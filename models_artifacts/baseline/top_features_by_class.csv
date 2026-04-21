@@ -1,0 +1,91 @@
+class_label,direction,feature,coefficient
+2.0,positive,cat__EmpJobRole_Senior Developer,1.0187971402109521
+2.0,positive,cat__EmpJobRole_Human Resources,0.6729811748038527
+2.0,positive,cat__EmpDepartment_Sales,0.6001769174556973
+2.0,positive,cat__EmpJobRole_Laboratory Technician,0.5884343106789658
+2.0,positive,num__YearsSinceLastPromotion,0.5841066215378113
+2.0,positive,num__ExperienceYearsInCurrentRole,0.5658112081553224
+2.0,positive,cat__EmpDepartment_Finance,0.5054301894255354
+2.0,positive,cat__EmpJobRole_Finance Manager,0.5054301894255354
+2.0,positive,cat__EducationBackground_Medical,0.47665463656157236
+2.0,positive,cat__EmpJobRole_Research Scientist,0.4522433010453678
+2.0,positive,num__YearsWithCurrManager,0.42591532783439723
+2.0,positive,cat__EmpJobRole_Sales Representative,0.3848993347836268
+2.0,positive,cat__EmpDepartment_Research & Development,0.37142489574111986
+2.0,positive,ord__EmpJobLevel,0.28763292548437935
+2.0,positive,num__DistanceFromHome,0.2446191986645291
+2.0,negative,ord__EmpEnvironmentSatisfaction,-1.842107537636413
+2.0,negative,cat__EmpDepartment_Development,-1.1385196265675557
+2.0,negative,cat__EmpJobRole_Developer,-0.9859015401350592
+2.0,negative,num__EmpLastSalaryHikePercent,-0.7916370714775973
+2.0,negative,cat__EmpJobRole_Business Analyst,-0.7206247570102567
+2.0,negative,ord__EmpWorkLifeBalance,-0.6185652998304297
+2.0,negative,cat__EmpDepartment_Data Science,-0.4917102441530319
+2.0,negative,cat__EmpJobRole_Data Scientist,-0.4917102441530319
+2.0,negative,num__ExperienceYearsAtThisCompany,-0.4679022246473197
+2.0,negative,cat__EducationBackground_Marketing,-0.4170305112474365
+2.0,negative,cat__EmpJobRole_Sales Executive,-0.4006411062458107
+2.0,negative,cat__EmpJobRole_Manager,-0.35318153759056037
+2.0,negative,num__TotalWorkExperienceInYears,-0.3139528615027248
+2.0,negative,cat__EmpJobRole_Manager R&D,-0.2728261907856182
+2.0,negative,ord__EmpEducationLevel,-0.2263986689770985
+3.0,positive,ord__EmpEnvironmentSatisfaction,0.7321990744395649
+3.0,positive,cat__EmpJobRole_Sales Representative,0.5642062839500791
+3.0,positive,cat__EmpDepartment_Development,0.5576768173103637
+3.0,positive,cat__EmpJobRole_Technical Architect,0.489301334280319
+3.0,positive,num__TotalWorkExperienceInYears,0.4874015829104926
+3.0,positive,cat__EducationBackground_Human Resources,0.4409443011642906
+3.0,positive,cat__EmpJobRole_Developer,0.4119074732772522
+3.0,positive,cat__EducationBackground_Other,0.3545564520030519
+3.0,positive,cat__EmpDepartment_Data Science,0.28921394378760423
+3.0,positive,cat__EmpJobRole_Data Scientist,0.28921394378760423
+3.0,positive,cat__EmpJobRole_Delivery Manager,0.2372265323032939
+3.0,positive,cat__OverTime_Yes,0.23565521342777213
+3.0,positive,cat__BusinessTravelFrequency_Travel_Rarely,0.1617886918156915
+3.0,positive,cat__EmpJobRole_Senior Manager R&D,0.14833203875824869
+3.0,positive,cat__EmpJobRole_Sales Executive,0.14392386333904766
+3.0,negative,num__EmpLastSalaryHikePercent,-0.8690560539845751
+3.0,negative,cat__EmpJobRole_Manager,-0.7141086363975733
+3.0,negative,cat__EmpJobRole_Senior Developer,-0.5616446344499958
+3.0,negative,cat__EmpDepartment_Sales,-0.47723148679287536
+3.0,negative,cat__EmpJobRole_Human Resources,-0.40179349597787
+3.0,negative,cat__EducationBackground_Technical Degree,-0.3724257074241939
+3.0,negative,cat__EducationBackground_Medical,-0.3238041670820488
+3.0,negative,cat__BusinessTravelFrequency_Travel_Frequently,-0.26218129673291174
+3.0,negative,cat__EmpDepartment_Finance,-0.23402942736491464
+3.0,negative,cat__EmpJobRole_Finance Manager,-0.23402942736491464
+3.0,negative,cat__EmpJobRole_Research Scientist,-0.2317744766160927
+3.0,negative,cat__OverTime_No,-0.20933782480270915
+3.0,negative,num__YearsSinceLastPromotion,-0.19217537002138999
+3.0,negative,num__YearsWithCurrManager,-0.18274486671711082
+3.0,negative,num__ExperienceYearsInCurrentRole,-0.16095806972147353
+4.0,positive,num__EmpLastSalaryHikePercent,1.6606931254621684
+4.0,positive,ord__EmpEnvironmentSatisfaction,1.1099084631968505
+4.0,positive,cat__EmpJobRole_Manager,1.0672901739881304
+4.0,positive,ord__EmpWorkLifeBalance,0.7753362730160073
+4.0,positive,cat__EmpJobRole_Business Analyst,0.6610372026984732
+4.0,positive,cat__EmpDepartment_Development,0.5808428092571899
+4.0,positive,cat__EmpJobRole_Developer,0.5739940668578045
+4.0,positive,cat__EducationBackground_Technical Degree,0.4564829166598085
+4.0,positive,cat__EducationBackground_Marketing,0.4456182792488078
+4.0,positive,num__ExperienceYearsAtThisCompany,0.41196888563514233
+4.0,positive,cat__EmpJobRole_Technical Lead,0.3023417240252593
+4.0,positive,cat__EmpJobRole_Manager R&D,0.2607129774943174
+4.0,positive,cat__EmpJobRole_Sales Executive,0.2567172429067618
+4.0,positive,cat__BusinessTravelFrequency_Travel_Frequently,0.23567723129982796
+4.0,positive,num__Age,0.22611981876500203
+4.0,negative,cat__EmpJobRole_Sales Representative,-0.9491056187337014
+4.0,negative,cat__EducationBackground_Human Resources,-0.4933474290308457
+4.0,negative,cat__EmpJobRole_Senior Developer,-0.4571525057609588
+4.0,negative,cat__EmpJobRole_Laboratory Technician,-0.4283467317262901
+4.0,negative,num__ExperienceYearsInCurrentRole,-0.4048531384338517
+4.0,negative,num__YearsSinceLastPromotion,-0.39193125151642616
+4.0,negative,cat__EmpJobRole_Senior Manager R&D,-0.351592836434967
+4.0,negative,num__DistanceFromHome,-0.3397396308792737
+4.0,negative,cat__EmpJobRole_Technical Architect,-0.32160663599569966
+4.0,negative,cat__BusinessTravelFrequency_Travel_Rarely,-0.2838626813540099
+4.0,negative,cat__EmpDepartment_Research & Development,-0.28087545150365856
+4.0,negative,cat__EmpJobRole_Finance Manager,-0.27140076206061925
+4.0,negative,cat__EmpDepartment_Finance,-0.27140076206061925
+4.0,negative,cat__EmpJobRole_Human Resources,-0.2711876788259828
+4.0,negative,num__YearsWithCurrManager,-0.24317046111729285
