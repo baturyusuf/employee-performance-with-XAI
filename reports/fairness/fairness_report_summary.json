@@ -1,0 +1,134 @@
+{
+  "model_name": "catboost_multiclass",
+  "drop_sensitive": true,
+  "audited_attributes_requested": [
+    "Gender",
+    "MaritalStatus",
+    "EmpDepartment",
+    "EducationBackground",
+    "BusinessTravelFrequency"
+  ],
+  "audited_attributes_available": [
+    "Gender",
+    "MaritalStatus",
+    "EmpDepartment",
+    "EducationBackground",
+    "BusinessTravelFrequency"
+  ],
+  "audited_attributes_missing": [],
+  "test_rows": 240,
+  "overall_test_metrics": {
+    "accuracy": 0.9375,
+    "weighted_f1": 0.9352916666666666,
+    "macro_f1": 0.8951851851851852,
+    "weighted_precision": 0.9391610360360361,
+    "macro_precision": 0.9506006006006006,
+    "weighted_recall": 0.9375,
+    "macro_recall": 0.8551648351648352,
+    "ordinal_mae": 0.06666666666666667,
+    "balanced_accuracy": 0.8551648351648352,
+    "quadratic_weighted_kappa": 0.8476620354044714
+  },
+  "attribute_summaries": [
+    {
+      "attribute": "Gender",
+      "n_groups": 2,
+      "groups": [
+        "Male",
+        "Female"
+      ],
+      "disparity": {
+        "accuracy_max_gap": 0.05208333333333337,
+        "weighted_f1_max_gap": 0.054512066172721085,
+        "macro_f1_max_gap": 0.06567060956628101,
+        "macro_recall_max_gap": 0.09099161550141943,
+        "balanced_accuracy_max_gap": 0.09099161550141943,
+        "ordinal_mae_max_gap": 0.041666666666666664,
+        "quadratic_weighted_kappa_max_gap": 0.02633831735998926
+      },
+      "csv_path": "C:\\Users\\Yusuf\\Documents\\GitHub\\employee performance with XAI\\reports\\fairness\\gender_group_metrics.csv"
+    },
+    {
+      "attribute": "MaritalStatus",
+      "n_groups": 3,
+      "groups": [
+        "Married",
+        "Single",
+        "Divorced"
+      ],
+      "disparity": {
+        "accuracy_max_gap": 0.030000000000000027,
+        "weighted_f1_max_gap": 0.03747876833879071,
+        "macro_f1_max_gap": 0.1492335585280712,
+        "macro_recall_max_gap": 0.19740259740259736,
+        "balanced_accuracy_max_gap": 0.19740259740259736,
+        "ordinal_mae_max_gap": 0.04666666666666667,
+        "quadratic_weighted_kappa_max_gap": 0.2199678144944498
+      },
+      "csv_path": "C:\\Users\\Yusuf\\Documents\\GitHub\\employee performance with XAI\\reports\\fairness\\maritalstatus_group_metrics.csv"
+    },
+    {
+      "attribute": "EmpDepartment",
+      "n_groups": 6,
+      "groups": [
+        "Sales",
+        "Development",
+        "Research & Development",
+        "Human Resources",
+        "Finance",
+        "Data Science"
+      ],
+      "disparity": {
+        "accuracy_max_gap": 0.09999999999999998,
+        "weighted_f1_max_gap": 0.10615384615384615,
+        "macro_f1_max_gap": 0.3690753690753691,
+        "macro_recall_max_gap": 0.38095238095238093,
+        "balanced_accuracy_max_gap": 0.38095238095238093,
+        "ordinal_mae_max_gap": 0.1,
+        "quadratic_weighted_kappa_max_gap": 0.2605633802816901
+      },
+      "csv_path": "C:\\Users\\Yusuf\\Documents\\GitHub\\employee performance with XAI\\reports\\fairness\\empdepartment_group_metrics.csv"
+    },
+    {
+      "attribute": "EducationBackground",
+      "n_groups": 6,
+      "groups": [
+        "Life Sciences",
+        "Medical",
+        "Marketing",
+        "Technical Degree",
+        "Other",
+        "Human Resources"
+      ],
+      "disparity": {
+        "accuracy_max_gap": 0.19999999999999996,
+        "weighted_f1_max_gap": 0.21904761904761916,
+        "macro_f1_max_gap": 0.23809523809523814,
+        "macro_recall_max_gap": 0.25,
+        "balanced_accuracy_max_gap": 0.25,
+        "ordinal_mae_max_gap": 0.2,
+        "quadratic_weighted_kappa_max_gap": 0.4545454545454546
+      },
+      "csv_path": "C:\\Users\\Yusuf\\Documents\\GitHub\\employee performance with XAI\\reports\\fairness\\educationbackground_group_metrics.csv"
+    },
+    {
+      "attribute": "BusinessTravelFrequency",
+      "n_groups": 3,
+      "groups": [
+        "Travel_Rarely",
+        "Travel_Frequently",
+        "Non-Travel"
+      ],
+      "disparity": {
+        "accuracy_max_gap": 0.04761904761904767,
+        "weighted_f1_max_gap": 0.0599262105484506,
+        "macro_f1_max_gap": 0.08796620213721784,
+        "macro_recall_max_gap": 0.0888888888888889,
+        "balanced_accuracy_max_gap": 0.0888888888888889,
+        "ordinal_mae_max_gap": 0.047619047619047616,
+        "quadratic_weighted_kappa_max_gap": 0.04865220249835622
+      },
+      "csv_path": "C:\\Users\\Yusuf\\Documents\\GitHub\\employee performance with XAI\\reports\\fairness\\businesstravelfrequency_group_metrics.csv"
+    }
+  ]
+}

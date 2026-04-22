@@ -1,0 +1,153 @@
+{
+  "sample_index": 811,
+  "true_class": 3,
+  "predicted_class": 3,
+  "desired_class": 4,
+  "original_probabilities": {
+    "2": 0.07301816422093924,
+    "3": 0.8550675373326019,
+    "4": 0.07191429844645898
+  },
+  "drop_sensitive": true,
+  "actionable_features": [
+    "EmpEnvironmentSatisfaction",
+    "EmpLastSalaryHikePercent",
+    "EmpWorkLifeBalance",
+    "EmpJobInvolvement",
+    "TrainingTimesLastYear"
+  ],
+  "max_features_changed": 2,
+  "top_k": 5,
+  "n_valid_counterfactuals_found": 5,
+  "candidates": [
+    {
+      "prototype_index": 124,
+      "predicted_class_after_change": 4,
+      "desired_class_probability": 0.5621819638552001,
+      "num_changes": 1,
+      "cost": 1.5126288324345933,
+      "changes": [
+        {
+          "feature": "EmpLastSalaryHikePercent",
+          "old_value": 15,
+          "new_value": 20
+        }
+      ],
+      "actions_tr": [
+        {
+          "feature": "EmpLastSalaryHikePercent",
+          "feature_label_tr": "son maaş artış oranı",
+          "old_value": 15,
+          "new_value": 20,
+          "old_value_description": "%15",
+          "new_value_description": "%20",
+          "action_sentence_tr": "Son maaş artış oranı değişkenini %15 düzeyinden %20 düzeyine taşımak önerilmektedir."
+        }
+      ]
+    },
+    {
+      "prototype_index": 891,
+      "predicted_class_after_change": 4,
+      "desired_class_probability": 0.5621819638552001,
+      "num_changes": 1,
+      "cost": 1.5126288324345933,
+      "changes": [
+        {
+          "feature": "EmpLastSalaryHikePercent",
+          "old_value": 15,
+          "new_value": 20
+        }
+      ],
+      "actions_tr": [
+        {
+          "feature": "EmpLastSalaryHikePercent",
+          "feature_label_tr": "son maaş artış oranı",
+          "old_value": 15,
+          "new_value": 20,
+          "old_value_description": "%15",
+          "new_value_description": "%20",
+          "action_sentence_tr": "Son maaş artış oranı değişkenini %15 düzeyinden %20 düzeyine taşımak önerilmektedir."
+        }
+      ]
+    },
+    {
+      "prototype_index": 285,
+      "predicted_class_after_change": 4,
+      "desired_class_probability": 0.5621819638552001,
+      "num_changes": 1,
+      "cost": 1.5126288324345933,
+      "changes": [
+        {
+          "feature": "EmpLastSalaryHikePercent",
+          "old_value": 15,
+          "new_value": 20
+        }
+      ],
+      "actions_tr": [
+        {
+          "feature": "EmpLastSalaryHikePercent",
+          "feature_label_tr": "son maaş artış oranı",
+          "old_value": 15,
+          "new_value": 20,
+          "old_value_description": "%15",
+          "new_value_description": "%20",
+          "action_sentence_tr": "Son maaş artış oranı değişkenini %15 düzeyinden %20 düzeyine taşımak önerilmektedir."
+        }
+      ]
+    },
+    {
+      "prototype_index": 1180,
+      "predicted_class_after_change": 4,
+      "desired_class_probability": 0.5621819638552001,
+      "num_changes": 1,
+      "cost": 1.5126288324345933,
+      "changes": [
+        {
+          "feature": "EmpLastSalaryHikePercent",
+          "old_value": 15,
+          "new_value": 20
+        }
+      ],
+      "actions_tr": [
+        {
+          "feature": "EmpLastSalaryHikePercent",
+          "feature_label_tr": "son maaş artış oranı",
+          "old_value": 15,
+          "new_value": 20,
+          "old_value_description": "%15",
+          "new_value_description": "%20",
+          "action_sentence_tr": "Son maaş artış oranı değişkenini %15 düzeyinden %20 düzeyine taşımak önerilmektedir."
+        }
+      ]
+    },
+    {
+      "prototype_index": 584,
+      "predicted_class_after_change": 4,
+      "desired_class_probability": 0.5621819638552001,
+      "num_changes": 1,
+      "cost": 1.5126288324345933,
+      "changes": [
+        {
+          "feature": "EmpLastSalaryHikePercent",
+          "old_value": 15,
+          "new_value": 20
+        }
+      ],
+      "actions_tr": [
+        {
+          "feature": "EmpLastSalaryHikePercent",
+          "feature_label_tr": "son maaş artış oranı",
+          "old_value": 15,
+          "new_value": 20,
+          "old_value_description": "%15",
+          "new_value_description": "%20",
+          "action_sentence_tr": "Son maaş artış oranı değişkenini %15 düzeyinden %20 düzeyine taşımak önerilmektedir."
+        }
+      ]
+    }
+  ],
+  "summary_text_tr": "Seçilen çalışanın indeks değeri: 811.\nGerçek sınıf: 3.\nModel tahmini: 3.\nHedef karşı-olgusal sınıf: 4.\nBaşlangıç olasılıkları:\n- Sınıf 2: 0.0730\n- Sınıf 3: 0.8551\n- Sınıf 4: 0.0719\n\nEn iyi counterfactual öneri:\n- Toplam değişiklik sayısı: 1\n- Hedef sınıf olasılığı: 0.5622\n- Maliyet skoru: 1.5126\nÖnerilen aksiyonlar:\n- Son maaş artış oranı değişkenini %15 düzeyinden %20 düzeyine taşımak önerilmektedir.",
+  "output_files": {
+    "candidates_csv": "C:\\Users\\Yusuf\\Documents\\GitHub\\employee performance with XAI\\reports\\xai\\counterfactuals\\sample_811\\counterfactual_candidates_target_4.csv"
+  }
+}

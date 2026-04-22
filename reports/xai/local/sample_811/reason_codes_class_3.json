@@ -1,0 +1,74 @@
+{
+  "sample_index": 811,
+  "true_class": 3,
+  "predicted_class": 3,
+  "explained_class": 3,
+  "predicted_probability_for_predicted_class": 0.8550675373326019,
+  "source_files": {
+    "local_explanation_csv": "C:\\Users\\Yusuf\\Documents\\GitHub\\employee performance with XAI\\reports\\xai\\local\\sample_811\\local_explanation_class_3.csv",
+    "local_explanation_json": "C:\\Users\\Yusuf\\Documents\\GitHub\\employee performance with XAI\\reports\\xai\\local\\sample_811\\local_explanation_class_3.json"
+  },
+  "reason_codes": {
+    "positive_reason_codes": [
+      {
+        "feature": "EmpEnvironmentSatisfaction",
+        "feature_label_tr": "çalışma ortamı memnuniyeti",
+        "feature_value": "3",
+        "feature_value_description": "seviye: orta-iyi",
+        "shap_value": 0.3080956749892477,
+        "sentence_tr": "Çalışma ortamı memnuniyeti (seviye: orta-iyi) performans tahminini yukarı çekmiştir."
+      },
+      {
+        "feature": "EmpLastSalaryHikePercent",
+        "feature_label_tr": "son maaş artış oranı",
+        "feature_value": "15",
+        "feature_value_description": "%15",
+        "shap_value": 0.2422604348444906,
+        "sentence_tr": "Son maaş artış oranı (%15) olumlu bir katkı sağlamıştır."
+      },
+      {
+        "feature": "EmpDepartment",
+        "feature_label_tr": "departman",
+        "feature_value": "Development",
+        "feature_value_description": "Development",
+        "shap_value": 0.0529577114421277,
+        "sentence_tr": "Departman bilgisi (Development) modelde bu sınıf yönünde pozitif katkı üretmiştir."
+      },
+      {
+        "feature": "EmpWorkLifeBalance",
+        "feature_label_tr": "iş-yaşam dengesi",
+        "feature_value": "3",
+        "feature_value_description": "seviye: dengeli",
+        "shap_value": 0.0132341324024115,
+        "sentence_tr": "Iş-yaşam dengesi (seviye: dengeli) performans tahminini desteklemiştir."
+      }
+    ],
+    "negative_reason_codes": [
+      {
+        "feature": "YearsSinceLastPromotion",
+        "feature_label_tr": "son terfiden bu yana geçen süre",
+        "feature_value": "2",
+        "feature_value_description": "2 yıl",
+        "shap_value": -0.0621007837719288,
+        "sentence_tr": "Son terfiden bu yana geçen süre (2 yıl) tahmini aşağı yönlü etkilemiştir."
+      },
+      {
+        "feature": "YearsWithCurrManager",
+        "feature_label_tr": "mevcut yönetici ile çalışma süresi",
+        "feature_value": "2",
+        "feature_value_description": "2 yıl",
+        "shap_value": -0.009274689293812,
+        "sentence_tr": "Mevcut yönetici ile çalışma süresi (2 yıl) model kararına negatif katkı sağlamıştır."
+      },
+      {
+        "feature": "TotalWorkExperienceInYears",
+        "feature_label_tr": "toplam iş deneyimi",
+        "feature_value": "4",
+        "feature_value_description": "4 yıl",
+        "shap_value": -0.0089577483722953,
+        "sentence_tr": "Toplam iş deneyimi (4 yıl) model kararına negatif katkı sağlamıştır."
+      }
+    ]
+  },
+  "summary_text_tr": "Model bu çalışanı 3 performans sınıfında tahmin etti.\nGerçek sınıf: 3.\nTahmin güveni: 0.8551.\n\nTahmini yukarı çeken başlıca nedenler:\n- Çalışma ortamı memnuniyeti (seviye: orta-iyi) performans tahminini yukarı çekmiştir.\n- Son maaş artış oranı (%15) olumlu bir katkı sağlamıştır.\n- Departman bilgisi (Development) modelde bu sınıf yönünde pozitif katkı üretmiştir.\n- Iş-yaşam dengesi (seviye: dengeli) performans tahminini desteklemiştir.\n\nTahmini aşağı çeken başlıca nedenler:\n- Son terfiden bu yana geçen süre (2 yıl) tahmini aşağı yönlü etkilemiştir.\n- Mevcut yönetici ile çalışma süresi (2 yıl) model kararına negatif katkı sağlamıştır.\n- Toplam iş deneyimi (4 yıl) model kararına negatif katkı sağlamıştır."
+}

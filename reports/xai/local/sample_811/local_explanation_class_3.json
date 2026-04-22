@@ -1,0 +1,142 @@
+{
+  "sample_index": 811,
+  "sample_position": 0,
+  "true_class": 3,
+  "predicted_class": 3,
+  "explained_class": 3,
+  "predicted_probability_for_predicted_class": 0.8550675373326019,
+  "base_value_for_explained_class": 1.0628755185197862,
+  "drop_sensitive": true,
+  "top_10_local_features": [
+    {
+      "feature": "EmpEnvironmentSatisfaction",
+      "feature_value": 3,
+      "shap_value": 0.3080956749892477,
+      "abs_shap_value": 0.3080956749892477,
+      "direction": "positive"
+    },
+    {
+      "feature": "EmpLastSalaryHikePercent",
+      "feature_value": 15,
+      "shap_value": 0.2422604348444906,
+      "abs_shap_value": 0.2422604348444906,
+      "direction": "positive"
+    },
+    {
+      "feature": "YearsSinceLastPromotion",
+      "feature_value": 2,
+      "shap_value": -0.0621007837719288,
+      "abs_shap_value": 0.0621007837719288,
+      "direction": "negative"
+    },
+    {
+      "feature": "EmpDepartment",
+      "feature_value": "Development",
+      "shap_value": 0.0529577114421277,
+      "abs_shap_value": 0.0529577114421277,
+      "direction": "positive"
+    },
+    {
+      "feature": "EmpWorkLifeBalance",
+      "feature_value": 3,
+      "shap_value": 0.0132341324024115,
+      "abs_shap_value": 0.0132341324024115,
+      "direction": "positive"
+    },
+    {
+      "feature": "ExperienceYearsInCurrentRole",
+      "feature_value": 2,
+      "shap_value": 0.0101538517252953,
+      "abs_shap_value": 0.0101538517252953,
+      "direction": "positive"
+    },
+    {
+      "feature": "YearsWithCurrManager",
+      "feature_value": 2,
+      "shap_value": -0.009274689293812,
+      "abs_shap_value": 0.009274689293812,
+      "direction": "negative"
+    },
+    {
+      "feature": "EmpJobInvolvement",
+      "feature_value": 3,
+      "shap_value": 0.0091023353283705,
+      "abs_shap_value": 0.0091023353283705,
+      "direction": "positive"
+    },
+    {
+      "feature": "TotalWorkExperienceInYears",
+      "feature_value": 4,
+      "shap_value": -0.0089577483722953,
+      "abs_shap_value": 0.0089577483722953,
+      "direction": "negative"
+    },
+    {
+      "feature": "BusinessTravelFrequency",
+      "feature_value": "Travel_Rarely",
+      "shap_value": 0.0080708160132198,
+      "abs_shap_value": 0.0080708160132198,
+      "direction": "positive"
+    }
+  ],
+  "summary": {
+    "summary_text": "Model bu çalışanı 3 sınıfında tahmin etti. Gerçek sınıf: 3. Tahmin olasılığı yaklaşık 0.8551. Pozitif katkı yapan değişkenler ve negatif katkı yapan değişkenler ayrı listelendi.",
+    "predicted_class": 3,
+    "true_class": 3,
+    "predicted_probability": 0.8550675373326019,
+    "top_positive_drivers": [
+      {
+        "feature": "EmpEnvironmentSatisfaction",
+        "feature_value": 3,
+        "shap_value": 0.3080956749892477
+      },
+      {
+        "feature": "EmpLastSalaryHikePercent",
+        "feature_value": 15,
+        "shap_value": 0.2422604348444906
+      },
+      {
+        "feature": "EmpDepartment",
+        "feature_value": "Development",
+        "shap_value": 0.0529577114421277
+      },
+      {
+        "feature": "EmpWorkLifeBalance",
+        "feature_value": 3,
+        "shap_value": 0.0132341324024115
+      },
+      {
+        "feature": "ExperienceYearsInCurrentRole",
+        "feature_value": 2,
+        "shap_value": 0.0101538517252953
+      }
+    ],
+    "top_negative_drivers": [
+      {
+        "feature": "YearsSinceLastPromotion",
+        "feature_value": 2,
+        "shap_value": -0.0621007837719288
+      },
+      {
+        "feature": "YearsWithCurrManager",
+        "feature_value": 2,
+        "shap_value": -0.009274689293812
+      },
+      {
+        "feature": "TotalWorkExperienceInYears",
+        "feature_value": 4,
+        "shap_value": -0.0089577483722953
+      },
+      {
+        "feature": "EmpEducationLevel",
+        "feature_value": 4,
+        "shap_value": -0.0044449503701288
+      },
+      {
+        "feature": "ExperienceYearsAtThisCompany",
+        "feature_value": 2,
+        "shap_value": -0.0024938875500027
+      }
+    ]
+  }
+}

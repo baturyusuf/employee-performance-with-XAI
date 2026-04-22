@@ -1,0 +1,15 @@
+Seçilen çalışanın indeks değeri: 811.
+Gerçek sınıf: 3.
+Model tahmini: 3.
+Hedef karşı-olgusal sınıf: 4.
+Başlangıç olasılıkları:
+- Sınıf 2: 0.0730
+- Sınıf 3: 0.8551
+- Sınıf 4: 0.0719
+
+En iyi counterfactual öneri:
+- Toplam değişiklik sayısı: 1
+- Hedef sınıf olasılığı: 0.5622
+- Maliyet skoru: 1.5126
+Önerilen aksiyonlar:
+- Son maaş artış oranı değişkenini %15 düzeyinden %20 düzeyine taşımak önerilmektedir.

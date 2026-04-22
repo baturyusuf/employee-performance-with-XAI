@@ -1,0 +1,121 @@
+{
+  "model_name": "catboost_multiclass",
+  "drop_sensitive": true,
+  "use_balanced_class_weights": false,
+  "class_weights": null,
+  "random_state": 42,
+  "test_size": 0.2,
+  "iterations": 500,
+  "learning_rate": 0.05,
+  "depth": 6,
+  "l2_leaf_reg": 3.0,
+  "early_stopping_rounds": 50,
+  "best_iteration": 39,
+  "train_metrics": {
+    "accuracy": 0.928125,
+    "balanced_accuracy": 0.8752963033589126,
+    "macro_f1": 0.8866973594594533,
+    "weighted_f1": 0.927372915659818,
+    "macro_precision": 0.9021873002374733,
+    "weighted_precision": 0.9280703174940631,
+    "macro_recall": 0.8752963033589126,
+    "weighted_recall": 0.928125,
+    "ordinal_mae": 0.075,
+    "quadratic_weighted_kappa": 0.8460165417059097
+  },
+  "test_metrics": {
+    "accuracy": 0.9375,
+    "balanced_accuracy": 0.8551648351648352,
+    "macro_f1": 0.8951851851851852,
+    "weighted_f1": 0.9352916666666666,
+    "macro_precision": 0.9506006006006006,
+    "weighted_precision": 0.9391610360360361,
+    "macro_recall": 0.8551648351648352,
+    "weighted_recall": 0.9375,
+    "ordinal_mae": 0.06666666666666667,
+    "quadratic_weighted_kappa": 0.8476620354044714
+  },
+  "input_metadata": {
+    "input_rows": 1200,
+    "train_rows": 960,
+    "test_rows": 240,
+    "input_feature_count": 24,
+    "processed_feature_count": 56,
+    "target_column": "PerformanceRating",
+    "id_column_excluded": "EmpNumber",
+    "drop_sensitive": true,
+    "sensitive_columns_removed": [
+      "Gender",
+      "MaritalStatus"
+    ],
+    "numeric_columns": [
+      "Age",
+      "DistanceFromHome",
+      "EmpHourlyRate",
+      "NumCompaniesWorked",
+      "EmpLastSalaryHikePercent",
+      "TotalWorkExperienceInYears",
+      "TrainingTimesLastYear",
+      "ExperienceYearsAtThisCompany",
+      "ExperienceYearsInCurrentRole",
+      "YearsSinceLastPromotion",
+      "YearsWithCurrManager"
+    ],
+    "ordinal_columns": [
+      "EmpEducationLevel",
+      "EmpEnvironmentSatisfaction",
+      "EmpJobInvolvement",
+      "EmpJobLevel",
+      "EmpJobSatisfaction",
+      "EmpRelationshipSatisfaction",
+      "EmpWorkLifeBalance"
+    ],
+    "categorical_columns": [
+      "EducationBackground",
+      "EmpDepartment",
+      "EmpJobRole",
+      "BusinessTravelFrequency",
+      "OverTime",
+      "Attrition"
+    ],
+    "class_distribution_full": {
+      "2": 194,
+      "3": 874,
+      "4": 132
+    },
+    "class_distribution_train": {
+      "2": 155,
+      "3": 699,
+      "4": 106
+    },
+    "class_distribution_test": {
+      "2": 39,
+      "3": 175,
+      "4": 26
+    },
+    "test_size": 0.2,
+    "random_state": 42,
+    "artifacts": {
+      "x_train_raw": "C:\\Users\\Yusuf\\Documents\\GitHub\\employee performance with XAI\\data\\processed\\X_train_raw.csv",
+      "x_test_raw": "C:\\Users\\Yusuf\\Documents\\GitHub\\employee performance with XAI\\data\\processed\\X_test_raw.csv",
+      "y_train": "C:\\Users\\Yusuf\\Documents\\GitHub\\employee performance with XAI\\data\\processed\\y_train.csv",
+      "y_test": "C:\\Users\\Yusuf\\Documents\\GitHub\\employee performance with XAI\\data\\processed\\y_test.csv",
+      "x_train_preprocessed": "C:\\Users\\Yusuf\\Documents\\GitHub\\employee performance with XAI\\data\\processed\\X_train_preprocessed.csv",
+      "x_test_preprocessed": "C:\\Users\\Yusuf\\Documents\\GitHub\\employee performance with XAI\\data\\processed\\X_test_preprocessed.csv",
+      "preprocessor": "C:\\Users\\Yusuf\\Documents\\GitHub\\employee performance with XAI\\data\\processed\\sklearn_preprocessor.joblib"
+    }
+  },
+  "output_files": {
+    "model_cbm": "C:\\Users\\Yusuf\\Documents\\GitHub\\employee performance with XAI\\models_artifacts\\catboost\\catboost_model.cbm",
+    "model_joblib": "C:\\Users\\Yusuf\\Documents\\GitHub\\employee performance with XAI\\models_artifacts\\catboost\\catboost_model.joblib",
+    "train_predictions": "C:\\Users\\Yusuf\\Documents\\GitHub\\employee performance with XAI\\models_artifacts\\catboost\\train_predictions.csv",
+    "test_predictions": "C:\\Users\\Yusuf\\Documents\\GitHub\\employee performance with XAI\\models_artifacts\\catboost\\test_predictions.csv",
+    "train_pred_proba": "C:\\Users\\Yusuf\\Documents\\GitHub\\employee performance with XAI\\models_artifacts\\catboost\\train_pred_proba.csv",
+    "test_pred_proba": "C:\\Users\\Yusuf\\Documents\\GitHub\\employee performance with XAI\\models_artifacts\\catboost\\test_pred_proba.csv",
+    "train_classification_report": "C:\\Users\\Yusuf\\Documents\\GitHub\\employee performance with XAI\\models_artifacts\\catboost\\train_classification_report.csv",
+    "test_classification_report": "C:\\Users\\Yusuf\\Documents\\GitHub\\employee performance with XAI\\models_artifacts\\catboost\\test_classification_report.csv",
+    "feature_importance": "C:\\Users\\Yusuf\\Documents\\GitHub\\employee performance with XAI\\models_artifacts\\catboost\\feature_importance.csv",
+    "feature_importance_plot": "C:\\Users\\Yusuf\\Documents\\GitHub\\employee performance with XAI\\models_artifacts\\catboost\\feature_importance_top20.png",
+    "feature_metadata": "C:\\Users\\Yusuf\\Documents\\GitHub\\employee performance with XAI\\models_artifacts\\catboost\\feature_metadata.json"
+  }
+}

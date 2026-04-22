@@ -1,0 +1,6 @@
+rank,prototype_index,predicted_class_after_change,desired_class_probability,num_changes,cost,changed_features
+1,124,4,0.5621819638552001,1,1.5126288324345933,EmpLastSalaryHikePercent
+2,891,4,0.5621819638552001,1,1.5126288324345933,EmpLastSalaryHikePercent
+3,285,4,0.5621819638552001,1,1.5126288324345933,EmpLastSalaryHikePercent
+4,1180,4,0.5621819638552001,1,1.5126288324345933,EmpLastSalaryHikePercent
+5,584,4,0.5621819638552001,1,1.5126288324345933,EmpLastSalaryHikePercent

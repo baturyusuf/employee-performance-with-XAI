@@ -1,0 +1,68 @@
+{
+  "model_path": "C:\\Users\\Yusuf\\Documents\\GitHub\\employee performance with XAI\\models_artifacts\\catboost\\catboost_model.cbm",
+  "source_run_summary": "C:\\Users\\Yusuf\\Documents\\GitHub\\employee performance with XAI\\models_artifacts\\catboost\\run_summary.json",
+  "n_samples_used": 240,
+  "n_features": 24,
+  "n_classes": 3,
+  "class_labels": [
+    2,
+    3,
+    4
+  ],
+  "drop_sensitive": true,
+  "categorical_feature_names": [
+    "EducationBackground",
+    "EmpDepartment",
+    "EmpJobRole",
+    "BusinessTravelFrequency",
+    "OverTime",
+    "Attrition"
+  ],
+  "top_10_features_overall": [
+    {
+      "feature": "EmpEnvironmentSatisfaction",
+      "mean_abs_shap": 0.3022080064869837
+    },
+    {
+      "feature": "EmpLastSalaryHikePercent",
+      "mean_abs_shap": 0.21499311513299474
+    },
+    {
+      "feature": "YearsSinceLastPromotion",
+      "mean_abs_shap": 0.14212012337761698
+    },
+    {
+      "feature": "EmpDepartment",
+      "mean_abs_shap": 0.053490449769411995
+    },
+    {
+      "feature": "ExperienceYearsInCurrentRole",
+      "mean_abs_shap": 0.023099200678331586
+    },
+    {
+      "feature": "EmpWorkLifeBalance",
+      "mean_abs_shap": 0.018585974660324606
+    },
+    {
+      "feature": "ExperienceYearsAtThisCompany",
+      "mean_abs_shap": 0.008216168023946353
+    },
+    {
+      "feature": "EmpJobInvolvement",
+      "mean_abs_shap": 0.007029897518239747
+    },
+    {
+      "feature": "EmpJobRole",
+      "mean_abs_shap": 0.006057097443642365
+    },
+    {
+      "feature": "YearsWithCurrManager",
+      "mean_abs_shap": 0.006007916259638927
+    }
+  ],
+  "outputs": {
+    "overall_csv": "C:\\Users\\Yusuf\\Documents\\GitHub\\employee performance with XAI\\reports\\xai\\global_shap_importance.csv",
+    "per_class_csv": "C:\\Users\\Yusuf\\Documents\\GitHub\\employee performance with XAI\\reports\\xai\\global_shap_importance_by_class.csv",
+    "overall_plot": "C:\\Users\\Yusuf\\Documents\\GitHub\\employee performance with XAI\\reports\\xai\\global_shap_top20.png"
+  }
+}

@@ -1,0 +1,44 @@
+{
+  "feature_names": [
+    "Age",
+    "EducationBackground",
+    "EmpDepartment",
+    "EmpJobRole",
+    "BusinessTravelFrequency",
+    "DistanceFromHome",
+    "EmpEducationLevel",
+    "EmpEnvironmentSatisfaction",
+    "EmpHourlyRate",
+    "EmpJobInvolvement",
+    "EmpJobLevel",
+    "EmpJobSatisfaction",
+    "NumCompaniesWorked",
+    "OverTime",
+    "EmpLastSalaryHikePercent",
+    "EmpRelationshipSatisfaction",
+    "TotalWorkExperienceInYears",
+    "TrainingTimesLastYear",
+    "EmpWorkLifeBalance",
+    "ExperienceYearsAtThisCompany",
+    "ExperienceYearsInCurrentRole",
+    "YearsSinceLastPromotion",
+    "YearsWithCurrManager",
+    "Attrition"
+  ],
+  "categorical_feature_names": [
+    "EducationBackground",
+    "EmpDepartment",
+    "EmpJobRole",
+    "BusinessTravelFrequency",
+    "OverTime",
+    "Attrition"
+  ],
+  "categorical_feature_indices": [
+    1,
+    2,
+    3,
+    4,
+    13,
+    23
+  ]
+}

@@ -1,0 +1,14 @@
+Model bu çalışanı 3 performans sınıfında tahmin etti.
+Gerçek sınıf: 3.
+Tahmin güveni: 0.8551.
+
+Tahmini yukarı çeken başlıca nedenler:
+- Çalışma ortamı memnuniyeti (seviye: orta-iyi) performans tahminini yukarı çekmiştir.
+- Son maaş artış oranı (%15) olumlu bir katkı sağlamıştır.
+- Departman bilgisi (Development) modelde bu sınıf yönünde pozitif katkı üretmiştir.
+- Iş-yaşam dengesi (seviye: dengeli) performans tahminini desteklemiştir.
+
+Tahmini aşağı çeken başlıca nedenler:
+- Son terfiden bu yana geçen süre (2 yıl) tahmini aşağı yönlü etkilemiştir.
+- Mevcut yönetici ile çalışma süresi (2 yıl) model kararına negatif katkı sağlamıştır.
+- Toplam iş deneyimi (4 yıl) model kararına negatif katkı sağlamıştır.
