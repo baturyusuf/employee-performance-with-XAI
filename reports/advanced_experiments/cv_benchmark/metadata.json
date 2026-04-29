@@ -1,0 +1,4 @@
+{
+  "n_splits": 10,
+  "drop_sensitive": true
+}

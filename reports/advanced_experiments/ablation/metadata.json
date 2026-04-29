@@ -1,0 +1,116 @@
+{
+  "feature_sets": {
+    "all_features": [
+      "Age",
+      "EducationBackground",
+      "EmpDepartment",
+      "EmpJobRole",
+      "BusinessTravelFrequency",
+      "DistanceFromHome",
+      "EmpEducationLevel",
+      "EmpEnvironmentSatisfaction",
+      "EmpHourlyRate",
+      "EmpJobInvolvement",
+      "EmpJobLevel",
+      "EmpJobSatisfaction",
+      "NumCompaniesWorked",
+      "OverTime",
+      "EmpLastSalaryHikePercent",
+      "EmpRelationshipSatisfaction",
+      "TotalWorkExperienceInYears",
+      "TrainingTimesLastYear",
+      "EmpWorkLifeBalance",
+      "ExperienceYearsAtThisCompany",
+      "ExperienceYearsInCurrentRole",
+      "YearsSinceLastPromotion",
+      "YearsWithCurrManager",
+      "Attrition"
+    ],
+    "satisfaction_only": [
+      "EmpEnvironmentSatisfaction",
+      "EmpJobSatisfaction",
+      "EmpRelationshipSatisfaction",
+      "EmpWorkLifeBalance",
+      "EmpJobInvolvement"
+    ],
+    "career_tenure_only": [
+      "TotalWorkExperienceInYears",
+      "ExperienceYearsAtThisCompany",
+      "ExperienceYearsInCurrentRole",
+      "YearsSinceLastPromotion",
+      "YearsWithCurrManager",
+      "NumCompaniesWorked",
+      "TrainingTimesLastYear"
+    ],
+    "compensation_only": [
+      "EmpHourlyRate",
+      "EmpLastSalaryHikePercent"
+    ],
+    "role_org_only": [
+      "EmpDepartment",
+      "EmpJobRole",
+      "EmpJobLevel",
+      "BusinessTravelFrequency",
+      "OverTime",
+      "Attrition"
+    ],
+    "shap_top_5": [
+      "EmpEnvironmentSatisfaction",
+      "EmpLastSalaryHikePercent",
+      "YearsSinceLastPromotion",
+      "EmpDepartment",
+      "ExperienceYearsInCurrentRole"
+    ],
+    "shap_top_10": [
+      "EmpEnvironmentSatisfaction",
+      "EmpLastSalaryHikePercent",
+      "YearsSinceLastPromotion",
+      "EmpDepartment",
+      "ExperienceYearsInCurrentRole",
+      "EmpWorkLifeBalance",
+      "ExperienceYearsAtThisCompany",
+      "EmpJobInvolvement",
+      "EmpJobRole",
+      "YearsWithCurrManager"
+    ],
+    "shap_top_15": [
+      "EmpEnvironmentSatisfaction",
+      "EmpLastSalaryHikePercent",
+      "YearsSinceLastPromotion",
+      "EmpDepartment",
+      "ExperienceYearsInCurrentRole",
+      "EmpWorkLifeBalance",
+      "ExperienceYearsAtThisCompany",
+      "EmpJobInvolvement",
+      "EmpJobRole",
+      "YearsWithCurrManager",
+      "EducationBackground",
+      "NumCompaniesWorked",
+      "BusinessTravelFrequency",
+      "EmpJobSatisfaction",
+      "TotalWorkExperienceInYears"
+    ],
+    "shap_top_20": [
+      "EmpEnvironmentSatisfaction",
+      "EmpLastSalaryHikePercent",
+      "YearsSinceLastPromotion",
+      "EmpDepartment",
+      "ExperienceYearsInCurrentRole",
+      "EmpWorkLifeBalance",
+      "ExperienceYearsAtThisCompany",
+      "EmpJobInvolvement",
+      "EmpJobRole",
+      "YearsWithCurrManager",
+      "EducationBackground",
+      "NumCompaniesWorked",
+      "BusinessTravelFrequency",
+      "EmpJobSatisfaction",
+      "TotalWorkExperienceInYears",
+      "Attrition",
+      "EmpHourlyRate",
+      "OverTime",
+      "Age",
+      "EmpJobLevel"
+    ]
+  }
+}

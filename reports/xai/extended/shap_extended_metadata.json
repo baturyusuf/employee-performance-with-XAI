@@ -1,0 +1,19 @@
+{
+  "sample_size": null,
+  "top_k": 15,
+  "class_labels": [
+    2,
+    3,
+    4
+  ],
+  "n_samples": 240,
+  "n_features": 24,
+  "top_dependence_features": [
+    "EmpEnvironmentSatisfaction",
+    "EmpLastSalaryHikePercent",
+    "YearsSinceLastPromotion",
+    "EmpDepartment",
+    "ExperienceYearsInCurrentRole"
+  ],
+  "output_dir": "C:\\Users\\Yusuf\\Documents\\GitHub\\employee performance with XAI\\reports\\xai\\extended"
+}
