@@ -1,0 +1,18 @@
+{
+  "metric": "balanced_accuracy",
+  "alpha": 0.05,
+  "omnibus": [
+    {
+      "feature_set": "no_salary_hike_no_attrition",
+      "test": "friedman",
+      "statistic": 6.200000000000003,
+      "p_value": 0.04504920239355775
+    },
+    {
+      "feature_set": "no_salary_hike_no_attrition_no_department",
+      "test": "friedman",
+      "statistic": 6.8205128205128265,
+      "p_value": 0.03303272935930054
+    }
+  ]
+}

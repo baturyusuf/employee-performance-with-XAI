@@ -1,0 +1,59 @@
+{
+  "model_name": "catboost",
+  "feature_set": "no_salary_hike_no_attrition_no_department",
+  "drop_sensitive": true,
+  "test_size": 0.2,
+  "random_state": 42,
+  "labels": [
+    2,
+    3,
+    4
+  ],
+  "n_train": 960,
+  "n_test": 240,
+  "n_features": 21,
+  "feature_names": [
+    "Age",
+    "EducationBackground",
+    "EmpJobRole",
+    "BusinessTravelFrequency",
+    "DistanceFromHome",
+    "EmpEducationLevel",
+    "EmpEnvironmentSatisfaction",
+    "EmpHourlyRate",
+    "EmpJobInvolvement",
+    "EmpJobLevel",
+    "EmpJobSatisfaction",
+    "NumCompaniesWorked",
+    "OverTime",
+    "EmpRelationshipSatisfaction",
+    "TotalWorkExperienceInYears",
+    "TrainingTimesLastYear",
+    "EmpWorkLifeBalance",
+    "ExperienceYearsAtThisCompany",
+    "ExperienceYearsInCurrentRole",
+    "YearsSinceLastPromotion",
+    "YearsWithCurrManager"
+  ],
+  "removed_features": [
+    "EmpLastSalaryHikePercent",
+    "Attrition",
+    "EmpDepartment"
+  ],
+  "metrics": {
+    "accuracy": 0.8,
+    "balanced_accuracy": 0.5583394383394383,
+    "macro_f1": 0.5322192513368984,
+    "weighted_f1": 0.753396278966132,
+    "macro_precision": 0.5088041835192221,
+    "weighted_precision": 0.7121961433182171,
+    "macro_recall": 0.5583394383394383,
+    "weighted_recall": 0.8,
+    "ordinal_mae": 0.2,
+    "quadratic_weighted_kappa": 0.5273652252400098,
+    "severe_error_rate": 0.0,
+    "nll_log_loss": 0.5240752036027634,
+    "multiclass_brier": 0.30608375532527604,
+    "ece_confidence": 0.0506531378792882
+  }
+}

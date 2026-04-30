@@ -1,0 +1,6 @@
+{
+  "mean_jaccard_top5": 1.0,
+  "mean_jaccard_top10": 0.8272727272727274,
+  "mean_jaccard_top15": 0.7289731682146543,
+  "mean_spearman": 0.8552173913043477
+}

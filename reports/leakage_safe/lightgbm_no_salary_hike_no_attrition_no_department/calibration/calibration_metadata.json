@@ -1,0 +1,125 @@
+{
+  "model_name": "lightgbm",
+  "feature_set": "no_salary_hike_no_attrition_no_department",
+  "drop_sensitive": true,
+  "test_size": 0.2,
+  "random_state": 42,
+  "labels": [
+    2,
+    3,
+    4
+  ],
+  "n_train": 960,
+  "n_test": 240,
+  "n_features": 21,
+  "feature_names": [
+    "Age",
+    "EducationBackground",
+    "EmpJobRole",
+    "BusinessTravelFrequency",
+    "DistanceFromHome",
+    "EmpEducationLevel",
+    "EmpEnvironmentSatisfaction",
+    "EmpHourlyRate",
+    "EmpJobInvolvement",
+    "EmpJobLevel",
+    "EmpJobSatisfaction",
+    "NumCompaniesWorked",
+    "OverTime",
+    "EmpRelationshipSatisfaction",
+    "TotalWorkExperienceInYears",
+    "TrainingTimesLastYear",
+    "EmpWorkLifeBalance",
+    "ExperienceYearsAtThisCompany",
+    "ExperienceYearsInCurrentRole",
+    "YearsSinceLastPromotion",
+    "YearsWithCurrManager"
+  ],
+  "removed_features": [
+    "EmpLastSalaryHikePercent",
+    "Attrition",
+    "EmpDepartment"
+  ],
+  "calibration_bins": [
+    {
+      "bin": 1,
+      "bin_low": 0.0,
+      "bin_high": 0.1,
+      "n_samples": 0,
+      "mean_confidence": NaN,
+      "accuracy": NaN
+    },
+    {
+      "bin": 2,
+      "bin_low": 0.1,
+      "bin_high": 0.2,
+      "n_samples": 0,
+      "mean_confidence": NaN,
+      "accuracy": NaN
+    },
+    {
+      "bin": 3,
+      "bin_low": 0.2,
+      "bin_high": 0.30000000000000004,
+      "n_samples": 0,
+      "mean_confidence": NaN,
+      "accuracy": NaN
+    },
+    {
+      "bin": 4,
+      "bin_low": 0.30000000000000004,
+      "bin_high": 0.4,
+      "n_samples": 0,
+      "mean_confidence": NaN,
+      "accuracy": NaN
+    },
+    {
+      "bin": 5,
+      "bin_low": 0.4,
+      "bin_high": 0.5,
+      "n_samples": 0,
+      "mean_confidence": NaN,
+      "accuracy": NaN
+    },
+    {
+      "bin": 6,
+      "bin_low": 0.5,
+      "bin_high": 0.6000000000000001,
+      "n_samples": 3,
+      "mean_confidence": 0.5472548273353334,
+      "accuracy": 0.6666666666666666
+    },
+    {
+      "bin": 7,
+      "bin_low": 0.6000000000000001,
+      "bin_high": 0.7000000000000001,
+      "n_samples": 3,
+      "mean_confidence": 0.6606317235850795,
+      "accuracy": 0.3333333333333333
+    },
+    {
+      "bin": 8,
+      "bin_low": 0.7000000000000001,
+      "bin_high": 0.8,
+      "n_samples": 10,
+      "mean_confidence": 0.7520487927674049,
+      "accuracy": 0.9
+    },
+    {
+      "bin": 9,
+      "bin_low": 0.8,
+      "bin_high": 0.9,
+      "n_samples": 13,
+      "mean_confidence": 0.853430911795783,
+      "accuracy": 0.9230769230769231
+    },
+    {
+      "bin": 10,
+      "bin_low": 0.9,
+      "bin_high": 1.0,
+      "n_samples": 211,
+      "mean_confidence": 0.9868486205518756,
+      "accuracy": 0.8578199052132701
+    }
+  ]
+}

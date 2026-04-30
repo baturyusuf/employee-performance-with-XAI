@@ -1,0 +1,221 @@
+{
+  "model": "xgboost",
+  "feature_set": "no_salary_hike_no_attrition",
+  "drop_sensitive": true,
+  "test_size": 0.2,
+  "random_state": 42,
+  "class_labels": [
+    2,
+    3,
+    4
+  ],
+  "numeric_columns": [
+    "Age",
+    "DistanceFromHome",
+    "EmpEducationLevel",
+    "EmpEnvironmentSatisfaction",
+    "EmpHourlyRate",
+    "EmpJobInvolvement",
+    "EmpJobLevel",
+    "EmpJobSatisfaction",
+    "NumCompaniesWorked",
+    "EmpRelationshipSatisfaction",
+    "TotalWorkExperienceInYears",
+    "TrainingTimesLastYear",
+    "EmpWorkLifeBalance",
+    "ExperienceYearsAtThisCompany",
+    "ExperienceYearsInCurrentRole",
+    "YearsSinceLastPromotion",
+    "YearsWithCurrManager"
+  ],
+  "categorical_columns": [
+    "EducationBackground",
+    "EmpDepartment",
+    "EmpJobRole",
+    "BusinessTravelFrequency",
+    "OverTime"
+  ],
+  "group_names": [
+    "Age",
+    "DistanceFromHome",
+    "EmpEducationLevel",
+    "EmpEnvironmentSatisfaction",
+    "EmpHourlyRate",
+    "EmpJobInvolvement",
+    "EmpJobLevel",
+    "EmpJobSatisfaction",
+    "NumCompaniesWorked",
+    "EmpRelationshipSatisfaction",
+    "TotalWorkExperienceInYears",
+    "TrainingTimesLastYear",
+    "EmpWorkLifeBalance",
+    "ExperienceYearsAtThisCompany",
+    "ExperienceYearsInCurrentRole",
+    "YearsSinceLastPromotion",
+    "YearsWithCurrManager",
+    "EducationBackground",
+    "EmpDepartment",
+    "EmpJobRole",
+    "BusinessTravelFrequency",
+    "OverTime"
+  ],
+  "transformed_feature_names": [
+    "Age",
+    "DistanceFromHome",
+    "EmpEducationLevel",
+    "EmpEnvironmentSatisfaction",
+    "EmpHourlyRate",
+    "EmpJobInvolvement",
+    "EmpJobLevel",
+    "EmpJobSatisfaction",
+    "NumCompaniesWorked",
+    "EmpRelationshipSatisfaction",
+    "TotalWorkExperienceInYears",
+    "TrainingTimesLastYear",
+    "EmpWorkLifeBalance",
+    "ExperienceYearsAtThisCompany",
+    "ExperienceYearsInCurrentRole",
+    "YearsSinceLastPromotion",
+    "YearsWithCurrManager",
+    "EducationBackground=Human Resources",
+    "EducationBackground=Life Sciences",
+    "EducationBackground=Marketing",
+    "EducationBackground=Medical",
+    "EducationBackground=Other",
+    "EducationBackground=Technical Degree",
+    "EmpDepartment=Data Science",
+    "EmpDepartment=Development",
+    "EmpDepartment=Finance",
+    "EmpDepartment=Human Resources",
+    "EmpDepartment=Research & Development",
+    "EmpDepartment=Sales",
+    "EmpJobRole=Business Analyst",
+    "EmpJobRole=Data Scientist",
+    "EmpJobRole=Delivery Manager",
+    "EmpJobRole=Developer",
+    "EmpJobRole=Finance Manager",
+    "EmpJobRole=Healthcare Representative",
+    "EmpJobRole=Human Resources",
+    "EmpJobRole=Laboratory Technician",
+    "EmpJobRole=Manager",
+    "EmpJobRole=Manager R&D",
+    "EmpJobRole=Manufacturing Director",
+    "EmpJobRole=Research Director",
+    "EmpJobRole=Research Scientist",
+    "EmpJobRole=Sales Executive",
+    "EmpJobRole=Sales Representative",
+    "EmpJobRole=Senior Developer",
+    "EmpJobRole=Senior Manager R&D",
+    "EmpJobRole=Technical Architect",
+    "EmpJobRole=Technical Lead",
+    "BusinessTravelFrequency=Non-Travel",
+    "BusinessTravelFrequency=Travel_Frequently",
+    "BusinessTravelFrequency=Travel_Rarely",
+    "OverTime=No",
+    "OverTime=Yes"
+  ],
+  "group_mapping": {
+    "Age": [
+      0
+    ],
+    "DistanceFromHome": [
+      1
+    ],
+    "EmpEducationLevel": [
+      2
+    ],
+    "EmpEnvironmentSatisfaction": [
+      3
+    ],
+    "EmpHourlyRate": [
+      4
+    ],
+    "EmpJobInvolvement": [
+      5
+    ],
+    "EmpJobLevel": [
+      6
+    ],
+    "EmpJobSatisfaction": [
+      7
+    ],
+    "NumCompaniesWorked": [
+      8
+    ],
+    "EmpRelationshipSatisfaction": [
+      9
+    ],
+    "TotalWorkExperienceInYears": [
+      10
+    ],
+    "TrainingTimesLastYear": [
+      11
+    ],
+    "EmpWorkLifeBalance": [
+      12
+    ],
+    "ExperienceYearsAtThisCompany": [
+      13
+    ],
+    "ExperienceYearsInCurrentRole": [
+      14
+    ],
+    "YearsSinceLastPromotion": [
+      15
+    ],
+    "YearsWithCurrManager": [
+      16
+    ],
+    "EducationBackground": [
+      17,
+      18,
+      19,
+      20,
+      21,
+      22
+    ],
+    "EmpDepartment": [
+      23,
+      24,
+      25,
+      26,
+      27,
+      28
+    ],
+    "EmpJobRole": [
+      29,
+      30,
+      31,
+      32,
+      33,
+      34,
+      35,
+      36,
+      37,
+      38,
+      39,
+      40,
+      41,
+      42,
+      43,
+      44,
+      45,
+      46,
+      47
+    ],
+    "BusinessTravelFrequency": [
+      48,
+      49,
+      50
+    ],
+    "OverTime": [
+      51,
+      52
+    ]
+  },
+  "removed_features": [
+    "EmpLastSalaryHikePercent",
+    "Attrition"
+  ],
+  "output_dir": "C:\\Users\\Yusuf\\Documents\\GitHub\\employee performance with XAI\\reports\\leakage_safe\\xgboost_no_salary_hike_no_attrition\\shap"
+}

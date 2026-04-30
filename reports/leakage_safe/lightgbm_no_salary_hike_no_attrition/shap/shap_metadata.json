@@ -1,0 +1,44 @@
+{
+  "model_name": "lightgbm",
+  "feature_set": "no_salary_hike_no_attrition",
+  "drop_sensitive": true,
+  "test_size": 0.2,
+  "random_state": 42,
+  "labels": [
+    2,
+    3,
+    4
+  ],
+  "n_train": 960,
+  "n_test": 240,
+  "n_features": 22,
+  "feature_names": [
+    "Age",
+    "EducationBackground",
+    "EmpDepartment",
+    "EmpJobRole",
+    "BusinessTravelFrequency",
+    "DistanceFromHome",
+    "EmpEducationLevel",
+    "EmpEnvironmentSatisfaction",
+    "EmpHourlyRate",
+    "EmpJobInvolvement",
+    "EmpJobLevel",
+    "EmpJobSatisfaction",
+    "NumCompaniesWorked",
+    "OverTime",
+    "EmpRelationshipSatisfaction",
+    "TotalWorkExperienceInYears",
+    "TrainingTimesLastYear",
+    "EmpWorkLifeBalance",
+    "ExperienceYearsAtThisCompany",
+    "ExperienceYearsInCurrentRole",
+    "YearsSinceLastPromotion",
+    "YearsWithCurrManager"
+  ],
+  "removed_features": [
+    "EmpLastSalaryHikePercent",
+    "Attrition"
+  ],
+  "shap_output_dir": "C:\\Users\\Yusuf\\Documents\\GitHub\\employee performance with XAI\\reports\\leakage_safe\\lightgbm_no_salary_hike_no_attrition\\shap"
+}

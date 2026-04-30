@@ -1,0 +1,626 @@
+actionability_mode,sample_index,rank,desired_class,probability,cost,num_changes,changed_features
+employee_manager,542,1,3,0.8641668263084483,1.0630709597505748,1,EmpEnvironmentSatisfaction
+employee_manager,542,2,3,0.8641668263084483,1.0630709597505748,1,EmpEnvironmentSatisfaction
+employee_manager,542,3,3,0.8641668263084483,1.0630709597505748,1,EmpEnvironmentSatisfaction
+employee_manager,542,4,3,0.8641668263084483,1.0630709597505748,1,EmpEnvironmentSatisfaction
+employee_manager,542,5,3,0.8641668263084483,1.0630709597505748,1,EmpEnvironmentSatisfaction
+employee_manager,479,1,3,0.860153687017445,1.0630709597505748,1,EmpEnvironmentSatisfaction
+employee_manager,479,2,3,0.860153687017445,1.0630709597505748,1,EmpEnvironmentSatisfaction
+employee_manager,479,3,3,0.860153687017445,1.0630709597505748,1,EmpEnvironmentSatisfaction
+employee_manager,479,4,3,0.860153687017445,1.0630709597505748,1,EmpEnvironmentSatisfaction
+employee_manager,479,5,3,0.860153687017445,1.0630709597505748,1,EmpEnvironmentSatisfaction
+employee_manager,612,1,3,0.8205045104158879,1.0630709597505748,1,EmpEnvironmentSatisfaction
+employee_manager,612,2,3,0.8205045104158879,1.0630709597505748,1,EmpEnvironmentSatisfaction
+employee_manager,612,3,3,0.8205045104158879,1.0630709597505748,1,EmpEnvironmentSatisfaction
+employee_manager,612,4,3,0.8205045104158879,1.0630709597505748,1,EmpEnvironmentSatisfaction
+employee_manager,612,5,3,0.8205045104158879,1.0630709597505748,1,EmpEnvironmentSatisfaction
+employee_manager,732,1,4,0.6596043893537854,1.9761419195011494,1,EmpEnvironmentSatisfaction
+employee_manager,732,2,4,0.6596043893537854,1.9761419195011494,1,EmpEnvironmentSatisfaction
+employee_manager,732,3,4,0.6596043893537854,1.9761419195011494,1,EmpEnvironmentSatisfaction
+employee_manager,732,4,4,0.6596043893537854,1.9761419195011494,1,EmpEnvironmentSatisfaction
+employee_manager,732,5,4,0.6596043893537854,1.9761419195011494,1,EmpEnvironmentSatisfaction
+employee_manager,1081,1,3,0.8526861061196604,1.0630709597505748,1,EmpEnvironmentSatisfaction
+employee_manager,1081,2,3,0.8526861061196604,1.0630709597505748,1,EmpEnvironmentSatisfaction
+employee_manager,1081,3,3,0.8526861061196604,1.0630709597505748,1,EmpEnvironmentSatisfaction
+employee_manager,1081,4,3,0.8526861061196604,1.0630709597505748,1,EmpEnvironmentSatisfaction
+employee_manager,1081,5,3,0.8526861061196604,1.0630709597505748,1,EmpEnvironmentSatisfaction
+employee_manager,654,1,4,0.5999233647655715,1.9761419195011494,1,EmpEnvironmentSatisfaction
+employee_manager,654,2,4,0.5987507905245933,2.004470342068962,2,"TrainingTimesLastYear, EmpEnvironmentSatisfaction"
+employee_manager,654,3,4,0.5987507905245933,2.004470342068962,2,"TrainingTimesLastYear, EmpEnvironmentSatisfaction"
+employee_manager,654,4,4,0.5987507905245933,2.004470342068962,2,"TrainingTimesLastYear, EmpEnvironmentSatisfaction"
+employee_manager,654,5,4,0.6107088020740402,2.6308014879471036,2,"EmpJobInvolvement, EmpEnvironmentSatisfaction"
+employee_manager,331,1,3,0.8525095632719546,1.9761419195011494,1,EmpEnvironmentSatisfaction
+employee_manager,331,2,3,0.8525095632719546,1.9761419195011494,1,EmpEnvironmentSatisfaction
+employee_manager,331,3,3,0.8525095632719546,1.9761419195011494,1,EmpEnvironmentSatisfaction
+employee_manager,331,4,3,0.8525095632719546,1.9761419195011494,1,EmpEnvironmentSatisfaction
+employee_manager,331,5,3,0.8525095632719546,1.9761419195011494,1,EmpEnvironmentSatisfaction
+employee_manager,414,1,3,0.850993632953885,1.9761419195011494,1,EmpEnvironmentSatisfaction
+employee_manager,414,2,3,0.850993632953885,1.9761419195011494,1,EmpEnvironmentSatisfaction
+employee_manager,414,3,3,0.850993632953885,1.9761419195011494,1,EmpEnvironmentSatisfaction
+employee_manager,414,4,3,0.8506718707865535,2.889212879251724,1,EmpEnvironmentSatisfaction
+employee_manager,414,5,3,0.8506718707865535,2.889212879251724,1,EmpEnvironmentSatisfaction
+employee_manager,425,1,3,0.853912618336804,1.0630709597505748,1,EmpEnvironmentSatisfaction
+employee_manager,425,2,3,0.853912618336804,1.0630709597505748,1,EmpEnvironmentSatisfaction
+employee_manager,425,3,3,0.853912618336804,1.0630709597505748,1,EmpEnvironmentSatisfaction
+employee_manager,425,4,3,0.853912618336804,1.0630709597505748,1,EmpEnvironmentSatisfaction
+employee_manager,425,5,3,0.853912618336804,1.0630709597505748,1,EmpEnvironmentSatisfaction
+employee_manager,223,1,3,0.7900217800728935,1.0630709597505748,1,EmpEnvironmentSatisfaction
+employee_manager,223,2,3,0.7900217800728935,1.0630709597505748,1,EmpEnvironmentSatisfaction
+employee_manager,223,3,3,0.7900217800728935,1.0630709597505748,1,EmpEnvironmentSatisfaction
+employee_manager,223,4,3,0.7900217800728935,1.0630709597505748,1,EmpEnvironmentSatisfaction
+employee_manager,223,5,3,0.7900217800728935,1.0630709597505748,1,EmpEnvironmentSatisfaction
+employee_manager,786,1,3,0.8536213504111599,1.0630709597505748,1,EmpEnvironmentSatisfaction
+employee_manager,786,2,3,0.8536213504111599,1.0630709597505748,1,EmpEnvironmentSatisfaction
+employee_manager,786,3,3,0.8536213504111599,1.0630709597505748,1,EmpEnvironmentSatisfaction
+employee_manager,786,4,3,0.8536213504111599,1.0630709597505748,1,EmpEnvironmentSatisfaction
+employee_manager,786,5,3,0.8536213504111599,1.0630709597505748,1,EmpEnvironmentSatisfaction
+employee_manager,718,1,3,0.8085395775651951,1.9761419195011494,1,EmpEnvironmentSatisfaction
+employee_manager,718,2,3,0.8085395775651951,1.9761419195011494,1,EmpEnvironmentSatisfaction
+employee_manager,718,3,3,0.8085395775651951,1.9761419195011494,1,EmpEnvironmentSatisfaction
+employee_manager,718,4,3,0.8085395775651951,1.9761419195011494,1,EmpEnvironmentSatisfaction
+employee_manager,718,5,3,0.8085395775651951,1.9761419195011494,1,EmpEnvironmentSatisfaction
+employee_manager,546,1,3,0.8601629435834659,1.9761419195011494,1,EmpEnvironmentSatisfaction
+employee_manager,546,2,3,0.8601629435834659,1.9761419195011494,1,EmpEnvironmentSatisfaction
+employee_manager,546,3,3,0.8601629435834659,1.9761419195011494,1,EmpEnvironmentSatisfaction
+employee_manager,546,4,3,0.8601629435834659,1.9761419195011494,1,EmpEnvironmentSatisfaction
+employee_manager,546,5,3,0.8598605143707504,2.889212879251724,1,EmpEnvironmentSatisfaction
+employee_manager,1137,1,3,0.8550957711640775,1.0630709597505748,1,EmpEnvironmentSatisfaction
+employee_manager,1137,2,3,0.8550957711640775,1.0630709597505748,1,EmpEnvironmentSatisfaction
+employee_manager,1137,3,3,0.8550957711640775,1.0630709597505748,1,EmpEnvironmentSatisfaction
+employee_manager,1137,4,3,0.8550957711640775,1.0630709597505748,1,EmpEnvironmentSatisfaction
+employee_manager,1137,5,3,0.8550957711640775,1.0630709597505748,1,EmpEnvironmentSatisfaction
+no_salary,542,1,3,0.8641668263084483,1.0630709597505748,1,EmpEnvironmentSatisfaction
+no_salary,542,2,3,0.8641668263084483,1.0630709597505748,1,EmpEnvironmentSatisfaction
+no_salary,542,3,3,0.8641668263084483,1.0630709597505748,1,EmpEnvironmentSatisfaction
+no_salary,542,4,3,0.8641668263084483,1.0630709597505748,1,EmpEnvironmentSatisfaction
+no_salary,542,5,3,0.8641668263084483,1.0630709597505748,1,EmpEnvironmentSatisfaction
+no_salary,479,1,3,0.860153687017445,1.0630709597505748,1,EmpEnvironmentSatisfaction
+no_salary,479,2,3,0.860153687017445,1.0630709597505748,1,EmpEnvironmentSatisfaction
+no_salary,479,3,3,0.860153687017445,1.0630709597505748,1,EmpEnvironmentSatisfaction
+no_salary,479,4,3,0.860153687017445,1.0630709597505748,1,EmpEnvironmentSatisfaction
+no_salary,479,5,3,0.860153687017445,1.0630709597505748,1,EmpEnvironmentSatisfaction
+no_salary,612,1,3,0.8205045104158879,1.0630709597505748,1,EmpEnvironmentSatisfaction
+no_salary,612,2,3,0.8205045104158879,1.0630709597505748,1,EmpEnvironmentSatisfaction
+no_salary,612,3,3,0.8205045104158879,1.0630709597505748,1,EmpEnvironmentSatisfaction
+no_salary,612,4,3,0.8205045104158879,1.0630709597505748,1,EmpEnvironmentSatisfaction
+no_salary,612,5,3,0.8205045104158879,1.0630709597505748,1,EmpEnvironmentSatisfaction
+no_salary,732,1,4,0.6596043893537854,1.9761419195011494,1,EmpEnvironmentSatisfaction
+no_salary,732,2,4,0.6596043893537854,1.9761419195011494,1,EmpEnvironmentSatisfaction
+no_salary,732,3,4,0.6596043893537854,1.9761419195011494,1,EmpEnvironmentSatisfaction
+no_salary,732,4,4,0.6596043893537854,1.9761419195011494,1,EmpEnvironmentSatisfaction
+no_salary,732,5,4,0.6596043893537854,1.9761419195011494,1,EmpEnvironmentSatisfaction
+no_salary,1081,1,3,0.8526861061196604,1.0630709597505748,1,EmpEnvironmentSatisfaction
+no_salary,1081,2,3,0.8526861061196604,1.0630709597505748,1,EmpEnvironmentSatisfaction
+no_salary,1081,3,3,0.8526861061196604,1.0630709597505748,1,EmpEnvironmentSatisfaction
+no_salary,1081,4,3,0.8526861061196604,1.0630709597505748,1,EmpEnvironmentSatisfaction
+no_salary,1081,5,3,0.8526861061196604,1.0630709597505748,1,EmpEnvironmentSatisfaction
+no_salary,654,1,4,0.5999233647655715,1.9761419195011494,1,EmpEnvironmentSatisfaction
+no_salary,654,2,4,0.5987507905245933,2.004470342068962,2,"TrainingTimesLastYear, EmpEnvironmentSatisfaction"
+no_salary,654,3,4,0.5987507905245933,2.004470342068962,2,"TrainingTimesLastYear, EmpEnvironmentSatisfaction"
+no_salary,654,4,4,0.5987507905245933,2.004470342068962,2,"TrainingTimesLastYear, EmpEnvironmentSatisfaction"
+no_salary,654,5,4,0.6107088020740402,2.6308014879471036,2,"EmpJobInvolvement, EmpEnvironmentSatisfaction"
+no_salary,331,1,3,0.8525095632719546,1.9761419195011494,1,EmpEnvironmentSatisfaction
+no_salary,331,2,3,0.8525095632719546,1.9761419195011494,1,EmpEnvironmentSatisfaction
+no_salary,331,3,3,0.8525095632719546,1.9761419195011494,1,EmpEnvironmentSatisfaction
+no_salary,331,4,3,0.8525095632719546,1.9761419195011494,1,EmpEnvironmentSatisfaction
+no_salary,331,5,3,0.8525095632719546,1.9761419195011494,1,EmpEnvironmentSatisfaction
+no_salary,414,1,3,0.850993632953885,1.9761419195011494,1,EmpEnvironmentSatisfaction
+no_salary,414,2,3,0.850993632953885,1.9761419195011494,1,EmpEnvironmentSatisfaction
+no_salary,414,3,3,0.850993632953885,1.9761419195011494,1,EmpEnvironmentSatisfaction
+no_salary,414,4,3,0.8506718707865535,2.889212879251724,1,EmpEnvironmentSatisfaction
+no_salary,414,5,3,0.8506718707865535,2.889212879251724,1,EmpEnvironmentSatisfaction
+no_salary,425,1,3,0.853912618336804,1.0630709597505748,1,EmpEnvironmentSatisfaction
+no_salary,425,2,3,0.853912618336804,1.0630709597505748,1,EmpEnvironmentSatisfaction
+no_salary,425,3,3,0.853912618336804,1.0630709597505748,1,EmpEnvironmentSatisfaction
+no_salary,425,4,3,0.853912618336804,1.0630709597505748,1,EmpEnvironmentSatisfaction
+no_salary,425,5,3,0.853912618336804,1.0630709597505748,1,EmpEnvironmentSatisfaction
+no_salary,223,1,3,0.7900217800728935,1.0630709597505748,1,EmpEnvironmentSatisfaction
+no_salary,223,2,3,0.7900217800728935,1.0630709597505748,1,EmpEnvironmentSatisfaction
+no_salary,223,3,3,0.7900217800728935,1.0630709597505748,1,EmpEnvironmentSatisfaction
+no_salary,223,4,3,0.7900217800728935,1.0630709597505748,1,EmpEnvironmentSatisfaction
+no_salary,223,5,3,0.7900217800728935,1.0630709597505748,1,EmpEnvironmentSatisfaction
+no_salary,786,1,3,0.8536213504111599,1.0630709597505748,1,EmpEnvironmentSatisfaction
+no_salary,786,2,3,0.8536213504111599,1.0630709597505748,1,EmpEnvironmentSatisfaction
+no_salary,786,3,3,0.8536213504111599,1.0630709597505748,1,EmpEnvironmentSatisfaction
+no_salary,786,4,3,0.8536213504111599,1.0630709597505748,1,EmpEnvironmentSatisfaction
+no_salary,786,5,3,0.8536213504111599,1.0630709597505748,1,EmpEnvironmentSatisfaction
+no_salary,718,1,3,0.8085395775651951,1.9761419195011494,1,EmpEnvironmentSatisfaction
+no_salary,718,2,3,0.8085395775651951,1.9761419195011494,1,EmpEnvironmentSatisfaction
+no_salary,718,3,3,0.8085395775651951,1.9761419195011494,1,EmpEnvironmentSatisfaction
+no_salary,718,4,3,0.8085395775651951,1.9761419195011494,1,EmpEnvironmentSatisfaction
+no_salary,718,5,3,0.8085395775651951,1.9761419195011494,1,EmpEnvironmentSatisfaction
+no_salary,546,1,3,0.8601629435834659,1.9761419195011494,1,EmpEnvironmentSatisfaction
+no_salary,546,2,3,0.8601629435834659,1.9761419195011494,1,EmpEnvironmentSatisfaction
+no_salary,546,3,3,0.8601629435834659,1.9761419195011494,1,EmpEnvironmentSatisfaction
+no_salary,546,4,3,0.8601629435834659,1.9761419195011494,1,EmpEnvironmentSatisfaction
+no_salary,546,5,3,0.8598605143707504,2.889212879251724,1,EmpEnvironmentSatisfaction
+no_salary,1137,1,3,0.8550957711640775,1.0630709597505748,1,EmpEnvironmentSatisfaction
+no_salary,1137,2,3,0.8550957711640775,1.0630709597505748,1,EmpEnvironmentSatisfaction
+no_salary,1137,3,3,0.8550957711640775,1.0630709597505748,1,EmpEnvironmentSatisfaction
+no_salary,1137,4,3,0.8550957711640775,1.0630709597505748,1,EmpEnvironmentSatisfaction
+no_salary,1137,5,3,0.8550957711640775,1.0630709597505748,1,EmpEnvironmentSatisfaction
+full_default,811,1,4,0.5621819638552001,1.5126288324345933,1,EmpLastSalaryHikePercent
+full_default,811,2,4,0.5621819638552001,1.5126288324345933,1,EmpLastSalaryHikePercent
+full_default,811,3,4,0.5621819638552001,1.5126288324345933,1,EmpLastSalaryHikePercent
+full_default,811,4,4,0.5621819638552001,1.5126288324345933,1,EmpLastSalaryHikePercent
+full_default,811,5,4,0.5621819638552001,1.5126288324345933,1,EmpLastSalaryHikePercent
+full_default,1149,1,4,0.534208405734907,3.8693813251854223,3,"EmpLastSalaryHikePercent, EmpWorkLifeBalance, EmpJobInvolvement"
+full_default,1149,2,4,0.6180600947533468,4.030775827490869,2,"EmpLastSalaryHikePercent, EmpWorkLifeBalance"
+full_default,1149,3,4,0.6000703623755598,4.1419070916723415,3,"EmpLastSalaryHikePercent, EmpWorkLifeBalance, EmpJobInvolvement"
+full_default,1149,4,4,0.6208419866035984,4.41443285815926,3,"EmpLastSalaryHikePercent, EmpWorkLifeBalance, EmpJobInvolvement"
+full_default,1149,5,4,0.6208419866035984,4.41443285815926,3,"EmpLastSalaryHikePercent, EmpWorkLifeBalance, EmpJobInvolvement"
+full_default,662,1,4,0.598055218323483,4.579501094599506,3,"EmpLastSalaryHikePercent, EmpWorkLifeBalance, TrainingTimesLastYear"
+full_default,662,2,4,0.7434539053312957,4.848353126951625,2,"EmpLastSalaryHikePercent, EmpWorkLifeBalance"
+full_default,662,3,4,0.6963268463252599,4.852026861086425,3,"EmpLastSalaryHikePercent, EmpWorkLifeBalance, TrainingTimesLastYear"
+full_default,662,4,4,0.7445149683099713,4.959484391133097,3,"EmpLastSalaryHikePercent, EmpWorkLifeBalance, EmpJobInvolvement"
+full_default,662,5,4,0.7288924367568254,5.124552627573343,3,"EmpLastSalaryHikePercent, EmpWorkLifeBalance, TrainingTimesLastYear"
+full_default,542,1,3,0.8641668263084483,1.0630709597505748,1,EmpEnvironmentSatisfaction
+full_default,542,2,3,0.8641668263084483,1.0630709597505748,1,EmpEnvironmentSatisfaction
+full_default,542,3,3,0.8641668263084483,1.0630709597505748,1,EmpEnvironmentSatisfaction
+full_default,542,4,3,0.8641668263084483,1.0630709597505748,1,EmpEnvironmentSatisfaction
+full_default,542,5,3,0.8641668263084483,1.0630709597505748,1,EmpEnvironmentSatisfaction
+full_default,858,1,4,0.5513547422156377,1.5126288324345933,1,EmpLastSalaryHikePercent
+full_default,858,2,4,0.5513547422156377,1.5126288324345933,1,EmpLastSalaryHikePercent
+full_default,858,3,4,0.5513547422156377,1.5126288324345933,1,EmpLastSalaryHikePercent
+full_default,858,4,4,0.6277405192465538,1.785154598921512,1,EmpLastSalaryHikePercent
+full_default,858,5,4,0.6277405192465538,1.785154598921512,1,EmpLastSalaryHikePercent
+full_default,191,1,4,0.606940865701051,1.2401030659476746,1,EmpLastSalaryHikePercent
+full_default,191,2,4,0.606940865701051,1.2401030659476746,1,EmpLastSalaryHikePercent
+full_default,191,3,4,0.606940865701051,1.2401030659476746,1,EmpLastSalaryHikePercent
+full_default,191,4,4,0.606940865701051,1.2401030659476746,1,EmpLastSalaryHikePercent
+full_default,191,5,4,0.6840258599554481,1.5126288324345933,1,EmpLastSalaryHikePercent
+full_default,479,1,3,0.860153687017445,1.0630709597505748,1,EmpEnvironmentSatisfaction
+full_default,479,2,3,0.860153687017445,1.0630709597505748,1,EmpEnvironmentSatisfaction
+full_default,479,3,3,0.860153687017445,1.0630709597505748,1,EmpEnvironmentSatisfaction
+full_default,479,4,3,0.860153687017445,1.0630709597505748,1,EmpEnvironmentSatisfaction
+full_default,479,5,3,0.860153687017445,1.0630709597505748,1,EmpEnvironmentSatisfaction
+full_default,1,1,4,0.6345659695955903,2.3302061318953493,1,EmpLastSalaryHikePercent
+full_default,1,2,4,0.6345659695955903,2.3302061318953493,1,EmpLastSalaryHikePercent
+full_default,1,3,4,0.6345659695955903,2.3302061318953493,1,EmpLastSalaryHikePercent
+full_default,1,4,4,0.6345659695955903,2.3302061318953493,1,EmpLastSalaryHikePercent
+full_default,1,5,4,0.6345659695955903,2.3302061318953493,1,EmpLastSalaryHikePercent
+full_default,659,1,4,0.5784639040589205,2.575699792185168,2,"EmpEnvironmentSatisfaction, EmpLastSalaryHikePercent"
+full_default,659,2,4,0.5784639040589205,2.575699792185168,2,"EmpEnvironmentSatisfaction, EmpLastSalaryHikePercent"
+full_default,659,3,4,0.5784639040589205,2.575699792185168,2,"EmpEnvironmentSatisfaction, EmpLastSalaryHikePercent"
+full_default,659,4,4,0.5784639040589205,2.575699792185168,2,"EmpEnvironmentSatisfaction, EmpLastSalaryHikePercent"
+full_default,659,5,4,0.5784639040589205,2.575699792185168,2,"EmpEnvironmentSatisfaction, EmpLastSalaryHikePercent"
+full_default,1136,1,4,0.622132850630013,1.785154598921512,1,EmpLastSalaryHikePercent
+full_default,1136,2,4,0.622132850630013,1.785154598921512,1,EmpLastSalaryHikePercent
+full_default,1136,3,4,0.622132850630013,1.785154598921512,1,EmpLastSalaryHikePercent
+full_default,1136,4,4,0.622132850630013,1.785154598921512,1,EmpLastSalaryHikePercent
+full_default,1136,5,4,0.622132850630013,1.785154598921512,1,EmpLastSalaryHikePercent
+full_default,230,1,4,0.6137779623360189,1.785154598921512,1,EmpLastSalaryHikePercent
+full_default,230,2,4,0.6137779623360189,1.785154598921512,1,EmpLastSalaryHikePercent
+full_default,230,3,4,0.6929522034450684,2.057680365408431,1,EmpLastSalaryHikePercent
+full_default,230,4,4,0.6929522034450684,2.057680365408431,1,EmpLastSalaryHikePercent
+full_default,230,5,4,0.7275270960106952,2.3302061318953493,1,EmpLastSalaryHikePercent
+full_default,612,1,3,0.8205045104158879,1.0630709597505748,1,EmpEnvironmentSatisfaction
+full_default,612,2,3,0.8205045104158879,1.0630709597505748,1,EmpEnvironmentSatisfaction
+full_default,612,3,3,0.8205045104158879,1.4855967262374934,2,"EmpEnvironmentSatisfaction, EmpLastSalaryHikePercent"
+full_default,612,4,3,0.8205045104158879,1.4855967262374934,2,"EmpEnvironmentSatisfaction, EmpLastSalaryHikePercent"
+full_default,612,5,3,0.8201587386735892,1.9761419195011494,1,EmpEnvironmentSatisfaction
+full_default,193,1,4,0.533364795177952,1.5126288324345933,1,EmpLastSalaryHikePercent
+full_default,193,2,4,0.533364795177952,1.5126288324345933,1,EmpLastSalaryHikePercent
+full_default,193,3,4,0.533364795177952,1.5126288324345933,1,EmpLastSalaryHikePercent
+full_default,193,4,4,0.533364795177952,1.5126288324345933,1,EmpLastSalaryHikePercent
+full_default,193,5,4,0.6231128202294658,1.785154598921512,1,EmpLastSalaryHikePercent
+full_default,148,1,4,0.5233521337178887,1.785154598921512,1,EmpLastSalaryHikePercent
+full_default,148,2,4,0.5233521337178887,1.785154598921512,1,EmpLastSalaryHikePercent
+full_default,148,3,4,0.5233521337178887,1.785154598921512,1,EmpLastSalaryHikePercent
+full_default,148,4,4,0.5233521337178887,1.785154598921512,1,EmpLastSalaryHikePercent
+full_default,148,5,4,0.5233521337178887,1.785154598921512,1,EmpLastSalaryHikePercent
+full_default,328,1,4,0.5762909494814625,1.5126288324345933,1,EmpLastSalaryHikePercent
+full_default,328,2,4,0.5762909494814625,1.5126288324345933,1,EmpLastSalaryHikePercent
+full_default,328,3,4,0.5762909494814625,1.5126288324345933,1,EmpLastSalaryHikePercent
+full_default,328,4,4,0.5762909494814625,1.5126288324345933,1,EmpLastSalaryHikePercent
+full_default,328,5,4,0.5762909494814625,1.5126288324345933,1,EmpLastSalaryHikePercent
+full_default,390,1,4,0.6418639190271138,3.665802858132843,2,"EmpEnvironmentSatisfaction, EmpLastSalaryHikePercent"
+full_default,390,2,4,0.5720112711914972,4.3063480513964985,2,"EmpEnvironmentSatisfaction, EmpLastSalaryHikePercent"
+full_default,390,3,4,0.5727583882988383,4.961007619842453,3,"EmpEnvironmentSatisfaction, EmpLastSalaryHikePercent, EmpJobInvolvement"
+full_default,390,4,4,0.5727583882988383,4.961007619842453,3,"EmpEnvironmentSatisfaction, EmpLastSalaryHikePercent, EmpJobInvolvement"
+full_default,390,5,4,0.5641576808392775,4.999876355660981,3,"EmpEnvironmentSatisfaction, EmpLastSalaryHikePercent, EmpWorkLifeBalance"
+full_default,461,1,4,0.6000119827739905,0.6950515329738374,1,EmpLastSalaryHikePercent
+full_default,461,2,4,0.6000119827739905,0.6950515329738374,1,EmpLastSalaryHikePercent
+full_default,461,3,4,0.6000119827739905,0.6950515329738374,1,EmpLastSalaryHikePercent
+full_default,461,4,4,0.6000119827739905,0.6950515329738374,1,EmpLastSalaryHikePercent
+full_default,461,5,4,0.6000119827739905,0.6950515329738374,1,EmpLastSalaryHikePercent
+full_default,694,1,4,0.558636732056042,2.602731898382268,1,EmpLastSalaryHikePercent
+full_default,694,2,4,0.558636732056042,2.602731898382268,1,EmpLastSalaryHikePercent
+full_default,694,3,4,0.558636732056042,2.602731898382268,1,EmpLastSalaryHikePercent
+full_default,694,4,4,0.558636732056042,2.602731898382268,1,EmpLastSalaryHikePercent
+full_default,694,5,4,0.6260784364553214,2.8752576648691868,1,EmpLastSalaryHikePercent
+full_default,732,1,4,0.6596043893537854,1.9761419195011494,1,EmpEnvironmentSatisfaction
+full_default,732,2,4,0.6596043893537854,1.9761419195011494,1,EmpEnvironmentSatisfaction
+full_default,732,3,4,0.6596043893537854,1.9761419195011494,1,EmpEnvironmentSatisfaction
+full_default,732,4,4,0.6596043893537854,1.9761419195011494,1,EmpEnvironmentSatisfaction
+full_default,732,5,4,0.6596043893537854,1.9761419195011494,1,EmpEnvironmentSatisfaction
+full_default,238,1,4,0.5772856594699842,1.785154598921512,1,EmpLastSalaryHikePercent
+full_default,238,2,4,0.5772856594699842,1.785154598921512,1,EmpLastSalaryHikePercent
+full_default,238,3,4,0.6717033144379211,2.057680365408431,1,EmpLastSalaryHikePercent
+full_default,238,4,4,0.7112854621145829,2.3302061318953493,1,EmpLastSalaryHikePercent
+full_default,238,5,4,0.7112854621145829,2.3302061318953493,1,EmpLastSalaryHikePercent
+full_default,385,1,4,0.6078826424406714,3.393277091645924,2,"EmpEnvironmentSatisfaction, EmpLastSalaryHikePercent"
+full_default,385,2,4,0.6271336752150612,3.665802858132843,2,"EmpEnvironmentSatisfaction, EmpLastSalaryHikePercent"
+full_default,385,3,4,0.6271336752150612,3.9383286246197615,2,"EmpEnvironmentSatisfaction, EmpLastSalaryHikePercent"
+full_default,385,4,4,0.5344380708605154,4.03382228490958,2,"EmpEnvironmentSatisfaction, EmpLastSalaryHikePercent"
+full_default,385,5,4,0.554818609162802,4.727350589174062,3,"EmpEnvironmentSatisfaction, EmpLastSalaryHikePercent, EmpWorkLifeBalance"
+full_default,1081,1,3,0.8526861061196604,1.0630709597505748,1,EmpEnvironmentSatisfaction
+full_default,1081,2,3,0.8526861061196604,1.0630709597505748,1,EmpEnvironmentSatisfaction
+full_default,1081,3,3,0.8526861061196604,1.0630709597505748,1,EmpEnvironmentSatisfaction
+full_default,1081,4,3,0.8526861061196604,1.0630709597505748,1,EmpEnvironmentSatisfaction
+full_default,1081,5,3,0.8526861061196604,1.0630709597505748,1,EmpEnvironmentSatisfaction
+full_default,997,1,4,0.6632084278877047,4.03382228490958,2,"EmpEnvironmentSatisfaction, EmpLastSalaryHikePercent"
+full_default,997,2,4,0.6632084278877047,4.03382228490958,2,"EmpEnvironmentSatisfaction, EmpLastSalaryHikePercent"
+full_default,997,3,4,0.6632084278877047,4.03382228490958,2,"EmpEnvironmentSatisfaction, EmpLastSalaryHikePercent"
+full_default,997,4,4,0.6911918631838055,4.3063480513964985,2,"EmpEnvironmentSatisfaction, EmpLastSalaryHikePercent"
+full_default,997,5,4,0.6911918631838055,4.3063480513964985,2,"EmpEnvironmentSatisfaction, EmpLastSalaryHikePercent"
+full_default,939,1,4,0.47810308076299424,3.391753862936568,2,"EmpLastSalaryHikePercent, EmpWorkLifeBalance"
+full_default,939,2,4,0.47810308076299424,3.391753862936568,2,"EmpLastSalaryHikePercent, EmpWorkLifeBalance"
+full_default,939,3,4,0.5585275850344305,3.664279629423487,2,"EmpLastSalaryHikePercent, EmpWorkLifeBalance"
+full_default,939,4,4,0.5785352730236809,3.9368053959104055,2,"EmpLastSalaryHikePercent, EmpWorkLifeBalance"
+full_default,939,5,4,0.5785352730236809,3.9368053959104055,2,"EmpLastSalaryHikePercent, EmpWorkLifeBalance"
+full_default,43,1,4,0.6503882548811192,3.7612965184226614,2,"EmpEnvironmentSatisfaction, EmpLastSalaryHikePercent"
+full_default,43,2,4,0.6258887544595991,4.43017013425413,3,"EmpEnvironmentSatisfaction, EmpLastSalaryHikePercent, TrainingTimesLastYear"
+full_default,43,3,4,0.6594243097724254,4.674367478173236,2,"EmpEnvironmentSatisfaction, EmpLastSalaryHikePercent"
+full_default,43,4,4,0.6503882548811192,4.975221667227967,3,"EmpEnvironmentSatisfaction, EmpLastSalaryHikePercent, TrainingTimesLastYear"
+full_default,43,5,4,0.546757420375661,5.070715327517786,3,"EmpEnvironmentSatisfaction, EmpLastSalaryHikePercent, TrainingTimesLastYear"
+full_default,116,1,4,0.6180989864928137,3.1477834313561055,1,EmpLastSalaryHikePercent
+full_default,116,2,4,0.5150523317311324,3.5441312807006553,2,"EmpLastSalaryHikePercent, TrainingTimesLastYear"
+full_default,116,3,4,0.6031429232699664,3.816657047187574,2,"EmpLastSalaryHikePercent, TrainingTimesLastYear"
+full_default,116,4,4,0.6031429232699664,3.816657047187574,2,"EmpLastSalaryHikePercent, TrainingTimesLastYear"
+full_default,116,5,4,0.5150523317311324,4.335530663019043,2,"EmpLastSalaryHikePercent, TrainingTimesLastYear"
+full_default,1125,1,4,0.5903164674038396,3.393277091645924,2,"EmpEnvironmentSatisfaction, EmpLastSalaryHikePercent"
+full_default,1125,2,4,0.5903164674038396,3.393277091645924,2,"EmpEnvironmentSatisfaction, EmpLastSalaryHikePercent"
+full_default,1125,3,4,0.5903164674038396,3.393277091645924,2,"EmpEnvironmentSatisfaction, EmpLastSalaryHikePercent"
+full_default,1125,4,4,0.5903164674038396,3.393277091645924,2,"EmpEnvironmentSatisfaction, EmpLastSalaryHikePercent"
+full_default,1125,5,4,0.5903164674038396,3.393277091645924,2,"EmpEnvironmentSatisfaction, EmpLastSalaryHikePercent"
+full_default,984,1,4,0.4739222848448018,5.817453655121737,3,"EmpEnvironmentSatisfaction, EmpLastSalaryHikePercent, EmpWorkLifeBalance"
+full_default,984,2,4,0.4769511593224664,6.210981959386218,2,"EmpLastSalaryHikePercent, EmpWorkLifeBalance"
+full_default,984,3,4,0.6290614247252537,6.457998848385393,3,"EmpEnvironmentSatisfaction, EmpLastSalaryHikePercent, EmpWorkLifeBalance"
+full_default,984,4,4,0.6290614247252537,6.457998848385393,3,"EmpEnvironmentSatisfaction, EmpLastSalaryHikePercent, EmpWorkLifeBalance"
+full_default,984,5,4,0.6290614247252537,6.457998848385393,3,"EmpEnvironmentSatisfaction, EmpLastSalaryHikePercent, EmpWorkLifeBalance"
+full_default,1098,1,4,0.5170320687881471,4.03382228490958,2,"EmpEnvironmentSatisfaction, EmpLastSalaryHikePercent"
+full_default,1098,2,4,0.5170320687881471,4.03382228490958,2,"EmpEnvironmentSatisfaction, EmpLastSalaryHikePercent"
+full_default,1098,3,4,0.5170320687881471,4.03382228490958,2,"EmpEnvironmentSatisfaction, EmpLastSalaryHikePercent"
+full_default,1098,4,4,0.5170320687881471,4.03382228490958,2,"EmpEnvironmentSatisfaction, EmpLastSalaryHikePercent"
+full_default,1098,5,4,0.6049040512510638,4.3063480513964985,2,"EmpEnvironmentSatisfaction, EmpLastSalaryHikePercent"
+full_default,33,1,4,0.6144523815831147,0.6950515329738374,1,EmpLastSalaryHikePercent
+full_default,33,2,4,0.6144523815831147,0.6950515329738374,1,EmpLastSalaryHikePercent
+full_default,33,3,4,0.6144523815831147,0.6950515329738374,1,EmpLastSalaryHikePercent
+full_default,33,4,4,0.6144523815831147,0.6950515329738374,1,EmpLastSalaryHikePercent
+full_default,33,5,4,0.6144523815831147,0.6950515329738374,1,EmpLastSalaryHikePercent
+full_default,1057,1,4,0.6187401619640361,2.057680365408431,1,EmpLastSalaryHikePercent
+full_default,1057,2,4,0.6187401619640361,2.057680365408431,1,EmpLastSalaryHikePercent
+full_default,1057,3,4,0.6187401619640361,2.057680365408431,1,EmpLastSalaryHikePercent
+full_default,1057,4,4,0.6187401619640361,2.057680365408431,1,EmpLastSalaryHikePercent
+full_default,1057,5,4,0.7130476574921529,2.3302061318953493,1,EmpLastSalaryHikePercent
+full_default,245,1,4,0.5834481453200213,2.3302061318953493,1,EmpLastSalaryHikePercent
+full_default,245,2,4,0.5834481453200213,2.3302061318953493,1,EmpLastSalaryHikePercent
+full_default,245,3,4,0.6636357118505098,2.602731898382268,1,EmpLastSalaryHikePercent
+full_default,245,4,4,0.6636357118505098,2.602731898382268,1,EmpLastSalaryHikePercent
+full_default,245,5,4,0.6636357118505098,2.602731898382268,1,EmpLastSalaryHikePercent
+full_default,654,1,4,0.5999233647655715,1.9761419195011494,1,EmpEnvironmentSatisfaction
+full_default,654,2,4,0.5987507905245933,2.004470342068962,2,"EmpEnvironmentSatisfaction, TrainingTimesLastYear"
+full_default,654,3,4,0.6233943813357656,2.4269961085558807,3,"EmpEnvironmentSatisfaction, EmpLastSalaryHikePercent, TrainingTimesLastYear"
+full_default,654,4,4,0.6107088020740402,2.6308014879471036,2,"EmpEnvironmentSatisfaction, EmpJobInvolvement"
+full_default,654,5,4,0.619373152473631,2.669670223765631,2,"EmpEnvironmentSatisfaction, EmpWorkLifeBalance"
+full_default,1063,1,4,0.6304105365995443,2.057680365408431,1,EmpLastSalaryHikePercent
+full_default,1063,2,4,0.6304105365995443,2.057680365408431,1,EmpLastSalaryHikePercent
+full_default,1063,3,4,0.6304105365995443,2.057680365408431,1,EmpLastSalaryHikePercent
+full_default,1063,4,4,0.6304105365995443,2.057680365408431,1,EmpLastSalaryHikePercent
+full_default,1063,5,4,0.6304105365995443,2.057680365408431,1,EmpLastSalaryHikePercent
+full_default,55,1,4,0.6854131620714795,2.602731898382268,1,EmpLastSalaryHikePercent
+full_default,55,2,4,0.5898748393934704,2.999079747726818,2,"EmpLastSalaryHikePercent, TrainingTimesLastYear"
+full_default,55,3,4,0.6743226656031974,3.2716055142137366,2,"EmpLastSalaryHikePercent, TrainingTimesLastYear"
+full_default,55,4,4,0.6962504492652566,3.5441312807006553,2,"EmpLastSalaryHikePercent, TrainingTimesLastYear"
+full_default,55,5,4,0.6962504492652566,3.5441312807006553,2,"EmpLastSalaryHikePercent, TrainingTimesLastYear"
+full_default,979,1,4,0.6422857407039928,4.089182813674493,2,"EmpLastSalaryHikePercent, TrainingTimesLastYear"
+full_default,979,2,4,0.5578798949198599,4.335530663019043,2,"EmpLastSalaryHikePercent, TrainingTimesLastYear"
+full_default,979,3,4,0.6232491295077666,4.608056429505961,2,"EmpLastSalaryHikePercent, TrainingTimesLastYear"
+full_default,979,4,4,0.6478530895196122,4.754382695371162,2,"EmpLastSalaryHikePercent, EmpWorkLifeBalance"
+full_default,979,5,4,0.5578798949198599,5.12693004533743,2,"EmpLastSalaryHikePercent, TrainingTimesLastYear"
+full_default,139,1,4,0.5859852635738463,2.057680365408431,1,EmpLastSalaryHikePercent
+full_default,139,2,4,0.5859852635738463,2.057680365408431,1,EmpLastSalaryHikePercent
+full_default,139,3,4,0.5859852635738463,2.057680365408431,1,EmpLastSalaryHikePercent
+full_default,139,4,4,0.5859852635738463,2.057680365408431,1,EmpLastSalaryHikePercent
+full_default,139,5,4,0.5859852635738463,2.057680365408431,1,EmpLastSalaryHikePercent
+full_default,126,1,4,0.610044084355588,2.057680365408431,1,EmpLastSalaryHikePercent
+full_default,126,2,4,0.610044084355588,2.057680365408431,1,EmpLastSalaryHikePercent
+full_default,126,3,4,0.610044084355588,2.057680365408431,1,EmpLastSalaryHikePercent
+full_default,126,4,4,0.610044084355588,2.057680365408431,1,EmpLastSalaryHikePercent
+full_default,126,5,4,0.610044084355588,2.057680365408431,1,EmpLastSalaryHikePercent
+full_default,1196,1,4,0.597116943760746,0.9675772994607561,1,EmpLastSalaryHikePercent
+full_default,1196,2,4,0.597116943760746,0.9675772994607561,1,EmpLastSalaryHikePercent
+full_default,1196,3,4,0.597116943760746,0.9675772994607561,1,EmpLastSalaryHikePercent
+full_default,1196,4,4,0.597116943760746,0.9675772994607561,1,EmpLastSalaryHikePercent
+full_default,1196,5,4,0.597116943760746,0.9675772994607561,1,EmpLastSalaryHikePercent
+full_default,1089,1,4,0.6886209691823677,5.272402122147899,3,"EmpEnvironmentSatisfaction, EmpLastSalaryHikePercent, EmpWorkLifeBalance"
+full_default,1089,2,4,0.6886209691823677,5.272402122147899,3,"EmpEnvironmentSatisfaction, EmpLastSalaryHikePercent, EmpWorkLifeBalance"
+full_default,1089,3,4,0.6886209691823677,5.272402122147899,3,"EmpEnvironmentSatisfaction, EmpLastSalaryHikePercent, EmpWorkLifeBalance"
+full_default,1089,4,4,0.7220249803808503,5.544927888634818,3,"EmpEnvironmentSatisfaction, EmpLastSalaryHikePercent, EmpWorkLifeBalance"
+full_default,1089,5,4,0.7220249803808503,5.544927888634818,3,"EmpEnvironmentSatisfaction, EmpLastSalaryHikePercent, EmpWorkLifeBalance"
+full_default,903,1,4,0.5425371105929817,1.2401030659476746,1,EmpLastSalaryHikePercent
+full_default,903,2,4,0.5425371105929817,1.2401030659476746,1,EmpLastSalaryHikePercent
+full_default,903,3,4,0.6397511483287093,1.5126288324345933,1,EmpLastSalaryHikePercent
+full_default,903,4,4,0.6397511483287093,1.5126288324345933,1,EmpLastSalaryHikePercent
+full_default,903,5,4,0.6397511483287093,1.5126288324345933,1,EmpLastSalaryHikePercent
+full_default,956,1,4,0.5912868789273593,2.602731898382268,1,EmpLastSalaryHikePercent
+full_default,956,2,4,0.5912868789273593,2.602731898382268,1,EmpLastSalaryHikePercent
+full_default,956,3,4,0.5912868789273593,2.602731898382268,1,EmpLastSalaryHikePercent
+full_default,956,4,4,0.5912868789273593,2.602731898382268,1,EmpLastSalaryHikePercent
+full_default,956,5,4,0.5912868789273593,2.602731898382268,1,EmpLastSalaryHikePercent
+full_default,39,1,4,0.589703097260619,0.42252576648691864,1,EmpLastSalaryHikePercent
+full_default,39,2,4,0.589703097260619,0.42252576648691864,1,EmpLastSalaryHikePercent
+full_default,39,3,4,0.589703097260619,0.42252576648691864,1,EmpLastSalaryHikePercent
+full_default,39,4,4,0.589703097260619,0.42252576648691864,1,EmpLastSalaryHikePercent
+full_default,39,5,4,0.589703097260619,0.42252576648691864,1,EmpLastSalaryHikePercent
+full_default,1051,1,4,0.4962211488946388,2.057680365408431,1,EmpLastSalaryHikePercent
+full_default,1051,2,4,0.4962211488946388,2.057680365408431,1,EmpLastSalaryHikePercent
+full_default,1051,3,4,0.4962211488946388,2.057680365408431,1,EmpLastSalaryHikePercent
+full_default,1051,4,4,0.4962211488946388,2.057680365408431,1,EmpLastSalaryHikePercent
+full_default,1051,5,4,0.4962211488946388,2.057680365408431,1,EmpLastSalaryHikePercent
+full_default,429,1,4,0.5891564371594752,2.057680365408431,1,EmpLastSalaryHikePercent
+full_default,429,2,4,0.5891564371594752,2.057680365408431,1,EmpLastSalaryHikePercent
+full_default,429,3,4,0.5891564371594752,2.057680365408431,1,EmpLastSalaryHikePercent
+full_default,429,4,4,0.5891564371594752,2.057680365408431,1,EmpLastSalaryHikePercent
+full_default,429,5,4,0.5891564371594752,2.057680365408431,1,EmpLastSalaryHikePercent
+full_default,331,1,3,0.8525095632719546,1.9761419195011494,1,EmpEnvironmentSatisfaction
+full_default,331,2,3,0.8525095632719546,1.9761419195011494,1,EmpEnvironmentSatisfaction
+full_default,331,3,3,0.8525095632719546,1.9761419195011494,1,EmpEnvironmentSatisfaction
+full_default,331,4,3,0.8525095632719546,1.9761419195011494,1,EmpEnvironmentSatisfaction
+full_default,331,5,3,0.8525095632719546,1.9761419195011494,1,EmpEnvironmentSatisfaction
+full_default,600,1,4,0.5768016896061062,0.9675772994607561,1,EmpLastSalaryHikePercent
+full_default,600,2,4,0.5768016896061062,0.9675772994607561,1,EmpLastSalaryHikePercent
+full_default,600,3,4,0.5768016896061062,0.9675772994607561,1,EmpLastSalaryHikePercent
+full_default,600,4,4,0.5768016896061062,0.9675772994607561,1,EmpLastSalaryHikePercent
+full_default,600,5,4,0.5768016896061062,0.9675772994607561,1,EmpLastSalaryHikePercent
+full_default,63,1,4,0.6682921292278421,3.7612965184226614,2,"EmpEnvironmentSatisfaction, EmpLastSalaryHikePercent"
+full_default,63,2,4,0.6964267528458232,4.03382228490958,2,"EmpEnvironmentSatisfaction, EmpLastSalaryHikePercent"
+full_default,63,3,4,0.6964267528458232,4.3063480513964985,2,"EmpEnvironmentSatisfaction, EmpLastSalaryHikePercent"
+full_default,63,4,4,0.5709371872207788,4.401841711686317,2,"EmpEnvironmentSatisfaction, EmpLastSalaryHikePercent"
+full_default,63,5,4,0.5833361918633296,5.0953700159508,3,"EmpEnvironmentSatisfaction, EmpLastSalaryHikePercent, EmpWorkLifeBalance"
+full_default,179,1,4,0.6184554045461828,0.6950515329738374,1,EmpLastSalaryHikePercent
+full_default,179,2,4,0.6184554045461828,0.6950515329738374,1,EmpLastSalaryHikePercent
+full_default,179,3,4,0.6184554045461828,0.6950515329738374,1,EmpLastSalaryHikePercent
+full_default,179,4,4,0.6184554045461828,0.6950515329738374,1,EmpLastSalaryHikePercent
+full_default,179,5,4,0.6184554045461828,0.6950515329738374,1,EmpLastSalaryHikePercent
+full_default,950,1,4,0.6830586320701744,2.602731898382268,1,EmpLastSalaryHikePercent
+full_default,950,2,4,0.5912914300923522,3.897936660091878,2,"EmpLastSalaryHikePercent, EmpJobInvolvement"
+full_default,950,3,4,0.5681680587601793,3.9368053959104055,2,"EmpLastSalaryHikePercent, EmpWorkLifeBalance"
+full_default,950,4,4,0.6830586320701744,4.170462426578797,2,"EmpLastSalaryHikePercent, EmpJobInvolvement"
+full_default,950,5,4,0.7122338918666531,4.210854391106681,2,"EmpEnvironmentSatisfaction, EmpLastSalaryHikePercent"
+full_default,172,1,4,0.5948007194872003,2.6711934524749865,2,"EmpEnvironmentSatisfaction, EmpLastSalaryHikePercent"
+full_default,172,2,4,0.5948007194872003,2.6711934524749865,2,"EmpEnvironmentSatisfaction, EmpLastSalaryHikePercent"
+full_default,172,3,4,0.5948007194872003,2.6711934524749865,2,"EmpEnvironmentSatisfaction, EmpLastSalaryHikePercent"
+full_default,172,4,4,0.5948007194872003,2.6711934524749865,2,"EmpEnvironmentSatisfaction, EmpLastSalaryHikePercent"
+full_default,172,5,4,0.44493650697989956,2.8467023299627305,2,"EmpLastSalaryHikePercent, EmpWorkLifeBalance"
+full_default,601,1,4,0.603454579795825,2.057680365408431,1,EmpLastSalaryHikePercent
+full_default,601,2,4,0.6928130097097273,2.3302061318953493,1,EmpLastSalaryHikePercent
+full_default,601,3,4,0.7268536587773965,2.602731898382268,1,EmpLastSalaryHikePercent
+full_default,601,4,4,0.7268536587773965,2.602731898382268,1,EmpLastSalaryHikePercent
+full_default,601,5,4,0.7268536587773965,2.602731898382268,1,EmpLastSalaryHikePercent
+full_default,1018,1,4,0.598329575998307,0.9675772994607561,1,EmpLastSalaryHikePercent
+full_default,1018,2,4,0.598329575998307,0.9675772994607561,1,EmpLastSalaryHikePercent
+full_default,1018,3,4,0.598329575998307,0.9675772994607561,1,EmpLastSalaryHikePercent
+full_default,1018,4,4,0.6854847284245209,1.2401030659476746,1,EmpLastSalaryHikePercent
+full_default,1018,5,4,0.6854847284245209,1.2401030659476746,1,EmpLastSalaryHikePercent
+full_default,433,1,4,0.5354079035028267,4.578873817883418,2,"EmpEnvironmentSatisfaction, EmpLastSalaryHikePercent"
+full_default,433,2,4,0.5354079035028267,4.578873817883418,2,"EmpEnvironmentSatisfaction, EmpLastSalaryHikePercent"
+full_default,433,3,4,0.6265144585804071,4.851399584370336,2,"EmpEnvironmentSatisfaction, EmpLastSalaryHikePercent"
+full_default,433,4,4,0.6265144585804071,4.851399584370336,2,"EmpEnvironmentSatisfaction, EmpLastSalaryHikePercent"
+full_default,433,5,4,0.6265144585804071,4.851399584370336,2,"EmpEnvironmentSatisfaction, EmpLastSalaryHikePercent"
+full_default,21,1,4,0.5703218986689211,0.9675772994607561,1,EmpLastSalaryHikePercent
+full_default,21,2,4,0.5703218986689211,0.9675772994607561,1,EmpLastSalaryHikePercent
+full_default,21,3,4,0.5703218986689211,0.9675772994607561,1,EmpLastSalaryHikePercent
+full_default,21,4,4,0.5703218986689211,0.9675772994607561,1,EmpLastSalaryHikePercent
+full_default,21,5,4,0.5703218986689211,0.9675772994607561,1,EmpLastSalaryHikePercent
+full_default,506,1,4,0.5511791083594028,1.5126288324345933,1,EmpLastSalaryHikePercent
+full_default,506,2,4,0.5511791083594028,1.5126288324345933,1,EmpLastSalaryHikePercent
+full_default,506,3,4,0.5511791083594028,1.5126288324345933,1,EmpLastSalaryHikePercent
+full_default,506,4,4,0.6194906912237371,1.785154598921512,1,EmpLastSalaryHikePercent
+full_default,506,5,4,0.6194906912237371,1.785154598921512,1,EmpLastSalaryHikePercent
+full_default,10,1,4,0.6838030065254099,4.03382228490958,2,"EmpEnvironmentSatisfaction, EmpLastSalaryHikePercent"
+full_default,10,2,4,0.6031170823697737,4.674367478173236,2,"EmpEnvironmentSatisfaction, EmpLastSalaryHikePercent"
+full_default,10,3,4,0.6006224859839678,5.329027046619191,3,"EmpEnvironmentSatisfaction, EmpLastSalaryHikePercent, EmpJobInvolvement"
+full_default,10,4,4,0.6006224859839678,5.329027046619191,3,"EmpEnvironmentSatisfaction, EmpLastSalaryHikePercent, EmpJobInvolvement"
+full_default,10,5,4,0.5799897677812761,5.367895782437718,3,"EmpEnvironmentSatisfaction, EmpLastSalaryHikePercent, EmpWorkLifeBalance"
+full_default,414,1,3,0.850993632953885,1.9761419195011494,1,EmpEnvironmentSatisfaction
+full_default,414,2,3,0.850993632953885,1.9761419195011494,1,EmpEnvironmentSatisfaction
+full_default,414,3,3,0.8506718707865535,2.889212879251724,1,EmpEnvironmentSatisfaction
+full_default,414,4,3,0.8506718707865535,2.889212879251724,1,EmpEnvironmentSatisfaction
+full_default,414,5,3,0.856481469562523,2.9175413018195364,2,"EmpEnvironmentSatisfaction, TrainingTimesLastYear"
+full_default,180,1,4,0.5797905644592153,2.3302061318953493,1,EmpLastSalaryHikePercent
+full_default,180,2,4,0.5797905644592153,2.3302061318953493,1,EmpLastSalaryHikePercent
+full_default,180,3,4,0.5797905644592153,2.3302061318953493,1,EmpLastSalaryHikePercent
+full_default,180,4,4,0.5797905644592153,2.3302061318953493,1,EmpLastSalaryHikePercent
+full_default,180,5,4,0.5797905644592153,2.3302061318953493,1,EmpLastSalaryHikePercent
+full_default,1148,1,4,0.6380123485870816,2.3302061318953493,1,EmpLastSalaryHikePercent
+full_default,1148,2,4,0.6380123485870816,2.3302061318953493,1,EmpLastSalaryHikePercent
+full_default,1148,3,4,0.6380123485870816,2.3302061318953493,1,EmpLastSalaryHikePercent
+full_default,1148,4,4,0.6380123485870816,2.3302061318953493,1,EmpLastSalaryHikePercent
+full_default,1148,5,4,0.6380123485870816,2.3302061318953493,1,EmpLastSalaryHikePercent
+full_default,125,1,4,0.5622184119429187,0.6950515329738374,1,EmpLastSalaryHikePercent
+full_default,125,2,4,0.63944643196814,0.9675772994607561,1,EmpLastSalaryHikePercent
+full_default,125,3,4,0.63944643196814,0.9675772994607561,1,EmpLastSalaryHikePercent
+full_default,125,4,4,0.6586682707138092,1.2401030659476746,1,EmpLastSalaryHikePercent
+full_default,125,5,4,0.5622184119429187,1.6364509152922246,2,"EmpLastSalaryHikePercent, TrainingTimesLastYear"
+full_default,1116,1,4,0.5972887817906758,4.578873817883418,2,"EmpEnvironmentSatisfaction, EmpLastSalaryHikePercent"
+full_default,1116,2,4,0.6217169795284007,4.851399584370336,2,"EmpEnvironmentSatisfaction, EmpLastSalaryHikePercent"
+full_default,1116,3,4,0.6217169795284007,5.123925350857255,2,"EmpEnvironmentSatisfaction, EmpLastSalaryHikePercent"
+full_default,1116,4,4,0.5271413118668966,5.219419011147074,2,"EmpEnvironmentSatisfaction, EmpLastSalaryHikePercent"
+full_default,1116,5,4,0.547535306717914,5.912947315411555,3,"EmpEnvironmentSatisfaction, EmpLastSalaryHikePercent, EmpWorkLifeBalance"
+full_default,1056,1,4,0.5724693344401388,2.602731898382268,1,EmpLastSalaryHikePercent
+full_default,1056,2,4,0.5724693344401388,2.602731898382268,1,EmpLastSalaryHikePercent
+full_default,1056,3,4,0.5724693344401388,2.602731898382268,1,EmpLastSalaryHikePercent
+full_default,1056,4,4,0.5724693344401388,2.602731898382268,1,EmpLastSalaryHikePercent
+full_default,1056,5,4,0.5724693344401388,2.602731898382268,1,EmpLastSalaryHikePercent
+full_default,1186,1,4,0.6790251493478606,1.785154598921512,1,EmpLastSalaryHikePercent
+full_default,1186,2,4,0.7145778940175614,2.057680365408431,1,EmpLastSalaryHikePercent
+full_default,1186,3,4,0.7145778940175614,2.057680365408431,1,EmpLastSalaryHikePercent
+full_default,1186,4,4,0.7145778940175614,2.057680365408431,1,EmpLastSalaryHikePercent
+full_default,1186,5,4,0.5754214461026057,2.4540282147529804,2,"EmpLastSalaryHikePercent, TrainingTimesLastYear"
+full_default,1099,1,4,0.5016729601192318,1.785154598921512,1,EmpLastSalaryHikePercent
+full_default,1099,2,4,0.5016729601192318,1.785154598921512,1,EmpLastSalaryHikePercent
+full_default,1099,3,4,0.5016729601192318,1.785154598921512,1,EmpLastSalaryHikePercent
+full_default,1099,4,4,0.5016729601192318,1.785154598921512,1,EmpLastSalaryHikePercent
+full_default,1099,5,4,0.5016729601192318,1.785154598921512,1,EmpLastSalaryHikePercent
+full_default,1121,1,4,0.5288948883501725,2.602731898382268,1,EmpLastSalaryHikePercent
+full_default,1121,2,4,0.5288948883501725,2.602731898382268,1,EmpLastSalaryHikePercent
+full_default,1121,3,4,0.5288948883501725,2.602731898382268,1,EmpLastSalaryHikePercent
+full_default,1121,4,4,0.5288948883501725,2.602731898382268,1,EmpLastSalaryHikePercent
+full_default,1121,5,4,0.5288948883501725,2.602731898382268,1,EmpLastSalaryHikePercent
+full_default,993,1,4,0.5355153366760681,2.6711934524749865,2,"EmpEnvironmentSatisfaction, EmpLastSalaryHikePercent"
+full_default,993,2,4,0.5355153366760681,2.6711934524749865,2,"EmpEnvironmentSatisfaction, EmpLastSalaryHikePercent"
+full_default,993,3,4,0.5355153366760681,2.6711934524749865,2,"EmpEnvironmentSatisfaction, EmpLastSalaryHikePercent"
+full_default,993,4,4,0.6149189691820873,2.9437192189619052,2,"EmpEnvironmentSatisfaction, EmpLastSalaryHikePercent"
+full_default,993,5,4,0.6149189691820873,2.9437192189619052,2,"EmpEnvironmentSatisfaction, EmpLastSalaryHikePercent"
+full_default,300,1,4,0.5742881292260397,2.602731898382268,1,EmpLastSalaryHikePercent
+full_default,300,2,4,0.5742881292260397,2.602731898382268,1,EmpLastSalaryHikePercent
+full_default,300,3,4,0.5742881292260397,2.602731898382268,1,EmpLastSalaryHikePercent
+full_default,300,4,4,0.5742881292260397,2.602731898382268,1,EmpLastSalaryHikePercent
+full_default,300,5,4,0.5742881292260397,2.602731898382268,1,EmpLastSalaryHikePercent
+full_default,1184,1,4,0.6467486590833685,3.1207513251590053,2,"EmpEnvironmentSatisfaction, EmpLastSalaryHikePercent"
+full_default,1184,2,4,0.6467486590833685,3.1207513251590053,2,"EmpEnvironmentSatisfaction, EmpLastSalaryHikePercent"
+full_default,1184,3,4,0.6467486590833685,3.1207513251590053,2,"EmpEnvironmentSatisfaction, EmpLastSalaryHikePercent"
+full_default,1184,4,4,0.6825422898650352,3.393277091645924,2,"EmpEnvironmentSatisfaction, EmpLastSalaryHikePercent"
+full_default,1184,5,4,0.6825422898650352,3.393277091645924,2,"EmpEnvironmentSatisfaction, EmpLastSalaryHikePercent"
+full_default,534,1,4,0.5982393099566804,4.578873817883418,2,"EmpEnvironmentSatisfaction, EmpLastSalaryHikePercent"
+full_default,534,2,4,0.5982393099566804,4.578873817883418,2,"EmpEnvironmentSatisfaction, EmpLastSalaryHikePercent"
+full_default,534,3,4,0.5982393099566804,4.578873817883418,2,"EmpEnvironmentSatisfaction, EmpLastSalaryHikePercent"
+full_default,534,4,4,0.6453336807572683,4.851399584370336,2,"EmpEnvironmentSatisfaction, EmpLastSalaryHikePercent"
+full_default,534,5,4,0.6453336807572683,4.851399584370336,2,"EmpEnvironmentSatisfaction, EmpLastSalaryHikePercent"
+full_default,953,1,4,0.571336481478026,1.785154598921512,1,EmpLastSalaryHikePercent
+full_default,953,2,4,0.571336481478026,1.785154598921512,1,EmpLastSalaryHikePercent
+full_default,953,3,4,0.571336481478026,1.785154598921512,1,EmpLastSalaryHikePercent
+full_default,953,4,4,0.571336481478026,1.785154598921512,1,EmpLastSalaryHikePercent
+full_default,953,5,4,0.571336481478026,1.785154598921512,1,EmpLastSalaryHikePercent
+full_default,425,1,3,0.853912618336804,1.0630709597505748,1,EmpEnvironmentSatisfaction
+full_default,425,2,3,0.853912618336804,1.0630709597505748,1,EmpEnvironmentSatisfaction
+full_default,425,3,3,0.853912618336804,1.0630709597505748,1,EmpEnvironmentSatisfaction
+full_default,425,4,3,0.853912618336804,1.0630709597505748,1,EmpEnvironmentSatisfaction
+full_default,425,5,3,0.853912618336804,1.0630709597505748,1,EmpEnvironmentSatisfaction
+full_default,1086,1,4,0.5822012270476192,4.578873817883418,2,"EmpEnvironmentSatisfaction, EmpLastSalaryHikePercent"
+full_default,1086,2,4,0.5822012270476192,4.578873817883418,2,"EmpEnvironmentSatisfaction, EmpLastSalaryHikePercent"
+full_default,1086,3,4,0.6769936127684495,4.851399584370336,2,"EmpEnvironmentSatisfaction, EmpLastSalaryHikePercent"
+full_default,1086,4,4,0.6769936127684495,4.851399584370336,2,"EmpEnvironmentSatisfaction, EmpLastSalaryHikePercent"
+full_default,1086,5,4,0.6769936127684495,4.851399584370336,2,"EmpEnvironmentSatisfaction, EmpLastSalaryHikePercent"
+full_default,674,1,4,0.6066195570336553,1.5126288324345933,1,EmpLastSalaryHikePercent
+full_default,674,2,4,0.6066195570336553,1.5126288324345933,1,EmpLastSalaryHikePercent
+full_default,674,3,4,0.6066195570336553,1.5126288324345933,1,EmpLastSalaryHikePercent
+full_default,674,4,4,0.6882795415029179,1.785154598921512,1,EmpLastSalaryHikePercent
+full_default,674,5,4,0.6882795415029179,1.785154598921512,1,EmpLastSalaryHikePercent
+full_default,358,1,4,0.6494045065277084,2.8752576648691868,1,EmpLastSalaryHikePercent
+full_default,358,2,4,0.5670132208082217,4.0630048965321235,2,"EmpLastSalaryHikePercent, TrainingTimesLastYear"
+full_default,358,3,4,0.5670132208082217,4.0630048965321235,2,"EmpLastSalaryHikePercent, TrainingTimesLastYear"
+full_default,358,4,4,0.5670132208082217,4.0630048965321235,2,"EmpLastSalaryHikePercent, TrainingTimesLastYear"
+full_default,358,5,4,0.6291826963416335,4.335530663019043,2,"EmpLastSalaryHikePercent, TrainingTimesLastYear"
+full_default,223,1,3,0.7900217800728935,1.0630709597505748,1,EmpEnvironmentSatisfaction
+full_default,223,2,3,0.7900217800728935,1.0630709597505748,1,EmpEnvironmentSatisfaction
+full_default,223,3,3,0.7900217800728935,1.0630709597505748,1,EmpEnvironmentSatisfaction
+full_default,223,4,3,0.7900217800728935,1.0630709597505748,1,EmpEnvironmentSatisfaction
+full_default,223,5,3,0.7900217800728935,1.0630709597505748,1,EmpEnvironmentSatisfaction
+full_default,994,1,4,0.5693783380114045,1.7581224927244121,2,"EmpEnvironmentSatisfaction, EmpLastSalaryHikePercent"
+full_default,994,2,4,0.6705200634927704,2.030648259211331,2,"EmpEnvironmentSatisfaction, EmpLastSalaryHikePercent"
+full_default,994,3,4,0.6705200634927704,2.030648259211331,2,"EmpEnvironmentSatisfaction, EmpLastSalaryHikePercent"
+full_default,994,4,4,0.6705200634927704,2.030648259211331,2,"EmpEnvironmentSatisfaction, EmpLastSalaryHikePercent"
+full_default,994,5,4,0.7049268171548841,2.303174025698249,2,"EmpEnvironmentSatisfaction, EmpLastSalaryHikePercent"
+full_default,866,1,4,0.5643901913999038,0.42252576648691864,1,EmpLastSalaryHikePercent
+full_default,866,2,4,0.6640950984905009,0.6950515329738374,1,EmpLastSalaryHikePercent
+full_default,866,3,4,0.6867950284775488,0.9675772994607561,1,EmpLastSalaryHikePercent
+full_default,866,4,4,0.6867950284775488,0.9675772994607561,1,EmpLastSalaryHikePercent
+full_default,866,5,4,0.6867950284775488,1.2401030659476746,1,EmpLastSalaryHikePercent
+full_default,368,1,4,0.672228762220538,3.1477834313561055,1,EmpLastSalaryHikePercent
+full_default,368,2,4,0.5577923718416128,4.335530663019043,2,"EmpLastSalaryHikePercent, TrainingTimesLastYear"
+full_default,368,3,4,0.6497735510347201,4.608056429505961,2,"EmpLastSalaryHikePercent, TrainingTimesLastYear"
+full_default,368,4,4,0.6497735510347201,4.608056429505961,2,"EmpLastSalaryHikePercent, TrainingTimesLastYear"
+full_default,368,5,4,0.5577923718416128,5.12693004533743,2,"EmpLastSalaryHikePercent, TrainingTimesLastYear"
+full_default,135,1,4,0.5935497178229909,1.2401030659476746,1,EmpLastSalaryHikePercent
+full_default,135,2,4,0.5935497178229909,1.2401030659476746,1,EmpLastSalaryHikePercent
+full_default,135,3,4,0.5935497178229909,1.2401030659476746,1,EmpLastSalaryHikePercent
+full_default,135,4,4,0.5935497178229909,1.2401030659476746,1,EmpLastSalaryHikePercent
+full_default,135,5,4,0.5935497178229909,1.2401030659476746,1,EmpLastSalaryHikePercent
+full_default,188,1,4,0.6330564654898275,4.03382228490958,2,"EmpEnvironmentSatisfaction, EmpLastSalaryHikePercent"
+full_default,188,2,4,0.6330564654898275,4.03382228490958,2,"EmpEnvironmentSatisfaction, EmpLastSalaryHikePercent"
+full_default,188,3,4,0.6330564654898275,4.03382228490958,2,"EmpEnvironmentSatisfaction, EmpLastSalaryHikePercent"
+full_default,188,4,4,0.6412742326228938,4.3063480513964985,2,"EmpEnvironmentSatisfaction, EmpLastSalaryHikePercent"
+full_default,188,5,4,0.6412742326228938,4.3063480513964985,2,"EmpEnvironmentSatisfaction, EmpLastSalaryHikePercent"
+full_default,289,1,4,0.6096215600605146,1.785154598921512,1,EmpLastSalaryHikePercent
+full_default,289,2,4,0.6096215600605146,1.785154598921512,1,EmpLastSalaryHikePercent
+full_default,289,3,4,0.6096215600605146,1.785154598921512,1,EmpLastSalaryHikePercent
+full_default,289,4,4,0.6096215600605146,1.785154598921512,1,EmpLastSalaryHikePercent
+full_default,289,5,4,0.6096215600605146,1.785154598921512,1,EmpLastSalaryHikePercent
+full_default,186,1,4,0.6743962603445818,4.999876355660981,3,"EmpEnvironmentSatisfaction, EmpLastSalaryHikePercent, EmpWorkLifeBalance"
+full_default,186,2,4,0.6830968688416243,5.912947315411555,3,"EmpEnvironmentSatisfaction, EmpLastSalaryHikePercent, EmpWorkLifeBalance"
+full_default,186,3,4,0.6930443388694266,6.456475619676037,3,"EmpEnvironmentSatisfaction, EmpLastSalaryHikePercent, EmpWorkLifeBalance"
+full_default,186,4,4,0.6930443388694266,6.456475619676037,3,"EmpEnvironmentSatisfaction, EmpLastSalaryHikePercent, EmpWorkLifeBalance"
+full_default,186,5,4,0.587794408059845,6.824495046452774,3,"EmpEnvironmentSatisfaction, EmpLastSalaryHikePercent, EmpWorkLifeBalance"
+full_default,825,1,4,0.5321490701596611,2.030648259211331,2,"EmpEnvironmentSatisfaction, EmpLastSalaryHikePercent"
+full_default,825,2,4,0.5321490701596611,2.030648259211331,2,"EmpEnvironmentSatisfaction, EmpLastSalaryHikePercent"
+full_default,825,3,4,0.5321490701596611,2.030648259211331,2,"EmpEnvironmentSatisfaction, EmpLastSalaryHikePercent"
+full_default,825,4,4,0.5321490701596611,2.030648259211331,2,"EmpEnvironmentSatisfaction, EmpLastSalaryHikePercent"
+full_default,825,5,4,0.6078817235676106,2.303174025698249,2,"EmpEnvironmentSatisfaction, EmpLastSalaryHikePercent"
+full_default,1146,1,4,0.5150660661586773,2.9437192189619052,2,"EmpEnvironmentSatisfaction, EmpLastSalaryHikePercent"
+full_default,1146,2,4,0.5150660661586773,2.9437192189619052,2,"EmpEnvironmentSatisfaction, EmpLastSalaryHikePercent"
+full_default,1146,3,4,0.6016457292701702,3.216244985448824,2,"EmpEnvironmentSatisfaction, EmpLastSalaryHikePercent"
+full_default,1146,4,4,0.6016457292701702,3.216244985448824,2,"EmpEnvironmentSatisfaction, EmpLastSalaryHikePercent"
+full_default,1146,5,4,0.6016457292701702,3.216244985448824,2,"EmpEnvironmentSatisfaction, EmpLastSalaryHikePercent"
+full_default,637,1,4,0.5838430354046659,2.057680365408431,1,EmpLastSalaryHikePercent
+full_default,637,2,4,0.5838430354046659,2.057680365408431,1,EmpLastSalaryHikePercent
+full_default,637,3,4,0.5838430354046659,2.057680365408431,1,EmpLastSalaryHikePercent
+full_default,637,4,4,0.5838430354046659,2.057680365408431,1,EmpLastSalaryHikePercent
+full_default,637,5,4,0.5838430354046659,2.057680365408431,1,EmpLastSalaryHikePercent
+full_default,786,1,3,0.8536213504111599,1.0630709597505748,1,EmpEnvironmentSatisfaction
+full_default,786,2,3,0.8536213504111599,1.0630709597505748,1,EmpEnvironmentSatisfaction
+full_default,786,3,3,0.8536213504111599,1.0630709597505748,1,EmpEnvironmentSatisfaction
+full_default,786,4,3,0.8536213504111599,1.0630709597505748,1,EmpEnvironmentSatisfaction
+full_default,786,5,3,0.8536213504111599,1.0630709597505748,1,EmpEnvironmentSatisfaction
+full_default,1092,1,4,0.5986954943424292,2.575699792185168,2,"EmpEnvironmentSatisfaction, EmpLastSalaryHikePercent"
+full_default,1092,2,4,0.5986954943424292,2.575699792185168,2,"EmpEnvironmentSatisfaction, EmpLastSalaryHikePercent"
+full_default,1092,3,4,0.5986954943424292,2.575699792185168,2,"EmpEnvironmentSatisfaction, EmpLastSalaryHikePercent"
+full_default,1092,4,4,0.6811650200247732,2.8482255586720866,2,"EmpEnvironmentSatisfaction, EmpLastSalaryHikePercent"
+full_default,1092,5,4,0.6811650200247732,2.8482255586720866,2,"EmpEnvironmentSatisfaction, EmpLastSalaryHikePercent"
+full_default,715,1,4,0.5142453480897384,0.42252576648691864,1,EmpLastSalaryHikePercent
+full_default,715,2,4,0.5142453480897384,0.42252576648691864,1,EmpLastSalaryHikePercent
+full_default,715,3,4,0.5913352140276371,0.6950515329738374,1,EmpLastSalaryHikePercent
+full_default,715,4,4,0.6199876779885463,0.9675772994607561,1,EmpLastSalaryHikePercent
+full_default,715,5,4,0.6199876779885463,0.9675772994607561,1,EmpLastSalaryHikePercent
+full_default,1174,1,4,0.545173820318643,0.6950515329738374,1,EmpLastSalaryHikePercent
+full_default,1174,2,4,0.545173820318643,0.6950515329738374,1,EmpLastSalaryHikePercent
+full_default,1174,3,4,0.545173820318643,0.6950515329738374,1,EmpLastSalaryHikePercent
+full_default,1174,4,4,0.545173820318643,0.6950515329738374,1,EmpLastSalaryHikePercent
+full_default,1174,5,4,0.545173820318643,0.6950515329738374,1,EmpLastSalaryHikePercent
+full_default,862,1,4,0.5944345931670695,2.3302061318953493,1,EmpLastSalaryHikePercent
+full_default,862,2,4,0.5944345931670695,2.3302061318953493,1,EmpLastSalaryHikePercent
+full_default,862,3,4,0.5944345931670695,2.3302061318953493,1,EmpLastSalaryHikePercent
+full_default,862,4,4,0.5944345931670695,2.3302061318953493,1,EmpLastSalaryHikePercent
+full_default,862,5,4,0.5944345931670695,2.3302061318953493,1,EmpLastSalaryHikePercent
+full_default,321,1,4,0.5982264288856378,2.602731898382268,1,EmpLastSalaryHikePercent
+full_default,321,2,4,0.5982264288856378,2.602731898382268,1,EmpLastSalaryHikePercent
+full_default,321,3,4,0.5982264288856378,2.602731898382268,1,EmpLastSalaryHikePercent
+full_default,321,4,4,0.5982264288856378,2.602731898382268,1,EmpLastSalaryHikePercent
+full_default,321,5,4,0.6872438554831152,2.8752576648691868,1,EmpLastSalaryHikePercent
+full_default,685,1,4,0.6343323631751742,1.785154598921512,1,EmpLastSalaryHikePercent
+full_default,685,2,4,0.6343323631751742,1.785154598921512,1,EmpLastSalaryHikePercent
+full_default,685,3,4,0.7154330622486472,2.057680365408431,1,EmpLastSalaryHikePercent
+full_default,685,4,4,0.7154330622486472,2.057680365408431,1,EmpLastSalaryHikePercent
+full_default,685,5,4,0.7154330622486472,2.057680365408431,1,EmpLastSalaryHikePercent
+full_default,718,1,3,0.8085395775651951,1.9761419195011494,1,EmpEnvironmentSatisfaction
+full_default,718,2,3,0.8085395775651951,1.9761419195011494,1,EmpEnvironmentSatisfaction
+full_default,718,3,3,0.8085395775651951,1.9761419195011494,1,EmpEnvironmentSatisfaction
+full_default,718,4,3,0.8085395775651951,1.9761419195011494,1,EmpEnvironmentSatisfaction
+full_default,718,5,3,0.8085395775651951,1.9761419195011494,1,EmpEnvironmentSatisfaction
+full_default,546,1,3,0.8601629435834659,1.9761419195011494,1,EmpEnvironmentSatisfaction
+full_default,546,2,3,0.8601629435834659,1.9761419195011494,1,EmpEnvironmentSatisfaction
+full_default,546,3,3,0.8601629435834659,2.6711934524749865,2,"EmpEnvironmentSatisfaction, EmpLastSalaryHikePercent"
+full_default,546,4,3,0.8598605143707504,2.889212879251724,1,EmpEnvironmentSatisfaction
+full_default,546,5,3,0.8598605143707504,2.889212879251724,1,EmpEnvironmentSatisfaction
+full_default,1137,1,3,0.8550957711640775,1.0630709597505748,1,EmpEnvironmentSatisfaction
+full_default,1137,2,3,0.8550957711640775,1.0630709597505748,1,EmpEnvironmentSatisfaction
+full_default,1137,3,3,0.8550957711640775,1.0630709597505748,1,EmpEnvironmentSatisfaction
+full_default,1137,4,3,0.8550957711640775,1.0630709597505748,1,EmpEnvironmentSatisfaction
+full_default,1137,5,3,0.8550957711640775,1.0630709597505748,1,EmpEnvironmentSatisfaction
+full_default,292,1,4,0.6053125766513822,2.5741765634758123,2,"EmpLastSalaryHikePercent, EmpWorkLifeBalance"
+full_default,292,2,4,0.6053125766513822,2.5741765634758123,2,"EmpLastSalaryHikePercent, EmpWorkLifeBalance"
+full_default,292,3,4,0.6893170559455863,2.8467023299627305,2,"EmpLastSalaryHikePercent, EmpWorkLifeBalance"
+full_default,292,4,4,0.7272334401617331,3.1192280964496497,2,"EmpLastSalaryHikePercent, EmpWorkLifeBalance"
+full_default,292,5,4,0.7272334401617331,3.1192280964496497,2,"EmpLastSalaryHikePercent, EmpWorkLifeBalance"

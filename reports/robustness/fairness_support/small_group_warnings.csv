@@ -1,0 +1,9 @@
+attribute,group_value,n_samples,warning
+EmpDepartment,Human Resources,10,n_samples < 30
+EmpDepartment,Finance,8,n_samples < 30
+EmpDepartment,Data Science,2,n_samples < 30
+EducationBackground,Marketing,26,n_samples < 30
+EducationBackground,Technical Degree,21,n_samples < 30
+EducationBackground,Other,20,n_samples < 30
+EducationBackground,Human Resources,5,n_samples < 30
+BusinessTravelFrequency,Non-Travel,28,n_samples < 30

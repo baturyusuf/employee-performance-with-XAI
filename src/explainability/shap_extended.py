@@ -15,6 +15,8 @@ from src.data.preprocess import run_preprocessing
 from src.models.train_catboost import prepare_catboost_inputs
 from src.utils.config import SETTINGS
 
+import shap
+
 
 def ensure_dir(path: Path) -> None:
     path.mkdir(parents=True, exist_ok=True)
@@ -137,9 +139,34 @@ def compute_shap_outputs(sample_size: Optional[int] = None):
 
     return X, y, pred, proba, shap_values, base_values, feature_names, class_labels
 
+def build_shap_display_matrices(
+    X: pd.DataFrame,
+    feature_names: List[str],
+) -> Tuple[pd.DataFrame, pd.DataFrame]:
+    plot_data = pd.DataFrame(index=X.index)
+    display_data = pd.DataFrame(index=X.index)
+
+    for feature in feature_names:
+        series = X[feature]
+
+        if pd.api.types.is_numeric_dtype(series):
+            plot_data[feature] = pd.to_numeric(series, errors="coerce")
+            display_data[feature] = series
+        else:
+            clean_series = series.astype("string").fillna("__MISSING__")
+            codes, _ = pd.factorize(clean_series)
+            plot_data[feature] = codes.astype(float)
+            display_data[feature] = clean_series.astype(str)
+
+    plot_data = plot_data.fillna(plot_data.median(numeric_only=True))
+    display_data = display_data.fillna("__MISSING__")
+
+    return plot_data, display_data
 
 def plot_summary_class(
+    X: pd.DataFrame,
     shap_values: np.ndarray,
+    base_values: np.ndarray,
     feature_names: List[str],
     class_labels: List[int],
     class_label: int,
@@ -147,33 +174,37 @@ def plot_summary_class(
     top_k: int,
 ) -> None:
     class_idx = class_labels.index(class_label)
-    values = shap_values[:, class_idx, :]
 
-    mean_abs = np.mean(np.abs(values), axis=0)
-    selected_idx = np.argsort(mean_abs)[-top_k:]
+    class_shap_values = shap_values[:, class_idx, :]
+    class_base_values = base_values[:, class_idx]
 
-    fig, ax = plt.subplots(figsize=(9, 7))
-    rng = np.random.default_rng(42)
+    plot_data, display_data = build_shap_display_matrices(
+        X=X,
+        feature_names=feature_names,
+    )
 
-    for pos, feature_idx in enumerate(selected_idx):
-        shap_col = values[:, feature_idx]
-        jitter = rng.normal(0, 0.06, size=len(shap_col))
-        ax.scatter(
-            shap_col,
-            np.full(len(shap_col), pos) + jitter,
-            s=18,
-            alpha=0.65,
-        )
+    explanation = shap.Explanation(
+        values=class_shap_values,
+        base_values=class_base_values,
+        data=plot_data[feature_names].values,
+        feature_names=feature_names,
+    )
 
-    ax.axvline(0, linestyle="--", linewidth=1)
-    ax.set_yticks(np.arange(len(selected_idx)))
-    ax.set_yticklabels([feature_names[i] for i in selected_idx])
-    ax.set_xlabel("SHAP value")
-    ax.set_title(f"SHAP Summary | Class {class_label}")
-    fig.tight_layout()
-    fig.savefig(output_path, dpi=160, bbox_inches="tight")
-    plt.close(fig)
+    explanation.display_data = display_data[feature_names].values
 
+    plt.figure(figsize=(10, 7))
+    shap.plots.beeswarm(
+        explanation,
+        max_display=top_k,
+        show=False,
+        plot_size=(10, 7),
+        color_bar=True,
+    )
+
+    plt.title(f"SHAP Beeswarm Summary | Class {class_label}", fontsize=14)
+    plt.tight_layout()
+    plt.savefig(output_path, dpi=300, bbox_inches="tight")
+    plt.close()
 
 def build_local_shap_table(
     X: pd.DataFrame,
@@ -207,15 +238,25 @@ def plot_local_explanation(
 ) -> None:
     data = local_df.head(top_k).iloc[::-1].copy()
 
+    colors = np.where(
+        data["shap_value"] >= 0,
+        "#d62728",
+        "#1f77b4",
+    )
+
     fig, ax = plt.subplots(figsize=(9, 6))
-    ax.barh(data["feature"], data["shap_value"])
-    ax.axvline(0, linestyle="--", linewidth=1)
+    ax.barh(data["feature"], data["shap_value"], color=colors)
+    ax.axvline(0, color="black", linestyle="--", linewidth=1)
     ax.set_xlabel("SHAP contribution")
     ax.set_title(title)
-    fig.tight_layout()
-    fig.savefig(output_path, dpi=160, bbox_inches="tight")
-    plt.close(fig)
+    ax.grid(axis="x", alpha=0.25)
 
+    for spine in ["top", "right"]:
+        ax.spines[spine].set_visible(False)
+
+    fig.tight_layout()
+    fig.savefig(output_path, dpi=300, bbox_inches="tight")
+    plt.close(fig)
 
 def plot_dependence(
     X: pd.DataFrame,
@@ -321,7 +362,9 @@ def run_shap_extended(sample_size: Optional[int] = None, top_k: int = 15) -> Non
 
     for class_label in class_labels:
         plot_summary_class(
+            X=X,
             shap_values=shap_values,
+            base_values=base_values,
             feature_names=feature_names,
             class_labels=class_labels,
             class_label=class_label,

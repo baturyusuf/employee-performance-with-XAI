@@ -1,0 +1,6 @@
+case,sample_index,predicted_class,true_class,confidence
+high_conf_class_2,405,2,2,0.9999268501690597
+high_conf_class_3,153,3,3,0.9999971428605205
+high_conf_class_4,27,4,4,0.5749980550559041
+most_uncertain,1183,3,3,0.5120813811427128
+misclassified_example,662,3,2,0.9885577282651855

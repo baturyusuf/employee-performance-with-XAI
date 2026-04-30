@@ -1,0 +1,5 @@
+actionability_mode,n_samples,validity_rate,mean_probability_gain,mean_best_cost,mean_best_num_changes
+employee_manager,100,0.14,0.5114255323558999,1.4543870853579637,1.0
+employee_only,100,0.0,,,
+full_default,100,0.97,0.5095484245547545,2.302151343349833,1.3505154639175259
+no_salary,100,0.14,0.5114255323558999,1.4543870853579637,1.0

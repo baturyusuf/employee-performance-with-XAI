@@ -1,0 +1,15 @@
+{
+  "accuracy": 0.9291666666666667,
+  "balanced_accuracy": 0.85990231990232,
+  "macro_f1": 0.88938170013589,
+  "weighted_f1": 0.9275185276058181,
+  "macro_precision": 0.924895323255979,
+  "weighted_precision": 0.9286901213540557,
+  "macro_recall": 0.85990231990232,
+  "weighted_recall": 0.9291666666666667,
+  "ordinal_mae": 0.075,
+  "quadratic_weighted_kappa": 0.834151060742174,
+  "severe_error_rate": 0.004166666666666667,
+  "nll_log_loss": 0.3614847396785453,
+  "multiclass_brier": 0.13330000023422267
+}

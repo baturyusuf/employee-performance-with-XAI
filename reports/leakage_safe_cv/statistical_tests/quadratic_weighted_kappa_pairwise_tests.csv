@@ -1,0 +1,7 @@
+feature_set,model_a,model_b,metric,mean_a,mean_b,mean_diff_a_minus_b,wilcoxon_stat,p_value,p_holm,significant_holm
+no_salary_hike_no_attrition,catboost,lightgbm,quadratic_weighted_kappa,0.5791303651356009,0.6035798569465015,-0.024449491810900614,13.0,0.16015625,0.16015625,False
+no_salary_hike_no_attrition,catboost,xgboost,quadratic_weighted_kappa,0.5791303651356009,0.6403375189140723,-0.06120715377847141,4.0,0.013671875,0.041015625,True
+no_salary_hike_no_attrition,lightgbm,xgboost,quadratic_weighted_kappa,0.6035798569465015,0.6403375189140723,-0.0367576619675708,5.0,0.01953125,0.041015625,True
+no_salary_hike_no_attrition_no_department,catboost,lightgbm,quadratic_weighted_kappa,0.5657840167730583,0.6004059074451903,-0.03462189067213195,13.0,0.16015625,0.16015625,False
+no_salary_hike_no_attrition_no_department,catboost,xgboost,quadratic_weighted_kappa,0.5657840167730583,0.6330151835096145,-0.06723116673655616,2.0,0.005859375,0.017578125,True
+no_salary_hike_no_attrition_no_department,lightgbm,xgboost,quadratic_weighted_kappa,0.6004059074451903,0.6330151835096145,-0.03260927606442421,6.0,0.0546875,0.109375,False

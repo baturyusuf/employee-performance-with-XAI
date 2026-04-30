@@ -1,0 +1,19 @@
+{
+  "drop_sensitive": true,
+  "random_state": 42,
+  "test_size": 0.2,
+  "class_labels": [
+    2,
+    3,
+    4
+  ],
+  "categorical_features": [
+    "EducationBackground",
+    "EmpDepartment",
+    "EmpJobRole",
+    "BusinessTravelFrequency",
+    "OverTime",
+    "Attrition"
+  ],
+  "output_dir": "C:\\Users\\Yusuf\\Documents\\GitHub\\employee performance with XAI\\reports\\xai\\lightgbm"
+}
