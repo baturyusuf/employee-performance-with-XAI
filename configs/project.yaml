@@ -1,0 +1,18 @@
+{
+  "project": {
+    "name": "employee-performance-hr-xai",
+    "research_title": "Beyond Accuracy in Employee Performance Prediction: A Leakage-Aware, Actionability-Constrained, Fairness-Audited XAI Framework for HR Decision Support",
+    "target_column": "PerformanceRating",
+    "id_column": "EmpNumber",
+    "allowed_target_labels": [2, 3, 4],
+    "default_seed": 42,
+    "paths": {
+      "raw_data": "data/raw/inx_employee_performance.csv",
+      "interim_data": "data/interim/inx_employee_performance_validated.csv",
+      "processed_dir": "data/processed",
+      "reports_dir": "reports",
+      "artifacts_dir": "models_artifacts",
+      "research_log_dir": "reports/research_log"
+    }
+  }
+}

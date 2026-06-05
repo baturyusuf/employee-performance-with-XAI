@@ -1,0 +1,32 @@
+{
+  "audit_attributes": [
+    "Gender",
+    "MaritalStatus",
+    "EmpDepartment",
+    "EducationBackground",
+    "BusinessTravelFrequency"
+  ],
+  "feature_sets": [
+    "no_salary_hike_no_attrition",
+    "no_salary_hike_no_attrition_no_department",
+    "no_salary_hike_no_attrition_no_department_no_job_role"
+  ],
+  "git_commit_if_available": "6f9df0a85d26bf1519634001357c8f91340a740c",
+  "min_support": 30,
+  "model": "xgboost",
+  "n_splits": 10,
+  "outputs": {
+    "disparity_summary": "C:\\Users\\Yusuf\\Documents\\GitHub\\employee performance with XAI\\reports\\fairness\\feature_set_sensitivity\\fairness_disparity_summary.csv",
+    "group_metrics": "C:\\Users\\Yusuf\\Documents\\GitHub\\employee performance with XAI\\reports\\fairness\\feature_set_sensitivity\\fairness_group_metrics.csv",
+    "interpretation": "C:\\Users\\Yusuf\\Documents\\GitHub\\employee performance with XAI\\reports\\fairness\\feature_set_sensitivity\\fairness_feature_set_sensitivity_interpretation.md",
+    "oof_predictions": "C:\\Users\\Yusuf\\Documents\\GitHub\\employee performance with XAI\\reports\\fairness\\feature_set_sensitivity\\fairness_oof_predictions.csv",
+    "small_group_warnings": "C:\\Users\\Yusuf\\Documents\\GitHub\\employee performance with XAI\\reports\\fairness\\feature_set_sensitivity\\small_group_warnings.csv"
+  },
+  "package_versions": {
+    "numpy": "2.4.4",
+    "pandas": "3.0.2",
+    "scikit-learn": "1.8.0",
+    "xgboost": "3.2.0"
+  },
+  "random_state": 42
+}

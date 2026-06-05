@@ -1,0 +1,2 @@
+feature_set,model,metric,mean,std,ci_low,ci_high
+no_salary_hike_no_attrition,xgboost,macro_f1,0.5977702754704644,0.011573767956738337,0.5895863856643752,0.6059541652765537

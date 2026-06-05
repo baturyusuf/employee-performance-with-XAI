@@ -1,0 +1,19 @@
+{
+  "feature_sets": [
+    "no_salary_hike_no_attrition",
+    "no_salary_hike_no_attrition_no_department",
+    "no_salary_hike_no_attrition_no_department_no_job_role"
+  ],
+  "min_support": 30,
+  "model": "xgboost",
+  "n_boot": 500,
+  "package_versions": {
+    "numpy": "2.4.4",
+    "pandas": "3.0.2",
+    "scikit-learn": "1.8.0",
+    "xgboost": "3.2.0"
+  },
+  "seed": 42,
+  "source_oof_predictions": "C:\\Users\\Yusuf\\Documents\\GitHub\\employee performance with XAI\\reports\\fairness\\feature_set_sensitivity\\fairness_oof_predictions.csv",
+  "task": "bootstrap_fairness_uncertainty"
+}

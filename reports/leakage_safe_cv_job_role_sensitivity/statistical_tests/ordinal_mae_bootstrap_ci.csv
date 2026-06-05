@@ -1,0 +1,4 @@
+feature_set,model,metric,mean,std,ci_low,ci_high
+no_salary_hike_no_attrition_no_department_no_job_role,xgboost,ordinal_mae,0.205,0.02122774797171423,0.1933333333333333,0.21750000000000003
+no_salary_hike_no_attrition_no_department_no_job_role,lightgbm,ordinal_mae,0.20250000000000004,0.025169180644609553,0.18916666666666665,0.21916666666666665
+no_salary_hike_no_attrition_no_department_no_job_role,catboost,ordinal_mae,0.1925,0.019817843313041084,0.18083333333333335,0.2041666666666667

@@ -1,0 +1,5 @@
+{
+  "metric": "ece_confidence",
+  "alpha": 0.05,
+  "omnibus": []
+}

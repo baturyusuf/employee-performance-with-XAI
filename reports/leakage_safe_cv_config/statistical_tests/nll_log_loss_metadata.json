@@ -1,0 +1,18 @@
+{
+  "metric": "nll_log_loss",
+  "alpha": 0.05,
+  "omnibus": [
+    {
+      "feature_set": "no_salary_hike_no_attrition",
+      "test": "friedman",
+      "statistic": 20.0,
+      "p_value": 4.539992976248486e-05
+    },
+    {
+      "feature_set": "no_salary_hike_no_attrition_no_department",
+      "test": "friedman",
+      "statistic": 18.200000000000017,
+      "p_value": 0.0001116658084901137
+    }
+  ]
+}

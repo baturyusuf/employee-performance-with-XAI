@@ -1,0 +1,5 @@
+{
+  "metric": "quadratic_weighted_kappa",
+  "alpha": 0.05,
+  "omnibus": []
+}

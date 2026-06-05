@@ -1,0 +1,12 @@
+{
+  "metric": "multiclass_brier",
+  "alpha": 0.05,
+  "omnibus": [
+    {
+      "feature_set": "no_salary_hike_no_attrition_no_department_no_job_role",
+      "test": "friedman",
+      "statistic": 18.200000000000017,
+      "p_value": 0.0001116658084901137
+    }
+  ]
+}

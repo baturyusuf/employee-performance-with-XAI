@@ -1,0 +1,256 @@
+feature_set,model,attribute,metric,n_groups_included,min_group_value,min_group_support,min,max_group_value,max_group_support,max,max_gap,min_group_support_threshold,class_label
+no_salary_hike_no_attrition,xgboost,BusinessTravelFrequency,accuracy,3,Travel_Frequently,222,0.8153153153153153,Travel_Rarely,846,0.8652482269503546,0.04993291163503932,30,
+no_salary_hike_no_attrition,xgboost,BusinessTravelFrequency,false_positive_rate,3,Travel_Rarely,846,0.4337899543378995,Travel_Frequently,222,0.5147058823529411,0.0809159280150416,30,3.0
+no_salary_hike_no_attrition,xgboost,BusinessTravelFrequency,false_positive_rate,3,Non-Travel,132,0.009009009009009009,Travel_Frequently,222,0.02702702702702703,0.01801801801801802,30,2.0
+no_salary_hike_no_attrition,xgboost,BusinessTravelFrequency,false_positive_rate,3,Travel_Rarely,846,0.0,Non-Travel,132,0.008771929824561403,0.008771929824561403,30,4.0
+no_salary_hike_no_attrition,xgboost,BusinessTravelFrequency,macro_f1,3,Travel_Frequently,222,0.586112759643917,Non-Travel,132,0.6259114283521375,0.039798668708220575,30,
+no_salary_hike_no_attrition,xgboost,BusinessTravelFrequency,mean_predicted_probability,3,Non-Travel,132,0.7349023103544657,Travel_Rarely,846,0.7599857605533591,0.025083450198893353,30,3.0
+no_salary_hike_no_attrition,xgboost,BusinessTravelFrequency,mean_predicted_probability,3,Travel_Rarely,846,0.08010590272955871,Non-Travel,132,0.10510968921042865,0.02500378648086994,30,4.0
+no_salary_hike_no_attrition,xgboost,BusinessTravelFrequency,mean_predicted_probability,3,Travel_Rarely,846,0.15990833686602435,Travel_Frequently,222,0.1647505079791855,0.004842171113161153,30,2.0
+no_salary_hike_no_attrition,xgboost,BusinessTravelFrequency,positive_prediction_rate,3,Travel_Frequently,222,0.8243243243243243,Travel_Rarely,846,0.8333333333333334,0.009009009009009028,30,3.0
+no_salary_hike_no_attrition,xgboost,BusinessTravelFrequency,positive_prediction_rate,3,Travel_Rarely,846,0.001182033096926714,Non-Travel,132,0.007575757575757576,0.006393724478830862,30,4.0
+no_salary_hike_no_attrition,xgboost,BusinessTravelFrequency,positive_prediction_rate,3,Travel_Rarely,846,0.16548463356973994,Travel_Frequently,222,0.17117117117117117,0.00568653760143123,30,2.0
+no_salary_hike_no_attrition,xgboost,BusinessTravelFrequency,precision,3,Non-Travel,132,0.0,Travel_Rarely,846,1.0,1.0,30,4.0
+no_salary_hike_no_attrition,xgboost,BusinessTravelFrequency,precision,3,Travel_Rarely,846,0.8642857142857143,Non-Travel,132,0.9545454545454546,0.09025974025974026,30,2.0
+no_salary_hike_no_attrition,xgboost,BusinessTravelFrequency,precision,3,Travel_Frequently,222,0.8087431693989071,Travel_Rarely,846,0.8652482269503546,0.056505057551447524,30,3.0
+no_salary_hike_no_attrition,xgboost,BusinessTravelFrequency,true_positive_rate,3,Travel_Rarely,846,0.8897058823529411,Non-Travel,132,1.0,0.11029411764705888,30,2.0
+no_salary_hike_no_attrition,xgboost,BusinessTravelFrequency,true_positive_rate,3,Travel_Frequently,222,0.961038961038961,Non-Travel,132,0.978494623655914,0.01745566261695297,30,3.0
+no_salary_hike_no_attrition,xgboost,BusinessTravelFrequency,true_positive_rate,3,Non-Travel,132,0.0,Travel_Rarely,846,0.012048192771084338,0.012048192771084338,30,4.0
+no_salary_hike_no_attrition,xgboost,EducationBackground,accuracy,5,Technical Degree,100,0.84,Other,66,0.8787878787878788,0.038787878787878816,30,
+no_salary_hike_no_attrition,xgboost,EducationBackground,false_positive_rate,5,Marketing,137,0.32558139534883723,Other,66,0.7,0.3744186046511627,30,3.0
+no_salary_hike_no_attrition,xgboost,EducationBackground,false_positive_rate,5,Medical,384,0.012461059190031152,Marketing,137,0.06481481481481481,0.05235375562478366,30,2.0
+no_salary_hike_no_attrition,xgboost,EducationBackground,false_positive_rate,5,Marketing,137,0.0,Medical,384,0.0029069767441860465,0.0029069767441860465,30,4.0
+no_salary_hike_no_attrition,xgboost,EducationBackground,macro_f1,5,Marketing,137,0.5909863945578232,Medical,384,0.6081587968197563,0.017172402261933062,30,
+no_salary_hike_no_attrition,xgboost,EducationBackground,mean_predicted_probability,5,Other,66,0.05839047038611942,Marketing,137,0.22635269479891523,0.16796222441279582,30,2.0
+no_salary_hike_no_attrition,xgboost,EducationBackground,mean_predicted_probability,5,Marketing,137,0.7081254864533018,Other,66,0.8614966820248149,0.15337119557151313,30,3.0
+no_salary_hike_no_attrition,xgboost,EducationBackground,mean_predicted_probability,5,Marketing,137,0.06552181687940212,Technical Degree,100,0.09432534903171472,0.0288035321523126,30,4.0
+no_salary_hike_no_attrition,xgboost,EducationBackground,positive_prediction_rate,5,Marketing,137,0.7445255474452555,Other,66,0.9393939393939394,0.194868391948684,30,3.0
+no_salary_hike_no_attrition,xgboost,EducationBackground,positive_prediction_rate,5,Other,66,0.06060606060606061,Marketing,137,0.25547445255474455,0.19486839194868394,30,2.0
+no_salary_hike_no_attrition,xgboost,EducationBackground,positive_prediction_rate,5,Marketing,137,0.0,Life Sciences,492,0.0040650406504065045,0.0040650406504065045,30,4.0
+no_salary_hike_no_attrition,xgboost,EducationBackground,precision,2,Medical,384,0.0,Life Sciences,492,0.5,0.5,30,4.0
+no_salary_hike_no_attrition,xgboost,EducationBackground,precision,5,Other,66,0.75,Medical,384,0.9333333333333333,0.18333333333333335,30,2.0
+no_salary_hike_no_attrition,xgboost,EducationBackground,precision,5,Technical Degree,100,0.8292682926829268,Other,66,0.8870967741935484,0.05782848151062159,30,3.0
+no_salary_hike_no_attrition,xgboost,EducationBackground,true_positive_rate,5,Life Sciences,492,0.8846153846153846,Other,66,1.0,0.11538461538461542,30,2.0
+no_salary_hike_no_attrition,xgboost,EducationBackground,true_positive_rate,5,Marketing,137,0.9361702127659575,Medical,384,0.9822064056939501,0.04603619292799266,30,3.0
+no_salary_hike_no_attrition,xgboost,EducationBackground,true_positive_rate,5,Marketing,137,0.0,Life Sciences,492,0.017543859649122806,0.017543859649122806,30,4.0
+no_salary_hike_no_attrition,xgboost,EmpDepartment,accuracy,5,Development,361,0.8310249307479224,Finance,49,0.9183673469387755,0.08734241619085314,30,
+no_salary_hike_no_attrition,xgboost,EmpDepartment,false_positive_rate,5,Finance,49,0.21052631578947367,Development,361,0.9649122807017544,0.7543859649122807,30,3.0
+no_salary_hike_no_attrition,xgboost,EmpDepartment,false_positive_rate,5,Finance,49,0.0,Sales,373,0.045454545454545456,0.045454545454545456,30,2.0
+no_salary_hike_no_attrition,xgboost,EmpDepartment,false_positive_rate,5,Finance,49,0.0,Development,361,0.006309148264984227,0.006309148264984227,30,4.0
+no_salary_hike_no_attrition,xgboost,EmpDepartment,macro_f1,5,Development,361,0.3725600149536703,Finance,49,0.6458333333333334,0.27327331837966307,30,
+no_salary_hike_no_attrition,xgboost,EmpDepartment,mean_predicted_probability,5,Development,361,0.038177135510762274,Finance,49,0.2813475592809074,0.2431704237701451,30,2.0
+no_salary_hike_no_attrition,xgboost,EmpDepartment,mean_predicted_probability,5,Finance,49,0.6345827695438448,Development,361,0.8674898084428502,0.23290703889900533,30,3.0
+no_salary_hike_no_attrition,xgboost,EmpDepartment,mean_predicted_probability,5,Sales,373,0.07240777059293405,Development,361,0.09433305621117488,0.021925285618240836,30,4.0
+no_salary_hike_no_attrition,xgboost,EmpDepartment,positive_prediction_rate,5,Development,361,0.01662049861495845,Finance,49,0.30612244897959184,0.2895019503646334,30,2.0
+no_salary_hike_no_attrition,xgboost,EmpDepartment,positive_prediction_rate,5,Finance,49,0.6938775510204082,Development,361,0.9778393351800554,0.28396178415964723,30,3.0
+no_salary_hike_no_attrition,xgboost,EmpDepartment,positive_prediction_rate,5,Finance,49,0.0,Development,361,0.00554016620498615,0.00554016620498615,30,4.0
+no_salary_hike_no_attrition,xgboost,EmpDepartment,precision,2,Development,361,0.0,Research & Development,343,1.0,1.0,30,4.0
+no_salary_hike_no_attrition,xgboost,EmpDepartment,precision,5,Development,361,0.3333333333333333,Finance,49,1.0,0.6666666666666667,30,2.0
+no_salary_hike_no_attrition,xgboost,EmpDepartment,precision,5,Human Resources,54,0.8409090909090909,Finance,49,0.8823529411764706,0.04144385026737962,30,3.0
+no_salary_hike_no_attrition,xgboost,EmpDepartment,true_positive_rate,5,Development,361,0.15384615384615385,Finance,49,1.0,0.8461538461538461,30,2.0
+no_salary_hike_no_attrition,xgboost,EmpDepartment,true_positive_rate,5,Sales,373,0.952191235059761,Finance,49,1.0,0.047808764940239,30,3.0
+no_salary_hike_no_attrition,xgboost,EmpDepartment,true_positive_rate,5,Development,361,0.0,Research & Development,343,0.024390243902439025,0.024390243902439025,30,4.0
+no_salary_hike_no_attrition,xgboost,Gender,accuracy,2,Male,725,0.8441379310344828,Female,475,0.8694736842105263,0.02533575317604353,30,
+no_salary_hike_no_attrition,xgboost,Gender,false_positive_rate,2,Female,475,0.015,Male,725,0.03135313531353135,0.01635313531353135,30,2.0
+no_salary_hike_no_attrition,xgboost,Gender,false_positive_rate,2,Female,475,0.4444444444444444,Male,725,0.46,0.0155555555555556,30,3.0
+no_salary_hike_no_attrition,xgboost,Gender,false_positive_rate,2,Female,475,0.0,Male,725,0.003105590062111801,0.003105590062111801,30,4.0
+no_salary_hike_no_attrition,xgboost,Gender,macro_f1,2,Male,725,0.5976134119817823,Female,475,0.6128526924788608,0.015239280497078456,30,
+no_salary_hike_no_attrition,xgboost,Gender,mean_predicted_probability,2,Male,725,0.7458918629149939,Female,475,0.7640407570177002,0.01814889410270637,30,3.0
+no_salary_hike_no_attrition,xgboost,Gender,mean_predicted_probability,2,Female,475,0.15368430072591813,Male,725,0.16548336461754434,0.011799063891626216,30,2.0
+no_salary_hike_no_attrition,xgboost,Gender,mean_predicted_probability,2,Female,475,0.08227494078345204,Male,725,0.08862477368048938,0.006349832897037333,30,4.0
+no_salary_hike_no_attrition,xgboost,Gender,positive_prediction_rate,2,Male,725,0.8234482758620689,Female,475,0.8421052631578947,0.018656987295825767,30,3.0
+no_salary_hike_no_attrition,xgboost,Gender,positive_prediction_rate,2,Female,475,0.15789473684210525,Male,725,0.1724137931034483,0.014519056261343033,30,2.0
+no_salary_hike_no_attrition,xgboost,Gender,positive_prediction_rate,2,Female,475,0.0,Male,725,0.004137931034482759,0.004137931034482759,30,4.0
+no_salary_hike_no_attrition,xgboost,Gender,precision,2,Male,725,0.848,Female,475,0.92,0.07200000000000006,30,2.0
+no_salary_hike_no_attrition,xgboost,Gender,precision,2,Male,725,0.8458961474036851,Female,475,0.86,0.014103852596314859,30,3.0
+no_salary_hike_no_attrition,xgboost,Gender,precision,1,Male,725,0.3333333333333333,Male,725,0.3333333333333333,0.0,30,4.0
+no_salary_hike_no_attrition,xgboost,Gender,true_positive_rate,2,Male,725,0.8907563025210085,Female,475,0.92,0.02924369747899158,30,2.0
+no_salary_hike_no_attrition,xgboost,Gender,true_positive_rate,2,Male,725,0.9619047619047619,Female,475,0.9856733524355301,0.023768590530768186,30,3.0
+no_salary_hike_no_attrition,xgboost,Gender,true_positive_rate,2,Female,475,0.0,Male,725,0.012345679012345678,0.012345679012345678,30,4.0
+no_salary_hike_no_attrition,xgboost,MaritalStatus,accuracy,3,Single,384,0.8359375,Divorced,268,0.8694029850746269,0.03346548507462688,30,
+no_salary_hike_no_attrition,xgboost,MaritalStatus,false_positive_rate,3,Married,548,0.4,Divorced,268,0.5079365079365079,0.10793650793650789,30,3.0
+no_salary_hike_no_attrition,xgboost,MaritalStatus,false_positive_rate,3,Divorced,268,0.008658008658008658,Married,548,0.033482142857142856,0.0248241341991342,30,2.0
+no_salary_hike_no_attrition,xgboost,MaritalStatus,false_positive_rate,3,Married,548,0.0,Divorced,268,0.004132231404958678,0.004132231404958678,30,4.0
+no_salary_hike_no_attrition,xgboost,MaritalStatus,macro_f1,3,Single,384,0.5982087183266255,Married,548,0.6093607776746703,0.011152059348044863,30,
+no_salary_hike_no_attrition,xgboost,MaritalStatus,mean_predicted_probability,3,Divorced,268,0.12486208165234951,Married,548,0.18436616184888832,0.059504080196538814,30,2.0
+no_salary_hike_no_attrition,xgboost,MaritalStatus,mean_predicted_probability,3,Married,548,0.7339701706791691,Divorced,268,0.7813528535553991,0.04738268287622993,30,3.0
+no_salary_hike_no_attrition,xgboost,MaritalStatus,mean_predicted_probability,3,Married,548,0.08166366891969883,Divorced,268,0.0937850622706977,0.012121393350998877,30,4.0
+no_salary_hike_no_attrition,xgboost,MaritalStatus,positive_prediction_rate,3,Divorced,268,0.12313432835820895,Married,548,0.19343065693430658,0.07029632857609763,30,2.0
+no_salary_hike_no_attrition,xgboost,MaritalStatus,positive_prediction_rate,3,Married,548,0.8047445255474452,Divorced,268,0.8731343283582089,0.06838980281076368,30,3.0
+no_salary_hike_no_attrition,xgboost,MaritalStatus,positive_prediction_rate,3,Married,548,0.0018248175182481751,Divorced,268,0.0037313432835820895,0.0019065257653339144,30,4.0
+no_salary_hike_no_attrition,xgboost,MaritalStatus,precision,3,Divorced,268,0.0,Married,548,1.0,1.0,30,4.0
+no_salary_hike_no_attrition,xgboost,MaritalStatus,precision,3,Married,548,0.8584905660377359,Divorced,268,0.9393939393939394,0.08090337335620357,30,2.0
+no_salary_hike_no_attrition,xgboost,MaritalStatus,precision,3,Single,384,0.8322981366459627,Divorced,268,0.8632478632478633,0.03094972660190054,30,3.0
+no_salary_hike_no_attrition,xgboost,MaritalStatus,true_positive_rate,3,Divorced,268,0.8378378378378378,Single,384,0.9298245614035088,0.09198672356567095,30,2.0
+no_salary_hike_no_attrition,xgboost,MaritalStatus,true_positive_rate,3,Married,548,0.9643765903307888,Divorced,268,0.9853658536585366,0.020989263327747754,30,3.0
+no_salary_hike_no_attrition,xgboost,MaritalStatus,true_positive_rate,3,Divorced,268,0.0,Married,548,0.01818181818181818,0.01818181818181818,30,4.0
+no_salary_hike_no_attrition_no_department,xgboost,BusinessTravelFrequency,accuracy,3,Travel_Frequently,222,0.8198198198198198,Travel_Rarely,846,0.8605200945626478,0.040700274742828,30,
+no_salary_hike_no_attrition_no_department,xgboost,BusinessTravelFrequency,false_positive_rate,3,Travel_Rarely,846,0.4292237442922374,Travel_Frequently,222,0.5147058823529411,0.0854821380607037,30,3.0
+no_salary_hike_no_attrition_no_department,xgboost,BusinessTravelFrequency,false_positive_rate,3,Travel_Frequently,222,0.0,Non-Travel,132,0.017543859649122806,0.017543859649122806,30,4.0
+no_salary_hike_no_attrition_no_department,xgboost,BusinessTravelFrequency,false_positive_rate,3,Non-Travel,132,0.02702702702702703,Travel_Rarely,846,0.0323943661971831,0.0053673391701560685,30,2.0
+no_salary_hike_no_attrition_no_department,xgboost,BusinessTravelFrequency,macro_f1,3,Travel_Frequently,222,0.5872189349112426,Non-Travel,132,0.6059184812953657,0.01869954638412319,30,
+no_salary_hike_no_attrition_no_department,xgboost,BusinessTravelFrequency,mean_predicted_probability,3,Non-Travel,132,0.7266638533099357,Travel_Rarely,846,0.7573762616257119,0.030712408315776263,30,3.0
+no_salary_hike_no_attrition_no_department,xgboost,BusinessTravelFrequency,mean_predicted_probability,3,Travel_Rarely,846,0.08140482987501783,Non-Travel,132,0.10816927202695022,0.026764442151932383,30,4.0
+no_salary_hike_no_attrition_no_department,xgboost,BusinessTravelFrequency,mean_predicted_probability,3,Travel_Rarely,846,0.161218908324114,Travel_Frequently,222,0.16693546875293586,0.0057165604288218486,30,2.0
+no_salary_hike_no_attrition_no_department,xgboost,BusinessTravelFrequency,positive_prediction_rate,3,Non-Travel,132,0.803030303030303,Travel_Frequently,222,0.8288288288288288,0.025798525798525818,30,3.0
+no_salary_hike_no_attrition_no_department,xgboost,BusinessTravelFrequency,positive_prediction_rate,3,Travel_Frequently,222,0.0,Non-Travel,132,0.015151515151515152,0.015151515151515152,30,4.0
+no_salary_hike_no_attrition_no_department,xgboost,BusinessTravelFrequency,positive_prediction_rate,3,Travel_Frequently,222,0.17117117117117117,Non-Travel,132,0.18181818181818182,0.010647010647010652,30,2.0
+no_salary_hike_no_attrition_no_department,xgboost,BusinessTravelFrequency,precision,2,Non-Travel,132,0.0,Travel_Rarely,846,0.5,0.5,30,4.0
+no_salary_hike_no_attrition_no_department,xgboost,BusinessTravelFrequency,precision,3,Travel_Frequently,222,0.8097826086956522,Travel_Rarely,846,0.8655221745350501,0.055739565839397875,30,3.0
+no_salary_hike_no_attrition_no_department,xgboost,BusinessTravelFrequency,precision,3,Travel_Rarely,846,0.8413793103448276,Non-Travel,132,0.875,0.0336206896551724,30,2.0
+no_salary_hike_no_attrition_no_department,xgboost,BusinessTravelFrequency,true_positive_rate,3,Travel_Frequently,222,0.8918918918918919,Non-Travel,132,1.0,0.10810810810810811,30,2.0
+no_salary_hike_no_attrition_no_department,xgboost,BusinessTravelFrequency,true_positive_rate,3,Non-Travel,132,0.946236559139785,Travel_Frequently,222,0.9675324675324676,0.021295908392682583,30,3.0
+no_salary_hike_no_attrition_no_department,xgboost,BusinessTravelFrequency,true_positive_rate,3,Non-Travel,132,0.0,Travel_Rarely,846,0.012048192771084338,0.012048192771084338,30,4.0
+no_salary_hike_no_attrition_no_department,xgboost,EducationBackground,accuracy,5,Technical Degree,100,0.83,Other,66,0.8787878787878788,0.048787878787878824,30,
+no_salary_hike_no_attrition_no_department,xgboost,EducationBackground,false_positive_rate,5,Marketing,137,0.3023255813953488,Other,66,0.7,0.39767441860465114,30,3.0
+no_salary_hike_no_attrition_no_department,xgboost,EducationBackground,false_positive_rate,5,Other,66,0.015873015873015872,Marketing,137,0.06481481481481481,0.04894179894179894,30,2.0
+no_salary_hike_no_attrition_no_department,xgboost,EducationBackground,false_positive_rate,5,Marketing,137,0.0,Technical Degree,100,0.011363636363636364,0.011363636363636364,30,4.0
+no_salary_hike_no_attrition_no_department,xgboost,EducationBackground,macro_f1,5,Life Sciences,492,0.5846249610955493,Marketing,137,0.6369658119658119,0.052340850870262634,30,
+no_salary_hike_no_attrition_no_department,xgboost,EducationBackground,mean_predicted_probability,5,Other,66,0.06015498208227765,Marketing,137,0.2262708626069973,0.16611588052471965,30,2.0
+no_salary_hike_no_attrition_no_department,xgboost,EducationBackground,mean_predicted_probability,5,Marketing,137,0.7080319312394318,Other,66,0.8577400036156178,0.149708072376186,30,3.0
+no_salary_hike_no_attrition_no_department,xgboost,EducationBackground,mean_predicted_probability,5,Marketing,137,0.0656972077197606,Technical Degree,100,0.09689876311225816,0.031201555392497554,30,4.0
+no_salary_hike_no_attrition_no_department,xgboost,EducationBackground,positive_prediction_rate,5,Marketing,137,0.7372262773722628,Other,66,0.9393939393939394,0.2021676620216767,30,3.0
+no_salary_hike_no_attrition_no_department,xgboost,EducationBackground,positive_prediction_rate,5,Other,66,0.06060606060606061,Marketing,137,0.25547445255474455,0.19486839194868394,30,2.0
+no_salary_hike_no_attrition_no_department,xgboost,EducationBackground,positive_prediction_rate,5,Other,66,0.0,Technical Degree,100,0.01,0.01,30,4.0
+no_salary_hike_no_attrition_no_department,xgboost,EducationBackground,precision,4,Life Sciences,492,0.0,Marketing,137,1.0,1.0,30,4.0
+no_salary_hike_no_attrition_no_department,xgboost,EducationBackground,precision,5,Other,66,0.75,Medical,384,0.9047619047619048,0.15476190476190477,30,2.0
+no_salary_hike_no_attrition_no_department,xgboost,EducationBackground,precision,5,Technical Degree,100,0.8271604938271605,Other,66,0.8870967741935484,0.05993628036638787,30,3.0
+no_salary_hike_no_attrition_no_department,xgboost,EducationBackground,true_positive_rate,5,Life Sciences,492,0.8846153846153846,Other,66,1.0,0.11538461538461542,30,2.0
+no_salary_hike_no_attrition_no_department,xgboost,EducationBackground,true_positive_rate,5,Life Sciences,492,0.0,Marketing,137,0.07142857142857142,0.07142857142857142,30,4.0
+no_salary_hike_no_attrition_no_department,xgboost,EducationBackground,true_positive_rate,5,Marketing,137,0.9361702127659575,Other,66,0.9821428571428571,0.04597264437689963,30,3.0
+no_salary_hike_no_attrition_no_department,xgboost,EmpDepartment,accuracy,5,Development,361,0.8199445983379502,Finance,49,0.9183673469387755,0.09842274860082534,30,
+no_salary_hike_no_attrition_no_department,xgboost,EmpDepartment,false_positive_rate,5,Finance,49,0.21052631578947367,Development,361,0.9473684210526315,0.7368421052631579,30,3.0
+no_salary_hike_no_attrition_no_department,xgboost,EmpDepartment,false_positive_rate,5,Finance,49,0.0,Sales,373,0.045454545454545456,0.045454545454545456,30,2.0
+no_salary_hike_no_attrition_no_department,xgboost,EmpDepartment,false_positive_rate,5,Finance,49,0.0,Human Resources,54,0.020833333333333332,0.020833333333333332,30,4.0
+no_salary_hike_no_attrition_no_department,xgboost,EmpDepartment,macro_f1,5,Development,361,0.37697428020008666,Finance,49,0.6458333333333334,0.2688590531332467,30,
+no_salary_hike_no_attrition_no_department,xgboost,EmpDepartment,mean_predicted_probability,5,Development,361,0.05652241769789007,Finance,49,0.27757977625314734,0.22105735855525727,30,2.0
+no_salary_hike_no_attrition_no_department,xgboost,EmpDepartment,mean_predicted_probability,5,Finance,49,0.6360353991313248,Development,361,0.8490148258712813,0.2129794267399565,30,3.0
+no_salary_hike_no_attrition_no_department,xgboost,EmpDepartment,mean_predicted_probability,5,Sales,373,0.07489382071874975,Human Resources,54,0.09756884406993373,0.022675023351183973,30,4.0
+no_salary_hike_no_attrition_no_department,xgboost,EmpDepartment,positive_prediction_rate,5,Development,361,0.036011080332409975,Finance,49,0.30612244897959184,0.2701113686471819,30,2.0
+no_salary_hike_no_attrition_no_department,xgboost,EmpDepartment,positive_prediction_rate,5,Finance,49,0.6938775510204082,Development,361,0.961218836565097,0.26734128554468883,30,3.0
+no_salary_hike_no_attrition_no_department,xgboost,EmpDepartment,positive_prediction_rate,5,Finance,49,0.0,Human Resources,54,0.018518518518518517,0.018518518518518517,30,4.0
+no_salary_hike_no_attrition_no_department,xgboost,EmpDepartment,precision,4,Development,361,0.0,Sales,373,1.0,1.0,30,4.0
+no_salary_hike_no_attrition_no_department,xgboost,EmpDepartment,precision,5,Development,361,0.23076923076923078,Finance,49,1.0,0.7692307692307692,30,2.0
+no_salary_hike_no_attrition_no_department,xgboost,EmpDepartment,precision,5,Human Resources,54,0.8372093023255814,Finance,49,0.8823529411764706,0.04514363885088912,30,3.0
+no_salary_hike_no_attrition_no_department,xgboost,EmpDepartment,true_positive_rate,5,Development,361,0.23076923076923078,Finance,49,1.0,0.7692307692307692,30,2.0
+no_salary_hike_no_attrition_no_department,xgboost,EmpDepartment,true_positive_rate,5,Human Resources,54,0.9473684210526315,Finance,49,1.0,0.052631578947368474,30,3.0
+no_salary_hike_no_attrition_no_department,xgboost,EmpDepartment,true_positive_rate,5,Development,361,0.0,Sales,373,0.02857142857142857,0.02857142857142857,30,4.0
+no_salary_hike_no_attrition_no_department,xgboost,Gender,accuracy,2,Male,725,0.84,Female,475,0.8631578947368421,0.023157894736842155,30,
+no_salary_hike_no_attrition_no_department,xgboost,Gender,false_positive_rate,2,Female,475,0.02,Male,725,0.037953795379537955,0.017953795379537955,30,2.0
+no_salary_hike_no_attrition_no_department,xgboost,Gender,false_positive_rate,2,Female,475,0.4444444444444444,Male,725,0.455,0.010555555555555596,30,3.0
+no_salary_hike_no_attrition_no_department,xgboost,Gender,false_positive_rate,2,Female,475,0.0023584905660377358,Male,725,0.003105590062111801,0.0007470994960740653,30,4.0
+no_salary_hike_no_attrition_no_department,xgboost,Gender,macro_f1,2,Male,725,0.5934309776086911,Female,475,0.6073679507078689,0.01393697309917774,30,
+no_salary_hike_no_attrition_no_department,xgboost,Gender,mean_predicted_probability,2,Male,725,0.7430706901925391,Female,475,0.7598435581377463,0.01677286794520716,30,3.0
+no_salary_hike_no_attrition_no_department,xgboost,Gender,mean_predicted_probability,2,Female,475,0.155254440741831,Male,725,0.16759591559730952,0.012341474855478513,30,2.0
+no_salary_hike_no_attrition_no_department,xgboost,Gender,mean_predicted_probability,2,Female,475,0.08490200180609367,Male,725,0.08933339323655798,0.00443139143046431,30,4.0
+no_salary_hike_no_attrition_no_department,xgboost,Gender,positive_prediction_rate,2,Male,725,0.8165517241379311,Female,475,0.8357894736842105,0.019237749546279437,30,3.0
+no_salary_hike_no_attrition_no_department,xgboost,Gender,positive_prediction_rate,2,Female,475,0.16210526315789472,Male,725,0.1793103448275862,0.01720508166969148,30,2.0
+no_salary_hike_no_attrition_no_department,xgboost,Gender,positive_prediction_rate,2,Female,475,0.002105263157894737,Male,725,0.004137931034482759,0.002032667876588022,30,4.0
+no_salary_hike_no_attrition_no_department,xgboost,Gender,precision,2,Female,475,0.0,Male,725,0.3333333333333333,0.3333333333333333,30,4.0
+no_salary_hike_no_attrition_no_department,xgboost,Gender,precision,2,Male,725,0.823076923076923,Female,475,0.8961038961038961,0.07302697302697303,30,2.0
+no_salary_hike_no_attrition_no_department,xgboost,Gender,precision,2,Male,725,0.8462837837837838,Female,475,0.8589420654911839,0.012658281707400132,30,3.0
+no_salary_hike_no_attrition_no_department,xgboost,Gender,true_positive_rate,2,Male,725,0.9542857142857143,Female,475,0.9770773638968482,0.02279164961113389,30,3.0
+no_salary_hike_no_attrition_no_department,xgboost,Gender,true_positive_rate,2,Male,725,0.8991596638655462,Female,475,0.92,0.020840336134453796,30,2.0
+no_salary_hike_no_attrition_no_department,xgboost,Gender,true_positive_rate,2,Female,475,0.0,Male,725,0.012345679012345678,0.012345679012345678,30,4.0
+no_salary_hike_no_attrition_no_department,xgboost,MaritalStatus,accuracy,3,Single,384,0.8385416666666666,Divorced,268,0.8619402985074627,0.023398631840796047,30,
+no_salary_hike_no_attrition_no_department,xgboost,MaritalStatus,false_positive_rate,3,Married,548,0.4,Single,384,0.5,0.09999999999999998,30,3.0
+no_salary_hike_no_attrition_no_department,xgboost,MaritalStatus,false_positive_rate,3,Divorced,268,0.017316017316017316,Married,548,0.04241071428571429,0.02509469696969697,30,2.0
+no_salary_hike_no_attrition_no_department,xgboost,MaritalStatus,false_positive_rate,3,Single,384,0.0,Divorced,268,0.008264462809917356,0.008264462809917356,30,4.0
+no_salary_hike_no_attrition_no_department,xgboost,MaritalStatus,macro_f1,3,Divorced,268,0.5972182858342517,Married,548,0.6013487679794581,0.004130482145206393,30,
+no_salary_hike_no_attrition_no_department,xgboost,MaritalStatus,mean_predicted_probability,3,Divorced,268,0.13161167702095716,Married,548,0.18642962675764538,0.054817949736688215,30,2.0
+no_salary_hike_no_attrition_no_department,xgboost,MaritalStatus,mean_predicted_probability,3,Married,548,0.7302145608768792,Divorced,268,0.7731951071686153,0.04298054629173609,30,3.0
+no_salary_hike_no_attrition_no_department,xgboost,MaritalStatus,mean_predicted_probability,3,Married,548,0.08335581137165665,Divorced,268,0.09519321575183977,0.011837404380183117,30,4.0
+no_salary_hike_no_attrition_no_department,xgboost,MaritalStatus,positive_prediction_rate,3,Divorced,268,0.13432835820895522,Married,548,0.20072992700729927,0.06640156879834405,30,2.0
+no_salary_hike_no_attrition_no_department,xgboost,MaritalStatus,positive_prediction_rate,3,Married,548,0.7956204379562044,Divorced,268,0.8582089552238806,0.06258851726767622,30,3.0
+no_salary_hike_no_attrition_no_department,xgboost,MaritalStatus,positive_prediction_rate,3,Single,384,0.0,Divorced,268,0.007462686567164179,0.007462686567164179,30,4.0
+no_salary_hike_no_attrition_no_department,xgboost,MaritalStatus,precision,2,Divorced,268,0.0,Married,548,0.5,0.5,30,4.0
+no_salary_hike_no_attrition_no_department,xgboost,MaritalStatus,precision,3,Married,548,0.8272727272727273,Divorced,268,0.8888888888888888,0.06161616161616157,30,2.0
+no_salary_hike_no_attrition_no_department,xgboost,MaritalStatus,precision,3,Single,384,0.8328173374613003,Divorced,268,0.8652173913043478,0.03240005384304756,30,3.0
+no_salary_hike_no_attrition_no_department,xgboost,MaritalStatus,true_positive_rate,3,Divorced,268,0.8648648648648649,Single,384,0.9298245614035088,0.06495969653864386,30,2.0
+no_salary_hike_no_attrition_no_department,xgboost,MaritalStatus,true_positive_rate,3,Married,548,0.9516539440203562,Single,384,0.9746376811594203,0.022983737139064098,30,3.0
+no_salary_hike_no_attrition_no_department,xgboost,MaritalStatus,true_positive_rate,3,Divorced,268,0.0,Married,548,0.01818181818181818,0.01818181818181818,30,4.0
+no_salary_hike_no_attrition_no_department_no_job_role,xgboost,BusinessTravelFrequency,accuracy,3,Non-Travel,132,0.7424242424242424,Travel_Rarely,846,0.8085106382978723,0.06608639587362986,30,
+no_salary_hike_no_attrition_no_department_no_job_role,xgboost,BusinessTravelFrequency,false_positive_rate,3,Travel_Frequently,222,0.47058823529411764,Non-Travel,132,0.5641025641025641,0.09351432880844646,30,3.0
+no_salary_hike_no_attrition_no_department_no_job_role,xgboost,BusinessTravelFrequency,false_positive_rate,3,Travel_Rarely,846,0.007863695937090432,Non-Travel,132,0.02631578947368421,0.01845209353659378,30,4.0
+no_salary_hike_no_attrition_no_department_no_job_role,xgboost,BusinessTravelFrequency,false_positive_rate,3,Travel_Rarely,846,0.0647887323943662,Non-Travel,132,0.08108108108108109,0.01629234868671489,30,2.0
+no_salary_hike_no_attrition_no_department_no_job_role,xgboost,BusinessTravelFrequency,macro_f1,3,Non-Travel,132,0.5166449558546823,Travel_Frequently,222,0.589454047566251,0.07280909171156869,30,
+no_salary_hike_no_attrition_no_department_no_job_role,xgboost,BusinessTravelFrequency,mean_predicted_probability,3,Travel_Frequently,222,0.7226023870847516,Travel_Rarely,846,0.7572498784068065,0.03464749132205491,30,3.0
+no_salary_hike_no_attrition_no_department_no_job_role,xgboost,BusinessTravelFrequency,mean_predicted_probability,3,Travel_Rarely,846,0.08330927584204717,Travel_Frequently,222,0.10065834185943377,0.017349066017386602,30,4.0
+no_salary_hike_no_attrition_no_department_no_job_role,xgboost,BusinessTravelFrequency,mean_predicted_probability,3,Travel_Rarely,846,0.15944084646959986,Travel_Frequently,222,0.17673926853194233,0.017298422062342472,30,2.0
+no_salary_hike_no_attrition_no_department_no_job_role,xgboost,BusinessTravelFrequency,positive_prediction_rate,3,Travel_Frequently,222,0.7747747747747747,Travel_Rarely,846,0.8120567375886525,0.037281962813877745,30,3.0
+no_salary_hike_no_attrition_no_department_no_job_role,xgboost,BusinessTravelFrequency,positive_prediction_rate,3,Travel_Rarely,846,0.18085106382978725,Travel_Frequently,222,0.2072072072072072,0.026356143377419955,30,2.0
+no_salary_hike_no_attrition_no_department_no_job_role,xgboost,BusinessTravelFrequency,positive_prediction_rate,3,Travel_Rarely,846,0.0070921985815602835,Non-Travel,132,0.022727272727272728,0.015635074145712444,30,4.0
+no_salary_hike_no_attrition_no_department_no_job_role,xgboost,BusinessTravelFrequency,precision,3,Non-Travel,132,0.0,Travel_Frequently,222,0.5,0.5,30,4.0
+no_salary_hike_no_attrition_no_department_no_job_role,xgboost,BusinessTravelFrequency,precision,3,Non-Travel,132,0.6538461538461539,Travel_Frequently,222,0.717391304347826,0.0635451505016722,30,2.0
+no_salary_hike_no_attrition_no_department_no_job_role,xgboost,BusinessTravelFrequency,precision,3,Non-Travel,132,0.7864077669902912,Travel_Rarely,846,0.8398835516739447,0.05347578468365344,30,3.0
+no_salary_hike_no_attrition_no_department_no_job_role,xgboost,BusinessTravelFrequency,true_positive_rate,3,Travel_Rarely,846,0.7867647058823529,Travel_Frequently,222,0.8918918918918919,0.10512718600953896,30,2.0
+no_salary_hike_no_attrition_no_department_no_job_role,xgboost,BusinessTravelFrequency,true_positive_rate,3,Non-Travel,132,0.0,Travel_Frequently,222,0.06451612903225806,0.06451612903225806,30,4.0
+no_salary_hike_no_attrition_no_department_no_job_role,xgboost,BusinessTravelFrequency,true_positive_rate,3,Non-Travel,132,0.8709677419354839,Travel_Rarely,846,0.9202551834130781,0.04928744147759423,30,3.0
+no_salary_hike_no_attrition_no_department_no_job_role,xgboost,EducationBackground,accuracy,5,Life Sciences,492,0.7682926829268293,Technical Degree,100,0.84,0.07170731707317068,30,
+no_salary_hike_no_attrition_no_department_no_job_role,xgboost,EducationBackground,false_positive_rate,5,Marketing,137,0.3488372093023256,Other,66,0.8,0.45116279069767445,30,3.0
+no_salary_hike_no_attrition_no_department_no_job_role,xgboost,EducationBackground,false_positive_rate,5,Technical Degree,100,0.036585365853658534,Life Sciences,492,0.0821256038647343,0.04554023801107577,30,2.0
+no_salary_hike_no_attrition_no_department_no_job_role,xgboost,EducationBackground,false_positive_rate,5,Other,66,0.0,Technical Degree,100,0.022727272727272728,0.022727272727272728,30,4.0
+no_salary_hike_no_attrition_no_department_no_job_role,xgboost,EducationBackground,macro_f1,5,Other,66,0.4686609686609686,Technical Degree,100,0.6629129129129129,0.19425194425194425,30,
+no_salary_hike_no_attrition_no_department_no_job_role,xgboost,EducationBackground,mean_predicted_probability,5,Other,66,0.06468288693698317,Marketing,137,0.2066325145986239,0.1419496276616407,30,2.0
+no_salary_hike_no_attrition_no_department_no_job_role,xgboost,EducationBackground,mean_predicted_probability,5,Marketing,137,0.7199159620506485,Other,66,0.8585511218530663,0.1386351598024178,30,3.0
+no_salary_hike_no_attrition_no_department_no_job_role,xgboost,EducationBackground,mean_predicted_probability,5,Marketing,137,0.0734515263185748,Technical Degree,100,0.09950737989274785,0.02605585357417306,30,4.0
+no_salary_hike_no_attrition_no_department_no_job_role,xgboost,EducationBackground,positive_prediction_rate,5,Marketing,137,0.7445255474452555,Other,66,0.9242424242424242,0.17971687679716875,30,3.0
+no_salary_hike_no_attrition_no_department_no_job_role,xgboost,EducationBackground,positive_prediction_rate,5,Other,66,0.07575757575757576,Marketing,137,0.24817518248175183,0.17241760672417605,30,2.0
+no_salary_hike_no_attrition_no_department_no_job_role,xgboost,EducationBackground,positive_prediction_rate,5,Other,66,0.0,Technical Degree,100,0.04,0.04,30,4.0
+no_salary_hike_no_attrition_no_department_no_job_role,xgboost,EducationBackground,precision,4,Life Sciences,492,0.0,Technical Degree,100,0.5,0.5,30,4.0
+no_salary_hike_no_attrition_no_department_no_job_role,xgboost,EducationBackground,precision,5,Other,66,0.4,Technical Degree,100,0.8333333333333334,0.43333333333333335,30,2.0
+no_salary_hike_no_attrition_no_department_no_job_role,xgboost,EducationBackground,precision,5,Life Sciences,492,0.8107416879795396,Other,66,0.8688524590163934,0.0581107710368538,30,3.0
+no_salary_hike_no_attrition_no_department_no_job_role,xgboost,EducationBackground,true_positive_rate,5,Other,66,0.6666666666666666,Marketing,137,0.9310344827586207,0.26436781609195403,30,2.0
+no_salary_hike_no_attrition_no_department_no_job_role,xgboost,EducationBackground,true_positive_rate,5,Life Sciences,492,0.0,Technical Degree,100,0.16666666666666666,0.16666666666666666,30,4.0
+no_salary_hike_no_attrition_no_department_no_job_role,xgboost,EducationBackground,true_positive_rate,5,Life Sciences,492,0.8879551820728291,Technical Degree,100,0.9571428571428572,0.0691876750700281,30,3.0
+no_salary_hike_no_attrition_no_department_no_job_role,xgboost,EmpDepartment,accuracy,5,Development,361,0.7285318559556787,Finance,49,0.8571428571428571,0.1286110011871784,30,
+no_salary_hike_no_attrition_no_department_no_job_role,xgboost,EmpDepartment,false_positive_rate,5,Finance,49,0.3684210526315789,Development,361,0.7894736842105263,0.4210526315789474,30,3.0
+no_salary_hike_no_attrition_no_department_no_job_role,xgboost,EmpDepartment,false_positive_rate,5,Finance,49,0.0,Development,361,0.14080459770114942,0.14080459770114942,30,2.0
+no_salary_hike_no_attrition_no_department_no_job_role,xgboost,EmpDepartment,false_positive_rate,5,Finance,49,0.0,Human Resources,54,0.020833333333333332,0.020833333333333332,30,4.0
+no_salary_hike_no_attrition_no_department_no_job_role,xgboost,EmpDepartment,macro_f1,5,Development,361,0.37999073082153795,Finance,49,0.5948037589828634,0.21481302816132547,30,
+no_salary_hike_no_attrition_no_department_no_job_role,xgboost,EmpDepartment,mean_predicted_probability,5,Finance,49,0.7122978503454704,Development,361,0.7720084321837346,0.059710581838264165,30,3.0
+no_salary_hike_no_attrition_no_department_no_job_role,xgboost,EmpDepartment,mean_predicted_probability,5,Development,361,0.14217413604889778,Finance,49,0.19850880600813758,0.0563346699592398,30,2.0
+no_salary_hike_no_attrition_no_department_no_job_role,xgboost,EmpDepartment,mean_predicted_probability,5,Development,361,0.08581743042572941,Human Resources,54,0.10781753234806712,0.022000101922337714,30,4.0
+no_salary_hike_no_attrition_no_department_no_job_role,xgboost,EmpDepartment,positive_prediction_rate,5,Research & Development,343,0.1661807580174927,Finance,49,0.24489795918367346,0.07871720116618075,30,2.0
+no_salary_hike_no_attrition_no_department_no_job_role,xgboost,EmpDepartment,positive_prediction_rate,5,Finance,49,0.7551020408163265,Research & Development,343,0.8250728862973761,0.06997084548104959,30,3.0
+no_salary_hike_no_attrition_no_department_no_job_role,xgboost,EmpDepartment,positive_prediction_rate,5,Finance,49,0.0,Human Resources,54,0.018518518518518517,0.018518518518518517,30,4.0
+no_salary_hike_no_attrition_no_department_no_job_role,xgboost,EmpDepartment,precision,5,Development,361,0.18333333333333332,Finance,49,1.0,0.8166666666666667,30,2.0
+no_salary_hike_no_attrition_no_department_no_job_role,xgboost,EmpDepartment,precision,4,Development,361,0.0,Research & Development,343,0.3333333333333333,0.3333333333333333,30,4.0
+no_salary_hike_no_attrition_no_department_no_job_role,xgboost,EmpDepartment,precision,5,Research & Development,343,0.8056537102473498,Development,361,0.8484848484848485,0.042831138237498734,30,3.0
+no_salary_hike_no_attrition_no_department_no_job_role,xgboost,EmpDepartment,true_positive_rate,5,Development,361,0.8289473684210527,Finance,49,1.0,0.17105263157894735,30,3.0
+no_salary_hike_no_attrition_no_department_no_job_role,xgboost,EmpDepartment,true_positive_rate,5,Research & Development,343,0.7794117647058824,Development,361,0.8461538461538461,0.06674208144796379,30,2.0
+no_salary_hike_no_attrition_no_department_no_job_role,xgboost,EmpDepartment,true_positive_rate,5,Development,361,0.0,Sales,373,0.02857142857142857,0.02857142857142857,30,4.0
+no_salary_hike_no_attrition_no_department_no_job_role,xgboost,Gender,accuracy,2,Male,725,0.7875862068965517,Female,475,0.8126315789473684,0.025045372050816694,30,
+no_salary_hike_no_attrition_no_department_no_job_role,xgboost,Gender,false_positive_rate,2,Female,475,0.48412698412698413,Male,725,0.515,0.030873015873015885,30,3.0
+no_salary_hike_no_attrition_no_department_no_job_role,xgboost,Gender,false_positive_rate,2,Female,475,0.0575,Male,725,0.07425742574257425,0.01675742574257425,30,2.0
+no_salary_hike_no_attrition_no_department_no_job_role,xgboost,Gender,false_positive_rate,2,Male,725,0.009316770186335404,Female,475,0.01179245283018868,0.002475682643853276,30,4.0
+no_salary_hike_no_attrition_no_department_no_job_role,xgboost,Gender,macro_f1,2,Male,725,0.5319698580568146,Female,475,0.5745823126688022,0.042612454611987594,30,
+no_salary_hike_no_attrition_no_department_no_job_role,xgboost,Gender,mean_predicted_probability,2,Male,725,0.7465878323902344,Female,475,0.7511584961884901,0.004570663798255659,30,3.0
+no_salary_hike_no_attrition_no_department_no_job_role,xgboost,Gender,mean_predicted_probability,2,Female,475,0.16144912795595653,Male,725,0.16467547139907576,0.0032263434431192284,30,2.0
+no_salary_hike_no_attrition_no_department_no_job_role,xgboost,Gender,mean_predicted_probability,2,Female,475,0.08739237793794784,Male,725,0.08873669524179321,0.001344317303845377,30,4.0
+no_salary_hike_no_attrition_no_department_no_job_role,xgboost,Gender,positive_prediction_rate,2,Female,475,0.17894736842105263,Male,725,0.19310344827586207,0.014156079854809434,30,2.0
+no_salary_hike_no_attrition_no_department_no_job_role,xgboost,Gender,positive_prediction_rate,2,Male,725,0.7986206896551724,Female,475,0.8063157894736842,0.007695099818511797,30,3.0
+no_salary_hike_no_attrition_no_department_no_job_role,xgboost,Gender,positive_prediction_rate,2,Male,725,0.008275862068965517,Female,475,0.014736842105263158,0.00646098003629764,30,4.0
+no_salary_hike_no_attrition_no_department_no_job_role,xgboost,Gender,precision,2,Male,725,0.0,Female,475,0.2857142857142857,0.2857142857142857,30,4.0
+no_salary_hike_no_attrition_no_department_no_job_role,xgboost,Gender,precision,2,Male,725,0.6785714285714286,Female,475,0.7294117647058823,0.05084033613445371,30,2.0
+no_salary_hike_no_attrition_no_department_no_job_role,xgboost,Gender,precision,2,Male,725,0.8221070811744386,Female,475,0.8407310704960835,0.018623989321644885,30,3.0
+no_salary_hike_no_attrition_no_department_no_job_role,xgboost,Gender,true_positive_rate,2,Male,725,0.0,Female,475,0.0392156862745098,0.0392156862745098,30,4.0
+no_salary_hike_no_attrition_no_department_no_job_role,xgboost,Gender,true_positive_rate,2,Male,725,0.7983193277310925,Female,475,0.8266666666666667,0.028347338935574173,30,2.0
+no_salary_hike_no_attrition_no_department_no_job_role,xgboost,Gender,true_positive_rate,2,Male,725,0.9066666666666666,Female,475,0.9226361031518625,0.015969436485195887,30,3.0
+no_salary_hike_no_attrition_no_department_no_job_role,xgboost,MaritalStatus,accuracy,3,Married,548,0.7883211678832117,Divorced,268,0.8208955223880597,0.032574354504848024,30,
+no_salary_hike_no_attrition_no_department_no_job_role,xgboost,MaritalStatus,false_positive_rate,3,Married,548,0.4645161290322581,Single,384,0.5555555555555556,0.0910394265232975,30,3.0
+no_salary_hike_no_attrition_no_department_no_job_role,xgboost,MaritalStatus,false_positive_rate,3,Single,384,0.05504587155963303,Married,548,0.08258928571428571,0.02754341415465268,30,2.0
+no_salary_hike_no_attrition_no_department_no_job_role,xgboost,MaritalStatus,false_positive_rate,3,Single,384,0.003003003003003003,Married,548,0.014198782961460446,0.011195779958457443,30,4.0
+no_salary_hike_no_attrition_no_department_no_job_role,xgboost,MaritalStatus,macro_f1,3,Married,548,0.5359180510033523,Single,384,0.5613860358958398,0.025467984892487472,30,
+no_salary_hike_no_attrition_no_department_no_job_role,xgboost,MaritalStatus,mean_predicted_probability,3,Divorced,268,0.14379461467354698,Married,548,0.18597060522494963,0.04217599055140264,30,2.0
+no_salary_hike_no_attrition_no_department_no_job_role,xgboost,MaritalStatus,mean_predicted_probability,3,Married,548,0.7297724882535038,Single,384,0.7645377722122552,0.034765283958751336,30,3.0
+no_salary_hike_no_attrition_no_department_no_job_role,xgboost,MaritalStatus,mean_predicted_probability,3,Married,548,0.0842569076280232,Divorced,268,0.09285226687024445,0.008595359242221254,30,4.0
+no_salary_hike_no_attrition_no_department_no_job_role,xgboost,MaritalStatus,positive_prediction_rate,3,Married,548,0.7700729927007299,Single,384,0.8307291666666666,0.0606561739659367,30,3.0
+no_salary_hike_no_attrition_no_department_no_job_role,xgboost,MaritalStatus,positive_prediction_rate,3,Single,384,0.16145833333333334,Married,548,0.21715328467153286,0.055694951338199516,30,2.0
+no_salary_hike_no_attrition_no_department_no_job_role,xgboost,MaritalStatus,positive_prediction_rate,3,Single,384,0.0078125,Married,548,0.012773722627737226,0.004961222627737226,30,4.0
+no_salary_hike_no_attrition_no_department_no_job_role,xgboost,MaritalStatus,precision,3,Divorced,268,0.0,Single,384,0.6666666666666666,0.6666666666666666,30,4.0
+no_salary_hike_no_attrition_no_department_no_job_role,xgboost,MaritalStatus,precision,3,Single,384,0.8119122257053292,Divorced,268,0.8552036199095022,0.04329139420417305,30,3.0
+no_salary_hike_no_attrition_no_department_no_job_role,xgboost,MaritalStatus,precision,3,Married,548,0.6890756302521008,Single,384,0.7096774193548387,0.02060178910273791,30,2.0
+no_salary_hike_no_attrition_no_department_no_job_role,xgboost,MaritalStatus,true_positive_rate,3,Single,384,0.7719298245614035,Divorced,268,0.8378378378378378,0.06590801327643436,30,2.0
+no_salary_hike_no_attrition_no_department_no_job_role,xgboost,MaritalStatus,true_positive_rate,3,Married,548,0.8905852417302799,Single,384,0.9384057971014492,0.04782055537116936,30,3.0
+no_salary_hike_no_attrition_no_department_no_job_role,xgboost,MaritalStatus,true_positive_rate,3,Divorced,268,0.0,Single,384,0.0392156862745098,0.0392156862745098,30,4.0

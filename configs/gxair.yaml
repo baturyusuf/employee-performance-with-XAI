@@ -1,0 +1,23 @@
+{
+  "gxair": {
+    "components": {
+      "PAS": "Performance Adequacy Score",
+      "LRS": "Leakage Robustness Score",
+      "ESS": "Explanation Stability Score",
+      "CRS": "Calibration Reliability Score",
+      "FRS": "Fairness Robustness Score",
+      "ARS": "Actionability Realism Score",
+      "PRP": "Proxy Risk Penalty"
+    },
+    "default_weights": {
+      "PAS": 1.0,
+      "LRS": 1.0,
+      "ESS": 1.0,
+      "CRS": 1.0,
+      "FRS": 1.0,
+      "ARS": 1.0,
+      "PRP": 1.0
+    },
+    "interpretation_warning": "G-XAIR is an audit dashboard, not a universal deployment score."
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "feature_sets": [
+    "no_salary_hike_no_attrition",
+    "no_salary_hike_no_attrition_no_department",
+    "no_salary_hike_no_attrition_no_department_no_job_role"
+  ],
+  "model": "xgboost",
+  "n_splits": 5,
+  "package_versions": {
+    "numpy": "2.4.4",
+    "pandas": "3.0.2",
+    "scikit-learn": "1.8.0",
+    "shap": "0.51.0",
+    "xgboost": "3.2.0"
+  },
+  "seed": 42,
+  "task": "final_candidate_shap_stability"
+}

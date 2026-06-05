@@ -1,0 +1,4 @@
+feature_set,model,metric,mean,std,ci_low,ci_high
+no_salary_hike_no_attrition_no_department_no_job_role,lightgbm,nll_log_loss,0.8471904268949626,0.15365887201800246,0.7632390134189814,0.9450844903518708
+no_salary_hike_no_attrition_no_department_no_job_role,xgboost,nll_log_loss,0.5466005745624595,0.06560866484404874,0.5098211134187494,0.5872333010907712
+no_salary_hike_no_attrition_no_department_no_job_role,catboost,nll_log_loss,0.5139399277136697,0.04031525946113077,0.4908642679660496,0.5388714953755003

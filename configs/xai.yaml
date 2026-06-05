@@ -1,0 +1,17 @@
+{
+  "xai": {
+    "top_k_values": [5, 10, 15],
+    "local_cases": [
+      "high_conf_class_2",
+      "high_conf_class_3",
+      "high_conf_class_4",
+      "misclassified_example",
+      "most_uncertain"
+    ],
+    "warnings": {
+      "shap_not_causal": "SHAP values are model attributions, not causal effects.",
+      "proxy_warning": "Feature may encode sensitive or organisational proxy information.",
+      "low_support_warning": "Subgroup support is low; interpret explanation cautiously."
+    }
+  }
+}

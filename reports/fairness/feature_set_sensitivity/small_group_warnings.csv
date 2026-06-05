@@ -1,0 +1,3 @@
+attribute,group_value,n_samples,warning
+EmpDepartment,Data Science,20,n_samples < 30
+EducationBackground,Human Resources,21,n_samples < 30

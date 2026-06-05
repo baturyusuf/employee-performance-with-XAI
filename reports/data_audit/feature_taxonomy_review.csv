@@ -1,0 +1,29 @@
+feature_name,data_type,temporal_status,leakage_risk,control_type,sensitive_or_proxy,allowed_for_final_model,notes,observed_in_data
+EmpNumber,categorical,identifier,high,forbidden,not_sensitive,False,Employee identifier; must never be used as a model predictor.,True
+Age,numeric,pre_evaluation,none,immutable,direct_sensitive,False,Age is immutable and legally/ethically sensitive in HR contexts; use only after explicit researcher review.,True
+Gender,categorical,pre_evaluation,none,immutable,direct_sensitive,False,Direct demographic attribute.,True
+EducationBackground,categorical,pre_evaluation,low,immutable,possible_proxy,True,May encode social or demographic proxy effects; audit subgroup and proxy behavior.,True
+MaritalStatus,categorical,pre_evaluation,none,immutable,direct_sensitive,False,Direct demographic/family-status attribute.,True
+EmpDepartment,categorical,pre_evaluation,medium,organisation_controllable,organisational_group,False,Organisational grouping; useful for sensitivity analysis but risky for direct deployment.,True
+EmpJobRole,categorical,pre_evaluation,low,organisation_controllable,possible_proxy,True,May proxy department after EmpDepartment is removed; requires proxy audit.,True
+BusinessTravelFrequency,categorical,pre_evaluation,low,organisation_controllable,possible_proxy,True,Assignment/travel pattern may reflect role or organisational constraints.,True
+DistanceFromHome,numeric,pre_evaluation,none,immutable,possible_proxy,True,Can proxy socioeconomic or location constraints; audit before final use.,True
+EmpEducationLevel,ordinal,pre_evaluation,none,employee_controllable,possible_proxy,True,Partly employee-controllable over long horizons; not a short-term prescription.,True
+EmpEnvironmentSatisfaction,ordinal,concurrent,medium,manager_controllable,not_sensitive,True,May be measured near evaluation time; use as decision-support signal with temporality warning.,True
+EmpHourlyRate,numeric,pre_evaluation,low,organisation_controllable,possible_proxy,True,Compensation-related but less directly outcome-proximal than salary hike; audit for proxy risk.,True
+EmpJobInvolvement,ordinal,concurrent,medium,employee_controllable,not_sensitive,True,Potentially actionable but may be self-report or manager-rated; do not treat causally.,True
+EmpJobLevel,ordinal,pre_evaluation,low,organisation_controllable,possible_proxy,True,Seniority/level may encode historical opportunity and organisational structure.,True
+EmpJobSatisfaction,ordinal,concurrent,medium,manager_controllable,not_sensitive,True,Potentially concurrent survey measure; reason codes need non-causal warning.,True
+NumCompaniesWorked,numeric,pre_evaluation,none,immutable,possible_proxy,True,"Work history can proxy age, opportunity, or labor-market history.",True
+OverTime,binary,concurrent,medium,manager_controllable,possible_proxy,True,May reflect staffing/manager assignment rather than employee choice.,True
+EmpLastSalaryHikePercent,numeric,post_evaluation_risk,high,forbidden,not_sensitive,False,Outcome-proximal compensation feature; use only in upper-bound/leakage-warning baselines.,True
+EmpRelationshipSatisfaction,ordinal,concurrent,medium,manager_controllable,not_sensitive,True,Potentially concurrent survey measure; use non-causal interpretation.,True
+TotalWorkExperienceInYears,numeric,pre_evaluation,none,immutable,possible_proxy,True,May proxy age and historical opportunity.,True
+TrainingTimesLastYear,numeric,pre_evaluation,low,employee_controllable,not_sensitive,True,Partly employee-controllable but often organisation-mediated.,True
+EmpWorkLifeBalance,ordinal,concurrent,medium,manager_controllable,possible_proxy,True,Often shaped by manager/team constraints; avoid employee-blaming recommendations.,True
+ExperienceYearsAtThisCompany,numeric,pre_evaluation,none,immutable,possible_proxy,True,Tenure can proxy age and internal opportunity.,True
+ExperienceYearsInCurrentRole,numeric,pre_evaluation,low,organisation_controllable,possible_proxy,True,Role tenure may reflect staffing and promotion pathways.,True
+YearsSinceLastPromotion,numeric,pre_evaluation,medium,organisation_controllable,possible_proxy,True,May encode prior performance or promotion decisions; audit as historical-decision proxy.,True
+YearsWithCurrManager,numeric,pre_evaluation,low,organisation_controllable,possible_proxy,True,Manager assignment and tenure can encode organisational structure.,True
+Attrition,binary,post_evaluation_risk,high,forbidden,possible_proxy,False,Risky unless prediction time is explicitly before attrition is known; excluded from primary leakage-safe feature set.,True
+PerformanceRating,ordinal,target,high,forbidden,not_sensitive,False,Target column; must never be included as a predictor.,True

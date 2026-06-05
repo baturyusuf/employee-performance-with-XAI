@@ -1,0 +1,54 @@
+{
+  "feature_sets": {
+    "full_feature_upper_bound": {
+      "description": "All non-ID predictors except target. Used only as an upper-bound and leakage warning.",
+      "drop": ["EmpNumber", "PerformanceRating"],
+      "deployment_status": "upper_bound_leakage_warning"
+    },
+    "no_salary_hike": {
+      "description": "Removes primary outcome-proximal compensation variable.",
+      "drop": ["EmpNumber", "PerformanceRating", "EmpLastSalaryHikePercent"],
+      "deployment_status": "sensitivity_only"
+    },
+    "no_salary_hike_no_attrition": {
+      "description": "Primary leakage-safe decision-support feature set after researcher-approved exclusion of Age from final candidates.",
+      "drop": ["EmpNumber", "PerformanceRating", "EmpLastSalaryHikePercent", "Attrition", "Age"],
+      "deployment_status": "candidate"
+    },
+    "no_salary_hike_no_attrition_no_department": {
+      "description": "Fairness-aware final-model candidate excluding direct department membership and Age.",
+      "drop": ["EmpNumber", "PerformanceRating", "EmpLastSalaryHikePercent", "Attrition", "EmpDepartment", "Age"],
+      "deployment_status": "candidate"
+    },
+    "no_salary_hike_no_attrition_with_age_audit": {
+      "description": "Audit-only leakage-safe feature set retaining Age to quantify the effect of the researcher-approved Age exclusion policy.",
+      "drop": ["EmpNumber", "PerformanceRating", "EmpLastSalaryHikePercent", "Attrition"],
+      "deployment_status": "audit_only"
+    },
+    "no_salary_hike_no_attrition_no_department_with_age_audit": {
+      "description": "Audit-only department-free leakage-safe feature set retaining Age.",
+      "drop": ["EmpNumber", "PerformanceRating", "EmpLastSalaryHikePercent", "Attrition", "EmpDepartment"],
+      "deployment_status": "audit_only"
+    },
+    "no_salary_hike_no_attrition_no_department_no_job_role": {
+      "description": "Stricter fairness/proxy sensitivity feature set excluding Age, direct department membership, and job role.",
+      "drop": ["EmpNumber", "PerformanceRating", "EmpLastSalaryHikePercent", "Attrition", "Age", "EmpDepartment", "EmpJobRole"],
+      "deployment_status": "sensitivity_only"
+    },
+    "no_sensitive_demographic": {
+      "description": "Sensitivity set excluding direct demographic attributes, including researcher-approved Age exclusion.",
+      "drop": ["EmpNumber", "PerformanceRating", "Gender", "MaritalStatus", "Age"],
+      "deployment_status": "sensitivity_only"
+    },
+    "actionable_employee_only": {
+      "description": "Only employee-controllable variables after taxonomy review.",
+      "include_by_control_type": ["employee_controllable"],
+      "deployment_status": "counterfactual_only"
+    },
+    "employee_manager": {
+      "description": "Variables controllable by employee or manager.",
+      "include_by_control_type": ["employee_controllable", "manager_controllable"],
+      "deployment_status": "counterfactual_only"
+    }
+  }
+}

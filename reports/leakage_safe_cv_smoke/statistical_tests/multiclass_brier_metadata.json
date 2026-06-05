@@ -1,0 +1,5 @@
+{
+  "metric": "multiclass_brier",
+  "alpha": 0.05,
+  "omnibus": []
+}

@@ -1,0 +1,94 @@
+{
+  "n_splits": 10,
+  "random_state": 42,
+  "drop_sensitive": true,
+  "feature_sets": [
+    "no_salary_hike_no_attrition",
+    "no_salary_hike_no_attrition_no_department"
+  ],
+  "feature_set_definitions": {
+    "no_salary_hike_no_attrition": {
+      "description": "Primary leakage-safe decision-support feature set after researcher-approved exclusion of Age from final candidates.",
+      "drop": [
+        "EmpNumber",
+        "PerformanceRating",
+        "EmpLastSalaryHikePercent",
+        "Attrition",
+        "Age"
+      ],
+      "deployment_status": "candidate"
+    },
+    "no_salary_hike_no_attrition_no_department": {
+      "description": "Fairness-aware final-model candidate excluding direct department membership and Age.",
+      "drop": [
+        "EmpNumber",
+        "PerformanceRating",
+        "EmpLastSalaryHikePercent",
+        "Attrition",
+        "EmpDepartment",
+        "Age"
+      ],
+      "deployment_status": "candidate"
+    }
+  },
+  "models": [
+    "catboost",
+    "lightgbm",
+    "xgboost"
+  ],
+  "labels": [
+    2,
+    3,
+    4
+  ],
+  "git_commit_if_available": "6f9df0a85d26bf1519634001357c8f91340a740c",
+  "package_versions": {
+    "numpy": "2.4.4",
+    "pandas": "3.0.2",
+    "scikit-learn": "1.8.0",
+    "catboost": "1.2.10",
+    "lightgbm": "4.6.0",
+    "xgboost": "3.2.0"
+  },
+  "outputs": {
+    "fold_metrics": "C:\\Users\\Yusuf\\Documents\\GitHub\\employee performance with XAI\\reports\\leakage_safe_cv_config\\fold_metrics.csv",
+    "summary_metrics": "C:\\Users\\Yusuf\\Documents\\GitHub\\employee performance with XAI\\reports\\leakage_safe_cv_config\\summary_metrics.csv",
+    "statistical_tests": {
+      "macro_f1": {
+        "bootstrap_ci": "C:\\Users\\Yusuf\\Documents\\GitHub\\employee performance with XAI\\reports\\leakage_safe_cv_config\\statistical_tests\\macro_f1_bootstrap_ci.csv",
+        "pairwise_tests": "C:\\Users\\Yusuf\\Documents\\GitHub\\employee performance with XAI\\reports\\leakage_safe_cv_config\\statistical_tests\\macro_f1_pairwise_tests.csv",
+        "metadata": "C:\\Users\\Yusuf\\Documents\\GitHub\\employee performance with XAI\\reports\\leakage_safe_cv_config\\statistical_tests\\macro_f1_metadata.json"
+      },
+      "quadratic_weighted_kappa": {
+        "bootstrap_ci": "C:\\Users\\Yusuf\\Documents\\GitHub\\employee performance with XAI\\reports\\leakage_safe_cv_config\\statistical_tests\\quadratic_weighted_kappa_bootstrap_ci.csv",
+        "pairwise_tests": "C:\\Users\\Yusuf\\Documents\\GitHub\\employee performance with XAI\\reports\\leakage_safe_cv_config\\statistical_tests\\quadratic_weighted_kappa_pairwise_tests.csv",
+        "metadata": "C:\\Users\\Yusuf\\Documents\\GitHub\\employee performance with XAI\\reports\\leakage_safe_cv_config\\statistical_tests\\quadratic_weighted_kappa_metadata.json"
+      },
+      "balanced_accuracy": {
+        "bootstrap_ci": "C:\\Users\\Yusuf\\Documents\\GitHub\\employee performance with XAI\\reports\\leakage_safe_cv_config\\statistical_tests\\balanced_accuracy_bootstrap_ci.csv",
+        "pairwise_tests": "C:\\Users\\Yusuf\\Documents\\GitHub\\employee performance with XAI\\reports\\leakage_safe_cv_config\\statistical_tests\\balanced_accuracy_pairwise_tests.csv",
+        "metadata": "C:\\Users\\Yusuf\\Documents\\GitHub\\employee performance with XAI\\reports\\leakage_safe_cv_config\\statistical_tests\\balanced_accuracy_metadata.json"
+      },
+      "ordinal_mae": {
+        "bootstrap_ci": "C:\\Users\\Yusuf\\Documents\\GitHub\\employee performance with XAI\\reports\\leakage_safe_cv_config\\statistical_tests\\ordinal_mae_bootstrap_ci.csv",
+        "pairwise_tests": "C:\\Users\\Yusuf\\Documents\\GitHub\\employee performance with XAI\\reports\\leakage_safe_cv_config\\statistical_tests\\ordinal_mae_pairwise_tests.csv",
+        "metadata": "C:\\Users\\Yusuf\\Documents\\GitHub\\employee performance with XAI\\reports\\leakage_safe_cv_config\\statistical_tests\\ordinal_mae_metadata.json"
+      },
+      "nll_log_loss": {
+        "bootstrap_ci": "C:\\Users\\Yusuf\\Documents\\GitHub\\employee performance with XAI\\reports\\leakage_safe_cv_config\\statistical_tests\\nll_log_loss_bootstrap_ci.csv",
+        "pairwise_tests": "C:\\Users\\Yusuf\\Documents\\GitHub\\employee performance with XAI\\reports\\leakage_safe_cv_config\\statistical_tests\\nll_log_loss_pairwise_tests.csv",
+        "metadata": "C:\\Users\\Yusuf\\Documents\\GitHub\\employee performance with XAI\\reports\\leakage_safe_cv_config\\statistical_tests\\nll_log_loss_metadata.json"
+      },
+      "multiclass_brier": {
+        "bootstrap_ci": "C:\\Users\\Yusuf\\Documents\\GitHub\\employee performance with XAI\\reports\\leakage_safe_cv_config\\statistical_tests\\multiclass_brier_bootstrap_ci.csv",
+        "pairwise_tests": "C:\\Users\\Yusuf\\Documents\\GitHub\\employee performance with XAI\\reports\\leakage_safe_cv_config\\statistical_tests\\multiclass_brier_pairwise_tests.csv",
+        "metadata": "C:\\Users\\Yusuf\\Documents\\GitHub\\employee performance with XAI\\reports\\leakage_safe_cv_config\\statistical_tests\\multiclass_brier_metadata.json"
+      },
+      "ece_confidence": {
+        "bootstrap_ci": "C:\\Users\\Yusuf\\Documents\\GitHub\\employee performance with XAI\\reports\\leakage_safe_cv_config\\statistical_tests\\ece_confidence_bootstrap_ci.csv",
+        "pairwise_tests": "C:\\Users\\Yusuf\\Documents\\GitHub\\employee performance with XAI\\reports\\leakage_safe_cv_config\\statistical_tests\\ece_confidence_pairwise_tests.csv",
+        "metadata": "C:\\Users\\Yusuf\\Documents\\GitHub\\employee performance with XAI\\reports\\leakage_safe_cv_config\\statistical_tests\\ece_confidence_metadata.json"
+      }
+    }
+  }
+}

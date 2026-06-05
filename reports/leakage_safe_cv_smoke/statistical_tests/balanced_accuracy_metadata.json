@@ -1,0 +1,5 @@
+{
+  "metric": "balanced_accuracy",
+  "alpha": 0.05,
+  "omnibus": []
+}

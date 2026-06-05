@@ -1,0 +1,25 @@
+{
+  "candidate_roles": [
+    {
+      "feature_set": "no_salary_hike_no_attrition",
+      "recommendation_category": "diagnostic comparison baseline",
+      "required_warnings": "decision support only; no causal SHAP claims; external validation required; probability calibration warning; department or job-role proxy risk",
+      "role": "main leakage-safe comparison baseline"
+    },
+    {
+      "feature_set": "no_salary_hike_no_attrition_no_department",
+      "recommendation_category": "recommended primary research model",
+      "required_warnings": "decision support only; no causal SHAP claims; external validation required; probability calibration warning; department or job-role proxy risk",
+      "role": "recommended primary research model candidate"
+    },
+    {
+      "feature_set": "no_salary_hike_no_attrition_no_department_no_job_role",
+      "recommendation_category": "strict fairness/proxy sensitivity model",
+      "required_warnings": "decision support only; no causal SHAP claims; external validation required; probability calibration warning",
+      "role": "strict fairness/proxy sensitivity baseline"
+    }
+  ],
+  "decision_rule": "multi-criteria governance review; no single composite score used as sole selection criterion",
+  "model_family": "xgboost",
+  "recommended_primary_research_model": "no_salary_hike_no_attrition_no_department"
+}

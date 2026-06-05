@@ -1,0 +1,19 @@
+{
+  "feature_sets": [
+    "no_salary_hike_no_attrition",
+    "no_salary_hike_no_attrition_no_department",
+    "no_salary_hike_no_attrition_no_department_no_job_role"
+  ],
+  "max_features_changed": 3,
+  "max_prototypes": 250,
+  "model": "xgboost",
+  "modes": [
+    "employee_only",
+    "employee_manager",
+    "organization_allowed",
+    "full_default",
+    "no_salary"
+  ],
+  "seed": 42,
+  "task": "final_candidate_counterfactual_actionability"
+}

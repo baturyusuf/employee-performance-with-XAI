@@ -1,0 +1,30 @@
+{
+  "counterfactuals": {
+    "intervention_sets": {
+      "full_default": {
+        "include_control_types": [
+          "employee_controllable",
+          "manager_controllable",
+          "organisation_controllable"
+        ]
+      },
+      "no_salary": {
+        "exclude_features": ["EmpLastSalaryHikePercent"]
+      },
+      "employee_only": {
+        "include_control_types": ["employee_controllable"]
+      },
+      "employee_manager": {
+        "include_control_types": ["employee_controllable", "manager_controllable"]
+      },
+      "organisation_required": {
+        "include_control_types": ["organisation_controllable"]
+      },
+      "fairness_safe_no_sensitive": {
+        "exclude_sensitive_or_proxy": ["direct_sensitive", "organisational_group"]
+      }
+    },
+    "max_features_changed": 3,
+    "top_k": 5
+  }
+}

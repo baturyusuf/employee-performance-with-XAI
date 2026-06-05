@@ -1,0 +1,76 @@
+feature_set,case_type,sample_index,true_class,predicted_class,desired_class,eligible_for_upward_shift,confidence,intervention_mode,n_allowed_features,valid,probability_gain,desired_probability,cost,num_changed_features,changed_features,changed_control_types,failed_reason
+no_salary_hike_no_attrition,correct_class_2,405,2,2,3,True,0.9893275782669178,employee_only,3,False,,,,0,,,no_candidate_reached_desired_class
+no_salary_hike_no_attrition,correct_class_2,405,2,2,3,True,0.9893275782669178,employee_manager,8,True,0.8381580323051964,0.8468625952259616,3.042211732282211,2,EmpJobSatisfaction; EmpEnvironmentSatisfaction,manager_controllable; manager_controllable,
+no_salary_hike_no_attrition,correct_class_2,405,2,2,3,True,0.9893275782669178,organization_allowed,16,True,0.5245232910543166,0.5332278539750819,1.79477266751429,2,EmpHourlyRate; EmpDepartment,organisation_controllable; organisation_controllable,
+no_salary_hike_no_attrition,correct_class_2,405,2,2,3,True,0.9893275782669178,full_default,21,True,0.6915826830232972,0.7002872459440624,2.3,2,EmpDepartment; EmpJobRole,organisation_controllable; organisation_controllable,
+no_salary_hike_no_attrition,correct_class_2,405,2,2,3,True,0.9893275782669178,no_salary,21,True,0.6915826830232972,0.7002872459440624,2.3,2,EmpDepartment; EmpJobRole,organisation_controllable; organisation_controllable,
+no_salary_hike_no_attrition,correct_class_3,376,3,3,4,True,0.9950544326076799,employee_only,3,False,,,,0,,,no_candidate_reached_desired_class
+no_salary_hike_no_attrition,correct_class_3,376,3,3,4,True,0.9950544326076799,employee_manager,8,False,,,,0,,,no_candidate_reached_desired_class
+no_salary_hike_no_attrition,correct_class_3,376,3,3,4,True,0.9950544326076799,organization_allowed,16,False,,,,0,,,no_candidate_reached_desired_class
+no_salary_hike_no_attrition,correct_class_3,376,3,3,4,True,0.9950544326076799,full_default,21,False,,,,0,,,no_candidate_reached_desired_class
+no_salary_hike_no_attrition,correct_class_3,376,3,3,4,True,0.9950544326076799,no_salary,21,False,,,,0,,,no_candidate_reached_desired_class
+no_salary_hike_no_attrition,correct_class_4,568,4,4,4,False,0.9001516456674805,employee_only,3,False,,,,0,,,already_predicted_highest_class
+no_salary_hike_no_attrition,correct_class_4,568,4,4,4,False,0.9001516456674805,employee_manager,8,False,,,,0,,,already_predicted_highest_class
+no_salary_hike_no_attrition,correct_class_4,568,4,4,4,False,0.9001516456674805,organization_allowed,16,False,,,,0,,,already_predicted_highest_class
+no_salary_hike_no_attrition,correct_class_4,568,4,4,4,False,0.9001516456674805,full_default,21,False,,,,0,,,already_predicted_highest_class
+no_salary_hike_no_attrition,correct_class_4,568,4,4,4,False,0.9001516456674805,no_salary,21,False,,,,0,,,already_predicted_highest_class
+no_salary_hike_no_attrition,misclassified_high_confidence,18,4,3,4,True,0.8396097719763616,employee_only,3,False,,,,0,,,no_candidate_reached_desired_class
+no_salary_hike_no_attrition,misclassified_high_confidence,18,4,3,4,True,0.8396097719763616,employee_manager,8,False,,,,0,,,no_candidate_reached_desired_class
+no_salary_hike_no_attrition,misclassified_high_confidence,18,4,3,4,True,0.8396097719763616,organization_allowed,16,True,0.3520765383998491,0.5111647235176499,1.4385869370123765,3,YearsWithCurrManager; YearsSinceLastPromotion; EmpHourlyRate,organisation_controllable; organisation_controllable; organisation_controllable,
+no_salary_hike_no_attrition,misclassified_high_confidence,18,4,3,4,True,0.8396097719763616,full_default,21,True,0.34334929365970035,0.5024374787775011,1.2885143921518947,3,ExperienceYearsAtThisCompany; YearsWithCurrManager; EmpHourlyRate,immutable; organisation_controllable; organisation_controllable,
+no_salary_hike_no_attrition,misclassified_high_confidence,18,4,3,4,True,0.8396097719763616,no_salary,21,True,0.34334929365970035,0.5024374787775011,1.2885143921518947,3,ExperienceYearsAtThisCompany; YearsWithCurrManager; EmpHourlyRate,immutable; organisation_controllable; organisation_controllable,
+no_salary_hike_no_attrition,most_uncertain,392,3,3,4,True,0.48891982370137116,employee_only,3,False,,,,0,,,no_candidate_reached_desired_class
+no_salary_hike_no_attrition,most_uncertain,392,3,3,4,True,0.48891982370137116,employee_manager,8,False,,,,0,,,no_candidate_reached_desired_class
+no_salary_hike_no_attrition,most_uncertain,392,3,3,4,True,0.48891982370137116,organization_allowed,16,False,,,,0,,,no_candidate_reached_desired_class
+no_salary_hike_no_attrition,most_uncertain,392,3,3,4,True,0.48891982370137116,full_default,21,True,0.35006672726789556,0.5045603068041893,1.997211296886405,2,EmpHourlyRate; DistanceFromHome,organisation_controllable; immutable,
+no_salary_hike_no_attrition,most_uncertain,392,3,3,4,True,0.48891982370137116,no_salary,21,True,0.35006672726789556,0.5045603068041893,1.997211296886405,2,EmpHourlyRate; DistanceFromHome,organisation_controllable; immutable,
+no_salary_hike_no_attrition_no_department,correct_class_2,528,2,2,3,True,0.9836298763239094,employee_only,3,False,,,,0,,,no_candidate_reached_desired_class
+no_salary_hike_no_attrition_no_department,correct_class_2,528,2,2,3,True,0.9836298763239094,employee_manager,8,True,0.942985478089004,0.9587809249247812,1.0669269308862652,1,EmpEnvironmentSatisfaction,manager_controllable,
+no_salary_hike_no_attrition_no_department,correct_class_2,528,2,2,3,True,0.9836298763239094,organization_allowed,15,True,0.942985478089004,0.9587809249247812,1.0669269308862652,1,EmpEnvironmentSatisfaction,manager_controllable,
+no_salary_hike_no_attrition_no_department,correct_class_2,528,2,2,3,True,0.9836298763239094,full_default,20,True,0.942985478089004,0.9587809249247812,1.0669269308862652,1,EmpEnvironmentSatisfaction,manager_controllable,
+no_salary_hike_no_attrition_no_department,correct_class_2,528,2,2,3,True,0.9836298763239094,no_salary,20,True,0.942985478089004,0.9587809249247812,1.0669269308862652,1,EmpEnvironmentSatisfaction,manager_controllable,
+no_salary_hike_no_attrition_no_department,correct_class_3,376,3,3,4,True,0.9948591941166247,employee_only,3,False,,,,0,,,no_candidate_reached_desired_class
+no_salary_hike_no_attrition_no_department,correct_class_3,376,3,3,4,True,0.9948591941166247,employee_manager,8,False,,,,0,,,no_candidate_reached_desired_class
+no_salary_hike_no_attrition_no_department,correct_class_3,376,3,3,4,True,0.9948591941166247,organization_allowed,15,False,,,,0,,,no_candidate_reached_desired_class
+no_salary_hike_no_attrition_no_department,correct_class_3,376,3,3,4,True,0.9948591941166247,full_default,20,False,,,,0,,,no_candidate_reached_desired_class
+no_salary_hike_no_attrition_no_department,correct_class_3,376,3,3,4,True,0.9948591941166247,no_salary,20,False,,,,0,,,no_candidate_reached_desired_class
+no_salary_hike_no_attrition_no_department,correct_class_4,568,4,4,4,False,0.9053656427743827,employee_only,3,False,,,,0,,,already_predicted_highest_class
+no_salary_hike_no_attrition_no_department,correct_class_4,568,4,4,4,False,0.9053656427743827,employee_manager,8,False,,,,0,,,already_predicted_highest_class
+no_salary_hike_no_attrition_no_department,correct_class_4,568,4,4,4,False,0.9053656427743827,organization_allowed,15,False,,,,0,,,already_predicted_highest_class
+no_salary_hike_no_attrition_no_department,correct_class_4,568,4,4,4,False,0.9053656427743827,full_default,20,False,,,,0,,,already_predicted_highest_class
+no_salary_hike_no_attrition_no_department,correct_class_4,568,4,4,4,False,0.9053656427743827,no_salary,20,False,,,,0,,,already_predicted_highest_class
+no_salary_hike_no_attrition_no_department,misclassified_high_confidence,18,4,3,4,True,0.8735988525633045,employee_only,3,False,,,,0,,,no_candidate_reached_desired_class
+no_salary_hike_no_attrition_no_department,misclassified_high_confidence,18,4,3,4,True,0.8735988525633045,employee_manager,8,False,,,,0,,,no_candidate_reached_desired_class
+no_salary_hike_no_attrition_no_department,misclassified_high_confidence,18,4,3,4,True,0.8735988525633045,organization_allowed,15,False,,,,0,,,no_candidate_reached_desired_class
+no_salary_hike_no_attrition_no_department,misclassified_high_confidence,18,4,3,4,True,0.8735988525633045,full_default,20,False,,,,0,,,no_candidate_reached_desired_class
+no_salary_hike_no_attrition_no_department,misclassified_high_confidence,18,4,3,4,True,0.8735988525633045,no_salary,20,False,,,,0,,,no_candidate_reached_desired_class
+no_salary_hike_no_attrition_no_department,most_uncertain,392,3,3,4,True,0.4269939724653061,employee_only,3,False,,,,0,,,no_candidate_reached_desired_class
+no_salary_hike_no_attrition_no_department,most_uncertain,392,3,3,4,True,0.4269939724653061,employee_manager,8,False,,,,0,,,no_candidate_reached_desired_class
+no_salary_hike_no_attrition_no_department,most_uncertain,392,3,3,4,True,0.4269939724653061,organization_allowed,15,False,,,,0,,,no_candidate_reached_desired_class
+no_salary_hike_no_attrition_no_department,most_uncertain,392,3,3,4,True,0.4269939724653061,full_default,20,True,0.29768805649411767,0.47374445905900686,1.997211296886405,2,EmpHourlyRate; DistanceFromHome,organisation_controllable; immutable,
+no_salary_hike_no_attrition_no_department,most_uncertain,392,3,3,4,True,0.4269939724653061,no_salary,20,True,0.29768805649411767,0.47374445905900686,1.997211296886405,2,EmpHourlyRate; DistanceFromHome,organisation_controllable; immutable,
+no_salary_hike_no_attrition_no_department_no_job_role,correct_class_2,1137,2,2,3,True,0.9724377819958996,employee_only,3,False,,,,0,,,no_candidate_reached_desired_class
+no_salary_hike_no_attrition_no_department_no_job_role,correct_class_2,1137,2,2,3,True,0.9724377819958996,employee_manager,8,True,0.8352635362972698,0.8609493230496646,1.0669269308862652,1,EmpEnvironmentSatisfaction,manager_controllable,
+no_salary_hike_no_attrition_no_department_no_job_role,correct_class_2,1137,2,2,3,True,0.9724377819958996,organization_allowed,14,True,0.8352635362972698,0.8609493230496646,1.0669269308862652,1,EmpEnvironmentSatisfaction,manager_controllable,
+no_salary_hike_no_attrition_no_department_no_job_role,correct_class_2,1137,2,2,3,True,0.9724377819958996,full_default,19,True,0.8719876708140262,0.897673457566421,2.0801668390514587,3,EmpHourlyRate; DistanceFromHome; EmpEnvironmentSatisfaction,organisation_controllable; immutable; manager_controllable,
+no_salary_hike_no_attrition_no_department_no_job_role,correct_class_2,1137,2,2,3,True,0.9724377819958996,no_salary,19,True,0.8719876708140262,0.897673457566421,2.0801668390514587,3,EmpHourlyRate; DistanceFromHome; EmpEnvironmentSatisfaction,organisation_controllable; immutable; manager_controllable,
+no_salary_hike_no_attrition_no_department_no_job_role,correct_class_3,376,3,3,4,True,0.9947069909516515,employee_only,3,False,,,,0,,,no_candidate_reached_desired_class
+no_salary_hike_no_attrition_no_department_no_job_role,correct_class_3,376,3,3,4,True,0.9947069909516515,employee_manager,8,False,,,,0,,,no_candidate_reached_desired_class
+no_salary_hike_no_attrition_no_department_no_job_role,correct_class_3,376,3,3,4,True,0.9947069909516515,organization_allowed,14,False,,,,0,,,no_candidate_reached_desired_class
+no_salary_hike_no_attrition_no_department_no_job_role,correct_class_3,376,3,3,4,True,0.9947069909516515,full_default,19,False,,,,0,,,no_candidate_reached_desired_class
+no_salary_hike_no_attrition_no_department_no_job_role,correct_class_3,376,3,3,4,True,0.9947069909516515,no_salary,19,False,,,,0,,,no_candidate_reached_desired_class
+no_salary_hike_no_attrition_no_department_no_job_role,correct_class_4,568,4,4,4,False,0.9400765444953534,employee_only,3,False,,,,0,,,already_predicted_highest_class
+no_salary_hike_no_attrition_no_department_no_job_role,correct_class_4,568,4,4,4,False,0.9400765444953534,employee_manager,8,False,,,,0,,,already_predicted_highest_class
+no_salary_hike_no_attrition_no_department_no_job_role,correct_class_4,568,4,4,4,False,0.9400765444953534,organization_allowed,14,False,,,,0,,,already_predicted_highest_class
+no_salary_hike_no_attrition_no_department_no_job_role,correct_class_4,568,4,4,4,False,0.9400765444953534,full_default,19,False,,,,0,,,already_predicted_highest_class
+no_salary_hike_no_attrition_no_department_no_job_role,correct_class_4,568,4,4,4,False,0.9400765444953534,no_salary,19,False,,,,0,,,already_predicted_highest_class
+no_salary_hike_no_attrition_no_department_no_job_role,misclassified_high_confidence,18,4,3,4,True,0.8198739509762973,employee_only,3,False,,,,0,,,no_candidate_reached_desired_class
+no_salary_hike_no_attrition_no_department_no_job_role,misclassified_high_confidence,18,4,3,4,True,0.8198739509762973,employee_manager,8,False,,,,0,,,no_candidate_reached_desired_class
+no_salary_hike_no_attrition_no_department_no_job_role,misclassified_high_confidence,18,4,3,4,True,0.8198739509762973,organization_allowed,14,False,,,,0,,,no_candidate_reached_desired_class
+no_salary_hike_no_attrition_no_department_no_job_role,misclassified_high_confidence,18,4,3,4,True,0.8198739509762973,full_default,19,False,,,,0,,,no_candidate_reached_desired_class
+no_salary_hike_no_attrition_no_department_no_job_role,misclassified_high_confidence,18,4,3,4,True,0.8198739509762973,no_salary,19,False,,,,0,,,no_candidate_reached_desired_class
+no_salary_hike_no_attrition_no_department_no_job_role,most_uncertain,392,3,3,4,True,0.4665446614216615,employee_only,3,False,,,,0,,,no_candidate_reached_desired_class
+no_salary_hike_no_attrition_no_department_no_job_role,most_uncertain,392,3,3,4,True,0.4665446614216615,employee_manager,8,False,,,,0,,,no_candidate_reached_desired_class
+no_salary_hike_no_attrition_no_department_no_job_role,most_uncertain,392,3,3,4,True,0.4665446614216615,organization_allowed,14,False,,,,0,,,no_candidate_reached_desired_class
+no_salary_hike_no_attrition_no_department_no_job_role,most_uncertain,392,3,3,4,True,0.4665446614216615,full_default,19,True,0.2793269160606434,0.3947970506427914,1.997211296886405,2,EmpHourlyRate; DistanceFromHome,organisation_controllable; immutable,
+no_salary_hike_no_attrition_no_department_no_job_role,most_uncertain,392,3,3,4,True,0.4665446614216615,no_salary,19,True,0.2793269160606434,0.3947970506427914,1.997211296886405,2,EmpHourlyRate; DistanceFromHome,organisation_controllable; immutable,

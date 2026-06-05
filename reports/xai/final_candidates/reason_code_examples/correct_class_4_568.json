@@ -1,0 +1,114 @@
+{
+  "case_type": "correct_class_4",
+  "confidence_band": "high",
+  "feature_set": "no_salary_hike_no_attrition_no_department",
+  "mandatory_warnings": [
+    "SHAP is attribution, not causality.",
+    "This model is decision support, not autonomous employee evaluation.",
+    "Job role may proxy department.",
+    "Department removal does not prove fairness.",
+    "Counterfactuals may require manager or organisation intervention.",
+    "Probability estimates may be imperfectly calibrated.",
+    "Small subgroup results may be unstable.",
+    "External validation is required before deployment."
+  ],
+  "model": "xgboost",
+  "predicted_class": 4,
+  "predicted_probability": 0.9053656427743827,
+  "sample_index": 568,
+  "top_opposing_features": [
+    {
+      "control_type": "organisation_controllable",
+      "feature": "EmpJobRole",
+      "feature_value": "Manufacturing Director",
+      "grouped_shap_value": -0.3753000497817993,
+      "leakage_risk": "low",
+      "notes": "May proxy department after EmpDepartment is removed; requires proxy audit.",
+      "sensitive_or_proxy": "possible_proxy"
+    },
+    {
+      "control_type": "employee_controllable",
+      "feature": "EmpEducationLevel",
+      "feature_value": 1,
+      "grouped_shap_value": -0.04344554618000984,
+      "leakage_risk": "none",
+      "notes": "Partly employee-controllable over long horizons; not a short-term prescription.",
+      "sensitive_or_proxy": "possible_proxy"
+    },
+    {
+      "control_type": "manager_controllable",
+      "feature": "EmpWorkLifeBalance",
+      "feature_value": 2,
+      "grouped_shap_value": -0.029130728915333748,
+      "leakage_risk": "medium",
+      "notes": "Often shaped by manager/team constraints; avoid employee-blaming recommendations.",
+      "sensitive_or_proxy": "possible_proxy"
+    },
+    {
+      "control_type": "organisation_controllable",
+      "feature": "EmpHourlyRate",
+      "feature_value": 30,
+      "grouped_shap_value": -0.022945813834667206,
+      "leakage_risk": "low",
+      "notes": "Compensation-related but less directly outcome-proximal than salary hike; audit for proxy risk.",
+      "sensitive_or_proxy": "possible_proxy"
+    },
+    {
+      "control_type": "organisation_controllable",
+      "feature": "YearsSinceLastPromotion",
+      "feature_value": 1,
+      "grouped_shap_value": -0.014655905775725842,
+      "leakage_risk": "medium",
+      "notes": "May encode prior performance or promotion decisions; audit as historical-decision proxy.",
+      "sensitive_or_proxy": "possible_proxy"
+    }
+  ],
+  "top_supporting_features": [
+    {
+      "control_type": "immutable",
+      "feature": "DistanceFromHome",
+      "feature_value": 24,
+      "grouped_shap_value": 0.6562257409095764,
+      "leakage_risk": "none",
+      "notes": "Can proxy socioeconomic or location constraints; audit before final use.",
+      "sensitive_or_proxy": "possible_proxy"
+    },
+    {
+      "control_type": "manager_controllable",
+      "feature": "EmpEnvironmentSatisfaction",
+      "feature_value": 4,
+      "grouped_shap_value": 0.5128120183944702,
+      "leakage_risk": "medium",
+      "notes": "May be measured near evaluation time; use as decision-support signal with temporality warning.",
+      "sensitive_or_proxy": "not_sensitive"
+    },
+    {
+      "control_type": "manager_controllable",
+      "feature": "EmpJobSatisfaction",
+      "feature_value": 4,
+      "grouped_shap_value": 0.3224063813686371,
+      "leakage_risk": "medium",
+      "notes": "Potentially concurrent survey measure; reason codes need non-causal warning.",
+      "sensitive_or_proxy": "not_sensitive"
+    },
+    {
+      "control_type": "organisation_controllable",
+      "feature": "ExperienceYearsInCurrentRole",
+      "feature_value": 4,
+      "grouped_shap_value": 0.22711484134197235,
+      "leakage_risk": "low",
+      "notes": "Role tenure may reflect staffing and promotion pathways.",
+      "sensitive_or_proxy": "possible_proxy"
+    },
+    {
+      "control_type": "organisation_controllable",
+      "feature": "BusinessTravelFrequency",
+      "feature_value": "Travel_Frequently",
+      "grouped_shap_value": 0.14459040760993958,
+      "leakage_risk": "low",
+      "notes": "Assignment/travel pattern may reflect role or organisational constraints.",
+      "sensitive_or_proxy": "possible_proxy"
+    }
+  ],
+  "true_class": 4
+}

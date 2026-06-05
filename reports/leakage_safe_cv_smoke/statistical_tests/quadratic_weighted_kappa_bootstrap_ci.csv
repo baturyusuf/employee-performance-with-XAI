@@ -1,0 +1,2 @@
+feature_set,model,metric,mean,std,ci_low,ci_high
+no_salary_hike_no_attrition,xgboost,quadratic_weighted_kappa,0.6199286847039758,0.02285816331154187,0.603765522420915,0.6360918469870366

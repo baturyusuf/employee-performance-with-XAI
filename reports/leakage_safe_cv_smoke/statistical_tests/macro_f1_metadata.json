@@ -1,0 +1,5 @@
+{
+  "metric": "macro_f1",
+  "alpha": 0.05,
+  "omnibus": []
+}

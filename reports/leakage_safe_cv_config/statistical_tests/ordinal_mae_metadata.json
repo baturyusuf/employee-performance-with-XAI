@@ -1,0 +1,18 @@
+{
+  "metric": "ordinal_mae",
+  "alpha": 0.05,
+  "omnibus": [
+    {
+      "feature_set": "no_salary_hike_no_attrition",
+      "test": "friedman",
+      "statistic": 14.894736842105269,
+      "p_value": 0.000582973736768725
+    },
+    {
+      "feature_set": "no_salary_hike_no_attrition_no_department",
+      "test": "friedman",
+      "statistic": 14.000000000000018,
+      "p_value": 0.0009118819655545079
+    }
+  ]
+}

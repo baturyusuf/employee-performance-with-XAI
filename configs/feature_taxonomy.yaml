@@ -1,0 +1,284 @@
+{
+  "feature_taxonomy": [
+    {
+      "feature_name": "EmpNumber",
+      "data_type": "categorical",
+      "temporal_status": "identifier",
+      "leakage_risk": "high",
+      "control_type": "forbidden",
+      "sensitive_or_proxy": "not_sensitive",
+      "allowed_for_final_model": false,
+      "notes": "Employee identifier; must never be used as a model predictor."
+    },
+    {
+      "feature_name": "Age",
+      "data_type": "numeric",
+      "temporal_status": "pre_evaluation",
+      "leakage_risk": "none",
+      "control_type": "immutable",
+      "sensitive_or_proxy": "direct_sensitive",
+      "allowed_for_final_model": false,
+      "notes": "Age is immutable and legally/ethically sensitive in HR contexts; use only after explicit researcher review."
+    },
+    {
+      "feature_name": "Gender",
+      "data_type": "categorical",
+      "temporal_status": "pre_evaluation",
+      "leakage_risk": "none",
+      "control_type": "immutable",
+      "sensitive_or_proxy": "direct_sensitive",
+      "allowed_for_final_model": false,
+      "notes": "Direct demographic attribute."
+    },
+    {
+      "feature_name": "EducationBackground",
+      "data_type": "categorical",
+      "temporal_status": "pre_evaluation",
+      "leakage_risk": "low",
+      "control_type": "immutable",
+      "sensitive_or_proxy": "possible_proxy",
+      "allowed_for_final_model": true,
+      "notes": "May encode social or demographic proxy effects; audit subgroup and proxy behavior."
+    },
+    {
+      "feature_name": "MaritalStatus",
+      "data_type": "categorical",
+      "temporal_status": "pre_evaluation",
+      "leakage_risk": "none",
+      "control_type": "immutable",
+      "sensitive_or_proxy": "direct_sensitive",
+      "allowed_for_final_model": false,
+      "notes": "Direct demographic/family-status attribute."
+    },
+    {
+      "feature_name": "EmpDepartment",
+      "data_type": "categorical",
+      "temporal_status": "pre_evaluation",
+      "leakage_risk": "medium",
+      "control_type": "organisation_controllable",
+      "sensitive_or_proxy": "organisational_group",
+      "allowed_for_final_model": false,
+      "notes": "Organisational grouping; useful for sensitivity analysis but risky for direct deployment."
+    },
+    {
+      "feature_name": "EmpJobRole",
+      "data_type": "categorical",
+      "temporal_status": "pre_evaluation",
+      "leakage_risk": "low",
+      "control_type": "organisation_controllable",
+      "sensitive_or_proxy": "possible_proxy",
+      "allowed_for_final_model": true,
+      "notes": "May proxy department after EmpDepartment is removed; requires proxy audit."
+    },
+    {
+      "feature_name": "BusinessTravelFrequency",
+      "data_type": "categorical",
+      "temporal_status": "pre_evaluation",
+      "leakage_risk": "low",
+      "control_type": "organisation_controllable",
+      "sensitive_or_proxy": "possible_proxy",
+      "allowed_for_final_model": true,
+      "notes": "Assignment/travel pattern may reflect role or organisational constraints."
+    },
+    {
+      "feature_name": "DistanceFromHome",
+      "data_type": "numeric",
+      "temporal_status": "pre_evaluation",
+      "leakage_risk": "none",
+      "control_type": "immutable",
+      "sensitive_or_proxy": "possible_proxy",
+      "allowed_for_final_model": true,
+      "notes": "Can proxy socioeconomic or location constraints; audit before final use."
+    },
+    {
+      "feature_name": "EmpEducationLevel",
+      "data_type": "ordinal",
+      "temporal_status": "pre_evaluation",
+      "leakage_risk": "none",
+      "control_type": "employee_controllable",
+      "sensitive_or_proxy": "possible_proxy",
+      "allowed_for_final_model": true,
+      "notes": "Partly employee-controllable over long horizons; not a short-term prescription."
+    },
+    {
+      "feature_name": "EmpEnvironmentSatisfaction",
+      "data_type": "ordinal",
+      "temporal_status": "concurrent",
+      "leakage_risk": "medium",
+      "control_type": "manager_controllable",
+      "sensitive_or_proxy": "not_sensitive",
+      "allowed_for_final_model": true,
+      "notes": "May be measured near evaluation time; use as decision-support signal with temporality warning."
+    },
+    {
+      "feature_name": "EmpHourlyRate",
+      "data_type": "numeric",
+      "temporal_status": "pre_evaluation",
+      "leakage_risk": "low",
+      "control_type": "organisation_controllable",
+      "sensitive_or_proxy": "possible_proxy",
+      "allowed_for_final_model": true,
+      "notes": "Compensation-related but less directly outcome-proximal than salary hike; audit for proxy risk."
+    },
+    {
+      "feature_name": "EmpJobInvolvement",
+      "data_type": "ordinal",
+      "temporal_status": "concurrent",
+      "leakage_risk": "medium",
+      "control_type": "employee_controllable",
+      "sensitive_or_proxy": "not_sensitive",
+      "allowed_for_final_model": true,
+      "notes": "Potentially actionable but may be self-report or manager-rated; do not treat causally."
+    },
+    {
+      "feature_name": "EmpJobLevel",
+      "data_type": "ordinal",
+      "temporal_status": "pre_evaluation",
+      "leakage_risk": "low",
+      "control_type": "organisation_controllable",
+      "sensitive_or_proxy": "possible_proxy",
+      "allowed_for_final_model": true,
+      "notes": "Seniority/level may encode historical opportunity and organisational structure."
+    },
+    {
+      "feature_name": "EmpJobSatisfaction",
+      "data_type": "ordinal",
+      "temporal_status": "concurrent",
+      "leakage_risk": "medium",
+      "control_type": "manager_controllable",
+      "sensitive_or_proxy": "not_sensitive",
+      "allowed_for_final_model": true,
+      "notes": "Potentially concurrent survey measure; reason codes need non-causal warning."
+    },
+    {
+      "feature_name": "NumCompaniesWorked",
+      "data_type": "numeric",
+      "temporal_status": "pre_evaluation",
+      "leakage_risk": "none",
+      "control_type": "immutable",
+      "sensitive_or_proxy": "possible_proxy",
+      "allowed_for_final_model": true,
+      "notes": "Work history can proxy age, opportunity, or labor-market history."
+    },
+    {
+      "feature_name": "OverTime",
+      "data_type": "binary",
+      "temporal_status": "concurrent",
+      "leakage_risk": "medium",
+      "control_type": "manager_controllable",
+      "sensitive_or_proxy": "possible_proxy",
+      "allowed_for_final_model": true,
+      "notes": "May reflect staffing/manager assignment rather than employee choice."
+    },
+    {
+      "feature_name": "EmpLastSalaryHikePercent",
+      "data_type": "numeric",
+      "temporal_status": "post_evaluation_risk",
+      "leakage_risk": "high",
+      "control_type": "forbidden",
+      "sensitive_or_proxy": "not_sensitive",
+      "allowed_for_final_model": false,
+      "notes": "Outcome-proximal compensation feature; use only in upper-bound/leakage-warning baselines."
+    },
+    {
+      "feature_name": "EmpRelationshipSatisfaction",
+      "data_type": "ordinal",
+      "temporal_status": "concurrent",
+      "leakage_risk": "medium",
+      "control_type": "manager_controllable",
+      "sensitive_or_proxy": "not_sensitive",
+      "allowed_for_final_model": true,
+      "notes": "Potentially concurrent survey measure; use non-causal interpretation."
+    },
+    {
+      "feature_name": "TotalWorkExperienceInYears",
+      "data_type": "numeric",
+      "temporal_status": "pre_evaluation",
+      "leakage_risk": "none",
+      "control_type": "immutable",
+      "sensitive_or_proxy": "possible_proxy",
+      "allowed_for_final_model": true,
+      "notes": "May proxy age and historical opportunity."
+    },
+    {
+      "feature_name": "TrainingTimesLastYear",
+      "data_type": "numeric",
+      "temporal_status": "pre_evaluation",
+      "leakage_risk": "low",
+      "control_type": "employee_controllable",
+      "sensitive_or_proxy": "not_sensitive",
+      "allowed_for_final_model": true,
+      "notes": "Partly employee-controllable but often organisation-mediated."
+    },
+    {
+      "feature_name": "EmpWorkLifeBalance",
+      "data_type": "ordinal",
+      "temporal_status": "concurrent",
+      "leakage_risk": "medium",
+      "control_type": "manager_controllable",
+      "sensitive_or_proxy": "possible_proxy",
+      "allowed_for_final_model": true,
+      "notes": "Often shaped by manager/team constraints; avoid employee-blaming recommendations."
+    },
+    {
+      "feature_name": "ExperienceYearsAtThisCompany",
+      "data_type": "numeric",
+      "temporal_status": "pre_evaluation",
+      "leakage_risk": "none",
+      "control_type": "immutable",
+      "sensitive_or_proxy": "possible_proxy",
+      "allowed_for_final_model": true,
+      "notes": "Tenure can proxy age and internal opportunity."
+    },
+    {
+      "feature_name": "ExperienceYearsInCurrentRole",
+      "data_type": "numeric",
+      "temporal_status": "pre_evaluation",
+      "leakage_risk": "low",
+      "control_type": "organisation_controllable",
+      "sensitive_or_proxy": "possible_proxy",
+      "allowed_for_final_model": true,
+      "notes": "Role tenure may reflect staffing and promotion pathways."
+    },
+    {
+      "feature_name": "YearsSinceLastPromotion",
+      "data_type": "numeric",
+      "temporal_status": "pre_evaluation",
+      "leakage_risk": "medium",
+      "control_type": "organisation_controllable",
+      "sensitive_or_proxy": "possible_proxy",
+      "allowed_for_final_model": true,
+      "notes": "May encode prior performance or promotion decisions; audit as historical-decision proxy."
+    },
+    {
+      "feature_name": "YearsWithCurrManager",
+      "data_type": "numeric",
+      "temporal_status": "pre_evaluation",
+      "leakage_risk": "low",
+      "control_type": "organisation_controllable",
+      "sensitive_or_proxy": "possible_proxy",
+      "allowed_for_final_model": true,
+      "notes": "Manager assignment and tenure can encode organisational structure."
+    },
+    {
+      "feature_name": "Attrition",
+      "data_type": "binary",
+      "temporal_status": "post_evaluation_risk",
+      "leakage_risk": "high",
+      "control_type": "forbidden",
+      "sensitive_or_proxy": "possible_proxy",
+      "allowed_for_final_model": false,
+      "notes": "Risky unless prediction time is explicitly before attrition is known; excluded from primary leakage-safe feature set."
+    },
+    {
+      "feature_name": "PerformanceRating",
+      "data_type": "ordinal",
+      "temporal_status": "target",
+      "leakage_risk": "high",
+      "control_type": "forbidden",
+      "sensitive_or_proxy": "not_sensitive",
+      "allowed_for_final_model": false,
+      "notes": "Target column; must never be included as a predictor."
+    }
+  ]
+}

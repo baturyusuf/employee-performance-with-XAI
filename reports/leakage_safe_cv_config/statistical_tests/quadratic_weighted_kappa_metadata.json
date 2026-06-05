@@ -1,0 +1,18 @@
+{
+  "metric": "quadratic_weighted_kappa",
+  "alpha": 0.05,
+  "omnibus": [
+    {
+      "feature_set": "no_salary_hike_no_attrition",
+      "test": "friedman",
+      "statistic": 8.974358974358974,
+      "p_value": 0.011252336453051688
+    },
+    {
+      "feature_set": "no_salary_hike_no_attrition_no_department",
+      "test": "friedman",
+      "statistic": 7.128205128205131,
+      "p_value": 0.0283223916132305
+    }
+  ]
+}

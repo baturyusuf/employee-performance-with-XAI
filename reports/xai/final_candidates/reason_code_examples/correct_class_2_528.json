@@ -1,0 +1,114 @@
+{
+  "case_type": "correct_class_2",
+  "confidence_band": "high",
+  "feature_set": "no_salary_hike_no_attrition_no_department",
+  "mandatory_warnings": [
+    "SHAP is attribution, not causality.",
+    "This model is decision support, not autonomous employee evaluation.",
+    "Job role may proxy department.",
+    "Department removal does not prove fairness.",
+    "Counterfactuals may require manager or organisation intervention.",
+    "Probability estimates may be imperfectly calibrated.",
+    "Small subgroup results may be unstable.",
+    "External validation is required before deployment."
+  ],
+  "model": "xgboost",
+  "predicted_class": 2,
+  "predicted_probability": 0.9836298763239094,
+  "sample_index": 528,
+  "top_opposing_features": [
+    {
+      "control_type": "manager_controllable",
+      "feature": "EmpWorkLifeBalance",
+      "feature_value": 3,
+      "grouped_shap_value": -0.10760674625635147,
+      "leakage_risk": "medium",
+      "notes": "Often shaped by manager/team constraints; avoid employee-blaming recommendations.",
+      "sensitive_or_proxy": "possible_proxy"
+    },
+    {
+      "control_type": "immutable",
+      "feature": "NumCompaniesWorked",
+      "feature_value": 3,
+      "grouped_shap_value": -0.04502948746085167,
+      "leakage_risk": "none",
+      "notes": "Work history can proxy age, opportunity, or labor-market history.",
+      "sensitive_or_proxy": "possible_proxy"
+    },
+    {
+      "control_type": "employee_controllable",
+      "feature": "EmpEducationLevel",
+      "feature_value": 5,
+      "grouped_shap_value": -0.028496403247117996,
+      "leakage_risk": "none",
+      "notes": "Partly employee-controllable over long horizons; not a short-term prescription.",
+      "sensitive_or_proxy": "possible_proxy"
+    },
+    {
+      "control_type": "employee_controllable",
+      "feature": "TrainingTimesLastYear",
+      "feature_value": 6,
+      "grouped_shap_value": -0.0012949220836162567,
+      "leakage_risk": "low",
+      "notes": "Partly employee-controllable but often organisation-mediated.",
+      "sensitive_or_proxy": "not_sensitive"
+    },
+    {
+      "control_type": "organisation_controllable",
+      "feature": "BusinessTravelFrequency",
+      "feature_value": "Travel_Rarely",
+      "grouped_shap_value": -0.0005964483134448528,
+      "leakage_risk": "low",
+      "notes": "Assignment/travel pattern may reflect role or organisational constraints.",
+      "sensitive_or_proxy": "possible_proxy"
+    }
+  ],
+  "top_supporting_features": [
+    {
+      "control_type": "manager_controllable",
+      "feature": "EmpEnvironmentSatisfaction",
+      "feature_value": 2,
+      "grouped_shap_value": 1.656496286392212,
+      "leakage_risk": "medium",
+      "notes": "May be measured near evaluation time; use as decision-support signal with temporality warning.",
+      "sensitive_or_proxy": "not_sensitive"
+    },
+    {
+      "control_type": "organisation_controllable",
+      "feature": "EmpJobRole",
+      "feature_value": "Finance Manager",
+      "grouped_shap_value": 0.7739636898040771,
+      "leakage_risk": "low",
+      "notes": "May proxy department after EmpDepartment is removed; requires proxy audit.",
+      "sensitive_or_proxy": "possible_proxy"
+    },
+    {
+      "control_type": "organisation_controllable",
+      "feature": "YearsSinceLastPromotion",
+      "feature_value": 4,
+      "grouped_shap_value": 0.7483686804771423,
+      "leakage_risk": "medium",
+      "notes": "May encode prior performance or promotion decisions; audit as historical-decision proxy.",
+      "sensitive_or_proxy": "possible_proxy"
+    },
+    {
+      "control_type": "organisation_controllable",
+      "feature": "EmpHourlyRate",
+      "feature_value": 91,
+      "grouped_shap_value": 0.25803834199905396,
+      "leakage_risk": "low",
+      "notes": "Compensation-related but less directly outcome-proximal than salary hike; audit for proxy risk.",
+      "sensitive_or_proxy": "possible_proxy"
+    },
+    {
+      "control_type": "organisation_controllable",
+      "feature": "EmpJobLevel",
+      "feature_value": 4,
+      "grouped_shap_value": 0.23405231535434723,
+      "leakage_risk": "low",
+      "notes": "Seniority/level may encode historical opportunity and organisational structure.",
+      "sensitive_or_proxy": "possible_proxy"
+    }
+  ],
+  "true_class": 2
+}

@@ -1,0 +1,7 @@
+feature_set,model,metric,mean,std,ci_low,ci_high
+no_salary_hike_no_attrition,catboost,ordinal_mae,0.185,0.017033010796395444,0.1741666666666667,0.195
+no_salary_hike_no_attrition,lightgbm,ordinal_mae,0.175,0.017568209223157667,0.16499999999999998,0.185
+no_salary_hike_no_attrition,xgboost,ordinal_mae,0.14749999999999996,0.01714588818001218,0.1375,0.15749999999999997
+no_salary_hike_no_attrition_no_department,catboost,ordinal_mae,0.19166666666666668,0.021154925294066422,0.18,0.2041666666666667
+no_salary_hike_no_attrition_no_department,lightgbm,ordinal_mae,0.16749999999999998,0.016410061653046596,0.15833333333333335,0.1775
+no_salary_hike_no_attrition_no_department,xgboost,ordinal_mae,0.1525,0.020431306164925882,0.1408333333333333,0.165

@@ -1,0 +1,7 @@
+feature_set,model_a,model_b,metric,mean_a,mean_b,mean_diff_a_minus_b,wilcoxon_stat,p_value,p_holm,significant_holm
+no_salary_hike_no_attrition,catboost,lightgbm,ordinal_mae,0.185,0.175,0.010000000000000009,11.0,0.1875,0.1875,False
+no_salary_hike_no_attrition,catboost,xgboost,ordinal_mae,0.185,0.14749999999999996,0.03750000000000003,0.0,0.001953125,0.005859375,True
+no_salary_hike_no_attrition,lightgbm,xgboost,ordinal_mae,0.175,0.14749999999999996,0.027500000000000024,0.0,0.00390625,0.0078125,True
+no_salary_hike_no_attrition_no_department,catboost,lightgbm,ordinal_mae,0.19166666666666668,0.16749999999999998,0.024166666666666697,4.0,0.015625,0.03125,True
+no_salary_hike_no_attrition_no_department,catboost,xgboost,ordinal_mae,0.19166666666666668,0.1525,0.03916666666666668,0.0,0.00390625,0.01171875,True
+no_salary_hike_no_attrition_no_department,lightgbm,xgboost,ordinal_mae,0.16749999999999998,0.1525,0.014999999999999986,2.0,0.03125,0.03125,True

@@ -1,0 +1,26 @@
+{
+  "fairness": {
+    "audit_attributes": [
+      "Gender",
+      "MaritalStatus",
+      "EmpDepartment",
+      "EducationBackground",
+      "BusinessTravelFrequency"
+    ],
+    "optional_audits": ["Age"],
+    "min_group_support": 30,
+    "metrics": [
+      "accuracy",
+      "macro_f1",
+      "true_positive_rate_by_class",
+      "false_positive_rate_by_class",
+      "precision_by_class",
+      "positive_prediction_rate_by_class",
+      "mean_predicted_probability_by_class"
+    ],
+    "proxy_analysis": {
+      "target_attribute": "EmpDepartment",
+      "watchlist": ["EmpJobRole", "EducationBackground", "BusinessTravelFrequency"]
+    }
+  }
+}

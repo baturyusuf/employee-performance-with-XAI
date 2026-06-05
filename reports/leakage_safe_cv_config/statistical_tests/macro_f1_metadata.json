@@ -1,0 +1,18 @@
+{
+  "metric": "macro_f1",
+  "alpha": 0.05,
+  "omnibus": [
+    {
+      "feature_set": "no_salary_hike_no_attrition",
+      "test": "friedman",
+      "statistic": 14.000000000000005,
+      "p_value": 0.0009118819655545136
+    },
+    {
+      "feature_set": "no_salary_hike_no_attrition_no_department",
+      "test": "friedman",
+      "statistic": 17.897435897435916,
+      "p_value": 0.00012990359640529617
+    }
+  ]
+}

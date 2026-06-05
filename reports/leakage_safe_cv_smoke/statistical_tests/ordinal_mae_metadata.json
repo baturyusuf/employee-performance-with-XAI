@@ -1,0 +1,5 @@
+{
+  "metric": "ordinal_mae",
+  "alpha": 0.05,
+  "omnibus": []
+}

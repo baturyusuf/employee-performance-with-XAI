@@ -1,0 +1,2 @@
+feature_set,model,metric,mean,std,ci_low,ci_high
+no_salary_hike_no_attrition,xgboost,balanced_accuracy,0.6201904391529058,0.022806303339512078,0.6040639474077394,0.6363169308980722

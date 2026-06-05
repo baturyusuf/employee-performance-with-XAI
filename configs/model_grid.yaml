@@ -1,0 +1,48 @@
+{
+  "models": {
+    "logistic_regression": {
+      "enabled": true,
+      "role": "baseline",
+      "params": {
+        "max_iter": 3000,
+        "class_weight": null,
+        "random_state": 42
+      }
+    },
+    "catboost": {
+      "enabled": true,
+      "role": "candidate",
+      "params": {
+        "iterations": 300,
+        "learning_rate": 0.05,
+        "depth": 6,
+        "random_seed": 42,
+        "verbose": false
+      }
+    },
+    "lightgbm": {
+      "enabled": true,
+      "role": "candidate",
+      "params": {
+        "n_estimators": 300,
+        "learning_rate": 0.05,
+        "random_state": 42,
+        "verbose": -1
+      }
+    },
+    "xgboost": {
+      "enabled": true,
+      "role": "candidate",
+      "params": {
+        "random_state": 42
+      }
+    },
+    "ebm": {
+      "enabled": false,
+      "role": "interpretable_candidate",
+      "params": {
+        "random_state": 42
+      }
+    }
+  }
+}

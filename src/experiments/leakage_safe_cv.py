@@ -27,24 +27,30 @@ from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import OneHotEncoder, label_binarize
 
 from src.data.preprocess import load_validated_or_raw_data, split_features_and_target
+from src.features.feature_sets import (
+    apply_feature_set as apply_config_feature_set,
+    build_feature_columns,
+    get_feature_sets,
+    leakage_safe_feature_sets,
+)
+from src.models.evaluate import classification_metrics
 from src.utils.config import SETTINGS
+from src.utils.experiment_registry import (
+    append_registry_row,
+    collect_package_versions,
+    get_git_commit,
+    utc_now_iso,
+)
 
 warnings.filterwarnings("ignore")
 
 
+FEATURE_SET_CONFIG = get_feature_sets()
 FEATURE_SET_DEFINITIONS = {
-    "no_salary_hike_no_attrition": [
-        "EmpLastSalaryHikePercent",
-        "Attrition",
-    ],
-    "no_salary_hike_no_attrition_no_department": [
-        "EmpLastSalaryHikePercent",
-        "Attrition",
-        "EmpDepartment",
-    ],
+    name: definition.get("drop", [])
+    for name, definition in FEATURE_SET_CONFIG.items()
 }
-
-DEFAULT_FEATURE_SETS = list(FEATURE_SET_DEFINITIONS.keys())
+DEFAULT_FEATURE_SETS = leakage_safe_feature_sets()
 DEFAULT_MODELS = ["catboost", "lightgbm", "xgboost"]
 
 
@@ -225,9 +231,12 @@ def apply_feature_set(X: pd.DataFrame, feature_set: str) -> pd.DataFrame:
             f"Allowed values: {sorted(FEATURE_SET_DEFINITIONS)}"
         )
 
-    removed = set(FEATURE_SET_DEFINITIONS[feature_set])
-    keep_cols = [col for col in X.columns if col not in removed]
-    return X[keep_cols].copy()
+    return apply_config_feature_set(X, feature_set_name=feature_set)
+
+
+def removed_features_for(all_columns: Iterable[str], feature_set: str) -> List[str]:
+    selected = set(build_feature_columns(all_columns, feature_set))
+    return [col for col in all_columns if col not in selected]
 
 
 def parse_csv_arg(value: str, allowed: List[str]) -> List[str]:
@@ -345,6 +354,7 @@ def fit_predict_catboost(
         learning_rate=0.05,
         depth=6,
         random_seed=random_state,
+        allow_writing_files=False,
         verbose=False,
     )
     model.fit(train_pool)
@@ -591,8 +601,12 @@ def run_cv(
     random_state: int,
     drop_sensitive: bool,
     alpha: float,
+    output_dir: Optional[Path] = None,
+    write_registry: bool = True,
 ) -> None:
-    output_dir = SETTINGS.reports_dir / "leakage_safe_cv"
+    output_dir = output_dir or (SETTINGS.reports_dir / "leakage_safe_cv")
+    if not output_dir.is_absolute():
+        output_dir = SETTINGS.project_root / output_dir
     stats_dir = output_dir / "statistical_tests"
     ensure_dir(output_dir)
     ensure_dir(stats_dir)
@@ -612,6 +626,7 @@ def run_cv(
 
     for feature_set in feature_sets:
         X = apply_feature_set(X_raw.copy(), feature_set=feature_set)
+        removed_features = removed_features_for(X_raw.columns, feature_set)
 
         for fold, (train_idx, test_idx) in enumerate(splitter.split(X, y), start=1):
             X_train = X.iloc[train_idx].copy()
@@ -628,14 +643,14 @@ def run_cv(
                         X_test=X_test,
                         random_state=random_state,
                     )
-                    metrics = metric_dict(y_test, pred, proba, labels)
+                    metrics = classification_metrics(y_test, pred, proba, labels)
 
                     row = {
                         "feature_set": feature_set,
                         "model": model_name,
                         "fold": fold,
                         "n_features": int(X.shape[1]),
-                        "removed_features": ", ".join(FEATURE_SET_DEFINITIONS[feature_set]),
+                        "removed_features": ", ".join(removed_features),
                         **metrics,
                     }
                     rows.append(row)
@@ -653,7 +668,7 @@ def run_cv(
                         "model": model_name,
                         "fold": fold,
                         "n_features": int(X.shape[1]),
-                        "removed_features": ", ".join(FEATURE_SET_DEFINITIONS[feature_set]),
+                        "removed_features": ", ".join(removed_features),
                         "error": str(exc),
                     })
                     print(
@@ -708,8 +723,16 @@ def run_cv(
         "random_state": random_state,
         "drop_sensitive": drop_sensitive,
         "feature_sets": feature_sets,
+        "feature_set_definitions": {
+            name: FEATURE_SET_CONFIG.get(name, {})
+            for name in feature_sets
+        },
         "models": models,
         "labels": labels,
+        "git_commit_if_available": get_git_commit(),
+        "package_versions": collect_package_versions(
+            ["numpy", "pandas", "scikit-learn", "catboost", "lightgbm", "xgboost"]
+        ),
         "outputs": {
             "fold_metrics": str(fold_path),
             "summary_metrics": str(summary_path),
@@ -717,6 +740,25 @@ def run_cv(
         },
     }
     save_json(metadata, output_dir / "metadata.json")
+
+    if write_registry:
+        append_registry_row(
+            {
+                "run_id": f"leakage_safe_cv_config_{utc_now_iso()}",
+                "date_time": utc_now_iso(),
+                "git_commit_if_available": metadata["git_commit_if_available"],
+                "script": "python -m src.experiments.leakage_safe_cv",
+                "config": "configs/feature_sets.yaml; configs/evaluation.yaml; configs/model_grid.yaml",
+                "feature_set": "; ".join(feature_sets),
+                "model": "; ".join(models),
+                "seed": random_state,
+                "cv_strategy": f"StratifiedKFold(n_splits={n_splits}, shuffle=True)",
+                "primary_metrics": "macro_f1; quadratic_weighted_kappa; ordinal_mae; severe_error_rate; nll_log_loss; multiclass_brier; ece_confidence",
+                "output_dir": str(output_dir.relative_to(SETTINGS.project_root)) if output_dir.is_relative_to(SETTINGS.project_root) else str(output_dir),
+                "notes": "Config-backed leakage-safe CV. Final candidate feature sets exclude Age per researcher approval.",
+                "decision_status": "candidate",
+            }
+        )
 
     print("\n=== LEAKAGE-SAFE CV COMPLETE ===")
     print(f"Fold metrics: {fold_path}")
@@ -746,15 +788,18 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--random-state", type=int, default=42)
     parser.add_argument("--drop-sensitive", action="store_true")
     parser.add_argument("--alpha", type=float, default=0.05)
+    parser.add_argument("--output-dir", type=Path, default=None)
+    parser.add_argument("--no-registry", action="store_true")
     return parser.parse_args()
 
 
 if __name__ == "__main__":
     args = parse_args()
 
+    allowed_feature_sets = DEFAULT_FEATURE_SETS if args.feature_sets == "all" else sorted(FEATURE_SET_DEFINITIONS)
     selected_feature_sets = parse_csv_arg(
         args.feature_sets,
-        allowed=DEFAULT_FEATURE_SETS,
+        allowed=allowed_feature_sets,
     )
     selected_models = parse_csv_arg(
         args.models,
@@ -768,4 +813,6 @@ if __name__ == "__main__":
         random_state=args.random_state,
         drop_sensitive=args.drop_sensitive,
         alpha=args.alpha,
+        output_dir=args.output_dir,
+        write_registry=not args.no_registry,
     )

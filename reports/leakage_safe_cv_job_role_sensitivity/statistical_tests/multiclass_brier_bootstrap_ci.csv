@@ -1,0 +1,4 @@
+feature_set,model,metric,mean,std,ci_low,ci_high
+no_salary_hike_no_attrition_no_department_no_job_role,lightgbm,multiclass_brier,0.35905035811727337,0.03664543485721688,0.33851077389383044,0.3816095325511619
+no_salary_hike_no_attrition_no_department_no_job_role,xgboost,multiclass_brier,0.31875365758374985,0.030369628932279867,0.30142532612028394,0.33743547354052544
+no_salary_hike_no_attrition_no_department_no_job_role,catboost,multiclass_brier,0.3014788720106599,0.023073656200845002,0.2884264734739207,0.3156558746529591

@@ -1,0 +1,4 @@
+feature_set,model,metric,mean,std,ci_low,ci_high
+no_salary_hike_no_attrition_no_department_no_job_role,lightgbm,ece_confidence,0.16051901961613296,0.01848621543328554,0.1496723270555103,0.17161750659578434
+no_salary_hike_no_attrition_no_department_no_job_role,xgboost,ece_confidence,0.08974162782231968,0.02435097360008376,0.07667090582785509,0.1054864546395838
+no_salary_hike_no_attrition_no_department_no_job_role,catboost,ece_confidence,0.06463407662477286,0.02231273492046131,0.05245433273406538,0.07847837223446284

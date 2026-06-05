@@ -1,0 +1,16 @@
+feature_set,intervention_mode,n_cases,eligible_cases,valid_cases,validity_rate,mean_probability_gain,mean_best_cost,mean_best_num_changes
+no_salary_hike_no_attrition,employee_manager,5,4,1,0.25,0.8381580323051964,3.042211732282211,2.0
+no_salary_hike_no_attrition,employee_only,5,4,0,0.0,,,
+no_salary_hike_no_attrition,full_default,5,4,3,0.75,0.4616662346502977,1.8619085630127665,2.3333333333333335
+no_salary_hike_no_attrition,no_salary,5,4,3,0.75,0.4616662346502977,1.8619085630127665,2.3333333333333335
+no_salary_hike_no_attrition,organization_allowed,5,4,2,0.5,0.43829991472708285,1.6166798022633333,2.5
+no_salary_hike_no_attrition_no_department,employee_manager,5,4,1,0.25,0.942985478089004,1.0669269308862652,1.0
+no_salary_hike_no_attrition_no_department,employee_only,5,4,0,0.0,,,
+no_salary_hike_no_attrition_no_department,full_default,5,4,2,0.5,0.6203367672915608,1.5320691138863352,1.5
+no_salary_hike_no_attrition_no_department,no_salary,5,4,2,0.5,0.6203367672915608,1.5320691138863352,1.5
+no_salary_hike_no_attrition_no_department,organization_allowed,5,4,1,0.25,0.942985478089004,1.0669269308862652,1.0
+no_salary_hike_no_attrition_no_department_no_job_role,employee_manager,5,4,1,0.25,0.8352635362972698,1.0669269308862652,1.0
+no_salary_hike_no_attrition_no_department_no_job_role,employee_only,5,4,0,0.0,,,
+no_salary_hike_no_attrition_no_department_no_job_role,full_default,5,4,2,0.5,0.5756572934373347,2.038689067968932,2.5
+no_salary_hike_no_attrition_no_department_no_job_role,no_salary,5,4,2,0.5,0.5756572934373347,2.038689067968932,2.5
+no_salary_hike_no_attrition_no_department_no_job_role,organization_allowed,5,4,1,0.25,0.8352635362972698,1.0669269308862652,1.0
