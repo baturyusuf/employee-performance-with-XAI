@@ -1,0 +1,97 @@
+{
+  "_llm_backend": "openai_chat_completions",
+  "_llm_model": "gpt-5.4-mini",
+  "_llm_usage": {
+    "completion_tokens": 907,
+    "completion_tokens_details": {
+      "accepted_prediction_tokens": 0,
+      "audio_tokens": 0,
+      "reasoning_tokens": 0,
+      "rejected_prediction_tokens": 0
+    },
+    "prompt_tokens": 5447,
+    "prompt_tokens_details": {
+      "audio_tokens": 0,
+      "cached_tokens": 4864
+    },
+    "total_tokens": 6354
+  },
+  "case_id": "392",
+  "detailed_explanation": "The leakage-safe XGBoost model predicted class 3 for case 392, and the true class is also 3. The reported class probability for class 3 is 0.4269939724653061, with uncertainty flagged. Calibration evidence says probabilities should be treated as approximate confidence bands, not calibrated truth. The calibration metrics provided are Brier score 0.2608022278073826, expected calibration error 0.0638464082070905, and log loss 0.45509175349537.\n\nThe strongest positive SHAP attributions were EmpHourlyRate (0.18021847307682037), YearsWithCurrManager (0.1623276025056839), EmpJobSatisfaction (0.10358555614948273), DistanceFromHome (0.08926171064376831), and BusinessTravelFrequency (0.06151972711086273). The strongest negative SHAP attributions were EmpEnvironmentSatisfaction (-0.6402941346168518), YearsSinceLastPromotion (-0.33148953318595886), EmpJobRole (-0.12770596146583557), EmpWorkLifeBalance (-0.0724664255976677), and ExperienceYearsAtThisCompany (-0.05383184552192688). These are model attributions only, not causal effects.\n\nThe SHAP stability summary reports Spearman 0.8717293233082707 and top-10 Jaccard 0.7606060606060606, which supports some stability in the ranked explanations. However, several features have proxy or temporality warnings: EmpJobRole may proxy EmpDepartment, YearsSinceLastPromotion may encode prior decisions, and some features may be measured near evaluation time. Fairness evidence includes an EmpDepartment macro F1 gap of 0.2688590531332467 with bootstrap CI low 0.1848783532680399 and high 0.3492426064838457, plus low-support warnings for Data Science (n=20) and Human Resources in EducationBackground (n=21). The evidence also states that removing EmpDepartment does not prove fairness.\n\nCounterfactual evidence is not employee-actionable: actionability_label is not_employee_actionable, changed_features is empty, validity is 0.0, and the failed reason is that employee_only validity is zero or unavailable. The model card and governance evidence state this is research-only decision support with strong warnings, not for hiring, firing, promotion, compensation, disciplinary action, or individual employment decisions. External validation is required.",
+  "faithfulness_check": {
+    "faithfulness_pass": true,
+    "forbidden_claims": [],
+    "missing_warnings": [],
+    "score": 100,
+    "suggested_revision": "",
+    "unsupported_claims": []
+  },
+  "requires_human_review": true,
+  "short_explanation": "For case 392, the model predicts class 3 with probability 0.4269939724653061. This is a research-only decision-support output, not an autonomous HR decision. SHAP values indicate which features contributed to the prediction, but SHAP is attribution, not causality, and the prediction requires human review.",
+  "unsupported_claims_detected": [],
+  "warnings": [
+    {
+      "category": "calibration",
+      "message": "Probability estimates should be interpreted as approximate confidence, not objective certainty.",
+      "severity": "medium",
+      "type": "calibration",
+      "warning_id": "calibration.probabilities_approximate"
+    },
+    {
+      "category": "causality",
+      "message": "SHAP is attribution, not causality.",
+      "severity": "high",
+      "type": "causality",
+      "warning_id": "causality.shap_not_causal"
+    },
+    {
+      "category": "deployment",
+      "message": "This model is decision support only and is not for autonomous HR decisions.",
+      "severity": "high",
+      "type": "deployment",
+      "warning_id": "deployment.not_autonomous"
+    },
+    {
+      "category": "actionability",
+      "message": "Counterfactuals may not be employee-actionable and must not be treated as employee prescriptions.",
+      "severity": "high",
+      "type": "actionability",
+      "warning_id": "actionability.counterfactual_not_prescription"
+    },
+    {
+      "category": "fairness",
+      "message": "Removing EmpDepartment does not prove fairness.",
+      "severity": "high",
+      "type": "fairness",
+      "warning_id": "fairness.department_removal_not_fairness_proof"
+    },
+    {
+      "category": "proxy",
+      "message": "EmpJobRole may proxy EmpDepartment, so department removal does not eliminate proxy risk.",
+      "severity": "high",
+      "type": "proxy",
+      "warning_id": "proxy.jobrole_department_proxy"
+    },
+    {
+      "category": "leakage",
+      "message": "Full-feature models are leakage-warning upper-bound baselines only, not deployable models.",
+      "severity": "high",
+      "type": "leakage",
+      "warning_id": "leakage.full_feature_upper_bound_only"
+    },
+    {
+      "category": "deployment",
+      "message": "Prediction requires human review.",
+      "severity": "high",
+      "type": "deployment",
+      "warning_id": "deployment.human_review_required"
+    },
+    {
+      "category": "validation",
+      "message": "External validation is required before deployment.",
+      "severity": "high",
+      "type": "validation",
+      "warning_id": "validation.external_validation_required"
+    }
+  ]
+}

@@ -24,6 +24,7 @@ from src.explainability.reason_codes import (
     build_reason_codes,
     build_executive_summary,
 )
+from src.chatbot.chat_engine import GuardrailedChatEngine
 from src.models.train_catboost import prepare_catboost_inputs
 from src.utils.config import SETTINGS
 
@@ -620,48 +621,206 @@ def render_manual_prediction(
         )
 
 
+def render_llm_governance_audit() -> None:
+    st.subheader("LLM Governance & Audit")
+    st.caption(
+        "The LLM layer interprets structured XAI evidence only. It is not the predictive model and does not make HR decisions."
+    )
+
+    explanation_root = SETTINGS.reports_dir / "llm_explanations"
+    case_dirs = sorted([p for p in explanation_root.glob("case_*") if p.is_dir()])
+    case_options = [p.name.replace("case_", "") for p in case_dirs]
+
+    st.markdown(
+        """
+        <style>
+        .governance-card {
+            border: 1px solid #d8e2dc;
+            border-radius: 14px;
+            padding: 1rem;
+            background: linear-gradient(135deg, #f8fbf7 0%, #eef5f2 100%);
+        }
+        .warning-card {
+            border-left: 5px solid #b45309;
+            padding: 0.85rem 1rem;
+            background: #fff7ed;
+            border-radius: 10px;
+        }
+        </style>
+        """,
+        unsafe_allow_html=True,
+    )
+
+    st.markdown(
+        """
+        <div class="warning-card">
+        <strong>Governance boundary:</strong> explanations are for research review only.
+        Do not use this system for hiring, firing, compensation, promotion, discipline, or autonomous employee evaluation.
+        SHAP is attribution, not causality.
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+
+    st.markdown("### Evaluation Snapshot")
+    snapshot_cols = st.columns(4)
+    real_summary_path = explanation_root / "real_llm_eval_summary.csv"
+    if real_summary_path.exists():
+        real_summary = pd.read_csv(real_summary_path).tail(1).iloc[0].to_dict()
+        metrics = [
+            ("Faithfulness", real_summary.get("faithfulness_pass_rate")),
+            ("Agent Success", real_summary.get("agent_success_rate")),
+            ("Guardrail Refusal", real_summary.get("unsafe_prompt_refusal_rate")),
+            ("Warning Consistency", real_summary.get("warning_consistency_rate")),
+        ]
+        for col, (label, value) in zip(snapshot_cols, metrics):
+            with col:
+                st.metric(label, value)
+    else:
+        st.info("Real LLM evaluation summary is unavailable.")
+
+    evidence_tab, case_tab, audit_tab, chatbot_tab = st.tabs(
+        ["Evidence Dashboard", "Case Explanation", "Agent Audit", "Guardrailed Chatbot"]
+    )
+
+    with evidence_tab:
+        col1, col2 = st.columns(2)
+        with col1:
+            summary_path = explanation_root / "llm_governance_eval_summary.csv"
+            if summary_path.exists():
+                st.write("**Offline/Deterministic LLM Governance Evaluation**")
+                st.dataframe(pd.read_csv(summary_path), use_container_width=True, hide_index=True)
+            else:
+                st.warning("LLM governance evaluation summary is unavailable. Run python -m src.llm.evaluate_llm_governance.")
+            guardrail_path = SETTINGS.reports_dir / "chatbot_eval" / "guardrail_evaluation.csv"
+            if guardrail_path.exists():
+                guardrail_df = pd.read_csv(guardrail_path)
+                st.write("**Chatbot Guardrail Evaluation**")
+                st.dataframe(
+                    guardrail_df.groupby("prompt_type")["pass"].mean().reset_index(name="pass_rate"),
+                    use_container_width=True,
+                    hide_index=True,
+                )
+        with col2:
+            taxonomy_path = SETTINGS.reports_dir / "governance_reports" / "warning_taxonomy.csv"
+            if taxonomy_path.exists():
+                st.write("**Canonical Warning Taxonomy**")
+                st.dataframe(pd.read_csv(taxonomy_path), use_container_width=True, hide_index=True)
+            interpretation_path = explanation_root / "real_llm_eval_interpretation.md"
+            if interpretation_path.exists():
+                st.write("**Real OpenAI Evaluation Interpretation**")
+                st.markdown(interpretation_path.read_text(encoding="utf-8")[:3000])
+
+    with case_tab:
+        selected_case = st.selectbox(
+            "Select generated evidence case",
+            options=case_options if case_options else ["unavailable"],
+            disabled=not case_options,
+        )
+        if case_options:
+            case_path = explanation_root / f"case_{selected_case}"
+            evidence_path = case_path / "structured_evidence.json"
+            explanation_path = case_path / "governed_explanation.json"
+            left, right = st.columns(2)
+            with left:
+                if evidence_path.exists():
+                    st.write("**Structured Prediction Evidence**")
+                    st.json(load_json(evidence_path))
+            with right:
+                if explanation_path.exists():
+                    st.write("**Governed Explanation**")
+                    explanation = load_json(explanation_path)
+                    st.markdown(explanation.get("short_explanation", ""))
+                    st.json(explanation)
+
+    with audit_tab:
+        audit_root = SETTINGS.reports_dir / "agent_audits"
+        audit_options = sorted(p.name for p in audit_root.glob("*governance_audit.md")) if audit_root.exists() else []
+        selected_audit = st.selectbox(
+            "Select agent audit report",
+            options=audit_options if audit_options else ["unavailable"],
+            disabled=not audit_options,
+        )
+        if audit_options:
+            audit_path = audit_root / selected_audit
+            st.markdown(audit_path.read_text(encoding="utf-8")[:6000])
+
+    with chatbot_tab:
+        st.write("**Guardrailed Chatbot**")
+        selected_case_for_chat = st.selectbox(
+            "Case context",
+            options=case_options if case_options else ["unavailable"],
+            disabled=not case_options,
+            key="llm_governance_chat_case",
+        )
+        question = st.text_input(
+            "Ask an audit question",
+            value="Why are full-feature models not deployable?",
+        )
+        if st.button("Ask Guardrailed Chatbot", use_container_width=True):
+            response = GuardrailedChatEngine().answer(
+                question,
+                case_id=selected_case_for_chat if case_options else None,
+            )
+            if response.allowed:
+                st.info(response.answer)
+            else:
+                st.error(response.answer)
+            if response.guardrail_reasons:
+                st.write("Guardrail reasons:", response.guardrail_reasons)
+
+
 # =========================
 # App
 # =========================
 def main() -> None:
     st.title("Employee Performance XAI Dashboard")
-    st.caption("CatBoost + SHAP-style local/global explanations + fairness + counterfactual suggestions")
+    st.caption("Leakage-aware XAI, governance audit, and guardrailed LLM explanation dashboard")
 
     try:
         model, summary = get_model_and_summary()
     except Exception as exc:
-        st.error(str(exc))
-        st.stop()
+        model = None
+        summary = {}
+        prep_data = None
+        st.sidebar.warning("Legacy CatBoost dashboard unavailable.")
+        st.sidebar.caption(str(exc))
+    else:
+        st.sidebar.header("Model Info")
+        st.sidebar.write(f"**Model:** {summary.get('model_name')}")
+        st.sidebar.write(f"**Drop sensitive:** {summary.get('drop_sensitive')}")
+        st.sidebar.write(f"**Best iteration:** {summary.get('best_iteration')}")
+        st.sidebar.write(f"**Test weighted F1:** {summary.get('test_metrics', {}).get('weighted_f1')}")
+        st.sidebar.write(f"**Test macro F1:** {summary.get('test_metrics', {}).get('macro_f1')}")
+        st.sidebar.write(f"**Test QWK:** {summary.get('test_metrics', {}).get('quadratic_weighted_kappa')}")
+        prep_data = get_rebuilt_data(
+            drop_sensitive=summary.get("drop_sensitive", False),
+            test_size=summary.get("test_size", 0.20),
+            random_state=summary.get("random_state", 42),
+        )
 
-    st.sidebar.header("Model Info")
-    st.sidebar.write(f"**Model:** {summary.get('model_name')}")
-    st.sidebar.write(f"**Drop sensitive:** {summary.get('drop_sensitive')}")
-    st.sidebar.write(f"**Best iteration:** {summary.get('best_iteration')}")
-    st.sidebar.write(f"**Test weighted F1:** {summary.get('test_metrics', {}).get('weighted_f1')}")
-    st.sidebar.write(f"**Test macro F1:** {summary.get('test_metrics', {}).get('macro_f1')}")
-    st.sidebar.write(f"**Test QWK:** {summary.get('test_metrics', {}).get('quadratic_weighted_kappa')}")
-
-    prep_data = get_rebuilt_data(
-        drop_sensitive=summary.get("drop_sensitive", False),
-        test_size=summary.get("test_size", 0.20),
-        random_state=summary.get("random_state", 42),
-    )
-
-    tab1, tab2, tab3, tab4, tab5 = st.tabs(
+    tab1, tab2, tab3, tab4, tab5, tab6 = st.tabs(
         [
             "Manual Prediction",
             "Test Sample Explorer",
             "Global XAI",
             "Fairness",
             "Counterfactuals",
+            "LLM Governance & Audit",
         ]
     )
 
     with tab1:
-        render_manual_prediction(model, summary)
+        if model is None:
+            st.warning("Legacy CatBoost model is unavailable. The LLM Governance tab remains available.")
+        else:
+            render_manual_prediction(model, summary)
 
     with tab2:
-        render_test_sample_explorer(model, summary, prep_data)
+        if model is None or prep_data is None:
+            st.warning("Legacy CatBoost model is unavailable. The LLM Governance tab remains available.")
+        else:
+            render_test_sample_explorer(model, summary, prep_data)
 
     with tab3:
         show_global_xai_outputs()
@@ -670,7 +829,13 @@ def main() -> None:
         show_fairness_outputs()
 
     with tab5:
-        render_counterfactual_section(model, summary, prep_data)
+        if model is None or prep_data is None:
+            st.warning("Legacy CatBoost model is unavailable. The LLM Governance tab remains available.")
+        else:
+            render_counterfactual_section(model, summary, prep_data)
+
+    with tab6:
+        render_llm_governance_audit()
 
 
 if __name__ == "__main__":

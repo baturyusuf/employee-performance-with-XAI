@@ -742,20 +742,102 @@ The Streamlit interface provides:
 
 ## Current Model Recommendation
 
-Based on leakage-safe cross-validation:
+Based on the final evidence package:
 
 ```text
 Primary model:
-XGBoost + no_salary_hike_no_attrition
-```
-
-Fairness-aware alternative:
-
-```text
 XGBoost + no_salary_hike_no_attrition_no_department
 ```
 
+Main leakage-safe comparison baseline:
+
+```text
+XGBoost + no_salary_hike_no_attrition
+```
+
+Strict fairness/proxy sensitivity baseline:
+
+```text
+XGBoost + no_salary_hike_no_attrition_no_department_no_job_role
+```
+
 Full-information models are retained only as upper-bound references.
+
+The recommended primary research model excludes EmpLastSalaryHikePercent, Attrition, and EmpDepartment. It still includes EmpJobRole, so proxy-risk warnings remain mandatory. Removing EmpDepartment does not prove fairness.
+
+---
+
+## LLM-Assisted Multi-Agent XAI Governance Layer
+
+This repository now includes an optional LLM-assisted governance layer. The LLM is **not** the predictive model. The architecture remains:
+
+```text
+XGBoost predicts -> XAI explains -> audit modules evaluate reliability -> LLM/agents interpret governed evidence -> chatbot exposes guarded explanations
+```
+
+The LLM layer consumes structured evidence only:
+
+* prediction metadata,
+* grouped SHAP attribution summaries,
+* leakage policy and leakage warnings,
+* fairness/proxy audit summaries,
+* calibration diagnostics,
+* counterfactual actionability results,
+* model-card and governance warnings.
+
+The agent system audits:
+
+* leakage-risk feature use,
+* subgroup fairness and proxy risk,
+* calibration reliability,
+* SHAP stability and non-causal wording,
+* counterfactual actionability,
+* explanation faithfulness and compliance.
+
+The chatbot is for researchers, HR analysts, auditors, and governance reviewers. It explains model evidence and limitations, but it refuses hiring, firing, promotion, compensation, disciplinary, autonomous decision, fairness-guarantee, sensitive-attribute justification, and employee-prescription requests.
+
+Run the governance layer. For production/research-demonstration use, configure a real OpenAI API key and pass `--require-real-llm`:
+
+```bash
+.\myenv\Scripts\pip.exe install -r requirements.txt
+.\myenv\Scripts\python.exe -m src.llm.check_llm_setup
+.\myenv\Scripts\python.exe -m src.llm.generate_governed_explanations --provider openai --require-real-llm --limit 5
+.\myenv\Scripts\python.exe -m src.agents.run_llm_governance_audit --agent-runtime openai-agents --provider openai --require-real-llm
+.\myenv\Scripts\python.exe -m src.llm.cost_estimator --write-report
+```
+
+Offline/test path:
+
+```bash
+python -m src.llm.generate_governed_explanations --provider offline --limit 5
+python -m src.agents.run_governance_audit
+python -m src.chatbot.evaluate_chatbot
+python -m src.llm.evaluate_llm_governance
+python -m src.governance.gxair_score
+python -m src.governance.governance_report
+```
+
+Run the guardrailed chatbot CLI:
+
+```bash
+python -m src.chatbot.chatbot_app --question "Can I trust this probability as confidence?"
+```
+
+The existing Streamlit dashboard also includes a report-backed **LLM Governance & Audit** tab after the governance reports have been generated:
+
+```bash
+streamlit run app/streamlit_app.py
+```
+
+The offline stub remains available only for tests and reproducibility. Real LLM-backed runs should use `--require-real-llm` so the system fails if the SDK or API key is missing.
+
+Approximate LLM cost estimates are written to:
+
+```text
+reports/llm_explanations/llm_cost_estimate.md
+```
+
+The system remains a research prototype. It is not an autonomous employee evaluator and must not be used for hiring, firing, compensation, promotion, or disciplinary action without independent validation and governance review.
 
 ---
 

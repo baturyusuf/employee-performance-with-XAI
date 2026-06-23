@@ -1,0 +1,12 @@
+warning_id,category,severity,canonical_message,match_terms,mandatory
+deployment.not_autonomous,deployment,high,This model is decision support only and is not for autonomous HR decisions.,autonomous; decision support; hr decisions,True
+deployment.human_review_required,deployment,high,Prediction requires human review.,human review; review required,True
+causality.shap_not_causal,causality,high,"SHAP is attribution, not causality.",shap; causality; causal,True
+leakage.full_feature_upper_bound_only,leakage,high,"Full-feature models are leakage-warning upper-bound baselines only, not deployable models.",full-feature; full feature; upper-bound; leakage-warning; not deployable,True
+leakage.salary_attrition_excluded,leakage,high,EmpLastSalaryHikePercent and Attrition are excluded from final candidates because they are leakage-risk or outcome-proximal variables.,emplastsalaryhikepercent; salary hike; attrition; outcome-proximal,False
+fairness.department_removal_not_fairness_proof,fairness,high,Removing EmpDepartment does not prove fairness.,department removal; empdepartment; does not prove fairness; fairness,True
+proxy.jobrole_department_proxy,proxy,high,"EmpJobRole may proxy EmpDepartment, so department removal does not eliminate proxy risk.",empjobrole; jobrole; job role; proxy; department,True
+calibration.probabilities_approximate,calibration,medium,"Probability estimates should be interpreted as approximate confidence, not objective certainty.",calibration; probability; confidence; ece; brier; log loss,False
+actionability.counterfactual_not_prescription,actionability,high,Counterfactuals may not be employee-actionable and must not be treated as employee prescriptions.,counterfactual; employee-actionable; employee actionable; prescription,True
+fairness.small_subgroup_instability,fairness,medium,Small subgroup findings may be unstable and should be treated as diagnostic audit evidence.,small subgroup; low support; support; unstable,False
+validation.external_validation_required,validation,high,External validation is required before deployment.,external validation; deployment; validation required,True

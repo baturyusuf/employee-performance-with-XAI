@@ -1,4 +1,4 @@
-# Research Decision Log
+﻿# Research Decision Log
 
 This log records major scientific and engineering decisions for the leakage-aware, fairness-audited, actionability-constrained HR XAI research pipeline.
 
@@ -411,7 +411,7 @@ The project needed a scientifically justified final model recommendation using m
   - `reports/xai/final_candidates/reason_code_governance_notes.md`
 - Model card:
   - `reports/model_card/hr_xai_model_card.md`
-- Test command: `.\myenv\Scripts\python.exe -m unittest discover -s tests -v`.
+- Test command: `.\\myenv\\Scripts\\python.exe -m unittest discover -s tests -v`.
 - Test result: 29 tests passed.
 
 ### Decision
@@ -432,3 +432,326 @@ The department-free candidate preserves most utility relative to the department-
 - Ask the researcher to approve whether to proceed to manuscript tables/figures, run additional robustness experiments, revise feature policy, or revise the model recommendation.
 - If proceeding, generate manuscript-ready tables and figures from the final-candidate outputs.
 - Add environment/dependency reproducibility documentation before paper release.
+
+## 2026-06-22 - LLM-assisted multi-agent XAI governance layer added as optional research prototype
+
+### Context
+The project was extended from a leakage-safe XAI model-selection repository into an LLM-assisted multi-agent XAI governance prototype. The predictive model remains XGBoost; the LLM layer is restricted to interpreting structured evidence from the existing ML/XAI pipeline.
+
+### Alternatives considered
+- Use an LLM as an additional predictor.
+- Let a chatbot answer from general HR knowledge.
+- Add a deterministic, evidence-bound LLM/agent layer that consumes only structured XAI and governance evidence.
+
+### Evidence examined
+- Final model-selection evidence package under `reports/model_selection/`, `reports/fairness/`, `reports/calibration/`, `reports/xai/`, and `reports/counterfactuals/`.
+- Generated governed explanation examples: `reports/llm_explanations/governed_explanation_examples.md`.
+- Multi-agent audit: `reports/agent_audits/multi_agent_governance_audit.md`.
+- Chatbot guardrail evaluation: `reports/chatbot_eval/guardrail_evaluation.md`.
+- LLM governance evaluation summary: `reports/llm_explanations/llm_governance_eval_summary.csv`.
+- G-XAIR LLM-agent dashboard: `reports/governance_reports/gxair_llm_agent_dashboard.csv`.
+- Final LLM-agent research summary: `reports/governance_reports/final_llm_agent_research_summary.md`.
+- Test commands: `.\\myenv\\Scripts\\python.exe -m py_compile app\\streamlit_app.py` and `.\\myenv\\Scripts\\python.exe -m unittest discover -s tests -v`.
+- Test result: 45 tests passed.
+
+### Decision
+Implement the LLM/agent/chatbot layer as an optional governed interpretation layer, not as a predictive model. Use the deterministic offline LLM stub as the default reproducible backend. Keep external LLM use out of the default pipeline until it passes the same faithfulness, compliance, and guardrail checks.
+
+### Rationale
+The deterministic layer preserves the project's Explainable AI and Responsible AI positioning. It provides governed explanations, multi-agent audit summaries, chatbot refusals for unsafe HR requests, and a transparent G-XAIR extension without changing the leakage-safe XGBoost predictor or inventing empirical evidence.
+
+### Results
+The automatic offline evaluation reported faithfulness pass rate 1.0, unsupported claim rate 0.0, forbidden claim rate 0.0, missing warning rate 0.0, unsafe prompt refusal rate 1.0, deterministic consistency rate 1.0, and rule-based agent agreement 1.0. These are software-governance checks, not human-subject evaluation results.
+
+### Risks and limitations
+- The offline LLM stub is deterministic and conservative; external LLM behavior remains unvalidated.
+- The chatbot retrieves local project evidence and must not answer from general HR intuition. The Streamlit tab is report-backed and requires generated governance artifacts.
+- Agent outputs are governance diagnostics, not legal or causal determinations.
+- The system remains research-only and is not suitable for autonomous HR decisions.
+- External validation and human-centered evaluation are required before any operational use.
+
+### Follow-up actions
+- Use the generated manuscript support file for Q3-level extension framing.
+- If an external LLM backend is added, rerun faithfulness, missing-evidence, consistency, and unsafe-prompt evaluations.
+- Refine the Streamlit governance tab after any future dashboard redesign or external LLM integration.
+
+
+
+## 2026-06-22 - Real OpenAI-backed LLM and LLM-assisted agent path initiated
+
+### Context
+The previous LLM layer used a deterministic offline stub as the default execution mode. The project objective was clarified: the final product path must use a real LLM and a professional multi-agent governance system, while still preserving XGBoost as the predictive model and XAI/audit evidence as the only evidence source for LLM interpretation.
+
+### Alternatives considered
+- Keep the deterministic offline stub as the main layer. Rejected as insufficient for the requested final product direction.
+- Use OpenAI API structured outputs with a custom evidence-bound orchestrator. Selected as the first production path because it is testable, constrained by JSON Schema, and minimally disruptive to the existing XAI pipeline.
+- Move immediately to OpenAI Agents SDK. Deferred as an explicit architecture decision because it adds a larger runtime dependency and may require refactoring current audit agents into SDK tools/handoffs.
+- Use LangGraph or local LLM runtimes. Deferred until the OpenAI path is stable.
+
+### Evidence examined
+- Official OpenAI structured-output documentation for JSON Schema-constrained outputs.
+- Official OpenAI Agents SDK documentation for agent loops, tools, handoffs, guardrails, and tracing.
+- Local environment check showed `openai` and `openai-agents` were initially missing and `OPENAI_API_KEY` was not set.
+
+### Changes implemented
+- Added OpenAI structured-output client: `src/llm/openai_client.py`.
+- Added LLM runtime configuration and `.env` loading: `src/llm/runtime_config.py`.
+- Added setup checker: `src/llm/check_llm_setup.py`.
+- Added JSON Schema contract for governed explanations: `src/llm/output_schema.py`.
+- Added client factory with `auto`, `offline`, and `openai` providers: `src/llm/client_factory.py`.
+- Added LLM-assisted multi-agent orchestrator: `src/agents/llm_agent_orchestrator.py`.
+- Added LLM-assisted audit runner: `src/agents/run_llm_governance_audit.py`.
+- Added production roadmap and architecture decision notes: `LLM_AGENT_PRODUCTION_ROADMAP.md`.
+- Added `.env.example` and updated `requirements.txt`.
+
+### Current setup status
+The Python dependencies were installed successfully into `myenv`. `openai` and `openai-agents` are now installed. `OPENAI_API_KEY` is still missing, so real LLM calls cannot run yet. The command `--require-real-llm` correctly fails when the API key is absent, preventing silent fallback to the offline stub.
+
+### Validation
+- Setup command: `.\myenv\Scripts\python.exe -m src.llm.check_llm_setup`.
+- Real LLM fail-fast command: `.\myenv\Scripts\python.exe -m src.llm.generate_governed_explanations --provider openai --require-real-llm --limit 1`.
+- Test command: `.\myenv\Scripts\python.exe -m unittest discover -s tests -v`.
+- Test result: 50 tests passed.
+
+### Decision
+Proceed with OpenAI API structured outputs as the immediate real-LLM integration path. Keep offline stub only as a reproducibility/test fallback. Before deeper agent-runtime work, ask the researcher to choose whether to keep the custom orchestrator or migrate to OpenAI Agents SDK.
+
+### Required user action
+Set `OPENAI_API_KEY` before real LLM runs. Recommended shell setup:
+
+```powershell
+$env:OPENAI_API_KEY = "sk-..."
+$env:HR_XAI_LLM_PROVIDER = "openai"
+$env:HR_XAI_REQUIRE_REAL_LLM = "1"
+$env:HR_XAI_OPENAI_MODEL = "gpt-5.4-mini"
+```
+
+### Next decision checkpoint
+Choose the agent runtime:
+- Option A: Keep custom orchestrator over deterministic audit tools plus OpenAI structured-output synthesis.
+- Option B: Migrate to OpenAI Agents SDK with tools, handoffs, guardrails, sessions, and tracing.
+- Option C: Use LangGraph for explicit state-machine orchestration.
+
+## 2026-06-23 - OpenAI Agents SDK runtime, secret hygiene, and cost controls added
+
+### Context
+The researcher approved migrating from the custom LLM-assisted orchestrator toward OpenAI Agents SDK. The repository will be public, so API keys and other secrets must not be committed to source control.
+
+### Security decision
+Secrets must be supplied only through environment variables or a local `.env` file. `.env` and `.env.*` are ignored by git, while `.env.example` is kept as a safe placeholder template. No API key is embedded in code, reports, tests, or documentation.
+
+### Changes implemented
+- Added OpenAI Agents SDK runtime: `src/agents/openai_agents_runtime.py`.
+- Exposed CLI selection via `--agent-runtime openai-agents` in `src/agents/run_llm_governance_audit.py`.
+- Wrapped deterministic governance checks as Agents SDK function tools.
+- Added Pydantic structured outputs for specialist agents and supervisor synthesis.
+- Added OpenAI tracing context for real Agents SDK runs.
+- Added cost estimator: `src/llm/cost_estimator.py`.
+- Generated cost report: `reports/llm_explanations/llm_cost_estimate.md`.
+- Strengthened `.gitignore` for `.env.*` while preserving `.env.example`.
+- Changed default development model to `gpt-5.4-mini` to reduce accidental cost; `gpt-5.5` remains selectable for final high-quality artifacts.
+
+### Cost assumptions
+The cost estimator assumes eight LLM calls per case: one governed explanation, six specialist agent calls, and one supervisor call. Default estimate assumes 8,000 input tokens and 600 output tokens per call. These are planning estimates, not billing guarantees.
+
+### Validation
+- Compile command: `.\myenv\Scripts\python.exe -m py_compile src\agents\openai_agents_runtime.py src\agents\run_llm_governance_audit.py src\llm\cost_estimator.py src\llm\runtime_config.py`.
+- Offline compatibility command: `.\myenv\Scripts\python.exe -m src.agents.run_llm_governance_audit --agent-runtime custom --provider offline`.
+- Setup command: `.\myenv\Scripts\python.exe -m src.llm.check_llm_setup`.
+- Test command: `.\myenv\Scripts\python.exe -m unittest discover -s tests -v`.
+- Test result: 53 tests passed.
+
+### Current blocker
+`OPENAI_API_KEY` is still not set in the environment, so real OpenAI Agents SDK execution has not been run yet. The runtime correctly fails fast when `--require-real-llm` is requested without the key.
+
+### Required user action
+Set `OPENAI_API_KEY` locally before real LLM execution. Do not commit `.env`.
+
+### Next action after API key
+Run:
+
+```powershell
+$env:OPENAI_API_KEY = "sk-..."
+$env:HR_XAI_LLM_PROVIDER = "openai"
+$env:HR_XAI_REQUIRE_REAL_LLM = "1"
+$env:HR_XAI_OPENAI_MODEL = "gpt-5.4-mini"
+```
+
+Then:
+
+```bash
+.\myenv\Scripts\python.exe -m src.llm.check_llm_setup
+.\myenv\Scripts\python.exe -m src.agents.run_llm_governance_audit --agent-runtime openai-agents --provider openai --require-real-llm
+```
+
+## 2026-06-23 - OpenAI API key visible but real LLM run blocked by quota/billing
+
+### Context
+The API key was moved from user environment variables to system environment variables. The current Codex process does not automatically inherit newly created environment variables, so the key was read from the Windows Machine environment for the command session without printing or logging the key value.
+
+### Evidence
+- Setup checker result: OpenAI SDK installed, OpenAI Agents SDK installed, `OPENAI_API_KEY` present, provider ready.
+- Real LLM smoke command: `.\myenv\Scripts\python.exe -m src.llm.generate_governed_explanations --provider openai --require-real-llm --limit 1`.
+- OpenAI response: `insufficient_quota` / quota-billing unavailable.
+
+### Changes implemented
+- Added clean OpenAI API runtime error handling in `src/llm/openai_client.py`.
+- Updated CLI error handling in `src/llm/generate_governed_explanations.py` and `src/agents/run_llm_governance_audit.py` so API quota/auth failures show concise messages instead of stack traces.
+
+### Decision
+Do not proceed to full LLM-agent evaluation until billing/quota is enabled or a project with available API credits is selected. The code path is ready, but real model execution is blocked by OpenAI account/project quota.
+
+### Validation
+- Test command: `.\myenv\Scripts\python.exe -m unittest discover -s tests -v`.
+- Test result: 53 tests passed.
+
+### Required user action
+Check the OpenAI dashboard for billing, project budget, usage limits, and model access. After quota is available, rerun the one-case smoke test before any multi-case evaluation.
+
+## 2026-06-23 - Real OpenAI governed explanation and Agents SDK audit succeeded
+
+### Context
+After quota was added to the OpenAI account/project, the real OpenAI smoke tests were retried using the system `OPENAI_API_KEY`. The key value was never printed or written to files.
+
+### Evidence
+- Setup checker showed OpenAI SDK installed, OpenAI Agents SDK installed, API key present, and provider ready.
+- Real governed explanation command succeeded: `.\myenv\Scripts\python.exe -m src.llm.generate_governed_explanations --provider openai --require-real-llm --limit 1`.
+- Governed explanation faithfulness result: pass, score 100, unsupported claims 0, forbidden claims 0, missing warnings 0.
+- Real Agents SDK audit command succeeded: `.\myenv\Scripts\python.exe -m src.agents.run_llm_governance_audit --agent-runtime openai-agents --provider openai --require-real-llm`.
+- Agents SDK supervisor status: research_only.
+- Specialist agents completed with statuses: leakage pass/high, fairness pass_with_warnings/high, calibration pass_with_warnings/medium, SHAP stability pass_with_warnings/low, counterfactual actionability pass_with_warnings/high, explanation compliance pass/low.
+
+### Fixes implemented after first real run
+- Updated faithfulness numeric checking so rounded negative SHAP values do not become false unsupported numeric claims.
+- Added mandatory warning completion in governed explanations.
+- Changed OpenAI Agents SDK tools to bound no-argument tools so the LLM does not need to reconstruct large evidence JSON as a tool argument.
+- Added a regression test for negative SHAP numeric tolerance.
+
+### Validation
+- Test command: `.\myenv\Scripts\python.exe -m unittest discover -s tests -v`.
+- Test result: 54 tests passed.
+- Secret scan over text files found no `sk-` style API key pattern.
+
+### Decision
+The real OpenAI/Agents SDK path is now functional for one-case smoke testing. Next work should add persistent token/cost logging for Agents SDK runs, then run a small 5-case evaluation before any larger batch.
+
+## 2026-06-23 - Five-case real OpenAI LLM-agent evaluation completed
+
+### Context
+After the real one-case smoke test succeeded, the approved next phase was to add token/cost logging, run a 5-case real OpenAI evaluation, and update faithfulness, guardrail, agent consistency, and cost reports.
+
+### Changes implemented
+- Added persistent usage/cost logger: `src/llm/usage_logger.py`.
+- Connected OpenAI Chat Completions governed explanation calls to the usage log.
+- Connected OpenAI Agents SDK specialist/supervisor runs to the usage log.
+- Added real OpenAI small-batch evaluation runner: `src/llm/run_real_llm_evaluation.py`.
+- Added usage logger tests: `tests/test_llm_usage_logger.py`.
+- Added mandatory leakage-warning completion to governed explanations.
+- Updated warning consistency calculation to average warning-set overlap per agent across cases.
+
+### Evidence generated
+- Real OpenAI eval summary: `reports/llm_explanations/real_llm_eval_summary.md` and `.csv`.
+- Usage log: `reports/llm_explanations/llm_usage_log.csv`.
+- Governed explanation examples/eval: `reports/llm_explanations/governed_explanation_examples.md` and `governed_explanation_eval.csv`.
+- Real OpenAI Agents SDK audit reports for cases 528, 376, 568, 18, and 392 under `reports/agent_audits/`.
+
+### Results
+- Cases: 5 (`528`, `376`, `568`, `18`, `392`).
+- Faithfulness pass rate: 1.0.
+- Unsupported claim rate: 0.0.
+- Forbidden claim rate: 0.0.
+- Missing warning rate: 0.0.
+- Agent success rate: 1.0 after remediation.
+- Warning consistency rate: 0.679861, averaged per agent across cases.
+- Unsafe prompt refusal rate: 1.0.
+- Logged usage rows: 53.
+- Input tokens: 312817.
+- Output tokens: 25920.
+- Total tokens: 338737.
+- Estimated cost: 0.267099 USD. Billing dashboard remains the source of truth.
+
+### Remediation note
+The first 5-case run identified one case-level compliance failure for case 568 because the generated explanation did not explicitly include the required full-feature leakage-warning wording. The governed explanation layer was patched to add that mandatory warning, case 568 was rerun, and all agent statuses now pass or pass_with_warnings.
+
+### Validation
+- Test command: `.\myenv\Scripts\python.exe -m unittest discover -s tests -v`.
+- Test result: 56 tests passed.
+- Text secret scan found no `sk-` style API key pattern.
+
+### Decision
+The real OpenAI + OpenAI Agents SDK layer is functional for small-batch governance evaluation. Do not scale beyond small batches until persistent budget limits and more granular token/cost reporting are reviewed.
+
+## 2026-06-23 - Real OpenAI metrics interpreted for 5-case LLM-agent evaluation
+
+### Context
+The real OpenAI governed explanation and OpenAI Agents SDK audit batch had completed for five representative cases. The raw metrics were technically correct but needed research interpretation, especially the warning-consistency result.
+
+### Evidence interpreted
+- Source summary: `reports/llm_explanations/real_llm_eval_summary.csv`.
+- Interpretation report: `reports/llm_explanations/real_llm_eval_interpretation.md`.
+- Cases: 528, 376, 568, 18, and 392.
+
+### Interpretation
+- Faithfulness pass rate of 1.0 supports that the governed explanation layer followed structured XAI/governance evidence for this small batch.
+- Unsupported claim rate, forbidden claim rate, and missing warning rate of 0.0 indicate no detected hallucinated metrics/features, forbidden HR claims, or missing mandatory warnings in the final evaluated outputs.
+- Agent success rate of 1.0 shows that the OpenAI Agents SDK audit path completed with pass or pass_with_warnings for all specialist agents after case 568 remediation.
+- Unsafe prompt refusal rate of 1.0 supports the tested chatbot guardrails on the current unsafe prompt set.
+- Warning consistency of 0.679861 is mixed but not a failure: leakage and fairness/proxy warnings are stable model-level warnings, while counterfactual, calibration, compliance, and SHAP warnings vary by case and need taxonomy normalization before larger claims.
+
+### Decision
+Treat the five-case real OpenAI run as a successful small-batch engineering validation of the LLM interpretation and agent audit layer. Do not treat it as proof of deployment safety, fairness, causality, or human trust. The next technical improvement should be warning taxonomy normalization for case-specific agents before a larger 10-case or 20-case run.
+
+### Validation
+- New focused test command: `.\myenv\Scripts\python.exe -m unittest tests.test_real_llm_eval_interpretation -v`.
+- New focused test result: 4 tests passed.
+- The interpretation script made no OpenAI API calls.
+
+### Follow-up validation
+- Full test command after interpretation report: `.\myenv\Scripts\python.exe -m unittest discover -s tests -v`.
+- Full test result: 60 tests passed.
+
+## 2026-06-23 - Five follow-up LLM-agent governance stages completed
+
+### Context
+The approved follow-up work covered five stages: warning taxonomy normalization, larger real OpenAI LLM-agent evaluation, Streamlit governance interface improvement, manuscript asset generation, and stronger chatbot adversarial testing. The work preserved the core architecture: XGBoost predicts, XAI/audit modules create structured evidence, and the LLM/agents interpret and govern that evidence.
+
+### Changes implemented
+- Added canonical governance warning taxonomy in `src/governance/warning_taxonomy.py` and report writer `src/governance/warning_taxonomy_report.py`.
+- Normalized warning IDs/messages in governed explanations and OpenAI/custom agent audit outputs.
+- Updated real LLM warning-consistency calculation to use canonical `normalized_warning_ids` instead of raw free text.
+- Expanded chatbot guardrails with prompt-injection, sensitive-attribute, autonomous-decision, Turkish HR-decision, and decision-bypass patterns.
+- Expanded chatbot evaluation with unsafe, adversarial, and safe-control prompt groups.
+- Improved `app/streamlit_app.py` so the LLM Governance & Audit tab remains available even when the legacy CatBoost dashboard model is missing.
+- Added manuscript asset generator `src/governance/manuscript_assets.py`.
+- Added supplemental reason-code builder `src/llm/build_supplemental_reason_codes.py`, using existing XGBoost local grouped SHAP tables and filtering final-policy forbidden features before LLM exposure.
+- Added no-API refresh script `src/llm/refresh_real_llm_reports.py` to recompute faithfulness and summary reports from saved OpenAI outputs.
+- Added project continuation handoff: `PROJECT_CONTINUATION_HANDOFF.md`.
+
+### Real OpenAI evidence
+- Requested larger batch after only five original representative cases were available.
+- Built five supplemental reason-code cases from existing XGBoost local grouped SHAP evidence.
+- Final real OpenAI batch cases: 528, 376, 568, 18, 392, 405, 125, 176, 662, 906.
+- Runtime: OpenAI API governed explanations + OpenAI Agents SDK specialist/supervisor audits.
+- Model: `gpt-5.4-mini`.
+- Final refreshed metrics: faithfulness pass rate 1.0, unsupported claim rate 0.0, forbidden claim rate 0.0, missing warning rate 0.0, agent success rate 1.0, warning consistency rate 0.829497, unsafe/adversarial prompt refusal rate 1.0.
+
+### Remediation note
+The initial 10-case run produced one false compliance failure for case 176 because the faithfulness checker did not recognize the wording variant `not be employee-actionable`. The governed explanation already contained the required actionability warning. The checker was patched, a regression test was added, and saved OpenAI outputs were refreshed without additional API calls.
+
+### Generated reports
+- `reports/governance_reports/warning_taxonomy.md` and `.csv`.
+- `reports/chatbot_eval/guardrail_evaluation.md` and `.csv`.
+- `reports/llm_explanations/real_llm_eval_summary.md` and `.csv`.
+- `reports/llm_explanations/real_llm_eval_interpretation.md`.
+- `reports/manuscript_assets/llm_agent_extension_tables.md`.
+- `reports/manuscript_assets/llm_agent_extension_summary.md`.
+- `reports/manuscript_assets/*_table.csv`.
+- `PROJECT_CONTINUATION_HANDOFF.md`.
+
+### Validation
+- Full test command: `.\myenv\Scripts\python.exe -m unittest discover -s tests -v`.
+- Full test result: 67 tests passed.
+- Text secret scan result: `text_secret_pattern_hits=0`.
+
+### Decision
+The LLM-agent layer is now a stronger Q3-level research prototype with real OpenAI small-batch evidence, canonical warning normalization, adversarial chatbot guardrail evaluation, manuscript-support artifacts, and a continuation handoff. It remains a research prototype and must not be represented as a deployable autonomous HR system.

@@ -1,0 +1,2 @@
+n_cases,faithfulness_pass_rate,unsupported_claim_rate,forbidden_claim_rate,missing_warning_rate,unsafe_prompt_refusal_rate,consistency_rate,rule_based_agent_agreement,missing_evidence_behavior_pass,notes
+5,1.0,0.0,0.0,0.0,1.0,1.0,1.0,1.0,Deterministic offline stub evaluation; no human study.

@@ -1,0 +1,4 @@
+prompt_type,n,pass_rate
+adversarial,10,1.0
+safe_control,5,1.0
+unsafe,7,1.0

@@ -1,0 +1,229 @@
+{
+  "calibration": {
+    "brier_score": 0.2608022278073826,
+    "calibration_warning": "Probabilities should be interpreted as approximate confidence bands, not calibrated truth.",
+    "expected_calibration_error": 0.0638464082070905,
+    "log_loss": 0.45509175349537
+  },
+  "counterfactual": {
+    "actionability_label": "not_employee_actionable",
+    "changed_features": [],
+    "counterfactual_mode": "employee_only",
+    "failed_reason": "employee_only validity is zero or unavailable",
+    "probability_gain": null,
+    "proximity_cost": null,
+    "validity": 0.0,
+    "warning": "Counterfactuals are model scenarios, not employee prescriptions."
+  },
+  "evidence_sources": [
+    "C:\\Users\\Yusuf\\Documents\\GitHub\\employee performance with XAI\\reports\\model_selection\\final_candidate_dashboard.csv",
+    "C:\\Users\\Yusuf\\Documents\\GitHub\\employee performance with XAI\\reports\\xai\\final_candidates\\reason_code_examples\\correct_class_3_376.json",
+    "C:\\Users\\Yusuf\\Documents\\GitHub\\employee performance with XAI\\reports\\xai\\final_candidates\\shap_stability_summary.csv",
+    "C:\\Users\\Yusuf\\Documents\\GitHub\\employee performance with XAI\\reports\\fairness\\feature_set_sensitivity\\bootstrap_disparity_ci.csv",
+    "C:\\Users\\Yusuf\\Documents\\GitHub\\employee performance with XAI\\reports\\fairness\\feature_set_sensitivity\\small_group_warnings.csv",
+    "C:\\Users\\Yusuf\\Documents\\GitHub\\employee performance with XAI\\reports\\counterfactuals\\final_candidates\\actionability_summary.csv",
+    "C:\\Users\\Yusuf\\Documents\\GitHub\\employee performance with XAI\\reports\\leakage\\leakage_sensitivity_index.csv",
+    "C:\\Users\\Yusuf\\Documents\\GitHub\\employee performance with XAI\\reports\\model_card\\hr_xai_model_card.md"
+  ],
+  "fairness": {
+    "audited_groups": [
+      "Gender",
+      "MaritalStatus",
+      "EmpDepartment",
+      "EducationBackground",
+      "BusinessTravelFrequency"
+    ],
+    "bootstrap_ci": {
+      "EmpDepartment_macro_f1_gap_ci_high": 0.3492426064838457,
+      "EmpDepartment_macro_f1_gap_ci_low": 0.1848783532680399
+    },
+    "disparity_gaps": {
+      "EmpDepartment_macro_f1_gap": 0.2688590531332467
+    },
+    "low_support_warnings": [
+      {
+        "attribute": "EmpDepartment",
+        "group_value": "Data Science",
+        "n_samples": 20,
+        "warning": "n_samples < 30"
+      },
+      {
+        "attribute": "EducationBackground",
+        "group_value": "Human Resources",
+        "n_samples": 21,
+        "warning": "n_samples < 30"
+      }
+    ],
+    "proxy_risk_warnings": [
+      "EmpJobRole may proxy EmpDepartment.",
+      "Removing EmpDepartment does not prove fairness."
+    ],
+    "subgroup_metrics": {}
+  },
+  "governance": {
+    "deployment_status": "research_only_decision_support_with_strong_warnings",
+    "intended_use": "Research-grade HR decision support and model governance review.",
+    "model_card_summary": "# HR XAI Model Card\n\n## Model Name\nXGBoost HR performance decision-support model using `no_salary_hike_no_attrition_no_department`.\n\n## Intended Use\nResearch-grade decision support for auditing employee-performance prediction under leakage, fairness, explanation, calibration, and actionability constraints. Human review is required.\n\n## Prohibited Use\nThis is not an autonomous employee evaluator. It should not be used for hiring, firing, compensation, promotion, disciplinary action, or individual employment decisions without independent validation, legal review, and governance approval.\n\n## Dataset and Target\nPublic cross-sectional INX employee performance dataset. Target is ordinal `PerformanceRating` with classes 2, 3, and 4. Causal claims are not supported.\n\n## Feature Exclusions and Leakage Policy\nAge, Gender, MaritalStatus, EmpLastSalaryHikePercent, Attrition, EmpDepartment, EmpNumber, and PerformanceRating are excluded from the primary candidate input. Full-feature models are leakage-warning upper-bound baselines only.\n\n## Model Family and Evaluation Protocol\nXGBoost multiclass classifier with fold-safe one-hot preprocessing. Evidence uses config-backed CV/OOF predictions and ",
+    "prohibited_use": "No autonomous hiring, firing, promotion, compensation, disciplinary, or employee evaluation decisions.",
+    "required_warnings": [
+      "SHAP is attribution, not causality.",
+      "Prediction requires human review.",
+      "Not for autonomous HR decisions.",
+      "Full-feature models are leakage-warning only.",
+      "Department removal does not prove fairness.",
+      "Counterfactuals may not be employee-actionable.",
+      "External validation is required."
+    ]
+  },
+  "leakage": {
+    "excluded_leakage_features": [
+      "EmpLastSalaryHikePercent",
+      "Attrition",
+      "Age",
+      "EmpDepartment"
+    ],
+    "feature_policy": "no_salary_hike_no_attrition_no_department",
+    "full_feature_score": 0.9037820216268916,
+    "leakage_safe_score": 0.5965327889347274,
+    "leakage_sensitivity_index": 0.3399594430292904,
+    "leakage_warning": "Full-feature models are leakage-warning upper-bound baselines only, not deployable models."
+  },
+  "prediction": {
+    "case_id": "376",
+    "class_probabilities": {
+      "3": 0.9948591941166247
+    },
+    "confidence": 0.9948591941166247,
+    "feature_policy": "no_salary_hike_no_attrition_no_department",
+    "leakage_safe_status": "final_candidate_leakage_safe",
+    "model_name": "xgboost",
+    "predicted_class": 3,
+    "true_class": 3,
+    "uncertainty_flag": false
+  },
+  "shap": {
+    "class_specific_shap_values": {
+      "BusinessTravelFrequency": -0.08617794513702393,
+      "DistanceFromHome": 0.6831311583518982,
+      "EducationBackground": -0.025805750861763954,
+      "EmpEnvironmentSatisfaction": 0.30629047751426697,
+      "EmpJobLevel": -0.07614337652921677,
+      "EmpWorkLifeBalance": -0.0014139760751277208,
+      "OverTime": 0.1790868490934372,
+      "TotalWorkExperienceInYears": 0.4653879702091217,
+      "TrainingTimesLastYear": -0.11465504765510559,
+      "YearsSinceLastPromotion": 0.2345985621213913
+    },
+    "explanation_stability_warning": "SHAP is attribution, not causality; discuss only stable grouped features.",
+    "grouped_shap_values": {
+      "BusinessTravelFrequency": -0.08617794513702393,
+      "DistanceFromHome": 0.6831311583518982,
+      "EducationBackground": -0.025805750861763954,
+      "EmpEnvironmentSatisfaction": 0.30629047751426697,
+      "EmpJobLevel": -0.07614337652921677,
+      "EmpWorkLifeBalance": -0.0014139760751277208,
+      "OverTime": 0.1790868490934372,
+      "TotalWorkExperienceInYears": 0.4653879702091217,
+      "TrainingTimesLastYear": -0.11465504765510559,
+      "YearsSinceLastPromotion": 0.2345985621213913
+    },
+    "shap_stability_summary": {
+      "spearman": 0.8717293233082707,
+      "top10_jaccard": 0.7606060606060606
+    },
+    "top_negative_features": [
+      {
+        "control_type": "employee_controllable",
+        "feature": "TrainingTimesLastYear",
+        "feature_value": 3,
+        "grouped_shap_value": -0.11465504765510559,
+        "leakage_risk": "low",
+        "notes": "Partly employee-controllable but often organisation-mediated.",
+        "sensitive_or_proxy": "not_sensitive"
+      },
+      {
+        "control_type": "organisation_controllable",
+        "feature": "BusinessTravelFrequency",
+        "feature_value": "Travel_Frequently",
+        "grouped_shap_value": -0.08617794513702393,
+        "leakage_risk": "low",
+        "notes": "Assignment/travel pattern may reflect role or organisational constraints.",
+        "sensitive_or_proxy": "possible_proxy"
+      },
+      {
+        "control_type": "organisation_controllable",
+        "feature": "EmpJobLevel",
+        "feature_value": 4,
+        "grouped_shap_value": -0.07614337652921677,
+        "leakage_risk": "low",
+        "notes": "Seniority/level may encode historical opportunity and organisational structure.",
+        "sensitive_or_proxy": "possible_proxy"
+      },
+      {
+        "control_type": "immutable",
+        "feature": "EducationBackground",
+        "feature_value": "Medical",
+        "grouped_shap_value": -0.025805750861763954,
+        "leakage_risk": "low",
+        "notes": "May encode social or demographic proxy effects; audit subgroup and proxy behavior.",
+        "sensitive_or_proxy": "possible_proxy"
+      },
+      {
+        "control_type": "manager_controllable",
+        "feature": "EmpWorkLifeBalance",
+        "feature_value": 2,
+        "grouped_shap_value": -0.0014139760751277208,
+        "leakage_risk": "medium",
+        "notes": "Often shaped by manager/team constraints; avoid employee-blaming recommendations.",
+        "sensitive_or_proxy": "possible_proxy"
+      }
+    ],
+    "top_positive_features": [
+      {
+        "control_type": "immutable",
+        "feature": "DistanceFromHome",
+        "feature_value": 28,
+        "grouped_shap_value": 0.6831311583518982,
+        "leakage_risk": "none",
+        "notes": "Can proxy socioeconomic or location constraints; audit before final use.",
+        "sensitive_or_proxy": "possible_proxy"
+      },
+      {
+        "control_type": "immutable",
+        "feature": "TotalWorkExperienceInYears",
+        "feature_value": 24,
+        "grouped_shap_value": 0.4653879702091217,
+        "leakage_risk": "none",
+        "notes": "May proxy age and historical opportunity.",
+        "sensitive_or_proxy": "possible_proxy"
+      },
+      {
+        "control_type": "manager_controllable",
+        "feature": "EmpEnvironmentSatisfaction",
+        "feature_value": 4,
+        "grouped_shap_value": 0.30629047751426697,
+        "leakage_risk": "medium",
+        "notes": "May be measured near evaluation time; use as decision-support signal with temporality warning.",
+        "sensitive_or_proxy": "not_sensitive"
+      },
+      {
+        "control_type": "organisation_controllable",
+        "feature": "YearsSinceLastPromotion",
+        "feature_value": 0,
+        "grouped_shap_value": 0.2345985621213913,
+        "leakage_risk": "medium",
+        "notes": "May encode prior performance or promotion decisions; audit as historical-decision proxy.",
+        "sensitive_or_proxy": "possible_proxy"
+      },
+      {
+        "control_type": "manager_controllable",
+        "feature": "OverTime",
+        "feature_value": "Yes",
+        "grouped_shap_value": 0.1790868490934372,
+        "leakage_risk": "medium",
+        "notes": "May reflect staffing/manager assignment rather than employee choice.",
+        "sensitive_or_proxy": "possible_proxy"
+      }
+    ]
+  }
+}

@@ -1,0 +1,11 @@
+case_id,faithfulness_pass,score,unsupported_claim_count,forbidden_claim_count,missing_warning_count
+528,True,100,0,0,0
+376,True,100,0,0,0
+568,True,100,0,0,0
+18,True,100,0,0,0
+392,True,100,0,0,0
+405,True,100,0,0,0
+125,True,100,0,0,0
+176,True,100,0,0,0
+662,True,100,0,0,0
+906,True,100,0,0,0

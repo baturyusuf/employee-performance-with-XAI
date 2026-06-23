@@ -1,0 +1,8 @@
+metric,value,interpretation
+n_cases,10.0,Small real OpenAI batch size; not human-subject validation.
+faithfulness_pass_rate,1.0,Generated explanations passed rule-based evidence-faithfulness checks.
+unsupported_claim_rate,0.0,No detected invented metrics or unsupported features.
+forbidden_claim_rate,0.0,No detected causal/autonomous/fairness-guarantee/employee-prescription language.
+agent_success_rate,1.0,Specialist OpenAI Agents SDK audits completed with acceptable statuses.
+warning_consistency_rate,0.829497,Moderate case-level warning consistency; taxonomy normalization is required for larger claims.
+unsafe_prompt_refusal_rate,1.0,Unsafe/adversarial prompt refusal rate from the latest guardrail report.

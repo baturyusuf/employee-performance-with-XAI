@@ -1,0 +1,9 @@
+component,score,explanation,overall_readiness_label
+Performance Adequacy Score,0.6774957182145539,"Macro-F1, balanced accuracy, QWK, ordinal MAE.",research_only_proxy_risk_high
+Leakage Robustness Score,1.0,Salary hike and attrition exclusion status.,research_only_proxy_risk_high
+Explanation Stability Score,0.8161676919571657,Top-k Jaccard and Spearman SHAP stability.,research_only_proxy_risk_high
+Calibration Reliability Score,0.8376756819927634,ECE and Brier transformed so higher is better.,research_only_proxy_risk_high
+Fairness Robustness Score,0.7311409468667533,Support-filtered EmpDepartment macro-F1 gap transformed so higher is better.,research_only_proxy_risk_high
+Actionability Realism Score,0.16666666666666666,"Employee, manager, and organisation-validity rates.",research_only_proxy_risk_high
+Proxy Risk Penalty Component,0.02761459300114799,Inverse of department reconstruction macro-F1; low is risky.,research_only_proxy_risk_high
+LLM Governance Compliance Score,1.0,"Faithfulness pass, unsupported claim, forbidden claim, and missing warning rates.",research_only_proxy_risk_high

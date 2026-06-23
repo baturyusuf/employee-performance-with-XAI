@@ -1,0 +1,8 @@
+agent,input,output,governance_function
+LeakageAuditAgent,"LeakageEvidence, feature policy, leakage-safe/full-feature metrics","Leakage risk level, leakage warnings, deployability status",Prevents full-feature leakage baselines from being presented as deployable models.
+FairnessProxyAuditAgent,"FairnessEvidence, subgroup gaps, proxy warnings, feature policy","Fairness/proxy risk level, subgroup warnings, proxy warnings",Separates diagnostic subgroup gaps from unsupported discrimination/fairness claims.
+CalibrationAuditAgent,CalibrationEvidence and probability quality metrics,Calibration risk level and probability-use warnings,Prevents raw probabilities from being treated as objective certainty.
+ShapStabilityAuditAgent,SHAP stability metrics and feature rankings,Explanation stability assessment and non-causality warnings,Distinguishes model attribution from causal explanation.
+CounterfactualActionabilityAgent,"Counterfactual validity, changed features, actionability labels",Actionability risk level and intervention-scope warnings,Prevents counterfactuals from becoming employee prescriptions.
+ExplanationComplianceAgent,LLM explanation and structured evidence,"Compliance score, unsupported claims, missing warnings",Checks faithfulness and forbidden HR/causal/fairness claims.
+SupervisorGovernanceAgent,All specialist agent outputs,Overall readiness label and required human-review warnings,Aggregates governance evidence without making HR decisions.
