@@ -25,6 +25,8 @@ GOVERNED_EXPLANATION_JSON_SCHEMA: Dict[str, Any] = {
                             "causality",
                             "deployment",
                             "evidence",
+                            "validation",
+                            "other",
                         ],
                     },
                     "severity": {"type": "string", "enum": ["low", "medium", "high"]},

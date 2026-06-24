@@ -1,0 +1,104 @@
+{
+  "_llm_backend": "openai_chat_completions",
+  "_llm_model": "gpt-5.4-mini",
+  "_llm_usage": {
+    "completion_tokens": 875,
+    "completion_tokens_details": {
+      "accepted_prediction_tokens": 0,
+      "audio_tokens": 0,
+      "reasoning_tokens": 0,
+      "rejected_prediction_tokens": 0
+    },
+    "prompt_tokens": 4539,
+    "prompt_tokens_details": {
+      "audio_tokens": 0,
+      "cached_tokens": 0
+    },
+    "total_tokens": 5414
+  },
+  "case_id": "ibm_hr_analytics_department_free_174",
+  "detailed_explanation": "The evidence package shows an xgboost prediction for case ibm_hr_analytics_department_free_174 under the department_free feature policy. The predicted class is 3 with confidence 0.5043424963951111, while class 4 has probability 0.4956575036048889, so the prediction is uncertain and requires human review. The true class is also reported as 3. Leakage-safe status is external_research_candidate, and the leakage-safe score is 0.4603114606553593. The leakage warning states that the external models exclude the target, identifiers, direct sensitive/audit-only fields, and mapped leakage-risk columns for the selected policy. SHAP values are provided as model attributions only; they do not establish causality. The strongest positive SHAP attributions are EmpHourlyRate (0.1728378236293792), YearsWithCurrManager (0.0891297087073326), DistanceFromHome (0.0816234871745109), EmpJobRole (0.0757772698998451), and YearsSinceLastPromotion (0.0313167087733745). The strongest negative SHAP attributions are MonthlyRate (-0.1446765512228012), EmpEducationLevel (-0.0875396952033042), EmpJobSatisfaction (-0.0454683527350425), EmpRelationshipSatisfaction (-0.0395939089357852), and ExperienceYearsAtThisCompany (-0.0356465801596641). Calibration evidence is available only as diagnostic confidence estimates: Brier score 0.2869191658796662, expected calibration error 0.0821766617978529, and log loss 0.4978445226753214, with a calibration caution warning. Counterfactual evidence is not claimed as recourse: changed_features is empty, validity is 0.0, and the package states prototype counterfactual recourse was not claimed for this external evidence package. Fairness evidence includes audited groups and disparity gaps for some precision_4.0 metrics, including EmpJobRole_precision_4.0 = 1.0, but subgroup metrics and bootstrap confidence intervals are unavailable. Low-support warnings are present for several Age groups with n_samples < 30. Proxy-risk warnings state that removing direct sensitive or group variables does not prove fairness, and that department, job role, salary, tenure, and evaluation-history fields may act as proxies depending on dataset context. Governance metadata states this is research-only external validation or robustness evidence and prohibits autonomous hiring, firing, promotion, compensation, discipline, or individual employment decisions.",
+  "faithfulness_check": {
+    "faithfulness_pass": true,
+    "forbidden_claims": [],
+    "missing_warnings": [],
+    "score": 100,
+    "suggested_revision": "",
+    "unsupported_claims": []
+  },
+  "requires_human_review": true,
+  "short_explanation": "This is a research-only external validation case. The model predicted class 3 with low confidence (0.5043 vs 0.4957 for class 4), so human review is required. SHAP attributions indicate the largest positive contributions came from EmpHourlyRate, YearsWithCurrManager, DistanceFromHome, EmpJobRole, and YearsSinceLastPromotion, while the largest negative contributions came from MonthlyRate, EmpEducationLevel, EmpJobSatisfaction, EmpRelationshipSatisfaction, and ExperienceYearsAtThisCompany. These are attributions, not causal effects.",
+  "unsupported_claims_detected": [],
+  "warnings": [
+    {
+      "category": "deployment",
+      "message": "This model is decision support only and is not for autonomous HR decisions.",
+      "severity": "high",
+      "type": "deployment",
+      "warning_id": "deployment.not_autonomous"
+    },
+    {
+      "category": "calibration",
+      "message": "Probability estimates should be interpreted as approximate confidence, not objective certainty.",
+      "severity": "medium",
+      "type": "calibration",
+      "warning_id": "calibration.probabilities_approximate"
+    },
+    {
+      "category": "causality",
+      "message": "SHAP is attribution, not causality.",
+      "severity": "high",
+      "type": "causality",
+      "warning_id": "causality.shap_not_causal"
+    },
+    {
+      "category": "actionability",
+      "message": "Counterfactuals may not be employee-actionable and must not be treated as employee prescriptions.",
+      "severity": "high",
+      "type": "actionability",
+      "warning_id": "actionability.counterfactual_not_prescription"
+    },
+    {
+      "category": "fairness",
+      "message": "Removing EmpDepartment does not prove fairness.",
+      "severity": "high",
+      "type": "fairness",
+      "warning_id": "fairness.department_removal_not_fairness_proof"
+    },
+    {
+      "category": "fairness",
+      "message": "Small subgroup findings may be unstable and should be treated as diagnostic audit evidence.",
+      "severity": "medium",
+      "type": "fairness",
+      "warning_id": "fairness.small_subgroup_instability"
+    },
+    {
+      "category": "deployment",
+      "message": "Prediction requires human review.",
+      "severity": "high",
+      "type": "deployment",
+      "warning_id": "deployment.human_review_required"
+    },
+    {
+      "category": "leakage",
+      "message": "Full-feature models are leakage-warning upper-bound baselines only, not deployable models.",
+      "severity": "high",
+      "type": "leakage",
+      "warning_id": "leakage.full_feature_upper_bound_only"
+    },
+    {
+      "category": "proxy",
+      "message": "EmpJobRole may proxy EmpDepartment, so department removal does not eliminate proxy risk.",
+      "severity": "high",
+      "type": "proxy",
+      "warning_id": "proxy.jobrole_department_proxy"
+    },
+    {
+      "category": "validation",
+      "message": "External validation is required before deployment.",
+      "severity": "high",
+      "type": "validation",
+      "warning_id": "validation.external_validation_required"
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+raw_column,canonical_column,present,role
+Work_accident,WorkAccident,True,candidate_feature_or_unused
+average_montly_hours,AverageMonthlyHours,True,proxy_risk
+last_evaluation,LastEvaluation,True,proxy_risk
+left,left,True,target;leakage_risk
+number_project,ProjectCount,True,candidate_feature_or_unused
+promotion_last_5years,PromotionLast5Years,True,proxy_risk
+salary,SalaryBand,True,proxy_risk
+sales,EmpDepartment,True,proxy_risk
+satisfaction_level,EmpJobSatisfaction,True,candidate_feature_or_unused
+time_spend_company,ExperienceYearsAtThisCompany,True,candidate_feature_or_unused

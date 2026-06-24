@@ -72,12 +72,32 @@ def flatten_text(output: Dict[str, Any] | str) -> str:
 
 def evidence_feature_names(evidence: Dict[str, Any]) -> Set[str]:
     names = set(taxonomy_by_feature().keys())
+
+    def walk_keys(value: Any) -> None:
+        if isinstance(value, dict):
+            for key, child in value.items():
+                _add_name_variant(names, str(key))
+                walk_keys(child)
+        elif isinstance(value, list):
+            for child in value:
+                walk_keys(child)
+        elif isinstance(value, str):
+            stripped = value.strip()
+            if stripped:
+                _add_name_variant(names, stripped)
+
+    walk_keys(evidence)
     shap = evidence.get("shap") or {}
     for key in ["top_positive_features", "top_negative_features"]:
         for row in shap.get(key, []) or []:
             if isinstance(row, dict) and row.get("feature"):
                 names.add(str(row["feature"]))
     return names
+
+
+def _add_name_variant(names: Set[str], value: str) -> None:
+    names.add(value)
+    names.add(re.sub(r"\.0\b", "", value))
 
 
 def evidence_numbers(evidence: Dict[str, Any]) -> Set[str]:
@@ -114,6 +134,17 @@ def evidence_numbers(evidence: Dict[str, Any]) -> Set[str]:
                     out.add(f"{num:.4f}")
                 except Exception:
                     pass
+            for match in re.findall(r"(?<![A-Za-z0-9_\-\.])\d+(?:\.\d+)?(?![A-Za-z0-9_])", stripped):
+                try:
+                    num = float(match)
+                    out.add(match)
+                    out.add(f"{num:.0f}")
+                    out.add(f"{num:.1f}")
+                    out.add(f"{num:.2f}")
+                    out.add(f"{num:.3f}")
+                    out.add(f"{num:.4f}")
+                except Exception:
+                    pass
 
     walk(evidence)
     return out
@@ -131,7 +162,7 @@ def detect_patterns(text: str, patterns: Iterable[str]) -> List[str]:
 def unsupported_metric_check(text: str, evidence: Dict[str, Any]) -> List[str]:
     allowed = evidence_numbers(evidence)
     claims = []
-    for match in re.findall(r"(?<![A-Za-z])\d+(?:\.\d+)?", text):
+    for match in re.findall(r"(?<![A-Za-z0-9_\-\.])\d+(?:\.\d+)?(?![A-Za-z0-9_])", text):
         if match not in allowed:
             try:
                 rounded = f"{float(match):.3f}"

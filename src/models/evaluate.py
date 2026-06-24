@@ -29,6 +29,8 @@ def safe_float(value: Any) -> Optional[float]:
 
 def multiclass_brier(y_true: Iterable[int], y_proba: np.ndarray, labels: list[int]) -> float:
     y_bin = label_binarize(list(y_true), classes=labels)
+    if len(labels) == 2 and y_bin.ndim == 2 and y_bin.shape[1] == 1:
+        y_bin = np.column_stack([1 - y_bin[:, 0], y_bin[:, 0]])
     return float(np.mean(np.sum((np.asarray(y_proba) - y_bin) ** 2, axis=1)))
 
 

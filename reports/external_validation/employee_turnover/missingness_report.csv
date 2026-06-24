@@ -1,0 +1,13 @@
+column,missing_count,missing_rate,non_null_count,n_unique,dtype
+AttritionTarget,0,0.0,14999,2,int64
+AverageMonthlyHours,0,0.0,14999,215,int64
+EmpDepartment,0,0.0,14999,10,str
+EmpJobSatisfaction,0,0.0,14999,92,float64
+ExperienceYearsAtThisCompany,0,0.0,14999,8,int64
+ExternalSampleId,0,0.0,14999,14999,int64
+LastEvaluation,0,0.0,14999,65,float64
+ProjectCount,0,0.0,14999,6,int64
+PromotionLast5Years,0,0.0,14999,2,int64
+SalaryBand,0,0.0,14999,3,str
+WorkAccident,0,0.0,14999,2,int64
+left,0,0.0,14999,2,int64

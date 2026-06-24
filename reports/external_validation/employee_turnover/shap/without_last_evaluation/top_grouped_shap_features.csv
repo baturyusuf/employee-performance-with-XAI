@@ -1,0 +1,9 @@
+feature,mean_abs_grouped_shap,rank
+EmpJobSatisfaction,0.9878747676922823,1
+ExperienceYearsAtThisCompany,0.5487071537977999,2
+ProjectCount,0.3511211107975238,3
+AverageMonthlyHours,0.3100301416593218,4
+SalaryBand,0.14324670634783532,5
+WorkAccident,0.10906328234699225,6
+EmpDepartment,0.06944629154345032,7
+PromotionLast5Years,0.005847986490697294,8

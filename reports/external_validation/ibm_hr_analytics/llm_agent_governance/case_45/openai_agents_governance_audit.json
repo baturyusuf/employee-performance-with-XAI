@@ -1,0 +1,869 @@
+{
+  "agent_syntheses": [
+    {
+      "agent_name": "LeakageAuditAgent",
+      "evidence_used": [
+        "leakage.excluded_leakage_features",
+        "leakage.feature_policy",
+        "leakage.leakage_warning",
+        "governance.deployment_status",
+        "governance.intended_use",
+        "governance.prohibited_use",
+        "governance.required_warnings",
+        "prediction.leakage_safe_status",
+        "prediction.feature_policy",
+        "prediction.predicted_class",
+        "prediction.true_class",
+        "shap.shap_stability_summary",
+        "fairness.proxy_risk_warnings",
+        "fairness.low_support_warnings",
+        "calibration.calibration_warning",
+        "counterfactual.warning",
+        "tool_output.status",
+        "tool_output.risk_level",
+        "tool_output.required_warnings",
+        "tool_output.details.missing_required_exclusions"
+      ],
+      "governed_summary": "Mapped external leakage-risk fields are excluded for the selected research policy. The evidence supports a research-only external validation context with no autonomous HR decision use. Leakage-safe status is marked as an external research candidate, and the deterministic audit reports no missing required exclusions.",
+      "normalized_warning_ids": [
+        "other.unmapped",
+        "causality.shap_not_causal",
+        "deployment.human_review_required",
+        "deployment.not_autonomous",
+        "fairness.department_removal_not_fairness_proof",
+        "actionability.counterfactual_not_prescription",
+        "calibration.probabilities_approximate"
+      ],
+      "normalized_warnings": [
+        {
+          "category": "other",
+          "message": "External models exclude target, identifiers, direct sensitive/audit-only fields, and mapped leakage-risk columns for the selected policy.",
+          "severity": "medium",
+          "source_text": "External models exclude target, identifiers, direct sensitive/audit-only fields, and mapped leakage-risk columns for the selected policy.",
+          "warning_id": "other.unmapped"
+        },
+        {
+          "category": "causality",
+          "message": "SHAP is attribution, not causality.",
+          "severity": "high",
+          "source_text": "SHAP is attribution, not causality.",
+          "warning_id": "causality.shap_not_causal"
+        },
+        {
+          "category": "deployment",
+          "message": "Prediction requires human review.",
+          "severity": "high",
+          "source_text": "Prediction requires human review.",
+          "warning_id": "deployment.human_review_required"
+        },
+        {
+          "category": "deployment",
+          "message": "This model is decision support only and is not for autonomous HR decisions.",
+          "severity": "high",
+          "source_text": "Not for autonomous HR decisions.",
+          "warning_id": "deployment.not_autonomous"
+        },
+        {
+          "category": "fairness",
+          "message": "Removing EmpDepartment does not prove fairness.",
+          "severity": "high",
+          "source_text": "Removing group variables does not prove fairness.",
+          "warning_id": "fairness.department_removal_not_fairness_proof"
+        },
+        {
+          "category": "actionability",
+          "message": "Counterfactuals may not be employee-actionable and must not be treated as employee prescriptions.",
+          "severity": "high",
+          "source_text": "Counterfactuals may not be employee-actionable.",
+          "warning_id": "actionability.counterfactual_not_prescription"
+        },
+        {
+          "category": "calibration",
+          "message": "Probability estimates should be interpreted as approximate confidence, not objective certainty.",
+          "severity": "medium",
+          "source_text": "External probabilities are diagnostic confidence estimates and require calibration caution.",
+          "warning_id": "calibration.probabilities_approximate"
+        }
+      ],
+      "recommended_research_actions": [
+        "None beyond maintaining the stated research-only governance controls and preserving the excluded leakage-risk feature policy."
+      ],
+      "required_warnings": [
+        "External models exclude target, identifiers, direct sensitive/audit-only fields, and mapped leakage-risk columns for the selected policy.",
+        "SHAP is attribution, not causality.",
+        "Prediction requires human review.",
+        "This model is decision support only and is not for autonomous HR decisions.",
+        "Removing EmpDepartment does not prove fairness.",
+        "Counterfactuals may not be employee-actionable and must not be treated as employee prescriptions.",
+        "Probability estimates should be interpreted as approximate confidence, not objective certainty."
+      ],
+      "requires_human_review": true,
+      "risk_level": "medium",
+      "status": "pass",
+      "unsupported_claims_detected": []
+    },
+    {
+      "agent_name": "FairnessProxyAuditAgent",
+      "evidence_used": [
+        "EVIDENCE_JSON fairness section: audited_groups, disparity_gaps, low_support_warnings, proxy_risk_warnings",
+        "EVIDENCE_JSON governance section: deployment_status, intended_use, prohibited_use, required_warnings",
+        "EVIDENCE_JSON leakage section: excluded_leakage_features, feature_policy, leakage_warning",
+        "EVIDENCE_JSON prediction section: case_id, class_probabilities, confidence, predicted_class, true_class",
+        "EVIDENCE_JSON shap section: grouped_shap_values, top_positive_features, top_negative_features, explanation_stability_warning",
+        "Deterministic audit tool output: status=pass_with_warnings, risk_level=medium, summary, required_warnings, details.low_support_warnings"
+      ],
+      "governed_summary": "Deterministic audit completed on the provided external validation evidence. The audit reports no department macro-F1 gap value, but proxy-risk warnings are present. Low-support warnings exist for several Age groups with n_samples < 30. The evidence supports a research-only external validation context, not autonomous HR use. The model must not be described as fair or unbiased. SHAP and counterfactual outputs are model explanations/scenarios, not causal or employee-prescriptive claims.",
+      "normalized_warning_ids": [
+        "other.unmapped",
+        "proxy.jobrole_department_proxy",
+        "fairness.department_removal_not_fairness_proof",
+        "causality.shap_not_causal",
+        "deployment.human_review_required",
+        "deployment.not_autonomous",
+        "actionability.counterfactual_not_prescription"
+      ],
+      "normalized_warnings": [
+        {
+          "category": "other",
+          "message": "Subgroup gaps require further investigation; they do not prove discrimination.",
+          "severity": "medium",
+          "source_text": "Subgroup gaps require further investigation; they do not prove discrimination.",
+          "warning_id": "other.unmapped"
+        },
+        {
+          "category": "proxy",
+          "message": "EmpJobRole may proxy EmpDepartment, so department removal does not eliminate proxy risk.",
+          "severity": "high",
+          "source_text": "Department removal reduces direct use but does not eliminate proxy risk.",
+          "warning_id": "proxy.jobrole_department_proxy"
+        },
+        {
+          "category": "fairness",
+          "message": "Removing EmpDepartment does not prove fairness.",
+          "severity": "high",
+          "source_text": "Removing direct sensitive or group variables does not prove fairness.",
+          "warning_id": "fairness.department_removal_not_fairness_proof"
+        },
+        {
+          "category": "causality",
+          "message": "SHAP is attribution, not causality.",
+          "severity": "high",
+          "source_text": "SHAP is attribution, not causality.",
+          "warning_id": "causality.shap_not_causal"
+        },
+        {
+          "category": "deployment",
+          "message": "Prediction requires human review.",
+          "severity": "high",
+          "source_text": "Prediction requires human review.",
+          "warning_id": "deployment.human_review_required"
+        },
+        {
+          "category": "deployment",
+          "message": "This model is decision support only and is not for autonomous HR decisions.",
+          "severity": "high",
+          "source_text": "Not for autonomous HR decisions.",
+          "warning_id": "deployment.not_autonomous"
+        },
+        {
+          "category": "actionability",
+          "message": "Counterfactuals may not be employee-actionable and must not be treated as employee prescriptions.",
+          "severity": "high",
+          "source_text": "Counterfactuals may not be employee-actionable.",
+          "warning_id": "actionability.counterfactual_not_prescription"
+        }
+      ],
+      "recommended_research_actions": [
+        "Investigate subgroup gaps further using additional validation data.",
+        "Review proxy-risk fields in context before any broader governance conclusion.",
+        "Maintain human review for all predictions in this research-only setting.",
+        "Respect the external dataset role limits and prohibited-use constraints."
+      ],
+      "required_warnings": [
+        "Subgroup gaps require further investigation; they do not prove discrimination.",
+        "EmpJobRole may proxy EmpDepartment, so department removal does not eliminate proxy risk.",
+        "Removing EmpDepartment does not prove fairness.",
+        "SHAP is attribution, not causality.",
+        "Prediction requires human review.",
+        "This model is decision support only and is not for autonomous HR decisions.",
+        "Counterfactuals may not be employee-actionable and must not be treated as employee prescriptions."
+      ],
+      "requires_human_review": true,
+      "risk_level": "medium",
+      "status": "pass_with_warnings",
+      "unsupported_claims_detected": [
+        "Any claim that the model is fair, unbiased, or non-discriminatory.",
+        "Any causal interpretation of SHAP values or counterfactual outputs.",
+        "Any employee-prescriptive recommendation based on counterfactual actionability.",
+        "Any autonomous HR decision claim based on this evidence."
+      ]
+    },
+    {
+      "agent_name": "CalibrationAuditAgent",
+      "evidence_used": [
+        "EVIDENCE_JSON.calibration.brier_score=0.2869191658796662",
+        "EVIDENCE_JSON.calibration.expected_calibration_error=0.0821766617978529",
+        "EVIDENCE_JSON.calibration.log_loss=0.4978445226753214",
+        "EVIDENCE_JSON.calibration.calibration_warning='External probabilities are diagnostic confidence estimates and require calibration caution.'",
+        "Deterministic audit tool output: status=pass_with_warnings, risk_level=medium, required_warnings=['Probability estimates are approximate and may be imperfectly calibrated.']",
+        "EVIDENCE_JSON.governance.required_warnings",
+        "EVIDENCE_JSON.governance.deployment_status='research_only_external_validation_or_robustness'"
+      ],
+      "governed_summary": "Calibration governance audit indicates approximate probability quality with ECE=0.0821766617978529, Brier score=0.2869191658796662, and log loss=0.4978445226753214. External probabilities are diagnostic confidence estimates and require calibration caution. Use probability bands and calibration warnings. The evidence package is research-only external validation and not for autonomous HR decisions.",
+      "normalized_warning_ids": [
+        "calibration.probabilities_approximate",
+        "causality.shap_not_causal",
+        "deployment.human_review_required",
+        "deployment.not_autonomous",
+        "fairness.department_removal_not_fairness_proof",
+        "actionability.counterfactual_not_prescription",
+        "other.unmapped"
+      ],
+      "normalized_warnings": [
+        {
+          "category": "calibration",
+          "message": "Probability estimates should be interpreted as approximate confidence, not objective certainty.",
+          "severity": "medium",
+          "source_text": "Probability estimates are approximate and may be imperfectly calibrated.",
+          "warning_id": "calibration.probabilities_approximate"
+        },
+        {
+          "category": "causality",
+          "message": "SHAP is attribution, not causality.",
+          "severity": "high",
+          "source_text": "SHAP is attribution, not causality.",
+          "warning_id": "causality.shap_not_causal"
+        },
+        {
+          "category": "deployment",
+          "message": "Prediction requires human review.",
+          "severity": "high",
+          "source_text": "Prediction requires human review.",
+          "warning_id": "deployment.human_review_required"
+        },
+        {
+          "category": "deployment",
+          "message": "This model is decision support only and is not for autonomous HR decisions.",
+          "severity": "high",
+          "source_text": "Not for autonomous HR decisions.",
+          "warning_id": "deployment.not_autonomous"
+        },
+        {
+          "category": "fairness",
+          "message": "Removing EmpDepartment does not prove fairness.",
+          "severity": "high",
+          "source_text": "Removing group variables does not prove fairness.",
+          "warning_id": "fairness.department_removal_not_fairness_proof"
+        },
+        {
+          "category": "actionability",
+          "message": "Counterfactuals may not be employee-actionable and must not be treated as employee prescriptions.",
+          "severity": "high",
+          "source_text": "Counterfactuals may not be employee-actionable.",
+          "warning_id": "actionability.counterfactual_not_prescription"
+        },
+        {
+          "category": "other",
+          "message": "External dataset role limits must be respected.",
+          "severity": "medium",
+          "source_text": "External dataset role limits must be respected.",
+          "warning_id": "other.unmapped"
+        }
+      ],
+      "recommended_research_actions": [
+        "Use probability bands rather than point estimates for downstream interpretation.",
+        "Retain calibration caution in any reporting or dashboarding.",
+        "Keep the research-only external validation boundary and avoid autonomous HR use.",
+        "Review calibration on additional external samples before any broader governance reliance."
+      ],
+      "required_warnings": [
+        "Probability estimates should be interpreted as approximate confidence, not objective certainty.",
+        "SHAP is attribution, not causality.",
+        "Prediction requires human review.",
+        "This model is decision support only and is not for autonomous HR decisions.",
+        "Removing EmpDepartment does not prove fairness.",
+        "Counterfactuals may not be employee-actionable and must not be treated as employee prescriptions.",
+        "External dataset role limits must be respected."
+      ],
+      "requires_human_review": true,
+      "risk_level": "medium",
+      "status": "pass_with_warnings",
+      "unsupported_claims_detected": []
+    },
+    {
+      "agent_name": "ShapStabilityAuditAgent",
+      "evidence_used": [
+        "Deterministic audit tool output: status=pass_with_warnings, risk_level=high, details.external_case_type=correct_high_confidence, required_warnings=['SHAP is attribution, not causality.', 'Discuss only stable global feature groups.']",
+        "EVIDENCE_JSON.governance: deployment_status=research_only_external_validation_or_robustness; prohibited_use excludes autonomous HR decisions; required_warnings include SHAP attribution not causality, prediction requires human review, not for autonomous HR decisions, removing group variables does not prove fairness, counterfactuals may not be employee-actionable, external dataset role limits must be respected.",
+        "EVIDENCE_JSON.prediction: case_id=ibm_hr_analytics_department_free_45; predicted_class=3; true_class=3; confidence=0.9966751427553432; uncertainty_flag=false; leakage_safe_status=external_research_candidate.",
+        "EVIDENCE_JSON.shap: shap_stability_summary.external_case_type=correct_high_confidence; grouped_shap_values and top positive/negative features provided; explanation_stability_warning states SHAP values are model attributions, not causal effects.",
+        "EVIDENCE_JSON.calibration: calibration_warning indicates external probabilities are diagnostic confidence estimates and require calibration caution.",
+        "EVIDENCE_JSON.counterfactual: validity=0.0; failed_reason states prototype counterfactual recourse was not claimed; warning states counterfactuals and actionability summaries are model scenarios, not employee prescriptions.",
+        "EVIDENCE_JSON.fairness: proxy_risk_warnings and low_support_warnings indicate proxy and small-sample caution; disparity_gaps reported for several attributes.",
+        "EVIDENCE_JSON.leakage: leakage_safe_score=0.4603114606553593; leakage_warning notes exclusion of target, identifiers, direct sensitive/audit-only fields, and mapped leakage-risk columns for the selected policy."
+      ],
+      "governed_summary": "Grouped SHAP stability audit passed with warnings for an external correct high-confidence case. The deterministic audit reports SHAP as attribution, not causality, and advises discussing only stable global feature groups. Evidence shows a research-only external validation setting, high prediction confidence for the predicted class, and grouped SHAP values with both positive and negative contributors. No causal or employee-prescriptive interpretation is supported.",
+      "normalized_warning_ids": [
+        "causality.shap_not_causal",
+        "other.unmapped",
+        "deployment.human_review_required",
+        "deployment.not_autonomous",
+        "fairness.department_removal_not_fairness_proof",
+        "actionability.counterfactual_not_prescription",
+        "calibration.probabilities_approximate"
+      ],
+      "normalized_warnings": [
+        {
+          "category": "causality",
+          "message": "SHAP is attribution, not causality.",
+          "severity": "high",
+          "source_text": "SHAP is attribution, not causality.",
+          "warning_id": "causality.shap_not_causal"
+        },
+        {
+          "category": "other",
+          "message": "Discuss only stable global feature groups.",
+          "severity": "medium",
+          "source_text": "Discuss only stable global feature groups.",
+          "warning_id": "other.unmapped"
+        },
+        {
+          "category": "deployment",
+          "message": "Prediction requires human review.",
+          "severity": "high",
+          "source_text": "Prediction requires human review.",
+          "warning_id": "deployment.human_review_required"
+        },
+        {
+          "category": "deployment",
+          "message": "This model is decision support only and is not for autonomous HR decisions.",
+          "severity": "high",
+          "source_text": "Not for autonomous HR decisions.",
+          "warning_id": "deployment.not_autonomous"
+        },
+        {
+          "category": "fairness",
+          "message": "Removing EmpDepartment does not prove fairness.",
+          "severity": "high",
+          "source_text": "Removing group variables does not prove fairness.",
+          "warning_id": "fairness.department_removal_not_fairness_proof"
+        },
+        {
+          "category": "actionability",
+          "message": "Counterfactuals may not be employee-actionable and must not be treated as employee prescriptions.",
+          "severity": "high",
+          "source_text": "Counterfactuals may not be employee-actionable.",
+          "warning_id": "actionability.counterfactual_not_prescription"
+        },
+        {
+          "category": "calibration",
+          "message": "Probability estimates should be interpreted as approximate confidence, not objective certainty.",
+          "severity": "medium",
+          "source_text": "External probabilities are diagnostic confidence estimates and require calibration caution.",
+          "warning_id": "calibration.probabilities_approximate"
+        }
+      ],
+      "recommended_research_actions": [
+        "Limit interpretation to stable grouped SHAP patterns only.",
+        "Treat the prediction as research-grade decision support requiring human review.",
+        "Apply calibration caution when using the reported probabilities.",
+        "Avoid using counterfactual/actionability outputs as employee instructions.",
+        "Review proxy-risk and low-support fairness warnings before any broader governance conclusion."
+      ],
+      "required_warnings": [
+        "SHAP is attribution, not causality.",
+        "Discuss only stable global feature groups.",
+        "Prediction requires human review.",
+        "This model is decision support only and is not for autonomous HR decisions.",
+        "Removing EmpDepartment does not prove fairness.",
+        "Counterfactuals may not be employee-actionable and must not be treated as employee prescriptions.",
+        "Probability estimates should be interpreted as approximate confidence, not objective certainty."
+      ],
+      "requires_human_review": true,
+      "risk_level": "high",
+      "status": "pass_with_warnings",
+      "unsupported_claims_detected": [
+        "Any causal interpretation of SHAP values.",
+        "Any employee-prescriptive recommendation derived from counterfactuals or actionability summaries.",
+        "Any claim that removing group variables proves fairness.",
+        "Any autonomous HR decision claim based on this output."
+      ]
+    },
+    {
+      "agent_name": "CounterfactualActionabilityAgent",
+      "evidence_used": [
+        "EVIDENCE_JSON.counterfactual.actionability_label = mostly_manager_organisation_or_proxy_constrained",
+        "EVIDENCE_JSON.counterfactual.changed_features = []",
+        "EVIDENCE_JSON.counterfactual.validity = 0.0",
+        "EVIDENCE_JSON.counterfactual.failed_reason = Prototype counterfactual recourse was not claimed for this external evidence package.",
+        "EVIDENCE_JSON.counterfactual.warning = Counterfactuals and actionability summaries are model scenarios, not employee prescriptions.",
+        "EVIDENCE_JSON.governance.deployment_status = research_only_external_validation_or_robustness",
+        "EVIDENCE_JSON.governance.required_warnings",
+        "Deterministic audit tool output: status=pass_with_warnings, risk_level=high, summary=Employee-only counterfactual validity is zero or unavailable; recourse is not employee-actionable."
+      ],
+      "governed_summary": "The deterministic audit indicates the counterfactual actionability result is not employee-actionable: validity is 0.0, no changed features are provided, and the package explicitly states prototype counterfactual recourse was not claimed for this external evidence package. The actionability label is mostly_manager_organisation_or_proxy_constrained, which suggests constraints are primarily organizational or proxy-related rather than employee-controlled. This is research-only external validation evidence and must not be used for autonomous HR decisions or employee prescriptions.",
+      "normalized_warning_ids": [
+        "actionability.counterfactual_not_prescription",
+        "other.unmapped",
+        "causality.shap_not_causal",
+        "deployment.human_review_required",
+        "deployment.not_autonomous",
+        "fairness.department_removal_not_fairness_proof"
+      ],
+      "normalized_warnings": [
+        {
+          "category": "actionability",
+          "message": "Counterfactuals may not be employee-actionable and must not be treated as employee prescriptions.",
+          "severity": "high",
+          "source_text": "Counterfactuals are model-level scenarios, not employee instructions.",
+          "warning_id": "actionability.counterfactual_not_prescription"
+        },
+        {
+          "category": "other",
+          "message": "Do not say the employee should change a feature.",
+          "severity": "medium",
+          "source_text": "Do not say the employee should change a feature.",
+          "warning_id": "other.unmapped"
+        },
+        {
+          "category": "causality",
+          "message": "SHAP is attribution, not causality.",
+          "severity": "high",
+          "source_text": "SHAP is attribution, not causality.",
+          "warning_id": "causality.shap_not_causal"
+        },
+        {
+          "category": "deployment",
+          "message": "Prediction requires human review.",
+          "severity": "high",
+          "source_text": "Prediction requires human review.",
+          "warning_id": "deployment.human_review_required"
+        },
+        {
+          "category": "deployment",
+          "message": "This model is decision support only and is not for autonomous HR decisions.",
+          "severity": "high",
+          "source_text": "Not for autonomous HR decisions.",
+          "warning_id": "deployment.not_autonomous"
+        },
+        {
+          "category": "fairness",
+          "message": "Removing EmpDepartment does not prove fairness.",
+          "severity": "high",
+          "source_text": "Removing group variables does not prove fairness.",
+          "warning_id": "fairness.department_removal_not_fairness_proof"
+        }
+      ],
+      "recommended_research_actions": [
+        "Treat the result as non-actionable research evidence only.",
+        "If recourse is needed, evaluate organizational or process-level interventions rather than employee prescriptions.",
+        "Preserve the existing governance warnings in any downstream report.",
+        "Route any operational use through human review and HR governance controls."
+      ],
+      "required_warnings": [
+        "Counterfactuals may not be employee-actionable and must not be treated as employee prescriptions.",
+        "Do not say the employee should change a feature.",
+        "SHAP is attribution, not causality.",
+        "Prediction requires human review.",
+        "This model is decision support only and is not for autonomous HR decisions.",
+        "Removing EmpDepartment does not prove fairness."
+      ],
+      "requires_human_review": true,
+      "risk_level": "high",
+      "status": "pass_with_warnings",
+      "unsupported_claims_detected": []
+    },
+    {
+      "agent_name": "ExplanationComplianceAgent",
+      "evidence_used": [
+        "EXPLANATION_JSON.detailed_explanation",
+        "EXPLANATION_JSON.faithfulness_check",
+        "EXPLANATION_JSON.requires_human_review",
+        "EXPLANATION_JSON.warnings",
+        "EVIDENCE_JSON.governance",
+        "EVIDENCE_JSON.prediction",
+        "EVIDENCE_JSON.shap",
+        "EVIDENCE_JSON.calibration",
+        "EVIDENCE_JSON.fairness",
+        "EVIDENCE_JSON.counterfactual",
+        "EVIDENCE_JSON.leakage",
+        "Deterministic compliance audit tool output: status=pass, risk_level=low, score=100"
+      ],
+      "governed_summary": "Explanation compliance audit passed with score 100. The explanation is faithful to the provided evidence, with no forbidden claims, no unsupported claims, and no missing warnings detected by the deterministic audit tool. The case remains research-only external validation / robustness evidence, with human review required before any operational HR use.",
+      "normalized_warning_ids": [
+        "causality.shap_not_causal",
+        "deployment.human_review_required",
+        "deployment.not_autonomous",
+        "fairness.department_removal_not_fairness_proof",
+        "actionability.counterfactual_not_prescription",
+        "other.unmapped"
+      ],
+      "normalized_warnings": [
+        {
+          "category": "causality",
+          "message": "SHAP is attribution, not causality.",
+          "severity": "high",
+          "source_text": "SHAP is attribution, not causality.",
+          "warning_id": "causality.shap_not_causal"
+        },
+        {
+          "category": "deployment",
+          "message": "Prediction requires human review.",
+          "severity": "high",
+          "source_text": "Prediction requires human review.",
+          "warning_id": "deployment.human_review_required"
+        },
+        {
+          "category": "deployment",
+          "message": "This model is decision support only and is not for autonomous HR decisions.",
+          "severity": "high",
+          "source_text": "Not for autonomous HR decisions.",
+          "warning_id": "deployment.not_autonomous"
+        },
+        {
+          "category": "fairness",
+          "message": "Removing EmpDepartment does not prove fairness.",
+          "severity": "high",
+          "source_text": "Removing group variables does not prove fairness.",
+          "warning_id": "fairness.department_removal_not_fairness_proof"
+        },
+        {
+          "category": "actionability",
+          "message": "Counterfactuals may not be employee-actionable and must not be treated as employee prescriptions.",
+          "severity": "high",
+          "source_text": "Counterfactuals may not be employee-actionable.",
+          "warning_id": "actionability.counterfactual_not_prescription"
+        },
+        {
+          "category": "other",
+          "message": "External dataset role limits must be respected.",
+          "severity": "medium",
+          "source_text": "External dataset role limits must be respected.",
+          "warning_id": "other.unmapped"
+        }
+      ],
+      "recommended_research_actions": [
+        "Retain the existing governance warnings in any downstream reporting.",
+        "Use the explanation only as research-grade external validation evidence.",
+        "Do not convert SHAP attributions into causal or prescriptive HR statements.",
+        "Do not use the prediction for autonomous HR decisions.",
+        "If further analysis is needed, review the external validation and fairness summaries under the stated policy constraints."
+      ],
+      "required_warnings": [
+        "SHAP is attribution, not causality.",
+        "Prediction requires human review.",
+        "This model is decision support only and is not for autonomous HR decisions.",
+        "Removing EmpDepartment does not prove fairness.",
+        "Counterfactuals may not be employee-actionable and must not be treated as employee prescriptions.",
+        "External dataset role limits must be respected."
+      ],
+      "requires_human_review": true,
+      "risk_level": "low",
+      "status": "pass",
+      "unsupported_claims_detected": []
+    }
+  ],
+  "case_id": "ibm_hr_analytics_department_free_45",
+  "governed_explanation": {
+    "_llm_backend": "openai_chat_completions",
+    "_llm_model": "gpt-5.4-mini",
+    "_llm_usage": {
+      "completion_tokens": 726,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": 0
+      },
+      "prompt_tokens": 4517,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 4352
+      },
+      "total_tokens": 5243
+    },
+    "case_id": "ibm_hr_analytics_department_free_45",
+    "detailed_explanation": "For case ibm_hr_analytics_department_free_45, the xgboost model predicted class 3 with class probabilities 0.9966751427553432 for class 3 and 0.0033248572446567 for class 4. The evidence labels this as an external research candidate under the department_free feature policy. The SHAP summary indicates the largest positive attributions were MonthlyIncome (0.333294004201889), MonthlyRate (0.263784646987915), EmpHourlyRate (0.2544944882392883), ExperienceYearsAtThisCompany (0.2070202529430389), and DistanceFromHome (0.1669445931911468). The largest negative attributions were YearsSinceLastPromotion (-0.1423932313919067), ExperienceYearsInCurrentRole (-0.1163963973522186), and YearsWithCurrManager (-0.1005365923047065). These SHAP values explain model attribution only and do not establish causality. Calibration evidence is available but should be treated cautiously: Brier score 0.2869191658796662, expected calibration error 0.0821766617978529, and log loss 0.4978445226753214, with an explicit warning that external probabilities are diagnostic confidence estimates. Fairness evidence includes audited groups and disparity gaps for some precision_4.0 metrics, including EmpJobRole_precision_4.0 = 1.0, EmpJobLevel_precision_4.0 = 0.25, YearsWithCurrManager_precision_4.0 = 0.3333333333333333, EducationBackground_precision_4.0 = 0.2, and MaritalStatus_precision_4.0 = 0.2. Low-support warnings are present for several Age groups with n_samples below 30. Counterfactual evidence does not claim recourse: changed_features is empty, validity is 0.0, and the package states that prototype counterfactual recourse was not claimed. The governance metadata states this system is research-only decision support and cannot make autonomous HR decisions.",
+    "faithfulness_check": {
+      "faithfulness_pass": true,
+      "forbidden_claims": [],
+      "missing_warnings": [],
+      "score": 100,
+      "suggested_revision": "",
+      "unsupported_claims": []
+    },
+    "requires_human_review": true,
+    "short_explanation": "This is a research-only external validation case. The model predicted class 3 with confidence 0.9967, and the provided SHAP values are attribution signals only, not causal effects. Human review is required before any use.",
+    "unsupported_claims_detected": [],
+    "warnings": [
+      {
+        "category": "deployment",
+        "message": "This model is decision support only and is not for autonomous HR decisions.",
+        "severity": "high",
+        "type": "deployment",
+        "warning_id": "deployment.not_autonomous"
+      },
+      {
+        "category": "causality",
+        "message": "SHAP is attribution, not causality.",
+        "severity": "high",
+        "type": "causality",
+        "warning_id": "causality.shap_not_causal"
+      },
+      {
+        "category": "calibration",
+        "message": "Probability estimates should be interpreted as approximate confidence, not objective certainty.",
+        "severity": "medium",
+        "type": "calibration",
+        "warning_id": "calibration.probabilities_approximate"
+      },
+      {
+        "category": "fairness",
+        "message": "Removing EmpDepartment does not prove fairness.",
+        "severity": "high",
+        "type": "fairness",
+        "warning_id": "fairness.department_removal_not_fairness_proof"
+      },
+      {
+        "category": "proxy",
+        "message": "EmpJobRole may proxy EmpDepartment, so department removal does not eliminate proxy risk.",
+        "severity": "high",
+        "type": "proxy",
+        "warning_id": "proxy.jobrole_department_proxy"
+      },
+      {
+        "category": "actionability",
+        "message": "Counterfactuals may not be employee-actionable and must not be treated as employee prescriptions.",
+        "severity": "high",
+        "type": "actionability",
+        "warning_id": "actionability.counterfactual_not_prescription"
+      },
+      {
+        "category": "deployment",
+        "message": "Prediction requires human review.",
+        "severity": "high",
+        "type": "deployment",
+        "warning_id": "deployment.human_review_required"
+      },
+      {
+        "category": "leakage",
+        "message": "Full-feature models are leakage-warning upper-bound baselines only, not deployable models.",
+        "severity": "high",
+        "type": "leakage",
+        "warning_id": "leakage.full_feature_upper_bound_only"
+      },
+      {
+        "category": "validation",
+        "message": "External validation is required before deployment.",
+        "severity": "high",
+        "type": "validation",
+        "warning_id": "validation.external_validation_required"
+      }
+    ]
+  },
+  "runtime_model": "gpt-5.4-mini",
+  "runtime_provider": "openai_agents_sdk",
+  "supervisor_synthesis": {
+    "critical_warnings": [
+      "Counterfactuals may not be employee-actionable and must not be treated as employee prescriptions.",
+      "Discuss only stable global feature groups.",
+      "Prediction requires human review.",
+      "Probability estimates should be interpreted as approximate confidence, not objective certainty.",
+      "Removing EmpDepartment does not prove fairness.",
+      "SHAP is attribution, not causality.",
+      "This model is decision support only and is not for autonomous HR decisions."
+    ],
+    "normalized_critical_warning_ids": [
+      "actionability.counterfactual_not_prescription",
+      "other.unmapped",
+      "deployment.human_review_required",
+      "calibration.probabilities_approximate",
+      "fairness.department_removal_not_fairness_proof",
+      "causality.shap_not_causal",
+      "deployment.not_autonomous"
+    ],
+    "normalized_critical_warnings": [
+      {
+        "category": "actionability",
+        "message": "Counterfactuals may not be employee-actionable and must not be treated as employee prescriptions.",
+        "severity": "high",
+        "source_text": "Counterfactuals may not be employee-actionable and must not be treated as employee prescriptions.",
+        "warning_id": "actionability.counterfactual_not_prescription"
+      },
+      {
+        "category": "other",
+        "message": "Discuss only stable global feature groups.",
+        "severity": "medium",
+        "source_text": "Discuss only stable global feature groups.",
+        "warning_id": "other.unmapped"
+      },
+      {
+        "category": "deployment",
+        "message": "Prediction requires human review.",
+        "severity": "high",
+        "source_text": "Prediction requires human review.",
+        "warning_id": "deployment.human_review_required"
+      },
+      {
+        "category": "calibration",
+        "message": "Probability estimates should be interpreted as approximate confidence, not objective certainty.",
+        "severity": "medium",
+        "source_text": "Probability estimates should be interpreted as approximate confidence, not objective certainty.",
+        "warning_id": "calibration.probabilities_approximate"
+      },
+      {
+        "category": "fairness",
+        "message": "Removing EmpDepartment does not prove fairness.",
+        "severity": "high",
+        "source_text": "Removing EmpDepartment does not prove fairness.",
+        "warning_id": "fairness.department_removal_not_fairness_proof"
+      },
+      {
+        "category": "causality",
+        "message": "SHAP is attribution, not causality.",
+        "severity": "high",
+        "source_text": "SHAP is attribution, not causality.",
+        "warning_id": "causality.shap_not_causal"
+      },
+      {
+        "category": "deployment",
+        "message": "This model is decision support only and is not for autonomous HR decisions.",
+        "severity": "high",
+        "source_text": "This model is decision support only and is not for autonomous HR decisions.",
+        "warning_id": "deployment.not_autonomous"
+      }
+    ],
+    "overall_status": "research_only",
+    "prohibited_uses": [
+      "hiring decisions",
+      "firing decisions",
+      "promotion decisions",
+      "compensation decisions",
+      "disciplinary decisions",
+      "autonomous employee evaluation"
+    ],
+    "readiness_summary": "The evidence supports research-governance use only, with human review required. Leakage controls appear in place for the selected policy, explanation compliance passed, and calibration is usable only as approximate diagnostic confidence with caution. However, fairness remains unresolved due to proxy-risk and low-support warnings, SHAP must be treated as attribution rather than causality, and counterfactual outputs are not employee-actionable. This system is not ready for autonomous HR use or any HR decision-making.",
+    "recommended_research_actions": [
+      "Use final-candidate evidence in manuscript tables only with the stated warnings preserved.",
+      "Report proxy risk, low-support subgroup limitations, and counterfactual non-actionability explicitly.",
+      "Use probability bands rather than point estimates in any reporting.",
+      "Limit SHAP interpretation to stable grouped feature patterns only.",
+      "Perform additional external validation on subgroup performance and calibration before any broader governance conclusion."
+    ],
+    "required_human_review": true
+  },
+  "usage_rows": [
+    {
+      "cached_input_tokens": 2048,
+      "case_id": "ibm_hr_analytics_department_free_45",
+      "estimated_cost_usd": 0.0038826,
+      "input_tokens": 4752,
+      "model": "gpt-5.4-mini",
+      "notes": "OpenAI Agents SDK run.",
+      "operation": "agents_sdk_LeakageAuditAgent",
+      "output_tokens": 378,
+      "provider": "openai_agents_sdk",
+      "reasoning_tokens": 0,
+      "requests": 2,
+      "run_id": "agents_sdk_LeakageAuditAgent_2026-06-24T07:38:21+00:00",
+      "timestamp": "2026-06-24T07:38:21+00:00",
+      "total_tokens": 5130
+    },
+    {
+      "cached_input_tokens": 2048,
+      "case_id": "ibm_hr_analytics_department_free_45",
+      "estimated_cost_usd": 0.00477135,
+      "input_tokens": 5121,
+      "model": "gpt-5.4-mini",
+      "notes": "OpenAI Agents SDK run.",
+      "operation": "agents_sdk_FairnessProxyAuditAgent",
+      "output_tokens": 514,
+      "provider": "openai_agents_sdk",
+      "reasoning_tokens": 0,
+      "requests": 2,
+      "run_id": "agents_sdk_FairnessProxyAuditAgent_2026-06-24T07:38:26+00:00",
+      "timestamp": "2026-06-24T07:38:26+00:00",
+      "total_tokens": 5635
+    },
+    {
+      "cached_input_tokens": 2048,
+      "case_id": "ibm_hr_analytics_department_free_45",
+      "estimated_cost_usd": 0.0041316,
+      "input_tokens": 4802,
+      "model": "gpt-5.4-mini",
+      "notes": "OpenAI Agents SDK run.",
+      "operation": "agents_sdk_CalibrationAuditAgent",
+      "output_tokens": 425,
+      "provider": "openai_agents_sdk",
+      "reasoning_tokens": 0,
+      "requests": 2,
+      "run_id": "agents_sdk_CalibrationAuditAgent_2026-06-24T07:38:30+00:00",
+      "timestamp": "2026-06-24T07:38:30+00:00",
+      "total_tokens": 5227
+    },
+    {
+      "cached_input_tokens": 2048,
+      "case_id": "ibm_hr_analytics_department_free_45",
+      "estimated_cost_usd": 0.0053871,
+      "input_tokens": 4778,
+      "model": "gpt-5.4-mini",
+      "notes": "OpenAI Agents SDK run.",
+      "operation": "agents_sdk_ShapStabilityAuditAgent",
+      "output_tokens": 708,
+      "provider": "openai_agents_sdk",
+      "reasoning_tokens": 0,
+      "requests": 2,
+      "run_id": "agents_sdk_ShapStabilityAuditAgent_2026-06-24T07:38:37+00:00",
+      "timestamp": "2026-06-24T07:38:37+00:00",
+      "total_tokens": 5486
+    },
+    {
+      "cached_input_tokens": 2048,
+      "case_id": "ibm_hr_analytics_department_free_45",
+      "estimated_cost_usd": 0.0044166,
+      "input_tokens": 4876,
+      "model": "gpt-5.4-mini",
+      "notes": "OpenAI Agents SDK run.",
+      "operation": "agents_sdk_CounterfactualActionabilityAgent",
+      "output_tokens": 476,
+      "provider": "openai_agents_sdk",
+      "reasoning_tokens": 0,
+      "requests": 2,
+      "run_id": "agents_sdk_CounterfactualActionabilityAgent_2026-06-24T07:38:41+00:00",
+      "timestamp": "2026-06-24T07:38:41+00:00",
+      "total_tokens": 5352
+    },
+    {
+      "cached_input_tokens": 3072,
+      "case_id": "ibm_hr_analytics_department_free_45",
+      "estimated_cost_usd": 0.0047904,
+      "input_tokens": 6986,
+      "model": "gpt-5.4-mini",
+      "notes": "OpenAI Agents SDK run.",
+      "operation": "agents_sdk_ExplanationComplianceAgent",
+      "output_tokens": 361,
+      "provider": "openai_agents_sdk",
+      "reasoning_tokens": 0,
+      "requests": 2,
+      "run_id": "agents_sdk_ExplanationComplianceAgent_2026-06-24T07:38:50+00:00",
+      "timestamp": "2026-06-24T07:38:50+00:00",
+      "total_tokens": 7347
+    },
+    {
+      "cached_input_tokens": 0,
+      "case_id": "ibm_hr_analytics_department_free_45",
+      "estimated_cost_usd": 0.00648675,
+      "input_tokens": 6753,
+      "model": "gpt-5.4-mini",
+      "notes": "OpenAI Agents SDK run.",
+      "operation": "agents_sdk_SupervisorGovernanceAgent",
+      "output_tokens": 316,
+      "provider": "openai_agents_sdk",
+      "reasoning_tokens": 0,
+      "requests": 1,
+      "run_id": "agents_sdk_SupervisorGovernanceAgent_2026-06-24T07:38:53+00:00",
+      "timestamp": "2026-06-24T07:38:53+00:00",
+      "total_tokens": 7069
+    }
+  ]
+}

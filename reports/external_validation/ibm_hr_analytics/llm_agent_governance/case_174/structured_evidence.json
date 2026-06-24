@@ -1,0 +1,239 @@
+{
+  "calibration": {
+    "brier_score": 0.2869191658796662,
+    "calibration_warning": "External probabilities are diagnostic confidence estimates and require calibration caution.",
+    "expected_calibration_error": 0.0821766617978529,
+    "log_loss": 0.4978445226753214
+  },
+  "counterfactual": {
+    "actionability_label": "mostly_manager_organisation_or_proxy_constrained",
+    "changed_features": [],
+    "counterfactual_mode": "external_actionability_classification",
+    "failed_reason": "Prototype counterfactual recourse was not claimed for this external evidence package.",
+    "probability_gain": null,
+    "proximity_cost": null,
+    "validity": 0.0,
+    "warning": "Counterfactuals and actionability summaries are model scenarios, not employee prescriptions."
+  },
+  "evidence_sources": [
+    "C:\\Users\\Yusuf\\Documents\\GitHub\\employee performance with XAI\\reports\\external_validation\\ibm_hr_analytics\\performance_metrics.csv",
+    "C:\\Users\\Yusuf\\Documents\\GitHub\\employee performance with XAI\\reports\\external_validation\\ibm_hr_analytics\\shap\\department_free\\local_grouped_shap_values.csv",
+    "C:\\Users\\Yusuf\\Documents\\GitHub\\employee performance with XAI\\reports\\external_validation\\ibm_hr_analytics\\fairness_proxy\\fairness_disparity_summary.csv",
+    "C:\\Users\\Yusuf\\Documents\\GitHub\\employee performance with XAI\\reports\\external_validation\\ibm_hr_analytics\\actionability_summary.csv"
+  ],
+  "fairness": {
+    "audited_groups": [
+      "Gender",
+      "MaritalStatus",
+      "EmpDepartment",
+      "EmpJobRole",
+      "Age",
+      "DailyRate",
+      "EducationBackground",
+      "EmpHourlyRate",
+      "EmpJobLevel",
+      "ExperienceYearsAtThisCompany",
+      "MonthlyIncome",
+      "MonthlyRate",
+      "StockOptionLevel",
+      "YearsSinceLastPromotion",
+      "YearsWithCurrManager"
+    ],
+    "bootstrap_ci": {},
+    "disparity_gaps": {
+      "EducationBackground_precision_4.0": 0.2,
+      "EmpJobLevel_precision_4.0": 0.25,
+      "EmpJobRole_precision_4.0": 1.0,
+      "MaritalStatus_precision_4.0": 0.2,
+      "YearsWithCurrManager_precision_4.0": 0.3333333333333333
+    },
+    "low_support_warnings": [
+      {
+        "attribute": "Age",
+        "group_value": "24",
+        "n_samples": 26,
+        "warning": "n_samples < 30"
+      },
+      {
+        "attribute": "Age",
+        "group_value": "25",
+        "n_samples": 26,
+        "warning": "n_samples < 30"
+      },
+      {
+        "attribute": "Age",
+        "group_value": "49",
+        "n_samples": 24,
+        "warning": "n_samples < 30"
+      },
+      {
+        "attribute": "Age",
+        "group_value": "47",
+        "n_samples": 24,
+        "warning": "n_samples < 30"
+      },
+      {
+        "attribute": "Age",
+        "group_value": "55",
+        "n_samples": 22,
+        "warning": "n_samples < 30"
+      },
+      {
+        "attribute": "Age",
+        "group_value": "53",
+        "n_samples": 19,
+        "warning": "n_samples < 30"
+      },
+      {
+        "attribute": "Age",
+        "group_value": "48",
+        "n_samples": 19,
+        "warning": "n_samples < 30"
+      },
+      {
+        "attribute": "Age",
+        "group_value": "51",
+        "n_samples": 19,
+        "warning": "n_samples < 30"
+      },
+      {
+        "attribute": "Age",
+        "group_value": "54",
+        "n_samples": 18,
+        "warning": "n_samples < 30"
+      },
+      {
+        "attribute": "Age",
+        "group_value": "52",
+        "n_samples": 18,
+        "warning": "n_samples < 30"
+      }
+    ],
+    "proxy_risk_warnings": [
+      "Removing direct sensitive or group variables does not prove fairness.",
+      "Department, job role, salary, tenure, and evaluation-history fields may act as proxies depending on dataset context."
+    ],
+    "subgroup_metrics": {}
+  },
+  "governance": {
+    "deployment_status": "research_only_external_validation_or_robustness",
+    "intended_use": "Research-grade external validation and robustness evidence for HR XAI governance.",
+    "model_card_summary": "External dataset IBM HR Analytics Employee Attrition and Performance is used for schema-compatible robustness with restricted performance target space. Policy department_free excludes mapped leakage-risk and sensitive/audit-only fields. The system is research-only decision support and cannot make autonomous HR decisions.",
+    "prohibited_use": "No autonomous hiring, firing, promotion, compensation, discipline, or individual employment decisions.",
+    "required_warnings": [
+      "SHAP is attribution, not causality.",
+      "Prediction requires human review.",
+      "Not for autonomous HR decisions.",
+      "Removing group variables does not prove fairness.",
+      "Counterfactuals may not be employee-actionable.",
+      "External dataset role limits must be respected."
+    ]
+  },
+  "leakage": {
+    "excluded_leakage_features": [
+      "Attrition",
+      "EmpLastSalaryHikePercent",
+      "EmployeeCount",
+      "Over18",
+      "PerformanceRating",
+      "StandardHours"
+    ],
+    "feature_policy": "department_free",
+    "full_feature_score": null,
+    "leakage_safe_score": 0.4603114606553593,
+    "leakage_sensitivity_index": null,
+    "leakage_warning": "External models exclude target, identifiers, direct sensitive/audit-only fields, and mapped leakage-risk columns for the selected policy."
+  },
+  "prediction": {
+    "case_id": "ibm_hr_analytics_department_free_174",
+    "class_probabilities": {
+      "3": 0.5043424963951111,
+      "4": 0.4956575036048889
+    },
+    "confidence": 0.5043424963951111,
+    "feature_policy": "department_free",
+    "leakage_safe_status": "external_research_candidate",
+    "model_name": "xgboost",
+    "predicted_class": 3,
+    "true_class": 3,
+    "uncertainty_flag": true
+  },
+  "shap": {
+    "class_specific_shap_values": {
+      "DistanceFromHome": 0.0816234871745109,
+      "EmpEducationLevel": -0.0875396952033042,
+      "EmpHourlyRate": 0.1728378236293792,
+      "EmpJobRole": 0.0757772698998451,
+      "EmpJobSatisfaction": -0.0454683527350425,
+      "EmpRelationshipSatisfaction": -0.0395939089357852,
+      "ExperienceYearsAtThisCompany": -0.0356465801596641,
+      "ExperienceYearsInCurrentRole": -0.0345723181962966,
+      "MonthlyIncome": -0.0328213647007942,
+      "MonthlyRate": -0.1446765512228012,
+      "YearsSinceLastPromotion": 0.0313167087733745,
+      "YearsWithCurrManager": 0.0891297087073326
+    },
+    "explanation_stability_warning": "External SHAP values are model attributions, not causal effects.",
+    "grouped_shap_values": {
+      "DistanceFromHome": 0.0816234871745109,
+      "EmpEducationLevel": -0.0875396952033042,
+      "EmpHourlyRate": 0.1728378236293792,
+      "EmpJobRole": 0.0757772698998451,
+      "EmpJobSatisfaction": -0.0454683527350425,
+      "EmpRelationshipSatisfaction": -0.0395939089357852,
+      "ExperienceYearsAtThisCompany": -0.0356465801596641,
+      "ExperienceYearsInCurrentRole": -0.0345723181962966,
+      "MonthlyIncome": -0.0328213647007942,
+      "MonthlyRate": -0.1446765512228012,
+      "YearsSinceLastPromotion": 0.0313167087733745,
+      "YearsWithCurrManager": 0.0891297087073326
+    },
+    "shap_stability_summary": {
+      "external_case_type": "correct_low_confidence"
+    },
+    "top_negative_features": [
+      {
+        "feature": "MonthlyRate",
+        "grouped_shap_value": -0.1446765512228012
+      },
+      {
+        "feature": "EmpEducationLevel",
+        "grouped_shap_value": -0.0875396952033042
+      },
+      {
+        "feature": "EmpJobSatisfaction",
+        "grouped_shap_value": -0.0454683527350425
+      },
+      {
+        "feature": "EmpRelationshipSatisfaction",
+        "grouped_shap_value": -0.0395939089357852
+      },
+      {
+        "feature": "ExperienceYearsAtThisCompany",
+        "grouped_shap_value": -0.0356465801596641
+      }
+    ],
+    "top_positive_features": [
+      {
+        "feature": "EmpHourlyRate",
+        "grouped_shap_value": 0.1728378236293792
+      },
+      {
+        "feature": "YearsWithCurrManager",
+        "grouped_shap_value": 0.0891297087073326
+      },
+      {
+        "feature": "DistanceFromHome",
+        "grouped_shap_value": 0.0816234871745109
+      },
+      {
+        "feature": "EmpJobRole",
+        "grouped_shap_value": 0.0757772698998451
+      },
+      {
+        "feature": "YearsSinceLastPromotion",
+        "grouped_shap_value": 0.0313167087733745
+      }
+    ]
+  }
+}

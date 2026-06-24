@@ -1,0 +1,3 @@
+policy,top_feature_count,employee_controllable_count,employee_controllable_share,manager_or_organisation_count,manager_or_organisation_share,high_caution_proxy_count,high_caution_proxy_share,actionability_status,warning
+with_last_evaluation,9,2,0.2222222222222222,5,0.5555555555555556,2,0.2222222222222222,mostly_manager_organisation_or_proxy_constrained,"Counterfactuals are model scenarios, not employee prescriptions; many high-attribution features require manager or organisation action."
+without_last_evaluation,8,2,0.25,5,0.625,1,0.125,mostly_manager_organisation_or_proxy_constrained,"Counterfactuals are model scenarios, not employee prescriptions; many high-attribution features require manager or organisation action."

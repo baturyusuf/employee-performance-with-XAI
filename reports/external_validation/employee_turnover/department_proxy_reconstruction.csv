@@ -1,0 +1,3 @@
+policy,proxy_target,status,n_features,accuracy,balanced_accuracy,macro_f1
+with_last_evaluation,EmpDepartment,completed,8,0.1019404245859731,0.13722358596334505,0.09555578877110903
+without_last_evaluation,EmpDepartment,completed,7,0.1009405135045015,0.13761025586432604,0.09527394679787833

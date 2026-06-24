@@ -1,0 +1,47 @@
+{
+  "dataset_name": "employee_turnover",
+  "display_name": "Human Resources Analytics / Employee Turnover",
+  "recommended_role": "HR task-transfer robustness",
+  "source_url": "https://raw.githubusercontent.com/ucg8j/kaggle_HR/master/HR_comma_sep.csv",
+  "canonical_source_note": "Public mirror of the Human Resources Analytics employee turnover dataset commonly circulated from Kaggle.",
+  "target": {
+    "raw_column": "left",
+    "canonical_column": "AttritionTarget",
+    "task_type": "binary_turnover",
+    "mapping": {}
+  },
+  "id_columns": [],
+  "rename_columns": {
+    "satisfaction_level": "EmpJobSatisfaction",
+    "last_evaluation": "LastEvaluation",
+    "number_project": "ProjectCount",
+    "average_montly_hours": "AverageMonthlyHours",
+    "time_spend_company": "ExperienceYearsAtThisCompany",
+    "Work_accident": "WorkAccident",
+    "promotion_last_5years": "PromotionLast5Years",
+    "sales": "EmpDepartment",
+    "salary": "SalaryBand"
+  },
+  "leakage_risk_columns": [
+    "left",
+    "AttritionTarget"
+  ],
+  "sensitive_audit_only_columns": [],
+  "proxy_risk_columns": [
+    "LastEvaluation",
+    "SalaryBand",
+    "EmpDepartment",
+    "PromotionLast5Years",
+    "AverageMonthlyHours"
+  ],
+  "feature_policy_variants": {
+    "with_last_evaluation": {
+      "description": "Task-transfer robustness candidate retaining last evaluation as a high-caution evaluation/performance proxy.",
+      "exclude_columns": []
+    },
+    "without_last_evaluation": {
+      "description": "Sensitivity candidate excluding last evaluation/performance proxy.",
+      "exclude_columns": ["LastEvaluation"]
+    }
+  }
+}

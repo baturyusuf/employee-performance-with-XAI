@@ -1,0 +1,90 @@
+{
+  "dataset_name": "ibm_hr_analytics",
+  "display_name": "IBM HR Analytics Employee Attrition and Performance",
+  "recommended_role": "schema-compatible robustness",
+  "source_url": "https://raw.githubusercontent.com/nelson-wu/employee-attrition-ml/master/WA_Fn-UseC_-HR-Employee-Attrition.csv",
+  "canonical_source_note": "Public mirror of the IBM HR Analytics Employee Attrition and Performance Kaggle dataset.",
+  "target": {
+    "raw_column": "PerformanceRating",
+    "canonical_column": "PerformanceRating",
+    "task_type": "restricted_ordinal_performance",
+    "mapping": {}
+  },
+  "optional_attrition_target": {
+    "raw_column": "Attrition",
+    "canonical_column": "AttritionTarget",
+    "task_type": "binary_attrition",
+    "mapping": {
+      "No": 0,
+      "Yes": 1
+    }
+  },
+  "id_columns": ["EmployeeNumber"],
+  "rename_columns": {
+    "EmployeeNumber": "EmpNumber",
+    "BusinessTravel": "BusinessTravelFrequency",
+    "Department": "EmpDepartment",
+    "JobRole": "EmpJobRole",
+    "Education": "EmpEducationLevel",
+    "EducationField": "EducationBackground",
+    "EnvironmentSatisfaction": "EmpEnvironmentSatisfaction",
+    "HourlyRate": "EmpHourlyRate",
+    "JobInvolvement": "EmpJobInvolvement",
+    "JobLevel": "EmpJobLevel",
+    "JobSatisfaction": "EmpJobSatisfaction",
+    "MonthlyIncome": "MonthlyIncome",
+    "OverTime": "OverTime",
+    "PercentSalaryHike": "EmpLastSalaryHikePercent",
+    "RelationshipSatisfaction": "EmpRelationshipSatisfaction",
+    "TotalWorkingYears": "TotalWorkExperienceInYears",
+    "TrainingTimesLastYear": "TrainingTimesLastYear",
+    "WorkLifeBalance": "EmpWorkLifeBalance",
+    "YearsAtCompany": "ExperienceYearsAtThisCompany",
+    "YearsInCurrentRole": "ExperienceYearsInCurrentRole",
+    "YearsSinceLastPromotion": "YearsSinceLastPromotion",
+    "YearsWithCurrManager": "YearsWithCurrManager"
+  },
+  "leakage_risk_columns": [
+    "PerformanceRating",
+    "PercentSalaryHike",
+    "EmpLastSalaryHikePercent",
+    "Attrition",
+    "EmployeeCount",
+    "Over18",
+    "StandardHours"
+  ],
+  "sensitive_audit_only_columns": [
+    "Age",
+    "Gender",
+    "MaritalStatus"
+  ],
+  "proxy_risk_columns": [
+    "MonthlyIncome",
+    "MonthlyRate",
+    "DailyRate",
+    "HourlyRate",
+    "EmpHourlyRate",
+    "StockOptionLevel",
+    "EmpDepartment",
+    "EmpJobRole",
+    "EmpJobLevel",
+    "EducationBackground",
+    "YearsSinceLastPromotion",
+    "ExperienceYearsAtThisCompany",
+    "YearsWithCurrManager"
+  ],
+  "feature_policy_variants": {
+    "department_including": {
+      "description": "Leakage-safe robustness candidate retaining department and job role.",
+      "exclude_columns": []
+    },
+    "department_free": {
+      "description": "Department-free robustness candidate.",
+      "exclude_columns": ["EmpDepartment"]
+    },
+    "department_job_role_free": {
+      "description": "Strict proxy sensitivity candidate excluding department, job role, and direct income fields.",
+      "exclude_columns": ["EmpDepartment", "EmpJobRole", "MonthlyIncome", "MonthlyRate", "DailyRate", "EmpHourlyRate"]
+    }
+  }
+}

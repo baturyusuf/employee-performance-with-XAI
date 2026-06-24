@@ -1,0 +1,16 @@
+dataset,policy,case_type,sample_index,external_sample_id,true_class,predicted_class,confidence,correct
+ibm_hr_analytics,department_free,correct_high_confidence,1157,1157,0,0,0.9995303719482495,True
+ibm_hr_analytics,department_free,correct_low_confidence,1197,1197,0,0,0.5004636496167287,True
+ibm_hr_analytics,department_free,misclassification,939,939,1,0,0.998136986532644,False
+ibm_hr_analytics,department_free,small_support_group_Gender,11,11,0,0,0.9547450533856976,True
+ibm_hr_analytics,department_free,proxy_warning_high_shap,936,936,0,0,0.9751333557995656,True
+ibm_hr_analytics,department_including,correct_high_confidence,1157,1157,0,0,0.9996174492438764,True
+ibm_hr_analytics,department_including,correct_low_confidence,1349,1349,0,0,0.5020425319671631,True
+ibm_hr_analytics,department_including,misclassification,939,939,1,0,0.9974339669403041,False
+ibm_hr_analytics,department_including,small_support_group_Gender,11,11,0,0,0.9582898616790771,True
+ibm_hr_analytics,department_including,proxy_warning_high_shap,899,899,0,0,0.9980426178570622,True
+ibm_hr_analytics,department_job_role_free,correct_high_confidence,189,189,0,0,0.9995386178392645,True
+ibm_hr_analytics,department_job_role_free,correct_low_confidence,663,663,1,1,0.5003368854522705,True
+ibm_hr_analytics,department_job_role_free,misclassification,33,33,1,0,0.9989338831175292,False
+ibm_hr_analytics,department_job_role_free,small_support_group_Gender,11,11,0,0,0.944834772291909,True
+ibm_hr_analytics,department_job_role_free,proxy_warning_high_shap,45,45,1,0,0.9497621053980447,False

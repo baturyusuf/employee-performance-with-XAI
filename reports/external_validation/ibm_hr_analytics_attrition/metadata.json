@@ -1,0 +1,25 @@
+{
+  "canonical_column_count": 37,
+  "dataset_name": "ibm_hr_analytics",
+  "display_name": "IBM HR Analytics Employee Attrition and Performance",
+  "labels": [
+    0,
+    1
+  ],
+  "outputs": {
+    "dataset_audit": "C:\\Users\\Yusuf\\Documents\\GitHub\\employee performance with XAI\\reports\\external_validation\\ibm_hr_analytics_attrition\\dataset_audit.md",
+    "duplicate_ids": "C:\\Users\\Yusuf\\Documents\\GitHub\\employee performance with XAI\\reports\\external_validation\\ibm_hr_analytics_attrition\\duplicate_id_report.csv",
+    "leakage_sensitive_proxy_audit": "C:\\Users\\Yusuf\\Documents\\GitHub\\employee performance with XAI\\reports\\external_validation\\ibm_hr_analytics_attrition\\leakage_sensitive_proxy_audit.csv",
+    "missingness": "C:\\Users\\Yusuf\\Documents\\GitHub\\employee performance with XAI\\reports\\external_validation\\ibm_hr_analytics_attrition\\missingness_report.csv",
+    "schema_mapping": "C:\\Users\\Yusuf\\Documents\\GitHub\\employee performance with XAI\\reports\\external_validation\\ibm_hr_analytics_attrition\\schema_mapping.csv",
+    "target_distribution": "C:\\Users\\Yusuf\\Documents\\GitHub\\employee performance with XAI\\reports\\external_validation\\ibm_hr_analytics_attrition\\target_distribution.csv"
+  },
+  "raw_column_count": 35,
+  "recommended_role": "schema-compatible robustness",
+  "row_count": 1470,
+  "source_url": "https://raw.githubusercontent.com/nelson-wu/employee-attrition-ml/master/WA_Fn-UseC_-HR-Employee-Attrition.csv",
+  "target_column": "AttritionTarget",
+  "target_kind": "attrition",
+  "target_raw_column": "Attrition",
+  "task_type": "binary_attrition"
+}

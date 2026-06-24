@@ -1,0 +1,4 @@
+policy,proxy_target,status,n_features,accuracy,balanced_accuracy,macro_f1
+department_including,EmpDepartment,completed,24,0.9666666666666666,0.953062702527248,0.9292791933590363
+department_free,EmpDepartment,completed,24,0.9666666666666666,0.953062702527248,0.9292791933590363
+department_job_role_free,EmpDepartment,completed,19,0.6204081632653061,0.5620464886541617,0.4950137492160779

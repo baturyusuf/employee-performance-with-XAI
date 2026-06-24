@@ -1,0 +1,54 @@
+{
+  "dataset": "employee_turnover",
+  "display_name": "Human Resources Analytics / Employee Turnover",
+  "labels": [
+    0,
+    1
+  ],
+  "min_support": 30,
+  "n_splits_requested": 5,
+  "outputs": {
+    "actionability": "C:\\Users\\Yusuf\\Documents\\GitHub\\employee performance with XAI\\reports\\external_validation\\employee_turnover\\actionability_summary.csv",
+    "calibration_bins": "C:\\Users\\Yusuf\\Documents\\GitHub\\employee performance with XAI\\reports\\external_validation\\employee_turnover\\calibration_bins.csv",
+    "fairness": {
+      "disparity_summary": "C:\\Users\\Yusuf\\Documents\\GitHub\\employee performance with XAI\\reports\\external_validation\\employee_turnover\\fairness_proxy\\fairness_disparity_summary.csv",
+      "group_metrics": "C:\\Users\\Yusuf\\Documents\\GitHub\\employee performance with XAI\\reports\\external_validation\\employee_turnover\\fairness_proxy\\fairness_group_metrics.csv",
+      "interpretation": "C:\\Users\\Yusuf\\Documents\\GitHub\\employee performance with XAI\\reports\\external_validation\\employee_turnover\\fairness_proxy\\fairness_proxy_interpretation.md",
+      "small_group_warnings": "C:\\Users\\Yusuf\\Documents\\GitHub\\employee performance with XAI\\reports\\external_validation\\employee_turnover\\fairness_proxy\\small_group_warnings.csv"
+    },
+    "feature_policy_audit": "C:\\Users\\Yusuf\\Documents\\GitHub\\employee performance with XAI\\reports\\external_validation\\employee_turnover\\feature_policy_audit.csv",
+    "interpretation": "C:\\Users\\Yusuf\\Documents\\GitHub\\employee performance with XAI\\reports\\external_validation\\employee_turnover\\external_experiment_interpretation.md",
+    "performance_metrics": "C:\\Users\\Yusuf\\Documents\\GitHub\\employee performance with XAI\\reports\\external_validation\\employee_turnover\\performance_metrics.csv",
+    "predictions": "C:\\Users\\Yusuf\\Documents\\GitHub\\employee performance with XAI\\reports\\external_validation\\employee_turnover\\model_predictions.csv",
+    "proxy_summary": "C:\\Users\\Yusuf\\Documents\\GitHub\\employee performance with XAI\\reports\\external_validation\\employee_turnover\\department_proxy_reconstruction.csv",
+    "representative_cases": "C:\\Users\\Yusuf\\Documents\\GitHub\\employee performance with XAI\\reports\\external_validation\\employee_turnover\\representative_cases.csv",
+    "shap": {
+      "with_last_evaluation": {
+        "global": "C:\\Users\\Yusuf\\Documents\\GitHub\\employee performance with XAI\\reports\\external_validation\\employee_turnover\\shap\\with_last_evaluation\\global_grouped_shap_importance.csv",
+        "local": "C:\\Users\\Yusuf\\Documents\\GitHub\\employee performance with XAI\\reports\\external_validation\\employee_turnover\\shap\\with_last_evaluation\\local_grouped_shap_values.csv",
+        "top": "C:\\Users\\Yusuf\\Documents\\GitHub\\employee performance with XAI\\reports\\external_validation\\employee_turnover\\shap\\with_last_evaluation\\top_grouped_shap_features.csv"
+      },
+      "without_last_evaluation": {
+        "global": "C:\\Users\\Yusuf\\Documents\\GitHub\\employee performance with XAI\\reports\\external_validation\\employee_turnover\\shap\\without_last_evaluation\\global_grouped_shap_importance.csv",
+        "local": "C:\\Users\\Yusuf\\Documents\\GitHub\\employee performance with XAI\\reports\\external_validation\\employee_turnover\\shap\\without_last_evaluation\\local_grouped_shap_values.csv",
+        "top": "C:\\Users\\Yusuf\\Documents\\GitHub\\employee performance with XAI\\reports\\external_validation\\employee_turnover\\shap\\without_last_evaluation\\top_grouped_shap_features.csv"
+      }
+    }
+  },
+  "package_versions": {
+    "numpy": "2.4.4",
+    "pandas": "3.0.2",
+    "scikit-learn": "1.8.0",
+    "shap": "0.51.0",
+    "xgboost": "3.2.0"
+  },
+  "policies": [
+    "with_last_evaluation",
+    "without_last_evaluation"
+  ],
+  "recommended_role": "HR task-transfer robustness",
+  "seed": 42,
+  "source_url": "https://raw.githubusercontent.com/ucg8j/kaggle_HR/master/HR_comma_sep.csv",
+  "target_kind": "primary",
+  "task_type": "binary_turnover"
+}

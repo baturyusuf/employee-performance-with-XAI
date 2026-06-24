@@ -1,0 +1,104 @@
+{
+  "_llm_backend": "openai_chat_completions",
+  "_llm_model": "gpt-5.4-mini",
+  "_llm_usage": {
+    "completion_tokens": 1010,
+    "completion_tokens_details": {
+      "accepted_prediction_tokens": 0,
+      "audio_tokens": 0,
+      "reasoning_tokens": 0,
+      "rejected_prediction_tokens": 0
+    },
+    "prompt_tokens": 4529,
+    "prompt_tokens_details": {
+      "audio_tokens": 0,
+      "cached_tokens": 0
+    },
+    "total_tokens": 5539
+  },
+  "case_id": "ibm_hr_analytics_department_free_20",
+  "detailed_explanation": "Evidence indicates an xgboost model under the department_free policy predicted class 3 for case ibm_hr_analytics_department_free_20, with class probabilities 0.9346573531035772 for class 3 and 0.0653426468964227 for class 4. The true_class is also 3 in the provided evidence. The leakage_safe_score is 0.4603114606553593 and the leakage_safe_status is external_research_candidate. Leakage-related exclusions listed in the evidence are Attrition, EmpLastSalaryHikePercent, EmployeeCount, Over18, PerformanceRating, and StandardHours.\n\nFor explanation, the provided SHAP values are model attributions only and must not be interpreted as causal effects. The largest positive SHAP values shown are EmpHourlyRate (0.3653191030025482), DailyRate (0.1142012625932693), MonthlyIncome (0.1089333295822143), DistanceFromHome (0.1018588915467262), and YearsWithCurrManager (0.1012981310486793). The largest negative SHAP values shown are EmpEnvironmentSatisfaction (-0.0549672581255435), StockOptionLevel (-0.0533443130552768), EmpEducationLevel (-0.0451689437031745), ExperienceYearsAtThisCompany (-0.0320962183177471), and EducationBackground (-0.0292425937950611).\n\nCalibration evidence is mixed and should be treated cautiously: Brier score is 0.2869191658796662, expected calibration error is 0.0821766617978529, and log loss is 0.4978445226753214. The evidence explicitly warns that external probabilities are diagnostic confidence estimates and require calibration caution.\n\nFairness evidence includes audited groups such as Gender, MaritalStatus, EmpDepartment, EmpJobRole, Age, and others. Reported disparity gaps include EducationBackground_precision_4.0 = 0.2, EmpJobLevel_precision_4.0 = 0.25, EmpJobRole_precision_4.0 = 1.0, MaritalStatus_precision_4.0 = 0.2, and YearsWithCurrManager_precision_4.0 = 0.3333333333333333. Low-support warnings are present for several Age values with n_samples below 30. The evidence also states that removing direct sensitive or group variables does not prove fairness, and that department, job role, salary, tenure, and evaluation-history fields may act as proxies depending on dataset context.\n\nCounterfactual evidence does not provide recourse: changed_features is empty, validity is 0.0, and the failed_reason states that prototype counterfactual recourse was not claimed for this external evidence package. The actionability label is mostly_manager_organisation_or_proxy_constrained, but the evidence warns that counterfactuals and actionability summaries are model scenarios, not employee prescriptions.\n\nThis case is governed as research-only external validation or robustness evidence. The evidence prohibits autonomous hiring, firing, promotion, compensation, discipline, or individual employment decisions. Prediction requires human review.",
+  "faithfulness_check": {
+    "faithfulness_pass": true,
+    "forbidden_claims": [],
+    "missing_warnings": [],
+    "score": 100,
+    "suggested_revision": "",
+    "unsupported_claims": []
+  },
+  "requires_human_review": true,
+  "short_explanation": "This is a research-only external validation case. The model predicted class 3 with confidence 0.9347, but this is a diagnostic estimate that requires human review. SHAP attributions indicate the largest positive contributions came from EmpHourlyRate, DailyRate, MonthlyIncome, DistanceFromHome, and YearsWithCurrManager, while the largest negative contributions came from EmpEnvironmentSatisfaction and StockOptionLevel. These are attributions, not causal effects.",
+  "unsupported_claims_detected": [],
+  "warnings": [
+    {
+      "category": "deployment",
+      "message": "This model is decision support only and is not for autonomous HR decisions.",
+      "severity": "high",
+      "type": "deployment",
+      "warning_id": "deployment.not_autonomous"
+    },
+    {
+      "category": "causality",
+      "message": "SHAP is attribution, not causality.",
+      "severity": "high",
+      "type": "causality",
+      "warning_id": "causality.shap_not_causal"
+    },
+    {
+      "category": "calibration",
+      "message": "Probability estimates should be interpreted as approximate confidence, not objective certainty.",
+      "severity": "medium",
+      "type": "calibration",
+      "warning_id": "calibration.probabilities_approximate"
+    },
+    {
+      "category": "fairness",
+      "message": "Removing EmpDepartment does not prove fairness.",
+      "severity": "high",
+      "type": "fairness",
+      "warning_id": "fairness.department_removal_not_fairness_proof"
+    },
+    {
+      "category": "proxy",
+      "message": "EmpJobRole may proxy EmpDepartment, so department removal does not eliminate proxy risk.",
+      "severity": "high",
+      "type": "proxy",
+      "warning_id": "proxy.jobrole_department_proxy"
+    },
+    {
+      "category": "actionability",
+      "message": "Counterfactuals may not be employee-actionable and must not be treated as employee prescriptions.",
+      "severity": "high",
+      "type": "actionability",
+      "warning_id": "actionability.counterfactual_not_prescription"
+    },
+    {
+      "category": "other",
+      "message": "Some subgroup evidence is limited or unavailable; bootstrap_ci and subgroup_metrics are empty, and several Age groups have n_samples < 30.",
+      "severity": "medium",
+      "type": "other",
+      "warning_id": "other.unmapped"
+    },
+    {
+      "category": "deployment",
+      "message": "Prediction requires human review.",
+      "severity": "high",
+      "type": "deployment",
+      "warning_id": "deployment.human_review_required"
+    },
+    {
+      "category": "leakage",
+      "message": "Full-feature models are leakage-warning upper-bound baselines only, not deployable models.",
+      "severity": "high",
+      "type": "leakage",
+      "warning_id": "leakage.full_feature_upper_bound_only"
+    },
+    {
+      "category": "validation",
+      "message": "External validation is required before deployment.",
+      "severity": "high",
+      "type": "validation",
+      "warning_id": "validation.external_validation_required"
+    }
+  ]
+}

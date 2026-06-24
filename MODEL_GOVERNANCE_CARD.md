@@ -31,13 +31,20 @@ The chatbot refuses requests for hiring, firing, promotion, compensation, discip
 - Counterfactuals may require manager or organization intervention.
 - Probability estimates may be imperfectly calibrated.
 - Small subgroup findings may be unstable.
-- External validation is required before deployment.
+- External validation and related-task robustness evidence now exists, but independent provenance review, organisation-specific validation, legal/governance review, and human-centered evaluation are still required before deployment.
 
 ## Limitations and Failure Modes
 The evidence is based on a public, cross-sectional dataset and does not support causal claims. Subgroup audits are diagnostic and do not prove discrimination or fairness. Counterfactuals are model-level scenarios, not employee instructions. Real OpenAI-backed LLM runs require API-key configuration, logging, and separate compliance evaluation. The chatbot relies on local report retrieval and should not answer from general HR intuition.
 
-## External Validation Requirement
-Before any operational use, the full pipeline requires validation on an independent dataset, governance review, calibration review, subgroup impact review, and human-centered evaluation of explanation usefulness and misuse risk.
+## External Validation Status
+External evidence has been generated under `reports/external_validation/`.
+
+- HRDataset_v14 is used for independent replication on a mappable performance target.
+- IBM HR Analytics is used for schema-compatible restricted target-space robustness, not direct 2/3/4 validation.
+- IBM Attrition and Employee Turnover are related HR task-transfer robustness checks, not performance validation.
+- INX-to-HRDataset train/test transfer is reported as infeasible/too limited because only three department-free safe common features overlap.
+
+Before any operational use, the full pipeline still requires data-provenance review, organisation-specific validation, governance review, calibration review, subgroup impact review, legal review, and human-centered evaluation of explanation usefulness and misuse risk.
 
 ## Key Artifacts
 - Final recommendation: `reports/model_selection/final_recommendation.md`
@@ -48,3 +55,6 @@ Before any operational use, the full pipeline requires validation on an independ
 - Chatbot guardrail evaluation: `reports/chatbot_eval/guardrail_evaluation.md`
 - G-XAIR LLM dashboard: `reports/governance_reports/gxair_llm_agent_dashboard.csv`
 - Final LLM-agent summary: `reports/governance_reports/final_llm_agent_research_summary.md`
+- External validation summary: `reports/external_validation/external_validation_summary.md`
+- External manuscript tables: `reports/manuscript_assets/external_validation_tables.md`
+- External governance summary: `reports/governance_reports/external_validation_governance_summary.md`

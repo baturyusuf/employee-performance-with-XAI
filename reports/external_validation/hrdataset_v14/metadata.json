@@ -1,0 +1,26 @@
+{
+  "canonical_column_count": 39,
+  "dataset_name": "hrdataset_v14",
+  "display_name": "HRDataset_v14",
+  "labels": [
+    2,
+    3,
+    4
+  ],
+  "outputs": {
+    "dataset_audit": "C:\\Users\\Yusuf\\Documents\\GitHub\\employee performance with XAI\\reports\\external_validation\\hrdataset_v14\\dataset_audit.md",
+    "duplicate_ids": "C:\\Users\\Yusuf\\Documents\\GitHub\\employee performance with XAI\\reports\\external_validation\\hrdataset_v14\\duplicate_id_report.csv",
+    "leakage_sensitive_proxy_audit": "C:\\Users\\Yusuf\\Documents\\GitHub\\employee performance with XAI\\reports\\external_validation\\hrdataset_v14\\leakage_sensitive_proxy_audit.csv",
+    "missingness": "C:\\Users\\Yusuf\\Documents\\GitHub\\employee performance with XAI\\reports\\external_validation\\hrdataset_v14\\missingness_report.csv",
+    "schema_mapping": "C:\\Users\\Yusuf\\Documents\\GitHub\\employee performance with XAI\\reports\\external_validation\\hrdataset_v14\\schema_mapping.csv",
+    "target_distribution": "C:\\Users\\Yusuf\\Documents\\GitHub\\employee performance with XAI\\reports\\external_validation\\hrdataset_v14\\target_distribution.csv"
+  },
+  "raw_column_count": 36,
+  "recommended_role": "independent replication and direct external performance validation",
+  "row_count": 311,
+  "source_url": "https://raw.githubusercontent.com/pouyasattari/HR-Dataset-Analysis/main/HRDataset_v14.csv",
+  "target_column": "PerformanceRating",
+  "target_kind": "primary",
+  "target_raw_column": "PerformanceScore",
+  "task_type": "ordinal_multiclass_performance"
+}

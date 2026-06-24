@@ -1,0 +1,93 @@
+{
+  "dataset_name": "hrdataset_v14",
+  "display_name": "HRDataset_v14",
+  "recommended_role": "independent replication and direct external performance validation",
+  "source_url": "https://raw.githubusercontent.com/pouyasattari/HR-Dataset-Analysis/main/HRDataset_v14.csv",
+  "canonical_source_note": "Public mirror of the HRDataset_v14 / Human Resources Data Set commonly distributed through Kaggle.",
+  "target": {
+    "raw_column": "PerformanceScore",
+    "canonical_column": "PerformanceRating",
+    "task_type": "ordinal_multiclass_performance",
+    "mapping": {
+      "PIP": 2,
+      "Needs Improvement": 2,
+      "Fully Meets": 3,
+      "Exceeds": 4,
+      "Exceptional": 4
+    }
+  },
+  "id_columns": ["EmpID", "Employee_Name"],
+  "rename_columns": {
+    "EmpID": "EmpNumber",
+    "Sex": "Gender",
+    "MaritalDesc": "MaritalStatus",
+    "RaceDesc": "RaceEthnicity",
+    "Department": "EmpDepartment",
+    "Position": "EmpJobRole",
+    "EmpSatisfaction": "EmpJobSatisfaction",
+    "EngagementSurvey": "EngagementSurvey",
+    "SpecialProjectsCount": "SpecialProjectsCount",
+    "Absences": "Absences",
+    "DaysLateLast30": "DaysLateLast30",
+    "DateofHire": "DateOfHire",
+    "Salary": "Salary"
+  },
+  "date_columns": ["DOB", "DateofHire", "DateofTermination", "LastPerformanceReview_Date"],
+  "derived_features": {
+    "ExperienceYearsAtThisCompany": {
+      "from": "DateofHire",
+      "reference": "LastPerformanceReview_Date",
+      "description": "Approximate tenure at last available performance review date."
+    }
+  },
+  "leakage_risk_columns": [
+    "PerformanceScore",
+    "PerfScoreID",
+    "Termd",
+    "EmploymentStatus",
+    "DateofTermination",
+    "TermReason",
+    "LastPerformanceReview_Date",
+    "ManagerName",
+    "ManagerID"
+  ],
+  "sensitive_audit_only_columns": [
+    "DOB",
+    "Gender",
+    "Sex",
+    "GenderID",
+    "MaritalStatus",
+    "MaritalDesc",
+    "MaritalStatusID",
+    "RaceEthnicity",
+    "RaceDesc",
+    "HispanicLatino",
+    "CitizenDesc"
+  ],
+  "proxy_risk_columns": [
+    "Salary",
+    "EmpDepartment",
+    "EmpJobRole",
+    "RecruitmentSource",
+    "State",
+    "Zip",
+    "ExperienceYearsAtThisCompany",
+    "SpecialProjectsCount",
+    "Absences",
+    "DaysLateLast30"
+  ],
+  "feature_policy_variants": {
+    "department_including": {
+      "description": "Leakage-safe candidate retaining department and job role but excluding direct sensitive/audit-only fields.",
+      "exclude_columns": []
+    },
+    "department_free": {
+      "description": "Primary external analog of the INX department-free research model.",
+      "exclude_columns": ["EmpDepartment"]
+    },
+    "department_job_role_free": {
+      "description": "Strict proxy sensitivity candidate excluding department and job role.",
+      "exclude_columns": ["EmpDepartment", "EmpJobRole"]
+    }
+  }
+}

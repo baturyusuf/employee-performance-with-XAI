@@ -1,0 +1,9 @@
+column,role,present,used_as_model_feature_by_default
+ExternalSampleId,id,True,False
+AttritionTarget,leakage,True,False
+left,leakage,True,False
+AverageMonthlyHours,proxy,True,policy_dependent
+EmpDepartment,proxy,True,policy_dependent
+LastEvaluation,proxy,True,policy_dependent
+PromotionLast5Years,proxy,True,policy_dependent
+SalaryBand,proxy,True,policy_dependent

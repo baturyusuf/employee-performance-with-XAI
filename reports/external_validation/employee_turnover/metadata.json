@@ -1,0 +1,25 @@
+{
+  "canonical_column_count": 12,
+  "dataset_name": "employee_turnover",
+  "display_name": "Human Resources Analytics / Employee Turnover",
+  "labels": [
+    0,
+    1
+  ],
+  "outputs": {
+    "dataset_audit": "C:\\Users\\Yusuf\\Documents\\GitHub\\employee performance with XAI\\reports\\external_validation\\employee_turnover\\dataset_audit.md",
+    "duplicate_ids": "C:\\Users\\Yusuf\\Documents\\GitHub\\employee performance with XAI\\reports\\external_validation\\employee_turnover\\duplicate_id_report.csv",
+    "leakage_sensitive_proxy_audit": "C:\\Users\\Yusuf\\Documents\\GitHub\\employee performance with XAI\\reports\\external_validation\\employee_turnover\\leakage_sensitive_proxy_audit.csv",
+    "missingness": "C:\\Users\\Yusuf\\Documents\\GitHub\\employee performance with XAI\\reports\\external_validation\\employee_turnover\\missingness_report.csv",
+    "schema_mapping": "C:\\Users\\Yusuf\\Documents\\GitHub\\employee performance with XAI\\reports\\external_validation\\employee_turnover\\schema_mapping.csv",
+    "target_distribution": "C:\\Users\\Yusuf\\Documents\\GitHub\\employee performance with XAI\\reports\\external_validation\\employee_turnover\\target_distribution.csv"
+  },
+  "raw_column_count": 10,
+  "recommended_role": "HR task-transfer robustness",
+  "row_count": 14999,
+  "source_url": "https://raw.githubusercontent.com/ucg8j/kaggle_HR/master/HR_comma_sep.csv",
+  "target_column": "AttritionTarget",
+  "target_kind": "primary",
+  "target_raw_column": "left",
+  "task_type": "binary_turnover"
+}

@@ -1,0 +1,6 @@
+dataset,target_kind,policy,case_id,case_type,model_provider,model,faithfulness_pass,unsupported_claim_count,forbidden_claim_count,missing_warning_count,agent_runtime_success,agent_governance_pass,agent_failure_count,warning_count
+ibm_hr_analytics,primary,department_free,ibm_hr_analytics_department_free_45,correct_high_confidence,openai,gpt-5.4-mini,True,0,0,0,True,True,0,9
+ibm_hr_analytics,primary,department_free,ibm_hr_analytics_department_free_174,correct_low_confidence,openai,gpt-5.4-mini,True,0,0,0,True,True,0,10
+ibm_hr_analytics,primary,department_free,ibm_hr_analytics_department_free_918,misclassification,openai,gpt-5.4-mini,True,0,0,0,True,True,0,10
+ibm_hr_analytics,primary,department_free,ibm_hr_analytics_department_free_20,small_support_group_Gender,openai,gpt-5.4-mini,True,0,0,0,True,True,0,10
+ibm_hr_analytics,primary,department_free,ibm_hr_analytics_department_free_272,proxy_warning_high_shap,openai,gpt-5.4-mini,True,0,0,0,True,True,0,9

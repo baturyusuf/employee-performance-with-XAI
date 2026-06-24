@@ -1,0 +1,16 @@
+dataset,policy,case_type,sample_index,external_sample_id,true_class,predicted_class,confidence,correct
+hrdataset_v14,department_free,correct_high_confidence,49,49,3,3,0.9993913929476668,True
+hrdataset_v14,department_free,correct_low_confidence,209,209,2,2,0.49699882616480034,True
+hrdataset_v14,department_free,misclassification,208,208,4,3,0.9979336908401609,False
+hrdataset_v14,department_free,small_support_group_Gender,1,1,3,3,0.9914753287713834,True
+hrdataset_v14,department_free,proxy_warning_high_shap,105,105,2,2,0.94413728577052,True
+hrdataset_v14,department_including,correct_high_confidence,49,49,3,3,0.999528048735443,True
+hrdataset_v14,department_including,correct_low_confidence,226,226,3,3,0.5188731441233642,True
+hrdataset_v14,department_including,misclassification,208,208,4,3,0.9982727070759961,False
+hrdataset_v14,department_including,small_support_group_Gender,1,1,3,3,0.9928583943500012,True
+hrdataset_v14,department_including,proxy_warning_high_shap,105,105,2,2,0.9435845773185358,True
+hrdataset_v14,department_job_role_free,correct_high_confidence,49,49,3,3,0.9995309116928842,True
+hrdataset_v14,department_job_role_free,correct_low_confidence,11,11,3,3,0.5628634291769737,True
+hrdataset_v14,department_job_role_free,misclassification,208,208,4,3,0.9981606222981374,False
+hrdataset_v14,department_job_role_free,small_support_group_Gender,1,1,3,3,0.9891564314636055,True
+hrdataset_v14,department_job_role_free,proxy_warning_high_shap,105,105,2,2,0.9400725435425037,True

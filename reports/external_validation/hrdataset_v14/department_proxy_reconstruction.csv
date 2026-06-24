@@ -1,0 +1,4 @@
+policy,proxy_target,status,error
+department_including,EmpDepartment,failed,Not enough support for proxy CV. Minimum department class count=1.
+department_free,EmpDepartment,failed,Not enough support for proxy CV. Minimum department class count=1.
+department_job_role_free,EmpDepartment,failed,Not enough support for proxy CV. Minimum department class count=1.

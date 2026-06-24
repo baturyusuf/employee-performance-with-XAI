@@ -1,0 +1,2 @@
+dataset,target_kind,policy,n_cases,case_ids,model_provider,model,faithfulness_pass_rate,unsupported_claim_rate,forbidden_claim_rate,missing_warning_rate,agent_runtime_success_rate,agent_success_rate,agent_failure_rate
+ibm_hr_analytics,primary,department_free,5,ibm_hr_analytics_department_free_45;ibm_hr_analytics_department_free_174;ibm_hr_analytics_department_free_918;ibm_hr_analytics_department_free_20;ibm_hr_analytics_department_free_272,openai,gpt-5.4-mini,1.0,0.0,0.0,0.0,1.0,1.0,0.0

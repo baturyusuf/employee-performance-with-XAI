@@ -1,0 +1,247 @@
+{
+  "calibration": {
+    "brier_score": 0.2565226512732113,
+    "calibration_warning": "External probabilities are diagnostic confidence estimates and require calibration caution.",
+    "expected_calibration_error": 0.0924541149217507,
+    "log_loss": 0.550790919971508
+  },
+  "counterfactual": {
+    "actionability_label": "mixed_context_dependent",
+    "changed_features": [],
+    "counterfactual_mode": "external_actionability_classification",
+    "failed_reason": "Prototype counterfactual recourse was not claimed for this external evidence package.",
+    "probability_gain": null,
+    "proximity_cost": null,
+    "validity": 0.1333333333333333,
+    "warning": "Counterfactuals and actionability summaries are model scenarios, not employee prescriptions."
+  },
+  "evidence_sources": [
+    "C:\\Users\\Yusuf\\Documents\\GitHub\\employee performance with XAI\\reports\\external_validation\\hrdataset_v14\\performance_metrics.csv",
+    "C:\\Users\\Yusuf\\Documents\\GitHub\\employee performance with XAI\\reports\\external_validation\\hrdataset_v14\\shap\\department_free\\local_grouped_shap_values.csv",
+    "C:\\Users\\Yusuf\\Documents\\GitHub\\employee performance with XAI\\reports\\external_validation\\hrdataset_v14\\fairness_proxy\\fairness_disparity_summary.csv",
+    "C:\\Users\\Yusuf\\Documents\\GitHub\\employee performance with XAI\\reports\\external_validation\\hrdataset_v14\\actionability_summary.csv"
+  ],
+  "fairness": {
+    "audited_groups": [
+      "Gender",
+      "RaceEthnicity",
+      "HispanicLatino",
+      "MaritalStatus",
+      "EmpDepartment",
+      "EmpJobRole",
+      "CitizenDesc",
+      "DOB",
+      "GenderID",
+      "MaritalStatusID",
+      "Absences",
+      "DaysLateLast30",
+      "ExperienceYearsAtThisCompany",
+      "RecruitmentSource",
+      "Salary",
+      "SpecialProjectsCount",
+      "State",
+      "Zip"
+    ],
+    "bootstrap_ci": {},
+    "disparity_gaps": {
+      "Absences_false_positive_rate_3.0": 1.0,
+      "Absences_precision_2.0": 0.5,
+      "EmpJobRole_precision_4.0": 1.0,
+      "Gender_precision_4.0": 0.5,
+      "SpecialProjectsCount_false_positive_rate_3.0": 0.6666666666666667
+    },
+    "low_support_warnings": [
+      {
+        "attribute": "RaceEthnicity",
+        "group_value": "Two or more races",
+        "n_samples": 11,
+        "warning": "n_samples < 16"
+      },
+      {
+        "attribute": "RaceEthnicity",
+        "group_value": "American Indian or Alaska Native",
+        "n_samples": 3,
+        "warning": "n_samples < 16"
+      },
+      {
+        "attribute": "RaceEthnicity",
+        "group_value": "Hispanic",
+        "n_samples": 1,
+        "warning": "n_samples < 16"
+      },
+      {
+        "attribute": "HispanicLatino",
+        "group_value": "no",
+        "n_samples": 1,
+        "warning": "n_samples < 16"
+      },
+      {
+        "attribute": "HispanicLatino",
+        "group_value": "yes",
+        "n_samples": 1,
+        "warning": "n_samples < 16"
+      },
+      {
+        "attribute": "MaritalStatus",
+        "group_value": "Separated",
+        "n_samples": 12,
+        "warning": "n_samples < 16"
+      },
+      {
+        "attribute": "MaritalStatus",
+        "group_value": "Widowed",
+        "n_samples": 8,
+        "warning": "n_samples < 16"
+      },
+      {
+        "attribute": "EmpDepartment",
+        "group_value": "Software Engineering",
+        "n_samples": 11,
+        "warning": "n_samples < 16"
+      },
+      {
+        "attribute": "EmpDepartment",
+        "group_value": "Admin Offices",
+        "n_samples": 9,
+        "warning": "n_samples < 16"
+      },
+      {
+        "attribute": "EmpDepartment",
+        "group_value": "Executive Office",
+        "n_samples": 1,
+        "warning": "n_samples < 16"
+      }
+    ],
+    "proxy_risk_warnings": [
+      "Removing direct sensitive or group variables does not prove fairness.",
+      "Department, job role, salary, tenure, and evaluation-history fields may act as proxies depending on dataset context."
+    ],
+    "subgroup_metrics": {}
+  },
+  "governance": {
+    "deployment_status": "research_only_external_validation_or_robustness",
+    "intended_use": "Research-grade external validation and robustness evidence for HR XAI governance.",
+    "model_card_summary": "External dataset HRDataset_v14 is used for independent external performance replication. Policy department_free excludes mapped leakage-risk and sensitive/audit-only fields. The system is research-only decision support and cannot make autonomous HR decisions.",
+    "prohibited_use": "No autonomous hiring, firing, promotion, compensation, discipline, or individual employment decisions.",
+    "required_warnings": [
+      "SHAP is attribution, not causality.",
+      "Prediction requires human review.",
+      "Not for autonomous HR decisions.",
+      "Removing group variables does not prove fairness.",
+      "Counterfactuals may not be employee-actionable.",
+      "External dataset role limits must be respected."
+    ]
+  },
+  "leakage": {
+    "excluded_leakage_features": [
+      "DateofTermination",
+      "EmploymentStatus",
+      "LastPerformanceReview_Date",
+      "ManagerID",
+      "ManagerName",
+      "PerfScoreID",
+      "PerformanceRating",
+      "PerformanceScore",
+      "TermReason",
+      "Termd"
+    ],
+    "feature_policy": "department_free",
+    "full_feature_score": null,
+    "leakage_safe_score": 0.6389426176660219,
+    "leakage_sensitivity_index": null,
+    "leakage_warning": "External models exclude target, identifiers, direct sensitive/audit-only fields, and mapped leakage-risk columns for the selected policy."
+  },
+  "prediction": {
+    "case_id": "hrdataset_v14_department_free_209",
+    "class_probabilities": {
+      "2": 0.4969988261648003,
+      "3": 0.4921424187214426,
+      "4": 0.010858755113757
+    },
+    "confidence": 0.4969988261648003,
+    "feature_policy": "department_free",
+    "leakage_safe_status": "external_research_candidate",
+    "model_name": "xgboost",
+    "predicted_class": 2,
+    "true_class": 2,
+    "uncertainty_flag": true
+  },
+  "shap": {
+    "class_specific_shap_values": {
+      "Absences": 0.1394097059965133,
+      "DateOfHire": -0.0107871685177087,
+      "DaysLateLast30": 5.124734401702881,
+      "DeptID": 0.0410024598240852,
+      "EmpJobRole": 0.0071940887719392,
+      "EngagementSurvey": -0.6485396027565002,
+      "ExperienceYearsAtThisCompany": -0.0135456984862685,
+      "MarriedID": -0.0220521986484527,
+      "RecruitmentSource": -0.04135337844491,
+      "Salary": 0.0921463072299957,
+      "SpecialProjectsCount": 0.0066862348467111,
+      "Zip": -0.0305609758943319
+    },
+    "explanation_stability_warning": "External SHAP values are model attributions, not causal effects.",
+    "grouped_shap_values": {
+      "Absences": 0.1394097059965133,
+      "DateOfHire": -0.0107871685177087,
+      "DaysLateLast30": 5.124734401702881,
+      "DeptID": 0.0410024598240852,
+      "EmpJobRole": 0.0071940887719392,
+      "EngagementSurvey": -0.6485396027565002,
+      "ExperienceYearsAtThisCompany": -0.0135456984862685,
+      "MarriedID": -0.0220521986484527,
+      "RecruitmentSource": -0.04135337844491,
+      "Salary": 0.0921463072299957,
+      "SpecialProjectsCount": 0.0066862348467111,
+      "Zip": -0.0305609758943319
+    },
+    "shap_stability_summary": {
+      "external_case_type": "correct_low_confidence"
+    },
+    "top_negative_features": [
+      {
+        "feature": "EngagementSurvey",
+        "grouped_shap_value": -0.6485396027565002
+      },
+      {
+        "feature": "RecruitmentSource",
+        "grouped_shap_value": -0.04135337844491
+      },
+      {
+        "feature": "Zip",
+        "grouped_shap_value": -0.0305609758943319
+      },
+      {
+        "feature": "MarriedID",
+        "grouped_shap_value": -0.0220521986484527
+      },
+      {
+        "feature": "ExperienceYearsAtThisCompany",
+        "grouped_shap_value": -0.0135456984862685
+      }
+    ],
+    "top_positive_features": [
+      {
+        "feature": "DaysLateLast30",
+        "grouped_shap_value": 5.124734401702881
+      },
+      {
+        "feature": "Absences",
+        "grouped_shap_value": 0.1394097059965133
+      },
+      {
+        "feature": "Salary",
+        "grouped_shap_value": 0.0921463072299957
+      },
+      {
+        "feature": "DeptID",
+        "grouped_shap_value": 0.0410024598240852
+      },
+      {
+        "feature": "EmpJobRole",
+        "grouped_shap_value": 0.0071940887719392
+      }
+    ]
+  }
+}

@@ -33,8 +33,17 @@ Top-10 grouped SHAP Jaccard: 0.7606; Spearman rank stability: 0.8717. SHAP is at
 ## Counterfactual and Actionability Summary
 Employee-only validity: 0.0000; employee+manager validity: 0.2500; organization-allowed validity: 0.2500. Counterfactuals are intervention hypotheses and may require manager or organisation action.
 
+## External Validation and Robustness Update
+External evidence has been added under `reports/external_validation/`.
+
+- HRDataset_v14 supports independent replication on a directly mappable external performance target (`PerformanceScore` mapped to 2/3/4).
+- IBM HR Analytics supports schema-compatible robustness only because `PerformanceRating` is restricted to classes 3 and 4 in the audited data.
+- IBM Attrition and Employee Turnover support related HR task-transfer robustness, not performance external validation.
+- INX-to-HRDataset cross-dataset validation is reported as infeasible/too limited because only three department-free safe common features overlap.
+- Real OpenAI governed explanation and OpenAI Agents SDK audits were run on 5 representative HRDataset_v14 cases, 5 IBM performance robustness cases, and 5 Employee Turnover task-transfer cases.
+
 ## Known Limitations
-Public cross-sectional data, no external validation, possible organisational proxy effects, imperfect probability calibration, sparse class-4 support, and no causal identification.
+Public cross-sectional data, public-mirror external dataset provenance requiring independent verification before publication, possible organisational proxy effects, imperfect probability calibration, sparse class-4 support, restricted IBM target space, limited cross-dataset feature overlap, and no causal identification.
 
 ## Ethical and Governance Warnings
 Decision support only; no autonomous evaluation; no causal SHAP claims; no proof of fairness; proxy risk remains; external validation required before deployment.
@@ -42,6 +51,9 @@ Decision support only; no autonomous evaluation; no causal SHAP claims; no proof
 ## Artifact Paths
 - `reports/model_selection/final_candidate_dashboard.csv`
 - `reports/model_selection/final_recommendation.md`
+- `reports/external_validation/external_validation_summary.md`
+- `reports/manuscript_assets/external_validation_tables.md`
+- `reports/governance_reports/external_validation_governance_summary.md`
 - `reports/fairness/feature_set_sensitivity/bootstrap_disparity_ci.csv`
 - `reports/calibration/final_candidates/calibration_summary.csv`
 - `reports/xai/final_candidates/shap_stability_summary.csv`

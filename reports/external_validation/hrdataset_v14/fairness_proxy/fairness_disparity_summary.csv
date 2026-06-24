@@ -1,0 +1,712 @@
+feature_set,model,attribute,metric,n_groups_included,min_group_value,min_group_support,min,max_group_value,max_group_support,max,max_gap,min_group_support_threshold,class_label
+department_free,xgboost,Absences,accuracy,10,14,17,0.7647058823529411,3,16,0.9375,0.17279411764705888,16,
+department_free,xgboost,Absences,false_positive_rate,10,2,21,0.0,14,17,1.0,1.0,16,3.0
+department_free,xgboost,Absences,false_positive_rate,10,13,17,0.0,14,17,0.07142857142857142,0.07142857142857142,16,4.0
+department_free,xgboost,Absences,false_positive_rate,10,13,17,0.0,2,21,0.05263157894736842,0.05263157894736842,16,2.0
+department_free,xgboost,Absences,macro_f1,10,14,17,0.2888888888888889,3,16,0.6533333333333333,0.3644444444444444,16,
+department_free,xgboost,Absences,mean_predicted_probability,10,14,17,0.002327999225712849,3,16,0.17564061377563522,0.17331261454992236,16,2.0
+department_free,xgboost,Absences,mean_predicted_probability,10,16,23,0.7443762410643864,14,17,0.9008242640441095,0.15644802297972316,16,3.0
+department_free,xgboost,Absences,mean_predicted_probability,10,6,16,0.02246037581654728,14,17,0.09684773673017752,0.07438736091363024,16,4.0
+department_free,xgboost,Absences,positive_prediction_rate,10,14,17,0.0,3,16,0.1875,0.1875,16,2.0
+department_free,xgboost,Absences,positive_prediction_rate,10,2,21,0.8095238095238095,14,17,0.9411764705882353,0.13165266106442575,16,3.0
+department_free,xgboost,Absences,positive_prediction_rate,10,13,17,0.0,19,16,0.0625,0.0625,16,4.0
+department_free,xgboost,Absences,precision,9,7,21,0.5,13,17,1.0,0.5,16,2.0
+department_free,xgboost,Absences,precision,10,16,23,0.7368421052631579,2,21,1.0,0.26315789473684215,16,3.0
+department_free,xgboost,Absences,precision,3,14,17,0.0,14,17,0.0,0.0,16,4.0
+department_free,xgboost,Absences,true_positive_rate,9,6,16,0.6666666666666666,13,17,1.0,0.33333333333333337,16,2.0
+department_free,xgboost,Absences,true_positive_rate,10,2,21,0.8947368421052632,13,17,1.0,0.10526315789473684,16,3.0
+department_free,xgboost,Absences,true_positive_rate,9,13,17,0.0,13,17,0.0,0.0,16,4.0
+department_free,xgboost,CitizenDesc,accuracy,1,US Citizen,295,0.8542372881355932,US Citizen,295,0.8542372881355932,0.0,16,
+department_free,xgboost,CitizenDesc,false_positive_rate,1,US Citizen,295,0.007547169811320755,US Citizen,295,0.007547169811320755,0.0,16,2.0
+department_free,xgboost,CitizenDesc,false_positive_rate,1,US Citizen,295,0.5522388059701493,US Citizen,295,0.5522388059701493,0.0,16,3.0
+department_free,xgboost,CitizenDesc,false_positive_rate,1,US Citizen,295,0.015503875968992248,US Citizen,295,0.015503875968992248,0.0,16,4.0
+department_free,xgboost,CitizenDesc,macro_f1,1,US Citizen,295,0.6367143439550617,US Citizen,295,0.6367143439550617,0.0,16,
+department_free,xgboost,CitizenDesc,mean_predicted_probability,1,US Citizen,295,0.10216504942675257,US Citizen,295,0.10216504942675257,0.0,16,2.0
+department_free,xgboost,CitizenDesc,mean_predicted_probability,1,US Citizen,295,0.8322522029915284,US Citizen,295,0.8322522029915284,0.0,16,3.0
+department_free,xgboost,CitizenDesc,mean_predicted_probability,1,US Citizen,295,0.06558274758171911,US Citizen,295,0.06558274758171911,0.0,16,4.0
+department_free,xgboost,CitizenDesc,positive_prediction_rate,1,US Citizen,295,0.10508474576271186,US Citizen,295,0.10508474576271186,0.0,16,2.0
+department_free,xgboost,CitizenDesc,positive_prediction_rate,1,US Citizen,295,0.8779661016949153,US Citizen,295,0.8779661016949153,0.0,16,3.0
+department_free,xgboost,CitizenDesc,positive_prediction_rate,1,US Citizen,295,0.01694915254237288,US Citizen,295,0.01694915254237288,0.0,16,4.0
+department_free,xgboost,CitizenDesc,precision,1,US Citizen,295,0.9354838709677419,US Citizen,295,0.9354838709677419,0.0,16,2.0
+department_free,xgboost,CitizenDesc,precision,1,US Citizen,295,0.8571428571428571,US Citizen,295,0.8571428571428571,0.0,16,3.0
+department_free,xgboost,CitizenDesc,precision,1,US Citizen,295,0.2,US Citizen,295,0.2,0.0,16,4.0
+department_free,xgboost,CitizenDesc,true_positive_rate,1,US Citizen,295,0.9666666666666667,US Citizen,295,0.9666666666666667,0.0,16,2.0
+department_free,xgboost,CitizenDesc,true_positive_rate,1,US Citizen,295,0.9736842105263158,US Citizen,295,0.9736842105263158,0.0,16,3.0
+department_free,xgboost,CitizenDesc,true_positive_rate,1,US Citizen,295,0.02702702702702703,US Citizen,295,0.02702702702702703,0.0,16,4.0
+department_free,xgboost,DaysLateLast30,accuracy,1,0,278,0.8525179856115108,0,278,0.8525179856115108,0.0,16,
+department_free,xgboost,DaysLateLast30,false_positive_rate,1,0,278,0.0,0,278,0.0,0.0,16,2.0
+department_free,xgboost,DaysLateLast30,false_positive_rate,1,0,278,0.9736842105263158,0,278,0.9736842105263158,0.0,16,3.0
+department_free,xgboost,DaysLateLast30,false_positive_rate,1,0,278,0.016597510373443983,0,278,0.016597510373443983,0.0,16,4.0
+department_free,xgboost,DaysLateLast30,macro_f1,1,0,278,0.3225656734428664,0,278,0.3225656734428664,0.0,16,
+department_free,xgboost,DaysLateLast30,mean_predicted_probability,1,0,278,0.0030988262437086963,0,278,0.0030988262437086963,0.0,16,2.0
+department_free,xgboost,DaysLateLast30,mean_predicted_probability,1,0,278,0.9242694696902926,0,278,0.9242694696902926,0.0,16,3.0
+department_free,xgboost,DaysLateLast30,mean_predicted_probability,1,0,278,0.07263170406599875,0,278,0.07263170406599875,0.0,16,4.0
+department_free,xgboost,DaysLateLast30,positive_prediction_rate,1,0,278,0.0,0,278,0.0,0.0,16,2.0
+department_free,xgboost,DaysLateLast30,positive_prediction_rate,1,0,278,0.9820143884892086,0,278,0.9820143884892086,0.0,16,3.0
+department_free,xgboost,DaysLateLast30,positive_prediction_rate,1,0,278,0.017985611510791366,0,278,0.017985611510791366,0.0,16,4.0
+department_free,xgboost,DaysLateLast30,precision,1,0,278,0.8644688644688645,0,278,0.8644688644688645,0.0,16,3.0
+department_free,xgboost,DaysLateLast30,precision,1,0,278,0.2,0,278,0.2,0.0,16,4.0
+department_free,xgboost,DaysLateLast30,true_positive_rate,1,0,278,0.0,0,278,0.0,0.0,16,2.0
+department_free,xgboost,DaysLateLast30,true_positive_rate,1,0,278,0.9833333333333333,0,278,0.9833333333333333,0.0,16,3.0
+department_free,xgboost,DaysLateLast30,true_positive_rate,1,0,278,0.02702702702702703,0,278,0.02702702702702703,0.0,16,4.0
+department_free,xgboost,EmpDepartment,accuracy,3,Production       ,209,0.8564593301435407,IT/IS,50,0.88,0.023540669856459306,16,
+department_free,xgboost,EmpDepartment,false_positive_rate,3,Sales,31,0.2857142857142857,IT/IS,50,0.75,0.4642857142857143,16,3.0
+department_free,xgboost,EmpDepartment,false_positive_rate,3,IT/IS,50,0.0,Sales,31,0.038461538461538464,0.038461538461538464,16,2.0
+department_free,xgboost,EmpDepartment,false_positive_rate,3,IT/IS,50,0.0,Sales,31,0.034482758620689655,0.034482758620689655,16,4.0
+department_free,xgboost,EmpDepartment,macro_f1,3,Sales,31,0.6085858585858586,Production       ,209,0.6451563691838291,0.03657051059797056,16,
+department_free,xgboost,EmpDepartment,mean_predicted_probability,3,IT/IS,50,0.040652966729107017,Sales,31,0.19264836121954027,0.15199539449043326,16,2.0
+department_free,xgboost,EmpDepartment,mean_predicted_probability,3,Sales,31,0.753855237009073,IT/IS,50,0.9037608861580283,0.14990564914895532,16,3.0
+department_free,xgboost,EmpDepartment,mean_predicted_probability,3,Sales,31,0.053496401771386815,Production       ,209,0.0634866249357218,0.009990223164334983,16,4.0
+department_free,xgboost,EmpDepartment,positive_prediction_rate,3,Sales,31,0.7741935483870968,IT/IS,50,0.96,0.1858064516129032,16,3.0
+department_free,xgboost,EmpDepartment,positive_prediction_rate,3,IT/IS,50,0.04,Sales,31,0.1935483870967742,0.15354838709677418,16,2.0
+department_free,xgboost,EmpDepartment,positive_prediction_rate,3,IT/IS,50,0.0,Sales,31,0.03225806451612903,0.03225806451612903,16,4.0
+department_free,xgboost,EmpDepartment,precision,2,Sales,31,0.0,Production       ,209,0.3333333333333333,0.3333333333333333,16,4.0
+department_free,xgboost,EmpDepartment,precision,3,Sales,31,0.8333333333333334,IT/IS,50,1.0,0.16666666666666663,16,2.0
+department_free,xgboost,EmpDepartment,precision,3,Production       ,209,0.8524590163934426,Sales,31,0.9166666666666666,0.06420765027322406,16,3.0
+department_free,xgboost,EmpDepartment,true_positive_rate,3,Sales,31,0.9166666666666666,IT/IS,50,1.0,0.08333333333333337,16,3.0
+department_free,xgboost,EmpDepartment,true_positive_rate,3,Production       ,209,0.9565217391304348,IT/IS,50,1.0,0.04347826086956519,16,2.0
+department_free,xgboost,EmpDepartment,true_positive_rate,3,IT/IS,50,0.0,Production       ,209,0.037037037037037035,0.037037037037037035,16,4.0
+department_free,xgboost,EmpJobRole,accuracy,3,Production Technician II,57,0.8421052631578947,Area Sales Manager,27,0.8888888888888888,0.04678362573099415,16,
+department_free,xgboost,EmpJobRole,false_positive_rate,3,Area Sales Manager,27,0.3333333333333333,Production Technician II,57,0.6153846153846154,0.2820512820512821,16,3.0
+department_free,xgboost,EmpJobRole,false_positive_rate,3,Production Technician II,57,0.0,Area Sales Manager,27,0.043478260869565216,0.043478260869565216,16,2.0
+department_free,xgboost,EmpJobRole,false_positive_rate,3,Area Sales Manager,27,0.0,Production Technician II,57,0.02040816326530612,0.02040816326530612,16,4.0
+department_free,xgboost,EmpJobRole,macro_f1,3,Area Sales Manager,27,0.6063738156761412,Production Technician I,137,0.659863834422658,0.05349001874651671,16,
+department_free,xgboost,EmpJobRole,mean_predicted_probability,3,Production Technician II,57,0.08712204598382148,Area Sales Manager,27,0.18450721928737904,0.09738517330355756,16,2.0
+department_free,xgboost,EmpJobRole,mean_predicted_probability,3,Area Sales Manager,27,0.7821517206891222,Production Technician II,57,0.8477304425545669,0.06557872186544467,16,3.0
+department_free,xgboost,EmpJobRole,mean_predicted_probability,3,Area Sales Manager,27,0.0333410600234988,Production Technician II,57,0.0651475114616117,0.0318064514381129,16,4.0
+department_free,xgboost,EmpJobRole,positive_prediction_rate,3,Production Technician II,57,0.08771929824561403,Area Sales Manager,27,0.18518518518518517,0.09746588693957114,16,2.0
+department_free,xgboost,EmpJobRole,positive_prediction_rate,3,Area Sales Manager,27,0.8148148148148148,Production Technician II,57,0.8947368421052632,0.0799220272904484,16,3.0
+department_free,xgboost,EmpJobRole,positive_prediction_rate,3,Area Sales Manager,27,0.0,Production Technician II,57,0.017543859649122806,0.017543859649122806,16,4.0
+department_free,xgboost,EmpJobRole,precision,2,Production Technician II,57,0.0,Production Technician I,137,1.0,1.0,16,4.0
+department_free,xgboost,EmpJobRole,precision,3,Area Sales Manager,27,0.8,Production Technician II,57,1.0,0.19999999999999996,16,2.0
+department_free,xgboost,EmpJobRole,precision,3,Production Technician II,57,0.8431372549019608,Area Sales Manager,27,0.9090909090909091,0.06595365418894827,16,3.0
+department_free,xgboost,EmpJobRole,true_positive_rate,3,Production Technician I,137,0.9375,Area Sales Manager,27,1.0,0.0625,16,2.0
+department_free,xgboost,EmpJobRole,true_positive_rate,3,Area Sales Manager,27,0.0,Production Technician I,137,0.0625,0.0625,16,4.0
+department_free,xgboost,EmpJobRole,true_positive_rate,3,Area Sales Manager,27,0.9523809523809523,Production Technician I,137,0.9904761904761905,0.03809523809523818,16,3.0
+department_free,xgboost,Gender,accuracy,2,M ,135,0.8592592592592593,F,176,0.8636363636363636,0.004377104377104368,16,
+department_free,xgboost,Gender,false_positive_rate,2,M ,135,0.47058823529411764,F,176,0.6176470588235294,0.1470588235294118,16,3.0
+department_free,xgboost,Gender,false_positive_rate,2,F,176,0.0,M ,135,0.01694915254237288,0.01694915254237288,16,2.0
+department_free,xgboost,Gender,false_positive_rate,2,M ,135,0.00847457627118644,F,176,0.019230769230769232,0.010756192959582791,16,4.0
+department_free,xgboost,Gender,macro_f1,2,F,176,0.6278309214291554,M ,135,0.6537785031053085,0.025947581676153075,16,
+department_free,xgboost,Gender,mean_predicted_probability,2,M ,135,0.7996877367148767,F,176,0.8608565548774307,0.06116881816255404,16,3.0
+department_free,xgboost,Gender,mean_predicted_probability,2,F,176,0.07505077787082454,M ,135,0.13320187679800938,0.05815109892718484,16,2.0
+department_free,xgboost,Gender,mean_predicted_probability,2,F,176,0.06409266725174487,M ,135,0.06711038648711393,0.0030177192353690596,16,4.0
+department_free,xgboost,Gender,positive_prediction_rate,2,F,176,0.07386363636363637,M ,135,0.14074074074074075,0.06687710437710438,16,2.0
+department_free,xgboost,Gender,positive_prediction_rate,2,M ,135,0.8444444444444444,F,176,0.9090909090909091,0.06464646464646462,16,3.0
+department_free,xgboost,Gender,positive_prediction_rate,2,M ,135,0.014814814814814815,F,176,0.017045454545454544,0.002230639730639729,16,4.0
+department_free,xgboost,Gender,precision,2,F,176,0.0,M ,135,0.5,0.5,16,4.0
+department_free,xgboost,Gender,precision,2,M ,135,0.8947368421052632,F,176,1.0,0.10526315789473684,16,2.0
+department_free,xgboost,Gender,precision,2,M ,135,0.8596491228070176,F,176,0.86875,0.00910087719298247,16,3.0
+department_free,xgboost,Gender,true_positive_rate,2,F,176,0.9285714285714286,M ,135,1.0,0.0714285714285714,16,2.0
+department_free,xgboost,Gender,true_positive_rate,2,F,176,0.0,M ,135,0.058823529411764705,0.058823529411764705,16,4.0
+department_free,xgboost,Gender,true_positive_rate,2,M ,135,0.9702970297029703,F,176,0.9788732394366197,0.008576209733649476,16,3.0
+department_free,xgboost,GenderID,accuracy,2,1,135,0.8592592592592593,0,176,0.8636363636363636,0.004377104377104368,16,
+department_free,xgboost,GenderID,false_positive_rate,2,1,135,0.47058823529411764,0,176,0.6176470588235294,0.1470588235294118,16,3.0
+department_free,xgboost,GenderID,false_positive_rate,2,0,176,0.0,1,135,0.01694915254237288,0.01694915254237288,16,2.0
+department_free,xgboost,GenderID,false_positive_rate,2,1,135,0.00847457627118644,0,176,0.019230769230769232,0.010756192959582791,16,4.0
+department_free,xgboost,GenderID,macro_f1,2,0,176,0.6278309214291554,1,135,0.6537785031053085,0.025947581676153075,16,
+department_free,xgboost,GenderID,mean_predicted_probability,2,1,135,0.7996877367148767,0,176,0.8608565548774307,0.06116881816255404,16,3.0
+department_free,xgboost,GenderID,mean_predicted_probability,2,0,176,0.07505077787082454,1,135,0.13320187679800938,0.05815109892718484,16,2.0
+department_free,xgboost,GenderID,mean_predicted_probability,2,0,176,0.06409266725174487,1,135,0.06711038648711393,0.0030177192353690596,16,4.0
+department_free,xgboost,GenderID,positive_prediction_rate,2,0,176,0.07386363636363637,1,135,0.14074074074074075,0.06687710437710438,16,2.0
+department_free,xgboost,GenderID,positive_prediction_rate,2,1,135,0.8444444444444444,0,176,0.9090909090909091,0.06464646464646462,16,3.0
+department_free,xgboost,GenderID,positive_prediction_rate,2,1,135,0.014814814814814815,0,176,0.017045454545454544,0.002230639730639729,16,4.0
+department_free,xgboost,GenderID,precision,2,0,176,0.0,1,135,0.5,0.5,16,4.0
+department_free,xgboost,GenderID,precision,2,1,135,0.8947368421052632,0,176,1.0,0.10526315789473684,16,2.0
+department_free,xgboost,GenderID,precision,2,1,135,0.8596491228070176,0,176,0.86875,0.00910087719298247,16,3.0
+department_free,xgboost,GenderID,true_positive_rate,2,0,176,0.9285714285714286,1,135,1.0,0.0714285714285714,16,2.0
+department_free,xgboost,GenderID,true_positive_rate,2,0,176,0.0,1,135,0.058823529411764705,0.058823529411764705,16,4.0
+department_free,xgboost,GenderID,true_positive_rate,2,1,135,0.9702970297029703,0,176,0.9788732394366197,0.008576209733649476,16,3.0
+department_free,xgboost,HispanicLatino,accuracy,2,No,282,0.8617021276595744,Yes,27,0.8888888888888888,0.027186761229314405,16,
+department_free,xgboost,HispanicLatino,false_positive_rate,2,No,282,0.5396825396825397,Yes,27,0.6,0.060317460317460325,16,3.0
+department_free,xgboost,HispanicLatino,false_positive_rate,2,Yes,27,0.0,No,282,0.012096774193548387,0.012096774193548387,16,4.0
+department_free,xgboost,HispanicLatino,false_positive_rate,2,Yes,27,0.0,No,282,0.007905138339920948,0.007905138339920948,16,2.0
+department_free,xgboost,HispanicLatino,macro_f1,2,No,282,0.6394241146727742,Yes,27,0.6453900709219859,0.005965956249211701,16,
+department_free,xgboost,HispanicLatino,mean_predicted_probability,2,Yes,27,0.07448764312040838,No,282,0.10345507400945969,0.028967430889051307,16,2.0
+department_free,xgboost,HispanicLatino,mean_predicted_probability,2,No,282,0.06216207423719107,Yes,27,0.08385052241458843,0.02168844817739736,16,4.0
+department_free,xgboost,HispanicLatino,mean_predicted_probability,2,No,282,0.8343828517533493,Yes,27,0.8416618344650032,0.007278982711653947,16,3.0
+department_free,xgboost,HispanicLatino,positive_prediction_rate,2,No,282,0.8794326241134752,Yes,27,0.9259259259259259,0.046493301812450705,16,3.0
+department_free,xgboost,HispanicLatino,positive_prediction_rate,2,Yes,27,0.07407407407407407,No,282,0.10638297872340426,0.032308904649330186,16,2.0
+department_free,xgboost,HispanicLatino,positive_prediction_rate,2,Yes,27,0.0,No,282,0.014184397163120567,0.014184397163120567,16,4.0
+department_free,xgboost,HispanicLatino,precision,2,No,282,0.9333333333333333,Yes,27,1.0,0.06666666666666665,16,2.0
+department_free,xgboost,HispanicLatino,precision,2,No,282,0.8629032258064516,Yes,27,0.88,0.01709677419354838,16,3.0
+department_free,xgboost,HispanicLatino,precision,1,No,282,0.25,No,282,0.25,0.0,16,4.0
+department_free,xgboost,HispanicLatino,true_positive_rate,2,No,282,0.9655172413793104,Yes,27,1.0,0.03448275862068961,16,2.0
+department_free,xgboost,HispanicLatino,true_positive_rate,2,Yes,27,0.0,No,282,0.029411764705882353,0.029411764705882353,16,4.0
+department_free,xgboost,HispanicLatino,true_positive_rate,2,No,282,0.9771689497716894,Yes,27,1.0,0.022831050228310557,16,3.0
+department_free,xgboost,MaritalStatus,accuracy,3,Divorced,30,0.8333333333333334,Married,124,0.8790322580645161,0.045698924731182755,16,
+department_free,xgboost,MaritalStatus,false_positive_rate,3,Married,124,0.5,Divorced,30,0.7142857142857143,0.2142857142857143,16,3.0
+department_free,xgboost,MaritalStatus,false_positive_rate,3,Divorced,30,0.0,Married,124,0.017699115044247787,0.017699115044247787,16,4.0
+department_free,xgboost,MaritalStatus,false_positive_rate,3,Divorced,30,0.0,Married,124,0.009009009009009009,0.009009009009009009,16,2.0
+department_free,xgboost,MaritalStatus,macro_f1,3,Married,124,0.6171021960495645,Single,137,0.6576299802106255,0.040527784161060953,16,
+department_free,xgboost,MaritalStatus,mean_predicted_probability,3,Divorced,30,0.06255534734086868,Single,137,0.11133482219014565,0.04877947484927697,16,2.0
+department_free,xgboost,MaritalStatus,mean_predicted_probability,3,Single,137,0.8157912141153855,Divorced,30,0.8631220606133359,0.047330846497950385,16,3.0
+department_free,xgboost,MaritalStatus,mean_predicted_probability,3,Married,124,0.052682041290029985,Divorced,30,0.07432259204579536,0.021640550755765375,16,4.0
+department_free,xgboost,MaritalStatus,positive_prediction_rate,3,Single,137,0.8613138686131386,Divorced,30,0.9333333333333333,0.07201946472019471,16,3.0
+department_free,xgboost,MaritalStatus,positive_prediction_rate,3,Divorced,30,0.06666666666666667,Single,137,0.11678832116788321,0.05012165450121654,16,2.0
+department_free,xgboost,MaritalStatus,positive_prediction_rate,3,Divorced,30,0.0,Single,137,0.021897810218978103,0.021897810218978103,16,4.0
+department_free,xgboost,MaritalStatus,precision,2,Married,124,0.0,Single,137,0.3333333333333333,0.3333333333333333,16,4.0
+department_free,xgboost,MaritalStatus,precision,3,Married,124,0.9230769230769231,Divorced,30,1.0,0.07692307692307687,16,2.0
+department_free,xgboost,MaritalStatus,precision,3,Divorced,30,0.8214285714285714,Married,124,0.8899082568807339,0.06847968545216254,16,3.0
+department_free,xgboost,MaritalStatus,true_positive_rate,3,Married,124,0.9230769230769231,Divorced,30,1.0,0.07692307692307687,16,2.0
+department_free,xgboost,MaritalStatus,true_positive_rate,3,Divorced,30,0.0,Single,137,0.05555555555555555,0.05555555555555555,16,4.0
+department_free,xgboost,MaritalStatus,true_positive_rate,3,Married,124,0.97,Divorced,30,1.0,0.030000000000000027,16,3.0
+department_free,xgboost,MaritalStatusID,accuracy,3,2,30,0.8333333333333334,1,124,0.8790322580645161,0.045698924731182755,16,
+department_free,xgboost,MaritalStatusID,false_positive_rate,3,1,124,0.5,2,30,0.7142857142857143,0.2142857142857143,16,3.0
+department_free,xgboost,MaritalStatusID,false_positive_rate,3,2,30,0.0,1,124,0.017699115044247787,0.017699115044247787,16,4.0
+department_free,xgboost,MaritalStatusID,false_positive_rate,3,2,30,0.0,1,124,0.009009009009009009,0.009009009009009009,16,2.0
+department_free,xgboost,MaritalStatusID,macro_f1,3,1,124,0.6171021960495645,0,137,0.6576299802106255,0.040527784161060953,16,
+department_free,xgboost,MaritalStatusID,mean_predicted_probability,3,2,30,0.06255534734086868,0,137,0.11133482219014565,0.04877947484927697,16,2.0
+department_free,xgboost,MaritalStatusID,mean_predicted_probability,3,0,137,0.8157912141153855,2,30,0.8631220606133359,0.047330846497950385,16,3.0
+department_free,xgboost,MaritalStatusID,mean_predicted_probability,3,1,124,0.052682041290029985,2,30,0.07432259204579536,0.021640550755765375,16,4.0
+department_free,xgboost,MaritalStatusID,positive_prediction_rate,3,0,137,0.8613138686131386,2,30,0.9333333333333333,0.07201946472019471,16,3.0
+department_free,xgboost,MaritalStatusID,positive_prediction_rate,3,2,30,0.06666666666666667,0,137,0.11678832116788321,0.05012165450121654,16,2.0
+department_free,xgboost,MaritalStatusID,positive_prediction_rate,3,2,30,0.0,0,137,0.021897810218978103,0.021897810218978103,16,4.0
+department_free,xgboost,MaritalStatusID,precision,2,1,124,0.0,0,137,0.3333333333333333,0.3333333333333333,16,4.0
+department_free,xgboost,MaritalStatusID,precision,3,1,124,0.9230769230769231,2,30,1.0,0.07692307692307687,16,2.0
+department_free,xgboost,MaritalStatusID,precision,3,2,30,0.8214285714285714,1,124,0.8899082568807339,0.06847968545216254,16,3.0
+department_free,xgboost,MaritalStatusID,true_positive_rate,3,1,124,0.9230769230769231,0,137,1.0,0.07692307692307687,16,2.0
+department_free,xgboost,MaritalStatusID,true_positive_rate,3,1,124,0.0,0,137,0.05555555555555555,0.05555555555555555,16,4.0
+department_free,xgboost,MaritalStatusID,true_positive_rate,3,1,124,0.97,2,30,1.0,0.030000000000000027,16,3.0
+department_free,xgboost,RaceEthnicity,accuracy,3,Black or African American,80,0.8125,Asian,29,0.9310344827586207,0.11853448275862066,16,
+department_free,xgboost,RaceEthnicity,false_positive_rate,3,Asian,29,0.25,Black or African American,80,0.5909090909090909,0.34090909090909094,16,3.0
+department_free,xgboost,RaceEthnicity,false_positive_rate,3,White,187,0.006060606060606061,Asian,29,0.03571428571428571,0.02965367965367965,16,4.0
+department_free,xgboost,RaceEthnicity,false_positive_rate,3,Asian,29,0.0,Black or African American,80,0.014285714285714285,0.014285714285714285,16,2.0
+department_free,xgboost,RaceEthnicity,macro_f1,3,Black or African American,80,0.5939632545931759,White,187,0.6601583659943281,0.0661951114011522,16,
+department_free,xgboost,RaceEthnicity,mean_predicted_probability,3,Black or African American,80,0.8038827912303761,White,187,0.8514808677787149,0.04759807654833881,16,3.0
+department_free,xgboost,RaceEthnicity,mean_predicted_probability,3,White,187,0.08911279296071742,Black or African American,80,0.11818288810430397,0.02907009514358655,16,2.0
+department_free,xgboost,RaceEthnicity,mean_predicted_probability,3,White,187,0.05940633926056776,Black or African American,80,0.07793432066531994,0.018527981404752182,16,4.0
+department_free,xgboost,RaceEthnicity,positive_prediction_rate,3,Asian,29,0.8620689655172413,White,187,0.8983957219251337,0.0363267564078924,16,3.0
+department_free,xgboost,RaceEthnicity,positive_prediction_rate,3,White,187,0.09090909090909091,Black or African American,80,0.125,0.03409090909090909,16,2.0
+department_free,xgboost,RaceEthnicity,positive_prediction_rate,3,White,187,0.0106951871657754,Asian,29,0.034482758620689655,0.023787571454914253,16,4.0
+department_free,xgboost,RaceEthnicity,precision,3,Asian,29,0.0,White,187,0.5,0.5,16,4.0
+department_free,xgboost,RaceEthnicity,precision,3,Black or African American,80,0.8115942028985508,Asian,29,0.96,0.1484057971014492,16,3.0
+department_free,xgboost,RaceEthnicity,precision,3,Black or African American,80,0.9,Asian,29,1.0,0.09999999999999998,16,2.0
+department_free,xgboost,RaceEthnicity,true_positive_rate,3,Black or African American,80,0.9,Asian,29,1.0,0.09999999999999998,16,2.0
+department_free,xgboost,RaceEthnicity,true_positive_rate,3,Asian,29,0.0,White,187,0.045454545454545456,0.045454545454545456,16,4.0
+department_free,xgboost,RaceEthnicity,true_positive_rate,3,Asian,29,0.96,White,187,0.9865771812080537,0.026577181208053746,16,3.0
+department_free,xgboost,RecruitmentSource,accuracy,6,Diversity Job Fair,29,0.7931034482758621,Google Search,49,0.9387755102040817,0.14567206192821958,16,
+department_free,xgboost,RecruitmentSource,false_positive_rate,6,CareerBuilder,23,0.3333333333333333,Employee Referral,31,0.8333333333333334,0.5,16,3.0
+department_free,xgboost,RecruitmentSource,false_positive_rate,6,Diversity Job Fair,29,0.0,CareerBuilder,23,0.05263157894736842,0.05263157894736842,16,2.0
+department_free,xgboost,RecruitmentSource,false_positive_rate,6,CareerBuilder,23,0.0,LinkedIn,76,0.029850746268656716,0.029850746268656716,16,4.0
+department_free,xgboost,RecruitmentSource,macro_f1,6,Indeed,87,0.5946645946645946,LinkedIn,76,0.6961805555555555,0.10151596089096082,16,
+department_free,xgboost,RecruitmentSource,mean_predicted_probability,6,Employee Referral,31,0.03411391885764982,CareerBuilder,23,0.20500950855798936,0.17089558970033952,16,2.0
+department_free,xgboost,RecruitmentSource,mean_predicted_probability,6,Diversity Job Fair,29,0.742965397153103,Employee Referral,31,0.8947323652645763,0.1517669681114734,16,3.0
+department_free,xgboost,RecruitmentSource,mean_predicted_probability,6,CareerBuilder,23,0.03704459568681483,Diversity Job Fair,29,0.08744419771855245,0.05039960203173763,16,4.0
+department_free,xgboost,RecruitmentSource,positive_prediction_rate,6,Employee Referral,31,0.03225806451612903,CareerBuilder,23,0.21739130434782608,0.18513323983169705,16,2.0
+department_free,xgboost,RecruitmentSource,positive_prediction_rate,6,CareerBuilder,23,0.782608695652174,Employee Referral,31,0.967741935483871,0.18513323983169705,16,3.0
+department_free,xgboost,RecruitmentSource,positive_prediction_rate,6,CareerBuilder,23,0.0,LinkedIn,76,0.039473684210526314,0.039473684210526314,16,4.0
+department_free,xgboost,RecruitmentSource,precision,3,Google Search,49,0.0,LinkedIn,76,0.3333333333333333,0.3333333333333333,16,4.0
+department_free,xgboost,RecruitmentSource,precision,6,Diversity Job Fair,29,0.75,Google Search,49,0.9545454545454546,0.20454545454545459,16,3.0
+department_free,xgboost,RecruitmentSource,precision,6,CareerBuilder,23,0.8,Diversity Job Fair,29,1.0,0.19999999999999996,16,2.0
+department_free,xgboost,RecruitmentSource,true_positive_rate,6,Indeed,87,0.8888888888888888,CareerBuilder,23,1.0,0.11111111111111116,16,2.0
+department_free,xgboost,RecruitmentSource,true_positive_rate,6,CareerBuilder,23,0.0,LinkedIn,76,0.1111111111111111,0.1111111111111111,16,4.0
+department_free,xgboost,RecruitmentSource,true_positive_rate,6,CareerBuilder,23,0.9411764705882353,Diversity Job Fair,29,1.0,0.05882352941176472,16,3.0
+department_free,xgboost,SpecialProjectsCount,accuracy,3,5,21,0.7619047619047619,6,21,0.9523809523809523,0.19047619047619047,16,
+department_free,xgboost,SpecialProjectsCount,false_positive_rate,3,6,21,0.3333333333333333,5,21,1.0,0.6666666666666667,16,3.0
+department_free,xgboost,SpecialProjectsCount,false_positive_rate,3,5,21,0.0,0,241,0.014150943396226415,0.014150943396226415,16,4.0
+department_free,xgboost,SpecialProjectsCount,false_positive_rate,3,5,21,0.0,0,241,0.004672897196261682,0.004672897196261682,16,2.0
+department_free,xgboost,SpecialProjectsCount,macro_f1,3,5,21,0.2882882882882883,6,21,0.6576576576576577,0.3693693693693694,16,
+department_free,xgboost,SpecialProjectsCount,mean_predicted_probability,3,6,21,0.8187113689674069,5,21,0.9381929735242788,0.11948160455687185,16,3.0
+department_free,xgboost,SpecialProjectsCount,mean_predicted_probability,3,5,21,0.0020062934294148536,0,241,0.10878223555077522,0.10677594212136036,16,2.0
+department_free,xgboost,SpecialProjectsCount,mean_predicted_probability,3,5,21,0.05980073304630641,6,21,0.0864121207690618,0.026611387722755384,16,4.0
+department_free,xgboost,SpecialProjectsCount,positive_prediction_rate,3,0,241,0.8713692946058091,5,21,1.0,0.12863070539419086,16,3.0
+department_free,xgboost,SpecialProjectsCount,positive_prediction_rate,3,5,21,0.0,0,241,0.11203319502074689,0.11203319502074689,16,2.0
+department_free,xgboost,SpecialProjectsCount,positive_prediction_rate,3,5,21,0.0,0,241,0.016597510373443983,0.016597510373443983,16,4.0
+department_free,xgboost,SpecialProjectsCount,precision,3,5,21,0.7619047619047619,6,21,0.9473684210526315,0.18546365914786966,16,3.0
+department_free,xgboost,SpecialProjectsCount,precision,2,0,241,0.9629629629629629,6,21,1.0,0.03703703703703709,16,2.0
+department_free,xgboost,SpecialProjectsCount,precision,1,0,241,0.25,0,241,0.25,0.0,16,4.0
+department_free,xgboost,SpecialProjectsCount,true_positive_rate,2,0,241,0.9629629629629629,6,21,1.0,0.03703703703703709,16,2.0
+department_free,xgboost,SpecialProjectsCount,true_positive_rate,3,5,21,0.0,0,241,0.034482758620689655,0.034482758620689655,16,4.0
+department_free,xgboost,SpecialProjectsCount,true_positive_rate,3,0,241,0.9783783783783784,5,21,1.0,0.021621621621621623,16,3.0
+department_free,xgboost,State,accuracy,1,MA,276,0.8659420289855072,MA,276,0.8659420289855072,0.0,16,
+department_free,xgboost,State,false_positive_rate,1,MA,276,0.004032258064516129,MA,276,0.004032258064516129,0.0,16,2.0
+department_free,xgboost,State,false_positive_rate,1,MA,276,0.5409836065573771,MA,276,0.5409836065573771,0.0,16,3.0
+department_free,xgboost,State,false_positive_rate,1,MA,276,0.012345679012345678,MA,276,0.012345679012345678,0.0,16,4.0
+department_free,xgboost,State,macro_f1,1,MA,276,0.6459099155177587,MA,276,0.6459099155177587,0.0,16,
+department_free,xgboost,State,mean_predicted_probability,1,MA,276,0.09847187308589007,MA,276,0.09847187308589007,0.0,16,2.0
+department_free,xgboost,State,mean_predicted_probability,1,MA,276,0.8342440860075891,MA,276,0.8342440860075891,0.0,16,3.0
+department_free,xgboost,State,mean_predicted_probability,1,MA,276,0.0672840409065208,MA,276,0.0672840409065208,0.0,16,4.0
+department_free,xgboost,State,positive_prediction_rate,1,MA,276,0.10144927536231885,MA,276,0.10144927536231885,0.0,16,2.0
+department_free,xgboost,State,positive_prediction_rate,1,MA,276,0.8840579710144928,MA,276,0.8840579710144928,0.0,16,3.0
+department_free,xgboost,State,positive_prediction_rate,1,MA,276,0.014492753623188406,MA,276,0.014492753623188406,0.0,16,4.0
+department_free,xgboost,State,precision,1,MA,276,0.9642857142857143,MA,276,0.9642857142857143,0.0,16,2.0
+department_free,xgboost,State,precision,1,MA,276,0.8647540983606558,MA,276,0.8647540983606558,0.0,16,3.0
+department_free,xgboost,State,precision,1,MA,276,0.25,MA,276,0.25,0.0,16,4.0
+department_free,xgboost,State,true_positive_rate,1,MA,276,0.9642857142857143,MA,276,0.9642857142857143,0.0,16,2.0
+department_free,xgboost,State,true_positive_rate,1,MA,276,0.9813953488372092,MA,276,0.9813953488372092,0.0,16,3.0
+department_free,xgboost,State,true_positive_rate,1,MA,276,0.030303030303030304,MA,276,0.030303030303030304,0.0,16,4.0
+department_including,xgboost,Absences,accuracy,10,14,17,0.7647058823529411,3,16,0.9375,0.17279411764705888,16,
+department_including,xgboost,Absences,false_positive_rate,10,2,21,0.0,14,17,1.0,1.0,16,3.0
+department_including,xgboost,Absences,false_positive_rate,10,13,17,0.0,14,17,0.07142857142857142,0.07142857142857142,16,4.0
+department_including,xgboost,Absences,false_positive_rate,10,13,17,0.0,2,21,0.05263157894736842,0.05263157894736842,16,2.0
+department_including,xgboost,Absences,macro_f1,10,14,17,0.2888888888888889,3,16,0.6533333333333333,0.3644444444444444,16,
+department_including,xgboost,Absences,mean_predicted_probability,10,14,17,0.002370778893879825,3,16,0.1774666051792259,0.1750958262853461,16,2.0
+department_including,xgboost,Absences,mean_predicted_probability,10,16,23,0.7508714830562744,14,17,0.8986652531769251,0.14779377012065076,16,3.0
+department_including,xgboost,Absences,mean_predicted_probability,10,6,16,0.02081329394130297,14,17,0.09896396792919503,0.07815067398789205,16,4.0
+department_including,xgboost,Absences,positive_prediction_rate,10,14,17,0.0,3,16,0.1875,0.1875,16,2.0
+department_including,xgboost,Absences,positive_prediction_rate,10,2,21,0.8095238095238095,14,17,0.9411764705882353,0.13165266106442575,16,3.0
+department_including,xgboost,Absences,positive_prediction_rate,10,13,17,0.0,19,16,0.0625,0.0625,16,4.0
+department_including,xgboost,Absences,precision,9,7,21,0.5,13,17,1.0,0.5,16,2.0
+department_including,xgboost,Absences,precision,10,16,23,0.7368421052631579,2,21,1.0,0.26315789473684215,16,3.0
+department_including,xgboost,Absences,precision,3,14,17,0.0,14,17,0.0,0.0,16,4.0
+department_including,xgboost,Absences,true_positive_rate,9,6,16,0.6666666666666666,13,17,1.0,0.33333333333333337,16,2.0
+department_including,xgboost,Absences,true_positive_rate,10,2,21,0.8947368421052632,13,17,1.0,0.10526315789473684,16,3.0
+department_including,xgboost,Absences,true_positive_rate,9,13,17,0.0,13,17,0.0,0.0,16,4.0
+department_including,xgboost,CitizenDesc,accuracy,1,US Citizen,295,0.8542372881355932,US Citizen,295,0.8542372881355932,0.0,16,
+department_including,xgboost,CitizenDesc,false_positive_rate,1,US Citizen,295,0.007547169811320755,US Citizen,295,0.007547169811320755,0.0,16,2.0
+department_including,xgboost,CitizenDesc,false_positive_rate,1,US Citizen,295,0.5522388059701493,US Citizen,295,0.5522388059701493,0.0,16,3.0
+department_including,xgboost,CitizenDesc,false_positive_rate,1,US Citizen,295,0.015503875968992248,US Citizen,295,0.015503875968992248,0.0,16,4.0
+department_including,xgboost,CitizenDesc,macro_f1,1,US Citizen,295,0.6367143439550617,US Citizen,295,0.6367143439550617,0.0,16,
+department_including,xgboost,CitizenDesc,mean_predicted_probability,1,US Citizen,295,0.10253758732846127,US Citizen,295,0.10253758732846127,0.0,16,2.0
+department_including,xgboost,CitizenDesc,mean_predicted_probability,1,US Citizen,295,0.8336049634759051,US Citizen,295,0.8336049634759051,0.0,16,3.0
+department_including,xgboost,CitizenDesc,mean_predicted_probability,1,US Citizen,295,0.06385744919563366,US Citizen,295,0.06385744919563366,0.0,16,4.0
+department_including,xgboost,CitizenDesc,positive_prediction_rate,1,US Citizen,295,0.10508474576271186,US Citizen,295,0.10508474576271186,0.0,16,2.0
+department_including,xgboost,CitizenDesc,positive_prediction_rate,1,US Citizen,295,0.8779661016949153,US Citizen,295,0.8779661016949153,0.0,16,3.0
+department_including,xgboost,CitizenDesc,positive_prediction_rate,1,US Citizen,295,0.01694915254237288,US Citizen,295,0.01694915254237288,0.0,16,4.0
+department_including,xgboost,CitizenDesc,precision,1,US Citizen,295,0.9354838709677419,US Citizen,295,0.9354838709677419,0.0,16,2.0
+department_including,xgboost,CitizenDesc,precision,1,US Citizen,295,0.8571428571428571,US Citizen,295,0.8571428571428571,0.0,16,3.0
+department_including,xgboost,CitizenDesc,precision,1,US Citizen,295,0.2,US Citizen,295,0.2,0.0,16,4.0
+department_including,xgboost,CitizenDesc,true_positive_rate,1,US Citizen,295,0.9666666666666667,US Citizen,295,0.9666666666666667,0.0,16,2.0
+department_including,xgboost,CitizenDesc,true_positive_rate,1,US Citizen,295,0.9736842105263158,US Citizen,295,0.9736842105263158,0.0,16,3.0
+department_including,xgboost,CitizenDesc,true_positive_rate,1,US Citizen,295,0.02702702702702703,US Citizen,295,0.02702702702702703,0.0,16,4.0
+department_including,xgboost,DaysLateLast30,accuracy,1,0,278,0.8525179856115108,0,278,0.8525179856115108,0.0,16,
+department_including,xgboost,DaysLateLast30,false_positive_rate,1,0,278,0.0,0,278,0.0,0.0,16,2.0
+department_including,xgboost,DaysLateLast30,false_positive_rate,1,0,278,0.9736842105263158,0,278,0.9736842105263158,0.0,16,3.0
+department_including,xgboost,DaysLateLast30,false_positive_rate,1,0,278,0.016597510373443983,0,278,0.016597510373443983,0.0,16,4.0
+department_including,xgboost,DaysLateLast30,macro_f1,1,0,278,0.3225656734428664,0,278,0.3225656734428664,0.0,16,
+department_including,xgboost,DaysLateLast30,mean_predicted_probability,1,0,278,0.003181042912980691,0,278,0.003181042912980691,0.0,16,2.0
+department_including,xgboost,DaysLateLast30,mean_predicted_probability,1,0,278,0.926123972433686,0,278,0.926123972433686,0.0,16,3.0
+department_including,xgboost,DaysLateLast30,mean_predicted_probability,1,0,278,0.07069498465333342,0,278,0.07069498465333342,0.0,16,4.0
+department_including,xgboost,DaysLateLast30,positive_prediction_rate,1,0,278,0.0,0,278,0.0,0.0,16,2.0
+department_including,xgboost,DaysLateLast30,positive_prediction_rate,1,0,278,0.9820143884892086,0,278,0.9820143884892086,0.0,16,3.0
+department_including,xgboost,DaysLateLast30,positive_prediction_rate,1,0,278,0.017985611510791366,0,278,0.017985611510791366,0.0,16,4.0
+department_including,xgboost,DaysLateLast30,precision,1,0,278,0.8644688644688645,0,278,0.8644688644688645,0.0,16,3.0
+department_including,xgboost,DaysLateLast30,precision,1,0,278,0.2,0,278,0.2,0.0,16,4.0
+department_including,xgboost,DaysLateLast30,true_positive_rate,1,0,278,0.0,0,278,0.0,0.0,16,2.0
+department_including,xgboost,DaysLateLast30,true_positive_rate,1,0,278,0.9833333333333333,0,278,0.9833333333333333,0.0,16,3.0
+department_including,xgboost,DaysLateLast30,true_positive_rate,1,0,278,0.02702702702702703,0,278,0.02702702702702703,0.0,16,4.0
+department_including,xgboost,EmpDepartment,accuracy,3,Production       ,209,0.8564593301435407,IT/IS,50,0.88,0.023540669856459306,16,
+department_including,xgboost,EmpDepartment,false_positive_rate,3,Sales,31,0.2857142857142857,IT/IS,50,0.75,0.4642857142857143,16,3.0
+department_including,xgboost,EmpDepartment,false_positive_rate,3,IT/IS,50,0.0,Sales,31,0.038461538461538464,0.038461538461538464,16,2.0
+department_including,xgboost,EmpDepartment,false_positive_rate,3,IT/IS,50,0.0,Sales,31,0.034482758620689655,0.034482758620689655,16,4.0
+department_including,xgboost,EmpDepartment,macro_f1,3,Sales,31,0.6085858585858586,Production       ,209,0.6451563691838291,0.03657051059797056,16,
+department_including,xgboost,EmpDepartment,mean_predicted_probability,3,IT/IS,50,0.040771887080053554,Sales,31,0.19237856855605448,0.15160668147600093,16,2.0
+department_including,xgboost,EmpDepartment,mean_predicted_probability,3,Sales,31,0.7612355769806052,IT/IS,50,0.9101643601284651,0.14892878314785996,16,3.0
+department_including,xgboost,EmpDepartment,mean_predicted_probability,3,Sales,31,0.0463858544633403,Production       ,209,0.06509690080965003,0.018711046346309726,16,4.0
+department_including,xgboost,EmpDepartment,positive_prediction_rate,3,Sales,31,0.7741935483870968,IT/IS,50,0.96,0.1858064516129032,16,3.0
+department_including,xgboost,EmpDepartment,positive_prediction_rate,3,IT/IS,50,0.04,Sales,31,0.1935483870967742,0.15354838709677418,16,2.0
+department_including,xgboost,EmpDepartment,positive_prediction_rate,3,IT/IS,50,0.0,Sales,31,0.03225806451612903,0.03225806451612903,16,4.0
+department_including,xgboost,EmpDepartment,precision,2,Sales,31,0.0,Production       ,209,0.3333333333333333,0.3333333333333333,16,4.0
+department_including,xgboost,EmpDepartment,precision,3,Sales,31,0.8333333333333334,IT/IS,50,1.0,0.16666666666666663,16,2.0
+department_including,xgboost,EmpDepartment,precision,3,Production       ,209,0.8524590163934426,Sales,31,0.9166666666666666,0.06420765027322406,16,3.0
+department_including,xgboost,EmpDepartment,true_positive_rate,3,Sales,31,0.9166666666666666,IT/IS,50,1.0,0.08333333333333337,16,3.0
+department_including,xgboost,EmpDepartment,true_positive_rate,3,Production       ,209,0.9565217391304348,IT/IS,50,1.0,0.04347826086956519,16,2.0
+department_including,xgboost,EmpDepartment,true_positive_rate,3,IT/IS,50,0.0,Production       ,209,0.037037037037037035,0.037037037037037035,16,4.0
+department_including,xgboost,EmpJobRole,accuracy,3,Production Technician II,57,0.8421052631578947,Area Sales Manager,27,0.8888888888888888,0.04678362573099415,16,
+department_including,xgboost,EmpJobRole,false_positive_rate,3,Area Sales Manager,27,0.3333333333333333,Production Technician II,57,0.6153846153846154,0.2820512820512821,16,3.0
+department_including,xgboost,EmpJobRole,false_positive_rate,3,Production Technician II,57,0.0,Area Sales Manager,27,0.043478260869565216,0.043478260869565216,16,2.0
+department_including,xgboost,EmpJobRole,false_positive_rate,3,Area Sales Manager,27,0.0,Production Technician II,57,0.02040816326530612,0.02040816326530612,16,4.0
+department_including,xgboost,EmpJobRole,macro_f1,3,Area Sales Manager,27,0.6063738156761412,Production Technician I,137,0.659863834422658,0.05349001874651671,16,
+department_including,xgboost,EmpJobRole,mean_predicted_probability,3,Production Technician II,57,0.08733299532220574,Area Sales Manager,27,0.18421642438296423,0.09688342906075849,16,2.0
+department_including,xgboost,EmpJobRole,mean_predicted_probability,3,Area Sales Manager,27,0.7845283106330806,Production Technician II,57,0.8470195208683596,0.06249121023527904,16,3.0
+department_including,xgboost,EmpJobRole,mean_predicted_probability,3,Area Sales Manager,27,0.03125526498395517,Production Technician II,57,0.0656474838094347,0.034392218825479534,16,4.0
+department_including,xgboost,EmpJobRole,positive_prediction_rate,3,Production Technician II,57,0.08771929824561403,Area Sales Manager,27,0.18518518518518517,0.09746588693957114,16,2.0
+department_including,xgboost,EmpJobRole,positive_prediction_rate,3,Area Sales Manager,27,0.8148148148148148,Production Technician II,57,0.8947368421052632,0.0799220272904484,16,3.0
+department_including,xgboost,EmpJobRole,positive_prediction_rate,3,Area Sales Manager,27,0.0,Production Technician II,57,0.017543859649122806,0.017543859649122806,16,4.0
+department_including,xgboost,EmpJobRole,precision,2,Production Technician II,57,0.0,Production Technician I,137,1.0,1.0,16,4.0
+department_including,xgboost,EmpJobRole,precision,3,Area Sales Manager,27,0.8,Production Technician II,57,1.0,0.19999999999999996,16,2.0
+department_including,xgboost,EmpJobRole,precision,3,Production Technician II,57,0.8431372549019608,Area Sales Manager,27,0.9090909090909091,0.06595365418894827,16,3.0
+department_including,xgboost,EmpJobRole,true_positive_rate,3,Production Technician I,137,0.9375,Area Sales Manager,27,1.0,0.0625,16,2.0
+department_including,xgboost,EmpJobRole,true_positive_rate,3,Area Sales Manager,27,0.0,Production Technician I,137,0.0625,0.0625,16,4.0
+department_including,xgboost,EmpJobRole,true_positive_rate,3,Area Sales Manager,27,0.9523809523809523,Production Technician I,137,0.9904761904761905,0.03809523809523818,16,3.0
+department_including,xgboost,Gender,accuracy,2,M ,135,0.8592592592592593,F,176,0.8636363636363636,0.004377104377104368,16,
+department_including,xgboost,Gender,false_positive_rate,2,M ,135,0.47058823529411764,F,176,0.6176470588235294,0.1470588235294118,16,3.0
+department_including,xgboost,Gender,false_positive_rate,2,F,176,0.0,M ,135,0.01694915254237288,0.01694915254237288,16,2.0
+department_including,xgboost,Gender,false_positive_rate,2,M ,135,0.00847457627118644,F,176,0.019230769230769232,0.010756192959582791,16,4.0
+department_including,xgboost,Gender,macro_f1,2,F,176,0.6278309214291554,M ,135,0.6537785031053085,0.025947581676153075,16,
+department_including,xgboost,Gender,mean_predicted_probability,2,M ,135,0.8020611790088562,F,176,0.8614521265629956,0.05939094755413943,16,3.0
+department_including,xgboost,Gender,mean_predicted_probability,2,F,176,0.07520832186144033,M ,135,0.13392434691788777,0.058716025056447435,16,2.0
+department_including,xgboost,Gender,mean_predicted_probability,2,F,176,0.06333955157556423,M ,135,0.06401447407325614,0.0006749224976919099,16,4.0
+department_including,xgboost,Gender,positive_prediction_rate,2,F,176,0.07386363636363637,M ,135,0.14074074074074075,0.06687710437710438,16,2.0
+department_including,xgboost,Gender,positive_prediction_rate,2,M ,135,0.8444444444444444,F,176,0.9090909090909091,0.06464646464646462,16,3.0
+department_including,xgboost,Gender,positive_prediction_rate,2,M ,135,0.014814814814814815,F,176,0.017045454545454544,0.002230639730639729,16,4.0
+department_including,xgboost,Gender,precision,2,F,176,0.0,M ,135,0.5,0.5,16,4.0
+department_including,xgboost,Gender,precision,2,M ,135,0.8947368421052632,F,176,1.0,0.10526315789473684,16,2.0
+department_including,xgboost,Gender,precision,2,M ,135,0.8596491228070176,F,176,0.86875,0.00910087719298247,16,3.0
+department_including,xgboost,Gender,true_positive_rate,2,F,176,0.9285714285714286,M ,135,1.0,0.0714285714285714,16,2.0
+department_including,xgboost,Gender,true_positive_rate,2,F,176,0.0,M ,135,0.058823529411764705,0.058823529411764705,16,4.0
+department_including,xgboost,Gender,true_positive_rate,2,M ,135,0.9702970297029703,F,176,0.9788732394366197,0.008576209733649476,16,3.0
+department_including,xgboost,GenderID,accuracy,2,1,135,0.8592592592592593,0,176,0.8636363636363636,0.004377104377104368,16,
+department_including,xgboost,GenderID,false_positive_rate,2,1,135,0.47058823529411764,0,176,0.6176470588235294,0.1470588235294118,16,3.0
+department_including,xgboost,GenderID,false_positive_rate,2,0,176,0.0,1,135,0.01694915254237288,0.01694915254237288,16,2.0
+department_including,xgboost,GenderID,false_positive_rate,2,1,135,0.00847457627118644,0,176,0.019230769230769232,0.010756192959582791,16,4.0
+department_including,xgboost,GenderID,macro_f1,2,0,176,0.6278309214291554,1,135,0.6537785031053085,0.025947581676153075,16,
+department_including,xgboost,GenderID,mean_predicted_probability,2,1,135,0.8020611790088562,0,176,0.8614521265629956,0.05939094755413943,16,3.0
+department_including,xgboost,GenderID,mean_predicted_probability,2,0,176,0.07520832186144033,1,135,0.13392434691788777,0.058716025056447435,16,2.0
+department_including,xgboost,GenderID,mean_predicted_probability,2,0,176,0.06333955157556423,1,135,0.06401447407325614,0.0006749224976919099,16,4.0
+department_including,xgboost,GenderID,positive_prediction_rate,2,0,176,0.07386363636363637,1,135,0.14074074074074075,0.06687710437710438,16,2.0
+department_including,xgboost,GenderID,positive_prediction_rate,2,1,135,0.8444444444444444,0,176,0.9090909090909091,0.06464646464646462,16,3.0
+department_including,xgboost,GenderID,positive_prediction_rate,2,1,135,0.014814814814814815,0,176,0.017045454545454544,0.002230639730639729,16,4.0
+department_including,xgboost,GenderID,precision,2,0,176,0.0,1,135,0.5,0.5,16,4.0
+department_including,xgboost,GenderID,precision,2,1,135,0.8947368421052632,0,176,1.0,0.10526315789473684,16,2.0
+department_including,xgboost,GenderID,precision,2,1,135,0.8596491228070176,0,176,0.86875,0.00910087719298247,16,3.0
+department_including,xgboost,GenderID,true_positive_rate,2,0,176,0.9285714285714286,1,135,1.0,0.0714285714285714,16,2.0
+department_including,xgboost,GenderID,true_positive_rate,2,0,176,0.0,1,135,0.058823529411764705,0.058823529411764705,16,4.0
+department_including,xgboost,GenderID,true_positive_rate,2,1,135,0.9702970297029703,0,176,0.9788732394366197,0.008576209733649476,16,3.0
+department_including,xgboost,HispanicLatino,accuracy,2,No,282,0.8617021276595744,Yes,27,0.8888888888888888,0.027186761229314405,16,
+department_including,xgboost,HispanicLatino,false_positive_rate,2,No,282,0.5396825396825397,Yes,27,0.6,0.060317460317460325,16,3.0
+department_including,xgboost,HispanicLatino,false_positive_rate,2,Yes,27,0.0,No,282,0.012096774193548387,0.012096774193548387,16,4.0
+department_including,xgboost,HispanicLatino,false_positive_rate,2,Yes,27,0.0,No,282,0.007905138339920948,0.007905138339920948,16,2.0
+department_including,xgboost,HispanicLatino,macro_f1,2,No,282,0.6394241146727742,Yes,27,0.6453900709219859,0.005965956249211701,16,
+department_including,xgboost,HispanicLatino,mean_predicted_probability,2,Yes,27,0.07489049533550245,No,282,0.10386093273414708,0.028970437398644633,16,2.0
+department_including,xgboost,HispanicLatino,mean_predicted_probability,2,No,282,0.06018326886429046,Yes,27,0.08356330241634502,0.023380033552054563,16,4.0
+department_including,xgboost,HispanicLatino,mean_predicted_probability,2,No,282,0.8359557984015625,Yes,27,0.8415462022481526,0.005590403846590042,16,3.0
+department_including,xgboost,HispanicLatino,positive_prediction_rate,2,No,282,0.8794326241134752,Yes,27,0.9259259259259259,0.046493301812450705,16,3.0
+department_including,xgboost,HispanicLatino,positive_prediction_rate,2,Yes,27,0.07407407407407407,No,282,0.10638297872340426,0.032308904649330186,16,2.0
+department_including,xgboost,HispanicLatino,positive_prediction_rate,2,Yes,27,0.0,No,282,0.014184397163120567,0.014184397163120567,16,4.0
+department_including,xgboost,HispanicLatino,precision,2,No,282,0.9333333333333333,Yes,27,1.0,0.06666666666666665,16,2.0
+department_including,xgboost,HispanicLatino,precision,2,No,282,0.8629032258064516,Yes,27,0.88,0.01709677419354838,16,3.0
+department_including,xgboost,HispanicLatino,precision,1,No,282,0.25,No,282,0.25,0.0,16,4.0
+department_including,xgboost,HispanicLatino,true_positive_rate,2,No,282,0.9655172413793104,Yes,27,1.0,0.03448275862068961,16,2.0
+department_including,xgboost,HispanicLatino,true_positive_rate,2,Yes,27,0.0,No,282,0.029411764705882353,0.029411764705882353,16,4.0
+department_including,xgboost,HispanicLatino,true_positive_rate,2,No,282,0.9771689497716894,Yes,27,1.0,0.022831050228310557,16,3.0
+department_including,xgboost,MaritalStatus,accuracy,3,Divorced,30,0.8333333333333334,Married,124,0.8790322580645161,0.045698924731182755,16,
+department_including,xgboost,MaritalStatus,false_positive_rate,3,Married,124,0.5,Divorced,30,0.7142857142857143,0.2142857142857143,16,3.0
+department_including,xgboost,MaritalStatus,false_positive_rate,3,Divorced,30,0.0,Married,124,0.017699115044247787,0.017699115044247787,16,4.0
+department_including,xgboost,MaritalStatus,false_positive_rate,3,Divorced,30,0.0,Married,124,0.009009009009009009,0.009009009009009009,16,2.0
+department_including,xgboost,MaritalStatus,macro_f1,3,Married,124,0.6171021960495645,Single,137,0.6576299802106255,0.040527784161060953,16,
+department_including,xgboost,MaritalStatus,mean_predicted_probability,3,Divorced,30,0.06330715028714887,Single,137,0.11206565291524334,0.048758502628094474,16,2.0
+department_including,xgboost,MaritalStatus,mean_predicted_probability,3,Single,137,0.8175363530411802,Divorced,30,0.8612903886342642,0.043754035593083995,16,3.0
+department_including,xgboost,MaritalStatus,mean_predicted_probability,3,Married,124,0.05202457010128476,Divorced,30,0.07540246107858704,0.023377890977302286,16,4.0
+department_including,xgboost,MaritalStatus,positive_prediction_rate,3,Single,137,0.8613138686131386,Divorced,30,0.9333333333333333,0.07201946472019471,16,3.0
+department_including,xgboost,MaritalStatus,positive_prediction_rate,3,Divorced,30,0.06666666666666667,Single,137,0.11678832116788321,0.05012165450121654,16,2.0
+department_including,xgboost,MaritalStatus,positive_prediction_rate,3,Divorced,30,0.0,Single,137,0.021897810218978103,0.021897810218978103,16,4.0
+department_including,xgboost,MaritalStatus,precision,2,Married,124,0.0,Single,137,0.3333333333333333,0.3333333333333333,16,4.0
+department_including,xgboost,MaritalStatus,precision,3,Married,124,0.9230769230769231,Divorced,30,1.0,0.07692307692307687,16,2.0
+department_including,xgboost,MaritalStatus,precision,3,Divorced,30,0.8214285714285714,Married,124,0.8899082568807339,0.06847968545216254,16,3.0
+department_including,xgboost,MaritalStatus,true_positive_rate,3,Married,124,0.9230769230769231,Divorced,30,1.0,0.07692307692307687,16,2.0
+department_including,xgboost,MaritalStatus,true_positive_rate,3,Divorced,30,0.0,Single,137,0.05555555555555555,0.05555555555555555,16,4.0
+department_including,xgboost,MaritalStatus,true_positive_rate,3,Married,124,0.97,Divorced,30,1.0,0.030000000000000027,16,3.0
+department_including,xgboost,MaritalStatusID,accuracy,3,2,30,0.8333333333333334,1,124,0.8790322580645161,0.045698924731182755,16,
+department_including,xgboost,MaritalStatusID,false_positive_rate,3,1,124,0.5,2,30,0.7142857142857143,0.2142857142857143,16,3.0
+department_including,xgboost,MaritalStatusID,false_positive_rate,3,2,30,0.0,1,124,0.017699115044247787,0.017699115044247787,16,4.0
+department_including,xgboost,MaritalStatusID,false_positive_rate,3,2,30,0.0,1,124,0.009009009009009009,0.009009009009009009,16,2.0
+department_including,xgboost,MaritalStatusID,macro_f1,3,1,124,0.6171021960495645,0,137,0.6576299802106255,0.040527784161060953,16,
+department_including,xgboost,MaritalStatusID,mean_predicted_probability,3,2,30,0.06330715028714887,0,137,0.11206565291524334,0.048758502628094474,16,2.0
+department_including,xgboost,MaritalStatusID,mean_predicted_probability,3,0,137,0.8175363530411802,2,30,0.8612903886342642,0.043754035593083995,16,3.0
+department_including,xgboost,MaritalStatusID,mean_predicted_probability,3,1,124,0.05202457010128476,2,30,0.07540246107858704,0.023377890977302286,16,4.0
+department_including,xgboost,MaritalStatusID,positive_prediction_rate,3,0,137,0.8613138686131386,2,30,0.9333333333333333,0.07201946472019471,16,3.0
+department_including,xgboost,MaritalStatusID,positive_prediction_rate,3,2,30,0.06666666666666667,0,137,0.11678832116788321,0.05012165450121654,16,2.0
+department_including,xgboost,MaritalStatusID,positive_prediction_rate,3,2,30,0.0,0,137,0.021897810218978103,0.021897810218978103,16,4.0
+department_including,xgboost,MaritalStatusID,precision,2,1,124,0.0,0,137,0.3333333333333333,0.3333333333333333,16,4.0
+department_including,xgboost,MaritalStatusID,precision,3,1,124,0.9230769230769231,2,30,1.0,0.07692307692307687,16,2.0
+department_including,xgboost,MaritalStatusID,precision,3,2,30,0.8214285714285714,1,124,0.8899082568807339,0.06847968545216254,16,3.0
+department_including,xgboost,MaritalStatusID,true_positive_rate,3,1,124,0.9230769230769231,0,137,1.0,0.07692307692307687,16,2.0
+department_including,xgboost,MaritalStatusID,true_positive_rate,3,1,124,0.0,0,137,0.05555555555555555,0.05555555555555555,16,4.0
+department_including,xgboost,MaritalStatusID,true_positive_rate,3,1,124,0.97,2,30,1.0,0.030000000000000027,16,3.0
+department_including,xgboost,RaceEthnicity,accuracy,3,Black or African American,80,0.8125,Asian,29,0.9310344827586207,0.11853448275862066,16,
+department_including,xgboost,RaceEthnicity,false_positive_rate,3,Asian,29,0.25,Black or African American,80,0.5909090909090909,0.34090909090909094,16,3.0
+department_including,xgboost,RaceEthnicity,false_positive_rate,3,White,187,0.006060606060606061,Asian,29,0.03571428571428571,0.02965367965367965,16,4.0
+department_including,xgboost,RaceEthnicity,false_positive_rate,3,Asian,29,0.0,Black or African American,80,0.014285714285714285,0.014285714285714285,16,2.0
+department_including,xgboost,RaceEthnicity,macro_f1,3,Black or African American,80,0.5939632545931759,White,187,0.6601583659943281,0.0661951114011522,16,
+department_including,xgboost,RaceEthnicity,mean_predicted_probability,3,Black or African American,80,0.8046947901830093,White,187,0.8533951103385925,0.04870032015558323,16,3.0
+department_including,xgboost,RaceEthnicity,mean_predicted_probability,3,White,187,0.08926835115202622,Black or African American,80,0.11920591077037121,0.02993755961834499,16,2.0
+department_including,xgboost,RaceEthnicity,mean_predicted_probability,3,White,187,0.05733653850938149,Black or African American,80,0.0760992990466195,0.018762760537238007,16,4.0
+department_including,xgboost,RaceEthnicity,positive_prediction_rate,3,Asian,29,0.8620689655172413,White,187,0.8983957219251337,0.0363267564078924,16,3.0
+department_including,xgboost,RaceEthnicity,positive_prediction_rate,3,White,187,0.09090909090909091,Black or African American,80,0.125,0.03409090909090909,16,2.0
+department_including,xgboost,RaceEthnicity,positive_prediction_rate,3,White,187,0.0106951871657754,Asian,29,0.034482758620689655,0.023787571454914253,16,4.0
+department_including,xgboost,RaceEthnicity,precision,3,Asian,29,0.0,White,187,0.5,0.5,16,4.0
+department_including,xgboost,RaceEthnicity,precision,3,Black or African American,80,0.8115942028985508,Asian,29,0.96,0.1484057971014492,16,3.0
+department_including,xgboost,RaceEthnicity,precision,3,Black or African American,80,0.9,Asian,29,1.0,0.09999999999999998,16,2.0
+department_including,xgboost,RaceEthnicity,true_positive_rate,3,Black or African American,80,0.9,Asian,29,1.0,0.09999999999999998,16,2.0
+department_including,xgboost,RaceEthnicity,true_positive_rate,3,Asian,29,0.0,White,187,0.045454545454545456,0.045454545454545456,16,4.0
+department_including,xgboost,RaceEthnicity,true_positive_rate,3,Asian,29,0.96,White,187,0.9865771812080537,0.026577181208053746,16,3.0
+department_including,xgboost,RecruitmentSource,accuracy,6,Diversity Job Fair,29,0.7931034482758621,Google Search,49,0.9387755102040817,0.14567206192821958,16,
+department_including,xgboost,RecruitmentSource,false_positive_rate,6,CareerBuilder,23,0.3333333333333333,Employee Referral,31,0.8333333333333334,0.5,16,3.0
+department_including,xgboost,RecruitmentSource,false_positive_rate,6,Diversity Job Fair,29,0.0,CareerBuilder,23,0.05263157894736842,0.05263157894736842,16,2.0
+department_including,xgboost,RecruitmentSource,false_positive_rate,6,CareerBuilder,23,0.0,LinkedIn,76,0.029850746268656716,0.029850746268656716,16,4.0
+department_including,xgboost,RecruitmentSource,macro_f1,6,Indeed,87,0.5946645946645946,LinkedIn,76,0.6961805555555555,0.10151596089096082,16,
+department_including,xgboost,RecruitmentSource,mean_predicted_probability,6,Employee Referral,31,0.0340071225387207,CareerBuilder,23,0.20579873033394822,0.1717916077952275,16,2.0
+department_including,xgboost,RecruitmentSource,mean_predicted_probability,6,Diversity Job Fair,29,0.7508510751028085,Employee Referral,31,0.8963655870667886,0.14551451196398013,16,3.0
+department_including,xgboost,RecruitmentSource,mean_predicted_probability,6,CareerBuilder,23,0.038325254533028236,Diversity Job Fair,29,0.0793852077394173,0.04105995320638907,16,4.0
+department_including,xgboost,RecruitmentSource,positive_prediction_rate,6,Employee Referral,31,0.03225806451612903,CareerBuilder,23,0.21739130434782608,0.18513323983169705,16,2.0
+department_including,xgboost,RecruitmentSource,positive_prediction_rate,6,CareerBuilder,23,0.782608695652174,Employee Referral,31,0.967741935483871,0.18513323983169705,16,3.0
+department_including,xgboost,RecruitmentSource,positive_prediction_rate,6,CareerBuilder,23,0.0,LinkedIn,76,0.039473684210526314,0.039473684210526314,16,4.0
+department_including,xgboost,RecruitmentSource,precision,3,Google Search,49,0.0,LinkedIn,76,0.3333333333333333,0.3333333333333333,16,4.0
+department_including,xgboost,RecruitmentSource,precision,6,Diversity Job Fair,29,0.75,Google Search,49,0.9545454545454546,0.20454545454545459,16,3.0
+department_including,xgboost,RecruitmentSource,precision,6,CareerBuilder,23,0.8,Diversity Job Fair,29,1.0,0.19999999999999996,16,2.0
+department_including,xgboost,RecruitmentSource,true_positive_rate,6,Indeed,87,0.8888888888888888,CareerBuilder,23,1.0,0.11111111111111116,16,2.0
+department_including,xgboost,RecruitmentSource,true_positive_rate,6,CareerBuilder,23,0.0,LinkedIn,76,0.1111111111111111,0.1111111111111111,16,4.0
+department_including,xgboost,RecruitmentSource,true_positive_rate,6,CareerBuilder,23,0.9411764705882353,Diversity Job Fair,29,1.0,0.05882352941176472,16,3.0
+department_including,xgboost,SpecialProjectsCount,accuracy,3,5,21,0.7619047619047619,6,21,0.9523809523809523,0.19047619047619047,16,
+department_including,xgboost,SpecialProjectsCount,false_positive_rate,3,6,21,0.3333333333333333,5,21,1.0,0.6666666666666667,16,3.0
+department_including,xgboost,SpecialProjectsCount,false_positive_rate,3,5,21,0.0,0,241,0.014150943396226415,0.014150943396226415,16,4.0
+department_including,xgboost,SpecialProjectsCount,false_positive_rate,3,5,21,0.0,0,241,0.004672897196261682,0.004672897196261682,16,2.0
+department_including,xgboost,SpecialProjectsCount,macro_f1,3,5,21,0.2882882882882883,6,21,0.6576576576576577,0.3693693693693694,16,
+department_including,xgboost,SpecialProjectsCount,mean_predicted_probability,3,0,241,0.826238190671462,5,21,0.946352946872206,0.12011475620074397,16,3.0
+department_including,xgboost,SpecialProjectsCount,mean_predicted_probability,3,5,21,0.0018758615066278097,0,241,0.10926836738531936,0.10739250587869155,16,2.0
+department_including,xgboost,SpecialProjectsCount,mean_predicted_probability,3,5,21,0.05177119162116611,6,21,0.0722970625472876,0.020525870926121487,16,4.0
+department_including,xgboost,SpecialProjectsCount,positive_prediction_rate,3,0,241,0.8713692946058091,5,21,1.0,0.12863070539419086,16,3.0
+department_including,xgboost,SpecialProjectsCount,positive_prediction_rate,3,5,21,0.0,0,241,0.11203319502074689,0.11203319502074689,16,2.0
+department_including,xgboost,SpecialProjectsCount,positive_prediction_rate,3,5,21,0.0,0,241,0.016597510373443983,0.016597510373443983,16,4.0
+department_including,xgboost,SpecialProjectsCount,precision,3,5,21,0.7619047619047619,6,21,0.9473684210526315,0.18546365914786966,16,3.0
+department_including,xgboost,SpecialProjectsCount,precision,2,0,241,0.9629629629629629,6,21,1.0,0.03703703703703709,16,2.0
+department_including,xgboost,SpecialProjectsCount,precision,1,0,241,0.25,0,241,0.25,0.0,16,4.0
+department_including,xgboost,SpecialProjectsCount,true_positive_rate,2,0,241,0.9629629629629629,6,21,1.0,0.03703703703703709,16,2.0
+department_including,xgboost,SpecialProjectsCount,true_positive_rate,3,5,21,0.0,0,241,0.034482758620689655,0.034482758620689655,16,4.0
+department_including,xgboost,SpecialProjectsCount,true_positive_rate,3,0,241,0.9783783783783784,5,21,1.0,0.021621621621621623,16,3.0
+department_including,xgboost,State,accuracy,1,MA,276,0.8659420289855072,MA,276,0.8659420289855072,0.0,16,
+department_including,xgboost,State,false_positive_rate,1,MA,276,0.004032258064516129,MA,276,0.004032258064516129,0.0,16,2.0
+department_including,xgboost,State,false_positive_rate,1,MA,276,0.5409836065573771,MA,276,0.5409836065573771,0.0,16,3.0
+department_including,xgboost,State,false_positive_rate,1,MA,276,0.012345679012345678,MA,276,0.012345679012345678,0.0,16,4.0
+department_including,xgboost,State,macro_f1,1,MA,276,0.6459099155177587,MA,276,0.6459099155177587,0.0,16,
+department_including,xgboost,State,mean_predicted_probability,1,MA,276,0.09892855229638249,MA,276,0.09892855229638249,0.0,16,2.0
+department_including,xgboost,State,mean_predicted_probability,1,MA,276,0.8349888974433587,MA,276,0.8349888974433587,0.0,16,3.0
+department_including,xgboost,State,mean_predicted_probability,1,MA,276,0.06608255026025886,MA,276,0.06608255026025886,0.0,16,4.0
+department_including,xgboost,State,positive_prediction_rate,1,MA,276,0.10144927536231885,MA,276,0.10144927536231885,0.0,16,2.0
+department_including,xgboost,State,positive_prediction_rate,1,MA,276,0.8840579710144928,MA,276,0.8840579710144928,0.0,16,3.0
+department_including,xgboost,State,positive_prediction_rate,1,MA,276,0.014492753623188406,MA,276,0.014492753623188406,0.0,16,4.0
+department_including,xgboost,State,precision,1,MA,276,0.9642857142857143,MA,276,0.9642857142857143,0.0,16,2.0
+department_including,xgboost,State,precision,1,MA,276,0.8647540983606558,MA,276,0.8647540983606558,0.0,16,3.0
+department_including,xgboost,State,precision,1,MA,276,0.25,MA,276,0.25,0.0,16,4.0
+department_including,xgboost,State,true_positive_rate,1,MA,276,0.9642857142857143,MA,276,0.9642857142857143,0.0,16,2.0
+department_including,xgboost,State,true_positive_rate,1,MA,276,0.9813953488372092,MA,276,0.9813953488372092,0.0,16,3.0
+department_including,xgboost,State,true_positive_rate,1,MA,276,0.030303030303030304,MA,276,0.030303030303030304,0.0,16,4.0
+department_job_role_free,xgboost,Absences,accuracy,10,16,23,0.7391304347826086,3,16,0.9375,0.19836956521739135,16,
+department_job_role_free,xgboost,Absences,false_positive_rate,10,2,21,0.0,14,17,1.0,1.0,16,3.0
+department_job_role_free,xgboost,Absences,false_positive_rate,10,13,17,0.0,14,17,0.07142857142857142,0.07142857142857142,16,4.0
+department_job_role_free,xgboost,Absences,false_positive_rate,10,13,17,0.0,2,21,0.05263157894736842,0.05263157894736842,16,2.0
+department_job_role_free,xgboost,Absences,macro_f1,10,14,17,0.2888888888888889,3,16,0.6533333333333333,0.3644444444444444,16,
+department_job_role_free,xgboost,Absences,mean_predicted_probability,10,14,17,0.002519324273576911,3,16,0.17389072811886527,0.17137140384528837,16,2.0
+department_job_role_free,xgboost,Absences,mean_predicted_probability,10,16,23,0.7381555015703912,14,17,0.892793655659783,0.15463815408939174,16,3.0
+department_job_role_free,xgboost,Absences,mean_predicted_probability,10,6,16,0.02001782733691855,14,17,0.10468702006664,0.08466919272972145,16,4.0
+department_job_role_free,xgboost,Absences,positive_prediction_rate,10,14,17,0.0,3,16,0.1875,0.1875,16,2.0
+department_job_role_free,xgboost,Absences,positive_prediction_rate,10,16,23,0.782608695652174,14,17,0.9411764705882353,0.15856777493606133,16,3.0
+department_job_role_free,xgboost,Absences,positive_prediction_rate,10,13,17,0.0,19,16,0.0625,0.0625,16,4.0
+department_job_role_free,xgboost,Absences,precision,9,7,21,0.5,13,17,1.0,0.5,16,2.0
+department_job_role_free,xgboost,Absences,precision,10,16,23,0.7222222222222222,2,21,1.0,0.2777777777777778,16,3.0
+department_job_role_free,xgboost,Absences,precision,4,14,17,0.0,14,17,0.0,0.0,16,4.0
+department_job_role_free,xgboost,Absences,true_positive_rate,9,6,16,0.6666666666666666,13,17,1.0,0.33333333333333337,16,2.0
+department_job_role_free,xgboost,Absences,true_positive_rate,10,2,21,0.8947368421052632,13,17,1.0,0.10526315789473684,16,3.0
+department_job_role_free,xgboost,Absences,true_positive_rate,9,13,17,0.0,13,17,0.0,0.0,16,4.0
+department_job_role_free,xgboost,CitizenDesc,accuracy,1,US Citizen,295,0.847457627118644,US Citizen,295,0.847457627118644,0.0,16,
+department_job_role_free,xgboost,CitizenDesc,false_positive_rate,1,US Citizen,295,0.007547169811320755,US Citizen,295,0.007547169811320755,0.0,16,2.0
+department_job_role_free,xgboost,CitizenDesc,false_positive_rate,1,US Citizen,295,0.5522388059701493,US Citizen,295,0.5522388059701493,0.0,16,3.0
+department_job_role_free,xgboost,CitizenDesc,false_positive_rate,1,US Citizen,295,0.023255813953488372,US Citizen,295,0.023255813953488372,0.0,16,4.0
+department_job_role_free,xgboost,CitizenDesc,macro_f1,1,US Citizen,295,0.6344969041436846,US Citizen,295,0.6344969041436846,0.0,16,
+department_job_role_free,xgboost,CitizenDesc,mean_predicted_probability,1,US Citizen,295,0.10243945367787743,US Citizen,295,0.10243945367787743,0.0,16,2.0
+department_job_role_free,xgboost,CitizenDesc,mean_predicted_probability,1,US Citizen,295,0.8299780765600843,US Citizen,295,0.8299780765600843,0.0,16,3.0
+department_job_role_free,xgboost,CitizenDesc,mean_predicted_probability,1,US Citizen,295,0.0675824697620384,US Citizen,295,0.0675824697620384,0.0,16,4.0
+department_job_role_free,xgboost,CitizenDesc,positive_prediction_rate,1,US Citizen,295,0.10508474576271186,US Citizen,295,0.10508474576271186,0.0,16,2.0
+department_job_role_free,xgboost,CitizenDesc,positive_prediction_rate,1,US Citizen,295,0.8711864406779661,US Citizen,295,0.8711864406779661,0.0,16,3.0
+department_job_role_free,xgboost,CitizenDesc,positive_prediction_rate,1,US Citizen,295,0.023728813559322035,US Citizen,295,0.023728813559322035,0.0,16,4.0
+department_job_role_free,xgboost,CitizenDesc,precision,1,US Citizen,295,0.9354838709677419,US Citizen,295,0.9354838709677419,0.0,16,2.0
+department_job_role_free,xgboost,CitizenDesc,precision,1,US Citizen,295,0.8560311284046692,US Citizen,295,0.8560311284046692,0.0,16,3.0
+department_job_role_free,xgboost,CitizenDesc,precision,1,US Citizen,295,0.14285714285714285,US Citizen,295,0.14285714285714285,0.0,16,4.0
+department_job_role_free,xgboost,CitizenDesc,true_positive_rate,1,US Citizen,295,0.9666666666666667,US Citizen,295,0.9666666666666667,0.0,16,2.0
+department_job_role_free,xgboost,CitizenDesc,true_positive_rate,1,US Citizen,295,0.9649122807017544,US Citizen,295,0.9649122807017544,0.0,16,3.0
+department_job_role_free,xgboost,CitizenDesc,true_positive_rate,1,US Citizen,295,0.02702702702702703,US Citizen,295,0.02702702702702703,0.0,16,4.0
+department_job_role_free,xgboost,DaysLateLast30,accuracy,1,0,278,0.8453237410071942,0,278,0.8453237410071942,0.0,16,
+department_job_role_free,xgboost,DaysLateLast30,false_positive_rate,1,0,278,0.0,0,278,0.0,0.0,16,2.0
+department_job_role_free,xgboost,DaysLateLast30,false_positive_rate,1,0,278,0.9736842105263158,0,278,0.9736842105263158,0.0,16,3.0
+department_job_role_free,xgboost,DaysLateLast30,false_positive_rate,1,0,278,0.024896265560165973,0,278,0.024896265560165973,0.0,16,4.0
+department_job_role_free,xgboost,DaysLateLast30,macro_f1,1,0,278,0.320435272490067,0,278,0.320435272490067,0.0,16,
+department_job_role_free,xgboost,DaysLateLast30,mean_predicted_probability,1,0,278,0.003139458913813,0,278,0.003139458913813,0.0,16,2.0
+department_job_role_free,xgboost,DaysLateLast30,mean_predicted_probability,1,0,278,0.9216651449067931,0,278,0.9216651449067931,0.0,16,3.0
+department_job_role_free,xgboost,DaysLateLast30,mean_predicted_probability,1,0,278,0.07519539617939386,0,278,0.07519539617939386,0.0,16,4.0
+department_job_role_free,xgboost,DaysLateLast30,positive_prediction_rate,1,0,278,0.0,0,278,0.0,0.0,16,2.0
+department_job_role_free,xgboost,DaysLateLast30,positive_prediction_rate,1,0,278,0.9748201438848921,0,278,0.9748201438848921,0.0,16,3.0
+department_job_role_free,xgboost,DaysLateLast30,positive_prediction_rate,1,0,278,0.025179856115107913,0,278,0.025179856115107913,0.0,16,4.0
+department_job_role_free,xgboost,DaysLateLast30,precision,1,0,278,0.8634686346863468,0,278,0.8634686346863468,0.0,16,3.0
+department_job_role_free,xgboost,DaysLateLast30,precision,1,0,278,0.14285714285714285,0,278,0.14285714285714285,0.0,16,4.0
+department_job_role_free,xgboost,DaysLateLast30,true_positive_rate,1,0,278,0.0,0,278,0.0,0.0,16,2.0
+department_job_role_free,xgboost,DaysLateLast30,true_positive_rate,1,0,278,0.975,0,278,0.975,0.0,16,3.0
+department_job_role_free,xgboost,DaysLateLast30,true_positive_rate,1,0,278,0.02702702702702703,0,278,0.02702702702702703,0.0,16,4.0
+department_job_role_free,xgboost,EmpDepartment,accuracy,3,Production       ,209,0.8516746411483254,IT/IS,50,0.88,0.028325358851674642,16,
+department_job_role_free,xgboost,EmpDepartment,false_positive_rate,3,Sales,31,0.2857142857142857,IT/IS,50,0.75,0.4642857142857143,16,3.0
+department_job_role_free,xgboost,EmpDepartment,false_positive_rate,3,IT/IS,50,0.0,Sales,31,0.038461538461538464,0.038461538461538464,16,2.0
+department_job_role_free,xgboost,EmpDepartment,false_positive_rate,3,IT/IS,50,0.0,Sales,31,0.034482758620689655,0.034482758620689655,16,4.0
+department_job_role_free,xgboost,EmpDepartment,macro_f1,3,Sales,31,0.6085858585858586,IT/IS,50,0.6444444444444445,0.03585858585858592,16,
+department_job_role_free,xgboost,EmpDepartment,mean_predicted_probability,3,IT/IS,50,0.0406650861981216,Sales,31,0.1926609656760744,0.15199587947795282,16,2.0
+department_job_role_free,xgboost,EmpDepartment,mean_predicted_probability,3,Sales,31,0.75282049315253,IT/IS,50,0.9041054380586767,0.15128494490614675,16,3.0
+department_job_role_free,xgboost,EmpDepartment,mean_predicted_probability,3,Sales,31,0.05451854117139544,Production       ,209,0.06627629391636274,0.011757752744967293,16,4.0
+department_job_role_free,xgboost,EmpDepartment,positive_prediction_rate,3,Sales,31,0.7741935483870968,IT/IS,50,0.96,0.1858064516129032,16,3.0
+department_job_role_free,xgboost,EmpDepartment,positive_prediction_rate,3,IT/IS,50,0.04,Sales,31,0.1935483870967742,0.15354838709677418,16,2.0
+department_job_role_free,xgboost,EmpDepartment,positive_prediction_rate,3,IT/IS,50,0.0,Sales,31,0.03225806451612903,0.03225806451612903,16,4.0
+department_job_role_free,xgboost,EmpDepartment,precision,2,Sales,31,0.0,Production       ,209,0.25,0.25,16,4.0
+department_job_role_free,xgboost,EmpDepartment,precision,3,Sales,31,0.8333333333333334,IT/IS,50,1.0,0.16666666666666663,16,2.0
+department_job_role_free,xgboost,EmpDepartment,precision,3,Production       ,209,0.8516483516483516,Sales,31,0.9166666666666666,0.06501831501831501,16,3.0
+department_job_role_free,xgboost,EmpDepartment,true_positive_rate,3,Sales,31,0.9166666666666666,IT/IS,50,1.0,0.08333333333333337,16,3.0
+department_job_role_free,xgboost,EmpDepartment,true_positive_rate,3,Production       ,209,0.9565217391304348,IT/IS,50,1.0,0.04347826086956519,16,2.0
+department_job_role_free,xgboost,EmpDepartment,true_positive_rate,3,IT/IS,50,0.0,Production       ,209,0.037037037037037035,0.037037037037037035,16,4.0
+department_job_role_free,xgboost,EmpJobRole,accuracy,3,Production Technician II,57,0.8421052631578947,Area Sales Manager,27,0.8888888888888888,0.04678362573099415,16,
+department_job_role_free,xgboost,EmpJobRole,false_positive_rate,3,Area Sales Manager,27,0.3333333333333333,Production Technician II,57,0.6153846153846154,0.2820512820512821,16,3.0
+department_job_role_free,xgboost,EmpJobRole,false_positive_rate,3,Production Technician II,57,0.0,Area Sales Manager,27,0.043478260869565216,0.043478260869565216,16,2.0
+department_job_role_free,xgboost,EmpJobRole,false_positive_rate,3,Area Sales Manager,27,0.0,Production Technician II,57,0.02040816326530612,0.02040816326530612,16,4.0
+department_job_role_free,xgboost,EmpJobRole,macro_f1,3,Area Sales Manager,27,0.6063738156761412,Production Technician I,137,0.6560846560846562,0.04971084040851492,16,
+department_job_role_free,xgboost,EmpJobRole,mean_predicted_probability,3,Production Technician II,57,0.0869616709798826,Area Sales Manager,27,0.1844185195465814,0.0974568485666988,16,2.0
+department_job_role_free,xgboost,EmpJobRole,mean_predicted_probability,3,Area Sales Manager,27,0.7798970461532385,Production Technician II,57,0.8480675975624602,0.06817055140922168,16,3.0
+department_job_role_free,xgboost,EmpJobRole,mean_predicted_probability,3,Area Sales Manager,27,0.035684434300180014,Production Technician II,57,0.06497073145765725,0.029286297157477235,16,4.0
+department_job_role_free,xgboost,EmpJobRole,positive_prediction_rate,3,Production Technician II,57,0.08771929824561403,Area Sales Manager,27,0.18518518518518517,0.09746588693957114,16,2.0
+department_job_role_free,xgboost,EmpJobRole,positive_prediction_rate,3,Area Sales Manager,27,0.8148148148148148,Production Technician II,57,0.8947368421052632,0.0799220272904484,16,3.0
+department_job_role_free,xgboost,EmpJobRole,positive_prediction_rate,3,Area Sales Manager,27,0.0,Production Technician II,57,0.017543859649122806,0.017543859649122806,16,4.0
+department_job_role_free,xgboost,EmpJobRole,precision,2,Production Technician II,57,0.0,Production Technician I,137,0.5,0.5,16,4.0
+department_job_role_free,xgboost,EmpJobRole,precision,3,Area Sales Manager,27,0.8,Production Technician II,57,1.0,0.19999999999999996,16,2.0
+department_job_role_free,xgboost,EmpJobRole,precision,3,Production Technician II,57,0.8431372549019608,Area Sales Manager,27,0.9090909090909091,0.06595365418894827,16,3.0
+department_job_role_free,xgboost,EmpJobRole,true_positive_rate,3,Production Technician I,137,0.9375,Area Sales Manager,27,1.0,0.0625,16,2.0
+department_job_role_free,xgboost,EmpJobRole,true_positive_rate,3,Area Sales Manager,27,0.0,Production Technician I,137,0.0625,0.0625,16,4.0
+department_job_role_free,xgboost,EmpJobRole,true_positive_rate,3,Area Sales Manager,27,0.9523809523809523,Production Technician I,137,0.9809523809523809,0.02857142857142858,16,3.0
+department_job_role_free,xgboost,Gender,accuracy,2,F,176,0.8522727272727273,M ,135,0.8592592592592593,0.006986531986531985,16,
+department_job_role_free,xgboost,Gender,false_positive_rate,2,M ,135,0.47058823529411764,F,176,0.6176470588235294,0.1470588235294118,16,3.0
+department_job_role_free,xgboost,Gender,false_positive_rate,2,M ,135,0.00847457627118644,F,176,0.03205128205128205,0.02357670578009561,16,4.0
+department_job_role_free,xgboost,Gender,false_positive_rate,2,F,176,0.0,M ,135,0.01694915254237288,0.01694915254237288,16,2.0
+department_job_role_free,xgboost,Gender,macro_f1,2,F,176,0.6254320987654322,M ,135,0.6537785031053085,0.02834640433987634,16,
+department_job_role_free,xgboost,Gender,mean_predicted_probability,2,M ,135,0.7981728679099246,F,176,0.8574512081665925,0.059278340256667894,16,3.0
+department_job_role_free,xgboost,Gender,mean_predicted_probability,2,F,176,0.07512060490819274,M ,135,0.13380639994980187,0.05868579504160913,16,2.0
+department_job_role_free,xgboost,Gender,mean_predicted_probability,2,F,176,0.06742818692521474,M ,135,0.06802073214027349,0.0005925452150587485,16,4.0
+department_job_role_free,xgboost,Gender,positive_prediction_rate,2,F,176,0.07386363636363637,M ,135,0.14074074074074075,0.06687710437710438,16,2.0
+department_job_role_free,xgboost,Gender,positive_prediction_rate,2,M ,135,0.8444444444444444,F,176,0.8977272727272727,0.053282828282828265,16,3.0
+department_job_role_free,xgboost,Gender,positive_prediction_rate,2,M ,135,0.014814814814814815,F,176,0.028409090909090908,0.013594276094276093,16,4.0
+department_job_role_free,xgboost,Gender,precision,2,F,176,0.0,M ,135,0.5,0.5,16,4.0
+department_job_role_free,xgboost,Gender,precision,2,M ,135,0.8947368421052632,F,176,1.0,0.10526315789473684,16,2.0
+department_job_role_free,xgboost,Gender,precision,2,M ,135,0.8596491228070176,F,176,0.8670886075949367,0.007439484787919115,16,3.0
+department_job_role_free,xgboost,Gender,true_positive_rate,2,F,176,0.9285714285714286,M ,135,1.0,0.0714285714285714,16,2.0
+department_job_role_free,xgboost,Gender,true_positive_rate,2,F,176,0.0,M ,135,0.058823529411764705,0.058823529411764705,16,4.0
+department_job_role_free,xgboost,Gender,true_positive_rate,2,F,176,0.9647887323943662,M ,135,0.9702970297029703,0.0055082973086040266,16,3.0
+department_job_role_free,xgboost,GenderID,accuracy,2,0,176,0.8522727272727273,1,135,0.8592592592592593,0.006986531986531985,16,
+department_job_role_free,xgboost,GenderID,false_positive_rate,2,1,135,0.47058823529411764,0,176,0.6176470588235294,0.1470588235294118,16,3.0
+department_job_role_free,xgboost,GenderID,false_positive_rate,2,1,135,0.00847457627118644,0,176,0.03205128205128205,0.02357670578009561,16,4.0
+department_job_role_free,xgboost,GenderID,false_positive_rate,2,0,176,0.0,1,135,0.01694915254237288,0.01694915254237288,16,2.0
+department_job_role_free,xgboost,GenderID,macro_f1,2,0,176,0.6254320987654322,1,135,0.6537785031053085,0.02834640433987634,16,
+department_job_role_free,xgboost,GenderID,mean_predicted_probability,2,1,135,0.7981728679099246,0,176,0.8574512081665925,0.059278340256667894,16,3.0
+department_job_role_free,xgboost,GenderID,mean_predicted_probability,2,0,176,0.07512060490819274,1,135,0.13380639994980187,0.05868579504160913,16,2.0
+department_job_role_free,xgboost,GenderID,mean_predicted_probability,2,0,176,0.06742818692521474,1,135,0.06802073214027349,0.0005925452150587485,16,4.0
+department_job_role_free,xgboost,GenderID,positive_prediction_rate,2,0,176,0.07386363636363637,1,135,0.14074074074074075,0.06687710437710438,16,2.0
+department_job_role_free,xgboost,GenderID,positive_prediction_rate,2,1,135,0.8444444444444444,0,176,0.8977272727272727,0.053282828282828265,16,3.0
+department_job_role_free,xgboost,GenderID,positive_prediction_rate,2,1,135,0.014814814814814815,0,176,0.028409090909090908,0.013594276094276093,16,4.0
+department_job_role_free,xgboost,GenderID,precision,2,0,176,0.0,1,135,0.5,0.5,16,4.0
+department_job_role_free,xgboost,GenderID,precision,2,1,135,0.8947368421052632,0,176,1.0,0.10526315789473684,16,2.0
+department_job_role_free,xgboost,GenderID,precision,2,1,135,0.8596491228070176,0,176,0.8670886075949367,0.007439484787919115,16,3.0
+department_job_role_free,xgboost,GenderID,true_positive_rate,2,0,176,0.9285714285714286,1,135,1.0,0.0714285714285714,16,2.0
+department_job_role_free,xgboost,GenderID,true_positive_rate,2,0,176,0.0,1,135,0.058823529411764705,0.058823529411764705,16,4.0
+department_job_role_free,xgboost,GenderID,true_positive_rate,2,0,176,0.9647887323943662,1,135,0.9702970297029703,0.0055082973086040266,16,3.0
+department_job_role_free,xgboost,HispanicLatino,accuracy,2,Yes,27,0.8518518518518519,No,282,0.8581560283687943,0.0063041765169424835,16,
+department_job_role_free,xgboost,HispanicLatino,false_positive_rate,2,No,282,0.5396825396825397,Yes,27,0.6,0.060317460317460325,16,3.0
+department_job_role_free,xgboost,HispanicLatino,false_positive_rate,2,No,282,0.016129032258064516,Yes,27,0.041666666666666664,0.02553763440860215,16,4.0
+department_job_role_free,xgboost,HispanicLatino,false_positive_rate,2,Yes,27,0.0,No,282,0.007905138339920948,0.007905138339920948,16,2.0
+department_job_role_free,xgboost,HispanicLatino,macro_f1,2,Yes,27,0.6376811594202899,No,282,0.6381992279278961,0.000518068507606162,16,
+department_job_role_free,xgboost,HispanicLatino,mean_predicted_probability,2,Yes,27,0.07478638256893567,No,282,0.10375761955762199,0.02897123698868631,16,2.0
+department_job_role_free,xgboost,HispanicLatino,mean_predicted_probability,2,No,282,0.06419261329284291,Yes,27,0.0864941617212523,0.022301548428409382,16,4.0
+department_job_role_free,xgboost,HispanicLatino,mean_predicted_probability,2,No,282,0.8320497671495352,Yes,27,0.838719455709812,0.006669688560276832,16,3.0
+department_job_role_free,xgboost,HispanicLatino,positive_prediction_rate,2,Yes,27,0.07407407407407407,No,282,0.10638297872340426,0.032308904649330186,16,2.0
+department_job_role_free,xgboost,HispanicLatino,positive_prediction_rate,2,No,282,0.01773049645390071,Yes,27,0.037037037037037035,0.019306540583136324,16,4.0
+department_job_role_free,xgboost,HispanicLatino,positive_prediction_rate,2,No,282,0.875886524822695,Yes,27,0.8888888888888888,0.013002364066193817,16,3.0
+department_job_role_free,xgboost,HispanicLatino,precision,2,Yes,27,0.0,No,282,0.2,0.2,16,4.0
+department_job_role_free,xgboost,HispanicLatino,precision,2,No,282,0.9333333333333333,Yes,27,1.0,0.06666666666666665,16,2.0
+department_job_role_free,xgboost,HispanicLatino,precision,2,No,282,0.8623481781376519,Yes,27,0.875,0.012651821862348145,16,3.0
+department_job_role_free,xgboost,HispanicLatino,true_positive_rate,2,No,282,0.9655172413793104,Yes,27,1.0,0.03448275862068961,16,2.0
+department_job_role_free,xgboost,HispanicLatino,true_positive_rate,2,Yes,27,0.0,No,282,0.029411764705882353,0.029411764705882353,16,4.0
+department_job_role_free,xgboost,HispanicLatino,true_positive_rate,2,Yes,27,0.9545454545454546,No,282,0.9726027397260274,0.018057285180572813,16,3.0
+department_job_role_free,xgboost,MaritalStatus,accuracy,3,Divorced,30,0.8,Married,124,0.8709677419354839,0.07096774193548383,16,
+department_job_role_free,xgboost,MaritalStatus,false_positive_rate,3,Married,124,0.5,Divorced,30,0.7142857142857143,0.2142857142857143,16,3.0
+department_job_role_free,xgboost,MaritalStatus,false_positive_rate,3,Single,137,0.01680672268907563,Divorced,30,0.04,0.02319327731092437,16,4.0
+department_job_role_free,xgboost,MaritalStatus,false_positive_rate,3,Divorced,30,0.0,Married,124,0.009009009009009009,0.009009009009009009,16,2.0
+department_job_role_free,xgboost,MaritalStatus,macro_f1,3,Married,124,0.6153846153846154,Single,137,0.6576299802106255,0.042245364826010046,16,
+department_job_role_free,xgboost,MaritalStatus,mean_predicted_probability,3,Divorced,30,0.06195959268994951,Single,137,0.11218868176895837,0.05022908907900886,16,2.0
+department_job_role_free,xgboost,MaritalStatus,mean_predicted_probability,3,Single,137,0.8140058567884135,Divorced,30,0.8593467934537442,0.04534093666533068,16,3.0
+department_job_role_free,xgboost,MaritalStatus,mean_predicted_probability,3,Married,124,0.056398860929856146,Divorced,30,0.07869361385630613,0.022294752926449987,16,4.0
+department_job_role_free,xgboost,MaritalStatus,positive_prediction_rate,3,Divorced,30,0.06666666666666667,Single,137,0.11678832116788321,0.05012165450121654,16,2.0
+department_job_role_free,xgboost,MaritalStatus,positive_prediction_rate,3,Single,137,0.8613138686131386,Divorced,30,0.9,0.03868613138686139,16,3.0
+department_job_role_free,xgboost,MaritalStatus,positive_prediction_rate,3,Single,137,0.021897810218978103,Divorced,30,0.03333333333333333,0.01143552311435523,16,4.0
+department_job_role_free,xgboost,MaritalStatus,precision,3,Divorced,30,0.0,Single,137,0.3333333333333333,0.3333333333333333,16,4.0
+department_job_role_free,xgboost,MaritalStatus,precision,3,Married,124,0.9230769230769231,Divorced,30,1.0,0.07692307692307687,16,2.0
+department_job_role_free,xgboost,MaritalStatus,precision,3,Divorced,30,0.8148148148148148,Married,124,0.8888888888888888,0.07407407407407407,16,3.0
+department_job_role_free,xgboost,MaritalStatus,true_positive_rate,3,Married,124,0.9230769230769231,Divorced,30,1.0,0.07692307692307687,16,2.0
+department_job_role_free,xgboost,MaritalStatus,true_positive_rate,3,Divorced,30,0.0,Single,137,0.05555555555555555,0.05555555555555555,16,4.0
+department_job_role_free,xgboost,MaritalStatus,true_positive_rate,3,Divorced,30,0.9565217391304348,Single,137,0.9711538461538461,0.014632107023411334,16,3.0
+department_job_role_free,xgboost,MaritalStatusID,accuracy,3,2,30,0.8,1,124,0.8709677419354839,0.07096774193548383,16,
+department_job_role_free,xgboost,MaritalStatusID,false_positive_rate,3,1,124,0.5,2,30,0.7142857142857143,0.2142857142857143,16,3.0
+department_job_role_free,xgboost,MaritalStatusID,false_positive_rate,3,0,137,0.01680672268907563,2,30,0.04,0.02319327731092437,16,4.0
+department_job_role_free,xgboost,MaritalStatusID,false_positive_rate,3,2,30,0.0,1,124,0.009009009009009009,0.009009009009009009,16,2.0
+department_job_role_free,xgboost,MaritalStatusID,macro_f1,3,1,124,0.6153846153846154,0,137,0.6576299802106255,0.042245364826010046,16,
+department_job_role_free,xgboost,MaritalStatusID,mean_predicted_probability,3,2,30,0.06195959268994951,0,137,0.11218868176895837,0.05022908907900886,16,2.0
+department_job_role_free,xgboost,MaritalStatusID,mean_predicted_probability,3,0,137,0.8140058567884135,2,30,0.8593467934537442,0.04534093666533068,16,3.0
+department_job_role_free,xgboost,MaritalStatusID,mean_predicted_probability,3,1,124,0.056398860929856146,2,30,0.07869361385630613,0.022294752926449987,16,4.0
+department_job_role_free,xgboost,MaritalStatusID,positive_prediction_rate,3,2,30,0.06666666666666667,0,137,0.11678832116788321,0.05012165450121654,16,2.0
+department_job_role_free,xgboost,MaritalStatusID,positive_prediction_rate,3,0,137,0.8613138686131386,2,30,0.9,0.03868613138686139,16,3.0
+department_job_role_free,xgboost,MaritalStatusID,positive_prediction_rate,3,0,137,0.021897810218978103,2,30,0.03333333333333333,0.01143552311435523,16,4.0
+department_job_role_free,xgboost,MaritalStatusID,precision,3,1,124,0.0,0,137,0.3333333333333333,0.3333333333333333,16,4.0
+department_job_role_free,xgboost,MaritalStatusID,precision,3,1,124,0.9230769230769231,2,30,1.0,0.07692307692307687,16,2.0
+department_job_role_free,xgboost,MaritalStatusID,precision,3,2,30,0.8148148148148148,1,124,0.8888888888888888,0.07407407407407407,16,3.0
+department_job_role_free,xgboost,MaritalStatusID,true_positive_rate,3,1,124,0.9230769230769231,0,137,1.0,0.07692307692307687,16,2.0
+department_job_role_free,xgboost,MaritalStatusID,true_positive_rate,3,1,124,0.0,0,137,0.05555555555555555,0.05555555555555555,16,4.0
+department_job_role_free,xgboost,MaritalStatusID,true_positive_rate,3,2,30,0.9565217391304348,0,137,0.9711538461538461,0.014632107023411334,16,3.0
+department_job_role_free,xgboost,RaceEthnicity,accuracy,3,Black or African American,80,0.8125,Asian,29,0.9310344827586207,0.11853448275862066,16,
+department_job_role_free,xgboost,RaceEthnicity,false_positive_rate,3,Asian,29,0.25,Black or African American,80,0.5909090909090909,0.34090909090909094,16,3.0
+department_job_role_free,xgboost,RaceEthnicity,false_positive_rate,3,Black or African American,80,0.014705882352941176,Asian,29,0.03571428571428571,0.021008403361344536,16,4.0
+department_job_role_free,xgboost,RaceEthnicity,false_positive_rate,3,Asian,29,0.0,Black or African American,80,0.014285714285714285,0.014285714285714285,16,2.0
+department_job_role_free,xgboost,RaceEthnicity,macro_f1,3,Black or African American,80,0.5939632545931759,White,187,0.6557516557516557,0.06178840115847983,16,
+department_job_role_free,xgboost,RaceEthnicity,mean_predicted_probability,3,Black or African American,80,0.7980891520886819,White,187,0.8498478508848085,0.0517586987961266,16,3.0
+department_job_role_free,xgboost,RaceEthnicity,mean_predicted_probability,3,White,187,0.08890075770412366,Black or African American,80,0.11979157392870503,0.03089081622458137,16,2.0
+department_job_role_free,xgboost,RaceEthnicity,mean_predicted_probability,3,White,187,0.061251391411067974,Black or African American,80,0.08211927398261296,0.020867882571544982,16,4.0
+department_job_role_free,xgboost,RaceEthnicity,positive_prediction_rate,3,White,187,0.09090909090909091,Black or African American,80,0.125,0.03409090909090909,16,2.0
+department_job_role_free,xgboost,RaceEthnicity,positive_prediction_rate,3,Asian,29,0.8620689655172413,White,187,0.8877005347593583,0.02563156924211696,16,3.0
+department_job_role_free,xgboost,RaceEthnicity,positive_prediction_rate,3,Black or African American,80,0.0125,Asian,29,0.034482758620689655,0.021982758620689654,16,4.0
+department_job_role_free,xgboost,RaceEthnicity,precision,3,Asian,29,0.0,White,187,0.25,0.25,16,4.0
+department_job_role_free,xgboost,RaceEthnicity,precision,3,Black or African American,80,0.8115942028985508,Asian,29,0.96,0.1484057971014492,16,3.0
+department_job_role_free,xgboost,RaceEthnicity,precision,3,Black or African American,80,0.9,Asian,29,1.0,0.09999999999999998,16,2.0
+department_job_role_free,xgboost,RaceEthnicity,true_positive_rate,3,Black or African American,80,0.9,Asian,29,1.0,0.09999999999999998,16,2.0
+department_job_role_free,xgboost,RaceEthnicity,true_positive_rate,3,Asian,29,0.0,White,187,0.045454545454545456,0.045454545454545456,16,4.0
+department_job_role_free,xgboost,RaceEthnicity,true_positive_rate,3,Asian,29,0.96,White,187,0.9731543624161074,0.013154362416107457,16,3.0
+department_job_role_free,xgboost,RecruitmentSource,accuracy,6,Diversity Job Fair,29,0.7931034482758621,Google Search,49,0.9387755102040817,0.14567206192821958,16,
+department_job_role_free,xgboost,RecruitmentSource,false_positive_rate,6,CareerBuilder,23,0.3333333333333333,Employee Referral,31,0.8333333333333334,0.5,16,3.0
+department_job_role_free,xgboost,RecruitmentSource,false_positive_rate,6,Diversity Job Fair,29,0.0,CareerBuilder,23,0.05263157894736842,0.05263157894736842,16,2.0
+department_job_role_free,xgboost,RecruitmentSource,false_positive_rate,6,CareerBuilder,23,0.0,Indeed,87,0.04,0.04,16,4.0
+department_job_role_free,xgboost,RecruitmentSource,macro_f1,6,Indeed,87,0.5894405043341213,LinkedIn,76,0.6961805555555555,0.10674005122143415,16,
+department_job_role_free,xgboost,RecruitmentSource,mean_predicted_probability,6,Employee Referral,31,0.03414187599187618,CareerBuilder,23,0.2039778775580585,0.1698360015661823,16,2.0
+department_job_role_free,xgboost,RecruitmentSource,mean_predicted_probability,6,Diversity Job Fair,29,0.7372997204314475,Employee Referral,31,0.8922564657812398,0.1549567453497923,16,3.0
+department_job_role_free,xgboost,RecruitmentSource,mean_predicted_probability,6,CareerBuilder,23,0.038071362822831356,Diversity Job Fair,29,0.09311574465925643,0.05504438183642507,16,4.0
+department_job_role_free,xgboost,RecruitmentSource,positive_prediction_rate,6,Employee Referral,31,0.03225806451612903,CareerBuilder,23,0.21739130434782608,0.18513323983169705,16,2.0
+department_job_role_free,xgboost,RecruitmentSource,positive_prediction_rate,6,CareerBuilder,23,0.782608695652174,Employee Referral,31,0.967741935483871,0.18513323983169705,16,3.0
+department_job_role_free,xgboost,RecruitmentSource,positive_prediction_rate,6,CareerBuilder,23,0.0,LinkedIn,76,0.039473684210526314,0.039473684210526314,16,4.0
+department_job_role_free,xgboost,RecruitmentSource,precision,3,Google Search,49,0.0,LinkedIn,76,0.3333333333333333,0.3333333333333333,16,4.0
+department_job_role_free,xgboost,RecruitmentSource,precision,6,Diversity Job Fair,29,0.75,Google Search,49,0.9545454545454546,0.20454545454545459,16,3.0
+department_job_role_free,xgboost,RecruitmentSource,precision,6,CareerBuilder,23,0.8,Diversity Job Fair,29,1.0,0.19999999999999996,16,2.0
+department_job_role_free,xgboost,RecruitmentSource,true_positive_rate,6,Indeed,87,0.8888888888888888,CareerBuilder,23,1.0,0.11111111111111116,16,2.0
+department_job_role_free,xgboost,RecruitmentSource,true_positive_rate,6,CareerBuilder,23,0.0,LinkedIn,76,0.1111111111111111,0.1111111111111111,16,4.0
+department_job_role_free,xgboost,RecruitmentSource,true_positive_rate,6,Indeed,87,0.9393939393939394,Diversity Job Fair,29,1.0,0.06060606060606055,16,3.0
+department_job_role_free,xgboost,SpecialProjectsCount,accuracy,3,5,21,0.7619047619047619,6,21,0.9523809523809523,0.19047619047619047,16,
+department_job_role_free,xgboost,SpecialProjectsCount,false_positive_rate,3,6,21,0.3333333333333333,5,21,1.0,0.6666666666666667,16,3.0
+department_job_role_free,xgboost,SpecialProjectsCount,false_positive_rate,3,5,21,0.0,0,241,0.02358490566037736,0.02358490566037736,16,4.0
+department_job_role_free,xgboost,SpecialProjectsCount,false_positive_rate,3,5,21,0.0,0,241,0.004672897196261682,0.004672897196261682,16,2.0
+department_job_role_free,xgboost,SpecialProjectsCount,macro_f1,3,5,21,0.2882882882882883,6,21,0.6576576576576577,0.3693693693693694,16,
+department_job_role_free,xgboost,SpecialProjectsCount,mean_predicted_probability,3,6,21,0.81579509993403,5,21,0.9364716216496121,0.12067652171558207,16,3.0
+department_job_role_free,xgboost,SpecialProjectsCount,mean_predicted_probability,3,5,21,0.0022400871894300237,0,241,0.10914430988014835,0.10690422269071832,16,2.0
+department_job_role_free,xgboost,SpecialProjectsCount,mean_predicted_probability,3,5,21,0.06128829116095792,6,21,0.08930078757043612,0.0280124964094782,16,4.0
+department_job_role_free,xgboost,SpecialProjectsCount,positive_prediction_rate,3,0,241,0.8630705394190872,5,21,1.0,0.13692946058091282,16,3.0
+department_job_role_free,xgboost,SpecialProjectsCount,positive_prediction_rate,3,5,21,0.0,0,241,0.11203319502074689,0.11203319502074689,16,2.0
+department_job_role_free,xgboost,SpecialProjectsCount,positive_prediction_rate,3,5,21,0.0,0,241,0.024896265560165973,0.024896265560165973,16,4.0
+department_job_role_free,xgboost,SpecialProjectsCount,precision,3,5,21,0.7619047619047619,6,21,0.9473684210526315,0.18546365914786966,16,3.0
+department_job_role_free,xgboost,SpecialProjectsCount,precision,2,0,241,0.9629629629629629,6,21,1.0,0.03703703703703709,16,2.0
+department_job_role_free,xgboost,SpecialProjectsCount,precision,1,0,241,0.16666666666666666,0,241,0.16666666666666666,0.0,16,4.0
+department_job_role_free,xgboost,SpecialProjectsCount,true_positive_rate,2,0,241,0.9629629629629629,6,21,1.0,0.03703703703703709,16,2.0
+department_job_role_free,xgboost,SpecialProjectsCount,true_positive_rate,3,5,21,0.0,0,241,0.034482758620689655,0.034482758620689655,16,4.0
+department_job_role_free,xgboost,SpecialProjectsCount,true_positive_rate,3,0,241,0.9675675675675676,5,21,1.0,0.032432432432432434,16,3.0
+department_job_role_free,xgboost,State,accuracy,1,MA,276,0.8586956521739131,MA,276,0.8586956521739131,0.0,16,
+department_job_role_free,xgboost,State,false_positive_rate,1,MA,276,0.004032258064516129,MA,276,0.004032258064516129,0.0,16,2.0
+department_job_role_free,xgboost,State,false_positive_rate,1,MA,276,0.5409836065573771,MA,276,0.5409836065573771,0.0,16,3.0
+department_job_role_free,xgboost,State,false_positive_rate,1,MA,276,0.0205761316872428,MA,276,0.0205761316872428,0.0,16,4.0
+department_job_role_free,xgboost,State,macro_f1,1,MA,276,0.6434095323592042,MA,276,0.6434095323592042,0.0,16,
+department_job_role_free,xgboost,State,mean_predicted_probability,1,MA,276,0.09881382425455408,MA,276,0.09881382425455408,0.0,16,2.0
+department_job_role_free,xgboost,State,mean_predicted_probability,1,MA,276,0.8314396057437969,MA,276,0.8314396057437969,0.0,16,3.0
+department_job_role_free,xgboost,State,mean_predicted_probability,1,MA,276,0.06974657000164895,MA,276,0.06974657000164895,0.0,16,4.0
+department_job_role_free,xgboost,State,positive_prediction_rate,1,MA,276,0.10144927536231885,MA,276,0.10144927536231885,0.0,16,2.0
+department_job_role_free,xgboost,State,positive_prediction_rate,1,MA,276,0.8768115942028986,MA,276,0.8768115942028986,0.0,16,3.0
+department_job_role_free,xgboost,State,positive_prediction_rate,1,MA,276,0.021739130434782608,MA,276,0.021739130434782608,0.0,16,4.0
+department_job_role_free,xgboost,State,precision,1,MA,276,0.9642857142857143,MA,276,0.9642857142857143,0.0,16,2.0
+department_job_role_free,xgboost,State,precision,1,MA,276,0.8636363636363636,MA,276,0.8636363636363636,0.0,16,3.0
+department_job_role_free,xgboost,State,precision,1,MA,276,0.16666666666666666,MA,276,0.16666666666666666,0.0,16,4.0
+department_job_role_free,xgboost,State,true_positive_rate,1,MA,276,0.9642857142857143,MA,276,0.9642857142857143,0.0,16,2.0
+department_job_role_free,xgboost,State,true_positive_rate,1,MA,276,0.9720930232558139,MA,276,0.9720930232558139,0.0,16,3.0
+department_job_role_free,xgboost,State,true_positive_rate,1,MA,276,0.030303030303030304,MA,276,0.030303030303030304,0.0,16,4.0

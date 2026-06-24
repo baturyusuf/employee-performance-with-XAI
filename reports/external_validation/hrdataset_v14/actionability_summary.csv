@@ -1,0 +1,4 @@
+policy,top_feature_count,employee_controllable_count,employee_controllable_share,manager_or_organisation_count,manager_or_organisation_share,high_caution_proxy_count,high_caution_proxy_share,actionability_status,warning
+department_including,15,2,0.13333333333333333,5,0.3333333333333333,3,0.2,mostly_manager_organisation_or_proxy_constrained,"Counterfactuals are model scenarios, not employee prescriptions; many high-attribution features require manager or organisation action."
+department_free,15,2,0.13333333333333333,4,0.26666666666666666,3,0.2,mixed_context_dependent,"Counterfactuals are model scenarios, not employee prescriptions; many high-attribution features require manager or organisation action."
+department_job_role_free,15,2,0.13333333333333333,4,0.26666666666666666,3,0.2,mixed_context_dependent,"Counterfactuals are model scenarios, not employee prescriptions; many high-attribution features require manager or organisation action."

@@ -1,0 +1,4 @@
+target_column,target_value,count,proportion
+PerformanceRating,2,31,0.09967845659163987
+PerformanceRating,3,243,0.7813504823151125
+PerformanceRating,4,37,0.1189710610932476

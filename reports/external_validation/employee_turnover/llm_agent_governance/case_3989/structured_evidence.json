@@ -1,0 +1,209 @@
+{
+  "calibration": {
+    "brier_score": 0.0395464184365567,
+    "calibration_warning": "External probabilities are diagnostic confidence estimates and require calibration caution.",
+    "expected_calibration_error": 0.0077239325469562,
+    "log_loss": 0.081045252247742
+  },
+  "counterfactual": {
+    "actionability_label": "mostly_manager_organisation_or_proxy_constrained",
+    "changed_features": [],
+    "counterfactual_mode": "external_actionability_classification",
+    "failed_reason": "Prototype counterfactual recourse was not claimed for this external evidence package.",
+    "probability_gain": null,
+    "proximity_cost": null,
+    "validity": 0.25,
+    "warning": "Counterfactuals and actionability summaries are model scenarios, not employee prescriptions."
+  },
+  "evidence_sources": [
+    "C:\\Users\\Yusuf\\Documents\\GitHub\\employee performance with XAI\\reports\\external_validation\\employee_turnover\\performance_metrics.csv",
+    "C:\\Users\\Yusuf\\Documents\\GitHub\\employee performance with XAI\\reports\\external_validation\\employee_turnover\\shap\\without_last_evaluation\\local_grouped_shap_values.csv",
+    "C:\\Users\\Yusuf\\Documents\\GitHub\\employee performance with XAI\\reports\\external_validation\\employee_turnover\\fairness_proxy\\fairness_disparity_summary.csv",
+    "C:\\Users\\Yusuf\\Documents\\GitHub\\employee performance with XAI\\reports\\external_validation\\employee_turnover\\actionability_summary.csv"
+  ],
+  "fairness": {
+    "audited_groups": [
+      "EmpDepartment",
+      "SalaryBand",
+      "AverageMonthlyHours",
+      "LastEvaluation",
+      "PromotionLast5Years"
+    ],
+    "bootstrap_ci": {},
+    "disparity_gaps": {
+      "AverageMonthlyHours_false_positive_rate_0.0": 1.0,
+      "AverageMonthlyHours_precision_1.0": 1.0,
+      "AverageMonthlyHours_true_positive_rate_1.0": 1.0,
+      "LastEvaluation_false_positive_rate_0.0": 1.0,
+      "LastEvaluation_precision_1.0": 1.0
+    },
+    "low_support_warnings": [
+      {
+        "attribute": "AverageMonthlyHours",
+        "group_value": 280.0,
+        "n_samples": 29,
+        "warning": "n_samples < 30"
+      },
+      {
+        "attribute": "AverageMonthlyHours",
+        "group_value": 113.0,
+        "n_samples": 29,
+        "warning": "n_samples < 30"
+      },
+      {
+        "attribute": "AverageMonthlyHours",
+        "group_value": 104.0,
+        "n_samples": 28,
+        "warning": "n_samples < 30"
+      },
+      {
+        "attribute": "AverageMonthlyHours",
+        "group_value": 111.0,
+        "n_samples": 26,
+        "warning": "n_samples < 30"
+      },
+      {
+        "attribute": "AverageMonthlyHours",
+        "group_value": 126.0,
+        "n_samples": 25,
+        "warning": "n_samples < 30"
+      },
+      {
+        "attribute": "AverageMonthlyHours",
+        "group_value": 283.0,
+        "n_samples": 25,
+        "warning": "n_samples < 30"
+      },
+      {
+        "attribute": "AverageMonthlyHours",
+        "group_value": 284.0,
+        "n_samples": 24,
+        "warning": "n_samples < 30"
+      },
+      {
+        "attribute": "AverageMonthlyHours",
+        "group_value": 301.0,
+        "n_samples": 24,
+        "warning": "n_samples < 30"
+      },
+      {
+        "attribute": "AverageMonthlyHours",
+        "group_value": 121.0,
+        "n_samples": 24,
+        "warning": "n_samples < 30"
+      },
+      {
+        "attribute": "AverageMonthlyHours",
+        "group_value": 98.0,
+        "n_samples": 23,
+        "warning": "n_samples < 30"
+      }
+    ],
+    "proxy_risk_warnings": [
+      "Removing direct sensitive or group variables does not prove fairness.",
+      "Department, job role, salary, tenure, and evaluation-history fields may act as proxies depending on dataset context."
+    ],
+    "subgroup_metrics": {}
+  },
+  "governance": {
+    "deployment_status": "research_only_external_validation_or_robustness",
+    "intended_use": "Research-grade external validation and robustness evidence for HR XAI governance.",
+    "model_card_summary": "External dataset Human Resources Analytics / Employee Turnover is used for related HR task-transfer robustness, not performance validation. Policy without_last_evaluation excludes mapped leakage-risk and sensitive/audit-only fields. The system is research-only decision support and cannot make autonomous HR decisions.",
+    "prohibited_use": "No autonomous hiring, firing, promotion, compensation, discipline, or individual employment decisions.",
+    "required_warnings": [
+      "SHAP is attribution, not causality.",
+      "Prediction requires human review.",
+      "Not for autonomous HR decisions.",
+      "Removing group variables does not prove fairness.",
+      "Counterfactuals may not be employee-actionable.",
+      "External dataset role limits must be respected."
+    ]
+  },
+  "leakage": {
+    "excluded_leakage_features": [
+      "AttritionTarget",
+      "left"
+    ],
+    "feature_policy": "without_last_evaluation",
+    "full_feature_score": null,
+    "leakage_safe_score": 0.9665620831528202,
+    "leakage_sensitivity_index": null,
+    "leakage_warning": "External models exclude target, identifiers, direct sensitive/audit-only fields, and mapped leakage-risk columns for the selected policy."
+  },
+  "prediction": {
+    "case_id": "employee_turnover_without_last_evaluation_3989",
+    "class_probabilities": {
+      "0": 0.5003685802111453,
+      "1": 0.4996314197888547
+    },
+    "confidence": 0.5003685802111453,
+    "feature_policy": "without_last_evaluation",
+    "leakage_safe_status": "external_research_candidate",
+    "model_name": "xgboost",
+    "predicted_class": 0,
+    "true_class": 0,
+    "uncertainty_flag": true
+  },
+  "shap": {
+    "class_specific_shap_values": {
+      "AverageMonthlyHours": -0.0810102000832557,
+      "EmpDepartment": 0.0310912821441888,
+      "EmpJobSatisfaction": 0.0967525765299797,
+      "ExperienceYearsAtThisCompany": -0.7106940150260925,
+      "ProjectCount": 0.8079329133033752,
+      "PromotionLast5Years": -0.0040091755799949,
+      "SalaryBand": -0.2047868520021438,
+      "WorkAccident": -0.0734604448080062
+    },
+    "explanation_stability_warning": "External SHAP values are model attributions, not causal effects.",
+    "grouped_shap_values": {
+      "AverageMonthlyHours": -0.0810102000832557,
+      "EmpDepartment": 0.0310912821441888,
+      "EmpJobSatisfaction": 0.0967525765299797,
+      "ExperienceYearsAtThisCompany": -0.7106940150260925,
+      "ProjectCount": 0.8079329133033752,
+      "PromotionLast5Years": -0.0040091755799949,
+      "SalaryBand": -0.2047868520021438,
+      "WorkAccident": -0.0734604448080062
+    },
+    "shap_stability_summary": {
+      "external_case_type": "correct_low_confidence"
+    },
+    "top_negative_features": [
+      {
+        "feature": "ExperienceYearsAtThisCompany",
+        "grouped_shap_value": -0.7106940150260925
+      },
+      {
+        "feature": "SalaryBand",
+        "grouped_shap_value": -0.2047868520021438
+      },
+      {
+        "feature": "AverageMonthlyHours",
+        "grouped_shap_value": -0.0810102000832557
+      },
+      {
+        "feature": "WorkAccident",
+        "grouped_shap_value": -0.0734604448080062
+      },
+      {
+        "feature": "PromotionLast5Years",
+        "grouped_shap_value": -0.0040091755799949
+      }
+    ],
+    "top_positive_features": [
+      {
+        "feature": "ProjectCount",
+        "grouped_shap_value": 0.8079329133033752
+      },
+      {
+        "feature": "EmpJobSatisfaction",
+        "grouped_shap_value": 0.0967525765299797
+      },
+      {
+        "feature": "EmpDepartment",
+        "grouped_shap_value": 0.0310912821441888
+      }
+    ]
+  }
+}

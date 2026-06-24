@@ -12,6 +12,14 @@ The LLM is not the predictor. XGBoost remains the predictive model. The LLM and 
 - Full-feature models: leakage-warning upper-bound only, not deployable.
 
 ## Completed In Latest Phase
+- Added external dataset infrastructure for HRDataset_v14, IBM HR Analytics, IBM Attrition transfer, and Employee Turnover.
+- Generated dataset cards, schema mappings, target distributions, leakage/sensitive/proxy audits, missingness reports, and duplicate-ID reports under `reports/external_validation/`.
+- Ran HRDataset_v14 independent replication using `PerformanceScore` mapped to 2/3/4.
+- Reported INX-to-HRDataset cross-dataset validation as infeasible/too limited because only three department-free safe common features overlap.
+- Ran IBM schema-compatible restricted target-space robustness and IBM attrition task-transfer robustness.
+- Ran Employee Turnover task-transfer robustness with and without `last_evaluation`.
+- Ran real OpenAI governed explanations and OpenAI Agents SDK audits on 5 HRDataset_v14 cases, 5 IBM performance robustness cases, and 5 Employee Turnover cases.
+- Generated integrated external validation summary, manuscript tables, and governance summary.
 - Added canonical governance warning taxonomy.
 - Normalized governed explanation warnings and agent warning IDs.
 - Expanded chatbot guardrail evaluation with adversarial and Turkish HR-decision prompts.
@@ -22,6 +30,12 @@ The LLM is not the predictor. XGBoost remains the predictive model. The LLM and 
 - Refreshed faithfulness and summary reports from saved OpenAI outputs after fixing a checker warning-variant false negative.
 
 ## Real OpenAI Evaluation Status
+External validation batches:
+- HRDataset_v14: 5 cases, real OpenAI governed explanations + OpenAI Agents SDK, faithfulness pass rate `1.0`, unsupported claim rate `0.0`, forbidden claim rate `0.0`, missing warning rate `0.0`, agent success rate `1.0`.
+- IBM HR Analytics performance robustness: 5 cases, real OpenAI governed explanations + OpenAI Agents SDK, faithfulness pass rate `1.0`, unsupported claim rate `0.0`, forbidden claim rate `0.0`, missing warning rate `0.0`, agent success rate `1.0`.
+- Employee Turnover task transfer: 5 cases, real OpenAI governed explanations + OpenAI Agents SDK, faithfulness pass rate `1.0`, unsupported claim rate `0.0`, forbidden claim rate `0.0`, missing warning rate `0.0`, agent success rate `1.0`.
+
+Prior INX batch:
 - Cases: `528;376;568;18;392;405;125;176;662;906`.
 - Model: `gpt-5.4-mini`.
 - Runtime: OpenAI API for governed explanations + OpenAI Agents SDK for governance audit.
@@ -79,6 +93,13 @@ text_secret_pattern_hits=0
 - `tests/test_chatbot_guardrails.py`
 
 ## Key Reports
+- `reports/external_validation/external_validation_summary.md`
+- `reports/external_validation/hrdataset_v14/external_experiment_interpretation.md`
+- `reports/external_validation/hrdataset_v14/cross_dataset_inx_to_hrdataset/cross_dataset_validation.md`
+- `reports/external_validation/ibm_hr_analytics/external_experiment_interpretation.md`
+- `reports/external_validation/employee_turnover/external_experiment_interpretation.md`
+- `reports/manuscript_assets/external_validation_tables.md`
+- `reports/governance_reports/external_validation_governance_summary.md`
 - `reports/llm_explanations/real_llm_eval_summary.csv`
 - `reports/llm_explanations/real_llm_eval_summary.md`
 - `reports/llm_explanations/real_llm_eval_interpretation.md`
@@ -121,6 +142,11 @@ Then:
 ```
 
 ## Known Limitations
+- External CSVs were retrieved from public mirrors and documented in dataset cards; source provenance and licensing should be independently verified before manuscript submission.
+- HRDataset_v14 supports independent external performance replication, but it is small and cross-sectional.
+- IBM performance robustness is restricted to target classes 3 and 4 and must not be described as direct 2/3/4 external validation.
+- Employee Turnover and IBM Attrition are related task-transfer robustness checks, not performance validation.
+- Cross-dataset INX-to-HRDataset validation is infeasible/too limited under the safe common feature set.
 - The 10-case real OpenAI evaluation is still a small-batch engineering validation, not a human-subject study.
 - Supplemental cases were built from existing XGBoost local grouped SHAP outputs and filtered for final-policy forbidden features; this is valid for prototype expansion but should be described transparently.
 - Warning consistency is improved after taxonomy normalization but still depends on case evidence and specialist agent behavior.

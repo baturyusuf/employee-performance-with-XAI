@@ -755,3 +755,56 @@ The initial 10-case run produced one false compliance failure for case 176 becau
 
 ### Decision
 The LLM-agent layer is now a stronger Q3-level research prototype with real OpenAI small-batch evidence, canonical warning normalization, adversarial chatbot guardrail evaluation, manuscript-support artifacts, and a continuation handoff. It remains a research prototype and must not be represented as a deployable autonomous HR system.
+
+## 2026-06-24 - External validation and robustness evidence added
+
+### Context
+The project needed external validation and robustness evidence beyond the original INX employee-performance dataset while preserving the established governance boundaries: leakage-safe feature policies, fairness/proxy auditing, calibration caution, SHAP-as-attribution, actionability constraints, and real OpenAI-backed LLM/agent evaluation.
+
+### Data sources and provenance
+- Added `data/external/hrdataset_v14/raw.csv` from a public HRDataset_v14 mirror.
+- Added `data/external/ibm_hr_analytics/raw.csv` from a public IBM HR Analytics mirror.
+- Added `data/external/employee_turnover/raw.csv` from a public Human Resources Analytics / Employee Turnover mirror.
+- Added dataset cards and schema mapping files under `data/external/<dataset>/`.
+- Decision: public mirrors are acceptable for reproducible engineering evidence, but source provenance and licensing must be independently verified before manuscript submission or operational claims.
+
+### External dataset role decisions
+- HRDataset_v14 is treated as independent replication / direct external performance-target validation because `PerformanceScore` maps to classes 2/3/4.
+- IBM HR Analytics performance is treated as schema-compatible restricted target-space robustness because audited `PerformanceRating` contains only classes 3 and 4.
+- IBM Attrition is included as optional related HR task-transfer robustness, with `PerformanceRating`, compensation, and outcome-proximal fields treated as leakage/proxy risks rather than uncontrolled ordinary predictors.
+- Employee Turnover is included only as related HR task-transfer robustness. It is not performance validation.
+- Absenteeism at Work remains excluded.
+
+### Experiments completed
+- Generated external dataset audits, schema mappings, target distributions, missingness reports, duplicate-ID reports, and leakage/sensitive/proxy audits under `reports/external_validation/`.
+- Ran HRDataset_v14 XGBoost independent replication with department-including, department-free, and department/job-role-free feature policies.
+- Reported INX-to-HRDataset train/test transfer as infeasible/too limited because only three department-free safe common features overlap: `EmpJobRole`, `EmpJobSatisfaction`, and `ExperienceYearsAtThisCompany`.
+- Ran IBM restricted performance robustness with the same department policy variants.
+- Ran IBM attrition task-transfer robustness.
+- Ran Employee Turnover task-transfer robustness with and without `last_evaluation`.
+- Generated performance, calibration, fairness/proxy, department proxy reconstruction, grouped SHAP, actionability, representative-case, and interpretation artifacts.
+
+### Key results
+- HRDataset_v14 department-free: macro-F1 0.638943, balanced accuracy 0.656693, QWK 0.594500, log loss 0.550791, Brier 0.256523, ECE 0.092454.
+- IBM restricted performance department-free: macro-F1 0.460311, balanced accuracy 0.497389, QWK -0.008499, log loss 0.497845, Brier 0.286919, ECE 0.082177.
+- IBM attrition department-free: macro-F1 0.674896, balanced accuracy 0.638840, QWK 0.363876, log loss 0.356022, Brier 0.204166, ECE 0.038770.
+- Employee Turnover without `last_evaluation`: macro-F1 0.966562, balanced accuracy 0.960323, QWK 0.933132, log loss 0.081045, Brier 0.039546, ECE 0.007724.
+
+### Real OpenAI / OpenAI Agents SDK external evaluation
+- HRDataset_v14: 5 cases, faithfulness pass rate 1.0, unsupported claim rate 0.0, forbidden claim rate 0.0, missing warning rate 0.0, agent success rate 1.0.
+- IBM performance robustness: 5 cases, faithfulness pass rate 1.0, unsupported claim rate 0.0, forbidden claim rate 0.0, missing warning rate 0.0, agent success rate 1.0.
+- Employee Turnover task transfer: 5 cases, faithfulness pass rate 1.0, unsupported claim rate 0.0, forbidden claim rate 0.0, missing warning rate 0.0, agent success rate 1.0.
+- All runs used real OpenAI governed explanations and OpenAI Agents SDK audits. The LLM interpreted structured ML/XAI/governance evidence and was not used as a predictor.
+
+### Checker and agent remediation
+- Patched `src/agents/leakage_agent.py` so INX-specific required leakage exclusions (`EmpLastSalaryHikePercent`, `Attrition`) are not incorrectly required when external datasets do not contain those fields and the evidence is marked as external research evidence.
+- Patched `src/llm/faithfulness_checker.py` so external metric keys, case IDs, low-support warning thresholds, and scientific notation are not misclassified as unsupported numeric or feature claims.
+- Patched `src/models/evaluate.py` so binary task-transfer Brier scores use a two-column one-hot target rather than scikit-learn's one-column binary `label_binarize` output.
+
+### Generated integrated reports
+- `reports/external_validation/external_validation_summary.md`
+- `reports/manuscript_assets/external_validation_tables.md`
+- `reports/governance_reports/external_validation_governance_summary.md`
+
+### Decision
+The project now has Q3-level external validation and robustness evidence, but claims remain conservative. HRDataset_v14 supports independent external performance replication; IBM performance supports restricted target-space robustness; IBM Attrition and Employee Turnover support related HR task-transfer robustness. The system remains research-grade decision support only and must not be represented as deployable or autonomous HR decision-making software.

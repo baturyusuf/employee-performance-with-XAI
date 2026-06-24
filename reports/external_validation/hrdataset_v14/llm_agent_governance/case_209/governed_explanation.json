@@ -1,0 +1,104 @@
+{
+  "_llm_backend": "openai_chat_completions",
+  "_llm_model": "gpt-5.4-mini",
+  "_llm_usage": {
+    "completion_tokens": 852,
+    "completion_tokens_details": {
+      "accepted_prediction_tokens": 0,
+      "audio_tokens": 0,
+      "reasoning_tokens": 0,
+      "rejected_prediction_tokens": 0
+    },
+    "prompt_tokens": 4605,
+    "prompt_tokens_details": {
+      "audio_tokens": 0,
+      "cached_tokens": 0
+    },
+    "total_tokens": 5457
+  },
+  "case_id": "hrdataset_v14_department_free_209",
+  "detailed_explanation": "For case hrdataset_v14_department_free_209, the xgboost model under the department_free policy predicted class 2 with class probabilities 0.4969988261648003 for class 2, 0.4921424187214426 for class 3, and 0.010858755113757 for class 4. The prediction is flagged as uncertain, and the evidence states that prediction requires human review. The leakage-safe score is 0.6389426176660219, and the leakage warning says the external model excludes target, identifiers, direct sensitive/audit-only fields, and mapped leakage-risk columns for the selected policy. SHAP values are provided as model attributions only, not causal effects. The largest positive attributions are DaysLateLast30 (5.124734401702881), Absences (0.1394097059965133), Salary (0.0921463072299957), DeptID (0.0410024598240852), and EmpJobRole (0.0071940887719392). The largest negative attributions are EngagementSurvey (-0.6485396027565002), RecruitmentSource (-0.04135337844491), Zip (-0.0305609758943319), MarriedID (-0.0220521986484527), and ExperienceYearsAtThisCompany (-0.0135456984862685). Calibration evidence is limited to diagnostic confidence estimates: Brier score 0.2565226512732113, expected calibration error 0.0924541149217507, and log loss 0.550790919971508, with a warning that external probabilities require calibration caution. Counterfactual evidence is not a recourse claim: changed_features is empty, validity is 0.1333333333333333, probability_gain and proximity_cost are null, and the package states that prototype counterfactual recourse was not claimed. Fairness evidence includes disparity gaps for Absences_false_positive_rate_3.0 = 1.0, Absences_precision_2.0 = 0.5, EmpJobRole_precision_4.0 = 1.0, Gender_precision_4.0 = 0.5, and SpecialProjectsCount_false_positive_rate_3.0 = 0.6666666666666667. Several audited groups have low support, including RaceEthnicity, HispanicLatino, MaritalStatus, and EmpDepartment subgroups with n_samples below 16. The governance record states this is research-only external validation or robustness evidence and prohibits autonomous hiring, firing, promotion, compensation, discipline, or individual employment decisions.",
+  "faithfulness_check": {
+    "faithfulness_pass": true,
+    "forbidden_claims": [],
+    "missing_warnings": [],
+    "score": 100,
+    "suggested_revision": "",
+    "unsupported_claims": []
+  },
+  "requires_human_review": true,
+  "short_explanation": "This is a research-only external validation case with an uncertain prediction. The model predicted class 2 with probability 0.4969988261648003, and the true class is also 2. SHAP shows attribution, not causality, with DaysLateLast30 as the largest positive attribution and EngagementSurvey as the largest negative attribution.",
+  "unsupported_claims_detected": [],
+  "warnings": [
+    {
+      "category": "deployment",
+      "message": "This model is decision support only and is not for autonomous HR decisions.",
+      "severity": "high",
+      "type": "deployment",
+      "warning_id": "deployment.not_autonomous"
+    },
+    {
+      "category": "calibration",
+      "message": "Probability estimates should be interpreted as approximate confidence, not objective certainty.",
+      "severity": "medium",
+      "type": "calibration",
+      "warning_id": "calibration.probabilities_approximate"
+    },
+    {
+      "category": "causality",
+      "message": "SHAP is attribution, not causality.",
+      "severity": "high",
+      "type": "causality",
+      "warning_id": "causality.shap_not_causal"
+    },
+    {
+      "category": "actionability",
+      "message": "Counterfactuals may not be employee-actionable and must not be treated as employee prescriptions.",
+      "severity": "high",
+      "type": "actionability",
+      "warning_id": "actionability.counterfactual_not_prescription"
+    },
+    {
+      "category": "fairness",
+      "message": "Removing EmpDepartment does not prove fairness.",
+      "severity": "high",
+      "type": "fairness",
+      "warning_id": "fairness.department_removal_not_fairness_proof"
+    },
+    {
+      "category": "proxy",
+      "message": "EmpJobRole may proxy EmpDepartment, so department removal does not eliminate proxy risk.",
+      "severity": "high",
+      "type": "proxy",
+      "warning_id": "proxy.jobrole_department_proxy"
+    },
+    {
+      "category": "other",
+      "message": "Some subgroup metrics are unavailable; bootstrap_ci and subgroup_metrics are empty in the provided evidence.",
+      "severity": "medium",
+      "type": "other",
+      "warning_id": "other.unmapped"
+    },
+    {
+      "category": "deployment",
+      "message": "Prediction requires human review.",
+      "severity": "high",
+      "type": "deployment",
+      "warning_id": "deployment.human_review_required"
+    },
+    {
+      "category": "leakage",
+      "message": "Full-feature models are leakage-warning upper-bound baselines only, not deployable models.",
+      "severity": "high",
+      "type": "leakage",
+      "warning_id": "leakage.full_feature_upper_bound_only"
+    },
+    {
+      "category": "validation",
+      "message": "External validation is required before deployment.",
+      "severity": "high",
+      "type": "validation",
+      "warning_id": "validation.external_validation_required"
+    }
+  ]
+}

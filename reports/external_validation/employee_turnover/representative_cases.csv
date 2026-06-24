@@ -1,0 +1,11 @@
+dataset,policy,case_type,sample_index,external_sample_id,true_class,predicted_class,confidence,correct
+employee_turnover,with_last_evaluation,correct_high_confidence,2594,2594,0,0,0.9999799578075284,True
+employee_turnover,with_last_evaluation,correct_low_confidence,6889,6889,0,0,0.5046574919027838,True
+employee_turnover,with_last_evaluation,misclassification,1158,1158,1,0,0.996211865762515,False
+employee_turnover,with_last_evaluation,small_support_group_EmpDepartment,137,137,1,1,0.9935391401873374,True
+employee_turnover,with_last_evaluation,proxy_warning_high_shap,376,376,1,1,0.9362370866360451,True
+employee_turnover,without_last_evaluation,correct_high_confidence,2594,2594,0,0,0.9999867445015653,True
+employee_turnover,without_last_evaluation,correct_low_confidence,3989,3989,0,0,0.5003685802111453,True
+employee_turnover,without_last_evaluation,misclassification,1158,1158,1,0,0.9971588726971717,False
+employee_turnover,without_last_evaluation,small_support_group_EmpDepartment,137,137,1,1,0.9933976554848654,True
+employee_turnover,without_last_evaluation,proxy_warning_high_shap,14587,14587,1,1,0.9335513005767696,True
