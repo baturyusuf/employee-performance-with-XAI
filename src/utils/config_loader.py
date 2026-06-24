@@ -19,6 +19,9 @@ def resolve_config_path(name_or_path: str | Path) -> Path:
     if path.is_absolute():
         return path
 
+    if path.exists():
+        return path
+
     if path.suffix:
         candidate = CONFIG_DIR / path
     else:

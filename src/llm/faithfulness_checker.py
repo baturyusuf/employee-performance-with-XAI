@@ -56,6 +56,92 @@ class FaithfulnessResult:
         }
 
 
+@dataclass
+class FaithfulnessCategoryResult:
+    unsupported_metric_claims: List[str] = field(default_factory=list)
+    unsupported_feature_claims: List[str] = field(default_factory=list)
+    causal_claims: List[str] = field(default_factory=list)
+    autonomous_decision_claims: List[str] = field(default_factory=list)
+    fairness_overclaims: List[str] = field(default_factory=list)
+    employee_prescriptions: List[str] = field(default_factory=list)
+    missing_warnings: List[str] = field(default_factory=list)
+    parsing_error: str = ""
+
+    @property
+    def forbidden_claims(self) -> List[str]:
+        return sorted(
+            set(
+                self.causal_claims
+                + self.autonomous_decision_claims
+                + self.fairness_overclaims
+                + self.employee_prescriptions
+            )
+        )
+
+    @property
+    def unsupported_claims(self) -> List[str]:
+        return sorted(set(self.unsupported_metric_claims + self.unsupported_feature_claims))
+
+    @property
+    def score(self) -> int:
+        penalty = (
+            15 * len(self.forbidden_claims)
+            + 10 * len(self.unsupported_claims)
+            + 8 * len(self.missing_warnings)
+            + (25 if self.parsing_error else 0)
+        )
+        return max(0, 100 - penalty)
+
+    @property
+    def passed(self) -> bool:
+        return (
+            not self.forbidden_claims
+            and not self.unsupported_claims
+            and not self.missing_warnings
+            and not self.parsing_error
+            and self.score >= 80
+        )
+
+    def to_summary_dict(self) -> Dict[str, Any]:
+        return {
+            "faithfulness_pass": self.passed,
+            "score": self.score,
+            "unsupported_claims": self.unsupported_claims,
+            "forbidden_claims": self.forbidden_claims,
+            "missing_warnings": self.missing_warnings,
+            "parsing_error": self.parsing_error,
+        }
+
+    def to_eval_row(
+        self,
+        *,
+        run_id: str,
+        dataset_name: str,
+        case_id: str,
+        evidence_hash: str,
+        response_hash: str,
+        notes: str = "",
+    ) -> Dict[str, Any]:
+        return {
+            "run_id": run_id,
+            "dataset_name": dataset_name,
+            "case_id": case_id,
+            "evidence_hash": evidence_hash,
+            "response_hash": response_hash,
+            "faithfulness_pass": self.passed,
+            "faithfulness_score": self.score,
+            "unsupported_metric_count": len(self.unsupported_metric_claims),
+            "unsupported_feature_count": len(self.unsupported_feature_claims),
+            "causal_claim_count": len(self.causal_claims),
+            "autonomous_decision_claim_count": len(self.autonomous_decision_claims),
+            "fairness_overclaim_count": len(self.fairness_overclaims),
+            "employee_prescription_count": len(self.employee_prescriptions),
+            "missing_warning_count": len(self.missing_warnings),
+            "parsing_error": self.parsing_error,
+            "notes": notes or "; ".join(self.unsupported_claims + self.forbidden_claims + self.missing_warnings),
+        }
+
+
 def flatten_text(output: Dict[str, Any] | str) -> str:
     if isinstance(output, str):
         return output
@@ -175,6 +261,7 @@ def unsupported_metric_check(text: str, evidence: Dict[str, Any]) -> List[str]:
 
 def unsupported_feature_check(text: str, evidence: Dict[str, Any]) -> List[str]:
     known = evidence_feature_names(evidence)
+    known_lower = {name.lower() for name in known}
     candidates = set(re.findall(r"\b[A-Z][A-Za-z0-9_]{3,}\b", text))
     feature_like_prefixes = (
         "Emp",
@@ -198,7 +285,11 @@ def unsupported_feature_check(text: str, evidence: Dict[str, Any]) -> List[str]:
         for name in candidates
         if name.startswith(feature_like_prefixes) or "_" in name
     ]
-    unsupported = [name for name in feature_like if name not in known and name not in {"Department", "JobRole"}]
+    unsupported = [
+        name
+        for name in feature_like
+        if name not in known and name.lower() not in known_lower and name not in {"Department", "JobRole"}
+    ]
     return sorted(set(unsupported))
 
 
@@ -229,28 +320,37 @@ def missing_warning_check(text: str, evidence: Dict[str, Any]) -> List[str]:
 
 
 def check_faithfulness(output: Dict[str, Any] | str, evidence: Dict[str, Any]) -> FaithfulnessResult:
-    text = flatten_text(output)
-    forbidden = []
-    forbidden.extend(detect_patterns(text, CAUSAL_PATTERNS))
-    forbidden.extend(detect_patterns(text, AUTONOMOUS_PATTERNS))
-    forbidden.extend(detect_patterns(text, FAIRNESS_OVERCLAIMS))
-    forbidden.extend(detect_patterns(text, EMPLOYEE_PRESCRIPTIONS))
-    unsupported = unsupported_metric_check(text, evidence) + unsupported_feature_check(text, evidence)
-    missing = missing_warning_check(text, evidence)
-    penalty = 15 * len(forbidden) + 10 * len(unsupported) + 8 * len(missing)
-    score = max(0, 100 - penalty)
-    passed = not forbidden and not unsupported and not missing and score >= 80
+    categorized = check_faithfulness_categories(output, evidence)
     revision = ""
-    if not passed:
+    if not categorized.passed:
         revision = (
             "Revise explanation to use only structured evidence, remove causal/HR decision language, "
             "and include all required governance warnings."
         )
     return FaithfulnessResult(
-        faithfulness_pass=passed,
-        score=score,
-        unsupported_claims=unsupported,
-        forbidden_claims=sorted(set(forbidden)),
-        missing_warnings=missing,
+        faithfulness_pass=categorized.passed,
+        score=categorized.score,
+        unsupported_claims=categorized.unsupported_claims,
+        forbidden_claims=categorized.forbidden_claims,
+        missing_warnings=categorized.missing_warnings,
         suggested_revision=revision,
+    )
+
+
+def check_faithfulness_categories(
+    output: Dict[str, Any] | str,
+    evidence: Dict[str, Any],
+    *,
+    parsing_error: str = "",
+) -> FaithfulnessCategoryResult:
+    text = flatten_text(output)
+    return FaithfulnessCategoryResult(
+        unsupported_metric_claims=unsupported_metric_check(text, evidence),
+        unsupported_feature_claims=unsupported_feature_check(text, evidence),
+        causal_claims=detect_patterns(text, CAUSAL_PATTERNS),
+        autonomous_decision_claims=detect_patterns(text, AUTONOMOUS_PATTERNS),
+        fairness_overclaims=detect_patterns(text, FAIRNESS_OVERCLAIMS),
+        employee_prescriptions=detect_patterns(text, EMPLOYEE_PRESCRIPTIONS),
+        missing_warnings=missing_warning_check(text, evidence),
+        parsing_error=parsing_error,
     )

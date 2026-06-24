@@ -5,7 +5,8 @@
 - HRDataset_v14 provides independent replication on a directly mappable external performance target.
 - IBM HR Analytics provides schema-compatible robustness, but its performance target is restricted to classes 3 and 4.
 - IBM attrition and Employee Turnover provide related HR risk-prediction task-transfer evidence, not performance validation.
-- Real OpenAI governed explanations and OpenAI Agents SDK audits ran on small representative external batches for HRDataset_v14, IBM performance robustness, and Employee Turnover.
+- Real OpenAI governed explanations now include an expanded 80-case priority-scope batch for INX and HRDataset_v14.
+- Earlier small real OpenAI and OpenAI Agents SDK audits exist for HRDataset_v14, IBM performance robustness, and Employee Turnover, but the related-task datasets remain robustness evidence only.
 
 ## What Cannot Be Claimed
 
@@ -20,7 +21,7 @@
 - External data provenance and licensing should be independently verified before publication.
 - Cross-dataset INX-to-HRDataset feature overlap is too weak for a defensible transportability result.
 - Subgroup results remain sample-size and support-threshold sensitive.
-- LLM-agent evaluation is small-batch technical evidence, not human-subject validation.
+- LLM-agent evaluation is automated technical evidence, not human-subject validation.
 
 ## Q3 Manuscript Positioning
 
@@ -36,6 +37,11 @@ The project can be positioned as a leakage-aware, fairness/proxy-audited, calibr
 | IBM HR Analytics attrition | department_free | 0.674896 | 0.63884 | 0.363876 | 0.131293 | 0 | 0.356022 | 0.204166 | 0.03877 |
 | Employee Turnover | without_last_evaluation | 0.966562 | 0.960323 | 0.933132 | 0.023935 | 0 | 0.081045 | 0.039546 | 0.007724 |
 
+| dataset | n_cases | run_mode | real_llm_used | llm_model | faithfulness_pass_rate | unsupported_claim_rate | forbidden_claim_rate | missing_warning_rate | parsing_success_rate | agent_compliance_pass_rate | notes |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| hrdataset_v14 | 40 | real | True | gpt-5.4-mini | 1 | 0 | 0 | 0 | 1 | 1 | expanded real priority scope; IBM/attrition/turnover LLM regeneration deferred |
+| inx_primary | 40 | real | True | gpt-5.4-mini | 1 | 0 | 0 | 0 | 1 | 1 | expanded real priority scope; IBM/attrition/turnover LLM regeneration deferred |
+
 | dataset | case_ids | n_cases | faithfulness_pass_rate | unsupported_claim_rate | forbidden_claim_rate | missing_warning_rate | agent_success_rate | notes |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | INX primary model | 528;376;568;18;392;405;125;176;662;906 | 10 | 1 | 0 | 0 | 0 | 1 | real OpenAI + OpenAI Agents SDK |
@@ -50,8 +56,8 @@ Usage is cumulative for the listed case IDs and includes remediation reruns; bil
 
 | dataset | logged_usage_rows | input_tokens | output_tokens | total_tokens | estimated_cost_usd |
 | --- | --- | --- | --- | --- | --- |
-| INX primary model | 190 | 1122859 | 95024 | 1217883 | 0.951109 |
-| HRDataset_v14 | 90 | 474550 | 47726 | 522276 | 0.451275 |
+| INX primary model | 231 | 1355636 | 128478 | 1484114 | 1.14197 |
+| HRDataset_v14 | 100 | 521244 | 56202 | 577446 | 0.524437 |
 | IBM HR Analytics performance | 90 | 476167 | 49621 | 525788 | 0.460497 |
 | IBM HR Analytics attrition | 0 | 0 | 0 | 0 | 0 |
 | Employee Turnover | 135 | 653058 | 71461 | 724519 | 0.630792 |

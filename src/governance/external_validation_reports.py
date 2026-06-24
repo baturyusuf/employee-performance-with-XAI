@@ -8,6 +8,7 @@ import pandas as pd
 
 from src.llm.usage_logger import USAGE_LOG_PATH
 from src.utils.config import SETTINGS
+from src.utils.config_loader import load_config
 from src.utils.experiment_registry import append_registry_row, get_git_commit, utc_now_iso
 
 
@@ -69,10 +70,12 @@ def run() -> Dict[str, Path]:
     summary_path = REPORT_ROOT / "external_validation_summary.md"
     manuscript_path = MANUSCRIPT_DIR / "external_validation_tables.md"
     governance_path = GOVERNANCE_DIR / "external_validation_governance_summary.md"
+    roles_path = REPORT_ROOT / "external_dataset_roles.csv"
 
     summary_path.write_text(summary_markdown(tables), encoding="utf-8")
     manuscript_path.write_text(manuscript_markdown(tables), encoding="utf-8")
     governance_path.write_text(governance_markdown(tables), encoding="utf-8")
+    write_external_dataset_roles(roles_path)
 
     append_registry_row(
         {
@@ -95,7 +98,29 @@ def run() -> Dict[str, Path]:
         "summary": summary_path,
         "manuscript": manuscript_path,
         "governance": governance_path,
+        "external_dataset_roles": roles_path,
     }
+
+
+def write_external_dataset_roles(output_path: Path) -> Path:
+    config = load_config("external_validation")
+    rows = []
+    for row in config.get("external_validation", {}).get("datasets", []):
+        rows.append(
+            {
+                "dataset_name": row.get("dataset_name", ""),
+                "source_path": row.get("source_path", ""),
+                "task_type": row.get("task_type", ""),
+                "target_variable": row.get("target_variable", ""),
+                "target_semantics": row.get("target_semantics", ""),
+                "comparable_to_inx_performance": bool(row.get("comparable_to_inx_performance", False)),
+                "role_in_manuscript": row.get("role_in_manuscript", ""),
+                "limitations": row.get("limitations", ""),
+            }
+        )
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+    pd.DataFrame(rows).to_csv(output_path, index=False)
+    return output_path
 
 
 def build_tables() -> Dict[str, pd.DataFrame]:
@@ -167,8 +192,8 @@ def build_tables() -> Dict[str, pd.DataFrame]:
             },
             {
                 "area": "LLM/agents",
-                "limitation": "Small real OpenAI batches evaluate evidence interpretation, not human trust or deployment safety.",
-                "allowed_claim": "Technical LLM-agent governance evidence on structured ML/XAI artifacts.",
+                "limitation": "Expanded real OpenAI technical evaluation currently prioritizes INX and HRDataset_v14; IBM and turnover related-task LLM regeneration are second-stage robustness work.",
+                "allowed_claim": "Technical LLM-agent governance evidence on structured ML/XAI artifacts for the stated dataset scope.",
             },
         ]
     )
@@ -176,6 +201,7 @@ def build_tables() -> Dict[str, pd.DataFrame]:
     llm_df = pd.DataFrame(llm_rows)
     usage = build_external_usage_table(llm_df)
     usage.to_csv(REPORT_ROOT / "external_llm_usage_summary.csv", index=False)
+    expanded_llm = expanded_llm_summary_table()
 
     return {
         "roles": pd.DataFrame(role_rows),
@@ -186,6 +212,7 @@ def build_tables() -> Dict[str, pd.DataFrame]:
         "calibration": pd.DataFrame(calibration_rows),
         "actionability": pd.DataFrame(actionability_rows),
         "llm": llm_df,
+        "expanded_llm": expanded_llm,
         "usage": usage,
         "limitations": limitations,
     }
@@ -387,6 +414,53 @@ def build_external_usage_table(llm_df: pd.DataFrame) -> pd.DataFrame:
     return pd.DataFrame(rows, columns=columns)
 
 
+def expanded_llm_summary_table() -> pd.DataFrame:
+    summary_path = SETTINGS.reports_dir / "llm_explanations" / "llm_agent_eval_summary.csv"
+    manifest_path = SETTINGS.reports_dir / "llm_explanations" / "eval_case_manifest.csv"
+    columns = [
+        "dataset",
+        "n_cases",
+        "run_mode",
+        "real_llm_used",
+        "llm_model",
+        "faithfulness_pass_rate",
+        "unsupported_claim_rate",
+        "forbidden_claim_rate",
+        "missing_warning_rate",
+        "parsing_success_rate",
+        "agent_compliance_pass_rate",
+        "notes",
+    ]
+    if not summary_path.exists() or not manifest_path.exists():
+        return pd.DataFrame(columns=columns)
+    summary = pd.read_csv(summary_path)
+    manifest = pd.read_csv(manifest_path)
+    if summary.empty or manifest.empty:
+        return pd.DataFrame(columns=columns)
+    row = summary.iloc[0]
+    out = []
+    for dataset, subset in manifest.groupby("dataset_name"):
+        out.append(
+            {
+                "dataset": dataset,
+                "n_cases": int(len(subset)),
+                "run_mode": row.get("run_mode", ""),
+                "real_llm_used": row.get("real_llm_used", ""),
+                "llm_model": row.get("llm_model_used", ""),
+                "faithfulness_pass_rate": row.get("faithfulness_pass_rate", ""),
+                "unsupported_claim_rate": row.get("unsupported_claim_rate", ""),
+                "forbidden_claim_rate": row.get("forbidden_claim_rate", ""),
+                "missing_warning_rate": row.get("missing_warning_rate", ""),
+                "parsing_success_rate": row.get("parsing_success_rate", ""),
+                "agent_compliance_pass_rate": row.get("agent_compliance_pass_rate", ""),
+                "notes": "expanded real priority scope; IBM/attrition/turnover LLM regeneration deferred"
+                if str(row.get("real_llm_used", "")).lower() in {"true", "1"}
+                else "dry-run/stub; not manuscript-grade real LLM evidence",
+            }
+        )
+    return pd.DataFrame(out, columns=columns)
+
+
 def allowed_claim_for(key: str) -> str:
     return {
         "inx_primary": "internal benchmark only",
@@ -435,6 +509,12 @@ def summary_markdown(tables: Dict[str, pd.DataFrame]) -> str:
         "",
         markdown_table(_round_table(tables["llm"])),
         "",
+        "## Expanded Real LLM-Agent Evaluation: Current Priority Scope",
+        "",
+        "This table is read from the current config-driven real run. It prioritizes INX and HRDataset_v14; related-task datasets are not direct employee-performance validation.",
+        "",
+        markdown_table(_round_table(tables["expanded_llm"])),
+        "",
         "## External LLM Usage / Cost Summary",
         "",
         "Usage is cumulative for the listed case IDs and includes remediation reruns; billing dashboards remain the source of truth.",
@@ -455,6 +535,7 @@ def manuscript_markdown(tables: Dict[str, pd.DataFrame]) -> str:
         ("Table 2: External Schema Mapping Summary", tables["targets"]),
         ("Table 3: Performance Metrics Across Datasets", _round_table(tables["performance"])),
         ("Table 4: Leakage/Proxy/Fairness Findings", _round_table(tables["fairness"])),
+        ("Table 5a: Expanded Real LLM-Agent Results for Priority Scope", _round_table(tables["expanded_llm"])),
         ("Table 5: LLM-Agent Governance Results Across Datasets", _round_table(tables["llm"])),
         ("Table 5b: External LLM Usage and Estimated Cost", _round_table(tables["usage"])),
         ("Table 6: Limitations and Allowed Claims", tables["limitations"]),
@@ -475,7 +556,8 @@ def governance_markdown(tables: Dict[str, pd.DataFrame]) -> str:
             "- HRDataset_v14 provides independent replication on a directly mappable external performance target.",
             "- IBM HR Analytics provides schema-compatible robustness, but its performance target is restricted to classes 3 and 4.",
             "- IBM attrition and Employee Turnover provide related HR risk-prediction task-transfer evidence, not performance validation.",
-            "- Real OpenAI governed explanations and OpenAI Agents SDK audits ran on small representative external batches for HRDataset_v14, IBM performance robustness, and Employee Turnover.",
+            "- Real OpenAI governed explanations now include an expanded 80-case priority-scope batch for INX and HRDataset_v14.",
+            "- Earlier small real OpenAI and OpenAI Agents SDK audits exist for HRDataset_v14, IBM performance robustness, and Employee Turnover, but the related-task datasets remain robustness evidence only.",
             "",
             "## What Cannot Be Claimed",
             "",
@@ -490,7 +572,7 @@ def governance_markdown(tables: Dict[str, pd.DataFrame]) -> str:
             "- External data provenance and licensing should be independently verified before publication.",
             "- Cross-dataset INX-to-HRDataset feature overlap is too weak for a defensible transportability result.",
             "- Subgroup results remain sample-size and support-threshold sensitive.",
-            "- LLM-agent evaluation is small-batch technical evidence, not human-subject validation.",
+            "- LLM-agent evaluation is automated technical evidence, not human-subject validation.",
             "",
             "## Q3 Manuscript Positioning",
             "",
@@ -499,6 +581,8 @@ def governance_markdown(tables: Dict[str, pd.DataFrame]) -> str:
             "## Supporting Tables",
             "",
             markdown_table(_round_table(tables["performance"])),
+            "",
+            markdown_table(_round_table(tables["expanded_llm"])),
             "",
             markdown_table(_round_table(tables["llm"])),
             "",

@@ -1,0 +1,13 @@
+{
+  "chatbot_guardrail_eval": {
+    "seed": 42,
+    "run_id_prefix": "chatbot_guardrail_eval",
+    "output_dir": "reports/chatbot_eval",
+    "unsafe_prompt_suite_path": "reports/chatbot_eval/unsafe_prompt_suite.csv",
+    "safe_prompt_suite_path": "reports/chatbot_eval/safe_prompt_suite.csv",
+    "engine": "deterministic_report_backed_chatbot",
+    "min_unsafe_prompts": 50,
+    "min_safe_prompts": 25
+  }
+}
+

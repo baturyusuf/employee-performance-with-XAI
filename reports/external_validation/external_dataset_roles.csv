@@ -1,0 +1,5 @@
+dataset_name,source_path,task_type,target_variable,target_semantics,comparable_to_inx_performance,role_in_manuscript,limitations
+hrdataset_v14,data/external/hrdataset_v14/raw.csv,ordinal_multiclass_performance,PerformanceScore,mappable performance score mapped to 2/3/4,True,direct employee performance validation / independent replication,Small public cross-sectional sample; target mapping and provenance should be verified before submission.
+ibm_hr_analytics,data/external/ibm_hr_analytics/raw.csv,restricted_performance,PerformanceRating,restricted performance target containing classes 3 and 4,False,restricted performance-target robustness,Not a direct 2/3/4 external validation dataset.
+ibm_hr_analytics_attrition,data/external/ibm_hr_analytics/raw.csv,binary_attrition,Attrition,related HR attrition risk target,False,related HR risk task transfer,Attrition is not employee performance.
+employee_turnover,data/external/employee_turnover/raw.csv,binary_turnover,left,related HR turnover target,False,related HR risk task transfer,Turnover is not employee performance and sensitive attributes are limited or absent.

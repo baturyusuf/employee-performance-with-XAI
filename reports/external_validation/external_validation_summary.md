@@ -78,14 +78,23 @@ This report extends the original INX HR XAI governance evidence with external va
 | IBM HR Analytics attrition |  | 0 |  |  |  |  |  | not run |
 | Employee Turnover | employee_turnover_without_last_evaluation_2594;employee_turnover_without_last_evaluation_3989;employee_turnover_without_last_evaluation_1158;employee_turnover_without_last_evaluation_137;employee_turnover_without_last_evaluation_14587 | 5 | 1 | 0 | 0 | 0 | 1 | real OpenAI + OpenAI Agents SDK |
 
+## Expanded Real LLM-Agent Evaluation: Current Priority Scope
+
+This table is read from the current config-driven real run. It prioritizes INX and HRDataset_v14; related-task datasets are not direct employee-performance validation.
+
+| dataset | n_cases | run_mode | real_llm_used | llm_model | faithfulness_pass_rate | unsupported_claim_rate | forbidden_claim_rate | missing_warning_rate | parsing_success_rate | agent_compliance_pass_rate | notes |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| hrdataset_v14 | 40 | real | True | gpt-5.4-mini | 1 | 0 | 0 | 0 | 1 | 1 | expanded real priority scope; IBM/attrition/turnover LLM regeneration deferred |
+| inx_primary | 40 | real | True | gpt-5.4-mini | 1 | 0 | 0 | 0 | 1 | 1 | expanded real priority scope; IBM/attrition/turnover LLM regeneration deferred |
+
 ## External LLM Usage / Cost Summary
 
 Usage is cumulative for the listed case IDs and includes remediation reruns; billing dashboards remain the source of truth.
 
 | dataset | logged_usage_rows | input_tokens | output_tokens | total_tokens | estimated_cost_usd |
 | --- | --- | --- | --- | --- | --- |
-| INX primary model | 190 | 1122859 | 95024 | 1217883 | 0.951109 |
-| HRDataset_v14 | 90 | 474550 | 47726 | 522276 | 0.451275 |
+| INX primary model | 231 | 1355636 | 128478 | 1484114 | 1.14197 |
+| HRDataset_v14 | 100 | 521244 | 56202 | 577446 | 0.524437 |
 | IBM HR Analytics performance | 90 | 476167 | 49621 | 525788 | 0.460497 |
 | IBM HR Analytics attrition | 0 | 0 | 0 | 0 | 0 |
 | Employee Turnover | 135 | 653058 | 71461 | 724519 | 0.630792 |
@@ -99,4 +108,4 @@ Usage is cumulative for the listed case IDs and includes remediation reruns; bil
 | Cross-dataset validation | Only three common department-free safe features were available. | Cross-dataset INX-to-HRDataset validation is infeasible/too limited. |
 | IBM performance | PerformanceRating contains only classes 3 and 4. | Restricted target-space schema-compatible robustness. |
 | Employee turnover | Target is attrition/turnover, not performance. | Related HR task-transfer robustness only. |
-| LLM/agents | Small real OpenAI batches evaluate evidence interpretation, not human trust or deployment safety. | Technical LLM-agent governance evidence on structured ML/XAI artifacts. |
+| LLM/agents | Expanded real OpenAI technical evaluation currently prioritizes INX and HRDataset_v14; IBM and turnover related-task LLM regeneration are second-stage robustness work. | Technical LLM-agent governance evidence on structured ML/XAI artifacts for the stated dataset scope. |

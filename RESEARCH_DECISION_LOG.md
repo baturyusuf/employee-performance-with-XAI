@@ -2,6 +2,38 @@
 
 This log records major scientific and engineering decisions for the leakage-aware, fairness-audited, actionability-constrained HR XAI research pipeline.
 
+## 2026-06-24 - Add config-driven LLM-agent evaluation without running paid expanded OpenAI batch
+
+### Context
+The code-side completion task requires a configurable, multi-dataset LLM-agent evaluation pipeline with expanded sampling, faithfulness checks, agent audits, chatbot guardrail evaluation, governance dashboard outputs, run registry entries, and uncertainty summaries. The recommended expanded real LLM batch is materially larger than the prior small validation runs.
+
+### Alternatives considered
+- Run the full expanded real OpenAI batch immediately.
+- Implement only offline/demo outputs.
+- Implement the full reusable pipeline now, generate clearly labelled dry-run outputs for reproducibility, and require explicit approval before paid expanded real OpenAI execution.
+
+### Evidence examined
+- Existing small real OpenAI/Agents evidence under `reports/llm_explanations/`, `reports/agent_audits/`, and `reports/external_validation/*/llm_agent_governance/`.
+- Missing batch files identified in `reports/research_log/code_completion_audit.md`.
+- Current governance policy that paid API calls beyond small validation runs require user approval.
+- Current project constraint that offline stub outputs must not be presented as manuscript-grade real LLM evidence.
+
+### Decision
+Implement the config-driven evaluation and reporting pipeline with `configs/llm_agent_eval.yaml` defaulting to `run_mode: dry_run` and `offline_stub_llm`. Do not run the expanded real OpenAI batch without explicit user approval.
+
+### Rationale
+This completes the reproducible code path, test coverage, sampling logic, batch report schemas, guardrail evaluation, agent audit outputs, and dashboard plumbing without silently incurring API cost or misrepresenting stub outputs as empirical LLM evidence.
+
+### Risks and limitations
+- The expanded 80-case reports generated in dry-run mode are not manuscript-grade real LLM evidence.
+- The component governance dashboard intentionally marks expanded LLM evidence as `evidence_missing` while the latest run is dry-run only.
+- Real OpenAI execution still needs API-key configuration and explicit approval.
+
+### Follow-up actions
+- If approved, switch `configs/llm_agent_eval.yaml` to `run_mode: real`, set OpenAI provider/model settings, and rerun the LLM-agent pipeline.
+- Recompute G-XAIR and statistical reliability reports after the real expanded batch.
+- Preserve dry-run outputs as reproducibility/test artifacts only.
+
 ## 2026-06-05 - Preserve existing structure and harden research pipeline
 
 ### Context
@@ -808,3 +840,43 @@ The project needed external validation and robustness evidence beyond the origin
 
 ### Decision
 The project now has Q3-level external validation and robustness evidence, but claims remain conservative. HRDataset_v14 supports independent external performance replication; IBM performance supports restricted target-space robustness; IBM Attrition and Employee Turnover support related HR task-transfer robustness. The system remains research-grade decision support only and must not be represented as deployable or autonomous HR decision-making software.
+
+## 2026-06-24 - Real OpenAI expanded pilot and final INX/HRDataset LLM-agent run
+
+### Context
+The user approved a staged real OpenAI evaluation: first a 40-case pilot, then an 80-case final run if the pilot was clean. The user also requested pytest as a development dependency while keeping the existing unittest tests, and requested that external-validation real LLM regeneration prioritize INX and HRDataset_v14 before IBM/attrition/turnover related-task datasets.
+
+### Decisions
+- Added `configs/llm_agent_eval_openai_pilot_40.yaml` for a real OpenAI 40-case pilot.
+- Added `configs/llm_agent_eval_openai_final_80.yaml` for a real OpenAI 80-case final run.
+- Kept `configs/llm_agent_eval.yaml` as dry-run/offline-stub by default for reproducibility and cost safety.
+- Added `requirements-dev.txt` with `pytest>=8.0.0`; existing unittest tests remain supported.
+- Prioritized only `inx_primary` and `hrdataset_v14` in the real expanded run.
+- Deferred IBM performance, IBM attrition, and Employee Turnover real LLM regeneration to a second-stage robustness phase.
+- Reaffirmed that related-task datasets must not be presented as direct employee-performance validation.
+
+### Implementation notes
+- Added retry and rate-limit handling in `src/llm/run_llm_agent_evaluation.py` for real API calls.
+- Added configurable agent output directory support so pilot agent audits are preserved under `reports/agent_audits/openai_pilot_40/`.
+- Patched the deterministic faithfulness checker to avoid treating case-variant dataset names such as `HRDataset_v14` as unsupported feature claims.
+- Added a regression test for the dataset-name checker behavior.
+
+### Evidence generated
+- Pilot summary: `reports/llm_explanations/openai_pilot_40/llm_agent_eval_summary.csv`.
+- Final expanded summary: `reports/llm_explanations/llm_agent_eval_summary.csv`.
+- Final governed explanations: `reports/llm_explanations/governed_explanations.jsonl`.
+- Final faithfulness evaluation: `reports/llm_explanations/faithfulness_eval.csv`.
+- Final batch agent audit: `reports/agent_audits/agent_audit_results.csv`.
+- Final G-XAIR dashboard: `reports/governance_reports/gxair_component_dashboard.csv`.
+- Final readiness report: `reports/governance_reports/final_governance_readiness_report.md`.
+
+### Results
+- 40-case pilot: `real_llm_used=True`, datasets `inx_primary` and `hrdataset_v14`, faithfulness pass rate `1.0`, unsupported claim rate `0.0`, forbidden claim rate `0.0`, missing warning rate `0.0`, parsing success rate `1.0`.
+- 80-case final: `real_llm_used=True`, 40 INX cases and 40 HRDataset_v14 cases, faithfulness pass rate `1.0`, unsupported claim rate `0.0`, forbidden claim rate `0.0`, missing warning rate `0.0`, parsing success rate `1.0`, chatbot unsafe refusal rate `1.0`, chatbot safe answer rate `1.0`, agent compliance pass rate `1.0`.
+- Final readiness remains `not_ready` because proxy risk and counterfactual actionability limits remain high-severity deployment blockers. This does not block manuscript-support technical reporting, but it blocks deployment-ready claims.
+
+### Validation
+- Real OpenAI calls completed using the environment API key; the key value was never printed or written.
+- `python -m compileall src` passed.
+- `python -m unittest discover -s tests -v` passed.
+- `python -m pytest` passed after installing `requirements-dev.txt`.

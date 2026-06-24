@@ -1020,6 +1020,7 @@ def build_external_case_evidence(
         model_name=MODEL_NAME,
         feature_policy=policy,
         leakage_safe_status="external_research_candidate",
+        dataset_name=dataset.config.dataset_name,
     )
 
     local_path = output_dir / "shap" / policy / "local_grouped_shap_values.csv"

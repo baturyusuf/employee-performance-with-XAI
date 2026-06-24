@@ -1,0 +1,48 @@
+{
+  "external_validation": {
+    "seed": 42,
+    "output_dir": "reports/external_validation",
+    "datasets": [
+      {
+        "dataset_name": "hrdataset_v14",
+        "source_path": "data/external/hrdataset_v14/raw.csv",
+        "task_type": "ordinal_multiclass_performance",
+        "target_variable": "PerformanceScore",
+        "target_semantics": "mappable performance score mapped to 2/3/4",
+        "comparable_to_inx_performance": true,
+        "role_in_manuscript": "direct employee performance validation / independent replication",
+        "limitations": "Small public cross-sectional sample; target mapping and provenance should be verified before submission."
+      },
+      {
+        "dataset_name": "ibm_hr_analytics",
+        "source_path": "data/external/ibm_hr_analytics/raw.csv",
+        "task_type": "restricted_performance",
+        "target_variable": "PerformanceRating",
+        "target_semantics": "restricted performance target containing classes 3 and 4",
+        "comparable_to_inx_performance": false,
+        "role_in_manuscript": "restricted performance-target robustness",
+        "limitations": "Not a direct 2/3/4 external validation dataset."
+      },
+      {
+        "dataset_name": "ibm_hr_analytics_attrition",
+        "source_path": "data/external/ibm_hr_analytics/raw.csv",
+        "task_type": "binary_attrition",
+        "target_variable": "Attrition",
+        "target_semantics": "related HR attrition risk target",
+        "comparable_to_inx_performance": false,
+        "role_in_manuscript": "related HR risk task transfer",
+        "limitations": "Attrition is not employee performance."
+      },
+      {
+        "dataset_name": "employee_turnover",
+        "source_path": "data/external/employee_turnover/raw.csv",
+        "task_type": "binary_turnover",
+        "target_variable": "left",
+        "target_semantics": "related HR turnover target",
+        "comparable_to_inx_performance": false,
+        "role_in_manuscript": "related HR risk task transfer",
+        "limitations": "Turnover is not employee performance and sensitive attributes are limited or absent."
+      }
+    ]
+  }
+}

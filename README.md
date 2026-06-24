@@ -89,14 +89,12 @@ reports/external_validation/hrdataset_v14/cross_dataset_inx_to_hrdataset/cross_d
 
 ### Real LLM and Agent Evaluation
 
-Final external LLM/agent evidence uses real OpenAI-backed code paths, not only offline stubs.
+Final LLM/agent evidence uses real OpenAI-backed code paths, not only offline stubs. The latest expanded real run prioritizes the primary INX benchmark and HRDataset_v14 independent replication; IBM and turnover related-task LLM regeneration remain a second-stage robustness task.
 
 | Dataset | Cases | Faithfulness Pass Rate | Unsupported Claim Rate | Forbidden Claim Rate | Missing Warning Rate | Agent Success Rate |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
-| INX primary | 10 | 1.0 | 0.0 | 0.0 | 0.0 | 1.0 |
-| HRDataset_v14 | 5 | 1.0 | 0.0 | 0.0 | 0.0 | 1.0 |
-| IBM performance | 5 | 1.0 | 0.0 | 0.0 | 0.0 | 1.0 |
-| Employee Turnover | 5 | 1.0 | 0.0 | 0.0 | 0.0 | 1.0 |
+| INX primary | 40 | 1.0 | 0.0 | 0.0 | 0.0 | 1.0 |
+| HRDataset_v14 | 40 | 1.0 | 0.0 | 0.0 | 0.0 | 1.0 |
 
 Usage and estimated cost are logged in:
 
@@ -240,7 +238,30 @@ $env:OPENAI_API_KEY = "..."
 .\myenv\Scripts\python.exe -m src.llm.check_llm_setup
 ```
 
-Run final external governed explanation and agent audits:
+Run the config-driven LLM-agent evaluation pipeline:
+
+```powershell
+.\myenv\Scripts\python.exe -m src.llm.run_llm_agent_evaluation --config configs/llm_agent_eval.yaml
+```
+
+By default `configs/llm_agent_eval.yaml` uses `run_mode: dry_run` and the deterministic offline stub. Those outputs are useful for reproducibility and testing, but they are not manuscript-grade real LLM evidence. For real OpenAI execution, change the config to `run_mode: real`, set provider/model settings under `llm`, and provide `OPENAI_API_KEY`. Large real batches require explicit approval because they incur API cost.
+
+Approved real OpenAI expanded evaluation uses a two-stage config:
+
+```powershell
+.\myenv\Scripts\python.exe -m src.llm.run_llm_agent_evaluation --config configs/llm_agent_eval_openai_pilot_40.yaml
+.\myenv\Scripts\python.exe -m src.llm.run_llm_agent_evaluation --config configs/llm_agent_eval_openai_final_80.yaml
+```
+
+The pilot writes to `reports/llm_explanations/openai_pilot_40/`. The final 80-case run writes manuscript-support technical evidence to `reports/llm_explanations/` and currently includes only `inx_primary` and `hrdataset_v14`. IBM performance, IBM attrition, and Employee Turnover remain second-stage robustness regeneration targets and must not be presented as direct employee-performance validation.
+
+Run the standalone batch agent audit from generated explanation JSONL:
+
+```powershell
+.\myenv\Scripts\python.exe -m src.agents.run_governance_audit --config configs/llm_agent_eval.yaml
+```
+
+Legacy small external governed explanation and agent audit commands:
 
 ```powershell
 .\myenv\Scripts\python.exe -m src.experiments.external_validation --dataset hrdataset_v14 --run-llm --llm-policy department_free --llm-limit 5
@@ -250,18 +271,54 @@ Run final external governed explanation and agent audits:
 
 The deterministic offline path remains available for tests and reproducibility, but final evidence should use the real OpenAI-backed path.
 
+Generated LLM-agent outputs:
+
+```text
+reports/llm_explanations/eval_case_manifest.csv
+reports/llm_explanations/governed_explanations.jsonl
+reports/llm_explanations/faithfulness_eval.csv
+reports/llm_explanations/faithfulness_eval_summary.md
+reports/llm_explanations/llm_agent_eval_summary.csv
+reports/llm_explanations/llm_agent_eval_summary.md
+reports/agent_audits/agent_audit_results.jsonl
+reports/agent_audits/agent_audit_results.csv
+reports/agent_audits/multi_agent_governance_audit.md
+```
+
+### Chatbot Guardrail Evaluation
+
+```powershell
+.\myenv\Scripts\python.exe -m src.chatbot.run_guardrail_eval --config configs/chatbot_guardrail_eval.yaml
+```
+
+This writes expanded prompt suites and evaluation outputs:
+
+```text
+reports/chatbot_eval/unsafe_prompt_suite.csv
+reports/chatbot_eval/safe_prompt_suite.csv
+reports/chatbot_eval/guardrail_evaluation.csv
+reports/chatbot_eval/guardrail_evaluation_summary.md
+```
+
 ### Integrated Reports
 
 ```powershell
 .\myenv\Scripts\python.exe -m src.governance.external_validation_reports
+.\myenv\Scripts\python.exe -m src.governance.gxair_score --config configs/governance_dashboard.yaml
+.\myenv\Scripts\python.exe -m src.governance.statistical_reliability
 ```
 
 This writes:
 
 ```text
 reports/external_validation/external_validation_summary.md
+reports/external_validation/external_dataset_roles.csv
 reports/manuscript_assets/external_validation_tables.md
 reports/governance_reports/external_validation_governance_summary.md
+reports/governance_reports/gxair_component_dashboard.csv
+reports/governance_reports/gxair_component_dashboard.md
+reports/governance_reports/final_governance_readiness_report.md
+reports/statistical_reliability/uncertainty_summary.md
 ```
 
 ## Internal Pipeline Entry Points
@@ -329,7 +386,7 @@ rg -n "s[k]-[A-Za-z0-9_-]{20,}" .
 Recent validation status:
 
 ```text
-Unit tests: 76 passed
+Unit tests: run with both `unittest discover` and `pytest`
 Python compile checks: passed
 Secret pattern scan: no OpenAI-key-pattern hits in text artifacts
 ```
@@ -341,8 +398,8 @@ Allowed claims:
 - The project implements a leakage-aware, SHAP/XAI, fairness/proxy-audited, calibration-aware, actionability-constrained HR governance framework.
 - HRDataset_v14 provides independent replication on a directly mappable external performance target.
 - IBM HR Analytics provides schema-compatible robustness with restricted performance target space.
-- IBM Attrition and Employee Turnover provide related HR risk prediction task transfer evidence.
-- Real OpenAI governed explanations and OpenAI Agents SDK audits have been run on small representative external batches.
+- IBM Attrition and Employee Turnover provide related HR risk prediction task transfer evidence, not direct employee-performance validation.
+- Real OpenAI governed explanations and deterministic batch agent audits have been run on an expanded 80-case INX + HRDataset_v14 batch.
 
 Not allowed:
 

@@ -65,12 +65,18 @@ class PredictionEvidence:
     model_name: str
     feature_policy: str
     leakage_safe_status: str
+    dataset_name: str = "inx_primary"
+    correctness: Optional[bool] = None
 
     def __post_init__(self) -> None:
         if not self.case_id:
             raise ValueError("PredictionEvidence.case_id is required")
+        if not self.dataset_name:
+            raise ValueError("PredictionEvidence.dataset_name is required")
         if self.model_name.lower() == "llm":
             raise ValueError("LLM must not be represented as the performance predictor")
+        if self.correctness is None and self.predicted_class is not None and self.true_class is not None:
+            self.correctness = bool(self.predicted_class == self.true_class)
 
 
 @dataclass
@@ -99,6 +105,14 @@ class CalibrationEvidence:
     brier_score: Optional[float]
     expected_calibration_error: Optional[float]
     calibration_warning: str
+    ece: Optional[float] = None
+    probability_interpretation: str = "Probabilities are model confidence estimates, not objective certainty."
+
+    def __post_init__(self) -> None:
+        if self.ece is None:
+            self.ece = self.expected_calibration_error
+        if self.expected_calibration_error is None:
+            self.expected_calibration_error = self.ece
 
 
 @dataclass
@@ -111,6 +125,15 @@ class CounterfactualEvidence:
     actionability_label: str
     failed_reason: str
     warning: str
+    mode: str = ""
+    desired_class: Optional[int] = None
+    cost: Optional[float] = None
+
+    def __post_init__(self) -> None:
+        if not self.mode:
+            self.mode = self.counterfactual_mode
+        if self.cost is None:
+            self.cost = self.proximity_cost
 
 
 @dataclass
@@ -130,6 +153,16 @@ class GovernanceEvidence:
     model_card_summary: str
     deployment_status: str
     required_warnings: List[str]
+    prohibited_uses: List[str] = field(default_factory=list)
+    human_review_required: bool = True
+
+    def __post_init__(self) -> None:
+        if not self.prohibited_uses and self.prohibited_use:
+            self.prohibited_uses = [part.strip() for part in self.prohibited_use.split(",") if part.strip()]
+        if not self.intended_use:
+            raise ValueError("GovernanceEvidence.intended_use is required")
+        if not self.deployment_status:
+            raise ValueError("GovernanceEvidence.deployment_status is required")
 
 
 @dataclass
@@ -156,6 +189,13 @@ class CompleteCaseEvidence:
 
     def to_json(self, indent: int = 2) -> str:
         return json.dumps(self.to_dict(), indent=indent, sort_keys=True)
+
+    def missing_evidence_sections(self) -> List[str]:
+        sections = []
+        for section in ["shap", "fairness", "calibration", "counterfactual", "leakage"]:
+            if getattr(self, section) is None:
+                sections.append(section)
+        return sections
 
     @classmethod
     def from_reports(cls, case_id: Optional[str] = None) -> "CompleteCaseEvidence":
@@ -187,6 +227,7 @@ class CompleteCaseEvidence:
             model_name=MODEL_NAME,
             feature_policy=FINAL_FEATURE_SET,
             leakage_safe_status="final_candidate_leakage_safe",
+            dataset_name="inx_primary",
         )
 
         shap_summary_path = REPORTS / "xai" / "final_candidates" / "shap_stability_summary.csv"
@@ -335,4 +376,3 @@ def write_evidence_json(output_path: Path, case_id: Optional[str] = None) -> Pat
     output_path.parent.mkdir(parents=True, exist_ok=True)
     output_path.write_text(evidence.to_json(), encoding="utf-8")
     return output_path
-

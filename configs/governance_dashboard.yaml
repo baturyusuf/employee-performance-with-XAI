@@ -1,0 +1,22 @@
+{
+  "governance_dashboard": {
+    "seed": 42,
+    "output_dir": "reports/governance_reports",
+    "primary_dataset": "inx_primary",
+    "primary_feature_policy": "no_salary_hike_no_attrition_no_department",
+    "model_name": "xgboost",
+    "evidence_paths": {
+      "final_candidate_dashboard": "reports/model_selection/final_candidate_dashboard.csv",
+      "llm_agent_eval_summary": "reports/llm_explanations/llm_agent_eval_summary.csv",
+      "chatbot_guardrail_eval": "reports/chatbot_eval/guardrail_evaluation.csv",
+      "external_validation_summary": "reports/external_validation/external_validation_summary.md"
+    },
+    "readiness_labels": [
+      "research_only",
+      "decision_support_with_strong_warnings",
+      "not_ready",
+      "evidence_missing"
+    ]
+  }
+}
+

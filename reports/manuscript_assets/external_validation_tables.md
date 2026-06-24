@@ -40,6 +40,13 @@
 | IBM HR Analytics attrition | department_free | 1 | Age false_positive_rate | 0.929279 | audit evidence only; no fairness guarantee |
 | Employee Turnover | without_last_evaluation | 1 | AverageMonthlyHours false_positive_rate | 0.0952739 | audit evidence only; no fairness guarantee |
 
+## Table 5a: Expanded Real LLM-Agent Results for Priority Scope
+
+| dataset | n_cases | run_mode | real_llm_used | llm_model | faithfulness_pass_rate | unsupported_claim_rate | forbidden_claim_rate | missing_warning_rate | parsing_success_rate | agent_compliance_pass_rate | notes |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| hrdataset_v14 | 40 | real | True | gpt-5.4-mini | 1 | 0 | 0 | 0 | 1 | 1 | expanded real priority scope; IBM/attrition/turnover LLM regeneration deferred |
+| inx_primary | 40 | real | True | gpt-5.4-mini | 1 | 0 | 0 | 0 | 1 | 1 | expanded real priority scope; IBM/attrition/turnover LLM regeneration deferred |
+
 ## Table 5: LLM-Agent Governance Results Across Datasets
 
 | dataset | case_ids | n_cases | faithfulness_pass_rate | unsupported_claim_rate | forbidden_claim_rate | missing_warning_rate | agent_success_rate | notes |
@@ -54,8 +61,8 @@
 
 | dataset | logged_usage_rows | input_tokens | output_tokens | total_tokens | estimated_cost_usd |
 | --- | --- | --- | --- | --- | --- |
-| INX primary model | 190 | 1122859 | 95024 | 1217883 | 0.951109 |
-| HRDataset_v14 | 90 | 474550 | 47726 | 522276 | 0.451275 |
+| INX primary model | 231 | 1355636 | 128478 | 1484114 | 1.14197 |
+| HRDataset_v14 | 100 | 521244 | 56202 | 577446 | 0.524437 |
 | IBM HR Analytics performance | 90 | 476167 | 49621 | 525788 | 0.460497 |
 | IBM HR Analytics attrition | 0 | 0 | 0 | 0 | 0 |
 | Employee Turnover | 135 | 653058 | 71461 | 724519 | 0.630792 |
@@ -69,4 +76,4 @@
 | Cross-dataset validation | Only three common department-free safe features were available. | Cross-dataset INX-to-HRDataset validation is infeasible/too limited. |
 | IBM performance | PerformanceRating contains only classes 3 and 4. | Restricted target-space schema-compatible robustness. |
 | Employee turnover | Target is attrition/turnover, not performance. | Related HR task-transfer robustness only. |
-| LLM/agents | Small real OpenAI batches evaluate evidence interpretation, not human trust or deployment safety. | Technical LLM-agent governance evidence on structured ML/XAI artifacts. |
+| LLM/agents | Expanded real OpenAI technical evaluation currently prioritizes INX and HRDataset_v14; IBM and turnover related-task LLM regeneration are second-stage robustness work. | Technical LLM-agent governance evidence on structured ML/XAI artifacts for the stated dataset scope. |

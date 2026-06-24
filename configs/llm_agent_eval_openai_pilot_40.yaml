@@ -1,0 +1,91 @@
+{
+  "llm_agent_eval": {
+    "seed": 42,
+    "run_id_prefix": "llm_agent_eval_openai_pilot_40",
+    "run_mode": "real",
+    "sampling_strategy": "stratified_risk_aware",
+    "output_dir": "reports/llm_explanations/openai_pilot_40",
+    "agent_output_dir": "reports/agent_audits/openai_pilot_40",
+    "prompt_version": "governed_evidence_v2",
+    "agent_system_version": "deterministic_agents_v2",
+    "llm": {
+      "provider": "openai",
+      "model": "gpt-5.4-mini",
+      "temperature": 0.0,
+      "max_tokens": 1200,
+      "require_real_llm": true
+    },
+    "retry_policy": {
+      "max_retries": 2,
+      "retry_backoff_seconds": 2
+    },
+    "rate_limit": {
+      "requests_per_minute": 20,
+      "sleep_between_requests_seconds": 0.5
+    },
+    "evaluation_flags": {
+      "run_chatbot_guardrail_tests": true,
+      "run_agent_audit": true,
+      "write_stub_label": false
+    },
+    "datasets": [
+      {
+        "dataset_name": "inx_primary",
+        "enabled": true,
+        "source": "internal",
+        "role": "primary_performance",
+        "sample_size": 20,
+        "feature_policy": "no_salary_hike_no_attrition_no_department",
+        "model_name": "xgboost",
+        "prediction_path": "reports/calibration/final_candidates/calibration_predictions.csv",
+        "reason_code_dir": "reports/xai/final_candidates/reason_code_examples",
+        "shap_representative_path": "reports/leakage_safe/xgboost_no_salary_hike_no_attrition_no_department/shap/representative_cases.csv"
+      },
+      {
+        "dataset_name": "hrdataset_v14",
+        "enabled": true,
+        "source": "external",
+        "role": "external_performance_replication",
+        "target_kind": "primary",
+        "sample_size": 20,
+        "feature_policy": "department_free",
+        "model_name": "xgboost",
+        "report_dir": "reports/external_validation/hrdataset_v14"
+      },
+      {
+        "dataset_name": "ibm_hr_analytics",
+        "enabled": false,
+        "source": "external",
+        "role": "restricted_target_robustness",
+        "target_kind": "primary",
+        "sample_size": 0,
+        "feature_policy": "department_free",
+        "model_name": "xgboost",
+        "report_dir": "reports/external_validation/ibm_hr_analytics"
+      },
+      {
+        "dataset_name": "ibm_hr_analytics_attrition",
+        "enabled": false,
+        "source": "external",
+        "external_dataset_name": "ibm_hr_analytics",
+        "role": "related_task_transfer",
+        "target_kind": "attrition",
+        "sample_size": 0,
+        "feature_policy": "department_free",
+        "model_name": "xgboost",
+        "report_dir": "reports/external_validation/ibm_hr_analytics_attrition"
+      },
+      {
+        "dataset_name": "employee_turnover",
+        "enabled": false,
+        "source": "external",
+        "role": "related_task_transfer",
+        "target_kind": "primary",
+        "sample_size": 0,
+        "feature_policy": "without_last_evaluation",
+        "model_name": "xgboost",
+        "report_dir": "reports/external_validation/employee_turnover"
+      }
+    ]
+  }
+}

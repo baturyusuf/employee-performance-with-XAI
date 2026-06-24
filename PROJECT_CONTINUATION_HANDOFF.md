@@ -12,6 +12,31 @@ The LLM is not the predictor. XGBoost remains the predictive model. The LLM and 
 - Full-feature models: leakage-warning upper-bound only, not deployable.
 
 ## Completed In Latest Phase
+- Added `reports/research_log/code_completion_audit.md` after auditing README, decision logs, governance cards, configs, source modules, tests, and reports.
+- Added config-driven LLM-agent evaluation pipeline: `src/llm/run_llm_agent_evaluation.py` with `configs/llm_agent_eval.yaml`.
+- Added shared core utilities: `src/core/io_utils.py`, `src/core/reporting.py`, and `src/core/run_registry.py`.
+- Added expanded chatbot guardrail runner: `src/chatbot/run_guardrail_eval.py` with `configs/chatbot_guardrail_eval.yaml`.
+- Added component governance dashboard outputs through `src/governance/gxair_score.py --config configs/governance_dashboard.yaml`.
+- Added statistical reliability reporting through `src/governance/statistical_reliability.py`.
+- Added real OpenAI pilot/final configs: `configs/llm_agent_eval_openai_pilot_40.yaml` and `configs/llm_agent_eval_openai_final_80.yaml`.
+- Added `requirements-dev.txt` with `pytest>=8.0.0` while preserving the existing unittest suite.
+- Generated expanded batch artifacts. The latest root-level LLM-agent outputs are real OpenAI results for INX + HRDataset_v14:
+  - `reports/llm_explanations/eval_case_manifest.csv`
+  - `reports/llm_explanations/governed_explanations.jsonl`
+  - `reports/llm_explanations/faithfulness_eval.csv`
+  - `reports/llm_explanations/faithfulness_eval_summary.md`
+  - `reports/llm_explanations/llm_agent_eval_summary.csv`
+  - `reports/llm_explanations/llm_agent_eval_summary.md`
+  - `reports/agent_audits/agent_audit_results.jsonl`
+  - `reports/agent_audits/agent_audit_results.csv`
+  - `reports/chatbot_eval/unsafe_prompt_suite.csv`
+  - `reports/chatbot_eval/safe_prompt_suite.csv`
+  - `reports/chatbot_eval/guardrail_evaluation_summary.md`
+  - `reports/governance_reports/gxair_component_dashboard.csv`
+  - `reports/governance_reports/gxair_component_dashboard.md`
+  - `reports/governance_reports/final_governance_readiness_report.md`
+  - `reports/external_validation/external_dataset_roles.csv`
+  - `reports/statistical_reliability/uncertainty_summary.md`
 - Added external dataset infrastructure for HRDataset_v14, IBM HR Analytics, IBM Attrition transfer, and Employee Turnover.
 - Generated dataset cards, schema mappings, target distributions, leakage/sensitive/proxy audits, missingness reports, and duplicate-ID reports under `reports/external_validation/`.
 - Ran HRDataset_v14 independent replication using `PerformanceScore` mapped to 2/3/4.
@@ -30,6 +55,14 @@ The LLM is not the predictor. XGBoost remains the predictive model. The LLM and 
 - Refreshed faithfulness and summary reports from saved OpenAI outputs after fixing a checker warning-variant false negative.
 
 ## Real OpenAI Evaluation Status
+Expanded configurable batch:
+- Pilot command: `python -m src.llm.run_llm_agent_evaluation --config configs/llm_agent_eval_openai_pilot_40.yaml`.
+- Pilot result: 40 real OpenAI cases across INX and HRDataset_v14, faithfulness pass rate `1.0`, unsupported claim rate `0.0`, forbidden claim rate `0.0`, missing warning rate `0.0`, parsing success rate `1.0`.
+- Final command: `python -m src.llm.run_llm_agent_evaluation --config configs/llm_agent_eval_openai_final_80.yaml`.
+- Final result: 80 real OpenAI cases across INX and HRDataset_v14, faithfulness pass rate `1.0`, unsupported claim rate `0.0`, forbidden claim rate `0.0`, missing warning rate `0.0`, parsing success rate `1.0`, agent compliance pass rate `1.0`.
+- Dataset scope: `inx_primary` 40 cases and `hrdataset_v14` 40 cases. IBM performance, IBM attrition, and Employee Turnover real LLM regeneration are deferred second-stage robustness tasks.
+- Important claim boundary: related-task datasets must not be presented as direct employee-performance validation.
+
 External validation batches:
 - HRDataset_v14: 5 cases, real OpenAI governed explanations + OpenAI Agents SDK, faithfulness pass rate `1.0`, unsupported claim rate `0.0`, forbidden claim rate `0.0`, missing warning rate `0.0`, agent success rate `1.0`.
 - IBM HR Analytics performance robustness: 5 cases, real OpenAI governed explanations + OpenAI Agents SDK, faithfulness pass rate `1.0`, unsupported claim rate `0.0`, forbidden claim rate `0.0`, missing warning rate `0.0`, agent success rate `1.0`.
@@ -49,9 +82,8 @@ Prior INX batch:
 - Notes: the final summary was refreshed from saved OpenAI outputs after checker remediation; no additional API calls were made during refresh.
 
 ## Guardrail Evaluation Status
-- Unsafe prompts: 7, pass rate `1.0`.
-- Adversarial prompts: 10, pass rate `1.0`.
-- Safe audit-control prompts: 5, pass rate `1.0`.
+- Unsafe/adversarial prompts: 50, refusal success rate `1.0`.
+- Safe audit-control prompts: 25, safe answer pass rate `1.0`.
 - Guardrails refuse hiring, firing, promotion, compensation, disciplinary, autonomous HR decisions, sensitive-attribute justification, prompt injection, and employee prescriptions.
 
 ## Tests
@@ -64,7 +96,7 @@ Latest full test command:
 Latest result:
 
 ```text
-67 tests passed
+96 tests passed
 ```
 
 Secret scan:
@@ -131,6 +163,11 @@ $env:HR_XAI_LLM_TEMPERATURE = '0'
 Then:
 
 ```powershell
+.\myenv\Scripts\python.exe -m src.llm.run_llm_agent_evaluation --config configs/llm_agent_eval.yaml
+.\myenv\Scripts\python.exe -m src.agents.run_governance_audit --config configs/llm_agent_eval.yaml
+.\myenv\Scripts\python.exe -m src.chatbot.run_guardrail_eval --config configs/chatbot_guardrail_eval.yaml
+.\myenv\Scripts\python.exe -m src.governance.gxair_score --config configs/governance_dashboard.yaml
+.\myenv\Scripts\python.exe -m src.governance.statistical_reliability
 .\myenv\Scripts\python.exe -m src.governance.warning_taxonomy_report
 .\myenv\Scripts\python.exe -m src.chatbot.evaluate_chatbot
 .\myenv\Scripts\python.exe -m src.llm.build_supplemental_reason_codes

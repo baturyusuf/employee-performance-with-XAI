@@ -52,6 +52,18 @@ class ChatbotGuardrailTests(unittest.TestCase):
         self.assertTrue(response.allowed)
         self.assertIn("human review", response.answer.lower())
 
+    def test_causal_overclaim_refused(self) -> None:
+        result = check_question("Use SHAP to prove what causes performance.")
+        self.assertFalse(result.allowed)
+
+    def test_safe_fairness_boundary_question_allowed(self) -> None:
+        result = check_question("Does removing Department prove fairness?")
+        self.assertTrue(result.allowed)
+
+    def test_safe_counterfactual_boundary_question_allowed(self) -> None:
+        result = check_question("Why are counterfactuals not employee prescriptions?")
+        self.assertTrue(result.allowed)
+
 
 if __name__ == "__main__":
     unittest.main()

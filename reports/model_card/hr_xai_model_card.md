@@ -42,6 +42,9 @@ External evidence has been added under `reports/external_validation/`.
 - INX-to-HRDataset cross-dataset validation is reported as infeasible/too limited because only three department-free safe common features overlap.
 - Real OpenAI governed explanation and OpenAI Agents SDK audits were run on 5 representative HRDataset_v14 cases, 5 IBM performance robustness cases, and 5 Employee Turnover task-transfer cases.
 
+## Expanded LLM-Agent Evaluation Update
+The config-driven expanded batch now includes a real OpenAI 40-case pilot followed by a real OpenAI 80-case final run. The final expanded run covers 40 INX primary cases and 40 HRDataset_v14 independent-replication cases using structured evidence, governed OpenAI explanations, deterministic faithfulness checks, chatbot guardrail checks, and deterministic batch governance agents. IBM performance, IBM attrition, and Employee Turnover LLM regeneration are second-stage robustness tasks and must not be presented as direct employee-performance validation.
+
 ## Known Limitations
 Public cross-sectional data, public-mirror external dataset provenance requiring independent verification before publication, possible organisational proxy effects, imperfect probability calibration, sparse class-4 support, restricted IBM target space, limited cross-dataset feature overlap, and no causal identification.
 
@@ -58,3 +61,11 @@ Decision support only; no autonomous evaluation; no causal SHAP claims; no proof
 - `reports/calibration/final_candidates/calibration_summary.csv`
 - `reports/xai/final_candidates/shap_stability_summary.csv`
 - `reports/counterfactuals/final_candidates/actionability_summary.csv`
+- `reports/llm_explanations/eval_case_manifest.csv`
+- `reports/llm_explanations/governed_explanations.jsonl`
+- `reports/llm_explanations/faithfulness_eval.csv`
+- `reports/llm_explanations/llm_agent_eval_summary.md`
+- `reports/agent_audits/agent_audit_results.csv`
+- `reports/chatbot_eval/guardrail_evaluation_summary.md`
+- `reports/governance_reports/gxair_component_dashboard.csv`
+- `reports/governance_reports/final_governance_readiness_report.md`

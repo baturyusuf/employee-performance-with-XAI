@@ -3,14 +3,19 @@ from __future__ import annotations
 import unittest
 
 from src.llm.evidence_schema import CompleteCaseEvidence
-from src.llm.faithfulness_checker import check_faithfulness
+from src.llm.faithfulness_checker import check_faithfulness, check_faithfulness_categories, unsupported_feature_check
 from src.llm.governed_explainer import GovernedExplainer
+from src.llm.offline_stub_llm import OfflineStubLLM
+from src.llm.runtime_config import LLMRuntimeConfig
 
 
 class FaithfulnessCheckerTests(unittest.TestCase):
     def test_offline_governed_explanation_passes(self) -> None:
         evidence = CompleteCaseEvidence.from_reports()
-        output = GovernedExplainer().generate(evidence)
+        output = GovernedExplainer(
+            llm_client=OfflineStubLLM(),
+            runtime_config=LLMRuntimeConfig(provider="offline", model="offline_stub_llm"),
+        ).generate(evidence)
         self.assertTrue(output["faithfulness_check"]["faithfulness_pass"])
 
     def test_forbidden_claim_detection(self) -> None:
@@ -19,6 +24,22 @@ class FaithfulnessCheckerTests(unittest.TestCase):
         result = check_faithfulness(bad, evidence)
         self.assertFalse(result.faithfulness_pass)
         self.assertGreater(len(result.forbidden_claims), 0)
+
+    def test_category_counts_distinguish_failure_modes(self) -> None:
+        evidence = CompleteCaseEvidence.from_reports().to_dict()
+        bad = "EmpImaginary caused performance. The employee should be promoted. This is an unbiased model."
+        result = check_faithfulness_categories(bad, evidence)
+        self.assertGreater(len(result.unsupported_feature_claims), 0)
+        self.assertGreater(len(result.causal_claims), 0)
+        self.assertGreater(len(result.employee_prescriptions), 0)
+        self.assertGreater(len(result.fairness_overclaims), 0)
+        self.assertFalse(result.passed)
+
+    def test_dataset_name_case_variant_is_not_feature_claim(self) -> None:
+        evidence = CompleteCaseEvidence.from_reports().to_dict()
+        evidence["prediction"]["dataset_name"] = "hrdataset_v14"
+        text = "This HRDataset_v14 external validation case uses SHAP as attribution, not causality."
+        self.assertEqual(unsupported_feature_check(text, evidence), [])
 
     def test_missing_warning_detection(self) -> None:
         evidence = CompleteCaseEvidence.from_reports().to_dict()

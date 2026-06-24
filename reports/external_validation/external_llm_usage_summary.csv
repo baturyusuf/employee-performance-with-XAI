@@ -1,6 +1,6 @@
 dataset,logged_usage_rows,input_tokens,output_tokens,total_tokens,estimated_cost_usd
-INX primary model,190,1122859,95024,1217883,0.95110905
-HRDataset_v14,90,474550,47726,522276,0.4512747
+INX primary model,231,1355636,128478,1484114,1.1419692000000001
+HRDataset_v14,100,521244,56202,577446,0.5244372
 IBM HR Analytics performance,90,476167,49621,525788,0.46049655
 IBM HR Analytics attrition,0,0,0,0,0.0
 Employee Turnover,135,653058,71461,724519,0.630792
