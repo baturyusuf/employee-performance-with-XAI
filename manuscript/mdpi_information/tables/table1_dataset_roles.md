@@ -1,0 +1,11 @@
+# Table 1. Dataset roles and claim boundaries
+
+Source data: reports/external_validation/external_dataset_roles.csv; reports/external_validation/external_validation_summary.md
+
+| Dataset                             | Target                  | Role in this study                                               | Allowed claim                                                               | Limitation                                                                                               |
+| ----------------------------------- | ----------------------- | ---------------------------------------------------------------- | --------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- |
+| INX Future Inc Employee Performance | PerformanceRating 2/3/4 | Internal primary research benchmark | Internal benchmark for the primary leakage-safe performance model. | Public cross-sectional benchmark; not deployment validation. |
+| HRDataset_v14 | PerformanceScore | direct employee performance validation / independent replication | Independent replication on a directly mappable external performance target. | Small public cross-sectional sample; target mapping and provenance should be verified before submission. |
+| IBM HR Analytics performance | PerformanceRating | restricted performance-target robustness | Schema-compatible restricted target-space robustness only. | Not a direct 2/3/4 external validation dataset. |
+| IBM HR Analytics attrition | Attrition | related HR risk task transfer | Related HR attrition task-transfer robustness only. | Attrition is not employee performance. |
+| Employee Turnover | left | related HR risk task transfer | Related HR turnover task-transfer robustness only. | Turnover is not employee performance and sensitive attributes are limited or absent. |

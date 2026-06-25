@@ -1,0 +1,5 @@
+Policy,Excluded variables,Role,Governance interpretation
+no_salary_hike_no_attrition_no_department,Age; Gender; MaritalStatus; EmpLastSalaryHikePercent; Attrition; EmpDepartment; EmpNumber; PerformanceRating,Primary internal research model,Leakage-safe and department-free candidate; EmpJobRole remains a documented proxy-risk concern.
+no_salary_hike_no_attrition,Age; Gender; MaritalStatus; EmpLastSalaryHikePercent; Attrition; EmpNumber; PerformanceRating,Main comparison baseline,Retains direct department information; useful for comparison but not the selected final policy.
+no_salary_hike_no_attrition_no_department_no_job_role,Age; Gender; MaritalStatus; EmpLastSalaryHikePercent; Attrition; EmpDepartment; EmpJobRole; EmpNumber; PerformanceRating,Strict fairness/proxy sensitivity baseline,Tests the utility cost of removing both Department and JobRole proxy channels.
+Full-feature models,Not leakage safe; includes historical leakage-risk or outcome-proximal fields depending on source script,Historical leakage-warning upper-bound baseline only,"Diagnostic upper bound; must not be used as final, deployable, or manuscript-grade recommended model."

@@ -1,0 +1,13 @@
+# Table 6. Limitations and allowed claims
+
+Source data: README.md; reports/governance_reports/final_governance_readiness_report.md; reports/manuscript_assets/external_validation_tables.md
+
+| Area                         | Limitation                                                                                                  | Allowed claim                                                                                                          | Forbidden interpretation                                                                |
+| ---------------------------- | ----------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- |
+| Intended use | The framework is research-grade decision support only. | It audits structured evidence for HR analytics governance. | Autonomous hiring, firing, promotion, compensation, discipline, or screening decisions. |
+| SHAP attribution | SHAP explains model attribution patterns and may be unstable across settings. | SHAP supports attribution-based explanation of model outputs. | Inferring causal effects from SHAP attribution. |
+| Fairness and proxy risk | Removing Department does not remove all proxy pathways; EmpJobRole remains a proxy-risk concern. | The framework audits subgroup and proxy-risk signals. | Claiming fairness, unbiasedness, or discrimination-free status. |
+| Counterfactual actionability | Employee-only counterfactual validity is limited; many changes require manager or organisation action. | Counterfactuals are model scenarios that require actionability review. | Counterfactuals are employee prescriptions or causal interventions. |
+| External validation | HRDataset_v14 is small; IBM performance has restricted classes; turnover tasks are not performance targets. | HRDataset_v14 supports independent performance-target replication; IBM/turnover support robustness or transfer only. | IBM attrition or Employee Turnover directly validate employee performance prediction. |
+| LLM-agent evaluation | The 80-case real OpenAI run is automated technical evidence, not a human-subject study. | The LLM-agent layer interpreted structured evidence without detected forbidden or unsupported claims in the final run. | A 1.0 automated pass rate proves universal LLM reliability or deployment readiness. |
+| Stub/dry-run outputs | Offline stub and dry-run outputs are retained for reproducibility and tests only. | Stub outputs exercise the pipeline in non-production mode. | Stub/dry-run outputs are manuscript-grade real LLM evidence. |
