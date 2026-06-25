@@ -162,6 +162,7 @@ def write_batch_markdown(df: pd.DataFrame, path: Path) -> None:
         "- Agent outputs are governance diagnostics, not legal determinations.",
         "- High-risk or warning statuses must be reported as limitations, not hidden.",
         "- The system remains research-grade decision support only.",
+        "- Agent audit outputs are manuscript-grade only when their source explanations are real LLM outputs; stub/dry-run LLM outputs are excluded from final evidence claims.",
     ]
     write_markdown(path, lines)
 
@@ -237,6 +238,7 @@ def run(case_id: str | None = None) -> Dict[str, Path]:
             "- The agents audit structured evidence; they do not retrain or validate the predictive model externally.",
             "- Findings are research governance diagnostics, not legal determinations.",
             "- The system must not be used for autonomous HR decisions.",
+            "- Stub/dry-run LLM outputs are not manuscript-grade real LLM evidence.",
         ]
     )
     md_path.write_text("\n".join(lines) + "\n", encoding="utf-8")

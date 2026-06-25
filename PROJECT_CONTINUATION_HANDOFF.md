@@ -20,6 +20,8 @@ The LLM is not the predictor. XGBoost remains the predictive model. The LLM and 
 - Added statistical reliability reporting through `src/governance/statistical_reliability.py`.
 - Added real OpenAI pilot/final configs: `configs/llm_agent_eval_openai_pilot_40.yaml` and `configs/llm_agent_eval_openai_final_80.yaml`.
 - Added `requirements-dev.txt` with `pytest>=8.0.0` while preserving the existing unittest suite.
+- Added final evidence package manifest generator: `src/governance/final_evidence_manifest.py`.
+- Generated final evidence package under `reports/manuscript_assets/final_evidence_manifest/`.
 - Generated expanded batch artifacts. The latest root-level LLM-agent outputs are real OpenAI results for INX + HRDataset_v14:
   - `reports/llm_explanations/eval_case_manifest.csv`
   - `reports/llm_explanations/governed_explanations.jsonl`
@@ -62,6 +64,13 @@ Expanded configurable batch:
 - Final result: 80 real OpenAI cases across INX and HRDataset_v14, faithfulness pass rate `1.0`, unsupported claim rate `0.0`, forbidden claim rate `0.0`, missing warning rate `0.0`, parsing success rate `1.0`, agent compliance pass rate `1.0`.
 - Dataset scope: `inx_primary` 40 cases and `hrdataset_v14` 40 cases. IBM performance, IBM attrition, and Employee Turnover real LLM regeneration are deferred second-stage robustness tasks.
 - Important claim boundary: related-task datasets must not be presented as direct employee-performance validation.
+
+Final evidence manifest:
+- `reports/manuscript_assets/final_evidence_manifest/final_evidence_manifest.csv`
+- `reports/manuscript_assets/final_evidence_manifest/final_evidence_manifest.json`
+- `reports/manuscript_assets/final_evidence_manifest/final_evidence_manifest.md`
+- `reports/manuscript_assets/final_evidence_manifest/readiness_not_ready_explanation.md`
+- Stub/dry-run outputs are indexed as excluded evidence and must not be cited as manuscript-grade real LLM evidence.
 
 External validation batches:
 - HRDataset_v14: 5 cases, real OpenAI governed explanations + OpenAI Agents SDK, faithfulness pass rate `1.0`, unsupported claim rate `0.0`, forbidden claim rate `0.0`, missing warning rate `0.0`, agent success rate `1.0`.

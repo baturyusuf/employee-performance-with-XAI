@@ -49,6 +49,8 @@ Before any operational use, the full pipeline still requires data-provenance rev
 ## Expanded Evaluation Status
 The config-driven expanded LLM-agent pipeline exists at `src/llm/run_llm_agent_evaluation.py`. A 40-case real OpenAI pilot completed first, then an 80-case real OpenAI final run completed for `inx_primary` and `hrdataset_v14`. The final expanded run uses OpenAI structured-output governed explanations plus deterministic batch governance agents. IBM performance, IBM attrition, and Employee Turnover LLM regeneration are deferred second-stage robustness tasks and must not be framed as direct employee-performance validation.
 
+Stub/dry-run outputs from `offline_stub_llm` or `run_mode=dry_run` are retained for reproducibility and tests only. They are not manuscript-grade real LLM evidence.
+
 ## Key Artifacts
 - Final recommendation: `reports/model_selection/final_recommendation.md`
 - Model card: `reports/model_card/hr_xai_model_card.md`

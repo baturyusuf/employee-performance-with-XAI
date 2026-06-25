@@ -61,7 +61,7 @@
 
 | dataset | logged_usage_rows | input_tokens | output_tokens | total_tokens | estimated_cost_usd |
 | --- | --- | --- | --- | --- | --- |
-| INX primary model | 231 | 1355636 | 128478 | 1484114 | 1.14197 |
+| INX primary model | 233 | 1367002 | 130059 | 1497061 | 1.15035 |
 | HRDataset_v14 | 100 | 521244 | 56202 | 577446 | 0.524437 |
 | IBM HR Analytics performance | 90 | 476167 | 49621 | 525788 | 0.460497 |
 | IBM HR Analytics attrition | 0 | 0 | 0 | 0 | 0 |
@@ -77,3 +77,4 @@
 | IBM performance | PerformanceRating contains only classes 3 and 4. | Restricted target-space schema-compatible robustness. |
 | Employee turnover | Target is attrition/turnover, not performance. | Related HR task-transfer robustness only. |
 | LLM/agents | Expanded real OpenAI technical evaluation currently prioritizes INX and HRDataset_v14; IBM and turnover related-task LLM regeneration are second-stage robustness work. | Technical LLM-agent governance evidence on structured ML/XAI artifacts for the stated dataset scope. |
+| Stub/dry-run outputs | offline_stub_llm and run_mode=dry_run outputs are retained for reproducibility and pipeline tests only. | Not manuscript-grade real LLM evidence; excluded from final evidence claims. |

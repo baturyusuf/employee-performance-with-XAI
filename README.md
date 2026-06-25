@@ -255,6 +255,14 @@ Approved real OpenAI expanded evaluation uses a two-stage config:
 
 The pilot writes to `reports/llm_explanations/openai_pilot_40/`. The final 80-case run writes manuscript-support technical evidence to `reports/llm_explanations/` and currently includes only `inx_primary` and `hrdataset_v14`. IBM performance, IBM attrition, and Employee Turnover remain second-stage robustness regeneration targets and must not be presented as direct employee-performance validation.
 
+Build the final manuscript-support evidence manifest from the saved final 80-case real run:
+
+```powershell
+.\myenv\Scripts\python.exe -m src.governance.final_evidence_manifest
+```
+
+The manifest is written under `reports/manuscript_assets/final_evidence_manifest/` and explicitly excludes `offline_stub_llm` / `run_mode=dry_run` outputs from manuscript-grade real LLM evidence.
+
 Run the standalone batch agent audit from generated explanation JSONL:
 
 ```powershell

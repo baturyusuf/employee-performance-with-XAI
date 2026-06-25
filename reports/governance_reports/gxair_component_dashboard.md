@@ -22,3 +22,4 @@ This is a component readiness dashboard, not a universal ethical score.
 - Scores are included only where defensible from existing evidence.
 - Evidence-missing components are not imputed.
 - The system must not be described as deployment-ready.
+- Stub/dry-run LLM outputs are not manuscript-grade real LLM evidence and are excluded from readiness evidence.

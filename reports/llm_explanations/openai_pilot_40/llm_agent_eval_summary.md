@@ -45,5 +45,6 @@ Agent system version: `deterministic_agents_v2`
 ## Limitations
 
 - This run used the real OpenAI-backed governed explanation path.
+- Stub/dry-run outputs from `offline_stub_llm` or `run_mode=dry_run` are not manuscript-grade real LLM evidence and are excluded from the final evidence package.
 - Automated LLM, faithfulness, agent, and chatbot checks do not replace human evaluation or legal/governance review.
 - Future larger or second-stage real LLM batches still require explicit approval because they incur API cost.

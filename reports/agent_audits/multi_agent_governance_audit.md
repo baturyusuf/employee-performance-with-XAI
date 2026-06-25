@@ -32,3 +32,4 @@ This batch audit is deterministic and evidence-based. Agents audit structured ML
 - Agent outputs are governance diagnostics, not legal determinations.
 - High-risk or warning statuses must be reported as limitations, not hidden.
 - The system remains research-grade decision support only.
+- Agent audit outputs are manuscript-grade only when their source explanations are real LLM outputs; stub/dry-run LLM outputs are excluded from final evidence claims.

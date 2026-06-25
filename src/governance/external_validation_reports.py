@@ -195,6 +195,11 @@ def build_tables() -> Dict[str, pd.DataFrame]:
                 "limitation": "Expanded real OpenAI technical evaluation currently prioritizes INX and HRDataset_v14; IBM and turnover related-task LLM regeneration are second-stage robustness work.",
                 "allowed_claim": "Technical LLM-agent governance evidence on structured ML/XAI artifacts for the stated dataset scope.",
             },
+            {
+                "area": "Stub/dry-run outputs",
+                "limitation": "offline_stub_llm and run_mode=dry_run outputs are retained for reproducibility and pipeline tests only.",
+                "allowed_claim": "Not manuscript-grade real LLM evidence; excluded from final evidence claims.",
+            },
         ]
     )
 
@@ -513,6 +518,8 @@ def summary_markdown(tables: Dict[str, pd.DataFrame]) -> str:
         "",
         "This table is read from the current config-driven real run. It prioritizes INX and HRDataset_v14; related-task datasets are not direct employee-performance validation.",
         "",
+        "Stub/dry-run LLM outputs are not manuscript-grade real LLM evidence and are excluded from this expanded evidence scope.",
+        "",
         markdown_table(_round_table(tables["expanded_llm"])),
         "",
         "## External LLM Usage / Cost Summary",
@@ -573,6 +580,7 @@ def governance_markdown(tables: Dict[str, pd.DataFrame]) -> str:
             "- Cross-dataset INX-to-HRDataset feature overlap is too weak for a defensible transportability result.",
             "- Subgroup results remain sample-size and support-threshold sensitive.",
             "- LLM-agent evaluation is automated technical evidence, not human-subject validation.",
+            "- Stub/dry-run LLM outputs are not manuscript-grade real LLM evidence and are excluded from final evidence claims.",
             "",
             "## Q3 Manuscript Positioning",
             "",

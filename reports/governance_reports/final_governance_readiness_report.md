@@ -17,3 +17,4 @@ The framework remains research-grade decision support. It is not an autonomous H
 - SHAP and counterfactuals do not support causal claims.
 - Removing group variables does not prove fairness.
 - Real expanded LLM evidence is automated technical evidence, not a substitute for human evaluation.
+- Stub/dry-run LLM outputs are not manuscript-grade real LLM evidence and are excluded from the final evidence package.

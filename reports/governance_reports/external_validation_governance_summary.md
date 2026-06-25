@@ -22,6 +22,7 @@
 - Cross-dataset INX-to-HRDataset feature overlap is too weak for a defensible transportability result.
 - Subgroup results remain sample-size and support-threshold sensitive.
 - LLM-agent evaluation is automated technical evidence, not human-subject validation.
+- Stub/dry-run LLM outputs are not manuscript-grade real LLM evidence and are excluded from final evidence claims.
 
 ## Q3 Manuscript Positioning
 
@@ -56,7 +57,7 @@ Usage is cumulative for the listed case IDs and includes remediation reruns; bil
 
 | dataset | logged_usage_rows | input_tokens | output_tokens | total_tokens | estimated_cost_usd |
 | --- | --- | --- | --- | --- | --- |
-| INX primary model | 231 | 1355636 | 128478 | 1484114 | 1.14197 |
+| INX primary model | 233 | 1367002 | 130059 | 1497061 | 1.15035 |
 | HRDataset_v14 | 100 | 521244 | 56202 | 577446 | 0.524437 |
 | IBM HR Analytics performance | 90 | 476167 | 49621 | 525788 | 0.460497 |
 | IBM HR Analytics attrition | 0 | 0 | 0 | 0 | 0 |

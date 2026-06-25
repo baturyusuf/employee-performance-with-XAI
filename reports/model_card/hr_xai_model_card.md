@@ -45,6 +45,8 @@ External evidence has been added under `reports/external_validation/`.
 ## Expanded LLM-Agent Evaluation Update
 The config-driven expanded batch now includes a real OpenAI 40-case pilot followed by a real OpenAI 80-case final run. The final expanded run covers 40 INX primary cases and 40 HRDataset_v14 independent-replication cases using structured evidence, governed OpenAI explanations, deterministic faithfulness checks, chatbot guardrail checks, and deterministic batch governance agents. IBM performance, IBM attrition, and Employee Turnover LLM regeneration are second-stage robustness tasks and must not be presented as direct employee-performance validation.
 
+Stub/dry-run outputs from `offline_stub_llm` or `run_mode=dry_run` remain useful for reproducibility and tests, but they are not manuscript-grade real LLM evidence and are excluded from the final evidence package.
+
 ## Known Limitations
 Public cross-sectional data, public-mirror external dataset provenance requiring independent verification before publication, possible organisational proxy effects, imperfect probability calibration, sparse class-4 support, restricted IBM target space, limited cross-dataset feature overlap, and no causal identification.
 

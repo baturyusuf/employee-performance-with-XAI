@@ -576,6 +576,14 @@ def write_faithfulness_summary(df: pd.DataFrame, path: Path) -> None:
     else:
         for row in failures.itertuples(index=False):
             lines.append(f"- `{row.case_id}`: {row.notes}")
+    lines.extend(
+        [
+            "",
+            "## Evidence Boundary",
+            "",
+            "This faithfulness summary is manuscript-grade real LLM evidence only when paired with a `run_mode=real` summary and `real_llm_used=True`. Stub/dry-run outputs from `offline_stub_llm` are reproducibility artifacts and must not be cited as real LLM evidence.",
+        ]
+    )
     write_markdown(path, lines)
 
 
@@ -658,6 +666,7 @@ def write_integrated_summary(
     if run_mode == "real":
         limitation_lines = [
             "- This run used the real OpenAI-backed governed explanation path.",
+            "- Stub/dry-run outputs from `offline_stub_llm` or `run_mode=dry_run` are not manuscript-grade real LLM evidence and are excluded from the final evidence package.",
             "- Automated LLM, faithfulness, agent, and chatbot checks do not replace human evaluation or legal/governance review.",
             "- Future larger or second-stage real LLM batches still require explicit approval because they incur API cost.",
         ]

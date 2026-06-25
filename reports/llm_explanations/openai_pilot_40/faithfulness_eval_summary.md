@@ -18,3 +18,7 @@
 ## Examples of Failures
 
 No faithfulness failures detected.
+
+## Evidence Boundary
+
+This faithfulness summary is manuscript-grade real LLM evidence only when paired with a `run_mode=real` summary and `real_llm_used=True`. Stub/dry-run outputs from `offline_stub_llm` are reproducibility artifacts and must not be cited as real LLM evidence.

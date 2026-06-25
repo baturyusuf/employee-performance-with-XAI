@@ -880,3 +880,25 @@ The user approved a staged real OpenAI evaluation: first a 40-case pilot, then a
 - `python -m compileall src` passed.
 - `python -m unittest discover -s tests -v` passed.
 - `python -m pytest` passed after installing `requirements-dev.txt`.
+
+## 2026-06-25 - Final 80-case real OpenAI evidence package manifest
+
+### Context
+The final 80-case real OpenAI run needed to be packaged into a manuscript-support evidence bundle without mixing in stub/dry-run outputs as empirical evidence.
+
+### Changes implemented
+- Added `src/governance/final_evidence_manifest.py`.
+- Generated `reports/manuscript_assets/final_evidence_manifest/final_evidence_manifest.csv`.
+- Generated `reports/manuscript_assets/final_evidence_manifest/final_evidence_manifest.json`.
+- Generated `reports/manuscript_assets/final_evidence_manifest/final_evidence_manifest.md`.
+- Generated `reports/manuscript_assets/final_evidence_manifest/readiness_not_ready_explanation.md`.
+- Added SHA-256 hashes, row counts, manuscript-grade status labels, claim roles, and explicit stub/dry-run exclusions for linked evidence files.
+- Updated LLM, agent, G-XAIR, external-validation, and model-card reports so stub/dry-run outputs are explicitly identified as non-manuscript-grade real LLM evidence.
+
+### Readiness interpretation
+The final readiness label remains `not_ready`. The primary blockers are:
+- Proxy Risk Penalty: high proxy risk remains; removing Department does not prove fairness.
+- Counterfactual Actionability: counterfactuals remain model scenarios and are often not employee-actionable.
+
+### Decision
+Treat the final manifest as the single index for manuscript-support technical evidence. Do not cite `offline_stub_llm` or `run_mode=dry_run` outputs as real LLM evidence.

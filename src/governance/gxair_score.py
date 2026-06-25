@@ -362,6 +362,7 @@ def write_component_markdown(dashboard: pd.DataFrame, path: Path, final_label: s
         "- Scores are included only where defensible from existing evidence.",
         "- Evidence-missing components are not imputed.",
         "- The system must not be described as deployment-ready.",
+        "- Stub/dry-run LLM outputs are not manuscript-grade real LLM evidence and are excluded from readiness evidence.",
     ]
     write_markdown(path, lines)
 
@@ -396,6 +397,7 @@ def write_readiness_report(dashboard: pd.DataFrame, path: Path, final_label: str
         "- SHAP and counterfactuals do not support causal claims.",
         "- Removing group variables does not prove fairness.",
         "- Real expanded LLM evidence is automated technical evidence, not a substitute for human evaluation.",
+        "- Stub/dry-run LLM outputs are not manuscript-grade real LLM evidence and are excluded from the final evidence package.",
     ]
     if llm_missing:
         blockers.append("- Real expanded LLM evaluation is required before manuscript-grade LLM claims if the current run is dry-run only.")

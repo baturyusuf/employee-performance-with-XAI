@@ -82,6 +82,8 @@ This report extends the original INX HR XAI governance evidence with external va
 
 This table is read from the current config-driven real run. It prioritizes INX and HRDataset_v14; related-task datasets are not direct employee-performance validation.
 
+Stub/dry-run LLM outputs are not manuscript-grade real LLM evidence and are excluded from this expanded evidence scope.
+
 | dataset | n_cases | run_mode | real_llm_used | llm_model | faithfulness_pass_rate | unsupported_claim_rate | forbidden_claim_rate | missing_warning_rate | parsing_success_rate | agent_compliance_pass_rate | notes |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | hrdataset_v14 | 40 | real | True | gpt-5.4-mini | 1 | 0 | 0 | 0 | 1 | 1 | expanded real priority scope; IBM/attrition/turnover LLM regeneration deferred |
@@ -93,7 +95,7 @@ Usage is cumulative for the listed case IDs and includes remediation reruns; bil
 
 | dataset | logged_usage_rows | input_tokens | output_tokens | total_tokens | estimated_cost_usd |
 | --- | --- | --- | --- | --- | --- |
-| INX primary model | 231 | 1355636 | 128478 | 1484114 | 1.14197 |
+| INX primary model | 233 | 1367002 | 130059 | 1497061 | 1.15035 |
 | HRDataset_v14 | 100 | 521244 | 56202 | 577446 | 0.524437 |
 | IBM HR Analytics performance | 90 | 476167 | 49621 | 525788 | 0.460497 |
 | IBM HR Analytics attrition | 0 | 0 | 0 | 0 | 0 |
@@ -109,3 +111,4 @@ Usage is cumulative for the listed case IDs and includes remediation reruns; bil
 | IBM performance | PerformanceRating contains only classes 3 and 4. | Restricted target-space schema-compatible robustness. |
 | Employee turnover | Target is attrition/turnover, not performance. | Related HR task-transfer robustness only. |
 | LLM/agents | Expanded real OpenAI technical evaluation currently prioritizes INX and HRDataset_v14; IBM and turnover related-task LLM regeneration are second-stage robustness work. | Technical LLM-agent governance evidence on structured ML/XAI artifacts for the stated dataset scope. |
+| Stub/dry-run outputs | offline_stub_llm and run_mode=dry_run outputs are retained for reproducibility and pipeline tests only. | Not manuscript-grade real LLM evidence; excluded from final evidence claims. |
