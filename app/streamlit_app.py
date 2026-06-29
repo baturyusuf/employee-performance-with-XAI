@@ -696,11 +696,23 @@ def render_llm_governance_audit() -> None:
             if guardrail_path.exists():
                 guardrail_df = pd.read_csv(guardrail_path)
                 st.write("**Chatbot Guardrail Evaluation**")
-                st.dataframe(
-                    guardrail_df.groupby("prompt_type")["pass"].mean().reset_index(name="pass_rate"),
-                    use_container_width=True,
-                    hide_index=True,
-                )
+                group_col = "prompt_type" if "prompt_type" in guardrail_df.columns else "category"
+                if group_col in guardrail_df.columns and "pass" in guardrail_df.columns:
+                    guardrail_display = guardrail_df.copy()
+                    if guardrail_display["pass"].dtype == object:
+                        guardrail_display["pass"] = (
+                            guardrail_display["pass"].astype(str).str.lower().isin({"true", "1", "yes"})
+                        )
+                    guardrail_summary = (
+                        guardrail_display.groupby(group_col)["pass"]
+                        .agg(pass_rate="mean", n_prompts="size")
+                        .reset_index()
+                        .rename(columns={group_col: "prompt_category"})
+                    )
+                    st.dataframe(guardrail_summary, use_container_width=True, hide_index=True)
+                else:
+                    st.warning("Guardrail evaluation report is missing category/prompt_type or pass columns.")
+                    st.dataframe(guardrail_df, use_container_width=True, hide_index=True)
         with col2:
             taxonomy_path = SETTINGS.reports_dir / "governance_reports" / "warning_taxonomy.csv"
             if taxonomy_path.exists():
