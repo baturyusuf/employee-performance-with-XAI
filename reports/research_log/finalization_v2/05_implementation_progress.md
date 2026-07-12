@@ -227,3 +227,5 @@ Checkpoint note: commit `f4e2dd7` captured the tested Unit 1A implementation. It
 - No model was fitted to the real dataset, no scientific result artifact was written, no network/API call occurred, and the manuscript was not edited.
 
 Unit 2B is not scientifically complete. `selection_metric` and `baseline_gate_metric` intentionally remain null pending the user's A/B/C metric decision, so real nested benchmarking fails closed. Policy ablation, calibration, SHAP and subgroup/proxy stages still instantiate independent folds/models and must be refactored to consume this fold/model contract before either scope becomes release-ready. The obsolete fixed XGBoost block remains a documented open conflict until that consumer refactor; it is not used by the new benchmark stage.
+
+Checkpoint: commit `8e9b5b9b9f66815abf7f9a599535a36737ea1706` (`feat(protocol): add shared nested OOF benchmark contract`) records this tested, deliberately predecision/fail-closed implementation. No push was performed.
