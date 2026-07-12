@@ -9,8 +9,8 @@
 - Rejected `reports/manuscript_final/latest` as v2 canonical evidence.
 - Created finalization and interruption-resilience records.
 
-Scientific implementation changes: **none yet**.  
-Scientific artifacts generated: **none**.  
+Scientific implementation changes: **none yet**.
+Scientific artifacts generated: **none**.
 Paid/network API calls: **zero**.
 
 Next gate: obtain user decisions D1-D5 before implementing model benchmark, tuning, dataset distribution, ethics metadata and artifact-publication architecture.
@@ -76,3 +76,5 @@ Planned only after Unit 1A passes. It will bind loader receipts, schema mappings
 - Compileall and diff hygiene: passed.
 
 V2-001 and V2-014 remain open until Unit 1B binds receipts to manifests/cache and a real-data v2 build validates the entire chain. No issue is marked resolved prematurely.
+
+Checkpoint note: commit `f4e2dd7` captured the tested Unit 1A implementation. Its staged diff check reported five Markdown trailing-whitespace lines, but the semicolon-separated shell command did not stop the commit. No scientific file or result was affected. The lines are corrected in a separate follow-up commit; the checkpoint is not amended or rewritten.

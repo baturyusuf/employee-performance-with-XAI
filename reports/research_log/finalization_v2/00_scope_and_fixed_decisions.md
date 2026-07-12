@@ -1,6 +1,6 @@
 # Scope and Fixed Decisions
 
-Date: 2026-07-13  
+Date: 2026-07-13
 Status: active contract
 
 ## Study Identity

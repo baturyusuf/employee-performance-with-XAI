@@ -1,6 +1,6 @@
 # Baseline Repository Audit
 
-Audit date: 2026-07-13  
+Audit date: 2026-07-13
 Audit mode: read-only scientific/code/artifact audit; no scientific code changed
 
 ## Git State

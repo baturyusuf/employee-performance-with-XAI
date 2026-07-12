@@ -103,3 +103,11 @@ git diff --quiet -- manuscript/mdpi_information/main.md
 ```
 
 Results: pytest 199 passed plus 4 subtests in 12.47 seconds; unittest 161 passed in 4.444 seconds; compileall exit 0; diff check exit 0; manuscript unchanged. No paid service or real dataset download was attempted.
+
+## Unit 1A Checkpoint
+
+```powershell
+git commit -m "fix(data): bind canonical inputs to pinned acquisition contract"
+```
+
+Commit: `f4e2dd7`. The staged diff check printed five Markdown trailing-whitespace findings, but the command chain did not fail closed before commit. The defect was recorded and corrected without amend/history rewriting. Future commit gates must use explicit conditional execution rather than semicolon-separated commands.
