@@ -1,0 +1,80 @@
+{
+  "config_hash": "c664ef152ff3a9eef89c53a403b9c2e6f677340bea0307b02d97d07cc54bdfc3",
+  "dataset_hashes": {
+    "employee_turnover": {
+      "path": "data/external/employee_turnover/raw.csv",
+      "role": "related_task_transfer",
+      "sha256": "2510e274a90547f34c7b0db5a4ab70282c2710eb54252f14921bf980b81a928c",
+      "size_bytes": 566778,
+      "task_type": "binary_turnover_transfer"
+    },
+    "hrdataset_v14": {
+      "path": "data/external/hrdataset_v14/raw.csv",
+      "role": "independent_external_performance_target_replication",
+      "sha256": "cb19996755c93c0a8d6527f59da4701c80aef65eff854906546dce286249813c",
+      "size_bytes": 76857,
+      "task_type": "ordinal_multiclass_performance"
+    },
+    "ibm_hr_analytics": {
+      "path": "data/external/ibm_hr_analytics/raw.csv",
+      "role": "restricted_target_performance_robustness",
+      "sha256": "a5c31e38bd7fafc9bc333884eb181b06b41b8e5e488e8f7ccb27199fb3be7659",
+      "size_bytes": 227977,
+      "task_type": "restricted_target_performance_robustness"
+    },
+    "ibm_hr_analytics_attrition": {
+      "path": "data/external/ibm_hr_analytics/raw.csv",
+      "role": "related_task_transfer",
+      "sha256": "a5c31e38bd7fafc9bc333884eb181b06b41b8e5e488e8f7ccb27199fb3be7659",
+      "size_bytes": 227977,
+      "task_type": "binary_attrition_transfer"
+    },
+    "inx_primary": {
+      "path": "data/raw/inx_employee_performance.csv",
+      "role": "primary_development_and_internal_oof_evaluation",
+      "sha256": "b8deac0a615b97076622ae540f4cfd0d3c3f1e7acb83ba3ff6560470a9ccf60a",
+      "size_bytes": 152715,
+      "task_type": "ordinal_multiclass_performance"
+    }
+  },
+  "elapsed_seconds": 0.327482599997893,
+  "ended_at": "2026-07-12T18:37:50+00:00",
+  "git_commit": "18347488bdb4eed60f115ceeff70c420071ceef0",
+  "outputs": [
+    {
+      "path": "reports/manuscript_final/manuscript_final_20260712T181754Z_c664ef152ff3/chatbot/category_summary.csv",
+      "sha256": "424b0d68639184f3e262e6daafda639f6f74c09b39de2b2935d4e00f4363d6cf",
+      "size_bytes": 5478
+    },
+    {
+      "path": "reports/manuscript_final/manuscript_final_20260712T181754Z_c664ef152ff3/chatbot/guardrail_category_summary.csv",
+      "sha256": "424b0d68639184f3e262e6daafda639f6f74c09b39de2b2935d4e00f4363d6cf",
+      "size_bytes": 5478
+    },
+    {
+      "path": "reports/manuscript_final/manuscript_final_20260712T181754Z_c664ef152ff3/chatbot/guardrail_evaluation.csv",
+      "sha256": "8e9787b057bb4a2c231dfaab74c9a7bdf54241b46b0868ab6401d99112c65eb6",
+      "size_bytes": 78028
+    },
+    {
+      "path": "reports/manuscript_final/manuscript_final_20260712T181754Z_c664ef152ff3/chatbot/guardrail_evaluation_summary.md",
+      "sha256": "77e19cd84e35fb5163862b08923a131bb338bd662983357e430d610b29493136",
+      "size_bytes": 8778
+    },
+    {
+      "path": "reports/manuscript_final/manuscript_final_20260712T181754Z_c664ef152ff3/chatbot/safe_prompt_suite.csv",
+      "sha256": "474b1c1677c2b1c37e1ffb7534105677dcd64c19f2ddd9c2be6317b4185bf6e9",
+      "size_bytes": 15112
+    },
+    {
+      "path": "reports/manuscript_final/manuscript_final_20260712T181754Z_c664ef152ff3/chatbot/unsafe_prompt_suite.csv",
+      "sha256": "fe052601ec2e805d769a813d7139301aad4ae4a2e1cd5a7ed0c360dfe8b04be2",
+      "size_bytes": 37200
+    }
+  ],
+  "run_id": "manuscript_final_20260712T181754Z_c664ef152ff3",
+  "source_tree_hash": "092778e5bafff11a7aa59399fde413efe6760d664e2214f71595d7ab59d44cb8",
+  "stage": "chatbot",
+  "started_at": "2026-07-12T18:37:50+00:00",
+  "status": "complete"
+}

@@ -1,0 +1,95 @@
+{
+  "config_hash": "c664ef152ff3a9eef89c53a403b9c2e6f677340bea0307b02d97d07cc54bdfc3",
+  "dataset_hashes": {
+    "employee_turnover": {
+      "path": "data/external/employee_turnover/raw.csv",
+      "role": "related_task_transfer",
+      "sha256": "2510e274a90547f34c7b0db5a4ab70282c2710eb54252f14921bf980b81a928c",
+      "size_bytes": 566778,
+      "task_type": "binary_turnover_transfer"
+    },
+    "hrdataset_v14": {
+      "path": "data/external/hrdataset_v14/raw.csv",
+      "role": "independent_external_performance_target_replication",
+      "sha256": "cb19996755c93c0a8d6527f59da4701c80aef65eff854906546dce286249813c",
+      "size_bytes": 76857,
+      "task_type": "ordinal_multiclass_performance"
+    },
+    "ibm_hr_analytics": {
+      "path": "data/external/ibm_hr_analytics/raw.csv",
+      "role": "restricted_target_performance_robustness",
+      "sha256": "a5c31e38bd7fafc9bc333884eb181b06b41b8e5e488e8f7ccb27199fb3be7659",
+      "size_bytes": 227977,
+      "task_type": "restricted_target_performance_robustness"
+    },
+    "ibm_hr_analytics_attrition": {
+      "path": "data/external/ibm_hr_analytics/raw.csv",
+      "role": "related_task_transfer",
+      "sha256": "a5c31e38bd7fafc9bc333884eb181b06b41b8e5e488e8f7ccb27199fb3be7659",
+      "size_bytes": 227977,
+      "task_type": "binary_attrition_transfer"
+    },
+    "inx_primary": {
+      "path": "data/raw/inx_employee_performance.csv",
+      "role": "primary_development_and_internal_oof_evaluation",
+      "sha256": "b8deac0a615b97076622ae540f4cfd0d3c3f1e7acb83ba3ff6560470a9ccf60a",
+      "size_bytes": 152715,
+      "task_type": "ordinal_multiclass_performance"
+    }
+  },
+  "elapsed_seconds": 0.06254880002234131,
+  "ended_at": "2026-07-12T18:12:47+00:00",
+  "git_commit": "18347488bdb4eed60f115ceeff70c420071ceef0",
+  "outputs": [
+    {
+      "path": "reports/manuscript_final/manuscript_final_20260712T175251Z_c664ef152ff3/provenance/cards/employee_turnover.md",
+      "sha256": "46e19307f7133acdd16f8a2240f8269dae32c64c56042996d67573a35b050644",
+      "size_bytes": 2114
+    },
+    {
+      "path": "reports/manuscript_final/manuscript_final_20260712T175251Z_c664ef152ff3/provenance/cards/hrdataset_v14.md",
+      "sha256": "62adbb8586a2b42b72241ac2f71770f63a1ab1abc571ee83f7273150adfbc21e",
+      "size_bytes": 2262
+    },
+    {
+      "path": "reports/manuscript_final/manuscript_final_20260712T175251Z_c664ef152ff3/provenance/cards/ibm_hr_analytics.md",
+      "sha256": "2eec4e33f980b3c09a58ad5c376e6f6cbb24f2eb2fd244a0654daeca9cf37bc4",
+      "size_bytes": 2204
+    },
+    {
+      "path": "reports/manuscript_final/manuscript_final_20260712T175251Z_c664ef152ff3/provenance/cards/ibm_hr_analytics_attrition.md",
+      "sha256": "858b376cd90c7653413fb34d3da71df29ea9c480ddab9adbaf1294c5d19e85cc",
+      "size_bytes": 2175
+    },
+    {
+      "path": "reports/manuscript_final/manuscript_final_20260712T175251Z_c664ef152ff3/provenance/cards/inx_primary.md",
+      "sha256": "b80b883872d323ccf0aed09cb4bf30f139d057b6d648517de5ec82abf06e709e",
+      "size_bytes": 2019
+    },
+    {
+      "path": "reports/manuscript_final/manuscript_final_20260712T175251Z_c664ef152ff3/provenance/dataset_card_validation_report.json",
+      "sha256": "1aee12f8b35e7be734cd46a87ae6ebdc3b7d14e759d6beeb56ea5ad4114781e1",
+      "size_bytes": 1024
+    },
+    {
+      "path": "reports/manuscript_final/manuscript_final_20260712T175251Z_c664ef152ff3/provenance/dataset_cards.csv",
+      "sha256": "4498135dd1547c3c7aeb8ecbec00df43172390b62238363853cf7395d2d71882",
+      "size_bytes": 7596
+    },
+    {
+      "path": "reports/manuscript_final/manuscript_final_20260712T175251Z_c664ef152ff3/provenance/dataset_cards.json",
+      "sha256": "8f25d4fc6cb929df7e420617448acd84214fa99132629514c064684b20d16b32",
+      "size_bytes": 13957
+    },
+    {
+      "path": "reports/manuscript_final/manuscript_final_20260712T175251Z_c664ef152ff3/provenance/metadata.json",
+      "sha256": "1c3687bed62951c94689805b44efdc299a6a29256a290eebebd16548efce8834",
+      "size_bytes": 1799
+    }
+  ],
+  "run_id": "manuscript_final_20260712T175251Z_c664ef152ff3",
+  "source_tree_hash": "81653ab9edd694a6e883f61111d814c26f332dcec4433e564c39b5d1396c7038",
+  "stage": "provenance",
+  "started_at": "2026-07-12T18:12:47+00:00",
+  "status": "complete"
+}

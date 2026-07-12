@@ -1,0 +1,47 @@
+{
+  "claim_limitations": [
+    "Research-grade decision support only; no autonomous HR decision use.",
+    "Dataset-specific models are not locked-INX-model transport.",
+    "SHAP attribution, if generated elsewhere, is not causal evidence.",
+    "Related attrition/turnover tasks are not performance-model replication."
+  ],
+  "completed_at": "2026-07-12T18:11:38+00:00",
+  "config_hash": "c664ef152ff3a9eef89c53a403b9c2e6f677340bea0307b02d97d07cc54bdfc3",
+  "dataset_key": "ibm_performance",
+  "dataset_name": "ibm_hr_analytics",
+  "effective_cv_splits": 10,
+  "labels": [
+    3,
+    4
+  ],
+  "locked_inx_model_transported": false,
+  "mapping_verified": true,
+  "n_rows": 1470,
+  "outputs": {
+    "actionability_summary": "actionability_summary.csv",
+    "feature_policy": "feature_policy_audit.csv",
+    "fold_metrics": "fold_metrics.csv",
+    "policy_summary": "performance_metrics.csv",
+    "predictions": "model_predictions.csv",
+    "representative_cases": "representative_cases.csv",
+    "target_mapping": "target_mapping.csv",
+    "target_support": "target_support.csv"
+  },
+  "policies": [
+    "department_including",
+    "department_free",
+    "department_job_role_free"
+  ],
+  "raw_dataset_path": "C:\\Users\\Yusuf\\Documents\\GitHub\\employee performance with XAI\\data\\external\\ibm_hr_analytics\\raw.csv",
+  "raw_dataset_sha256": "a5c31e38bd7fafc9bc333884eb181b06b41b8e5e488e8f7ccb27199fb3be7659",
+  "requested_cv_splits": 10,
+  "role": "restricted-target performance robustness",
+  "run_id": "manuscript_final_20260712T175251Z_c664ef152ff3",
+  "schema_mapping_path": "C:\\Users\\Yusuf\\Documents\\GitHub\\employee performance with XAI\\data\\external\\ibm_hr_analytics\\schema_mapping.json",
+  "schema_mapping_sha256": "49f97b700ae157cf7845cffa727e3a5fa912752cbaa9987734cbfa2aac137bf1",
+  "seed": 42,
+  "status": "completed",
+  "target_kind": "primary",
+  "task_comparison_group": "restricted_target_performance_robustness",
+  "task_type": "restricted_target_performance_robustness"
+}

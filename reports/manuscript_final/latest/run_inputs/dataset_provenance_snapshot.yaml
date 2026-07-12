@@ -1,0 +1,129 @@
+{
+  "dataset_provenance": {
+    "schema_version": 1,
+    "manual_review_marker": "manual_review_required",
+    "physical_sources": {
+      "inx_employee_performance": {
+        "canonical_name": "INX Future Inc Employee Performance",
+        "raw_file_path": "data/raw/inx_employee_performance.csv",
+        "csv_delimiter": ";",
+        "retrieval_url": "manual_review_required",
+        "retrieval_date": "manual_review_required",
+        "repository_first_recorded_date": "2026-04-21",
+        "known_source_mirror_status": "repository_local_copy_upstream_source_unverified",
+        "source_authenticity_verification_status": "manual_review_required",
+        "licence": "manual_review_required",
+        "licence_verification_status": "manual_review_required",
+        "citation_source": "INX Future Inc Employee Performance dataset title and repository-local raw file; upstream bibliographic source is not independently verified.",
+        "citation_verification_status": "manual_review_required",
+        "unresolved_manual_verification_items": [
+          "Confirm the upstream retrieval URL and actual retrieval date.",
+          "Confirm the authoritative source and mirror chain.",
+          "Confirm the dataset licence and reuse terms.",
+          "Confirm the authoritative bibliographic citation."
+        ]
+      },
+      "hrdataset_v14": {
+        "canonical_name": "HRDataset_v14 / Human Resources Data Set",
+        "raw_file_path": "data/external/hrdataset_v14/raw.csv",
+        "csv_delimiter": ",",
+        "retrieval_url": "https://raw.githubusercontent.com/pouyasattari/HR-Dataset-Analysis/main/HRDataset_v14.csv",
+        "retrieval_date": "manual_review_required",
+        "repository_first_recorded_date": "2026-06-24",
+        "known_source_mirror_status": "public_mirror_recorded_upstream_authenticity_unverified",
+        "source_authenticity_verification_status": "manual_review_required",
+        "licence": "manual_review_required",
+        "licence_verification_status": "manual_review_required",
+        "citation_source": "HRDataset_v14 / Human Resources Data Set; repository records the listed GitHub raw-file mirror, not an independently authenticated original source.",
+        "citation_verification_status": "manual_review_required",
+        "narrative_dataset_card": "data/external/hrdataset_v14/dataset_card.md",
+        "unresolved_manual_verification_items": [
+          "Confirm the actual retrieval date rather than treating the repository-add date as retrieval evidence.",
+          "Confirm the authoritative original source and mirror chain.",
+          "Confirm the dataset licence and reuse terms.",
+          "Confirm the authoritative bibliographic citation."
+        ]
+      },
+      "ibm_hr_analytics": {
+        "canonical_name": "IBM HR Analytics Employee Attrition and Performance",
+        "raw_file_path": "data/external/ibm_hr_analytics/raw.csv",
+        "csv_delimiter": ",",
+        "retrieval_url": "https://raw.githubusercontent.com/nelson-wu/employee-attrition-ml/master/WA_Fn-UseC_-HR-Employee-Attrition.csv",
+        "retrieval_date": "manual_review_required",
+        "repository_first_recorded_date": "2026-06-24",
+        "known_source_mirror_status": "public_mirror_recorded_upstream_authenticity_unverified",
+        "source_authenticity_verification_status": "manual_review_required",
+        "licence": "manual_review_required",
+        "licence_verification_status": "manual_review_required",
+        "citation_source": "IBM HR Analytics Employee Attrition and Performance dataset; repository records the listed GitHub raw-file mirror, not an independently authenticated original source.",
+        "citation_verification_status": "manual_review_required",
+        "narrative_dataset_card": "data/external/ibm_hr_analytics/dataset_card.md",
+        "unresolved_manual_verification_items": [
+          "Confirm the actual retrieval date rather than treating the repository-add date as retrieval evidence.",
+          "Confirm the authoritative original source and mirror chain.",
+          "Confirm the dataset licence and reuse terms.",
+          "Confirm the authoritative bibliographic citation."
+        ]
+      },
+      "employee_turnover": {
+        "canonical_name": "Human Resources Analytics / Employee Turnover",
+        "raw_file_path": "data/external/employee_turnover/raw.csv",
+        "csv_delimiter": ",",
+        "retrieval_url": "https://raw.githubusercontent.com/ucg8j/kaggle_HR/master/HR_comma_sep.csv",
+        "retrieval_date": "manual_review_required",
+        "repository_first_recorded_date": "2026-06-24",
+        "known_source_mirror_status": "public_mirror_recorded_upstream_authenticity_unverified",
+        "source_authenticity_verification_status": "manual_review_required",
+        "licence": "manual_review_required",
+        "licence_verification_status": "manual_review_required",
+        "citation_source": "Human Resources Analytics / Employee Turnover dataset; repository records the listed GitHub raw-file mirror, not an independently authenticated original source.",
+        "citation_verification_status": "manual_review_required",
+        "narrative_dataset_card": "data/external/employee_turnover/dataset_card.md",
+        "unresolved_manual_verification_items": [
+          "Confirm the actual retrieval date rather than treating the repository-add date as retrieval evidence.",
+          "Confirm the authoritative original source and mirror chain.",
+          "Confirm the dataset licence and reuse terms.",
+          "Confirm the authoritative bibliographic citation."
+        ]
+      }
+    },
+    "dataset_bindings": {
+      "inx_primary": {
+        "physical_source": "inx_employee_performance",
+        "raw_target": "PerformanceRating",
+        "target_mapping": {"2": 2, "3": 3, "4": 4},
+        "target_mapping_note": "Identity mapping for observed ordinal performance labels 2, 3, and 4."
+      },
+      "hrdataset_v14": {
+        "physical_source": "hrdataset_v14",
+        "raw_target": "PerformanceScore",
+        "target_mapping": {
+          "PIP": 2,
+          "Needs Improvement": 2,
+          "Fully Meets": 3,
+          "Exceeds": 4,
+          "Exceptional": 4
+        },
+        "target_mapping_note": "Predeclared performance-score mapping to canonical ordinal labels 2, 3, and 4."
+      },
+      "ibm_hr_analytics": {
+        "physical_source": "ibm_hr_analytics",
+        "raw_target": "PerformanceRating",
+        "target_mapping": {"3": 3, "4": 4},
+        "target_mapping_note": "Identity mapping for the observed restricted target support (classes 3 and 4 only)."
+      },
+      "ibm_hr_analytics_attrition": {
+        "physical_source": "ibm_hr_analytics",
+        "raw_target": "Attrition",
+        "target_mapping": {"No": 0, "Yes": 1},
+        "target_mapping_note": "Binary related-task mapping; attrition is not employee performance."
+      },
+      "employee_turnover": {
+        "physical_source": "employee_turnover",
+        "raw_target": "left",
+        "target_mapping": {"0": 0, "1": 1},
+        "target_mapping_note": "Identity mapping for the binary related turnover target; turnover is not employee performance."
+      }
+    }
+  }
+}

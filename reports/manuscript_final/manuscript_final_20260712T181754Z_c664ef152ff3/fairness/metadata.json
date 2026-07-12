@@ -1,0 +1,45 @@
+{
+  "audit_attributes": [
+    "Age",
+    "Gender",
+    "MaritalStatus",
+    "EmpDepartment",
+    "EducationBackground",
+    "BusinessTravelFrequency"
+  ],
+  "bootstrap_samples": 5000,
+  "bootstrap_stratification": [
+    "fold",
+    "y_true"
+  ],
+  "claim_boundary": "Subgroup gaps are descriptive OOF audit evidence with support and uncertainty constraints; they do not establish discrimination, fairness, or causality.",
+  "common_fold_assignment": true,
+  "confidence_level": 0.95,
+  "config_hash": "c664ef152ff3a9eef89c53a403b9c2e6f677340bea0307b02d97d07cc54bdfc3",
+  "minimum_class_metric_denominator": 10,
+  "minimum_group_support": 30,
+  "outputs": {
+    "disparity_uncertainty": "C:\\Users\\Yusuf\\Documents\\GitHub\\employee performance with XAI\\reports\\manuscript_final\\manuscript_final_20260712T181754Z_c664ef152ff3\\fairness\\fairness_disparity_uncertainty.csv",
+    "fold_assignment": "C:\\Users\\Yusuf\\Documents\\GitHub\\employee performance with XAI\\reports\\manuscript_final\\manuscript_final_20260712T181754Z_c664ef152ff3\\fairness\\common_fold_assignment.csv",
+    "group_support_and_metrics": "C:\\Users\\Yusuf\\Documents\\GitHub\\employee performance with XAI\\reports\\manuscript_final\\manuscript_final_20260712T181754Z_c664ef152ff3\\fairness\\fairness_group_support_and_metrics.csv",
+    "interpretation": "C:\\Users\\Yusuf\\Documents\\GitHub\\employee performance with XAI\\reports\\manuscript_final\\manuscript_final_20260712T181754Z_c664ef152ff3\\fairness\\fairness_proxy_interpretation.md",
+    "manuscript_table": "C:\\Users\\Yusuf\\Documents\\GitHub\\employee performance with XAI\\reports\\manuscript_final\\manuscript_final_20260712T181754Z_c664ef152ff3\\fairness\\manuscript_fairness_proxy_table.csv",
+    "oof_predictions": "C:\\Users\\Yusuf\\Documents\\GitHub\\employee performance with XAI\\reports\\manuscript_final\\manuscript_final_20260712T181754Z_c664ef152ff3\\fairness\\fairness_oof_predictions.csv",
+    "proxy_fold_metrics": "C:\\Users\\Yusuf\\Documents\\GitHub\\employee performance with XAI\\reports\\manuscript_final\\manuscript_final_20260712T181754Z_c664ef152ff3\\fairness\\proxy_fold_metrics.csv",
+    "proxy_policy_comparison": "C:\\Users\\Yusuf\\Documents\\GitHub\\employee performance with XAI\\reports\\manuscript_final\\manuscript_final_20260712T181754Z_c664ef152ff3\\fairness\\proxy_policy_comparison.csv",
+    "proxy_watchlist_associations": "C:\\Users\\Yusuf\\Documents\\GitHub\\employee performance with XAI\\reports\\manuscript_final\\manuscript_final_20260712T181754Z_c664ef152ff3\\fairness\\proxy_watchlist_associations.csv"
+  },
+  "policies": [
+    "no_salary_hike_no_attrition",
+    "no_salary_hike_no_attrition_no_department",
+    "no_salary_hike_no_attrition_no_department_no_job_role"
+  ],
+  "proxy_claim_boundary": "Reconstructability is proxy-risk evidence, not proof of causal or discriminatory use by the performance model.",
+  "run_id": "manuscript_final_20260712T181754Z_c664ef152ff3",
+  "sensitive_attributes": [
+    "Age",
+    "Gender",
+    "MaritalStatus"
+  ],
+  "task_type": "ordinal_multiclass_performance"
+}

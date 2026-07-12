@@ -1,0 +1,100 @@
+{
+  "config_hash": "c664ef152ff3a9eef89c53a403b9c2e6f677340bea0307b02d97d07cc54bdfc3",
+  "dataset_hashes": {
+    "employee_turnover": {
+      "path": "data/external/employee_turnover/raw.csv",
+      "role": "related_task_transfer",
+      "sha256": "2510e274a90547f34c7b0db5a4ab70282c2710eb54252f14921bf980b81a928c",
+      "size_bytes": 566778,
+      "task_type": "binary_turnover_transfer"
+    },
+    "hrdataset_v14": {
+      "path": "data/external/hrdataset_v14/raw.csv",
+      "role": "independent_external_performance_target_replication",
+      "sha256": "cb19996755c93c0a8d6527f59da4701c80aef65eff854906546dce286249813c",
+      "size_bytes": 76857,
+      "task_type": "ordinal_multiclass_performance"
+    },
+    "ibm_hr_analytics": {
+      "path": "data/external/ibm_hr_analytics/raw.csv",
+      "role": "restricted_target_performance_robustness",
+      "sha256": "a5c31e38bd7fafc9bc333884eb181b06b41b8e5e488e8f7ccb27199fb3be7659",
+      "size_bytes": 227977,
+      "task_type": "restricted_target_performance_robustness"
+    },
+    "ibm_hr_analytics_attrition": {
+      "path": "data/external/ibm_hr_analytics/raw.csv",
+      "role": "related_task_transfer",
+      "sha256": "a5c31e38bd7fafc9bc333884eb181b06b41b8e5e488e8f7ccb27199fb3be7659",
+      "size_bytes": 227977,
+      "task_type": "binary_attrition_transfer"
+    },
+    "inx_primary": {
+      "path": "data/raw/inx_employee_performance.csv",
+      "role": "primary_development_and_internal_oof_evaluation",
+      "sha256": "b8deac0a615b97076622ae540f4cfd0d3c3f1e7acb83ba3ff6560470a9ccf60a",
+      "size_bytes": 152715,
+      "task_type": "ordinal_multiclass_performance"
+    }
+  },
+  "elapsed_seconds": 32.99915519997012,
+  "ended_at": "2026-07-12T18:12:47+00:00",
+  "git_commit": "18347488bdb4eed60f115ceeff70c420071ceef0",
+  "outputs": [
+    {
+      "path": "reports/manuscript_final/manuscript_final_20260712T175251Z_c664ef152ff3/fairness/common_fold_assignment.csv",
+      "sha256": "139c778d176d9107762de652f19ed4384391213141af04e7162a680eafeb7372",
+      "size_bytes": 223478
+    },
+    {
+      "path": "reports/manuscript_final/manuscript_final_20260712T175251Z_c664ef152ff3/fairness/fairness_disparity_uncertainty.csv",
+      "sha256": "eabdd85aa1eb00cef208402d785302bd44b30c662c52ac24051ae7d9b39f2582",
+      "size_bytes": 176892
+    },
+    {
+      "path": "reports/manuscript_final/manuscript_final_20260712T175251Z_c664ef152ff3/fairness/fairness_group_support_and_metrics.csv",
+      "sha256": "87d6c082bff303e8d3330f2d08d136887dcd6ca1c9a5f70a28a5bec5491cc8bb",
+      "size_bytes": 368089
+    },
+    {
+      "path": "reports/manuscript_final/manuscript_final_20260712T175251Z_c664ef152ff3/fairness/fairness_oof_predictions.csv",
+      "sha256": "744b970300218b9e380436956b3defba3dcab372d9238b965e4630514eeb66fa",
+      "size_bytes": 1572563
+    },
+    {
+      "path": "reports/manuscript_final/manuscript_final_20260712T175251Z_c664ef152ff3/fairness/fairness_proxy_interpretation.md",
+      "sha256": "507f75505dfd5cb3cd076705e72f1182c4e951f99fa9e5d33b890cc30e315e59",
+      "size_bytes": 3148
+    },
+    {
+      "path": "reports/manuscript_final/manuscript_final_20260712T175251Z_c664ef152ff3/fairness/manuscript_fairness_proxy_table.csv",
+      "sha256": "a6af5554fc2f3e636052c6ed816459a162b3a3e6f727c94937fd054a70f2d15d",
+      "size_bytes": 191623
+    },
+    {
+      "path": "reports/manuscript_final/manuscript_final_20260712T175251Z_c664ef152ff3/fairness/metadata.json",
+      "sha256": "4e1b522c774cdc288c8001b4e764a19284cabcc7af5ce5e2e8fb5e7bd85a1360",
+      "size_bytes": 3135
+    },
+    {
+      "path": "reports/manuscript_final/manuscript_final_20260712T175251Z_c664ef152ff3/fairness/proxy_fold_metrics.csv",
+      "sha256": "9ad456af7d3b871d812c3a269bc613b7b04e17c8808495a8c7506e5744a9b894",
+      "size_bytes": 7982
+    },
+    {
+      "path": "reports/manuscript_final/manuscript_final_20260712T175251Z_c664ef152ff3/fairness/proxy_policy_comparison.csv",
+      "sha256": "cc6065b09ec9d0f5f96095070026b6b18a1d4d7a1c9b1b348db6895706f50838",
+      "size_bytes": 2557
+    },
+    {
+      "path": "reports/manuscript_final/manuscript_final_20260712T175251Z_c664ef152ff3/fairness/proxy_watchlist_associations.csv",
+      "sha256": "463852d102504ab0829ef0d5fadd903ab193b898a4f5c5c117866482a08f1bfd",
+      "size_bytes": 13234
+    }
+  ],
+  "run_id": "manuscript_final_20260712T175251Z_c664ef152ff3",
+  "source_tree_hash": "81653ab9edd694a6e883f61111d814c26f332dcec4433e564c39b5d1396c7038",
+  "stage": "fairness",
+  "started_at": "2026-07-12T18:12:14+00:00",
+  "status": "complete"
+}

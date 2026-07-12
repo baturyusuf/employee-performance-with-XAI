@@ -1,0 +1,135 @@
+{
+  "config_hash": "c664ef152ff3a9eef89c53a403b9c2e6f677340bea0307b02d97d07cc54bdfc3",
+  "dataset_hashes": {
+    "employee_turnover": {
+      "path": "data/external/employee_turnover/raw.csv",
+      "role": "related_task_transfer",
+      "sha256": "2510e274a90547f34c7b0db5a4ab70282c2710eb54252f14921bf980b81a928c",
+      "size_bytes": 566778,
+      "task_type": "binary_turnover_transfer"
+    },
+    "hrdataset_v14": {
+      "path": "data/external/hrdataset_v14/raw.csv",
+      "role": "independent_external_performance_target_replication",
+      "sha256": "cb19996755c93c0a8d6527f59da4701c80aef65eff854906546dce286249813c",
+      "size_bytes": 76857,
+      "task_type": "ordinal_multiclass_performance"
+    },
+    "ibm_hr_analytics": {
+      "path": "data/external/ibm_hr_analytics/raw.csv",
+      "role": "restricted_target_performance_robustness",
+      "sha256": "a5c31e38bd7fafc9bc333884eb181b06b41b8e5e488e8f7ccb27199fb3be7659",
+      "size_bytes": 227977,
+      "task_type": "restricted_target_performance_robustness"
+    },
+    "ibm_hr_analytics_attrition": {
+      "path": "data/external/ibm_hr_analytics/raw.csv",
+      "role": "related_task_transfer",
+      "sha256": "a5c31e38bd7fafc9bc333884eb181b06b41b8e5e488e8f7ccb27199fb3be7659",
+      "size_bytes": 227977,
+      "task_type": "binary_attrition_transfer"
+    },
+    "inx_primary": {
+      "path": "data/raw/inx_employee_performance.csv",
+      "role": "primary_development_and_internal_oof_evaluation",
+      "sha256": "b8deac0a615b97076622ae540f4cfd0d3c3f1e7acb83ba3ff6560470a9ccf60a",
+      "size_bytes": 152715,
+      "task_type": "ordinal_multiclass_performance"
+    }
+  },
+  "elapsed_seconds": 4.035418000072241,
+  "ended_at": "2026-07-12T17:53:14+00:00",
+  "git_commit": "18347488bdb4eed60f115ceeff70c420071ceef0",
+  "outputs": [
+    {
+      "path": "reports/manuscript_final/manuscript_final_20260712T175251Z_c664ef152ff3/calibration/calibration_bins.csv",
+      "sha256": "d8b834996df997d49d69a8d6f3286808df79c4b891ff6c31b9769ed2554828e8",
+      "size_bytes": 16240
+    },
+    {
+      "path": "reports/manuscript_final/manuscript_final_20260712T175251Z_c664ef152ff3/calibration/calibration_fold_metrics.csv",
+      "sha256": "b134accb8cee5608289208c3e60c0d38ee8b24d0ea7de5b4db9f67b03cf97bf7",
+      "size_bytes": 13118
+    },
+    {
+      "path": "reports/manuscript_final/manuscript_final_20260712T175251Z_c664ef152ff3/calibration/calibration_metadata.json",
+      "sha256": "32ec808ab53679cf35c58c0fcfcc9ceda33984b43619dee7dbcbfd229b136d66",
+      "size_bytes": 4450
+    },
+    {
+      "path": "reports/manuscript_final/manuscript_final_20260712T175251Z_c664ef152ff3/calibration/calibration_method_comparison.csv",
+      "sha256": "f8f89eb9f9fbbe2700dd21ad5880a412621e6edb5b2844a9771536cae2ac9659",
+      "size_bytes": 3484
+    },
+    {
+      "path": "reports/manuscript_final/manuscript_final_20260712T175251Z_c664ef152ff3/calibration/calibration_predictions.csv",
+      "sha256": "6c7bb5fe7295fc5e9f09a7b9ee1d2c909ab39e3b7b2e96a1435cc32ec117731e",
+      "size_bytes": 836578
+    },
+    {
+      "path": "reports/manuscript_final/manuscript_final_20260712T175251Z_c664ef152ff3/calibration/calibration_uncertainty.csv",
+      "sha256": "4511934e6357628c57a9af0f633058ba3b6296993ff6134968cbd91d0a3a0426",
+      "size_bytes": 2599
+    },
+    {
+      "path": "reports/manuscript_final/manuscript_final_20260712T175251Z_c664ef152ff3/calibration/figure_5_calibration_ordinal_error.png",
+      "sha256": "b0e0ce6932f63ced43deb49e11b8565d5bb4b5887f0cff9b80418276536c5a06",
+      "size_bytes": 418306
+    },
+    {
+      "path": "reports/manuscript_final/manuscript_final_20260712T175251Z_c664ef152ff3/calibration/figure_5_calibration_ordinal_error.svg",
+      "sha256": "ec552061180e99380e24f262db12addae9b7753e01d9d593b75ab12becda4ebb",
+      "size_bytes": 124233
+    },
+    {
+      "path": "reports/manuscript_final/manuscript_final_20260712T175251Z_c664ef152ff3/calibration/figure_5_metric_source.csv",
+      "sha256": "174c6d8d2a7dc50c2ae3ba601dce34825435aa80b314e398ff4a0659208d0ac6",
+      "size_bytes": 3294
+    },
+    {
+      "path": "reports/manuscript_final/manuscript_final_20260712T175251Z_c664ef152ff3/calibration/figure_5_reliability_source.csv",
+      "sha256": "d8b834996df997d49d69a8d6f3286808df79c4b891ff6c31b9769ed2554828e8",
+      "size_bytes": 16240
+    },
+    {
+      "path": "reports/manuscript_final/manuscript_final_20260712T175251Z_c664ef152ff3/calibration/figures/reliability_class_2.png",
+      "sha256": "7548b191eceb9a516fc3bb68858edcfc78def2464d6a7c5984015e45757da418",
+      "size_bytes": 236654
+    },
+    {
+      "path": "reports/manuscript_final/manuscript_final_20260712T175251Z_c664ef152ff3/calibration/figures/reliability_class_2.svg",
+      "sha256": "e02585b721694708b159b6ab4b0ca9f11f4506a1037e4c04babbb2f71c5b39c4",
+      "size_bytes": 42608
+    },
+    {
+      "path": "reports/manuscript_final/manuscript_final_20260712T175251Z_c664ef152ff3/calibration/figures/reliability_class_3.png",
+      "sha256": "a4cb8fbf1b855dda2bca754c8b19eba1329e5e1eba5265428090c193ec081861",
+      "size_bytes": 204896
+    },
+    {
+      "path": "reports/manuscript_final/manuscript_final_20260712T175251Z_c664ef152ff3/calibration/figures/reliability_class_3.svg",
+      "sha256": "bd2a739f0de3bfab8861e88c0c36afd23e8e44f90c42d7ad64677542b23cb1c7",
+      "size_bytes": 43315
+    },
+    {
+      "path": "reports/manuscript_final/manuscript_final_20260712T175251Z_c664ef152ff3/calibration/figures/reliability_class_4.png",
+      "sha256": "241c1679c42fb04facc7a281e1630c8f9906b65b725a4f41065a013ad837a3ea",
+      "size_bytes": 229554
+    },
+    {
+      "path": "reports/manuscript_final/manuscript_final_20260712T175251Z_c664ef152ff3/calibration/figures/reliability_class_4.svg",
+      "sha256": "6ecf7b3282c4eac6e06fd4f76ee05728578415fc57bef9b051bc17354e209cc8",
+      "size_bytes": 41416
+    },
+    {
+      "path": "reports/manuscript_final/manuscript_final_20260712T175251Z_c664ef152ff3/calibration/selected_method_rationale.md",
+      "sha256": "d140adb4eeadcd058c0796ce81e2da99b66bf65891e01ca56c2151c7cb29bd57",
+      "size_bytes": 1146
+    }
+  ],
+  "run_id": "manuscript_final_20260712T175251Z_c664ef152ff3",
+  "source_tree_hash": "81653ab9edd694a6e883f61111d814c26f332dcec4433e564c39b5d1396c7038",
+  "stage": "calibration",
+  "started_at": "2026-07-12T17:53:10+00:00",
+  "status": "complete"
+}

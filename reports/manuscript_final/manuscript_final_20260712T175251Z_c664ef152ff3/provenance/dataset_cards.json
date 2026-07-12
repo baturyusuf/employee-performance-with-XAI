@@ -1,0 +1,281 @@
+{
+  "cards": [
+    {
+      "allowed_claim": "Internal out-of-fold employee-performance evidence; not independent external validation.",
+      "canonical_name": "INX Future Inc Employee Performance",
+      "citation_source": "INX Future Inc Employee Performance dataset title and repository-local raw file; upstream bibliographic source is not independently verified.",
+      "citation_verification_status": "manual_review_required",
+      "column_count": 28,
+      "config_hash": "c664ef152ff3a9eef89c53a403b9c2e6f677340bea0307b02d97d07cc54bdfc3",
+      "dataset_id": "inx_primary",
+      "known_source_mirror_status": "repository_local_copy_upstream_source_unverified",
+      "licence": "manual_review_required",
+      "licence_verification_status": "manual_review_required",
+      "manual_review_marker": "manual_review_required",
+      "narrative_dataset_card": "",
+      "physical_source_id": "inx_employee_performance",
+      "provenance_config_hash": "f8349018704f719e9a2455322f983e3896e1f52bc4a93f7da5ee52d0a3a6cb64",
+      "raw_file_path": "data/raw/inx_employee_performance.csv",
+      "repository_first_recorded_date": "2026-04-21",
+      "retrieval_date": "manual_review_required",
+      "retrieval_url": "manual_review_required",
+      "role": "primary_development_and_internal_oof_evaluation",
+      "row_count": 1200,
+      "run_id": "manuscript_final_20260712T175251Z_c664ef152ff3",
+      "sha256": "b8deac0a615b97076622ae540f4cfd0d3c3f1e7acb83ba3ff6560470a9ccf60a",
+      "source_authenticity_verification_status": "manual_review_required",
+      "target_column": "PerformanceRating",
+      "target_mapping": {
+        "2": 2,
+        "3": 3,
+        "4": 4
+      },
+      "target_mapping_note": "Identity mapping for observed ordinal performance labels 2, 3, and 4.",
+      "target_mapping_support": [
+        {
+          "mapped_value": 2,
+          "raw_count": 194,
+          "raw_value": "2"
+        },
+        {
+          "mapped_value": 3,
+          "raw_count": 874,
+          "raw_value": "3"
+        },
+        {
+          "mapped_value": 4,
+          "raw_count": 132,
+          "raw_value": "4"
+        }
+      ],
+      "task_type": "ordinal_multiclass_performance",
+      "unmapped_observed_target_values": [],
+      "unresolved_manual_verification_items": [
+        "Confirm the upstream retrieval URL and actual retrieval date.",
+        "Confirm the authoritative source and mirror chain.",
+        "Confirm the dataset licence and reuse terms.",
+        "Confirm the authoritative bibliographic citation."
+      ]
+    },
+    {
+      "allowed_claim": "Independent external performance-target replication; not locked-model transport unless a separate transported-model result is generated.",
+      "canonical_name": "HRDataset_v14 / Human Resources Data Set",
+      "citation_source": "HRDataset_v14 / Human Resources Data Set; repository records the listed GitHub raw-file mirror, not an independently authenticated original source.",
+      "citation_verification_status": "manual_review_required",
+      "column_count": 36,
+      "config_hash": "c664ef152ff3a9eef89c53a403b9c2e6f677340bea0307b02d97d07cc54bdfc3",
+      "dataset_id": "hrdataset_v14",
+      "known_source_mirror_status": "public_mirror_recorded_upstream_authenticity_unverified",
+      "licence": "manual_review_required",
+      "licence_verification_status": "manual_review_required",
+      "manual_review_marker": "manual_review_required",
+      "narrative_dataset_card": "data/external/hrdataset_v14/dataset_card.md",
+      "physical_source_id": "hrdataset_v14",
+      "provenance_config_hash": "f8349018704f719e9a2455322f983e3896e1f52bc4a93f7da5ee52d0a3a6cb64",
+      "raw_file_path": "data/external/hrdataset_v14/raw.csv",
+      "repository_first_recorded_date": "2026-06-24",
+      "retrieval_date": "manual_review_required",
+      "retrieval_url": "https://raw.githubusercontent.com/pouyasattari/HR-Dataset-Analysis/main/HRDataset_v14.csv",
+      "role": "independent_external_performance_target_replication",
+      "row_count": 311,
+      "run_id": "manuscript_final_20260712T175251Z_c664ef152ff3",
+      "sha256": "cb19996755c93c0a8d6527f59da4701c80aef65eff854906546dce286249813c",
+      "source_authenticity_verification_status": "manual_review_required",
+      "target_column": "PerformanceScore",
+      "target_mapping": {
+        "Exceeds": 4,
+        "Exceptional": 4,
+        "Fully Meets": 3,
+        "Needs Improvement": 2,
+        "PIP": 2
+      },
+      "target_mapping_note": "Predeclared performance-score mapping to canonical ordinal labels 2, 3, and 4.",
+      "target_mapping_support": [
+        {
+          "mapped_value": 4,
+          "raw_count": 37,
+          "raw_value": "Exceeds"
+        },
+        {
+          "mapped_value": 3,
+          "raw_count": 243,
+          "raw_value": "Fully Meets"
+        },
+        {
+          "mapped_value": 2,
+          "raw_count": 18,
+          "raw_value": "Needs Improvement"
+        },
+        {
+          "mapped_value": 2,
+          "raw_count": 13,
+          "raw_value": "PIP"
+        }
+      ],
+      "task_type": "ordinal_multiclass_performance",
+      "unmapped_observed_target_values": [],
+      "unresolved_manual_verification_items": [
+        "Confirm the actual retrieval date rather than treating the repository-add date as retrieval evidence.",
+        "Confirm the authoritative original source and mirror chain.",
+        "Confirm the dataset licence and reuse terms.",
+        "Confirm the authoritative bibliographic citation."
+      ]
+    },
+    {
+      "allowed_claim": "Restricted-target performance robustness only; not direct three-class external validation.",
+      "canonical_name": "IBM HR Analytics Employee Attrition and Performance",
+      "citation_source": "IBM HR Analytics Employee Attrition and Performance dataset; repository records the listed GitHub raw-file mirror, not an independently authenticated original source.",
+      "citation_verification_status": "manual_review_required",
+      "column_count": 35,
+      "config_hash": "c664ef152ff3a9eef89c53a403b9c2e6f677340bea0307b02d97d07cc54bdfc3",
+      "dataset_id": "ibm_hr_analytics",
+      "known_source_mirror_status": "public_mirror_recorded_upstream_authenticity_unverified",
+      "licence": "manual_review_required",
+      "licence_verification_status": "manual_review_required",
+      "manual_review_marker": "manual_review_required",
+      "narrative_dataset_card": "data/external/ibm_hr_analytics/dataset_card.md",
+      "physical_source_id": "ibm_hr_analytics",
+      "provenance_config_hash": "f8349018704f719e9a2455322f983e3896e1f52bc4a93f7da5ee52d0a3a6cb64",
+      "raw_file_path": "data/external/ibm_hr_analytics/raw.csv",
+      "repository_first_recorded_date": "2026-06-24",
+      "retrieval_date": "manual_review_required",
+      "retrieval_url": "https://raw.githubusercontent.com/nelson-wu/employee-attrition-ml/master/WA_Fn-UseC_-HR-Employee-Attrition.csv",
+      "role": "restricted_target_performance_robustness",
+      "row_count": 1470,
+      "run_id": "manuscript_final_20260712T175251Z_c664ef152ff3",
+      "sha256": "a5c31e38bd7fafc9bc333884eb181b06b41b8e5e488e8f7ccb27199fb3be7659",
+      "source_authenticity_verification_status": "manual_review_required",
+      "target_column": "PerformanceRating",
+      "target_mapping": {
+        "3": 3,
+        "4": 4
+      },
+      "target_mapping_note": "Identity mapping for the observed restricted target support (classes 3 and 4 only).",
+      "target_mapping_support": [
+        {
+          "mapped_value": 3,
+          "raw_count": 1244,
+          "raw_value": "3"
+        },
+        {
+          "mapped_value": 4,
+          "raw_count": 226,
+          "raw_value": "4"
+        }
+      ],
+      "task_type": "restricted_target_performance_robustness",
+      "unmapped_observed_target_values": [],
+      "unresolved_manual_verification_items": [
+        "Confirm the actual retrieval date rather than treating the repository-add date as retrieval evidence.",
+        "Confirm the authoritative original source and mirror chain.",
+        "Confirm the dataset licence and reuse terms.",
+        "Confirm the authoritative bibliographic citation."
+      ]
+    },
+    {
+      "allowed_claim": "Related attrition-task transfer evidence only; not employee-performance validation.",
+      "canonical_name": "IBM HR Analytics Employee Attrition and Performance (attrition related-task binding)",
+      "citation_source": "IBM HR Analytics Employee Attrition and Performance dataset; repository records the listed GitHub raw-file mirror, not an independently authenticated original source.",
+      "citation_verification_status": "manual_review_required",
+      "column_count": 35,
+      "config_hash": "c664ef152ff3a9eef89c53a403b9c2e6f677340bea0307b02d97d07cc54bdfc3",
+      "dataset_id": "ibm_hr_analytics_attrition",
+      "known_source_mirror_status": "public_mirror_recorded_upstream_authenticity_unverified",
+      "licence": "manual_review_required",
+      "licence_verification_status": "manual_review_required",
+      "manual_review_marker": "manual_review_required",
+      "narrative_dataset_card": "data/external/ibm_hr_analytics/dataset_card.md",
+      "physical_source_id": "ibm_hr_analytics",
+      "provenance_config_hash": "f8349018704f719e9a2455322f983e3896e1f52bc4a93f7da5ee52d0a3a6cb64",
+      "raw_file_path": "data/external/ibm_hr_analytics/raw.csv",
+      "repository_first_recorded_date": "2026-06-24",
+      "retrieval_date": "manual_review_required",
+      "retrieval_url": "https://raw.githubusercontent.com/nelson-wu/employee-attrition-ml/master/WA_Fn-UseC_-HR-Employee-Attrition.csv",
+      "role": "related_task_transfer",
+      "row_count": 1470,
+      "run_id": "manuscript_final_20260712T175251Z_c664ef152ff3",
+      "sha256": "a5c31e38bd7fafc9bc333884eb181b06b41b8e5e488e8f7ccb27199fb3be7659",
+      "source_authenticity_verification_status": "manual_review_required",
+      "target_column": "Attrition",
+      "target_mapping": {
+        "No": 0,
+        "Yes": 1
+      },
+      "target_mapping_note": "Binary related-task mapping; attrition is not employee performance.",
+      "target_mapping_support": [
+        {
+          "mapped_value": 0,
+          "raw_count": 1233,
+          "raw_value": "No"
+        },
+        {
+          "mapped_value": 1,
+          "raw_count": 237,
+          "raw_value": "Yes"
+        }
+      ],
+      "task_type": "binary_attrition_transfer",
+      "unmapped_observed_target_values": [],
+      "unresolved_manual_verification_items": [
+        "Confirm the actual retrieval date rather than treating the repository-add date as retrieval evidence.",
+        "Confirm the authoritative original source and mirror chain.",
+        "Confirm the dataset licence and reuse terms.",
+        "Confirm the authoritative bibliographic citation."
+      ]
+    },
+    {
+      "allowed_claim": "Related turnover-task transfer evidence only; not employee-performance validation.",
+      "canonical_name": "Human Resources Analytics / Employee Turnover",
+      "citation_source": "Human Resources Analytics / Employee Turnover dataset; repository records the listed GitHub raw-file mirror, not an independently authenticated original source.",
+      "citation_verification_status": "manual_review_required",
+      "column_count": 10,
+      "config_hash": "c664ef152ff3a9eef89c53a403b9c2e6f677340bea0307b02d97d07cc54bdfc3",
+      "dataset_id": "employee_turnover",
+      "known_source_mirror_status": "public_mirror_recorded_upstream_authenticity_unverified",
+      "licence": "manual_review_required",
+      "licence_verification_status": "manual_review_required",
+      "manual_review_marker": "manual_review_required",
+      "narrative_dataset_card": "data/external/employee_turnover/dataset_card.md",
+      "physical_source_id": "employee_turnover",
+      "provenance_config_hash": "f8349018704f719e9a2455322f983e3896e1f52bc4a93f7da5ee52d0a3a6cb64",
+      "raw_file_path": "data/external/employee_turnover/raw.csv",
+      "repository_first_recorded_date": "2026-06-24",
+      "retrieval_date": "manual_review_required",
+      "retrieval_url": "https://raw.githubusercontent.com/ucg8j/kaggle_HR/master/HR_comma_sep.csv",
+      "role": "related_task_transfer",
+      "row_count": 14999,
+      "run_id": "manuscript_final_20260712T175251Z_c664ef152ff3",
+      "sha256": "2510e274a90547f34c7b0db5a4ab70282c2710eb54252f14921bf980b81a928c",
+      "source_authenticity_verification_status": "manual_review_required",
+      "target_column": "left",
+      "target_mapping": {
+        "0": 0,
+        "1": 1
+      },
+      "target_mapping_note": "Identity mapping for the binary related turnover target; turnover is not employee performance.",
+      "target_mapping_support": [
+        {
+          "mapped_value": 0,
+          "raw_count": 11428,
+          "raw_value": "0"
+        },
+        {
+          "mapped_value": 1,
+          "raw_count": 3571,
+          "raw_value": "1"
+        }
+      ],
+      "task_type": "binary_turnover_transfer",
+      "unmapped_observed_target_values": [],
+      "unresolved_manual_verification_items": [
+        "Confirm the actual retrieval date rather than treating the repository-add date as retrieval evidence.",
+        "Confirm the authoritative original source and mirror chain.",
+        "Confirm the dataset licence and reuse terms.",
+        "Confirm the authoritative bibliographic citation."
+      ]
+    }
+  ],
+  "config_hash": "c664ef152ff3a9eef89c53a403b9c2e6f677340bea0307b02d97d07cc54bdfc3",
+  "provenance_config_hash": "f8349018704f719e9a2455322f983e3896e1f52bc4a93f7da5ee52d0a3a6cb64",
+  "run_id": "manuscript_final_20260712T175251Z_c664ef152ff3"
+}

@@ -1,19 +1,19 @@
 {
   "dataset_name": "ibm_hr_analytics",
   "display_name": "IBM HR Analytics Employee Attrition and Performance",
-  "recommended_role": "schema-compatible robustness",
+  "recommended_role": "restricted-target performance robustness",
   "source_url": "https://raw.githubusercontent.com/nelson-wu/employee-attrition-ml/master/WA_Fn-UseC_-HR-Employee-Attrition.csv",
   "canonical_source_note": "Public mirror of the IBM HR Analytics Employee Attrition and Performance Kaggle dataset.",
   "target": {
     "raw_column": "PerformanceRating",
     "canonical_column": "PerformanceRating",
-    "task_type": "restricted_ordinal_performance",
+    "task_type": "restricted_target_performance_robustness",
     "mapping": {}
   },
   "optional_attrition_target": {
     "raw_column": "Attrition",
     "canonical_column": "AttritionTarget",
-    "task_type": "binary_attrition",
+    "task_type": "binary_attrition_transfer",
     "mapping": {
       "No": 0,
       "Yes": 1

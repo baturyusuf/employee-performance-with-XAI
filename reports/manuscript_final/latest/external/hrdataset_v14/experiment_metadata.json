@@ -1,0 +1,53 @@
+{
+  "claim_limitations": [
+    "Research-grade decision support only; no autonomous HR decision use.",
+    "Dataset-specific models are not locked-INX-model transport.",
+    "SHAP attribution, if generated elsewhere, is not causal evidence.",
+    "Related attrition/turnover tasks are not performance-model replication."
+  ],
+  "completed_at": "2026-07-12T18:36:28+00:00",
+  "config_hash": "c664ef152ff3a9eef89c53a403b9c2e6f677340bea0307b02d97d07cc54bdfc3",
+  "dataset_key": "hrdataset_v14",
+  "dataset_name": "hrdataset_v14",
+  "effective_cv_splits": 10,
+  "labels": [
+    2,
+    3,
+    4
+  ],
+  "locked_inx_model_transported": false,
+  "mapping_verified": true,
+  "n_rows": 311,
+  "outputs": {
+    "actionability_summary": "actionability_summary.csv",
+    "fairness_disparity_summary": "fairness_proxy\\fairness_disparity_summary.csv",
+    "fairness_group_metrics": "fairness_proxy\\fairness_group_metrics.csv",
+    "feature_policy": "feature_policy_audit.csv",
+    "fold_metrics": "fold_metrics.csv",
+    "oof_global_shap": "shap\\department_free\\global_grouped_shap_importance.csv",
+    "oof_local_shap": "shap\\department_free\\local_grouped_shap_values.csv",
+    "policy_summary": "performance_metrics.csv",
+    "predictions": "model_predictions.csv",
+    "representative_cases": "representative_cases.csv",
+    "small_group_warnings": "fairness_proxy\\small_group_warnings.csv",
+    "target_mapping": "target_mapping.csv",
+    "target_support": "target_support.csv"
+  },
+  "policies": [
+    "department_including",
+    "department_free",
+    "department_job_role_free"
+  ],
+  "raw_dataset_path": "C:\\Users\\Yusuf\\Documents\\GitHub\\employee performance with XAI\\data\\external\\hrdataset_v14\\raw.csv",
+  "raw_dataset_sha256": "cb19996755c93c0a8d6527f59da4701c80aef65eff854906546dce286249813c",
+  "requested_cv_splits": 10,
+  "role": "independent external performance-target replication",
+  "run_id": "manuscript_final_20260712T181754Z_c664ef152ff3",
+  "schema_mapping_path": "C:\\Users\\Yusuf\\Documents\\GitHub\\employee performance with XAI\\data\\external\\hrdataset_v14\\schema_mapping.json",
+  "schema_mapping_sha256": "4988bde12fbd0198102f22f4078fd31ba20ea4285160363d9cf101610e9f19d0",
+  "seed": 42,
+  "status": "completed",
+  "target_kind": "primary",
+  "task_comparison_group": "three_class_ordinal_performance",
+  "task_type": "ordinal_multiclass_performance"
+}

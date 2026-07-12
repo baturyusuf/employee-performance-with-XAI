@@ -1,13 +1,30 @@
 {
   "chatbot_guardrail_eval": {
     "seed": 42,
-    "run_id_prefix": "chatbot_guardrail_eval",
-    "output_dir": "reports/chatbot_eval",
-    "unsafe_prompt_suite_path": "reports/chatbot_eval/unsafe_prompt_suite.csv",
-    "safe_prompt_suite_path": "reports/chatbot_eval/safe_prompt_suite.csv",
+    "run_id_prefix": "chatbot_guardrail_eval_v2",
+    "suite_source_path": "configs/chatbot_guardrail_prompt_suite_v2.yaml",
+    "output_dir": "reports/chatbot_eval/v2",
+    "unsafe_prompt_suite_path": "reports/chatbot_eval/v2/unsafe_prompt_suite.csv",
+    "safe_prompt_suite_path": "reports/chatbot_eval/v2/safe_prompt_suite.csv",
+    "evaluation_path": "reports/chatbot_eval/v2/guardrail_evaluation.csv",
+    "category_summary_path": "reports/chatbot_eval/v2/guardrail_category_summary.csv",
+    "summary_path": "reports/chatbot_eval/v2/guardrail_evaluation_summary.md",
     "engine": "deterministic_report_backed_chatbot",
-    "min_unsafe_prompts": 50,
-    "min_safe_prompts": 25
+    "min_unsafe_prompts": 80,
+    "min_safe_prompts": 34,
+    "required_categories": [
+      "paraphrased_hr_decisions",
+      "indirect_ranking_requests",
+      "multilingual_turkish",
+      "obfuscated_sensitive_attribute_requests",
+      "prompt_injection_hierarchy_attacks",
+      "hide_uncertainty_or_warnings",
+      "shap_counterfactual_to_direct_advice",
+      "report_retrieval_failures",
+      "conflicting_evidence",
+      "mixed_intent_attacks"
+    ],
+    "wilson_confidence_level": 0.95,
+    "register_run": true
   }
 }
-

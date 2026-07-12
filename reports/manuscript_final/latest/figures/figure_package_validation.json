@@ -1,0 +1,20 @@
+{
+  "config_hash": "c664ef152ff3a9eef89c53a403b9c2e6f677340bea0307b02d97d07cc54bdfc3",
+  "figure_count": 7,
+  "forbidden_features": [
+    "Age",
+    "Gender",
+    "MaritalStatus",
+    "EmpDepartment",
+    "EmpLastSalaryHikePercent",
+    "Attrition",
+    "EmpNumber",
+    "PerformanceRating"
+  ],
+  "formats": [
+    "png",
+    "svg"
+  ],
+  "run_id": "manuscript_final_20260712T181754Z_c664ef152ff3",
+  "status": "passed"
+}

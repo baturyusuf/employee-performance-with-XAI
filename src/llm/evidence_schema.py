@@ -7,6 +7,8 @@ from typing import Any, Dict, List, Optional
 
 import pandas as pd
 
+from src.governance.manuscript_contract import load_manuscript_config, primary_excluded_features
+
 from src.utils.config import SETTINGS
 
 
@@ -177,9 +179,17 @@ class CompleteCaseEvidence:
     evidence_sources: List[str] = field(default_factory=list)
 
     def __post_init__(self) -> None:
-        forbidden_predictor_names = {"EmpLastSalaryHikePercent", "Attrition", "PerformanceRating", "EmpNumber", "Age"}
+        # The canonical feature-policy contract is the sole authority. Keeping a
+        # second LLM-local list previously allowed Gender, MaritalStatus, and
+        # EmpDepartment to re-enter case evidence after the model excluded them.
+        forbidden_predictor_names = set(primary_excluded_features(load_manuscript_config()))
         if self.shap is not None:
-            features = {row.get("feature") for row in self.shap.top_positive_features + self.shap.top_negative_features}
+            features = {
+                row.get("feature")
+                for row in self.shap.top_positive_features + self.shap.top_negative_features
+            }
+            features.update(self.shap.grouped_shap_values)
+            features.update(self.shap.class_specific_shap_values)
             leaked = sorted(forbidden_predictor_names.intersection(features))
             if leaked:
                 raise ValueError(f"Forbidden final-model feature exposed to LLM evidence: {leaked}")

@@ -27,7 +27,10 @@ def build_llm_client(config: Optional[LLMRuntimeConfig] = None) -> LLMClient:
         )
 
     if resolved.provider == "auto":
-        if os.getenv("OPENAI_API_KEY"):
+        # Auto mode is deliberately offline unless the caller explicitly
+        # requires a real provider. An API key's presence is configuration,
+        # not authorization to incur cost.
+        if resolved.require_real_llm and os.getenv("OPENAI_API_KEY"):
             try:
                 return OpenAIChatStructuredClient(
                     model=resolved.model,
@@ -49,5 +52,5 @@ def build_llm_client(config: Optional[LLMRuntimeConfig] = None) -> LLMClient:
 def active_provider_label(config: Optional[LLMRuntimeConfig] = None) -> str:
     resolved = config or LLMRuntimeConfig.from_env()
     if resolved.provider == "auto":
-        return "openai" if os.getenv("OPENAI_API_KEY") else "offline"
+        return "openai" if resolved.require_real_llm and os.getenv("OPENAI_API_KEY") else "offline"
     return resolved.provider

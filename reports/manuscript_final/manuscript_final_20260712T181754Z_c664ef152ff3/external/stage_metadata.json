@@ -1,0 +1,77 @@
+{
+  "completed_at": "2026-07-12T18:37:10+00:00",
+  "config_hash": "c664ef152ff3a9eef89c53a403b9c2e6f677340bea0307b02d97d07cc54bdfc3",
+  "locked_inx_model_transported": false,
+  "outputs": {
+    "external_dataset_roles": "external_dataset_roles.csv",
+    "interpretation": "external_evidence_interpretation.md",
+    "metric_applicability": "external_metric_applicability.csv",
+    "performance_target_replication": "performance_target_replication.csv",
+    "related_binary_task_transfer": "related_binary_task_transfer.csv",
+    "restricted_target_robustness": "restricted_target_robustness.csv",
+    "transport_feasibility": "cross_dataset_transport/transport_feasibility.json",
+    "transport_feature_overlap": "cross_dataset_transport/feature_overlap.csv",
+    "transport_interpretation": "cross_dataset_transport/transport_feasibility.md"
+  },
+  "paid_api_calls": 0,
+  "run_id": "manuscript_final_20260712T181754Z_c664ef152ff3",
+  "started_and_completed_by": "manuscript_external_evidence",
+  "status": "completed",
+  "task_keys": [
+    "hrdataset_v14",
+    "ibm_performance",
+    "ibm_attrition",
+    "employee_turnover"
+  ],
+  "task_outputs": {
+    "employee_turnover": {
+      "actionability_summary": "employee_turnover/actionability_summary.csv",
+      "feature_policy": "employee_turnover/feature_policy_audit.csv",
+      "fold_metrics": "employee_turnover/fold_metrics.csv",
+      "metadata": "employee_turnover/experiment_metadata.json",
+      "policy_summary": "employee_turnover/performance_metrics.csv",
+      "predictions": "employee_turnover/model_predictions.csv",
+      "representative_cases": "employee_turnover/representative_cases.csv",
+      "target_mapping": "employee_turnover/target_mapping.csv",
+      "target_support": "employee_turnover/target_support.csv"
+    },
+    "hrdataset_v14": {
+      "actionability_summary": "hrdataset_v14/actionability_summary.csv",
+      "fairness_disparity_summary": "hrdataset_v14/fairness_proxy/fairness_disparity_summary.csv",
+      "fairness_group_metrics": "hrdataset_v14/fairness_proxy/fairness_group_metrics.csv",
+      "feature_policy": "hrdataset_v14/feature_policy_audit.csv",
+      "fold_metrics": "hrdataset_v14/fold_metrics.csv",
+      "metadata": "hrdataset_v14/experiment_metadata.json",
+      "oof_global_shap": "hrdataset_v14/shap/department_free/global_grouped_shap_importance.csv",
+      "oof_local_shap": "hrdataset_v14/shap/department_free/local_grouped_shap_values.csv",
+      "policy_summary": "hrdataset_v14/performance_metrics.csv",
+      "predictions": "hrdataset_v14/model_predictions.csv",
+      "representative_cases": "hrdataset_v14/representative_cases.csv",
+      "small_group_warnings": "hrdataset_v14/fairness_proxy/small_group_warnings.csv",
+      "target_mapping": "hrdataset_v14/target_mapping.csv",
+      "target_support": "hrdataset_v14/target_support.csv"
+    },
+    "ibm_attrition": {
+      "actionability_summary": "ibm_attrition/actionability_summary.csv",
+      "feature_policy": "ibm_attrition/feature_policy_audit.csv",
+      "fold_metrics": "ibm_attrition/fold_metrics.csv",
+      "metadata": "ibm_attrition/experiment_metadata.json",
+      "policy_summary": "ibm_attrition/performance_metrics.csv",
+      "predictions": "ibm_attrition/model_predictions.csv",
+      "representative_cases": "ibm_attrition/representative_cases.csv",
+      "target_mapping": "ibm_attrition/target_mapping.csv",
+      "target_support": "ibm_attrition/target_support.csv"
+    },
+    "ibm_performance": {
+      "actionability_summary": "ibm_performance/actionability_summary.csv",
+      "feature_policy": "ibm_performance/feature_policy_audit.csv",
+      "fold_metrics": "ibm_performance/fold_metrics.csv",
+      "metadata": "ibm_performance/experiment_metadata.json",
+      "policy_summary": "ibm_performance/performance_metrics.csv",
+      "predictions": "ibm_performance/model_predictions.csv",
+      "representative_cases": "ibm_performance/representative_cases.csv",
+      "target_mapping": "ibm_performance/target_mapping.csv",
+      "target_support": "ibm_performance/target_support.csv"
+    }
+  }
+}

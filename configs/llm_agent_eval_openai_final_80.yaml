@@ -3,6 +3,10 @@
     "seed": 42,
     "run_id_prefix": "llm_agent_eval_openai_final_80",
     "run_mode": "real",
+    "canonical_manuscript_config": "configs/manuscript_final.yaml",
+    "missing_evidence_stratum": {
+      "enabled": false
+    },
     "sampling_strategy": "stratified_risk_aware",
     "output_dir": "reports/llm_explanations",
     "agent_output_dir": "reports/agent_audits",

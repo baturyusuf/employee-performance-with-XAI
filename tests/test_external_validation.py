@@ -26,7 +26,7 @@ class ExternalValidationTests(unittest.TestCase):
         dataset = load_external_dataset("ibm_hr_analytics")
 
         self.assertEqual(dataset.labels, [3, 4])
-        self.assertEqual(dataset.task_type, "restricted_ordinal_performance")
+        self.assertEqual(dataset.task_type, "restricted_target_performance_robustness")
 
     def test_external_policy_excludes_leakage_and_sensitive_columns(self) -> None:
         dataset = load_external_dataset("hrdataset_v14")

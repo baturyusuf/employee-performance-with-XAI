@@ -1,0 +1,106 @@
+{
+  "api_call_attempted": false,
+  "claim_boundary": "Evidence readiness only; no LLM faithfulness claim, no API execution, and no autonomous HR use.",
+  "complete_case_count": 80,
+  "config_hash": "c664ef152ff3a9eef89c53a403b9c2e6f677340bea0307b02d97d07cc54bdfc3",
+  "dataset_counts": {
+    "hrdataset_v14": 40,
+    "inx_primary": 40
+  },
+  "execution_mode": "deterministic_preflight_only",
+  "external_local_shap_requirement": "case-specific OOF fold and OOF-prediction agreement",
+  "outputs": {
+    "case_manifest": "reports\\research_log\\manuscript_remediation\\llm_identity_fix_validation\\llm\\case_manifest.csv",
+    "complete_case_evidence": "reports\\research_log\\manuscript_remediation\\llm_identity_fix_validation\\llm\\complete_case_evidence.jsonl",
+    "preflight_cases": "reports\\research_log\\manuscript_remediation\\llm_identity_fix_validation\\llm\\preflight_cases.csv",
+    "preflight_markdown": "reports\\research_log\\manuscript_remediation\\llm_identity_fix_validation\\llm\\preflight_report.md",
+    "preflight_report": "reports\\research_log\\manuscript_remediation\\llm_identity_fix_validation\\llm\\preflight_report.json"
+  },
+  "paid_api_approval_recorded": false,
+  "real_api_execution_allowed": false,
+  "requested_case_count": 80,
+  "run_id": "manuscript_final_20260712T175251Z_c664ef152ff3",
+  "stage": "canonical_llm_case_evidence_preflight",
+  "upstream_artifacts": [
+    {
+      "path": "C:\\Users\\Yusuf\\Documents\\GitHub\\employee performance with XAI\\reports\\manuscript_final\\manuscript_final_20260712T175251Z_c664ef152ff3\\calibration\\calibration_metadata.json",
+      "sha256": "32ec808ab53679cf35c58c0fcfcc9ceda33984b43619dee7dbcbfd229b136d66"
+    },
+    {
+      "path": "C:\\Users\\Yusuf\\Documents\\GitHub\\employee performance with XAI\\reports\\manuscript_final\\manuscript_final_20260712T175251Z_c664ef152ff3\\calibration\\calibration_method_comparison.csv",
+      "sha256": "f8f89eb9f9fbbe2700dd21ad5880a412621e6edb5b2844a9771536cae2ac9659"
+    },
+    {
+      "path": "C:\\Users\\Yusuf\\Documents\\GitHub\\employee performance with XAI\\reports\\manuscript_final\\manuscript_final_20260712T175251Z_c664ef152ff3\\calibration\\calibration_predictions.csv",
+      "sha256": "6c7bb5fe7295fc5e9f09a7b9ee1d2c909ab39e3b7b2e96a1435cc32ec117731e"
+    },
+    {
+      "path": "C:\\Users\\Yusuf\\Documents\\GitHub\\employee performance with XAI\\reports\\manuscript_final\\manuscript_final_20260712T175251Z_c664ef152ff3\\counterfactual\\actionability_by_case.csv",
+      "sha256": "0490885f50a1ac4cf192701422bf88e89f1df8ee775aebfa28ab69e11bcff10c"
+    },
+    {
+      "path": "C:\\Users\\Yusuf\\Documents\\GitHub\\employee performance with XAI\\reports\\manuscript_final\\manuscript_final_20260712T175251Z_c664ef152ff3\\counterfactual\\actionability_summary.csv",
+      "sha256": "8c13a794562de71090825a27c2448b3d1acbc13a1369801a0b1bc502fcb1f385"
+    },
+    {
+      "path": "C:\\Users\\Yusuf\\Documents\\GitHub\\employee performance with XAI\\reports\\manuscript_final\\manuscript_final_20260712T175251Z_c664ef152ff3\\external\\hrdataset_v14\\actionability_summary.csv",
+      "sha256": "1bcd3e4680f85bc2a59f570ae5d26fe8ebba9e00202e8e805f3690e5b822aa10"
+    },
+    {
+      "path": "C:\\Users\\Yusuf\\Documents\\GitHub\\employee performance with XAI\\reports\\manuscript_final\\manuscript_final_20260712T175251Z_c664ef152ff3\\external\\hrdataset_v14\\fairness_proxy\\fairness_disparity_summary.csv",
+      "sha256": "9bb3901f5eebe5c671302aa6aa0eb2e45b9dfe8a363d72aa16cca496db8410da"
+    },
+    {
+      "path": "C:\\Users\\Yusuf\\Documents\\GitHub\\employee performance with XAI\\reports\\manuscript_final\\manuscript_final_20260712T175251Z_c664ef152ff3\\external\\hrdataset_v14\\fairness_proxy\\small_group_warnings.csv",
+      "sha256": "8ee6f7fbf6810db377e1e5fa720fd59961fada3da88ca0fea4bf155c00e199cb"
+    },
+    {
+      "path": "C:\\Users\\Yusuf\\Documents\\GitHub\\employee performance with XAI\\reports\\manuscript_final\\manuscript_final_20260712T175251Z_c664ef152ff3\\external\\hrdataset_v14\\feature_policy_audit.csv",
+      "sha256": "02eacc7efcb15797b31c485021e65f5283a561f3ec98f3fe2ae08f256a59a63b"
+    },
+    {
+      "path": "C:\\Users\\Yusuf\\Documents\\GitHub\\employee performance with XAI\\reports\\manuscript_final\\manuscript_final_20260712T175251Z_c664ef152ff3\\external\\hrdataset_v14\\model_predictions.csv",
+      "sha256": "156e5541bb4f90223b3fce2ce7ec10d47066ac62bc5d511ecbdd95f2c2f9aee8"
+    },
+    {
+      "path": "C:\\Users\\Yusuf\\Documents\\GitHub\\employee performance with XAI\\reports\\manuscript_final\\manuscript_final_20260712T175251Z_c664ef152ff3\\external\\hrdataset_v14\\performance_metrics.csv",
+      "sha256": "2584079d5a883ce7d0c53d08ef2d1000be6be3221a8a48e71534fe80cb4dd6aa"
+    },
+    {
+      "path": "C:\\Users\\Yusuf\\Documents\\GitHub\\employee performance with XAI\\reports\\manuscript_final\\manuscript_final_20260712T175251Z_c664ef152ff3\\external\\hrdataset_v14\\representative_cases.csv",
+      "sha256": "82198dede355f2cf96cc524d518e9566c12b5f97cc240349f090766bf158b2bc"
+    },
+    {
+      "path": "C:\\Users\\Yusuf\\Documents\\GitHub\\employee performance with XAI\\reports\\manuscript_final\\manuscript_final_20260712T175251Z_c664ef152ff3\\external\\hrdataset_v14\\shap\\department_free\\local_grouped_shap_values.csv",
+      "sha256": "898f5941859833bb71035f6977c25e755304f63cd2803feffef512e8282e59e3"
+    },
+    {
+      "path": "C:\\Users\\Yusuf\\Documents\\GitHub\\employee performance with XAI\\reports\\manuscript_final\\manuscript_final_20260712T175251Z_c664ef152ff3\\external\\hrdataset_v14\\target_support.csv",
+      "sha256": "ead4470757f7f13807dd83f7e24ae4d2ee62ff12f112bad51dae20abef2c6d36"
+    },
+    {
+      "path": "C:\\Users\\Yusuf\\Documents\\GitHub\\employee performance with XAI\\reports\\manuscript_final\\manuscript_final_20260712T175251Z_c664ef152ff3\\fairness\\manuscript_fairness_proxy_table.csv",
+      "sha256": "a6af5554fc2f3e636052c6ed816459a162b3a3e6f727c94937fd054a70f2d15d"
+    },
+    {
+      "path": "C:\\Users\\Yusuf\\Documents\\GitHub\\employee performance with XAI\\reports\\manuscript_final\\manuscript_final_20260712T175251Z_c664ef152ff3\\policy\\leakage_sensitivity_index.csv",
+      "sha256": "3b8885e3b649f49c136acbda19b5e2eb9405b102cd6ff628196970a8ffab4f22"
+    },
+    {
+      "path": "C:\\Users\\Yusuf\\Documents\\GitHub\\employee performance with XAI\\reports\\manuscript_final\\manuscript_final_20260712T175251Z_c664ef152ff3\\policy\\policy_summary.csv",
+      "sha256": "1f3f6945d30604dde66f42fba5fe653dbfbf61084e00485cf86951d9fd007149"
+    },
+    {
+      "path": "C:\\Users\\Yusuf\\Documents\\GitHub\\employee performance with XAI\\reports\\research_log\\manuscript_remediation\\llm_identity_fix_validation\\shap\\local_grouped_shap_values.csv",
+      "sha256": "c05781d48a909a157ec06f4352ec67f6318e33c21e6b18bf06a00aed4a67c967"
+    },
+    {
+      "path": "C:\\Users\\Yusuf\\Documents\\GitHub\\employee performance with XAI\\reports\\research_log\\manuscript_remediation\\llm_identity_fix_validation\\shap\\representative_cases.csv",
+      "sha256": "30abef16aa4d20007c6feefc9fa5700c27c844613f443e3ff8033eeb8a86f4f3"
+    },
+    {
+      "path": "C:\\Users\\Yusuf\\Documents\\GitHub\\employee performance with XAI\\reports\\research_log\\manuscript_remediation\\llm_identity_fix_validation\\shap\\shap_stability_summary.csv",
+      "sha256": "6b3912b7d3ff8c09343a173cbae2fb6cb6a4435f50df352566b2511657928ac9"
+    }
+  ]
+}

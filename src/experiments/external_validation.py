@@ -33,6 +33,7 @@ from src.experiments.final_shap_stability import (
 from src.experiments.leakage_safe_cv import LabelEncodedXGBClassifier, infer_columns, make_preprocessor
 from src.experiments.proxy_analysis import run_proxy_classifier_cv, summarize_cv
 from src.features.feature_sets import apply_feature_set
+from src.governance.external_claims import external_allowed_claim
 from src.llm.evidence_schema import (
     CalibrationEvidence,
     CompleteCaseEvidence,
@@ -47,6 +48,7 @@ from src.llm.governed_explainer import GovernedExplainer
 from src.llm.runtime_config import LLMRuntimeConfig
 from src.agents.openai_agents_runtime import OpenAIAgentsSDKGovernanceRuntime
 from src.models.evaluate import classification_metrics
+from src.models.task_schema import get_task_schema
 from src.utils.config import SETTINGS
 from src.utils.experiment_registry import (
     append_registry_row,
@@ -159,12 +161,22 @@ def run_external_dataset_experiment(
         )
         all_prediction_rows.extend(predictions.to_dict(orient="records"))
         proba = predictions[[f"prob_class_{label}" for label in labels]].to_numpy(dtype=float)
-        metrics = classification_metrics(predictions["y_true"], predictions["y_pred"], proba, labels=labels)
+        task_schema = get_task_schema(dataset.task_type)
+        metrics = classification_metrics(
+            predictions["y_true"],
+            predictions["y_pred"],
+            proba,
+            labels=labels,
+            task_type=task_schema.name,
+        )
         metric_rows.append(
             {
                 "dataset": dataset_name,
                 "target_kind": target_kind,
-                "task_type": dataset.task_type,
+                "task_type": task_schema.name,
+                "task_comparison_group": task_schema.comparison_group,
+                "ordinal_metrics_comparable": task_schema.ordinal_metrics_comparable,
+                "metric_applicability_note": task_schema.applicability_note,
                 "policy": policy,
                 "model": MODEL_NAME,
                 "n_rows": int(len(dataset.canonical)),
@@ -220,8 +232,10 @@ def run_external_dataset_experiment(
             "dataset": dataset_name,
             "target_kind": target_kind,
             "display_name": dataset.config.display_name,
-            "recommended_role": dataset.config.recommended_role,
+            "recommended_role": external_allowed_claim(dataset_name, target_kind),
             "task_type": dataset.task_type,
+            "task_comparison_group": get_task_schema(dataset.task_type).comparison_group,
+            "metric_applicability_note": get_task_schema(dataset.task_type).applicability_note,
             "labels": labels,
             "policies": selected_policies,
             "n_splits_requested": n_splits,
@@ -258,7 +272,7 @@ def run_external_dataset_experiment(
                 "cv_strategy": "StratifiedKFold with split count capped by smallest class",
                 "primary_metrics": metrics_df.to_dict(orient="records"),
                 "output_dir": _rel(output_dir),
-                "notes": f"External validation/robustness run for {dataset_name} ({dataset.task_type}).",
+                "notes": f"External evidence/robustness run for {dataset_name} ({dataset.task_type}).",
                 "decision_status": "candidate",
             }
         )
@@ -742,35 +756,53 @@ def write_experiment_interpretation(
     min_support: int,
 ) -> Path:
     out = output_dir / "external_experiment_interpretation.md"
+    task_schema = get_task_schema(dataset.task_type)
+    allowed_claim = external_allowed_claim(dataset.config.dataset_name, target_kind)
     lines = [
         f"# External Experiment Interpretation: {dataset.config.display_name}",
         "",
-        f"Dataset role: {dataset.config.recommended_role}",
-        f"Task type: `{dataset.task_type}`",
+        f"Dataset role: {allowed_claim}",
+        f"Task type: `{task_schema.name}`",
+        f"Task comparison group: `{task_schema.comparison_group}`",
         f"Target kind: `{target_kind}`",
         f"Minimum subgroup support threshold: {min_support}",
+        f"Metric applicability: {task_schema.applicability_note}",
         "",
         "## Performance Summary",
         "",
     ]
     for row in metrics_df.itertuples(index=False):
-        qwk = getattr(row, "quadratic_weighted_kappa", np.nan)
+        probability_metrics = (
+            f"binary Brier={format_metric(getattr(row, 'binary_brier', None))}, "
+            f"ROC-AUC={format_metric(getattr(row, 'roc_auc', None))}, "
+            f"average precision={format_metric(getattr(row, 'average_precision', None))}"
+            if task_schema.comparison_group == "related_binary_task_transfer"
+            else f"multiclass Brier={format_metric(getattr(row, 'multiclass_brier', None))}"
+        )
         lines.append(
             f"- `{row.policy}`: macro-F1={row.macro_f1:.4f}, balanced accuracy={row.balanced_accuracy:.4f}, "
-            f"QWK={qwk:.4f}, log loss={row.nll_log_loss:.4f}, ECE={row.ece_confidence:.4f}."
+            f"QWK={format_metric(getattr(row, 'quadratic_weighted_kappa', None))}, "
+            f"ordinal MAE={format_metric(getattr(row, 'ordinal_mae', None))}, "
+            f"severe error rate={format_metric(getattr(row, 'severe_error_rate', None))}, "
+            f"log loss={format_metric(row.nll_log_loss)}, {probability_metrics}, "
+            f"ECE={format_metric(row.ece_confidence)}."
         )
     lines.extend(["", "## Interpretation", ""])
-    if dataset.config.dataset_name == "ibm_hr_analytics" and target_kind == "primary":
+    if task_schema.comparison_group == "restricted_target_performance_robustness":
         lines.append(
-            "IBM `PerformanceRating` contains a restricted target space in this run. Treat results as schema-compatible performance robustness, not direct 2/3/4 external validation."
+            "IBM `PerformanceRating` contains a restricted 3/4 target space. These results are "
+            "restricted-target performance robustness and are not comparable to the primary 2/3/4 task."
         )
-    elif dataset.config.dataset_name == "employee_turnover":
+    elif task_schema.comparison_group == "related_binary_task_transfer":
         lines.append(
-            "This is HR task-transfer robustness for turnover prediction. It must not be described as performance external validation."
+            f"This is {allowed_claim}. Its binary target is a different HR task and supplies no "
+            "employee-performance model validation evidence."
         )
     elif dataset.config.dataset_name == "hrdataset_v14":
         lines.append(
-            "This supports independent replication on a mappable external performance target, subject to dataset provenance and sample-size limitations."
+            "This is independent external performance-target replication using an independently "
+            "trained dataset-specific model, not transport of a locked INX model. The claim remains "
+            "subject to target-mapping, sample-support, and provenance limitations."
         )
     lines.extend(
         [
@@ -786,6 +818,11 @@ def write_experiment_interpretation(
     )
     out.write_text("\n".join(lines) + "\n", encoding="utf-8")
     return out
+
+
+def format_metric(value: Any) -> str:
+    numeric = safe_float(value)
+    return "N/A" if numeric is None else f"{numeric:.4f}"
 
 
 def run_hrdataset_cross_dataset_feasibility(seed: int = DEFAULT_SEED) -> Dict[str, Path]:
@@ -826,7 +863,7 @@ def run_hrdataset_cross_dataset_feasibility(seed: int = DEFAULT_SEED) -> Dict[st
         metrics = classification_metrics(y_test, pred, proba, labels)
         pd.DataFrame([{**metrics, "n_common_features": len(common), "common_features": ";".join(common)}]).to_csv(metrics_path, index=False)
         lines = [
-            "# INX-to-HRDataset Cross-Dataset Validation",
+            "# INX-to-HRDataset Locked-Model Transport Assessment",
             "",
             "Status: completed with a limited common feature set.",
             f"Common features: {', '.join(common)}",
@@ -836,7 +873,7 @@ def run_hrdataset_cross_dataset_feasibility(seed: int = DEFAULT_SEED) -> Dict[st
     else:
         pd.DataFrame([{"status": "infeasible_or_too_limited", "n_common_features": len(common), "common_features": ";".join(common)}]).to_csv(metrics_path, index=False)
         lines = [
-            "# INX-to-HRDataset Cross-Dataset Validation",
+            "# INX-to-HRDataset Locked-Model Transport Feasibility Assessment",
             "",
             "Status: reported as infeasible/too limited.",
             "",
@@ -845,7 +882,8 @@ def run_hrdataset_cross_dataset_feasibility(seed: int = DEFAULT_SEED) -> Dict[st
             "",
             "The overlap is too weak for a scientifically defensible train-on-INX/test-on-HRDataset performance claim. Forcing this experiment would primarily measure schema mismatch rather than model transportability.",
             "",
-            "Decision: do not claim cross-dataset external validation from this feature overlap. Use HRDataset_v14 as independent external replication instead.",
+            "Decision: do not claim locked-model transport validation from this feature overlap. "
+            "Use HRDataset_v14 only as independent external performance-target replication.",
         ]
     result_path.write_text("\n".join(lines) + "\n", encoding="utf-8")
     append_registry_row(

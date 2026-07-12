@@ -1,0 +1,19 @@
+{
+  "common_safe_features": [
+    "EmpJobRole",
+    "EmpJobSatisfaction",
+    "ExperienceYearsAtThisCompany"
+  ],
+  "config_hash": "c664ef152ff3a9eef89c53a403b9c2e6f677340bea0307b02d97d07cc54bdfc3",
+  "hr_target_labels_verified": [
+    2,
+    3,
+    4
+  ],
+  "interpretation": "The schema overlap is too limited for a scientifically defensible locked-model transport result. HRDataset_v14 remains independently trained performance-target replication evidence.",
+  "locked_inx_model_transported": false,
+  "minimum_feature_gate": 5,
+  "n_common_safe_features": 3,
+  "run_id": "manuscript_final_20260712T175251Z_c664ef152ff3",
+  "status": "infeasible_or_too_limited"
+}

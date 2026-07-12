@@ -1,0 +1,10 @@
+case_type,sample_index,sampling_reason,true_class,predicted_class,confidence,correct,fold
+correct_high_confidence,376,correct and highest OOF confidence,3,3,0.9968127900513263,True,2
+correct_low_confidence,962,correct and lowest OOF confidence,2,2,0.44798732781466866,True,7
+incorrect_high_confidence,18,incorrect and highest OOF confidence,4,3,0.9975133353865796,False,7
+incorrect_low_confidence,101,incorrect and lowest OOF confidence,3,4,0.5000651015451694,False,6
+most_uncertain,1164,lowest maximum OOF probability,3,3,0.5000781984995406,True,4
+minority_class_4_correct,25,correct case from least-supported true class 4,4,4,0.5050604397507339,True,3
+correct_class_2,251,correct high-confidence coverage for class 2,2,2,0.9812376482943795,True,3
+correct_class_3,376,correct high-confidence coverage for class 3,3,3,0.9968127900513263,True,2
+correct_class_4,25,correct high-confidence coverage for class 4,4,4,0.5050604397507339,True,3

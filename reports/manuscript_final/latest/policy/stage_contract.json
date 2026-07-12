@@ -1,0 +1,105 @@
+{
+  "config_hash": "c664ef152ff3a9eef89c53a403b9c2e6f677340bea0307b02d97d07cc54bdfc3",
+  "dataset_hashes": {
+    "employee_turnover": {
+      "path": "data/external/employee_turnover/raw.csv",
+      "role": "related_task_transfer",
+      "sha256": "2510e274a90547f34c7b0db5a4ab70282c2710eb54252f14921bf980b81a928c",
+      "size_bytes": 566778,
+      "task_type": "binary_turnover_transfer"
+    },
+    "hrdataset_v14": {
+      "path": "data/external/hrdataset_v14/raw.csv",
+      "role": "independent_external_performance_target_replication",
+      "sha256": "cb19996755c93c0a8d6527f59da4701c80aef65eff854906546dce286249813c",
+      "size_bytes": 76857,
+      "task_type": "ordinal_multiclass_performance"
+    },
+    "ibm_hr_analytics": {
+      "path": "data/external/ibm_hr_analytics/raw.csv",
+      "role": "restricted_target_performance_robustness",
+      "sha256": "a5c31e38bd7fafc9bc333884eb181b06b41b8e5e488e8f7ccb27199fb3be7659",
+      "size_bytes": 227977,
+      "task_type": "restricted_target_performance_robustness"
+    },
+    "ibm_hr_analytics_attrition": {
+      "path": "data/external/ibm_hr_analytics/raw.csv",
+      "role": "related_task_transfer",
+      "sha256": "a5c31e38bd7fafc9bc333884eb181b06b41b8e5e488e8f7ccb27199fb3be7659",
+      "size_bytes": 227977,
+      "task_type": "binary_attrition_transfer"
+    },
+    "inx_primary": {
+      "path": "data/raw/inx_employee_performance.csv",
+      "role": "primary_development_and_internal_oof_evaluation",
+      "sha256": "b8deac0a615b97076622ae540f4cfd0d3c3f1e7acb83ba3ff6560470a9ccf60a",
+      "size_bytes": 152715,
+      "task_type": "ordinal_multiclass_performance"
+    }
+  },
+  "elapsed_seconds": 19.07216460001655,
+  "ended_at": "2026-07-12T18:18:13+00:00",
+  "git_commit": "18347488bdb4eed60f115ceeff70c420071ceef0",
+  "outputs": [
+    {
+      "path": "reports/manuscript_final/manuscript_final_20260712T181754Z_c664ef152ff3/policy/figure_leakage_policy_tradeoff.png",
+      "sha256": "9bb2bcbe36262b41d9152c3802893be143a4a1c420f503e566c01989e96b5640",
+      "size_bytes": 214341
+    },
+    {
+      "path": "reports/manuscript_final/manuscript_final_20260712T181754Z_c664ef152ff3/policy/figure_leakage_policy_tradeoff.svg",
+      "sha256": "e14aa413dabbce00f3f75283e54ccf1fd1c5c609b6ada9d22c2c8d07cbda8ad3",
+      "size_bytes": 79112
+    },
+    {
+      "path": "reports/manuscript_final/manuscript_final_20260712T181754Z_c664ef152ff3/policy/figure_leakage_policy_tradeoff_source.csv",
+      "sha256": "c4f4f789110a39a7ad28ad97cad07c6a113180a3ef65908810b6c9786fd1ef7d",
+      "size_bytes": 1811
+    },
+    {
+      "path": "reports/manuscript_final/manuscript_final_20260712T181754Z_c664ef152ff3/policy/fold_assignments.csv",
+      "sha256": "5e67af5caa4b99b1263e618afd40028400832ee5d4e9c67da2b3c489cdd24d9c",
+      "size_bytes": 145455
+    },
+    {
+      "path": "reports/manuscript_final/manuscript_final_20260712T181754Z_c664ef152ff3/policy/fold_metrics.csv",
+      "sha256": "3a0017b606aa3b401d8ce5fc7753e544077541a4f58aa8872685d5360328ed18",
+      "size_bytes": 32665
+    },
+    {
+      "path": "reports/manuscript_final/manuscript_final_20260712T181754Z_c664ef152ff3/policy/leakage_sensitivity_index.csv",
+      "sha256": "7b2acffc5f3b14a211e0f9f92d4f82563a9d098bacd57a3bf93e6af668c776e4",
+      "size_bytes": 8474
+    },
+    {
+      "path": "reports/manuscript_final/manuscript_final_20260712T181754Z_c664ef152ff3/policy/manuscript_policy_table.csv",
+      "sha256": "ade6b8dde39b800cdd22b877c58dc764af9d94cbe77e7add90fb5ac642607c96",
+      "size_bytes": 3041
+    },
+    {
+      "path": "reports/manuscript_final/manuscript_final_20260712T181754Z_c664ef152ff3/policy/policy_ablation_metadata.json",
+      "sha256": "d9b885d8434313fece6d06a074537e449127a06843a34899fef1341da100bbee",
+      "size_bytes": 3241
+    },
+    {
+      "path": "reports/manuscript_final/manuscript_final_20260712T181754Z_c664ef152ff3/policy/policy_interpretation.md",
+      "sha256": "b4b513a1011df8b808c488312b0f18c89093a0f21bd94fb9a7e1f520b9a76d30",
+      "size_bytes": 2104
+    },
+    {
+      "path": "reports/manuscript_final/manuscript_final_20260712T181754Z_c664ef152ff3/policy/policy_pairwise_tests.csv",
+      "sha256": "6778f7919c21f5f8f08d0c47b703fdfbf108e578f41eccbb7036ebe852266494",
+      "size_bytes": 17636
+    },
+    {
+      "path": "reports/manuscript_final/manuscript_final_20260712T181754Z_c664ef152ff3/policy/policy_summary.csv",
+      "sha256": "b3ce6c7bcf0d4b83060781d40ee8b36dc8edd57386b43a920d12d267cc4f07ac",
+      "size_bytes": 7219
+    }
+  ],
+  "run_id": "manuscript_final_20260712T181754Z_c664ef152ff3",
+  "source_tree_hash": "092778e5bafff11a7aa59399fde413efe6760d664e2214f71595d7ab59d44cb8",
+  "stage": "policy",
+  "started_at": "2026-07-12T18:17:54+00:00",
+  "status": "complete"
+}

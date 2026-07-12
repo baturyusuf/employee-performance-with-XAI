@@ -6,7 +6,20 @@ from typing import Any, Dict, List
 
 import pandas as pd
 
+from src.governance.external_claims import (
+    external_allowed_claim,
+    external_claim_boundary,
+    validate_configured_claim,
+)
 from src.llm.usage_logger import USAGE_LOG_PATH
+from src.models.task_schema import (
+    BINARY_ATTRITION_TRANSFER,
+    BINARY_TURNOVER_TRANSFER,
+    ORDINAL_MULTICLASS_PERFORMANCE,
+    RESTRICTED_TARGET_PERFORMANCE_ROBUSTNESS,
+    apply_metric_applicability,
+    get_task_schema,
+)
 from src.utils.config import SETTINGS
 from src.utils.config_loader import load_config
 from src.utils.experiment_registry import append_registry_row, get_git_commit, utc_now_iso
@@ -23,6 +36,8 @@ DATASET_RUNS = [
         "display": "INX primary model",
         "path": None,
         "role": "internal primary research benchmark",
+        "task_type": ORDINAL_MULTICLASS_PERFORMANCE,
+        "target_kind": "primary",
         "target": "PerformanceRating 2/3/4",
         "policy": "no_salary_hike_no_attrition_no_department",
     },
@@ -30,7 +45,9 @@ DATASET_RUNS = [
         "key": "hrdataset_v14",
         "display": "HRDataset_v14",
         "path": REPORT_ROOT / "hrdataset_v14",
-        "role": "independent replication / direct external performance validation",
+        "role": external_allowed_claim("hrdataset_v14"),
+        "task_type": ORDINAL_MULTICLASS_PERFORMANCE,
+        "target_kind": "primary",
         "target": "PerformanceScore mapped to 2/3/4",
         "policy": "department_free",
     },
@@ -38,7 +55,9 @@ DATASET_RUNS = [
         "key": "ibm_hr_analytics",
         "display": "IBM HR Analytics performance",
         "path": REPORT_ROOT / "ibm_hr_analytics",
-        "role": "schema-compatible restricted target-space robustness",
+        "role": external_allowed_claim("ibm_hr_analytics"),
+        "task_type": RESTRICTED_TARGET_PERFORMANCE_ROBUSTNESS,
+        "target_kind": "primary",
         "target": "PerformanceRating restricted to 3/4",
         "policy": "department_free",
     },
@@ -46,7 +65,9 @@ DATASET_RUNS = [
         "key": "ibm_hr_analytics_attrition",
         "display": "IBM HR Analytics attrition",
         "path": REPORT_ROOT / "ibm_hr_analytics_attrition",
-        "role": "optional related HR task-transfer robustness",
+        "role": external_allowed_claim("ibm_hr_analytics", "attrition"),
+        "task_type": BINARY_ATTRITION_TRANSFER,
+        "target_kind": "attrition",
         "target": "Attrition mapped No/Yes to 0/1",
         "policy": "department_free",
     },
@@ -54,7 +75,9 @@ DATASET_RUNS = [
         "key": "employee_turnover",
         "display": "Employee Turnover",
         "path": REPORT_ROOT / "employee_turnover",
-        "role": "related HR task-transfer robustness only",
+        "role": external_allowed_claim("employee_turnover"),
+        "task_type": BINARY_TURNOVER_TRANSFER,
+        "target_kind": "primary",
         "target": "left 0/1",
         "policy": "without_last_evaluation",
     },
@@ -66,7 +89,7 @@ def run() -> Dict[str, Path]:
     GOVERNANCE_DIR.mkdir(parents=True, exist_ok=True)
     REPORT_ROOT.mkdir(parents=True, exist_ok=True)
 
-    tables = build_tables()
+    tables = build_tables(write_usage=True)
     summary_path = REPORT_ROOT / "external_validation_summary.md"
     manuscript_path = MANUSCRIPT_DIR / "external_validation_tables.md"
     governance_path = GOVERNANCE_DIR / "external_validation_governance_summary.md"
@@ -88,9 +111,9 @@ def run() -> Dict[str, Path]:
             "model": "xgboost; OpenAI governed explanation and agents",
             "seed": "42; LLM temperature 0",
             "cv_strategy": "artifact aggregation",
-            "primary_metrics": "external validation summary tables",
+            "primary_metrics": "external replication and robustness summary tables",
             "output_dir": "reports/external_validation; reports/manuscript_assets; reports/governance_reports",
-            "notes": "Generated integrated external validation, manuscript, and governance summaries.",
+            "notes": "Generated integrated external replication, robustness, manuscript, and governance summaries.",
             "decision_status": "candidate",
         }
     )
@@ -106,15 +129,34 @@ def write_external_dataset_roles(output_path: Path) -> Path:
     config = load_config("external_validation")
     rows = []
     for row in config.get("external_validation", {}).get("datasets", []):
+        dataset_name = str(row.get("dataset_name", ""))
+        configured_claim = str(row.get("role_in_manuscript", ""))
+        validate_configured_claim(dataset_name, "primary", configured_claim)
+        task_schema = get_task_schema(str(row.get("task_type", "")))
+        expected_run = next((item for item in DATASET_RUNS if item["key"] == dataset_name), None)
+        if expected_run is None or task_schema.name != expected_run["task_type"]:
+            expected = expected_run["task_type"] if expected_run is not None else "registered dataset"
+            raise ValueError(
+                f"External task schema mismatch for {dataset_name}: expected {expected}, observed {task_schema.name}."
+            )
+        transported = bool(row.get("locked_inx_model_transported", False))
+        boundary = external_claim_boundary(dataset_name)
+        if transported != boundary.transported_locked_inx_model:
+            raise ValueError(
+                f"Locked-model transport status mismatch for {dataset_name}: "
+                f"expected {boundary.transported_locked_inx_model}, observed {transported}."
+            )
         rows.append(
             {
-                "dataset_name": row.get("dataset_name", ""),
+                "dataset_name": dataset_name,
                 "source_path": row.get("source_path", ""),
-                "task_type": row.get("task_type", ""),
+                "task_type": task_schema.name,
+                "task_comparison_group": task_schema.comparison_group,
                 "target_variable": row.get("target_variable", ""),
                 "target_semantics": row.get("target_semantics", ""),
                 "comparable_to_inx_performance": bool(row.get("comparable_to_inx_performance", False)),
-                "role_in_manuscript": row.get("role_in_manuscript", ""),
+                "locked_inx_model_transported": transported,
+                "role_in_manuscript": configured_claim,
                 "limitations": row.get("limitations", ""),
             }
         )
@@ -123,7 +165,7 @@ def write_external_dataset_roles(output_path: Path) -> Path:
     return output_path
 
 
-def build_tables() -> Dict[str, pd.DataFrame]:
+def build_tables(*, write_usage: bool = False) -> Dict[str, pd.DataFrame]:
     role_rows = []
     target_rows = []
     performance_rows = []
@@ -133,10 +175,13 @@ def build_tables() -> Dict[str, pd.DataFrame]:
     llm_rows = []
 
     for run_info in DATASET_RUNS:
+        task_schema = get_task_schema(run_info["task_type"])
         role_rows.append(
             {
                 "dataset": run_info["display"],
                 "role": run_info["role"],
+                "task_type": task_schema.name,
+                "task_comparison_group": task_schema.comparison_group,
                 "target_definition": run_info["target"],
                 "default_policy": run_info["policy"],
                 "allowed_claim": allowed_claim_for(run_info["key"]),
@@ -173,17 +218,17 @@ def build_tables() -> Dict[str, pd.DataFrame]:
             {
                 "area": "HRDataset_v14",
                 "limitation": "Small external sample with mapped performance labels and public cross-sectional data.",
-                "allowed_claim": "Independent replication on a mappable external performance target.",
+                "allowed_claim": "Independent external performance-target replication.",
             },
             {
                 "area": "Cross-dataset validation",
                 "limitation": "Only three common department-free safe features were available.",
-                "allowed_claim": "Cross-dataset INX-to-HRDataset validation is infeasible/too limited.",
+                "allowed_claim": "Locked-INX-model transport is infeasible/too limited under the three-safe-feature overlap.",
             },
             {
                 "area": "IBM performance",
                 "limitation": "PerformanceRating contains only classes 3 and 4.",
-                "allowed_claim": "Restricted target-space schema-compatible robustness.",
+                "allowed_claim": "Restricted-target performance robustness.",
             },
             {
                 "area": "Employee turnover",
@@ -205,14 +250,28 @@ def build_tables() -> Dict[str, pd.DataFrame]:
 
     llm_df = pd.DataFrame(llm_rows)
     usage = build_external_usage_table(llm_df)
-    usage.to_csv(REPORT_ROOT / "external_llm_usage_summary.csv", index=False)
+    if write_usage:
+        usage.to_csv(REPORT_ROOT / "external_llm_usage_summary.csv", index=False)
     expanded_llm = expanded_llm_summary_table()
+    performance = pd.DataFrame(performance_rows)
 
     return {
         "roles": pd.DataFrame(role_rows),
         "targets": pd.DataFrame(target_rows),
         "overlap": overlap_table,
-        "performance": pd.DataFrame(performance_rows),
+        # Retained as a machine-readable superset only. Renderers below must use
+        # the task-separated tables so binary/restricted tasks cannot appear as
+        # directly equivalent to the primary three-class ordinal task.
+        "performance": performance,
+        "performance_ordinal": performance[
+            performance["task_comparison_group"] == "three_class_ordinal_performance"
+        ].reset_index(drop=True),
+        "performance_restricted": performance[
+            performance["task_comparison_group"] == "restricted_target_performance_robustness"
+        ].reset_index(drop=True),
+        "performance_binary_transfer": performance[
+            performance["task_comparison_group"] == "related_binary_task_transfer"
+        ].reset_index(drop=True),
         "fairness": pd.DataFrame(fairness_rows),
         "calibration": pd.DataFrame(calibration_rows),
         "actionability": pd.DataFrame(actionability_rows),
@@ -248,34 +307,62 @@ def target_row(run_info: Dict[str, Any]) -> Dict[str, Any]:
 
 
 def performance_row(run_info: Dict[str, Any]) -> Dict[str, Any]:
+    schema = get_task_schema(run_info["task_type"])
     if run_info["path"] is None:
         dashboard = pd.read_csv(SETTINGS.reports_dir / "model_selection" / "final_candidate_dashboard.csv")
         row = dashboard[dashboard["feature_set"] == run_info["policy"]].iloc[0]
-        return {
-            "dataset": run_info["display"],
-            "policy": run_info["policy"],
+        raw_metrics = {
             "macro_f1": row["macro_f1"],
             "balanced_accuracy": row["balanced_accuracy"],
-            "qwk": row["qwk"],
+            "quadratic_weighted_kappa": row["qwk"],
             "ordinal_mae": row["ordinal_mae"],
             "severe_error_rate": row["severe_error_rate"],
-            "log_loss": row["log_loss"],
-            "brier": row["multiclass_brier"],
-            "ece": row["ece"],
+            "nll_log_loss": row["log_loss"],
+            "multiclass_brier": row["multiclass_brier"],
+            "binary_brier": None,
+            "roc_auc": None,
+            "average_precision": None,
+            "ece_confidence": row["ece"],
         }
-    metrics = pd.read_csv(run_info["path"] / "performance_metrics.csv")
-    row = metrics[metrics["policy"] == run_info["policy"]].iloc[0]
+    else:
+        metrics = pd.read_csv(run_info["path"] / "performance_metrics.csv")
+        row = metrics[metrics["policy"] == run_info["policy"]].iloc[0]
+        observed_task = get_task_schema(str(row.get("task_type", schema.name))).name
+        if observed_task != schema.name:
+            raise ValueError(
+                f"Task schema mismatch for {run_info['key']}: expected {schema.name}, observed {observed_task}."
+            )
+        raw_metrics = {
+            "macro_f1": row.get("macro_f1"),
+            "balanced_accuracy": row.get("balanced_accuracy"),
+            "quadratic_weighted_kappa": row.get("quadratic_weighted_kappa"),
+            "ordinal_mae": row.get("ordinal_mae"),
+            "severe_error_rate": row.get("severe_error_rate"),
+            "nll_log_loss": row.get("nll_log_loss"),
+            "multiclass_brier": row.get("multiclass_brier"),
+            "binary_brier": row.get("binary_brier"),
+            "roc_auc": row.get("roc_auc"),
+            "average_precision": row.get("average_precision"),
+            "ece_confidence": row.get("ece_confidence"),
+        }
+    task_metrics = apply_metric_applicability(raw_metrics, schema.name)
     return {
         "dataset": run_info["display"],
         "policy": run_info["policy"],
-        "macro_f1": row.get("macro_f1"),
-        "balanced_accuracy": row.get("balanced_accuracy"),
-        "qwk": row.get("quadratic_weighted_kappa"),
-        "ordinal_mae": row.get("ordinal_mae"),
-        "severe_error_rate": row.get("severe_error_rate"),
-        "log_loss": row.get("nll_log_loss"),
-        "brier": row.get("multiclass_brier"),
-        "ece": row.get("ece_confidence"),
+        "task_type": schema.name,
+        "task_comparison_group": schema.comparison_group,
+        "metric_applicability": schema.applicability_note,
+        "macro_f1": task_metrics.get("macro_f1"),
+        "balanced_accuracy": task_metrics.get("balanced_accuracy"),
+        "qwk": task_metrics.get("quadratic_weighted_kappa"),
+        "ordinal_mae": task_metrics.get("ordinal_mae"),
+        "severe_error_rate": task_metrics.get("severe_error_rate"),
+        "log_loss": task_metrics.get("nll_log_loss"),
+        "brier": task_metrics.get("multiclass_brier"),
+        "binary_brier": task_metrics.get("binary_brier"),
+        "roc_auc": task_metrics.get("roc_auc"),
+        "average_precision": task_metrics.get("average_precision"),
+        "ece": task_metrics.get("ece_confidence"),
     }
 
 
@@ -320,8 +407,11 @@ def calibration_row(run_info: Dict[str, Any]) -> Dict[str, Any]:
     return {
         "dataset": row["dataset"],
         "policy": row["policy"],
+        "task_type": row["task_type"],
+        "cross_task_comparability": "descriptive within task only",
         "log_loss": row["log_loss"],
-        "brier": row["brier"],
+        "multiclass_brier": row["brier"],
+        "binary_brier": row["binary_brier"],
         "ece": row["ece"],
         "interpretation": "probability confidence requires calibration caution",
     }
@@ -467,20 +557,26 @@ def expanded_llm_summary_table() -> pd.DataFrame:
 
 
 def allowed_claim_for(key: str) -> str:
-    return {
-        "inx_primary": "internal benchmark only",
-        "hrdataset_v14": "independent external performance-target replication",
-        "ibm_hr_analytics": "restricted 3/4 performance robustness",
-        "ibm_hr_analytics_attrition": "related HR attrition task transfer",
-        "employee_turnover": "related HR turnover task transfer",
-    }.get(key, "limited robustness evidence")
+    if key == "inx_primary":
+        return "internal benchmark only"
+    lookup = {
+        "hrdataset_v14": ("hrdataset_v14", "primary"),
+        "ibm_hr_analytics": ("ibm_hr_analytics", "primary"),
+        "ibm_hr_analytics_attrition": ("ibm_hr_analytics", "attrition"),
+        "employee_turnover": ("employee_turnover", "primary"),
+    }
+    try:
+        dataset_name, target_kind = lookup[key]
+    except KeyError as exc:
+        raise ValueError(f"No allowed external claim registered for '{key}'.") from exc
+    return external_allowed_claim(dataset_name, target_kind)
 
 
 def summary_markdown(tables: Dict[str, pd.DataFrame]) -> str:
     lines = [
-        "# External Validation Summary",
+        "# External Replication and Robustness Evidence Summary",
         "",
-        "This report extends the original INX HR XAI governance evidence with external validation and robustness datasets. Claims are intentionally conservative: research-grade decision support only, no autonomous HR decisions, no causal SHAP claims, no fairness guarantee, and no deployment readiness claim.",
+        "This report extends the INX HR XAI evidence with independent external performance-target replication, restricted-target robustness, and related-task transfer. Claims are intentionally conservative: research-grade decision support only, no autonomous HR decisions, no causal SHAP claims, no fairness guarantee, and no deployment readiness claim.",
         "",
         "## Dataset Roles",
         "",
@@ -494,29 +590,43 @@ def summary_markdown(tables: Dict[str, pd.DataFrame]) -> str:
         "",
         markdown_table(tables["overlap"]),
         "",
-        "## Performance Comparison",
+        "## Three-Class Ordinal Performance Evidence",
         "",
-        markdown_table(_round_table(tables["performance"])),
+        "HRDataset_v14 uses an independently trained dataset-specific model; this table is not evidence of locked-INX-model transport.",
         "",
-        "## Fairness / Proxy Comparison",
+        markdown_table(_round_table(tables["performance_ordinal"])),
+        "",
+        "## Restricted-Target Performance Robustness",
+        "",
+        "The 3/4-only target is reported separately because its metric support is not equivalent to the primary 2/3/4 task.",
+        "",
+        markdown_table(_round_table(tables["performance_restricted"])),
+        "",
+        "## Related Binary Task Transfer",
+        "",
+        "Attrition and turnover are different targets. Ordinal and severe-error metrics are N/A by task contract.",
+        "",
+        markdown_table(_round_table(tables["performance_binary_transfer"])),
+        "",
+        "## Fairness / Proxy Evidence by Dataset",
         "",
         markdown_table(_round_table(tables["fairness"])),
         "",
-        "## Calibration Comparison",
+        "## Calibration Evidence by Non-Comparable Task",
         "",
         markdown_table(_round_table(tables["calibration"])),
         "",
-        "## Actionability Comparison",
+        "## Actionability Evidence by Dataset",
         "",
         markdown_table(_round_table(tables["actionability"])),
         "",
-        "## LLM / Agent Governance Comparison",
+        "## LLM / Agent Governance Evidence by Dataset",
         "",
         markdown_table(_round_table(tables["llm"])),
         "",
         "## Expanded Real LLM-Agent Evaluation: Current Priority Scope",
         "",
-        "This table is read from the current config-driven real run. It prioritizes INX and HRDataset_v14; related-task datasets are not direct employee-performance validation.",
+        "This table is read from the current config-driven real run. It prioritizes INX and HRDataset_v14; related-task datasets do not validate employee-performance models.",
         "",
         "Stub/dry-run LLM outputs are not manuscript-grade real LLM evidence and are excluded from this expanded evidence scope.",
         "",
@@ -540,14 +650,21 @@ def manuscript_markdown(tables: Dict[str, pd.DataFrame]) -> str:
     sections = [
         ("Table 1: Dataset Roles and Target Definitions", tables["roles"]),
         ("Table 2: External Schema Mapping Summary", tables["targets"]),
-        ("Table 3: Performance Metrics Across Datasets", _round_table(tables["performance"])),
+        ("Table 3a: Three-Class Ordinal Performance Evidence", _round_table(tables["performance_ordinal"])),
+        ("Table 3b: Restricted-Target Performance Robustness", _round_table(tables["performance_restricted"])),
+        ("Table 3c: Related Binary Task Transfer", _round_table(tables["performance_binary_transfer"])),
         ("Table 4: Leakage/Proxy/Fairness Findings", _round_table(tables["fairness"])),
         ("Table 5a: Expanded Real LLM-Agent Results for Priority Scope", _round_table(tables["expanded_llm"])),
         ("Table 5: LLM-Agent Governance Results Across Datasets", _round_table(tables["llm"])),
         ("Table 5b: External LLM Usage and Estimated Cost", _round_table(tables["usage"])),
         ("Table 6: Limitations and Allowed Claims", tables["limitations"]),
     ]
-    lines = ["# External Validation Manuscript Tables", ""]
+    lines = [
+        "# External Replication and Robustness Manuscript Tables",
+        "",
+        "Metric tables are separated by task schema; values must not be compared across the three sections as if they evaluated the same target.",
+        "",
+    ]
     for title, table in sections:
         lines.extend([f"## {title}", "", markdown_table(table), ""])
     return "\n".join(lines)
@@ -556,13 +673,13 @@ def manuscript_markdown(tables: Dict[str, pd.DataFrame]) -> str:
 def governance_markdown(tables: Dict[str, pd.DataFrame]) -> str:
     return "\n".join(
         [
-            "# External Validation Governance Summary",
+            "# External Replication and Robustness Governance Summary",
             "",
             "## What Can Be Claimed",
             "",
-            "- HRDataset_v14 provides independent replication on a directly mappable external performance target.",
-            "- IBM HR Analytics provides schema-compatible robustness, but its performance target is restricted to classes 3 and 4.",
-            "- IBM attrition and Employee Turnover provide related HR risk-prediction task-transfer evidence, not performance validation.",
+            "- HRDataset_v14 provides independent external performance-target replication using an independently trained dataset-specific model.",
+            "- IBM HR Analytics provides restricted-target performance robustness for classes 3 and 4.",
+            "- IBM attrition and Employee Turnover provide related HR task-transfer evidence only; they do not validate employee-performance models.",
             "- Real OpenAI governed explanations now include an expanded 80-case priority-scope batch for INX and HRDataset_v14.",
             "- Earlier small real OpenAI and OpenAI Agents SDK audits exist for HRDataset_v14, IBM performance robustness, and Employee Turnover, but the related-task datasets remain robustness evidence only.",
             "",
@@ -571,7 +688,7 @@ def governance_markdown(tables: Dict[str, pd.DataFrame]) -> str:
             "- No autonomous hiring, firing, promotion, compensation, discipline, or individual employment decision capability.",
             "- No causal interpretation of SHAP or counterfactuals.",
             "- No proof of fairness from removing sensitive or group variables.",
-            "- No direct performance external-validation claim for IBM or Employee Turnover.",
+            "- IBM and turnover results cannot support employee-performance model-validation claims.",
             "- No deployment readiness without independent data provenance review, human validation, legal review, and organisation-specific governance.",
             "",
             "## Remaining Deployment Blockers",
@@ -588,7 +705,17 @@ def governance_markdown(tables: Dict[str, pd.DataFrame]) -> str:
             "",
             "## Supporting Tables",
             "",
-            markdown_table(_round_table(tables["performance"])),
+            "### Three-Class Ordinal Performance Evidence",
+            "",
+            markdown_table(_round_table(tables["performance_ordinal"])),
+            "",
+            "### Restricted-Target Performance Robustness",
+            "",
+            markdown_table(_round_table(tables["performance_restricted"])),
+            "",
+            "### Related Binary Task Transfer",
+            "",
+            markdown_table(_round_table(tables["performance_binary_transfer"])),
             "",
             markdown_table(_round_table(tables["expanded_llm"])),
             "",
@@ -628,7 +755,7 @@ def markdown_table(df: pd.DataFrame) -> str:
 
 def _escape_cell(value: Any) -> str:
     if pd.isna(value):
-        return ""
+        return "N/A"
     if isinstance(value, float):
         return f"{value:.6g}"
     return str(value).replace("|", "\\|").replace("\n", " ")

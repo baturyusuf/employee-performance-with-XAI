@@ -1,13 +1,13 @@
 {
   "dataset_name": "employee_turnover",
   "display_name": "Human Resources Analytics / Employee Turnover",
-  "recommended_role": "HR task-transfer robustness",
+  "recommended_role": "related HR turnover task transfer",
   "source_url": "https://raw.githubusercontent.com/ucg8j/kaggle_HR/master/HR_comma_sep.csv",
   "canonical_source_note": "Public mirror of the Human Resources Analytics employee turnover dataset commonly circulated from Kaggle.",
   "target": {
     "raw_column": "left",
     "canonical_column": "AttritionTarget",
-    "task_type": "binary_turnover",
+    "task_type": "binary_turnover_transfer",
     "mapping": {}
   },
   "id_columns": [],

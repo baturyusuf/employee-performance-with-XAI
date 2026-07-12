@@ -1,0 +1,46 @@
+{
+  "claim_limitations": [
+    "Research-grade decision support only; no autonomous HR decision use.",
+    "Dataset-specific models are not locked-INX-model transport.",
+    "SHAP attribution, if generated elsewhere, is not causal evidence.",
+    "Related attrition/turnover tasks are not performance-model replication."
+  ],
+  "completed_at": "2026-07-12T18:37:10+00:00",
+  "config_hash": "c664ef152ff3a9eef89c53a403b9c2e6f677340bea0307b02d97d07cc54bdfc3",
+  "dataset_key": "employee_turnover",
+  "dataset_name": "employee_turnover",
+  "effective_cv_splits": 10,
+  "labels": [
+    0,
+    1
+  ],
+  "locked_inx_model_transported": false,
+  "mapping_verified": true,
+  "n_rows": 14999,
+  "outputs": {
+    "actionability_summary": "actionability_summary.csv",
+    "feature_policy": "feature_policy_audit.csv",
+    "fold_metrics": "fold_metrics.csv",
+    "policy_summary": "performance_metrics.csv",
+    "predictions": "model_predictions.csv",
+    "representative_cases": "representative_cases.csv",
+    "target_mapping": "target_mapping.csv",
+    "target_support": "target_support.csv"
+  },
+  "policies": [
+    "with_last_evaluation",
+    "without_last_evaluation"
+  ],
+  "raw_dataset_path": "C:\\Users\\Yusuf\\Documents\\GitHub\\employee performance with XAI\\data\\external\\employee_turnover\\raw.csv",
+  "raw_dataset_sha256": "2510e274a90547f34c7b0db5a4ab70282c2710eb54252f14921bf980b81a928c",
+  "requested_cv_splits": 10,
+  "role": "related HR turnover task transfer",
+  "run_id": "manuscript_final_20260712T181754Z_c664ef152ff3",
+  "schema_mapping_path": "C:\\Users\\Yusuf\\Documents\\GitHub\\employee performance with XAI\\data\\external\\employee_turnover\\schema_mapping.json",
+  "schema_mapping_sha256": "ef49bf69d6ea9461adb10268da09f14f9cc24d457c0183ddd703c26140842d82",
+  "seed": 42,
+  "status": "completed",
+  "target_kind": "primary",
+  "task_comparison_group": "related_binary_task_transfer",
+  "task_type": "binary_turnover_transfer"
+}

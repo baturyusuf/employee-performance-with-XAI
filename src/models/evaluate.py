@@ -6,15 +6,25 @@ from typing import Any, Dict, Iterable, Optional
 import numpy as np
 from sklearn.metrics import (
     accuracy_score,
+    average_precision_score,
     balanced_accuracy_score,
+    brier_score_loss,
     cohen_kappa_score,
     f1_score,
     log_loss,
     mean_absolute_error,
     precision_score,
     recall_score,
+    roc_auc_score,
 )
 from sklearn.preprocessing import label_binarize
+
+from src.models.task_schema import (
+    ORDINAL_METRICS,
+    ORDINAL_MULTICLASS_PERFORMANCE,
+    apply_metric_applicability,
+    get_task_schema,
+)
 
 
 def safe_float(value: Any) -> Optional[float]:
@@ -75,10 +85,12 @@ def classification_metrics(
     y_proba: np.ndarray | None = None,
     labels: list[int] | None = None,
     n_bins: int = 10,
+    task_type: str = ORDINAL_MULTICLASS_PERFORMANCE,
 ) -> Dict[str, Optional[float]]:
     y_true_arr = np.asarray(list(y_true), dtype=int)
     y_pred_arr = np.asarray(list(y_pred), dtype=int)
     labels = labels or sorted(np.unique(y_true_arr).astype(int).tolist())
+    schema = get_task_schema(task_type)
 
     metrics: Dict[str, Optional[float]] = {
         "accuracy": safe_float(accuracy_score(y_true_arr, y_pred_arr)),
@@ -89,19 +101,43 @@ def classification_metrics(
         "weighted_precision": safe_float(precision_score(y_true_arr, y_pred_arr, average="weighted", zero_division=0)),
         "macro_recall": safe_float(recall_score(y_true_arr, y_pred_arr, average="macro", zero_division=0)),
         "weighted_recall": safe_float(recall_score(y_true_arr, y_pred_arr, average="weighted", zero_division=0)),
-        "ordinal_mae": safe_float(mean_absolute_error(y_true_arr, y_pred_arr)),
-        "quadratic_weighted_kappa": safe_float(cohen_kappa_score(y_true_arr, y_pred_arr, weights="quadratic")),
-        "adjacent_accuracy": safe_float(adjacent_accuracy(y_true_arr, y_pred_arr)),
-        "severe_error_rate": safe_float(severe_error_rate(y_true_arr, y_pred_arr)),
     }
+
+    # Initialising inapplicable fields as None keeps tabular schemas stable while
+    # serialising them as N/A/blank instead of scientifically misleading zeros.
+    metrics.update({metric: None for metric in ORDINAL_METRICS})
+    if ORDINAL_METRICS.issubset(schema.applicable_metrics):
+        metrics.update(
+            {
+                "ordinal_mae": safe_float(mean_absolute_error(y_true_arr, y_pred_arr)),
+                "quadratic_weighted_kappa": safe_float(
+                    cohen_kappa_score(y_true_arr, y_pred_arr, weights="quadratic")
+                ),
+                "adjacent_accuracy": safe_float(adjacent_accuracy(y_true_arr, y_pred_arr)),
+                "severe_error_rate": safe_float(severe_error_rate(y_true_arr, y_pred_arr)),
+            }
+        )
 
     if y_proba is not None:
         proba = np.asarray(y_proba, dtype=float)
         metrics["nll_log_loss"] = safe_float(log_loss(y_true_arr, proba, labels=labels))
-        metrics["multiclass_brier"] = safe_float(multiclass_brier(y_true_arr, proba, labels))
         metrics["ece_confidence"] = safe_float(expected_calibration_error(y_true_arr, y_pred_arr, proba, n_bins=n_bins))
+        if schema.is_metric_applicable("multiclass_brier"):
+            metrics["multiclass_brier"] = safe_float(multiclass_brier(y_true_arr, proba, labels))
+        if schema.is_metric_applicable("binary_brier"):
+            if len(labels) != 2 or proba.ndim != 2 or proba.shape[1] != 2:
+                raise ValueError(
+                    f"Task '{schema.name}' requires exactly two aligned probability columns; "
+                    f"labels={labels}, probability_shape={proba.shape}."
+                )
+            positive_label = labels[-1]
+            positive_target = (y_true_arr == positive_label).astype(int)
+            positive_proba = proba[:, -1]
+            metrics["binary_brier"] = safe_float(brier_score_loss(positive_target, positive_proba))
+            metrics["roc_auc"] = safe_float(roc_auc_score(positive_target, positive_proba))
+            metrics["average_precision"] = safe_float(average_precision_score(positive_target, positive_proba))
 
-    return metrics
+    return apply_metric_applicability(metrics, schema.name)
 
 
 def leakage_sensitivity_index(full_feature_score: float, leakage_safe_score: float) -> Dict[str, Optional[float]]:

@@ -1,0 +1,59 @@
+{
+  "candidate_evaluations": 8317,
+  "case_excluded_from_training": true,
+  "config_hash": "738ec00ae6d2b64494c8e00f74fa3a6e32afd4d4afbff54c10900020287358fc",
+  "cost_scaling": "training-fold IQR, range fallback; categorical unit cost; sparsity penalty 0.15",
+  "diagnostic_full_default_includes_immutable": true,
+  "domain_constraints": "observed training-fold prototype values plus relational tenure constraints",
+  "elapsed_seconds": 8.915899599902332,
+  "evaluation_population": "diagnostic_cost_benchmark",
+  "excluded_features": [
+    "Age",
+    "Gender",
+    "MaritalStatus",
+    "EmpDepartment",
+    "EmpLastSalaryHikePercent",
+    "Attrition",
+    "EmpNumber",
+    "PerformanceRating"
+  ],
+  "intervention_modes": {
+    "diagnostic_full_default": [
+      "employee_controllable",
+      "manager_controllable",
+      "organisation_controllable"
+    ],
+    "employee_manager": [
+      "employee_controllable",
+      "manager_controllable"
+    ],
+    "employee_only": [
+      "employee_controllable"
+    ],
+    "no_salary": [
+      "employee_controllable",
+      "manager_controllable",
+      "organisation_controllable"
+    ],
+    "organization_allowed": [
+      "employee_controllable",
+      "manager_controllable",
+      "organisation_controllable"
+    ]
+  },
+  "max_cases": 10,
+  "max_features_changed": 3,
+  "max_prototypes": 250,
+  "model_evaluation_scope": "out_of_fold_only",
+  "n_splits": 10,
+  "n_total_case_mode_rows": 55,
+  "n_unique_cases": 11,
+  "n_unique_eligible_cases": 10,
+  "policy": "no_salary_hike_no_attrition_no_department",
+  "prototype_scope": "outer_training_partition_only",
+  "run_id": "counterfactual_cost_benchmark_20260712",
+  "scale_and_domain_scope": "outer_training_partition_only",
+  "seed": 42,
+  "validity_rule": "fold-specific predicted class reaches desired or higher class",
+  "warning": "Model scenarios only; not causal findings or employee prescriptions."
+}

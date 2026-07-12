@@ -1,7 +1,7 @@
 {
   "dataset_name": "hrdataset_v14",
   "display_name": "HRDataset_v14",
-  "recommended_role": "independent replication and direct external performance validation",
+  "recommended_role": "independent external performance-target replication",
   "source_url": "https://raw.githubusercontent.com/pouyasattari/HR-Dataset-Analysis/main/HRDataset_v14.csv",
   "canonical_source_note": "Public mirror of the HRDataset_v14 / Human Resources Data Set commonly distributed through Kaggle.",
   "target": {

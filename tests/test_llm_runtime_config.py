@@ -7,6 +7,7 @@ from unittest.mock import patch
 from src.llm.check_llm_setup import check_setup
 from src.llm.client_factory import build_llm_client
 from src.llm.offline_stub_llm import OfflineStubLLM
+from src.llm.governed_explainer import GovernedExplainer
 from src.llm.output_schema import validate_governed_explanation_payload
 from src.llm.runtime_config import LLMRuntimeConfig
 
@@ -18,10 +19,25 @@ class LLMRuntimeConfigTests(unittest.TestCase):
             client = build_llm_client(LLMRuntimeConfig(provider="auto", require_real_llm=False))
         self.assertIsInstance(client, OfflineStubLLM)
 
+    def test_auto_with_api_key_still_requires_explicit_real_authorization(self) -> None:
+        with patch.dict(os.environ, {"OPENAI_API_KEY": "test-key-must-not-be-used"}, clear=False):
+            client = build_llm_client(LLMRuntimeConfig(provider="auto", require_real_llm=False))
+        self.assertIsInstance(client, OfflineStubLLM)
+
     def test_require_real_llm_blocks_offline_provider(self) -> None:
         config = LLMRuntimeConfig(provider="offline", require_real_llm=True)
         with self.assertRaises(RuntimeError):
             build_llm_client(config)
+
+    def test_governed_explainer_default_is_offline_even_when_key_exists(self) -> None:
+        with patch.dict(
+            os.environ,
+            {"OPENAI_API_KEY": "test-key-must-not-be-used", "HR_XAI_LLM_PROVIDER": "auto"},
+            clear=False,
+        ):
+            explainer = GovernedExplainer()
+        self.assertEqual(explainer.runtime_config.provider, "offline")
+        self.assertIsInstance(explainer.llm_client, OfflineStubLLM)
 
     def test_setup_reports_missing_api_key(self) -> None:
         with patch.dict(os.environ, {"HR_XAI_LLM_PROVIDER": "openai"}, clear=False):

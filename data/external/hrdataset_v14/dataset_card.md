@@ -2,7 +2,7 @@
 
 ## Role
 
-Primary independent replication and direct external performance-validation dataset because it includes the mappable `PerformanceScore` target.
+Role: independent external performance-target replication because it includes a mappable `PerformanceScore` target. The dataset-specific model is trained independently; this is not transport and testing of a locked INX model.
 
 ## Source
 

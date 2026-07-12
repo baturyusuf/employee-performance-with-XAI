@@ -1,0 +1,185 @@
+{
+  "config_hash": "c664ef152ff3a9eef89c53a403b9c2e6f677340bea0307b02d97d07cc54bdfc3",
+  "dataset_hashes": {
+    "employee_turnover": {
+      "path": "data/external/employee_turnover/raw.csv",
+      "role": "related_task_transfer",
+      "sha256": "2510e274a90547f34c7b0db5a4ab70282c2710eb54252f14921bf980b81a928c",
+      "size_bytes": 566778,
+      "task_type": "binary_turnover_transfer"
+    },
+    "hrdataset_v14": {
+      "path": "data/external/hrdataset_v14/raw.csv",
+      "role": "independent_external_performance_target_replication",
+      "sha256": "cb19996755c93c0a8d6527f59da4701c80aef65eff854906546dce286249813c",
+      "size_bytes": 76857,
+      "task_type": "ordinal_multiclass_performance"
+    },
+    "ibm_hr_analytics": {
+      "path": "data/external/ibm_hr_analytics/raw.csv",
+      "role": "restricted_target_performance_robustness",
+      "sha256": "a5c31e38bd7fafc9bc333884eb181b06b41b8e5e488e8f7ccb27199fb3be7659",
+      "size_bytes": 227977,
+      "task_type": "restricted_target_performance_robustness"
+    },
+    "ibm_hr_analytics_attrition": {
+      "path": "data/external/ibm_hr_analytics/raw.csv",
+      "role": "related_task_transfer",
+      "sha256": "a5c31e38bd7fafc9bc333884eb181b06b41b8e5e488e8f7ccb27199fb3be7659",
+      "size_bytes": 227977,
+      "task_type": "binary_attrition_transfer"
+    },
+    "inx_primary": {
+      "path": "data/raw/inx_employee_performance.csv",
+      "role": "primary_development_and_internal_oof_evaluation",
+      "sha256": "b8deac0a615b97076622ae540f4cfd0d3c3f1e7acb83ba3ff6560470a9ccf60a",
+      "size_bytes": 152715,
+      "task_type": "ordinal_multiclass_performance"
+    }
+  },
+  "elapsed_seconds": 1.1005752000492066,
+  "ended_at": "2026-07-12T18:37:52+00:00",
+  "git_commit": "18347488bdb4eed60f115ceeff70c420071ceef0",
+  "outputs": [
+    {
+      "path": "reports/manuscript_final/manuscript_final_20260712T181754Z_c664ef152ff3/figures/figure_1_governance_architecture.png",
+      "sha256": "3c25d5c954cf8154308e563e7800dce31a95c53642fa7aab3c863123a1b9758e",
+      "size_bytes": 360047
+    },
+    {
+      "path": "reports/manuscript_final/manuscript_final_20260712T181754Z_c664ef152ff3/figures/figure_1_governance_architecture.svg",
+      "sha256": "d8d42d0042a2926dc47e352423d90522c5da70f8013aeb4ea444dfdba63663f1",
+      "size_bytes": 75942
+    },
+    {
+      "path": "reports/manuscript_final/manuscript_final_20260712T181754Z_c664ef152ff3/figures/figure_2_structured_evidence_flow.png",
+      "sha256": "5b4e5bce1a07d62fae747f8a78a473dee7ea889f32f49d94f326a8d733a20fa5",
+      "size_bytes": 321451
+    },
+    {
+      "path": "reports/manuscript_final/manuscript_final_20260712T181754Z_c664ef152ff3/figures/figure_2_structured_evidence_flow.svg",
+      "sha256": "2418e9073db4a90563ce5cb546db834667abdd857abdbffc12f3cdc9ee0972af",
+      "size_bytes": 66031
+    },
+    {
+      "path": "reports/manuscript_final/manuscript_final_20260712T181754Z_c664ef152ff3/figures/figure_3_multi_agent_audit.png",
+      "sha256": "986707595853e785616a2fe1ce2acd58c731c59051c53b94d8dad5f5a682dfa9",
+      "size_bytes": 326617
+    },
+    {
+      "path": "reports/manuscript_final/manuscript_final_20260712T181754Z_c664ef152ff3/figures/figure_3_multi_agent_audit.svg",
+      "sha256": "3d0491263e18b8636003b9ee999dc78e5755850cf3de53b381e57d548a0efae9",
+      "size_bytes": 98886
+    },
+    {
+      "path": "reports/manuscript_final/manuscript_final_20260712T181754Z_c664ef152ff3/figures/figure_4_gxair_readiness_dashboard.png",
+      "sha256": "49321806ec42ea5940d2e3080c7ea6f36db8c2576cad5cff1ef0fa88f6927d22",
+      "size_bytes": 342331
+    },
+    {
+      "path": "reports/manuscript_final/manuscript_final_20260712T181754Z_c664ef152ff3/figures/figure_4_gxair_readiness_dashboard.svg",
+      "sha256": "0d7f99790a677f43ffd9012f49f5f62ee08d6805aec20f01bfd4fa5822e50a2c",
+      "size_bytes": 123119
+    },
+    {
+      "path": "reports/manuscript_final/manuscript_final_20260712T181754Z_c664ef152ff3/figures/figure_5_calibration_ordinal_error.png",
+      "sha256": "3538467f6855bc89123b84bc1d1d8541c25c91c6390a615e5fd1fcc4a92eefed",
+      "size_bytes": 418306
+    },
+    {
+      "path": "reports/manuscript_final/manuscript_final_20260712T181754Z_c664ef152ff3/figures/figure_5_calibration_ordinal_error.svg",
+      "sha256": "a6ea249e112ec08f4a643d74ba6f8863f8ec202a5454917af409825b0fe9d65e",
+      "size_bytes": 124233
+    },
+    {
+      "path": "reports/manuscript_final/manuscript_final_20260712T181754Z_c664ef152ff3/figures/figure_6_global_grouped_shap.png",
+      "sha256": "bd4086936513e8cc7d7dee1c261a30bfa854002a952a67700c94531ae461593f",
+      "size_bytes": 216515
+    },
+    {
+      "path": "reports/manuscript_final/manuscript_final_20260712T181754Z_c664ef152ff3/figures/figure_6_global_grouped_shap.svg",
+      "sha256": "e8d9a09206c9ba5f390e1798aa0d616921385dd4434c32d0c3c9964cb30bd66d",
+      "size_bytes": 75934
+    },
+    {
+      "path": "reports/manuscript_final/manuscript_final_20260712T181754Z_c664ef152ff3/figures/figure_7_local_reason_code.png",
+      "sha256": "5ab8a3875ee53f1138f53ceff5bd110e99b10f73b21a76a21d71ae7ed96eaa1a",
+      "size_bytes": 197125
+    },
+    {
+      "path": "reports/manuscript_final/manuscript_final_20260712T181754Z_c664ef152ff3/figures/figure_7_local_reason_code.svg",
+      "sha256": "eefdfdcbf3d267d77b383134ccdef77eebf8e85764226a4b5a5c72292db78f02",
+      "size_bytes": 76633
+    },
+    {
+      "path": "reports/manuscript_final/manuscript_final_20260712T181754Z_c664ef152ff3/figures/figure_package_validation.json",
+      "sha256": "eee7889525dd2ea7cf68c76ab2b6573c058e732840afa40034b339a6f2728bb8",
+      "size_bytes": 422
+    },
+    {
+      "path": "reports/manuscript_final/manuscript_final_20260712T181754Z_c664ef152ff3/figures/source_data/figure_1_governance_architecture_edges.csv",
+      "sha256": "1b81d5da7df70c1a8c9ae239789df4901bb33e983a1c460792b174db104b79cf",
+      "size_bytes": 1762
+    },
+    {
+      "path": "reports/manuscript_final/manuscript_final_20260712T181754Z_c664ef152ff3/figures/source_data/figure_1_governance_architecture_nodes.csv",
+      "sha256": "38e67e952345623ad369996e761ee056c48e86bc976a0ab56f0804d2dca13371",
+      "size_bytes": 1843
+    },
+    {
+      "path": "reports/manuscript_final/manuscript_final_20260712T181754Z_c664ef152ff3/figures/source_data/figure_2_structured_evidence_flow_edges.csv",
+      "sha256": "f95a3c5dd93adadfcfeb24b7c184d3a63241014e68bae45d531c6fbba6f93124",
+      "size_bytes": 1981
+    },
+    {
+      "path": "reports/manuscript_final/manuscript_final_20260712T181754Z_c664ef152ff3/figures/source_data/figure_2_structured_evidence_flow_nodes.csv",
+      "sha256": "68746bfd01fa46812c61e4e6ffb81c0e78ded641432ba6332d2eeba4348b66de",
+      "size_bytes": 1573
+    },
+    {
+      "path": "reports/manuscript_final/manuscript_final_20260712T181754Z_c664ef152ff3/figures/source_data/figure_3_agent_roles.csv",
+      "sha256": "bff5d735ab2f9bf25c53c307fe647e591fda86aa49f3a20be94437d7ff848013",
+      "size_bytes": 1603
+    },
+    {
+      "path": "reports/manuscript_final/manuscript_final_20260712T181754Z_c664ef152ff3/figures/source_data/figure_4_readiness_status_matrix.csv",
+      "sha256": "d4839a787b40eef2e56478b2d924cd4dfd208e9dce06353d88b7bc6170c76f78",
+      "size_bytes": 2781
+    },
+    {
+      "path": "reports/manuscript_final/manuscript_final_20260712T181754Z_c664ef152ff3/figures/source_data/figure_5_metric_source.csv",
+      "sha256": "f7506cd4d1abd7e75d3935b42fd996f1f61ae2cd0f9be46f25c51a604adcfbf2",
+      "size_bytes": 3294
+    },
+    {
+      "path": "reports/manuscript_final/manuscript_final_20260712T181754Z_c664ef152ff3/figures/source_data/figure_5_reliability_source.csv",
+      "sha256": "5e3ed5367946d067a6b6ce222b665ef542bb4b11356b4d76d378b4c8815cd31e",
+      "size_bytes": 16240
+    },
+    {
+      "path": "reports/manuscript_final/manuscript_final_20260712T181754Z_c664ef152ff3/figures/source_data/figure_6_global_grouped_shap_source.csv",
+      "sha256": "77dc8d7e065b699cb3dcdd55611f34e3828348469fb928670c1222d98015d3d1",
+      "size_bytes": 6482
+    },
+    {
+      "path": "reports/manuscript_final/manuscript_final_20260712T181754Z_c664ef152ff3/figures/source_data/figure_7_all_local_grouped_shap_source.csv",
+      "sha256": "862d89f397142f137a699678384981fdc73bcf1429cf7bf6bd2132283e0696c7",
+      "size_bytes": 16152694
+    },
+    {
+      "path": "reports/manuscript_final/manuscript_final_20260712T181754Z_c664ef152ff3/figures/source_data/figure_7_oof_prediction_source.csv",
+      "sha256": "95bde6e60bcd8b4f56595d57a0cfd50b4c273e72bdec21582235b614f07053fc",
+      "size_bytes": 299544
+    },
+    {
+      "path": "reports/manuscript_final/manuscript_final_20260712T181754Z_c664ef152ff3/figures/source_data/figure_7_representative_case_source.csv",
+      "sha256": "64195316b97d6bd29139713d2c3f09712e165c3c2b0d62955e8dac852ba9e1cb",
+      "size_bytes": 2360
+    }
+  ],
+  "run_id": "manuscript_final_20260712T181754Z_c664ef152ff3",
+  "source_tree_hash": "092778e5bafff11a7aa59399fde413efe6760d664e2214f71595d7ab59d44cb8",
+  "stage": "figures",
+  "started_at": "2026-07-12T18:37:50+00:00",
+  "status": "complete"
+}

@@ -1,0 +1,15 @@
+{
+  "api_call_attempted": false,
+  "claim_boundary": "Deterministic pipeline/governance validation only; no real-LLM performance claim.",
+  "config_hash": "c664ef152ff3a9eef89c53a403b9c2e6f677340bea0307b02d97d07cc54bdfc3",
+  "dataset_counts": {
+    "hrdataset_v14": 40,
+    "inx_primary": 40
+  },
+  "execution_mode": "offline_deterministic_pipeline_validation",
+  "n_agent_rows": 560,
+  "n_cases": 80,
+  "paid_api_calls": 0,
+  "real_llm_used": false,
+  "run_id": "manuscript_final_20260712T181754Z_c664ef152ff3"
+}

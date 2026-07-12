@@ -8,6 +8,8 @@ from typing import Any, Dict, Iterable, List, Optional
 import numpy as np
 import pandas as pd
 
+from src.models.task_schema import canonical_task_type
+
 from src.data.load_data import _read_csv_with_best_effort
 from src.utils.config import SETTINGS
 
@@ -143,7 +145,7 @@ def load_external_dataset(dataset_name: str, target_kind: str = "primary") -> Ex
         canonical=canonical,
         target_column=canonical_target,
         target_raw_column=raw_target,
-        task_type=str(target_spec.get("task_type", "unknown")),
+        task_type=canonical_task_type(str(target_spec.get("task_type", "unknown"))),
         target_mapping={str(k): v for k, v in target_spec.get("mapping", {}).items()},
         unmapped_target_values=unmapped_values,
     )

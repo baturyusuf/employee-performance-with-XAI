@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import argparse
+import json
 import time
 from pathlib import Path
 from typing import Any, Dict, List, Tuple
@@ -24,6 +25,12 @@ from src.llm.evidence_schema import (
     LeakageEvidence,
     PredictionEvidence,
 )
+from src.llm.evidence_preflight import (
+    build_evidence_preflight_report,
+    enforce_real_llm_preflight,
+    wilson_interval,
+    write_evidence_preflight_report,
+)
 from src.llm.faithfulness_checker import check_faithfulness_categories
 from src.llm.governed_explainer import GovernedExplainer
 from src.llm.runtime_config import LLMRuntimeConfig
@@ -33,6 +40,35 @@ from src.utils.experiment_registry import append_registry_row, get_git_commit, u
 
 
 DEFAULT_CONFIG = "configs/llm_agent_eval.yaml"
+
+
+def run_preflight(config_path: str = DEFAULT_CONFIG) -> Dict[str, Path]:
+    """Generate selected-case readiness artifacts without constructing an LLM client."""
+
+    config = load_config(config_path)
+    settings = config.get("llm_agent_eval", config)
+    output_dir = Path(settings.get("output_dir", "reports/llm_explanations"))
+    output_dir.mkdir(parents=True, exist_ok=True)
+    run_id = f"{settings.get('run_id_prefix', 'llm_agent_eval')}_preflight_{utc_now_iso()}"
+    run_mode = str(settings.get("run_mode", "dry_run")).lower()
+    manifest_rows, evidence_items = build_manifest_and_evidence(settings, run_id=run_id)
+    report = build_evidence_preflight_report(
+        evidence_items,
+        run_id=run_id,
+        run_mode=run_mode,
+        missing_evidence_stratum=settings.get("missing_evidence_stratum"),
+        canonical_config_path=settings.get(
+            "canonical_manuscript_config", "configs/manuscript_final.yaml"
+        ),
+        requested_case_count=configured_requested_case_count(settings),
+    )
+    report["execution_intent"] = "preflight_only_no_llm_calls"
+    report["api_call_attempted"] = False
+    paths = write_evidence_preflight_report(report, output_dir)
+    attach_preflight_results(manifest_rows, evidence_items, report)
+    manifest_path = paths["preflight_json"].parent / "eval_case_manifest.csv"
+    pd.DataFrame(manifest_rows).to_csv(manifest_path, index=False)
+    return {**paths, "preflight_manifest": manifest_path}
 
 
 def run(config_path: str = DEFAULT_CONFIG) -> Dict[str, Path]:
@@ -47,10 +83,24 @@ def run(config_path: str = DEFAULT_CONFIG) -> Dict[str, Path]:
     retry_policy = settings.get("retry_policy", {})
     rate_limit = settings.get("rate_limit", {})
 
-    runtime_config = runtime_from_settings(settings, run_mode)
     manifest_rows, evidence_items = build_manifest_and_evidence(settings, run_id=run_id)
+    preflight_report = build_evidence_preflight_report(
+        evidence_items,
+        run_id=run_id,
+        run_mode=run_mode,
+        missing_evidence_stratum=settings.get("missing_evidence_stratum"),
+        canonical_config_path=settings.get("canonical_manuscript_config", "configs/manuscript_final.yaml"),
+        requested_case_count=configured_requested_case_count(settings),
+    )
+    preflight_paths = write_evidence_preflight_report(preflight_report, output_dir)
+    attach_preflight_results(manifest_rows, evidence_items, preflight_report)
     manifest_path = output_dir / "eval_case_manifest.csv"
     pd.DataFrame(manifest_rows).to_csv(manifest_path, index=False)
+
+    # This gate intentionally precedes runtime/client construction and every
+    # generate call. A blocked real batch therefore cannot spend API funds.
+    enforce_real_llm_preflight(preflight_report)
+    runtime_config = runtime_from_settings(settings, run_mode)
 
     explainer = GovernedExplainer(runtime_config=runtime_config)
     explanation_rows: List[Dict[str, Any]] = []
@@ -85,16 +135,22 @@ def run(config_path: str = DEFAULT_CONFIG) -> Dict[str, Path]:
             parsing_errors = str(exc)
         response_hash = object_hash(response)
         categorized = check_faithfulness_categories(response, evidence_dict, parsing_error=parsing_errors if not parsed_success else "")
-        faithfulness_rows.append(
-            categorized.to_eval_row(
-                run_id=run_id,
-                dataset_name=evidence.prediction.dataset_name,
-                case_id=evidence.prediction.case_id,
-                evidence_hash=evidence_hash,
-                response_hash=response_hash,
-                notes=item.get("notes", ""),
-            )
+        faithfulness_row = categorized.to_eval_row(
+            run_id=run_id,
+            dataset_name=evidence.prediction.dataset_name,
+            case_id=evidence.prediction.case_id,
+            evidence_hash=evidence_hash,
+            response_hash=response_hash,
+            notes=item.get("notes", ""),
         )
+        faithfulness_row.update(
+            {
+                "evidence_complete": bool(item["preflight"]["complete"]),
+                "evidence_readiness_status": item["preflight"]["readiness_status"],
+                "evidence_stratum": item["preflight"]["evidence_stratum"],
+            }
+        )
+        faithfulness_rows.append(faithfulness_row)
         explanation_rows.append(
             {
                 "run_id": run_id,
@@ -113,6 +169,11 @@ def run(config_path: str = DEFAULT_CONFIG) -> Dict[str, Path]:
                 "detailed_explanation": response.get("detailed_explanation", ""),
                 "warnings": response.get("warnings", []),
                 "evidence_references": evidence.evidence_sources,
+                "evidence_complete": bool(item["preflight"]["complete"]),
+                "evidence_readiness_status": item["preflight"]["readiness_status"],
+                "evidence_stratum": item["preflight"]["evidence_stratum"],
+                "missing_evidence_fields": item["preflight"]["missing_fields"],
+                "invalid_evidence_fields": item["preflight"]["invalid_fields"],
                 "unsupported_evidence_flags": response.get("unsupported_claims_detected", []),
                 "raw_response": response,
                 "structured_evidence": evidence_dict,
@@ -128,7 +189,11 @@ def run(config_path: str = DEFAULT_CONFIG) -> Dict[str, Path]:
     write_jsonl(explanations_path, explanation_rows)
     faithfulness_df = pd.DataFrame(faithfulness_rows)
     faithfulness_df.to_csv(faithfulness_path, index=False)
-    write_faithfulness_summary(faithfulness_df, faithfulness_summary_path)
+    write_faithfulness_summary(
+        faithfulness_df,
+        faithfulness_summary_path,
+        evidence_preflight=preflight_report,
+    )
 
     agent_outputs: Dict[str, Path] = {}
     if settings.get("evaluation_flags", {}).get("run_agent_audit", True):
@@ -155,6 +220,7 @@ def run(config_path: str = DEFAULT_CONFIG) -> Dict[str, Path]:
         agent_csv=agent_outputs.get("csv"),
         guardrail_csv=guardrail_outputs.get("evaluation"),
         output_dir=output_dir,
+        evidence_preflight=preflight_report,
     )
 
     outputs = {
@@ -162,6 +228,7 @@ def run(config_path: str = DEFAULT_CONFIG) -> Dict[str, Path]:
         "governed_explanations": explanations_path,
         "faithfulness_eval": faithfulness_path,
         "faithfulness_summary": faithfulness_summary_path,
+        **preflight_paths,
         **{f"agent_{key}": value for key, value in agent_outputs.items()},
         **{f"chatbot_{key}": value for key, value in guardrail_outputs.items()},
         **summary_paths,
@@ -198,6 +265,61 @@ def run(config_path: str = DEFAULT_CONFIG) -> Dict[str, Path]:
         }
     )
     return outputs
+
+
+def attach_preflight_results(
+    manifest_rows: List[Dict[str, Any]],
+    evidence_items: List[Dict[str, Any]],
+    preflight_report: Dict[str, Any],
+) -> None:
+    """Bind selected cases to their readiness stratum before any generation."""
+
+    case_rows = preflight_report.get("cases", [])
+    if len(manifest_rows) != len(evidence_items) or len(evidence_items) != len(case_rows):
+        raise RuntimeError(
+            "LLM preflight case count does not match the selected manifest/evidence records"
+        )
+    by_case = {str(row["case_id"]): row for row in case_rows}
+    if len(by_case) != len(case_rows):
+        raise RuntimeError("LLM preflight contains duplicate case IDs")
+    for manifest, item in zip(manifest_rows, evidence_items):
+        case_id = str(item["evidence"].prediction.case_id)
+        if case_id != str(manifest.get("case_id")) or case_id not in by_case:
+            raise RuntimeError(f"LLM preflight case identity mismatch for {case_id!r}")
+        readiness = by_case[case_id]
+        item["preflight"] = readiness
+        manifest.update(
+            {
+                "evidence_complete": bool(readiness["complete"]),
+                "evidence_readiness_status": readiness["readiness_status"],
+                "evidence_stratum": readiness["evidence_stratum"],
+                "eligible_for_real_api": bool(readiness["eligible_for_real_api"]),
+                "missing_evidence_fields": json.dumps(
+                    readiness.get("missing_fields", []), sort_keys=True
+                ),
+                "invalid_evidence_fields": json.dumps(
+                    readiness.get("invalid_fields", []), sort_keys=True
+                ),
+                "forbidden_evidence_features": json.dumps(
+                    readiness.get("forbidden_features", {}), sort_keys=True
+                ),
+            }
+        )
+
+
+def configured_requested_case_count(settings: Dict[str, Any]) -> int:
+    """Return the predeclared selected-case denominator from evaluation config."""
+
+    total = 0
+    for dataset in settings.get("datasets", []):
+        if not dataset.get("enabled", True):
+            continue
+        default = 30 if dataset.get("source") == "internal" else 10
+        count = int(dataset.get("sample_size", default))
+        if count < 0:
+            raise ValueError("LLM dataset sample_size must be non-negative")
+        total += count
+    return total
 
 
 def rate_limit_sleep_seconds(rate_limit: Dict[str, Any]) -> float:
@@ -550,7 +672,12 @@ def validate_explanation_payload(payload: Dict[str, Any]) -> Tuple[bool, str]:
     return True, ""
 
 
-def write_faithfulness_summary(df: pd.DataFrame, path: Path) -> None:
+def write_faithfulness_summary(
+    df: pd.DataFrame,
+    path: Path,
+    *,
+    evidence_preflight: Dict[str, Any] | None = None,
+) -> None:
     summary = summarize_faithfulness_metrics(df)
     by_dataset = df.groupby("dataset_name").agg(
         n_cases=("case_id", "count"),
@@ -558,19 +685,43 @@ def write_faithfulness_summary(df: pd.DataFrame, path: Path) -> None:
         mean_faithfulness_score=("faithfulness_score", "mean"),
         missing_warning_rate=("missing_warning_count", lambda s: float((s > 0).mean())),
     ).reset_index()
+    by_evidence_stratum = summarize_faithfulness_by_evidence_stratum(df)
     failures = df[df["faithfulness_pass"] == False].head(10)  # noqa: E712
     lines = [
         "# Faithfulness Evaluation Summary",
         "",
         *[f"- {key}: {value}" for key, value in summary.items()],
         "",
-        "## Per-Dataset Breakdown",
-        "",
-        *markdown_table(by_dataset),
-        "",
-        "## Examples of Failures",
+        "## Evidence Readiness",
         "",
     ]
+    if evidence_preflight is None:
+        lines.append("No case-evidence preflight was supplied to this summary.")
+    else:
+        lines.extend(
+            [
+                f"- Cases requested: {evidence_preflight.get('cases_requested')}",
+                f"- Complete case evidence: {evidence_preflight.get('cases_complete')}",
+                f"- Incomplete case evidence: {evidence_preflight.get('cases_incomplete')}",
+                f"- Complete-case rate: {evidence_preflight.get('complete_case_rate')}",
+                "- Text compliance and evidence completeness are reported separately; an all-pass text result does not repair incomplete evidence.",
+            ]
+        )
+    lines.extend(
+        [
+            "",
+            "## Per-Dataset Breakdown",
+            "",
+            *markdown_table(by_dataset),
+            "",
+            "## Faithfulness by Evidence Stratum",
+            "",
+            *markdown_table(by_evidence_stratum),
+            "",
+            "## Examples of Failures",
+            "",
+        ]
+    )
     if failures.empty:
         lines.append("No faithfulness failures detected.")
     else:
@@ -587,6 +738,39 @@ def write_faithfulness_summary(df: pd.DataFrame, path: Path) -> None:
     write_markdown(path, lines)
 
 
+def summarize_faithfulness_by_evidence_stratum(df: pd.DataFrame) -> pd.DataFrame:
+    """Keep missing-evidence handling out of complete-case primary metrics."""
+
+    if df.empty:
+        return pd.DataFrame()
+    if "evidence_stratum" not in df.columns:
+        working = df.assign(evidence_stratum="historical_unclassified")
+    else:
+        working = df
+    rows: List[Dict[str, Any]] = []
+    for stratum, group in working.groupby("evidence_stratum", dropna=False):
+        passed = group["faithfulness_pass"].astype(bool)
+        ci_low, ci_high = wilson_interval(int(passed.sum()), int(len(passed)))
+        rows.append(
+            {
+                "evidence_stratum": str(stratum),
+                "n_cases": int(len(group)),
+                "n_evidence_complete": (
+                    int(group["evidence_complete"].astype(bool).sum())
+                    if "evidence_complete" in group.columns
+                    else int(len(group))
+                ),
+                "faithfulness_pass_rate": float(passed.mean()),
+                "faithfulness_pass_rate_wilson_ci_low": ci_low,
+                "faithfulness_pass_rate_wilson_ci_high": ci_high,
+                "mean_faithfulness_score": float(group["faithfulness_score"].mean()),
+                "eligible_for_primary_complete_case_claim": str(stratum)
+                == "complete_case_evidence",
+            }
+        )
+    return pd.DataFrame(rows)
+
+
 def summarize_faithfulness_metrics(df: pd.DataFrame) -> Dict[str, Any]:
     if df.empty:
         return {
@@ -597,6 +781,21 @@ def summarize_faithfulness_metrics(df: pd.DataFrame) -> Dict[str, Any]:
             "forbidden_claim_rate": 0.0,
             "missing_warning_rate": 0.0,
             "parsing_success_rate": 0.0,
+            "n_complete_evidence_cases": 0,
+            "n_incomplete_evidence_cases": 0,
+            "complete_evidence_faithfulness_pass_rate": None,
+            "faithfulness_pass_rate_wilson_ci_low": None,
+            "faithfulness_pass_rate_wilson_ci_high": None,
+            "unsupported_claim_rate_wilson_ci_low": None,
+            "unsupported_claim_rate_wilson_ci_high": None,
+            "forbidden_claim_rate_wilson_ci_low": None,
+            "forbidden_claim_rate_wilson_ci_high": None,
+            "missing_warning_rate_wilson_ci_low": None,
+            "missing_warning_rate_wilson_ci_high": None,
+            "parsing_success_rate_wilson_ci_low": None,
+            "parsing_success_rate_wilson_ci_high": None,
+            "complete_evidence_faithfulness_pass_rate_wilson_ci_low": None,
+            "complete_evidence_faithfulness_pass_rate_wilson_ci_high": None,
         }
     forbidden_cols = [
         "causal_claim_count",
@@ -604,15 +803,51 @@ def summarize_faithfulness_metrics(df: pd.DataFrame) -> Dict[str, Any]:
         "fairness_overclaim_count",
         "employee_prescription_count",
     ]
-    return {
+    unsupported = (df["unsupported_metric_count"] + df["unsupported_feature_count"]) > 0
+    forbidden = df[forbidden_cols].sum(axis=1) > 0
+    missing_warning = df["missing_warning_count"] > 0
+    parsing_success = df["parsing_error"].fillna("") == ""
+    metrics = {
         "n_cases": int(len(df)),
         "faithfulness_pass_rate": float(df["faithfulness_pass"].mean()),
         "mean_faithfulness_score": float(df["faithfulness_score"].mean()),
-        "unsupported_claim_rate": float(((df["unsupported_metric_count"] + df["unsupported_feature_count"]) > 0).mean()),
-        "forbidden_claim_rate": float((df[forbidden_cols].sum(axis=1) > 0).mean()),
-        "missing_warning_rate": float((df["missing_warning_count"] > 0).mean()),
-        "parsing_success_rate": float((df["parsing_error"].fillna("") == "").mean()),
+        "unsupported_claim_rate": float(unsupported.mean()),
+        "forbidden_claim_rate": float(forbidden.mean()),
+        "missing_warning_rate": float(missing_warning.mean()),
+        "parsing_success_rate": float(parsing_success.mean()),
     }
+    rate_series = {
+        "faithfulness_pass_rate": df["faithfulness_pass"].astype(bool),
+        "unsupported_claim_rate": unsupported,
+        "forbidden_claim_rate": forbidden,
+        "missing_warning_rate": missing_warning,
+        "parsing_success_rate": parsing_success,
+    }
+    for name, values in rate_series.items():
+        ci_low, ci_high = wilson_interval(int(values.sum()), int(len(values)))
+        metrics[f"{name}_wilson_ci_low"] = ci_low
+        metrics[f"{name}_wilson_ci_high"] = ci_high
+
+    if "evidence_complete" in df.columns:
+        evidence_complete = df["evidence_complete"].astype(bool)
+    else:
+        # Backwards-compatible interpretation for historical rows that predate
+        # the preflight field; new manuscript runs always supply the column.
+        evidence_complete = pd.Series(True, index=df.index, dtype=bool)
+    complete_df = df[evidence_complete]
+    metrics["n_complete_evidence_cases"] = int(evidence_complete.sum())
+    metrics["n_incomplete_evidence_cases"] = int((~evidence_complete).sum())
+    if complete_df.empty:
+        metrics["complete_evidence_faithfulness_pass_rate"] = None
+        metrics["complete_evidence_faithfulness_pass_rate_wilson_ci_low"] = None
+        metrics["complete_evidence_faithfulness_pass_rate_wilson_ci_high"] = None
+    else:
+        passed = complete_df["faithfulness_pass"].astype(bool)
+        ci_low, ci_high = wilson_interval(int(passed.sum()), int(len(passed)))
+        metrics["complete_evidence_faithfulness_pass_rate"] = float(passed.mean())
+        metrics["complete_evidence_faithfulness_pass_rate_wilson_ci_low"] = ci_low
+        metrics["complete_evidence_faithfulness_pass_rate_wilson_ci_high"] = ci_high
+    return metrics
 
 
 def write_integrated_summary(
@@ -627,14 +862,18 @@ def write_integrated_summary(
     agent_csv: Path | None,
     guardrail_csv: Path | None,
     output_dir: Path,
+    evidence_preflight: Dict[str, Any] | None = None,
 ) -> Dict[str, Path]:
     metrics = summarize_faithfulness_metrics(faithfulness_df)
+    by_evidence_stratum = summarize_faithfulness_by_evidence_stratum(faithfulness_df)
     agent_df = pd.read_csv(agent_csv) if agent_csv is not None and agent_csv.exists() else pd.DataFrame()
     guardrail_df = pd.read_csv(guardrail_csv) if guardrail_csv is not None and guardrail_csv.exists() else pd.DataFrame()
     supervisor = agent_df[agent_df["agent_name"] == "SupervisorGovernanceAgent"] if not agent_df.empty else pd.DataFrame()
     readiness = supervisor["status"].value_counts().rename_axis("readiness_status").reset_index(name="count") if not supervisor.empty else pd.DataFrame()
     explanation_agent = agent_df[agent_df["agent_name"] == "ExplanationComplianceAgent"] if not agent_df.empty else pd.DataFrame()
     agent_compliance_pass_rate = float((explanation_agent["status"] == "pass").mean()) if not explanation_agent.empty else 0.0
+    agent_pass_count = int((explanation_agent["status"] == "pass").sum()) if not explanation_agent.empty else 0
+    agent_ci_low, agent_ci_high = wilson_interval(agent_pass_count, int(len(explanation_agent)))
 
     unsafe = guardrail_df[guardrail_df["expected_behavior"] == "refuse_with_safe_alternative"] if not guardrail_df.empty else pd.DataFrame()
     safe = guardrail_df[guardrail_df["expected_behavior"] == "answer_with_governance_warnings"] if not guardrail_df.empty else pd.DataFrame()
@@ -652,6 +891,16 @@ def write_integrated_summary(
         "chatbot_unsafe_refusal_rate": float(unsafe["refused"].mean()) if not unsafe.empty else 0.0,
         "chatbot_safe_answer_rate": float(safe["pass"].mean()) if not safe.empty else 0.0,
         "agent_compliance_pass_rate": agent_compliance_pass_rate,
+        "agent_compliance_pass_rate_wilson_ci_low": agent_ci_low,
+        "agent_compliance_pass_rate_wilson_ci_high": agent_ci_high,
+        "evidence_cases_requested": int(evidence_preflight.get("cases_requested", 0)) if evidence_preflight else 0,
+        "evidence_cases_complete": int(evidence_preflight.get("cases_complete", 0)) if evidence_preflight else 0,
+        "evidence_cases_incomplete": int(evidence_preflight.get("cases_incomplete", 0)) if evidence_preflight else 0,
+        "complete_case_evidence_rate": evidence_preflight.get("complete_case_rate") if evidence_preflight else None,
+        "complete_case_evidence_rate_wilson_ci_low": evidence_preflight.get("complete_case_rate_wilson_ci_low") if evidence_preflight else None,
+        "complete_case_evidence_rate_wilson_ci_high": evidence_preflight.get("complete_case_rate_wilson_ci_high") if evidence_preflight else None,
+        "evidence_preflight_passed": bool(evidence_preflight.get("preflight_passed")) if evidence_preflight else False,
+        "evidence_readiness_distribution": evidence_preflight.get("readiness_distribution", []) if evidence_preflight else [],
         "supervisor_readiness_distribution": readiness.to_dict(orient="records"),
     }
     csv_path = output_dir / "llm_agent_eval_summary.csv"
@@ -667,6 +916,8 @@ def write_integrated_summary(
         limitation_lines = [
             "- This run used the real OpenAI-backed governed explanation path.",
             "- Stub/dry-run outputs from `offline_stub_llm` or `run_mode=dry_run` are not manuscript-grade real LLM evidence and are excluded from the final evidence package.",
+            "- Faithfulness/compliance rates and CompleteCaseEvidence readiness are distinct; neither should be used to conceal failures in the other.",
+            "- Wilson intervals quantify finite-sample uncertainty; an all-pass batch does not prove a zero population failure rate.",
             "- Automated LLM, faithfulness, agent, and chatbot checks do not replace human evaluation or legal/governance review.",
             "- Future larger or second-stage real LLM batches still require explicit approval because they incur API cost.",
         ]
@@ -674,6 +925,7 @@ def write_integrated_summary(
         limitation_lines = [
             "- Dry-run outputs use the deterministic offline stub and are not manuscript-grade real LLM evidence.",
             "- Real OpenAI execution requires explicit approval and API-key configuration.",
+            "- Faithfulness/compliance and CompleteCaseEvidence readiness are reported separately with finite-sample uncertainty.",
             "- Automated checks do not replace human evaluation or legal/governance review.",
         ]
     lines = [
@@ -688,11 +940,27 @@ def write_integrated_summary(
         "",
         "## Summary Metrics",
         "",
-        *[f"- {key}: {value}" for key, value in summary_row.items() if key not in {"supervisor_readiness_distribution"}],
+        *[
+            f"- {key}: {value}"
+            for key, value in summary_row.items()
+            if key not in {"supervisor_readiness_distribution", "evidence_readiness_distribution"}
+        ],
         "",
         "## Per-Dataset Breakdown",
         "",
         *markdown_table(by_dataset),
+        "",
+        "## Faithfulness by Evidence Stratum",
+        "",
+        *markdown_table(by_evidence_stratum),
+        "",
+        "## CompleteCaseEvidence Readiness",
+        "",
+        *(
+            markdown_table(pd.DataFrame(evidence_preflight.get("readiness_distribution", [])))
+            if evidence_preflight
+            else ["No evidence preflight supplied."]
+        ),
         "",
         "## Supervisor Readiness Distribution",
         "",
@@ -709,9 +977,14 @@ def write_integrated_summary(
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Run configurable LLM-agent evaluation.")
     parser.add_argument("--config", default=DEFAULT_CONFIG)
+    parser.add_argument(
+        "--preflight-only",
+        action="store_true",
+        help="Build and validate selected CompleteCaseEvidence without constructing an LLM client.",
+    )
     return parser.parse_args()
 
 
 if __name__ == "__main__":
     args = parse_args()
-    print(run(args.config))
+    print(run_preflight(args.config) if args.preflight_only else run(args.config))

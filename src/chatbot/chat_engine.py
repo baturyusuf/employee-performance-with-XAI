@@ -28,7 +28,27 @@ class GuardrailedChatEngine:
 
         lowered = question.lower()
         context = retrieve_context(question, case_id=case_id)
-        if "leak" in lowered or "full-feature" in lowered or "full feature" in lowered:
+        retrieval_failure_terms = [
+            "retrieval fail",
+            "lookup fail",
+            "report is unavailable",
+            "report unavailable",
+            "cannot be retrieved",
+        ]
+        if any(term in lowered for term in retrieval_failure_terms):
+            answer = (
+                "Unavailable report evidence must be identified explicitly. The chatbot must not invent, infer, or silently "
+                "replace missing evidence, and no case-level conclusion should be produced until the source is restored."
+            )
+        elif any(
+            term in lowered
+            for term in ["conflicting", "reports disagree", "sources conflict", "evidence conflict"]
+        ):
+            answer = (
+                "Conflicting evidence must be surfaced with the affected sources and uncertainty intact. The chatbot must "
+                "not select the convenient source or convert the conflict into an HR recommendation; it should escalate for review."
+            )
+        elif "leak" in lowered or "full-feature" in lowered or "full feature" in lowered:
             answer = (
                 "Full-feature models are leakage-warning upper-bound baselines only. "
                 "EmpLastSalaryHikePercent and Attrition are outcome-proximal/leakage-risk variables and are excluded from final candidates."

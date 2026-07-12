@@ -1,0 +1,427 @@
+{
+  "code_package_versions": {
+    "PyYAML": "not_installed",
+    "catboost": "1.2.10",
+    "lightgbm": "4.6.0",
+    "matplotlib": "3.10.8",
+    "numpy": "2.4.4",
+    "openai": "2.43.0",
+    "openai-agents": "0.17.6",
+    "openpyxl": "not_installed",
+    "pandas": "3.0.2",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "pytest": "9.1.1",
+    "python": "3.14.0",
+    "python-dotenv": "1.2.2",
+    "python_implementation": "CPython",
+    "scikit-learn": "1.8.0",
+    "scipy": "1.17.1",
+    "shap": "0.51.0",
+    "xgboost": "3.2.0",
+    "xlrd": "not_installed"
+  },
+  "commands": [
+    {
+      "command": "C:\\Users\\Yusuf\\Documents\\GitHub\\employee performance with XAI\\myenv\\Scripts\\python.exe -m src.experiments.build_manuscript_evidence --config configs/manuscript_final.yaml",
+      "ended_at": null,
+      "return_code": null,
+      "stage": "entrypoint",
+      "started_at": "2026-07-12T17:50:19+00:00",
+      "status": "started"
+    },
+    {
+      "command": "internal-stage:policy",
+      "ended_at": "2026-07-12T17:50:47+00:00",
+      "return_code": 0,
+      "stage": "policy",
+      "started_at": "2026-07-12T17:50:19+00:00",
+      "status": "complete"
+    },
+    {
+      "command": "internal-stage:calibration",
+      "ended_at": "2026-07-12T17:50:51+00:00",
+      "return_code": 0,
+      "stage": "calibration",
+      "started_at": "2026-07-12T17:50:47+00:00",
+      "status": "complete"
+    },
+    {
+      "command": "internal-stage:shap",
+      "ended_at": null,
+      "return_code": null,
+      "stage": "shap",
+      "started_at": "2026-07-12T17:50:51+00:00",
+      "status": "started"
+    }
+  ],
+  "config_hash": "c664ef152ff3a9eef89c53a403b9c2e6f677340bea0307b02d97d07cc54bdfc3",
+  "config_path": "configs/manuscript_final.yaml",
+  "dataset_hashes": {
+    "employee_turnover": {
+      "path": "data/external/employee_turnover/raw.csv",
+      "role": "related_task_transfer",
+      "sha256": "2510e274a90547f34c7b0db5a4ab70282c2710eb54252f14921bf980b81a928c",
+      "size_bytes": 566778,
+      "task_type": "binary_turnover_transfer"
+    },
+    "hrdataset_v14": {
+      "path": "data/external/hrdataset_v14/raw.csv",
+      "role": "independent_external_performance_target_replication",
+      "sha256": "cb19996755c93c0a8d6527f59da4701c80aef65eff854906546dce286249813c",
+      "size_bytes": 76857,
+      "task_type": "ordinal_multiclass_performance"
+    },
+    "ibm_hr_analytics": {
+      "path": "data/external/ibm_hr_analytics/raw.csv",
+      "role": "restricted_target_performance_robustness",
+      "sha256": "a5c31e38bd7fafc9bc333884eb181b06b41b8e5e488e8f7ccb27199fb3be7659",
+      "size_bytes": 227977,
+      "task_type": "restricted_target_performance_robustness"
+    },
+    "ibm_hr_analytics_attrition": {
+      "path": "data/external/ibm_hr_analytics/raw.csv",
+      "role": "related_task_transfer",
+      "sha256": "a5c31e38bd7fafc9bc333884eb181b06b41b8e5e488e8f7ccb27199fb3be7659",
+      "size_bytes": 227977,
+      "task_type": "binary_attrition_transfer"
+    },
+    "inx_primary": {
+      "path": "data/raw/inx_employee_performance.csv",
+      "role": "primary_development_and_internal_oof_evaluation",
+      "sha256": "b8deac0a615b97076622ae540f4cfd0d3c3f1e7acb83ba3ff6560470a9ccf60a",
+      "size_bytes": 152715,
+      "task_type": "ordinal_multiclass_performance"
+    }
+  },
+  "end_timestamp": "2026-07-12T17:50:52+00:00",
+  "failure_information": [
+    {
+      "error_type": "ShapEvidenceError",
+      "message": "Raw feature-family order changed across SHAP folds.",
+      "stage": "shap",
+      "timestamp": "2026-07-12T17:50:52+00:00"
+    }
+  ],
+  "git_commit": "18347488bdb4eed60f115ceeff70c420071ceef0",
+  "git_status_sha256": "8a20f5c1e8c6c19af144bae5aedbae6c346a8acec9f8d2f48e8982197c0f3f2b",
+  "git_worktree_dirty": true,
+  "manifest_schema_version": 1,
+  "output_files": [
+    {
+      "artifact_type": "figure",
+      "config_hash": "c664ef152ff3a9eef89c53a403b9c2e6f677340bea0307b02d97d07cc54bdfc3",
+      "path": "reports/manuscript_final/manuscript_final_20260712T175019Z_c664ef152ff3/policy/figure_leakage_policy_tradeoff.png",
+      "registered_at": "2026-07-12T17:50:47+00:00",
+      "run_id": "manuscript_final_20260712T175019Z_c664ef152ff3",
+      "sha256": "d4b49c2396a005b4d465148f59e50271482326c0a4a0e39f8aec78ad88fab146",
+      "size_bytes": 214341,
+      "stage": "policy"
+    },
+    {
+      "artifact_type": "figure",
+      "config_hash": "c664ef152ff3a9eef89c53a403b9c2e6f677340bea0307b02d97d07cc54bdfc3",
+      "path": "reports/manuscript_final/manuscript_final_20260712T175019Z_c664ef152ff3/policy/figure_leakage_policy_tradeoff.svg",
+      "registered_at": "2026-07-12T17:50:47+00:00",
+      "run_id": "manuscript_final_20260712T175019Z_c664ef152ff3",
+      "sha256": "58fb62c04f738c2d51dfad083e38aa3f0e7e1679b9a42765202ec4809ef102f2",
+      "size_bytes": 79112,
+      "stage": "policy"
+    },
+    {
+      "artifact_type": "machine_readable_evidence",
+      "config_hash": "c664ef152ff3a9eef89c53a403b9c2e6f677340bea0307b02d97d07cc54bdfc3",
+      "path": "reports/manuscript_final/manuscript_final_20260712T175019Z_c664ef152ff3/policy/figure_leakage_policy_tradeoff_source.csv",
+      "registered_at": "2026-07-12T17:50:47+00:00",
+      "run_id": "manuscript_final_20260712T175019Z_c664ef152ff3",
+      "sha256": "be8593a51a15d4af5c777d9720714acc822cb40d26b9e1a53542e776621fbbe9",
+      "size_bytes": 1811,
+      "stage": "policy"
+    },
+    {
+      "artifact_type": "machine_readable_evidence",
+      "config_hash": "c664ef152ff3a9eef89c53a403b9c2e6f677340bea0307b02d97d07cc54bdfc3",
+      "path": "reports/manuscript_final/manuscript_final_20260712T175019Z_c664ef152ff3/policy/fold_assignments.csv",
+      "registered_at": "2026-07-12T17:50:47+00:00",
+      "run_id": "manuscript_final_20260712T175019Z_c664ef152ff3",
+      "sha256": "9538103715b86d88f98c83451821eec3e2615dadf8986ae862bf22422f33cc27",
+      "size_bytes": 145455,
+      "stage": "policy"
+    },
+    {
+      "artifact_type": "machine_readable_evidence",
+      "config_hash": "c664ef152ff3a9eef89c53a403b9c2e6f677340bea0307b02d97d07cc54bdfc3",
+      "path": "reports/manuscript_final/manuscript_final_20260712T175019Z_c664ef152ff3/policy/fold_metrics.csv",
+      "registered_at": "2026-07-12T17:50:47+00:00",
+      "run_id": "manuscript_final_20260712T175019Z_c664ef152ff3",
+      "sha256": "a3a7717af895346754a47fef7ddca7e252a53c7bd2a8d78a10d051c51e2489e2",
+      "size_bytes": 32665,
+      "stage": "policy"
+    },
+    {
+      "artifact_type": "machine_readable_evidence",
+      "config_hash": "c664ef152ff3a9eef89c53a403b9c2e6f677340bea0307b02d97d07cc54bdfc3",
+      "path": "reports/manuscript_final/manuscript_final_20260712T175019Z_c664ef152ff3/policy/leakage_sensitivity_index.csv",
+      "registered_at": "2026-07-12T17:50:47+00:00",
+      "run_id": "manuscript_final_20260712T175019Z_c664ef152ff3",
+      "sha256": "c874ee2209f21990fc7bd21178b18796b4c800f56158e3af0614c24d47a91795",
+      "size_bytes": 8474,
+      "stage": "policy"
+    },
+    {
+      "artifact_type": "machine_readable_evidence",
+      "config_hash": "c664ef152ff3a9eef89c53a403b9c2e6f677340bea0307b02d97d07cc54bdfc3",
+      "path": "reports/manuscript_final/manuscript_final_20260712T175019Z_c664ef152ff3/policy/manuscript_policy_table.csv",
+      "registered_at": "2026-07-12T17:50:47+00:00",
+      "run_id": "manuscript_final_20260712T175019Z_c664ef152ff3",
+      "sha256": "67390fc505d2519ab31da42c3ea7d3a8f8217c105c46185080b1954064fdf5bf",
+      "size_bytes": 3041,
+      "stage": "policy"
+    },
+    {
+      "artifact_type": "machine_readable_evidence",
+      "config_hash": "c664ef152ff3a9eef89c53a403b9c2e6f677340bea0307b02d97d07cc54bdfc3",
+      "path": "reports/manuscript_final/manuscript_final_20260712T175019Z_c664ef152ff3/policy/policy_ablation_metadata.json",
+      "registered_at": "2026-07-12T17:50:47+00:00",
+      "run_id": "manuscript_final_20260712T175019Z_c664ef152ff3",
+      "sha256": "50d29165a757b940a23fe7ac1fd32f90a80a6517b756462df807f617622f3506",
+      "size_bytes": 3241,
+      "stage": "policy"
+    },
+    {
+      "artifact_type": "report",
+      "config_hash": "c664ef152ff3a9eef89c53a403b9c2e6f677340bea0307b02d97d07cc54bdfc3",
+      "path": "reports/manuscript_final/manuscript_final_20260712T175019Z_c664ef152ff3/policy/policy_interpretation.md",
+      "registered_at": "2026-07-12T17:50:47+00:00",
+      "run_id": "manuscript_final_20260712T175019Z_c664ef152ff3",
+      "sha256": "50d0024aeb71884b4340b1b04d18f5263ee548b28edb604bfa45ebf46d1dfb42",
+      "size_bytes": 2104,
+      "stage": "policy"
+    },
+    {
+      "artifact_type": "machine_readable_evidence",
+      "config_hash": "c664ef152ff3a9eef89c53a403b9c2e6f677340bea0307b02d97d07cc54bdfc3",
+      "path": "reports/manuscript_final/manuscript_final_20260712T175019Z_c664ef152ff3/policy/policy_pairwise_tests.csv",
+      "registered_at": "2026-07-12T17:50:47+00:00",
+      "run_id": "manuscript_final_20260712T175019Z_c664ef152ff3",
+      "sha256": "d017ad3e405a3c73264a66da60709be50c571f6f94f4c22371de49111d8893da",
+      "size_bytes": 17636,
+      "stage": "policy"
+    },
+    {
+      "artifact_type": "machine_readable_evidence",
+      "config_hash": "c664ef152ff3a9eef89c53a403b9c2e6f677340bea0307b02d97d07cc54bdfc3",
+      "path": "reports/manuscript_final/manuscript_final_20260712T175019Z_c664ef152ff3/policy/policy_summary.csv",
+      "registered_at": "2026-07-12T17:50:47+00:00",
+      "run_id": "manuscript_final_20260712T175019Z_c664ef152ff3",
+      "sha256": "7f8111a321c4812268c19c92c9e28360ac735b2af4fa76a9ec7c4a3661719cf0",
+      "size_bytes": 7219,
+      "stage": "policy"
+    },
+    {
+      "artifact_type": "machine_readable_evidence",
+      "config_hash": "c664ef152ff3a9eef89c53a403b9c2e6f677340bea0307b02d97d07cc54bdfc3",
+      "path": "reports/manuscript_final/manuscript_final_20260712T175019Z_c664ef152ff3/policy/stage_contract.json",
+      "registered_at": "2026-07-12T17:50:47+00:00",
+      "run_id": "manuscript_final_20260712T175019Z_c664ef152ff3",
+      "sha256": "7d6bafbafc9c474b5343ea48f2fb22ef4805553814a35ca9e712b3e3202b8065",
+      "size_bytes": 4765,
+      "stage": "policy"
+    },
+    {
+      "artifact_type": "machine_readable_evidence",
+      "config_hash": "c664ef152ff3a9eef89c53a403b9c2e6f677340bea0307b02d97d07cc54bdfc3",
+      "path": "reports/manuscript_final/manuscript_final_20260712T175019Z_c664ef152ff3/calibration/calibration_bins.csv",
+      "registered_at": "2026-07-12T17:50:51+00:00",
+      "run_id": "manuscript_final_20260712T175019Z_c664ef152ff3",
+      "sha256": "2930356e0dc912a66ce5367ded78a5c82552f3122aa35496b8b40457e685829d",
+      "size_bytes": 16240,
+      "stage": "calibration"
+    },
+    {
+      "artifact_type": "machine_readable_evidence",
+      "config_hash": "c664ef152ff3a9eef89c53a403b9c2e6f677340bea0307b02d97d07cc54bdfc3",
+      "path": "reports/manuscript_final/manuscript_final_20260712T175019Z_c664ef152ff3/calibration/calibration_fold_metrics.csv",
+      "registered_at": "2026-07-12T17:50:51+00:00",
+      "run_id": "manuscript_final_20260712T175019Z_c664ef152ff3",
+      "sha256": "0990648f38a85213e2b924887733dd042f6773fa44407ed2eb230f5b2ac8a730",
+      "size_bytes": 13118,
+      "stage": "calibration"
+    },
+    {
+      "artifact_type": "machine_readable_evidence",
+      "config_hash": "c664ef152ff3a9eef89c53a403b9c2e6f677340bea0307b02d97d07cc54bdfc3",
+      "path": "reports/manuscript_final/manuscript_final_20260712T175019Z_c664ef152ff3/calibration/calibration_metadata.json",
+      "registered_at": "2026-07-12T17:50:51+00:00",
+      "run_id": "manuscript_final_20260712T175019Z_c664ef152ff3",
+      "sha256": "d65a22183c33b3008374d37e810a6c035f01e1a294ab27cc10406721fdcda185",
+      "size_bytes": 4450,
+      "stage": "calibration"
+    },
+    {
+      "artifact_type": "machine_readable_evidence",
+      "config_hash": "c664ef152ff3a9eef89c53a403b9c2e6f677340bea0307b02d97d07cc54bdfc3",
+      "path": "reports/manuscript_final/manuscript_final_20260712T175019Z_c664ef152ff3/calibration/calibration_method_comparison.csv",
+      "registered_at": "2026-07-12T17:50:51+00:00",
+      "run_id": "manuscript_final_20260712T175019Z_c664ef152ff3",
+      "sha256": "eede0320b7d49238f2aaabd294b2cad6041627fca5137093172fe5389905eec9",
+      "size_bytes": 3484,
+      "stage": "calibration"
+    },
+    {
+      "artifact_type": "machine_readable_evidence",
+      "config_hash": "c664ef152ff3a9eef89c53a403b9c2e6f677340bea0307b02d97d07cc54bdfc3",
+      "path": "reports/manuscript_final/manuscript_final_20260712T175019Z_c664ef152ff3/calibration/calibration_predictions.csv",
+      "registered_at": "2026-07-12T17:50:51+00:00",
+      "run_id": "manuscript_final_20260712T175019Z_c664ef152ff3",
+      "sha256": "6e8203f82057dc8b4b20317c8afbbe2684b7d935a701bfc7e90f7bdb47ff22f5",
+      "size_bytes": 836578,
+      "stage": "calibration"
+    },
+    {
+      "artifact_type": "machine_readable_evidence",
+      "config_hash": "c664ef152ff3a9eef89c53a403b9c2e6f677340bea0307b02d97d07cc54bdfc3",
+      "path": "reports/manuscript_final/manuscript_final_20260712T175019Z_c664ef152ff3/calibration/calibration_uncertainty.csv",
+      "registered_at": "2026-07-12T17:50:51+00:00",
+      "run_id": "manuscript_final_20260712T175019Z_c664ef152ff3",
+      "sha256": "cdcc02815da0ddcab0f758de9115bb60885a1ff97659d63d81a14e3e8ec947a6",
+      "size_bytes": 2599,
+      "stage": "calibration"
+    },
+    {
+      "artifact_type": "figure",
+      "config_hash": "c664ef152ff3a9eef89c53a403b9c2e6f677340bea0307b02d97d07cc54bdfc3",
+      "path": "reports/manuscript_final/manuscript_final_20260712T175019Z_c664ef152ff3/calibration/figure_5_calibration_ordinal_error.png",
+      "registered_at": "2026-07-12T17:50:51+00:00",
+      "run_id": "manuscript_final_20260712T175019Z_c664ef152ff3",
+      "sha256": "f2d8a74991d2e7a1989e4cdb1f771519db891fcc3e55e3f3b42b3054b839c13e",
+      "size_bytes": 418306,
+      "stage": "calibration"
+    },
+    {
+      "artifact_type": "figure",
+      "config_hash": "c664ef152ff3a9eef89c53a403b9c2e6f677340bea0307b02d97d07cc54bdfc3",
+      "path": "reports/manuscript_final/manuscript_final_20260712T175019Z_c664ef152ff3/calibration/figure_5_calibration_ordinal_error.svg",
+      "registered_at": "2026-07-12T17:50:51+00:00",
+      "run_id": "manuscript_final_20260712T175019Z_c664ef152ff3",
+      "sha256": "a26153c09fec9941a442a45d8c9cf793063c94fb56bd454eb97061b2e08f9788",
+      "size_bytes": 124233,
+      "stage": "calibration"
+    },
+    {
+      "artifact_type": "machine_readable_evidence",
+      "config_hash": "c664ef152ff3a9eef89c53a403b9c2e6f677340bea0307b02d97d07cc54bdfc3",
+      "path": "reports/manuscript_final/manuscript_final_20260712T175019Z_c664ef152ff3/calibration/figure_5_metric_source.csv",
+      "registered_at": "2026-07-12T17:50:51+00:00",
+      "run_id": "manuscript_final_20260712T175019Z_c664ef152ff3",
+      "sha256": "3014af2c06b8d14baed5b5317032c444e42e0a05323629c2a7cd67cec884a567",
+      "size_bytes": 3294,
+      "stage": "calibration"
+    },
+    {
+      "artifact_type": "machine_readable_evidence",
+      "config_hash": "c664ef152ff3a9eef89c53a403b9c2e6f677340bea0307b02d97d07cc54bdfc3",
+      "path": "reports/manuscript_final/manuscript_final_20260712T175019Z_c664ef152ff3/calibration/figure_5_reliability_source.csv",
+      "registered_at": "2026-07-12T17:50:51+00:00",
+      "run_id": "manuscript_final_20260712T175019Z_c664ef152ff3",
+      "sha256": "2930356e0dc912a66ce5367ded78a5c82552f3122aa35496b8b40457e685829d",
+      "size_bytes": 16240,
+      "stage": "calibration"
+    },
+    {
+      "artifact_type": "figure",
+      "config_hash": "c664ef152ff3a9eef89c53a403b9c2e6f677340bea0307b02d97d07cc54bdfc3",
+      "path": "reports/manuscript_final/manuscript_final_20260712T175019Z_c664ef152ff3/calibration/figures/reliability_class_2.png",
+      "registered_at": "2026-07-12T17:50:51+00:00",
+      "run_id": "manuscript_final_20260712T175019Z_c664ef152ff3",
+      "sha256": "228611600ed5488e36065bd7e762306fa5c082b29eda5ef849d0756f946f544f",
+      "size_bytes": 236654,
+      "stage": "calibration"
+    },
+    {
+      "artifact_type": "figure",
+      "config_hash": "c664ef152ff3a9eef89c53a403b9c2e6f677340bea0307b02d97d07cc54bdfc3",
+      "path": "reports/manuscript_final/manuscript_final_20260712T175019Z_c664ef152ff3/calibration/figures/reliability_class_2.svg",
+      "registered_at": "2026-07-12T17:50:51+00:00",
+      "run_id": "manuscript_final_20260712T175019Z_c664ef152ff3",
+      "sha256": "ab923f065dfda879f7a3ce330652b2ac0a5b38aa8db1f0c23d7f9904b31262bd",
+      "size_bytes": 42608,
+      "stage": "calibration"
+    },
+    {
+      "artifact_type": "figure",
+      "config_hash": "c664ef152ff3a9eef89c53a403b9c2e6f677340bea0307b02d97d07cc54bdfc3",
+      "path": "reports/manuscript_final/manuscript_final_20260712T175019Z_c664ef152ff3/calibration/figures/reliability_class_3.png",
+      "registered_at": "2026-07-12T17:50:51+00:00",
+      "run_id": "manuscript_final_20260712T175019Z_c664ef152ff3",
+      "sha256": "089f71e2ab5a1ea79ce40415e99430907218dbb4a8fed45f8cae334e233d4851",
+      "size_bytes": 204896,
+      "stage": "calibration"
+    },
+    {
+      "artifact_type": "figure",
+      "config_hash": "c664ef152ff3a9eef89c53a403b9c2e6f677340bea0307b02d97d07cc54bdfc3",
+      "path": "reports/manuscript_final/manuscript_final_20260712T175019Z_c664ef152ff3/calibration/figures/reliability_class_3.svg",
+      "registered_at": "2026-07-12T17:50:51+00:00",
+      "run_id": "manuscript_final_20260712T175019Z_c664ef152ff3",
+      "sha256": "04e242bc918703011074893cd9425f06f958791b59f75c3a80bc5e6d9967b0ef",
+      "size_bytes": 43315,
+      "stage": "calibration"
+    },
+    {
+      "artifact_type": "figure",
+      "config_hash": "c664ef152ff3a9eef89c53a403b9c2e6f677340bea0307b02d97d07cc54bdfc3",
+      "path": "reports/manuscript_final/manuscript_final_20260712T175019Z_c664ef152ff3/calibration/figures/reliability_class_4.png",
+      "registered_at": "2026-07-12T17:50:51+00:00",
+      "run_id": "manuscript_final_20260712T175019Z_c664ef152ff3",
+      "sha256": "5341b7ad74e6607c48e4aa28a4d89cabae4f178e2cc433fcc24c854e728db2e2",
+      "size_bytes": 229554,
+      "stage": "calibration"
+    },
+    {
+      "artifact_type": "figure",
+      "config_hash": "c664ef152ff3a9eef89c53a403b9c2e6f677340bea0307b02d97d07cc54bdfc3",
+      "path": "reports/manuscript_final/manuscript_final_20260712T175019Z_c664ef152ff3/calibration/figures/reliability_class_4.svg",
+      "registered_at": "2026-07-12T17:50:51+00:00",
+      "run_id": "manuscript_final_20260712T175019Z_c664ef152ff3",
+      "sha256": "89611cbc007614830c7211b7d8b89f00f55a17f53fde107cd9aeef43d23fe33d",
+      "size_bytes": 41416,
+      "stage": "calibration"
+    },
+    {
+      "artifact_type": "report",
+      "config_hash": "c664ef152ff3a9eef89c53a403b9c2e6f677340bea0307b02d97d07cc54bdfc3",
+      "path": "reports/manuscript_final/manuscript_final_20260712T175019Z_c664ef152ff3/calibration/selected_method_rationale.md",
+      "registered_at": "2026-07-12T17:50:51+00:00",
+      "run_id": "manuscript_final_20260712T175019Z_c664ef152ff3",
+      "sha256": "1e852f72fbbe0a31535ff0c61ec87f4c9fa2185fc54b5a79bf08233f2819d1d5",
+      "size_bytes": 1146,
+      "stage": "calibration"
+    },
+    {
+      "artifact_type": "machine_readable_evidence",
+      "config_hash": "c664ef152ff3a9eef89c53a403b9c2e6f677340bea0307b02d97d07cc54bdfc3",
+      "path": "reports/manuscript_final/manuscript_final_20260712T175019Z_c664ef152ff3/calibration/stage_contract.json",
+      "registered_at": "2026-07-12T17:50:51+00:00",
+      "run_id": "manuscript_final_20260712T175019Z_c664ef152ff3",
+      "sha256": "a0e673467cd3f35fb09751ff7cb3d68e2ef45b5e3cd9b846beabd37133d67313",
+      "size_bytes": 6390,
+      "stage": "calibration"
+    }
+  ],
+  "random_seeds": {
+    "bootstrap": 42,
+    "calibration": 42,
+    "chatbot": 42,
+    "counterfactual": 42,
+    "cv": 42,
+    "fairness": 42,
+    "llm_sampling": 42,
+    "master": 42,
+    "model": 42,
+    "shap": 42
+  },
+  "run_id": "manuscript_final_20260712T175019Z_c664ef152ff3",
+  "source_tree_hash": "cf7f603529cf7cfde1e9d6594591a58572beddece9010abfb72c45bdbb493b2c",
+  "start_timestamp": "2026-07-12T17:50:19+00:00",
+  "status": "failed"
+}

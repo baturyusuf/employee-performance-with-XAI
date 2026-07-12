@@ -17,7 +17,15 @@ class GovernedExplainer:
         llm_client: Optional[LLMClient] = None,
         runtime_config: Optional[LLMRuntimeConfig] = None,
     ):
-        self.runtime_config = runtime_config or LLMRuntimeConfig.from_env()
+        # Cost-safe by default: callers must explicitly pass a real-provider
+        # runtime config. Merely having an API key in the process environment
+        # must never turn tests, deterministic guardrail evaluation, or a
+        # report-backed chatbot call into paid network execution.
+        self.runtime_config = runtime_config or LLMRuntimeConfig(
+            provider="offline",
+            model="offline-stub",
+            require_real_llm=False,
+        )
         self.llm_client = llm_client or build_llm_client(self.runtime_config)
 
     def generate(self, evidence: CompleteCaseEvidence) -> Dict[str, Any]:

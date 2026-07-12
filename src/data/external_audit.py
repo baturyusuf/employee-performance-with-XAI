@@ -16,6 +16,7 @@ from src.data.external_adapters import (
     load_external_dataset,
     target_distribution,
 )
+from src.governance.external_claims import external_allowed_claim
 from src.utils.config import SETTINGS
 from src.utils.experiment_registry import append_registry_row, get_git_commit, utc_now_iso
 
@@ -80,6 +81,7 @@ def duplicate_id_report(dataset: ExternalDataset) -> pd.DataFrame:
 
 def write_dataset_audit_markdown(
     dataset: ExternalDataset,
+    target_kind: str,
     output_path: Path,
     mapping_df: pd.DataFrame,
     target_df: pd.DataFrame,
@@ -104,7 +106,7 @@ def write_dataset_audit_markdown(
         f"# Dataset Audit: {config.display_name}",
         "",
         f"Dataset name: `{config.dataset_name}`",
-        f"Recommended role: {config.recommended_role}",
+        f"Recommended role: {external_allowed_claim(config.dataset_name, target_kind)}",
         f"Task type: `{dataset.task_type}`",
         f"Source URL: `{config.source_url}`",
         f"Source note: {config.canonical_source_note}",
@@ -189,13 +191,13 @@ def run_dataset_audit(
     lsp_df.to_csv(outputs["leakage_sensitive_proxy_audit"], index=False)
     missing_df.to_csv(outputs["missingness"], index=False)
     duplicate_df.to_csv(outputs["duplicate_ids"], index=False)
-    write_dataset_audit_markdown(dataset, outputs["dataset_audit"], mapping_df, target_df, lsp_df)
+    write_dataset_audit_markdown(dataset, target_kind, outputs["dataset_audit"], mapping_df, target_df, lsp_df)
     save_json(
         {
             "dataset_name": dataset_name,
             "target_kind": target_kind,
             "display_name": dataset.config.display_name,
-            "recommended_role": dataset.config.recommended_role,
+            "recommended_role": external_allowed_claim(dataset_name, target_kind),
             "row_count": int(len(dataset.canonical)),
             "raw_column_count": int(dataset.raw.shape[1]),
             "canonical_column_count": int(dataset.canonical.shape[1]),

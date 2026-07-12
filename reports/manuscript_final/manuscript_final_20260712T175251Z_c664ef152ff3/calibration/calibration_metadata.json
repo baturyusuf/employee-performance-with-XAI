@@ -1,0 +1,54 @@
+{
+  "config_hash": "c664ef152ff3a9eef89c53a403b9c2e6f677340bea0307b02d97d07cc54bdfc3",
+  "excluded_features": [
+    "Age",
+    "Gender",
+    "MaritalStatus",
+    "EmpDepartment",
+    "EmpLastSalaryHikePercent",
+    "Attrition",
+    "EmpNumber",
+    "PerformanceRating"
+  ],
+  "outputs": {
+    "bins": "C:\\Users\\Yusuf\\Documents\\GitHub\\employee performance with XAI\\reports\\manuscript_final\\manuscript_final_20260712T175251Z_c664ef152ff3\\calibration\\calibration_bins.csv",
+    "figure_5_png": "C:\\Users\\Yusuf\\Documents\\GitHub\\employee performance with XAI\\reports\\manuscript_final\\manuscript_final_20260712T175251Z_c664ef152ff3\\calibration\\figure_5_calibration_ordinal_error.png",
+    "figure_5_svg": "C:\\Users\\Yusuf\\Documents\\GitHub\\employee performance with XAI\\reports\\manuscript_final\\manuscript_final_20260712T175251Z_c664ef152ff3\\calibration\\figure_5_calibration_ordinal_error.svg",
+    "figure_source_bins": "C:\\Users\\Yusuf\\Documents\\GitHub\\employee performance with XAI\\reports\\manuscript_final\\manuscript_final_20260712T175251Z_c664ef152ff3\\calibration\\figure_5_reliability_source.csv",
+    "figure_source_metrics": "C:\\Users\\Yusuf\\Documents\\GitHub\\employee performance with XAI\\reports\\manuscript_final\\manuscript_final_20260712T175251Z_c664ef152ff3\\calibration\\figure_5_metric_source.csv",
+    "fold_metrics": "C:\\Users\\Yusuf\\Documents\\GitHub\\employee performance with XAI\\reports\\manuscript_final\\manuscript_final_20260712T175251Z_c664ef152ff3\\calibration\\calibration_fold_metrics.csv",
+    "method_comparison": "C:\\Users\\Yusuf\\Documents\\GitHub\\employee performance with XAI\\reports\\manuscript_final\\manuscript_final_20260712T175251Z_c664ef152ff3\\calibration\\calibration_method_comparison.csv",
+    "predictions": "C:\\Users\\Yusuf\\Documents\\GitHub\\employee performance with XAI\\reports\\manuscript_final\\manuscript_final_20260712T175251Z_c664ef152ff3\\calibration\\calibration_predictions.csv",
+    "rationale": "C:\\Users\\Yusuf\\Documents\\GitHub\\employee performance with XAI\\reports\\manuscript_final\\manuscript_final_20260712T175251Z_c664ef152ff3\\calibration\\selected_method_rationale.md",
+    "reliability_class_2_png": "C:\\Users\\Yusuf\\Documents\\GitHub\\employee performance with XAI\\reports\\manuscript_final\\manuscript_final_20260712T175251Z_c664ef152ff3\\calibration\\figures\\reliability_class_2.png",
+    "reliability_class_2_svg": "C:\\Users\\Yusuf\\Documents\\GitHub\\employee performance with XAI\\reports\\manuscript_final\\manuscript_final_20260712T175251Z_c664ef152ff3\\calibration\\figures\\reliability_class_2.svg",
+    "reliability_class_3_png": "C:\\Users\\Yusuf\\Documents\\GitHub\\employee performance with XAI\\reports\\manuscript_final\\manuscript_final_20260712T175251Z_c664ef152ff3\\calibration\\figures\\reliability_class_3.png",
+    "reliability_class_3_svg": "C:\\Users\\Yusuf\\Documents\\GitHub\\employee performance with XAI\\reports\\manuscript_final\\manuscript_final_20260712T175251Z_c664ef152ff3\\calibration\\figures\\reliability_class_3.svg",
+    "reliability_class_4_png": "C:\\Users\\Yusuf\\Documents\\GitHub\\employee performance with XAI\\reports\\manuscript_final\\manuscript_final_20260712T175251Z_c664ef152ff3\\calibration\\figures\\reliability_class_4.png",
+    "reliability_class_4_svg": "C:\\Users\\Yusuf\\Documents\\GitHub\\employee performance with XAI\\reports\\manuscript_final\\manuscript_final_20260712T175251Z_c664ef152ff3\\calibration\\figures\\reliability_class_4.svg",
+    "uncertainty": "C:\\Users\\Yusuf\\Documents\\GitHub\\employee performance with XAI\\reports\\manuscript_final\\manuscript_final_20260712T175251Z_c664ef152ff3\\calibration\\calibration_uncertainty.csv"
+  },
+  "policy": "no_salary_hike_no_attrition_no_department",
+  "probability_warning": "Approximate model confidence only; use bands and human review, not autonomous HR thresholds.",
+  "protocol": {
+    "evaluation_scope": "outer_test_folds_only",
+    "inner_calibration_fraction": 0.2,
+    "methods": [
+      "raw",
+      "sigmoid",
+      "isotonic"
+    ],
+    "n_bins": 10,
+    "outer_folds": 10,
+    "outer_strategy": "StratifiedKFold",
+    "selection_metrics": [
+      "log_loss",
+      "multiclass_brier",
+      "ece"
+    ]
+  },
+  "run_id": "manuscript_final_20260712T175251Z_c664ef152ff3",
+  "seed": 42,
+  "selected_method": "sigmoid",
+  "stage": "calibration"
+}
