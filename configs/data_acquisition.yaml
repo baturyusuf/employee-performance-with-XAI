@@ -1,0 +1,252 @@
+{
+  "data_acquisition": {
+    "schema_version": 1,
+    "physical_datasets": {
+      "inx_employee_performance": {
+        "local_path": "data/raw/inx_employee_performance.csv",
+        "expected_sha256": "b8deac0a615b97076622ae540f4cfd0d3c3f1e7acb83ba3ff6560470a9ccf60a",
+        "expected_rows": 1200,
+        "expected_column_count": 28,
+        "expected_columns": [
+          "EmpNumber",
+          "Age",
+          "Gender",
+          "EducationBackground",
+          "MaritalStatus",
+          "EmpDepartment",
+          "EmpJobRole",
+          "BusinessTravelFrequency",
+          "DistanceFromHome",
+          "EmpEducationLevel",
+          "EmpEnvironmentSatisfaction",
+          "EmpHourlyRate",
+          "EmpJobInvolvement",
+          "EmpJobLevel",
+          "EmpJobSatisfaction",
+          "NumCompaniesWorked",
+          "OverTime",
+          "EmpLastSalaryHikePercent",
+          "EmpRelationshipSatisfaction",
+          "TotalWorkExperienceInYears",
+          "TrainingTimesLastYear",
+          "EmpWorkLifeBalance",
+          "ExperienceYearsAtThisCompany",
+          "ExperienceYearsInCurrentRole",
+          "YearsSinceLastPromotion",
+          "YearsWithCurrManager",
+          "Attrition",
+          "PerformanceRating"
+        ],
+        "format": "csv",
+        "delimiter": ";",
+        "encoding": "utf-8-sig",
+        "target_profiles": {
+          "performance": {
+            "raw_target": "PerformanceRating",
+            "expected_distribution": {
+              "2": 194,
+              "3": 874,
+              "4": 132
+            }
+          }
+        },
+        "acquisition_method": "user_provided_local_file",
+        "source_status": "repository_local_copy_upstream_source_unverified",
+        "licence_status": "manual_review_required",
+        "recorded_unverified_url": null,
+        "approved_download_url": null,
+        "automatic_download_allowed": false
+      },
+      "hrdataset_v14": {
+        "local_path": "data/external/hrdataset_v14/raw.csv",
+        "expected_sha256": "cb19996755c93c0a8d6527f59da4701c80aef65eff854906546dce286249813c",
+        "expected_rows": 311,
+        "expected_column_count": 36,
+        "expected_columns": [
+          "Employee_Name",
+          "EmpID",
+          "MarriedID",
+          "MaritalStatusID",
+          "GenderID",
+          "EmpStatusID",
+          "DeptID",
+          "PerfScoreID",
+          "FromDiversityJobFairID",
+          "Salary",
+          "Termd",
+          "PositionID",
+          "Position",
+          "State",
+          "Zip",
+          "DOB",
+          "Sex",
+          "MaritalDesc",
+          "CitizenDesc",
+          "HispanicLatino",
+          "RaceDesc",
+          "DateofHire",
+          "DateofTermination",
+          "TermReason",
+          "EmploymentStatus",
+          "Department",
+          "ManagerName",
+          "ManagerID",
+          "RecruitmentSource",
+          "PerformanceScore",
+          "EngagementSurvey",
+          "EmpSatisfaction",
+          "SpecialProjectsCount",
+          "LastPerformanceReview_Date",
+          "DaysLateLast30",
+          "Absences"
+        ],
+        "format": "csv",
+        "delimiter": ",",
+        "encoding": "utf-8-sig",
+        "target_profiles": {
+          "performance": {
+            "raw_target": "PerformanceScore",
+            "expected_distribution": {
+              "Exceeds": 37,
+              "Fully Meets": 243,
+              "Needs Improvement": 18,
+              "PIP": 13
+            }
+          }
+        },
+        "acquisition_method": "user_provided_local_file",
+        "source_status": "public_mirror_recorded_upstream_authenticity_unverified",
+        "licence_status": "manual_review_required",
+        "recorded_unverified_url": "https://raw.githubusercontent.com/pouyasattari/HR-Dataset-Analysis/main/HRDataset_v14.csv",
+        "approved_download_url": null,
+        "automatic_download_allowed": false
+      },
+      "ibm_hr_analytics": {
+        "local_path": "data/external/ibm_hr_analytics/raw.csv",
+        "expected_sha256": "a5c31e38bd7fafc9bc333884eb181b06b41b8e5e488e8f7ccb27199fb3be7659",
+        "expected_rows": 1470,
+        "expected_column_count": 35,
+        "expected_columns": [
+          "Age",
+          "Attrition",
+          "BusinessTravel",
+          "DailyRate",
+          "Department",
+          "DistanceFromHome",
+          "Education",
+          "EducationField",
+          "EmployeeCount",
+          "EmployeeNumber",
+          "EnvironmentSatisfaction",
+          "Gender",
+          "HourlyRate",
+          "JobInvolvement",
+          "JobLevel",
+          "JobRole",
+          "JobSatisfaction",
+          "MaritalStatus",
+          "MonthlyIncome",
+          "MonthlyRate",
+          "NumCompaniesWorked",
+          "Over18",
+          "OverTime",
+          "PercentSalaryHike",
+          "PerformanceRating",
+          "RelationshipSatisfaction",
+          "StandardHours",
+          "StockOptionLevel",
+          "TotalWorkingYears",
+          "TrainingTimesLastYear",
+          "WorkLifeBalance",
+          "YearsAtCompany",
+          "YearsInCurrentRole",
+          "YearsSinceLastPromotion",
+          "YearsWithCurrManager"
+        ],
+        "format": "csv",
+        "delimiter": ",",
+        "encoding": "utf-8-sig",
+        "target_profiles": {
+          "performance": {
+            "raw_target": "PerformanceRating",
+            "expected_distribution": {
+              "3": 1244,
+              "4": 226
+            }
+          },
+          "attrition": {
+            "raw_target": "Attrition",
+            "expected_distribution": {
+              "No": 1233,
+              "Yes": 237
+            }
+          }
+        },
+        "acquisition_method": "user_provided_local_file",
+        "source_status": "public_mirror_recorded_upstream_authenticity_unverified",
+        "licence_status": "manual_review_required",
+        "recorded_unverified_url": "https://raw.githubusercontent.com/nelson-wu/employee-attrition-ml/master/WA_Fn-UseC_-HR-Employee-Attrition.csv",
+        "approved_download_url": null,
+        "automatic_download_allowed": false
+      },
+      "employee_turnover": {
+        "local_path": "data/external/employee_turnover/raw.csv",
+        "expected_sha256": "2510e274a90547f34c7b0db5a4ab70282c2710eb54252f14921bf980b81a928c",
+        "expected_rows": 14999,
+        "expected_column_count": 10,
+        "expected_columns": [
+          "satisfaction_level",
+          "last_evaluation",
+          "number_project",
+          "average_montly_hours",
+          "time_spend_company",
+          "Work_accident",
+          "left",
+          "promotion_last_5years",
+          "sales",
+          "salary"
+        ],
+        "format": "csv",
+        "delimiter": ",",
+        "encoding": "utf-8",
+        "target_profiles": {
+          "turnover": {
+            "raw_target": "left",
+            "expected_distribution": {
+              "0": 11428,
+              "1": 3571
+            }
+          }
+        },
+        "acquisition_method": "user_provided_local_file",
+        "source_status": "public_mirror_recorded_upstream_authenticity_unverified",
+        "licence_status": "manual_review_required",
+        "recorded_unverified_url": "https://raw.githubusercontent.com/ucg8j/kaggle_HR/master/HR_comma_sep.csv",
+        "approved_download_url": null,
+        "automatic_download_allowed": false
+      }
+    },
+    "logical_bindings": {
+      "inx_primary": {
+        "physical_dataset": "inx_employee_performance",
+        "target_profile": "performance"
+      },
+      "hrdataset_v14": {
+        "physical_dataset": "hrdataset_v14",
+        "target_profile": "performance"
+      },
+      "ibm_hr_analytics": {
+        "physical_dataset": "ibm_hr_analytics",
+        "target_profile": "performance"
+      },
+      "ibm_hr_analytics_attrition": {
+        "physical_dataset": "ibm_hr_analytics",
+        "target_profile": "attrition"
+      },
+      "employee_turnover": {
+        "physical_dataset": "employee_turnover",
+        "target_profile": "turnover"
+      }
+    }
+  }
+}

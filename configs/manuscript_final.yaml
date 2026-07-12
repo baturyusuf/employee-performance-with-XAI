@@ -363,6 +363,7 @@
       }
     },
     "provenance": {
+      "data_acquisition_manifest": "configs/data_acquisition.yaml",
       "dataset_cards_config": "configs/dataset_provenance.yaml",
       "dataset_cards_config_hash_required": true,
       "dataset_card_required_fields_must_be_nonblank": true,

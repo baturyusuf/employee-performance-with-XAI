@@ -18,7 +18,7 @@ from sklearn.model_selection import StratifiedKFold
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import OneHotEncoder, StandardScaler
 
-from src.data.preprocess import load_validated_or_raw_data
+from src.data.canonical_loader import load_canonical_dataset
 from src.experiments.leakage_safe_cv import LabelEncodedXGBClassifier, make_preprocessor
 from src.experiments.manuscript_policy_ablation import exact_policy_frame, resolve_seed
 from src.experiments.proxy_analysis import feature_proxy_associations
@@ -868,7 +868,7 @@ def run(
     config_hash = config_hash or canonical_config_hash(raw_config)
     output = Path(output_dir)
     output.mkdir(parents=True, exist_ok=True)
-    data = load_validated_or_raw_data().reset_index(drop=True)
+    data = load_canonical_dataset(config_path, "inx_primary").frame.reset_index(drop=True)
     labels = [int(value) for value in settings.get("target", {}).get("labels", [2, 3, 4])]
     fairness = settings.get("fairness", {})
     task_type = str(settings.get("target", {}).get("problem_type", ""))

@@ -18,7 +18,7 @@ from scipy.stats import spearmanr
 from sklearn.model_selection import StratifiedKFold
 
 from src.core.io_utils import ensure_dir, write_json
-from src.data.preprocess import load_validated_or_raw_data
+from src.data.canonical_loader import load_canonical_dataset
 from src.experiments.final_evidence_common import align_proba, predict_labels_from_proba
 from src.experiments.final_shap_stability import get_group_mapping, group_shap_values, normalize_shap_values
 from src.experiments.leakage_safe_cv import infer_columns, make_preprocessor
@@ -491,7 +491,7 @@ def run(
     labels = [int(value) for value in target.get("labels", [2, 3, 4])]
     identifier_fields = settings.get("governance_fields", {}).get("identifier_fields", ["EmpNumber"])
     id_column = str(identifier_fields[0] if identifier_fields else "EmpNumber")
-    data = load_validated_or_raw_data()
+    data = load_canonical_dataset(config_path, "inx_primary").frame
     X, excluded = exact_policy_frame(data, primary_policy, definition, target_column=target_column, id_column=id_column)
     assert_feature_names_allowed(X.columns, forbidden)
     y = data[target_column].astype(int)

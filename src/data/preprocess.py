@@ -19,14 +19,15 @@ from src.utils.config import SETTINGS
 
 def load_validated_or_raw_data() -> pd.DataFrame:
     """
-    Load validated dataset if it already exists.
-    Otherwise load raw data, validate it, and save interim output.
-    """
-    if SETTINGS.interim_data_path.exists():
-        df = pd.read_csv(SETTINGS.interim_data_path)
-        return df
+    Legacy compatibility wrapper that always reads and validates the declared
+    raw INX path.
 
-    return load_and_validate_data(save_interim=True)
+    Scientific code must not switch inputs because an interim file happens to
+    exist. Canonical manuscript stages use ``src.data.canonical_loader`` with
+    their explicit config; older callers receive the same fail-closed behavior
+    against ``SETTINGS.raw_data_path`` and never write a global interim cache.
+    """
+    return load_and_validate_data(path=SETTINGS.raw_data_path, save_interim=False)
 
 
 def get_model_feature_columns(drop_sensitive: bool = False) -> List[str]:

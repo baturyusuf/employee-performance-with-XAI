@@ -19,7 +19,7 @@ from sklearn.model_selection import StratifiedKFold
 from sklearn.pipeline import Pipeline
 
 from src.core.io_utils import ensure_dir, write_json
-from src.data.preprocess import load_validated_or_raw_data
+from src.data.canonical_loader import load_canonical_dataset
 from src.experiments.leakage_safe_cv import LabelEncodedXGBClassifier, make_preprocessor
 from src.models.evaluate import classification_metrics
 from src.governance.manuscript_contract import canonical_config_hash
@@ -451,7 +451,7 @@ def run(
     labels = [int(value) for value in target.get("labels", [2, 3, 4])]
     identifier_fields = settings.get("governance_fields", {}).get("identifier_fields", ["EmpNumber"])
     id_column = str(identifier_fields[0] if identifier_fields else "EmpNumber")
-    data = load_validated_or_raw_data()
+    data = load_canonical_dataset(config_path, "inx_primary").frame
     y = data[target_column].astype(int)
     if sorted(y.unique().tolist()) != sorted(labels):
         raise PolicyAblationError(
