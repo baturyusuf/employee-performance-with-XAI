@@ -205,3 +205,36 @@ An earlier full pytest attempt produced one failure because the legacy Figures 1
 Network/API result: credentials were cleared; no network function, approved dataset URL or paid service was invoked. Scientific artifacts generated: none.
 
 The first Unit 2A commit attempt was correctly blocked before commit because the staged diff contained one blank line at EOF in each of two new contract tests. Both whitespace-only defects were removed; no history was created or rewritten and scientific/test behavior was unchanged.
+
+## Unit 2B — Shared Folds, Nested Benchmark and Paired OOF Bootstrap
+
+Focused contract regressions after integration hardening:
+
+```powershell
+.\myenv\Scripts\python.exe -m pytest -q tests/test_shared_fold_artifact_contract.py tests/test_shared_fold_assignments_across_models_and_policies.py tests/test_nested_search_outer_test_isolation.py tests/test_bootstrap_is_stratified_paired_and_deterministic.py tests/test_oof_bootstrap_intervals_are_domain_valid.py tests/test_paired_model_difference_bootstrap.py tests/test_paired_model_gate_contract.py tests/test_canonical_model_factory.py tests/test_manuscript_model_benchmark.py tests/test_stage_runner_scientific_input_binding.py tests/test_core_scope_contract.py tests/test_core_build_contains_no_llm_or_chatbot_stage.py
+```
+
+Exit status: 0. Result: 83 passed in 16.65 seconds.
+
+Full regression gates:
+
+```powershell
+$env:OPENAI_API_KEY=$null
+$env:OPENAI_AGENTS_API_KEY=$null
+$env:AZURE_OPENAI_API_KEY=$null
+.\myenv\Scripts\python.exe -m pytest -q
+.\myenv\Scripts\python.exe -m unittest discover -s tests -q
+.\myenv\Scripts\python.exe -m compileall -q src tests
+git diff --check
+git status --porcelain -- manuscript/mdpi_information/main.md
+```
+
+Results: pytest 314 passed, 2 skipped and 4 subtests passed in 31.23 seconds; unittest 162 passed with 2 skipped in 3.345 seconds; compileall/diff/manuscript gates passed.
+
+Real-input fold-contract preflight used the canonical loader and an in-memory scoped manifest, then called `generate_shared_folds(... outer_splits=10, inner_splits=3, seed=42, inner_seed=43)` and `validate_shared_folds` without writing outputs. Exit status: 0. Result: 1,200/1,200 exact outer assignments, 10 outer folds, 10,800 inner assignments, exactly three inner folds for each outer fold, pinned INX SHA-256 `b8deac0a615b97076622ae540f4cfd0d3c3f1e7acb83ba3ff6560470a9ccf60a`. The emitted predecision/dirty-tree fold hash is diagnostic only and must not be reused.
+
+One initial focused-test command invoked the broken Windows Store `python.exe` shim and failed before Python started; `py -3.14` then proved that the system interpreter has no pytest. All authoritative tests use `.\myenv\Scripts\python.exe` and passed. During development, an unbound `inner_splits` variable, bootstrap sorting/direction defects and inactive LightGBM row subsampling were detected by focused checks/review and corrected before the full suite. No real model benchmark was executed because the selection/gate metric decision is intentionally pending.
+
+Network/API result: credentials were cleared; no dataset acquisition, network/API call or paid service occurred. Scientific artifacts generated: none. Manuscript edits: none.
+
+The first Unit 2B staged checkpoint gate was blocked by `git diff --cached --check` because two new bootstrap test files had one blank line at EOF. The whitespace-only defects were removed with `apply_patch`; no commit or history mutation occurred before correction.

@@ -1,47 +1,105 @@
 {
-  "models": {
-    "logistic_regression": {
-      "enabled": true,
-      "role": "baseline",
-      "params": {
-        "max_iter": 3000,
-        "class_weight": null,
-        "random_state": 42
-      }
-    },
-    "catboost": {
-      "enabled": true,
-      "role": "candidate",
-      "params": {
-        "iterations": 300,
-        "learning_rate": 0.05,
-        "depth": 6,
-        "random_seed": 42,
-        "verbose": false
-      }
-    },
-    "lightgbm": {
-      "enabled": true,
-      "role": "candidate",
-      "params": {
-        "n_estimators": 300,
-        "learning_rate": 0.05,
-        "random_state": 42,
-        "verbose": -1
-      }
-    },
-    "xgboost": {
-      "enabled": true,
-      "role": "candidate",
-      "params": {
-        "random_state": 42
-      }
-    },
-    "ebm": {
-      "enabled": false,
-      "role": "interpretable_candidate",
-      "params": {
-        "random_state": 42
+  "model_benchmark": {
+    "schema_version": 2,
+    "protocol_name": "restrained_nested_tuning_v1",
+    "selection_metric": null,
+    "baseline_gate_metric": null,
+    "metric_decision_status": "pending_user_confirmation_before_real_benchmark",
+    "candidate_failure_policy": "fail_entire_stage",
+    "tie_breaking": "highest_inner_mean_then_lowest_candidate_index",
+    "models": {
+      "logistic_regression": {
+        "display_name": "Multinomial Logistic Regression",
+        "role": "baseline",
+        "estimator": "sklearn.linear_model.LogisticRegression",
+        "fixed_params": {
+          "solver": "lbfgs",
+          "max_iter": 5000,
+          "tol": 0.0001,
+          "l1_ratio": 0.0
+        },
+        "candidates": [
+          {"C": 0.1, "class_weight": null},
+          {"C": 0.1, "class_weight": "balanced"},
+          {"C": 1.0, "class_weight": null},
+          {"C": 1.0, "class_weight": "balanced"},
+          {"C": 10.0, "class_weight": null},
+          {"C": 10.0, "class_weight": "balanced"}
+        ]
+      },
+      "random_forest": {
+        "display_name": "Random Forest",
+        "role": "baseline",
+        "estimator": "sklearn.ensemble.RandomForestClassifier",
+        "fixed_params": {
+          "n_estimators": 300,
+          "max_features": "sqrt",
+          "bootstrap": true,
+          "n_jobs": 1
+        },
+        "candidates": [
+          {"max_depth": null, "min_samples_leaf": 1, "class_weight": null},
+          {"max_depth": null, "min_samples_leaf": 1, "class_weight": "balanced_subsample"},
+          {"max_depth": null, "min_samples_leaf": 3, "class_weight": null},
+          {"max_depth": null, "min_samples_leaf": 3, "class_weight": "balanced_subsample"},
+          {"max_depth": 8, "min_samples_leaf": 1, "class_weight": null},
+          {"max_depth": 8, "min_samples_leaf": 1, "class_weight": "balanced_subsample"},
+          {"max_depth": 8, "min_samples_leaf": 3, "class_weight": null},
+          {"max_depth": 8, "min_samples_leaf": 3, "class_weight": "balanced_subsample"}
+        ]
+      },
+      "lightgbm": {
+        "display_name": "LightGBM",
+        "role": "baseline",
+        "estimator": "lightgbm.LGBMClassifier",
+        "fixed_params": {
+          "n_estimators": 300,
+          "learning_rate": 0.05,
+          "subsample": 0.9,
+          "subsample_freq": 1,
+          "colsample_bytree": 0.9,
+          "deterministic": true,
+          "force_col_wise": true,
+          "verbosity": -1,
+          "n_jobs": 1
+        },
+        "candidates": [
+          {"num_leaves": 15, "min_child_samples": 20, "class_weight": null},
+          {"num_leaves": 15, "min_child_samples": 20, "class_weight": "balanced"},
+          {"num_leaves": 15, "min_child_samples": 40, "class_weight": null},
+          {"num_leaves": 15, "min_child_samples": 40, "class_weight": "balanced"},
+          {"num_leaves": 31, "min_child_samples": 20, "class_weight": null},
+          {"num_leaves": 31, "min_child_samples": 20, "class_weight": "balanced"},
+          {"num_leaves": 31, "min_child_samples": 40, "class_weight": null},
+          {"num_leaves": 31, "min_child_samples": 40, "class_weight": "balanced"}
+        ]
+      },
+      "xgboost": {
+        "display_name": "XGBoost",
+        "role": "primary_xai_reference_pending_comparison_gate",
+        "estimator": "xgboost.XGBClassifier",
+        "fixed_params": {
+          "n_estimators": 300,
+          "learning_rate": 0.05,
+          "subsample": 0.9,
+          "colsample_bytree": 0.9,
+          "objective": "multi:softprob",
+          "eval_metric": "mlogloss",
+          "tree_method": "hist",
+          "reg_lambda": 1.0,
+          "n_jobs": 1,
+          "verbosity": 0
+        },
+        "candidates": [
+          {"max_depth": 3, "min_child_weight": 1.0, "class_weight": null},
+          {"max_depth": 3, "min_child_weight": 1.0, "class_weight": "balanced"},
+          {"max_depth": 3, "min_child_weight": 5.0, "class_weight": null},
+          {"max_depth": 3, "min_child_weight": 5.0, "class_weight": "balanced"},
+          {"max_depth": 5, "min_child_weight": 1.0, "class_weight": null},
+          {"max_depth": 5, "min_child_weight": 1.0, "class_weight": "balanced"},
+          {"max_depth": 5, "min_child_weight": 5.0, "class_weight": null},
+          {"max_depth": 5, "min_child_weight": 5.0, "class_weight": "balanced"}
+        ]
       }
     }
   }

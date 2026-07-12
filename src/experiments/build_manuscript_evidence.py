@@ -21,6 +21,7 @@ from pathlib import Path
 from typing import Any, Callable, Dict, Iterable, Mapping, MutableMapping, Sequence
 
 from src.governance.manuscript_contract import (
+    ACTUAL_INPUT_IDENTITY_FIELDS,
     DEFAULT_CONFIG_PATH,
     RunManifestError,
     canonical_config_hash,
@@ -82,6 +83,10 @@ class ManuscriptBuildError(RuntimeError):
     """Raised when a canonical stage or final package fails its contract."""
 
 
+class BaselineReferenceDecisionRequired(ManuscriptBuildError):
+    """Raised when a baseline has a conclusive paired-OOF advantage over XGBoost."""
+
+
 def validate_scope_release_ready(scopes: Mapping[str, Any], scope_name: str) -> Mapping[str, Any]:
     """Reject an unknown or technically incomplete canonical evidence scope."""
 
@@ -141,6 +146,65 @@ class StageContext:
     manifest: MutableMapping[str, Any]
     evidence_scope: str = "core"
     scope_contract: Mapping[str, Any] | None = None
+
+
+def _validate_loaded_dataset_receipt(
+    context: StageContext,
+    dataset_key: str,
+    observed: Mapping[str, Any],
+) -> None:
+    """Bind a stage's freshly loaded bytes to the manifest's verified receipt."""
+
+    receipts = context.manifest.get("actual_input_receipts")
+    expected = receipts.get(dataset_key) if isinstance(receipts, Mapping) else None
+    if not isinstance(expected, Mapping):
+        raise ManuscriptBuildError(
+            f"Run manifest has no actual-input receipt for {dataset_key!r}."
+        )
+    identity_fields = (*ACTUAL_INPUT_IDENTITY_FIELDS, "size_bytes")
+    differences = {
+        field: {"manifest": expected.get(field), "stage_loader": observed.get(field)}
+        for field in identity_fields
+        if expected.get(field) != observed.get(field)
+    }
+    if differences:
+        raise ManuscriptBuildError(
+            f"Stage loader receipt for {dataset_key!r} does not match the run manifest: "
+            + json.dumps(differences, sort_keys=True, ensure_ascii=True)
+        )
+
+
+def _validated_side_input_path(
+    context: StageContext,
+    side_input_key: str,
+    configured_path: str | Path,
+) -> tuple[Path, str]:
+    """Resolve and re-hash a side input against the scoped manifest record."""
+
+    records = context.manifest.get("side_input_hashes")
+    record = records.get(side_input_key) if isinstance(records, Mapping) else None
+    if not isinstance(record, Mapping):
+        raise ManuscriptBuildError(
+            f"Run manifest has no scoped side-input record for {side_input_key!r}."
+        )
+    candidate = Path(configured_path)
+    if not candidate.is_absolute():
+        candidate = PROJECT_ROOT / candidate
+    candidate = candidate.resolve()
+    expected = (PROJECT_ROOT / str(record.get("path", ""))).resolve()
+    if candidate != expected:
+        raise ManuscriptBuildError(
+            f"Configured {side_input_key!r} path does not match the run manifest: "
+            f"configured={_portable(candidate)!r}, manifest={record.get('path')!r}."
+        )
+    if not candidate.is_file():
+        raise ManuscriptBuildError(f"Scientific side input is missing: {_portable(candidate)}")
+    digest = sha256_file(candidate)
+    if digest != record.get("sha256") or candidate.stat().st_size != record.get("size_bytes"):
+        raise ManuscriptBuildError(
+            f"Scientific side input {side_input_key!r} changed after manifest creation."
+        )
+    return candidate, digest
 
 
 def _write_json(path: Path, payload: Mapping[str, Any]) -> Path:
@@ -291,6 +355,59 @@ def _paths_from_result(result: Mapping[str, Any], stage_dir: Path) -> list[Path]
     return sorted(paths, key=lambda path: str(path))
 
 
+def _run_shared_folds(context: StageContext) -> Mapping[str, Any]:
+    from src.data.canonical_loader import load_canonical_dataset
+    from src.experiments.shared_folds import generate_shared_folds, write_shared_folds
+
+    loaded = load_canonical_dataset(context.config_path, "inx_primary")
+    _validate_loaded_dataset_receipt(context, "inx_primary", loaded.receipt)
+    target_column = str(context.settings["target"]["column"])
+    identifiers = context.settings["governance_fields"]["identifier_fields"]
+    if not isinstance(identifiers, list) or len(identifiers) != 1:
+        raise ManuscriptBuildError("The shared-fold contract requires exactly one canonical identifier.")
+    cv = context.settings["evaluation"]["cv"]
+    nested = context.settings["model"]["nested_tuning"]
+    seeds = context.settings["seeds"]
+    outer_seed = int(seeds[str(cv["seed"])])
+    inner_seed = int(seeds[str(nested["inner_seed"])])
+    receipt = context.manifest["actual_input_receipts"]["inx_primary"]
+    artifacts = generate_shared_folds(
+        loaded.frame,
+        target_column=target_column,
+        id_column=str(identifiers[0]),
+        run_id=context.run_id,
+        config_hash=context.config_hash,
+        scientific_input_hash=str(context.manifest["scientific_input_hash"]),
+        dataset_key="inx_primary",
+        dataset_sha256=str(receipt["actual_sha256"]),
+        outer_splits=int(cv["n_splits"]),
+        inner_splits=int(nested["inner_splits"]),
+        seed=outer_seed,
+        inner_seed=inner_seed,
+    )
+    return write_shared_folds(artifacts, context.run_dir / "shared_folds")
+
+
+def _run_model_benchmarks(context: StageContext) -> Mapping[str, Any]:
+    from src.experiments.manuscript_model_benchmark import run
+
+    model_grid, model_grid_sha256 = _validated_side_input_path(
+        context,
+        "model_search_space",
+        str(context.settings["model"]["search_space_config"]),
+    )
+    return run(
+        context.config_path,
+        model_grid_path=model_grid,
+        shared_folds_dir=context.run_dir / "shared_folds",
+        output_dir=context.run_dir / "model_benchmarks",
+        run_id=context.run_id,
+        config_hash=context.config_hash,
+        scientific_input_hash=str(context.manifest["scientific_input_hash"]),
+        model_grid_sha256=model_grid_sha256,
+    )
+
+
 def _run_policy(context: StageContext) -> Mapping[str, Any]:
     from src.experiments.manuscript_policy_ablation import run
 
@@ -392,6 +509,8 @@ def _run_provenance(context: StageContext) -> Mapping[str, Any]:
 
 
 STAGE_RUNNERS: Mapping[str, Callable[[StageContext], Mapping[str, Any]]] = {
+    "shared_folds": _run_shared_folds,
+    "model_benchmarks": _run_model_benchmarks,
     "policy_ablation": _run_policy,
     "sigmoid_calibration": _run_calibration,
     "oof_shap": _run_shap,
@@ -432,6 +551,65 @@ def _execute_stage(context: StageContext, stage: str, *, reuse_compatible: bool)
         elapsed_seconds=time.perf_counter() - started,
     )
     return [*outputs, metadata]
+
+
+def enforce_baseline_reference_gate(context: StageContext) -> Mapping[str, Any]:
+    """Validate and enforce the user-approved stop gate before downstream XAI stages."""
+
+    gate_path = context.run_dir / "model_benchmarks" / "baseline_xgboost_gate.json"
+    fold_path = context.run_dir / "shared_folds" / "fold_contract.json"
+    if not gate_path.is_file() or not fold_path.is_file():
+        raise ManuscriptBuildError(
+            "Baseline reference gate requires both benchmark and shared-fold contracts."
+        )
+    try:
+        gate = json.loads(gate_path.read_text(encoding="utf-8"))
+        fold_contract = json.loads(fold_path.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError) as exc:
+        raise ManuscriptBuildError(f"Cannot read baseline reference gate contract: {exc}") from exc
+    expected_identity = {
+        "run_id": context.run_id,
+        "config_hash": context.config_hash,
+        "scientific_input_hash": context.manifest.get("scientific_input_hash"),
+        "fold_contract_hash": fold_contract.get("fold_contract_hash"),
+    }
+    mismatches = {
+        field: {"expected": expected, "observed": gate.get(field)}
+        for field, expected in expected_identity.items()
+        if gate.get(field) != expected
+    }
+    if mismatches:
+        raise ManuscriptBuildError(
+            "Baseline reference gate identity mismatch: "
+            + json.dumps(mismatches, sort_keys=True, ensure_ascii=True)
+        )
+    expected_resamples = int(context.settings["evaluation"]["bootstrap"]["n_resamples"])
+    if gate.get("n_resamples") != expected_resamples:
+        raise ManuscriptBuildError("Baseline reference gate uses the wrong bootstrap count.")
+    resample_hash = gate.get("resample_hash")
+    if not isinstance(resample_hash, str) or len(resample_hash) != 64 or any(
+        character not in "0123456789abcdef" for character in resample_hash
+    ):
+        raise ManuscriptBuildError("Baseline reference gate has no valid resample hash.")
+    if not isinstance(gate.get("gate_metric"), str) or not gate["gate_metric"]:
+        raise ManuscriptBuildError("Baseline reference gate has no predeclared metric.")
+    if gate.get("trigger_rule") != "paired_improvement_ci_low_greater_than_zero":
+        raise ManuscriptBuildError("Baseline reference gate trigger rule drifted.")
+    if not isinstance(gate.get("gate_triggered"), bool):
+        raise ManuscriptBuildError("Baseline reference gate result must be boolean.")
+    comparisons = gate.get("triggered_comparisons")
+    if not isinstance(comparisons, list) or any(not isinstance(value, str) for value in comparisons):
+        raise ManuscriptBuildError("Baseline reference gate comparisons are invalid.")
+    if gate["gate_triggered"] != bool(comparisons):
+        raise ManuscriptBuildError("Baseline gate result and triggered comparisons disagree.")
+    if gate["gate_triggered"]:
+        raise BaselineReferenceDecisionRequired(
+            "A baseline outperformed XGBoost under the predeclared paired OOF bootstrap "
+            f"gate ({gate['gate_metric']}; {', '.join(comparisons)}). Downstream policy, "
+            "calibration and SHAP stages were not started. User must decide whether XGBoost "
+            "remains the XAI reference or the XAI pipeline is regenerated for the better model."
+        )
+    return gate
 
 
 def _artifact_type(path: Path) -> str:
@@ -924,6 +1102,8 @@ def build(
             _register_stage_files(context, stage, files)
             command_record.update(status="complete", ended_at=utc_now_iso(), return_code=0)
             write_run_manifest(manifest, manifest_path, project_root=PROJECT_ROOT)
+            if stage == "model_benchmarks":
+                enforce_baseline_reference_gate(context)
 
         active_stage = "package_validation"
         if evidence_scope == "core":

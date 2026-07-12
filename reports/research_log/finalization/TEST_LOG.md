@@ -46,3 +46,14 @@ V2-001 and V2-002 have passed implementation and real-input preflight but remain
 - Scientific experiments/artifacts and network/API calls: zero.
 
 V2-011 and V2-013 pass their implementation contracts but remain open until real scope packages are release-ready and validated. V2-012 and V2-021 remain in progress.
+
+## Unit 2B — 2026-07-13
+
+- Shared-fold, model-factory, nested-isolation, OOF-bootstrap, gate and runner-input-binding contracts: 83 passed.
+- Full pytest: 314 passed, 2 skipped, plus 4 subtests.
+- Full unittest: 162 passed, 2 skipped.
+- Compileall, diff check and manuscript no-change check: passed.
+- Real canonical-loader fold preflight: 1,200 samples, 10 outer folds, 10,800 inner assignments, three inner folds per outer fold; passed in memory with no written artifact.
+- Paid/API/network calls and real model fits: zero.
+
+V2-007 through V2-010 now have tested reusable infrastructure but remain open until the metric is fixed, the real benchmark succeeds, and every downstream primary stage consumes the same folds and exact fold models.

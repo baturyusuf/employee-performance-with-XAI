@@ -134,9 +134,26 @@
     },
     "model": {
       "primary_model": "xgboost",
+      "benchmark_models": ["xgboost", "logistic_regression", "random_forest", "lightgbm"],
+      "search_space_config": "configs/model_grid.yaml",
+      "nested_tuning": {
+        "protocol": "restrained_nested_tuning_v1",
+        "outer_folds_source": "shared_folds.outer_fold_assignments",
+        "inner_splits": 3,
+        "inner_shuffle": true,
+        "inner_seed": "inner_cv",
+        "selection_metric_source": "model_grid.model_benchmark.selection_metric",
+        "baseline_gate_metric_source": "model_grid.model_benchmark.baseline_gate_metric",
+        "metric_decision_status": "pending_user_confirmation_before_real_benchmark",
+        "outer_test_use": "evaluation_only_never_selection_or_tie_breaking",
+        "candidate_failure_policy": "fail_entire_stage",
+        "parallel_search_workers": 4,
+        "estimator_threads": 1,
+        "early_stopping": false
+      },
       "preprocessing": {
-        "numeric": "passthrough",
-        "categorical": "one_hot_encoder_handle_unknown_ignore",
+        "numeric": "median_imputation_then_standard_scaling",
+        "categorical": "most_frequent_imputation_then_dense_one_hot_handle_unknown_ignore",
         "fit_scope": "training_partition_only"
       },
       "xgboost": {
@@ -246,31 +263,35 @@
       "bootstrap": {
         "n_resamples": 5000,
         "confidence_level": 0.95,
-        "seed": "bootstrap"
+        "seed": "bootstrap",
+        "method": "paired_stratified_percentile",
+        "stratify_by": ["outer_fold", "y_true"],
+        "quantile_method": "linear",
+        "conditional_inference_note": "Intervals condition on the observed employees and fixed fold/model-training protocol; they do not estimate model-training instability."
       },
       "statistical_tests": {
-        "paired_test": "wilcoxon_signed_rank",
-        "multiple_comparison_correction": "holm",
+        "primary_method": "paired_sample_level_oof_bootstrap",
+        "fold_summaries": "descriptive_variability_only_no_population_ci",
         "alpha": 0.05
       },
       "metric_applicability": {
         "ordinal_multiclass_performance": {
-          "applicable": ["accuracy", "balanced_accuracy", "macro_f1", "quadratic_weighted_kappa", "ordinal_mae", "severe_error_rate", "log_loss", "multiclass_brier", "ece"],
+          "applicable": ["accuracy", "balanced_accuracy", "macro_f1", "quadratic_weighted_kappa", "ordinal_mae", "severe_error_rate", "nll_log_loss", "multiclass_brier", "ece_confidence"],
           "not_applicable": [],
           "cross_task_comparability": "Comparable only with datasets having a verified three-class 2/3/4 performance mapping."
         },
         "restricted_target_performance_robustness": {
-          "applicable": ["accuracy", "balanced_accuracy", "macro_f1", "log_loss", "ece"],
+          "applicable": ["accuracy", "balanced_accuracy", "macro_f1", "nll_log_loss", "ece_confidence"],
           "not_applicable": ["quadratic_weighted_kappa", "ordinal_mae", "severe_error_rate", "multiclass_brier"],
           "cross_task_comparability": "Robustness-only; do not present as equivalent to the primary three-class task."
         },
         "binary_attrition_transfer": {
-          "applicable": ["accuracy", "balanced_accuracy", "macro_f1", "roc_auc", "average_precision", "log_loss", "binary_brier", "ece"],
+          "applicable": ["accuracy", "balanced_accuracy", "macro_f1", "roc_auc", "average_precision", "nll_log_loss", "binary_brier", "ece_confidence"],
           "not_applicable": ["quadratic_weighted_kappa", "ordinal_mae", "severe_error_rate", "multiclass_brier"],
           "cross_task_comparability": "Related-task evidence only; ordinal metrics are N/A and must not be encoded as zero."
         },
         "binary_turnover_transfer": {
-          "applicable": ["accuracy", "balanced_accuracy", "macro_f1", "roc_auc", "average_precision", "log_loss", "binary_brier", "ece"],
+          "applicable": ["accuracy", "balanced_accuracy", "macro_f1", "roc_auc", "average_precision", "nll_log_loss", "binary_brier", "ece_confidence"],
           "not_applicable": ["quadratic_weighted_kappa", "ordinal_mae", "severe_error_rate", "multiclass_brier"],
           "cross_task_comparability": "Related-task evidence only; ordinal metrics are N/A and must not be encoded as zero."
         }
@@ -283,7 +304,7 @@
       "methods": ["raw", "sigmoid", "isotonic"],
       "evaluation_scope": "outer_test_fold_only",
       "n_bins": 10,
-      "selection_metrics": ["log_loss", "multiclass_brier", "ece"],
+      "selection_metrics": ["nll_log_loss", "multiclass_brier", "ece_confidence"],
       "probability_warning": "Calibrated probabilities are uncertain research outputs and must not be used as autonomous HR decision thresholds."
     },
     "shap": {
@@ -347,6 +368,7 @@
     "seeds": {
       "master": 42,
       "cv": 42,
+      "inner_cv": 43,
       "model": 42,
       "bootstrap": 42,
       "calibration": 42,
@@ -406,7 +428,6 @@
         "matplotlib",
         "PyYAML",
         "lightgbm",
-        "catboost",
         "python-dotenv",
         "xlrd",
         "openpyxl",

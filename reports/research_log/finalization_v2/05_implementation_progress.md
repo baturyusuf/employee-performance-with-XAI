@@ -161,6 +161,38 @@ The first full pytest run exposed one legacy figure test that still treated the 
 
 Unit 2A deliberately does not set either scope `release_ready=true`: shared folds, nested benchmark/tuning, corrected calibration/uncertainty, new core figures/tables and supplementary heuristic-search freeze remain unfinished.
 
+Checkpoint: commit `5d642865653fbb3f4570666a64c7559439fbf117` (`refactor(scope): isolate core and supplementary evidence contracts`) records the tested Unit 2A implementation. The staged whitespace gate blocked the first attempt; the corrected commit passed. No push was performed.
+
+## Unit 2B — Shared folds and restrained nested model benchmark (planned)
+
+Problem: XGBoost/policy/calibration/SHAP/fairness stages create splitters independently; there is no immutable fold assignment, no common OOF model comparison and no approved baseline implementation. Current fixed XGBoost parameters are not the accepted nested-tuning protocol.
+
+Root cause: model experiments evolved as independent report generators rather than consumers of one hashed split/search/metric contract. The only legacy baseline is an incomparable holdout logistic model.
+
+Intended files (finalized after read-only audit):
+
+- canonical config and versioned model search-space config;
+- a shared-fold assignment module/artifact;
+- one nested benchmark stage for XGBoost, Multinomial Logistic Regression, Random Forest and LightGBM;
+- task-aware OOF metric and paired 5,000-resample stratified bootstrap utilities where reusable;
+- build-stage registration only after the scientific contract passes;
+- shared-fold, target/ID exclusion, preprocessing, tuning-isolation, OOF-exactly-once and paired-bootstrap tests;
+- finalization logs and real trial-run metadata.
+
+Acceptance criteria:
+
+- every model consumes exactly the same immutable 10-fold outer assignment;
+- each outer-test sample receives exactly one prediction and is absent from all training/tuning partitions for that prediction;
+- inner CV/tuning occurs only inside each outer-training partition with a versioned restrained search space;
+- target, identifiers and all canonical primary-policy exclusions never enter preprocessing/model inputs;
+- preprocessing is fit only within training partitions;
+- all four models use the same primary policy, labels, folds, metric definitions and OOF sample population;
+- primary uncertainty is paired sample-level stratified bootstrap with 5,000 predeclared resamples, not fold-mean t intervals;
+- selected parameters, fold membership, OOF probabilities/predictions, metrics, bootstrap intervals and paired model differences are persisted with run/config/input identities;
+- a real-data trial run is labelled noncanonical until the full scoped package is rebuilt;
+- if a baseline-minus-XGBoost paired OOF interval excludes zero for the predeclared primary comparison metric, stop and request the user's XAI-reference decision;
+- focused/full tests and compile/hygiene gates pass; no manuscript edit occurs.
+
 ### Unit 1A Result — Passed
 
 - Added a pinned acquisition manifest for four physical datasets and five logical tasks.
@@ -179,3 +211,19 @@ Unit 2A deliberately does not set either scope `release_ready=true`: shared fold
 V2-001 and V2-014 remain open until Unit 1B binds receipts to manifests/cache and a real-data v2 build validates the entire chain. No issue is marked resolved prematurely.
 
 Checkpoint note: commit `f4e2dd7` captured the tested Unit 1A implementation. Its staged diff check reported five Markdown trailing-whitespace lines, but the semicolon-separated shell command did not stop the commit. No scientific file or result was affected. The lines are corrected in a separate follow-up commit; the checkpoint is not amended or rewritten.
+
+### Unit 2B implementation checkpoint — metric decision pending
+
+- Added a deterministic, immutable shared-fold contract: one 10-fold outer assignment and three inner folds within each outer-training partition. Only hashed sample identities are persisted; raw employee identifiers are not.
+- Added exact four-family model factories for Multinomial Logistic Regression, Random Forest, LightGBM and XGBoost. Every family uses the same train-fitted median/scale plus most-frequent/dense-one-hot preprocessing contract.
+- Added a restrained nested benchmark stage with fail-entire-stage candidate handling, deterministic tie-breaking, exact-once OOF predictions, aligned class probabilities, fold-selected parameter/model persistence and transformed-feature lineage.
+- Added 5,000-resample paired sample-level bootstrap infrastructure stratified jointly by outer fold and true class. Metric domains and higher/lower directions are explicit; fold summaries are descriptive only.
+- Added the user-authorized baseline stop gate to orchestration. If a baseline's predeclared paired improvement interval has lower bound above zero, the benchmark stage is retained but the overall run fails before policy, calibration or SHAP execution and requests a model-reference decision.
+- Bound the shared-fold loader receipt and model-grid path/hash/size to the scoped run manifest at stage boundaries. The model-grid hash is checked before configuration/data access and again before output persistence.
+- Hardened model contracts: every canonical policy exclusion is materialized and guarded, target/ID cannot enter inputs, probabilities must be finite/bounded/normalized with exact rows/classes, estimator paths and parameter keys are allowlisted, random seeds belong to orchestration, all-null or invalid feature schemas fail, and native fits run under `threadpoolctl(limits=1)`.
+- LightGBM row subsampling is now explicit (`subsample_freq=1`); the previous `subsample=0.9` setting was otherwise inactive under the installed LightGBM default.
+- Real-data in-memory fold preflight passed for 1,200 samples: 1,200 outer assignments, 10 outer folds, 10,800 inner assignments and exactly three inner folds per outer fold. It wrote no artifact and is not a canonical scientific run. The dirty/predecision fold-contract hash was `827b18ed233b9400d3c3deaac046de6868b1a85629b4576b45d01bdc2cdbd8d8`; it must not be cited or reused after config/commit changes.
+- Focused Unit 2B integration suite: 83 passed. Full pytest: 314 passed, 2 skipped, plus 4 subtests. Full unittest: 162 passed, 2 skipped. Compileall, diff hygiene and manuscript no-change checks passed.
+- No model was fitted to the real dataset, no scientific result artifact was written, no network/API call occurred, and the manuscript was not edited.
+
+Unit 2B is not scientifically complete. `selection_metric` and `baseline_gate_metric` intentionally remain null pending the user's A/B/C metric decision, so real nested benchmarking fails closed. Policy ablation, calibration, SHAP and subgroup/proxy stages still instantiate independent folds/models and must be refactored to consume this fold/model contract before either scope becomes release-ready. The obsolete fixed XGBoost block remains a documented open conflict until that consumer refactor; it is not used by the new benchmark stage.

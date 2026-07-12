@@ -29,3 +29,14 @@ No numeric manuscript claim is frozen. The v2 `manuscript_support/results_source
 | Supplementary | INX primary; IBM performance/attrition; Employee Turnover | heuristic model-scenario search, restricted-target/related-task robustness, supplementary tables/cards | HR replication, historical artifacts, LLM, chatbot, agent audits |
 
 Both scopes are intentionally `release_ready=false`. No v2 scientific artifact or numerical claim has been admitted. Scoped manifest and cache contracts are implementation evidence, not manuscript results.
+
+## Unit 2B Infrastructure Status
+
+| New component | Repository source | Current claim status |
+| --- | --- | --- |
+| Shared 10×3 folds | `src/experiments/shared_folds.py` | Tested infrastructure only; no persisted canonical fold artifact yet |
+| Four-model restrained nested benchmark | `src/experiments/manuscript_model_benchmark.py`, `src/models/canonical_models.py` | Tested/fail-closed; no real model result because the primary metric is pending |
+| Paired OOF bootstrap | `src/models/oof_bootstrap.py` | Tested statistical utility; not yet a manuscript result |
+| Baseline reference stop gate | `src/experiments/build_manuscript_evidence.py` | Tested orchestration control; no observed gate outcome |
+
+The real-input fold preflight wrote no files and its printed dirty/predecision hash is expressly noncanonical. It supports loader/fold engineering verification only and cannot support a numeric manuscript claim.

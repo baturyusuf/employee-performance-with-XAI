@@ -30,3 +30,13 @@
 - If any baseline exceeds XGBoost under paired OOF bootstrap and the confidence interval for baseline-minus-XGBoost excludes zero, stop before model-reference finalization and ask whether XGBoost remains the predeclared XAI reference or the complete XAI pipeline moves to the better model.
 - If a local dataset is absent, automatic acquisition may use only a URL explicitly approved in the acquisition manifest. The downloaded bytes must match the pinned SHA-256, schema, row count and target distribution. Any mismatch fails closed, produces a comparison report and requires user direction. Do not try unapproved mirrors.
 - Checkpoint commits are authorized only on `finalization/leakage-aware-v2`, after relevant tests pass. No force-push, merge, release publication, history alteration or new scientific-protocol decision is authorized.
+
+## Pending Decision — Unit 2B Primary Metric
+
+The accepted D2 nested-tuning decision did not specify the single metric that defines inner candidate selection and the baseline-over-XGBoost stop gate. The implementation therefore keeps both fields null and blocks before data/model execution.
+
+- Option A (recommended): `macro_f1` for both inner selection and the paired baseline gate. This directly prioritizes all three imbalanced classes.
+- Option B: `quadratic_weighted_kappa` for both. This prioritizes ordinal disagreement distance.
+- Option C: `macro_f1` for inner selection and macro-F1 plus QWK as multiplicity-controlled co-primary gate metrics. This is more complex and changes the gate implementation/config schema.
+
+Affected files after user decision: `configs/model_grid.yaml`, `configs/manuscript_final.yaml`, benchmark/gate tests, scientific-input hash and all real benchmark artifacts. No option has been inferred or executed.

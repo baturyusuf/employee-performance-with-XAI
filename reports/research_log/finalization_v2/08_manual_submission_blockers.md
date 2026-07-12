@@ -18,4 +18,4 @@ The workbook exists and is hashed. A one-time Excel COM comparison found its fir
 
 ## Claim Matrix — Pending
 
-The claim matrix cannot be approved until D1-D5 are decided and a clean, real-data v2 build completes.
+The claim matrix cannot be approved until the Unit 2B primary metric is predeclared, all D1-D5 implementations and manual provenance/ethics gates are resolved as applicable, and a clean real-data v2 build completes. D1-D5 themselves have been answered; the bracketed D4 identity/reference fields remain intentionally unverified placeholders.
