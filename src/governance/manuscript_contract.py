@@ -20,11 +20,29 @@ from importlib import metadata
 from pathlib import Path
 from typing import Any, Iterable, Mapping, MutableMapping, Sequence
 
-from src.utils.config_loader import PROJECT_ROOT, load_config, resolve_config_path
+from src.utils.config_loader import PROJECT_ROOT, load_config
 
 
 DEFAULT_CONFIG_PATH = PROJECT_ROOT / "configs" / "manuscript_final.yaml"
-MANIFEST_SCHEMA_VERSION = 1
+MANIFEST_SCHEMA_VERSION = 2
+
+ACTUAL_INPUT_IDENTITY_FIELDS = (
+    "dataset_key",
+    "physical_dataset_id",
+    "actual_path",
+    "actual_sha256",
+    "row_count",
+    "column_count",
+    "schema_status",
+    "schema_columns",
+    "target_column",
+    "target_distribution",
+    "acquisition_manifest_path",
+    "acquisition_manifest_sha256",
+    "automatic_download_allowed",
+    "source_authenticity_status",
+    "licence_verification_status",
+)
 
 REQUIRED_POLICY_NAMES = frozenset(
     {
@@ -598,8 +616,115 @@ def _portable_path(path: Path, project_root: Path) -> str:
     resolved = path.resolve()
     try:
         return resolved.relative_to(project_root.resolve()).as_posix()
-    except ValueError:
-        return str(resolved)
+    except ValueError as exc:
+        raise RunManifestError(
+            f"Scientific manifest paths must remain inside the project root: {resolved}"
+        ) from exc
+
+
+def _resolve_portable_reference(
+    raw_path: Any,
+    project_root: Path,
+    *,
+    context: str,
+) -> Path:
+    """Resolve a manifest/config reference only when it is repository-relative."""
+
+    if not isinstance(raw_path, str) or not raw_path.strip():
+        raise RunManifestError(f"{context} must be a non-empty repository-relative path.")
+    candidate = Path(raw_path)
+    if candidate.is_absolute():
+        raise RunManifestError(f"{context} must not be absolute: {raw_path!r}")
+    resolved = (project_root / candidate).resolve()
+    try:
+        resolved.relative_to(project_root.resolve())
+    except ValueError as exc:
+        raise RunManifestError(f"{context} escapes the project root: {raw_path!r}") from exc
+    return resolved
+
+
+def _sha256_canonical_json(value: Mapping[str, Any]) -> str:
+    encoded = json.dumps(
+        value,
+        sort_keys=True,
+        separators=(",", ":"),
+        ensure_ascii=True,
+        allow_nan=False,
+    ).encode("utf-8")
+    return hashlib.sha256(encoded).hexdigest()
+
+
+def declared_side_input_hashes(
+    config: Mapping[str, Any],
+    *,
+    project_root: str | Path = PROJECT_ROOT,
+) -> dict[str, dict[str, Any]]:
+    """Hash every explicitly declared non-dataset scientific input.
+
+    Side inputs are declared as ``logical_name: repository/relative/path`` in
+    ``manuscript_final.provenance.scientific_side_inputs``.  Requiring an
+    explicit non-empty mapping prevents configuration, schema mapping, feature
+    taxonomy, or search-space changes from bypassing the run/cache identity.
+    """
+
+    root = Path(project_root).resolve()
+    provenance = _require_mapping(manuscript_settings(config), "provenance", "manuscript_final")
+    declared = provenance.get("scientific_side_inputs")
+    if not isinstance(declared, Mapping) or not declared:
+        raise ManuscriptConfigError(
+            "manuscript_final.provenance.scientific_side_inputs must be a non-empty "
+            "logical-name to repository-relative path mapping."
+        )
+
+    records: dict[str, dict[str, Any]] = {}
+    for raw_name, raw_path in sorted(declared.items(), key=lambda item: str(item[0])):
+        if not isinstance(raw_name, str) or not raw_name.strip():
+            raise ManuscriptConfigError("Scientific side-input names must be non-empty strings.")
+        try:
+            path = _resolve_portable_reference(
+                raw_path,
+                root,
+                context=f"scientific side input {raw_name!r}",
+            )
+        except RunManifestError as exc:
+            raise ManuscriptConfigError(str(exc)) from exc
+        if not path.is_file():
+            raise RunManifestError(f"Declared scientific side input is missing for {raw_name!r}: {path}")
+        records[raw_name] = {
+            "path": _portable_path(path, root),
+            "sha256": sha256_file(path),
+            "size_bytes": path.stat().st_size,
+        }
+    return records
+
+
+def scientific_input_hash(
+    *,
+    config_hash: str,
+    dataset_hashes: Mapping[str, Any],
+    side_input_hashes: Mapping[str, Any],
+) -> str:
+    """Bind config, actual datasets, and declared side inputs to one identity."""
+
+    if not re.fullmatch(r"[0-9a-f]{64}", config_hash):
+        raise RunManifestError("config_hash must be a lowercase SHA-256 digest.")
+    if not isinstance(dataset_hashes, Mapping) or not dataset_hashes:
+        raise RunManifestError("dataset_hashes must be a non-empty mapping.")
+    if not isinstance(side_input_hashes, Mapping) or not side_input_hashes:
+        raise RunManifestError("side_input_hashes must be a non-empty mapping.")
+    return _sha256_canonical_json(
+        {
+            "config_hash": config_hash,
+            "dataset_hashes": dict(dataset_hashes),
+            "side_input_hashes": dict(side_input_hashes),
+        }
+    )
+
+
+def _actual_receipt_identity(receipt: Mapping[str, Any]) -> dict[str, Any]:
+    """Return the stable scientific identity subset of a loader receipt."""
+
+    return {field: receipt.get(field) for field in ACTUAL_INPUT_IDENTITY_FIELDS}
 
 
 def make_run_id(config: Mapping[str, Any], config_hash: str, *, timestamp: datetime | None = None) -> str:
@@ -617,43 +742,111 @@ def create_run_manifest(
     project_root: str | Path = PROJECT_ROOT,
     run_id: str | None = None,
     dataset_paths: Mapping[str, str | Path] | None = None,
+    allow_dataset_download: bool = False,
     initial_command: str | None = None,
 ) -> dict[str, Any]:
-    """Create an in-memory run manifest after validating and hashing all inputs."""
+    """Create a schema-v2 manifest from verified actual and side inputs.
+
+    ``dataset_paths`` remains as a compatibility assertion only: callers may
+    provide it, but it must exactly match every canonical configured path.  It
+    cannot override the explicit canonical loader contract.
+    """
 
     root = Path(project_root).resolve()
     raw_config_path = Path(config_path)
     rooted_config_path = root / raw_config_path if not raw_config_path.is_absolute() else raw_config_path
-    resolved_config_path = (
-        rooted_config_path.resolve()
-        if rooted_config_path.is_file()
-        else resolve_config_path(config_path).resolve()
-    )
+    resolved_config_path = rooted_config_path.resolve()
+    if not resolved_config_path.is_file():
+        raise RunManifestError(f"Canonical config is missing: {resolved_config_path}")
+    _portable_path(resolved_config_path, root)
     config = load_manuscript_config(resolved_config_path)
     config_hash = canonical_config_hash(config)
     settings = manuscript_settings(config)
 
     datasets = _require_mapping(settings, "datasets", "manuscript_final")
-    selected_paths = dataset_paths or {
+    configured_paths = {
         name: str(definition["path"])
         for name, definition in datasets.items()
         if isinstance(definition, Mapping)
     }
+    if set(configured_paths) != set(datasets):
+        raise ManuscriptConfigError("Every canonical dataset must define an explicit path.")
+    if dataset_paths is not None:
+        if set(dataset_paths) != set(configured_paths):
+            raise RunManifestError(
+                "dataset_paths must name every canonical dataset and cannot select a subset."
+            )
+        mismatches = {
+            name: {"configured": configured_paths[name], "supplied": str(dataset_paths[name])}
+            for name in configured_paths
+            if _resolve_from_root(configured_paths[name], root)
+            != _resolve_from_root(dataset_paths[name], root)
+        }
+        if mismatches:
+            raise RunManifestError(
+                "dataset_paths cannot override canonical configured paths: "
+                f"{mismatches}"
+            )
+
+    provenance = _require_mapping(settings, "provenance", "manuscript_final")
+    acquisition_manifest_path = provenance.get("data_acquisition_manifest")
+    if not isinstance(acquisition_manifest_path, str) or not acquisition_manifest_path:
+        raise ManuscriptConfigError(
+            "manuscript_final.provenance.data_acquisition_manifest must be a non-empty path."
+        )
+    side_input_hashes = declared_side_input_hashes(config, project_root=root)
+
+    try:
+        from src.data.canonical_loader import verify_configured_datasets
+
+        verified = verify_configured_datasets(
+            resolved_config_path,
+            acquisition_manifest_path,
+            dataset_keys=list(datasets),
+            allow_download=allow_dataset_download,
+            project_root=root,
+        )
+    except Exception as exc:
+        raise RunManifestError(f"Canonical dataset verification failed: {exc}") from exc
+
+    actual_input_receipts: dict[str, dict[str, Any]] = {}
     dataset_hashes: dict[str, dict[str, Any]] = {}
-    for name, raw_path in selected_paths.items():
-        path = _resolve_from_root(raw_path, root)
+    for name in datasets:
+        loaded = verified.get(name)
+        if loaded is None or not isinstance(loaded.receipt, Mapping):
+            raise RunManifestError(f"Canonical loader returned no receipt for dataset {name!r}.")
+        receipt = dict(loaded.receipt)
+        raw_actual_path = receipt.get("actual_path")
+        path = _resolve_portable_reference(
+            raw_actual_path,
+            root,
+            context=f"actual input receipt {name!r}.actual_path",
+        )
         if not path.is_file():
-            raise RunManifestError(f"Configured dataset is missing for {name!r}: {path}")
+            raise RunManifestError(f"Verified actual dataset disappeared for {name!r}: {path}")
+        actual_hash = sha256_file(path)
+        if receipt.get("actual_sha256") != actual_hash:
+            raise RunManifestError(
+                f"Loader receipt hash mismatch for dataset {name!r}: "
+                f"receipt={receipt.get('actual_sha256')}, actual={actual_hash}"
+            )
+        receipt["actual_path"] = _portable_path(path, root)
+        receipt["size_bytes"] = path.stat().st_size
+        actual_input_receipts[name] = receipt
         definition = datasets.get(name, {})
         dataset_hashes[name] = {
             "path": _portable_path(path, root),
-            "sha256": sha256_file(path),
+            "sha256": actual_hash,
             "size_bytes": path.stat().st_size,
+            "row_count": receipt.get("row_count"),
+            "column_count": receipt.get("column_count"),
+            "schema_status": receipt.get("schema_status"),
+            "target_column": receipt.get("target_column"),
+            "target_distribution": receipt.get("target_distribution"),
             "role": definition.get("role", "") if isinstance(definition, Mapping) else "",
             "task_type": definition.get("task_type", "") if isinstance(definition, Mapping) else "",
         }
 
-    provenance = _require_mapping(settings, "provenance", "manuscript_final")
     package_names = provenance.get("package_names", [])
     if not isinstance(package_names, list):
         raise ManuscriptConfigError("provenance.package_names must be a list.")
@@ -676,7 +869,14 @@ def create_run_manifest(
         "source_tree_hash": source_tree_hash(root),
         "config_path": _portable_path(resolved_config_path, root),
         "config_hash": config_hash,
+        "actual_input_receipts": actual_input_receipts,
         "dataset_hashes": dataset_hashes,
+        "side_input_hashes": side_input_hashes,
+        "scientific_input_hash": scientific_input_hash(
+            config_hash=config_hash,
+            dataset_hashes=dataset_hashes,
+            side_input_hashes=side_input_hashes,
+        ),
         "code_package_versions": _package_versions(package_names),
         "start_timestamp": utc_now_iso(),
         "end_timestamp": None,
@@ -839,7 +1039,10 @@ def validate_run_manifest(
         "git_commit",
         "config_path",
         "config_hash",
+        "actual_input_receipts",
         "dataset_hashes",
+        "side_input_hashes",
+        "scientific_input_hash",
         "code_package_versions",
         "start_timestamp",
         "end_timestamp",
@@ -865,14 +1068,24 @@ def validate_run_manifest(
     if expected_config_hash is not None and config_hash != expected_config_hash:
         errors.append(f"config_hash {config_hash!r} does not equal expected {expected_config_hash!r}")
 
+    loaded_config: dict[str, Any] | None = None
+    config_path: Path | None = None
     raw_config_path = manifest.get("config_path")
-    if isinstance(raw_config_path, str) and raw_config_path:
-        config_path = _resolve_from_root(raw_config_path, root)
+    try:
+        config_path = _resolve_portable_reference(
+            raw_config_path,
+            root,
+            context="config_path",
+        )
+    except RunManifestError as exc:
+        errors.append(str(exc))
+    else:
         if not config_path.is_file():
             errors.append(f"config file is missing: {config_path}")
         else:
             try:
-                actual_config_hash = canonical_config_hash(config_path)
+                loaded_config = load_manuscript_config(config_path)
+                actual_config_hash = canonical_config_hash(loaded_config)
             except Exception as exc:  # validation reports all manifest defects together
                 errors.append(f"config cannot be loaded or hashed: {exc}")
             else:
@@ -880,29 +1093,231 @@ def validate_run_manifest(
                     errors.append(
                         f"config hash mismatch for {config_path}: manifest={config_hash}, actual={actual_config_hash}"
                     )
-    else:
-        errors.append("config_path must be a non-empty string")
 
-    dataset_hashes = manifest.get("dataset_hashes")
-    if not isinstance(dataset_hashes, Mapping) or not dataset_hashes:
-        errors.append("dataset_hashes must be a non-empty mapping")
+    side_input_hashes = manifest.get("side_input_hashes")
+    if not isinstance(side_input_hashes, Mapping) or not side_input_hashes:
+        errors.append("side_input_hashes must be a non-empty mapping")
     else:
-        for dataset_name, record in dataset_hashes.items():
+        for side_name, record in side_input_hashes.items():
+            label = f"side input {side_name!r}"
+            if not isinstance(side_name, str) or not side_name:
+                errors.append("side-input names must be non-empty strings")
             if not isinstance(record, Mapping):
-                errors.append(f"dataset {dataset_name!r} record is not a mapping")
+                errors.append(f"{label} record is not a mapping")
                 continue
-            raw_path = record.get("path")
-            if not isinstance(raw_path, str) or not raw_path:
-                errors.append(f"dataset {dataset_name!r} has no path")
+            try:
+                path = _resolve_portable_reference(
+                    record.get("path"),
+                    root,
+                    context=f"{label}.path",
+                )
+            except RunManifestError as exc:
+                errors.append(str(exc))
                 continue
-            path = _resolve_from_root(raw_path, root)
             if not path.is_file():
-                errors.append(f"dataset {dataset_name!r} is missing: {path}")
+                errors.append(f"{label} is missing: {path}")
                 continue
             actual_hash = sha256_file(path)
             if record.get("sha256") != actual_hash:
                 errors.append(
+                    f"{label} hash mismatch: manifest={record.get('sha256')}, actual={actual_hash}"
+                )
+            if record.get("size_bytes") != path.stat().st_size:
+                errors.append(f"{label} size mismatch")
+
+        if loaded_config is not None:
+            try:
+                current_side_inputs = declared_side_input_hashes(loaded_config, project_root=root)
+            except Exception as exc:
+                errors.append(f"declared side inputs cannot be verified: {exc}")
+            else:
+                if dict(side_input_hashes) != current_side_inputs:
+                    errors.append(
+                        "side_input_hashes do not match the current canonical declarations/content"
+                    )
+
+                provenance = _require_mapping(
+                    manuscript_settings(loaded_config),
+                    "provenance",
+                    "manuscript_final",
+                )
+                acquisition_path = provenance.get("data_acquisition_manifest")
+                acquisition_records = [
+                    record
+                    for record in current_side_inputs.values()
+                    if isinstance(record, Mapping) and record.get("path") == acquisition_path
+                ]
+                if not acquisition_records:
+                    errors.append(
+                        "the configured data acquisition manifest must be declared as a scientific side input"
+                    )
+
+    actual_input_receipts = manifest.get("actual_input_receipts")
+    if not isinstance(actual_input_receipts, Mapping) or not actual_input_receipts:
+        errors.append("actual_input_receipts must be a non-empty mapping")
+
+    dataset_hashes = manifest.get("dataset_hashes")
+    if not isinstance(dataset_hashes, Mapping) or not dataset_hashes:
+        errors.append("dataset_hashes must be a non-empty mapping")
+    elif isinstance(actual_input_receipts, Mapping):
+        if set(dataset_hashes) != set(actual_input_receipts):
+            errors.append("dataset_hashes and actual_input_receipts must name exactly the same datasets")
+        if loaded_config is not None:
+            configured_datasets = _require_mapping(
+                manuscript_settings(loaded_config),
+                "datasets",
+                "manuscript_final",
+            )
+            if set(dataset_hashes) != set(configured_datasets):
+                errors.append(
+                    "manifest dataset identities do not match every dataset declared by the canonical config"
+                )
+
+        for dataset_name, record in dataset_hashes.items():
+            if not isinstance(record, Mapping):
+                errors.append(f"dataset {dataset_name!r} record is not a mapping")
+                continue
+            receipt = actual_input_receipts.get(dataset_name)
+            if not isinstance(receipt, Mapping):
+                errors.append(f"actual input receipt {dataset_name!r} is not a mapping")
+                continue
+            missing_receipt_fields = [
+                field
+                for field in (*ACTUAL_INPUT_IDENTITY_FIELDS, "size_bytes")
+                if field not in receipt
+            ]
+            if missing_receipt_fields:
+                errors.append(
+                    f"actual input receipt {dataset_name!r} is missing fields: {missing_receipt_fields}"
+                )
+            if receipt.get("dataset_key") != dataset_name:
+                errors.append(f"actual input receipt {dataset_name!r} has a mismatched dataset_key")
+            try:
+                path = _resolve_portable_reference(
+                    record.get("path"),
+                    root,
+                    context=f"dataset {dataset_name!r}.path",
+                )
+                receipt_path = _resolve_portable_reference(
+                    receipt.get("actual_path"),
+                    root,
+                    context=f"actual input receipt {dataset_name!r}.actual_path",
+                )
+            except RunManifestError as exc:
+                errors.append(str(exc))
+                continue
+            if path != receipt_path:
+                errors.append(f"dataset {dataset_name!r} path does not match its actual input receipt")
+            if not path.is_file():
+                errors.append(f"dataset {dataset_name!r} is missing: {path}")
+                continue
+            actual_hash = sha256_file(path)
+            actual_size = path.stat().st_size
+            if record.get("sha256") != actual_hash:
+                errors.append(
                     f"dataset {dataset_name!r} hash mismatch: manifest={record.get('sha256')}, actual={actual_hash}"
+                )
+            if receipt.get("actual_sha256") != actual_hash:
+                errors.append(
+                    f"actual input receipt {dataset_name!r} hash mismatch: "
+                    f"receipt={receipt.get('actual_sha256')}, actual={actual_hash}"
+                )
+            if record.get("size_bytes") != actual_size:
+                errors.append(f"dataset {dataset_name!r} size mismatch")
+            if receipt.get("size_bytes") != actual_size:
+                errors.append(f"actual input receipt {dataset_name!r} size mismatch")
+            receipt_links = {
+                "path": "actual_path",
+                "sha256": "actual_sha256",
+                "size_bytes": "size_bytes",
+                "row_count": "row_count",
+                "column_count": "column_count",
+                "schema_status": "schema_status",
+                "target_column": "target_column",
+                "target_distribution": "target_distribution",
+            }
+            for dataset_field, receipt_field in receipt_links.items():
+                if record.get(dataset_field) != receipt.get(receipt_field):
+                    errors.append(
+                        f"dataset {dataset_name!r}.{dataset_field} does not match "
+                        f"actual_input_receipts.{dataset_name}.{receipt_field}"
+                    )
+
+            try:
+                acquisition_path = _resolve_portable_reference(
+                    receipt.get("acquisition_manifest_path"),
+                    root,
+                    context=f"actual input receipt {dataset_name!r}.acquisition_manifest_path",
+                )
+            except RunManifestError as exc:
+                errors.append(str(exc))
+            else:
+                if not acquisition_path.is_file():
+                    errors.append(
+                        f"actual input receipt {dataset_name!r} acquisition manifest is missing: "
+                        f"{acquisition_path}"
+                    )
+                elif receipt.get("acquisition_manifest_sha256") != sha256_file(acquisition_path):
+                    errors.append(
+                        f"actual input receipt {dataset_name!r} acquisition-manifest hash mismatch"
+                    )
+
+        if loaded_config is not None and config_path is not None:
+            try:
+                from src.data.canonical_loader import verify_configured_datasets
+
+                provenance = _require_mapping(
+                    manuscript_settings(loaded_config),
+                    "provenance",
+                    "manuscript_final",
+                )
+                current_verified = verify_configured_datasets(
+                    config_path,
+                    provenance.get("data_acquisition_manifest"),
+                    dataset_keys=list(dataset_hashes),
+                    allow_download=False,
+                    project_root=root,
+                )
+            except Exception as exc:
+                errors.append(f"current canonical datasets cannot be reverified: {exc}")
+            else:
+                for dataset_name, loaded in current_verified.items():
+                    recorded_receipt = actual_input_receipts.get(dataset_name)
+                    if not isinstance(recorded_receipt, Mapping):
+                        continue
+                    if _actual_receipt_identity(recorded_receipt) != _actual_receipt_identity(
+                        loaded.receipt
+                    ):
+                        errors.append(
+                            f"actual input receipt {dataset_name!r} does not match current "
+                            "canonical-loader verification"
+                        )
+
+    observed_scientific_hash = manifest.get("scientific_input_hash")
+    if not isinstance(observed_scientific_hash, str) or not re.fullmatch(
+        r"[0-9a-f]{64}", observed_scientific_hash
+    ):
+        errors.append("scientific_input_hash must be a lowercase SHA-256 digest")
+    elif (
+        isinstance(config_hash, str)
+        and re.fullmatch(r"[0-9a-f]{64}", config_hash)
+        and isinstance(dataset_hashes, Mapping)
+        and dataset_hashes
+        and isinstance(side_input_hashes, Mapping)
+        and side_input_hashes
+    ):
+        try:
+            expected_scientific_hash = scientific_input_hash(
+                config_hash=config_hash,
+                dataset_hashes=dataset_hashes,
+                side_input_hashes=side_input_hashes,
+            )
+        except Exception as exc:
+            errors.append(f"scientific input identity cannot be recomputed: {exc}")
+        else:
+            if observed_scientific_hash != expected_scientific_hash:
+                errors.append(
+                    "scientific_input_hash does not bind the recorded config, datasets, and side inputs"
                 )
 
     outputs = manifest.get("output_files")
@@ -926,7 +1341,15 @@ def validate_run_manifest(
                 errors.append(f"{label} run_id does not match manifest run_id")
             if record.get("config_hash") != config_hash:
                 errors.append(f"{label} config_hash does not match manifest config_hash")
-            path = _resolve_from_root(raw_path, root)
+            try:
+                path = _resolve_portable_reference(
+                    raw_path,
+                    root,
+                    context=f"{label}.path",
+                )
+            except RunManifestError as exc:
+                errors.append(str(exc))
+                continue
             if not path.is_file():
                 errors.append(f"manifest-referenced artifact is missing: {path}")
                 continue
@@ -1001,6 +1424,7 @@ def write_run_manifest(
 
 
 __all__ = [
+    "ACTUAL_INPUT_IDENTITY_FIELDS",
     "DEFAULT_CONFIG_PATH",
     "FeaturePolicyConsistencyError",
     "ForbiddenFeatureError",
@@ -1010,6 +1434,7 @@ __all__ = [
     "canonical_config_hash",
     "canonical_policy_mapping",
     "create_run_manifest",
+    "declared_side_input_hashes",
     "feature_policy_definitions",
     "finalize_run_manifest",
     "forbidden_feature_mentions",
@@ -1023,6 +1448,7 @@ __all__ = [
     "record_failure",
     "register_artifact",
     "sha256_file",
+    "scientific_input_hash",
     "source_tree_hash",
     "validate_artifact_forbidden_features",
     "validate_manuscript_config",

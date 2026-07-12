@@ -34,6 +34,7 @@ class ExternalDatasetConfig:
     optional_attrition_target: Optional[Dict[str, Any]] = None
     date_columns: Optional[List[str]] = None
     derived_features: Optional[Dict[str, Dict[str, Any]]] = None
+    schema_mapping_path: Optional[Path] = None
 
     @property
     def dataset_dir(self) -> Path:
@@ -71,13 +72,37 @@ def available_dataset_names() -> List[str]:
     )
 
 
-def load_external_config(dataset_name: str) -> ExternalDatasetConfig:
-    path = EXTERNAL_DATA_ROOT / dataset_name / "schema_mapping.json"
+def load_external_config(
+    dataset_name: str,
+    *,
+    schema_mapping_path: str | Path | None = None,
+) -> ExternalDatasetConfig:
+    """Load one schema mapping, optionally from an explicitly bound path.
+
+    The default directory convention is retained for legacy and exploratory
+    callers.  Canonical scientific stages must pass ``schema_mapping_path`` so
+    that the mapping is a declared, hashable side input rather than a file
+    discovered by directory layout.
+    """
+
+    path = (
+        Path(schema_mapping_path).expanduser().resolve()
+        if schema_mapping_path is not None
+        else EXTERNAL_DATA_ROOT / dataset_name / "schema_mapping.json"
+    )
     if not path.exists():
         raise FileNotFoundError(f"External schema mapping not found: {path}")
+    if not path.is_file():
+        raise FileNotFoundError(f"External schema mapping is not a file: {path}")
     payload = json.loads(path.read_text(encoding="utf-8"))
+    mapped_dataset_name = str(payload.get("dataset_name", "")).strip()
+    if mapped_dataset_name != dataset_name:
+        raise ValueError(
+            "External schema mapping identity mismatch: "
+            f"requested {dataset_name!r}, mapping declares {mapped_dataset_name!r}."
+        )
     return ExternalDatasetConfig(
-        dataset_name=str(payload["dataset_name"]),
+        dataset_name=mapped_dataset_name,
         display_name=str(payload.get("display_name", payload["dataset_name"])),
         recommended_role=str(payload.get("recommended_role", "")),
         source_url=str(payload.get("source_url", "")),
@@ -92,15 +117,44 @@ def load_external_config(dataset_name: str) -> ExternalDatasetConfig:
         sensitive_audit_only_columns=[str(v) for v in payload.get("sensitive_audit_only_columns", [])],
         proxy_risk_columns=[str(v) for v in payload.get("proxy_risk_columns", [])],
         feature_policy_variants=dict(payload.get("feature_policy_variants", {})),
+        schema_mapping_path=path.resolve(),
     )
 
 
-def load_external_dataset(dataset_name: str, target_kind: str = "primary") -> ExternalDataset:
-    config = load_external_config(dataset_name)
-    if not config.raw_path.exists():
-        raise FileNotFoundError(f"External raw CSV not found: {config.raw_path}")
+def load_external_dataset(
+    dataset_name: str,
+    target_kind: str = "primary",
+    *,
+    raw_frame: pd.DataFrame | None = None,
+    raw_path: str | Path | None = None,
+    schema_mapping_path: str | Path | None = None,
+) -> ExternalDataset:
+    """Adapt an external dataset using explicit inputs when supplied.
 
-    raw = _read_csv_with_best_effort(config.raw_path)
+    ``raw_frame`` is intended for canonical callers that have already verified
+    the exact dataset bytes through :mod:`src.data.canonical_loader`.
+    ``raw_path`` is an explicit path alternative for non-canonical tools.  They
+    are mutually exclusive so a caller cannot claim one source while silently
+    reading another.  Omitting both retains the historical directory convention
+    for legacy callers only.
+    """
+
+    if raw_frame is not None and raw_path is not None:
+        raise ValueError("raw_frame and raw_path are mutually exclusive external inputs.")
+    if raw_frame is not None and not isinstance(raw_frame, pd.DataFrame):
+        raise TypeError("raw_frame must be a pandas DataFrame when supplied.")
+
+    config = load_external_config(dataset_name, schema_mapping_path=schema_mapping_path)
+    if raw_frame is None:
+        source_path = Path(raw_path).expanduser().resolve() if raw_path is not None else config.raw_path
+        if not source_path.exists():
+            raise FileNotFoundError(f"External raw CSV not found: {source_path}")
+        if not source_path.is_file():
+            raise FileNotFoundError(f"External raw CSV is not a file: {source_path}")
+        raw = _read_csv_with_best_effort(source_path)
+    else:
+        # Never mutate a verified loader result in-place while canonicalising it.
+        raw = raw_frame.copy(deep=True)
     raw = _strip_column_names(raw)
     target_spec = _target_spec_for(config, target_kind)
     raw_target = str(target_spec["raw_column"])

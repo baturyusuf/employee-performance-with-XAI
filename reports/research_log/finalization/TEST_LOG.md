@@ -21,3 +21,15 @@ Important: baseline green tests do not establish scientific readiness. They do n
 - Manuscript diff: none.
 
 This closes the Unit 1A implementation/test checkpoint only. V2-001 is not resolved until loader receipts and side inputs are bound into the release manifest/cache and a full real-data v2 build passes.
+
+## Unit 1B — 2026-07-13
+
+- Manifest/cache/snapshot contract: 21 passed.
+- External explicit-input/claim-boundary contract: 23 passed.
+- Real-data manifest validation: schema 2; five logical receipts; seven side inputs; passed.
+- Full pytest: 218 passed plus 4 subtests.
+- Full unittest: 161 passed.
+- Compileall, diff check and manuscript no-change check: passed.
+- Paid/API/network calls: zero.
+
+V2-001 and V2-002 have passed implementation and real-input preflight but remain open pending a clean, cache-disabled full v2 build and artifact verification.

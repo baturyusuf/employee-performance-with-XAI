@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import copy
+import hashlib
 import json
 import tempfile
 import unittest
@@ -27,8 +28,54 @@ class ArtifactRunManifestConsistencyTests(unittest.TestCase):
         config = copy.deepcopy(load_manuscript_config())
         for definition in config["manuscript_final"]["datasets"].values():
             definition["path"] = "data/sample.csv"
+        acquisition_path = root / "configs" / "data_acquisition.yaml"
+        acquisition_path.parent.mkdir(parents=True, exist_ok=True)
+        dataset_hash = hashlib.sha256(dataset.read_bytes()).hexdigest()
+        dataset_names = list(config["manuscript_final"]["datasets"])
+        acquisition_path.write_text(
+            json.dumps(
+                {
+                    "data_acquisition": {
+                        "schema_version": 1,
+                        "physical_datasets": {
+                            "fixture": {
+                                "local_path": "data/sample.csv",
+                                "expected_sha256": dataset_hash,
+                                "expected_rows": 1,
+                                "expected_column_count": 2,
+                                "expected_columns": ["feature", "target"],
+                                "format": "csv",
+                                "delimiter": ",",
+                                "encoding": "utf-8",
+                                "target_profiles": {
+                                    "main": {
+                                        "raw_target": "target",
+                                        "expected_distribution": {"2": 1},
+                                    }
+                                },
+                                "automatic_download_allowed": False,
+                            }
+                        },
+                        "logical_bindings": {
+                            name: {
+                                "physical_dataset": "fixture",
+                                "target_profile": "main",
+                            }
+                            for name in dataset_names
+                        },
+                    }
+                },
+                indent=2,
+            ),
+            encoding="utf-8",
+        )
+        provenance = config["manuscript_final"]["provenance"]
+        provenance["data_acquisition_manifest"] = "configs/data_acquisition.yaml"
+        provenance["scientific_side_inputs"] = {
+            "data_acquisition_contract": "configs/data_acquisition.yaml"
+        }
         config_path = root / "configs" / "manuscript_final.yaml"
-        config_path.parent.mkdir(parents=True)
+        config_path.parent.mkdir(parents=True, exist_ok=True)
         config_path.write_text(json.dumps(config, indent=2), encoding="utf-8")
 
         artifact = root / "reports" / "manuscript_final" / "test_run" / "table.csv"

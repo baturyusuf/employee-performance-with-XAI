@@ -23,6 +23,7 @@
       },
       "hrdataset_v14": {
         "path": "data/external/hrdataset_v14/raw.csv",
+        "schema_mapping_path": "data/external/hrdataset_v14/schema_mapping.json",
         "role": "independent_external_performance_target_replication",
         "task_type": "ordinal_multiclass_performance",
         "target": "PerformanceScore",
@@ -30,6 +31,7 @@
       },
       "ibm_hr_analytics": {
         "path": "data/external/ibm_hr_analytics/raw.csv",
+        "schema_mapping_path": "data/external/ibm_hr_analytics/schema_mapping.json",
         "role": "restricted_target_performance_robustness",
         "task_type": "restricted_target_performance_robustness",
         "target": "PerformanceRating",
@@ -37,6 +39,7 @@
       },
       "ibm_hr_analytics_attrition": {
         "path": "data/external/ibm_hr_analytics/raw.csv",
+        "schema_mapping_path": "data/external/ibm_hr_analytics/schema_mapping.json",
         "role": "related_task_transfer",
         "task_type": "binary_attrition_transfer",
         "target": "Attrition",
@@ -44,6 +47,7 @@
       },
       "employee_turnover": {
         "path": "data/external/employee_turnover/raw.csv",
+        "schema_mapping_path": "data/external/employee_turnover/schema_mapping.json",
         "role": "related_task_transfer",
         "task_type": "binary_turnover_transfer",
         "target": "left",
@@ -364,6 +368,15 @@
     },
     "provenance": {
       "data_acquisition_manifest": "configs/data_acquisition.yaml",
+      "scientific_side_inputs": {
+        "data_acquisition_contract": "configs/data_acquisition.yaml",
+        "dataset_provenance": "configs/dataset_provenance.yaml",
+        "feature_taxonomy": "configs/feature_taxonomy.yaml",
+        "model_search_space": "configs/model_grid.yaml",
+        "external_hrdataset_v14_schema_mapping": "data/external/hrdataset_v14/schema_mapping.json",
+        "external_ibm_hr_analytics_schema_mapping": "data/external/ibm_hr_analytics/schema_mapping.json",
+        "external_employee_turnover_schema_mapping": "data/external/employee_turnover/schema_mapping.json"
+      },
       "dataset_cards_config": "configs/dataset_provenance.yaml",
       "dataset_cards_config_hash_required": true,
       "dataset_card_required_fields_must_be_nonblank": true,

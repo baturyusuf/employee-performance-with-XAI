@@ -83,12 +83,17 @@ def _resolve(path: str | Path, root: Path = PROJECT_ROOT) -> Path:
     return candidate.resolve()
 
 
-def _portable_configured_path(raw_path: str | Path, resolved: Path) -> str:
+def _portable_configured_path(
+    raw_path: str | Path,
+    resolved: Path,
+    *,
+    project_root: Path = PROJECT_ROOT,
+) -> str:
     configured = Path(raw_path)
     if not configured.is_absolute():
         return configured.as_posix()
     try:
-        return resolved.relative_to(PROJECT_ROOT.resolve()).as_posix()
+        return resolved.relative_to(project_root.resolve()).as_posix()
     except ValueError:
         # Absolute paths are permitted only for isolated unit fixtures. Production
         # artifact portability validation rejects them before packaging.
@@ -154,6 +159,7 @@ def _validate_file(
     target_profile: Mapping[str, Any],
     dataset_key: str,
     mismatch_report_path: str | Path | None,
+    project_root: Path = PROJECT_ROOT,
 ) -> tuple[pd.DataFrame, Dict[str, Any]]:
     expected_hash = str(record.get("expected_sha256", "")).casefold()
     if not SHA256_PATTERN.fullmatch(expected_hash):
@@ -187,7 +193,7 @@ def _validate_file(
     )
     comparison = {
         "dataset_key": dataset_key,
-        "candidate_path": _portable_configured_path(path, path),
+        "candidate_path": _portable_configured_path(path, path, project_root=project_root),
         "expected_sha256": expected_hash,
         "actual_sha256": actual_hash,
         "expected_rows": expected_rows,
@@ -254,10 +260,13 @@ def load_canonical_dataset(
     *,
     allow_download: bool = False,
     mismatch_report_path: str | Path | None = None,
+    project_root: str | Path = PROJECT_ROOT,
 ) -> CanonicalDataset:
     """Load one explicitly configured dataset after exact contract validation."""
 
-    config = load_config(config_path)
+    root = Path(project_root).resolve()
+    resolved_config_path = _resolve(config_path, root)
+    config = load_config(resolved_config_path)
     settings = _settings(config)
     datasets = settings.get("datasets")
     if not isinstance(datasets, Mapping) or dataset_key not in datasets:
@@ -277,7 +286,7 @@ def load_canonical_dataset(
             else None
         )
         acquisition_manifest_path = configured_manifest or DEFAULT_ACQUISITION_MANIFEST
-    manifest_path = _resolve(acquisition_manifest_path)
+    manifest_path = _resolve(acquisition_manifest_path, root)
     manifest = load_config(manifest_path)
     acquisition = _acquisition_settings(manifest)
     bindings = acquisition["logical_bindings"]
@@ -306,8 +315,8 @@ def load_canonical_dataset(
     manifest_local_path = record.get("local_path")
     if not isinstance(manifest_local_path, str) or not manifest_local_path:
         raise CanonicalDataError(f"Physical dataset {physical_id!r} has no local_path.")
-    resolved_configured = _resolve(configured_path)
-    resolved_manifest = _resolve(manifest_local_path)
+    resolved_configured = _resolve(configured_path, root)
+    resolved_manifest = _resolve(manifest_local_path, root)
     if resolved_configured != resolved_manifest:
         raise CanonicalDataError(
             f"Config/acquisition path mismatch for {dataset_key!r}: "
@@ -349,6 +358,7 @@ def load_canonical_dataset(
             target_profile=target_profile,
             dataset_key=dataset_key,
             mismatch_report_path=mismatch_report_path,
+            project_root=root,
         )
         if downloaded is not None:
             os.replace(downloaded, resolved_configured)
@@ -363,8 +373,11 @@ def load_canonical_dataset(
     receipt = {
         "dataset_key": dataset_key,
         "physical_dataset_id": physical_id,
-        "actual_path": _portable_configured_path(configured_path, candidate),
+        "actual_path": _portable_configured_path(
+            configured_path, candidate, project_root=root
+        ),
         "actual_sha256": actual_hash,
+        "size_bytes": int(candidate.stat().st_size),
         "row_count": int(len(frame)),
         "column_count": int(len(frame.columns)),
         "schema_status": "valid",
@@ -373,7 +386,7 @@ def load_canonical_dataset(
         "target_distribution": _distribution(frame[target_column]),
         "acquisition_method": acquisition_method,
         "acquisition_manifest_path": _portable_configured_path(
-            acquisition_manifest_path, manifest_path
+            acquisition_manifest_path, manifest_path, project_root=root
         ),
         "acquisition_manifest_sha256": sha256_file(manifest_path),
         "automatic_download_allowed": bool(record.get("automatic_download_allowed") is True),
@@ -394,8 +407,11 @@ def verify_configured_datasets(
     dataset_keys: Iterable[str] | None = None,
     allow_download: bool = False,
     report_dir: str | Path | None = None,
+    project_root: str | Path = PROJECT_ROOT,
 ) -> Dict[str, CanonicalDataset]:
-    config = load_config(config_path)
+    root = Path(project_root).resolve()
+    resolved_config_path = _resolve(config_path, root)
+    config = load_config(resolved_config_path)
     settings = _settings(config)
     datasets = settings.get("datasets")
     if not isinstance(datasets, Mapping) or not datasets:
@@ -408,11 +424,12 @@ def verify_configured_datasets(
     for key in selected:
         mismatch = Path(report_dir) / f"{key}_acquisition_comparison.json" if report_dir else None
         output[key] = load_canonical_dataset(
-            config_path,
+            resolved_config_path,
             key,
             acquisition_manifest_path,
             allow_download=allow_download,
             mismatch_report_path=mismatch,
+            project_root=root,
         )
     return output
 

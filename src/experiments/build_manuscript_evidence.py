@@ -130,9 +130,17 @@ def _stage_cache_valid(context: StageContext, stage: str) -> bool:
         return False
     if payload.get("run_id") != context.run_id or payload.get("config_hash") != context.config_hash:
         return False
+    if payload.get("git_commit") != context.manifest.get("git_commit"):
+        return False
     if payload.get("source_tree_hash") != context.manifest.get("source_tree_hash"):
         return False
     if payload.get("dataset_hashes") != context.manifest.get("dataset_hashes"):
+        return False
+    if payload.get("actual_input_receipts") != context.manifest.get("actual_input_receipts"):
+        return False
+    if payload.get("side_input_hashes") != context.manifest.get("side_input_hashes"):
+        return False
+    if payload.get("scientific_input_hash") != context.manifest.get("scientific_input_hash"):
         return False
     outputs = payload.get("outputs")
     if not isinstance(outputs, list) or not outputs:
@@ -180,6 +188,9 @@ def _write_stage_metadata(
             "git_commit": context.manifest.get("git_commit"),
             "source_tree_hash": context.manifest.get("source_tree_hash"),
             "dataset_hashes": context.manifest.get("dataset_hashes"),
+            "actual_input_receipts": context.manifest.get("actual_input_receipts"),
+            "side_input_hashes": context.manifest.get("side_input_hashes"),
+            "scientific_input_hash": context.manifest.get("scientific_input_hash"),
             "started_at": started_at,
             "ended_at": utc_now_iso(),
             "elapsed_seconds": elapsed_seconds,
@@ -700,8 +711,14 @@ def _write_input_snapshots(context: StageContext) -> list[Path]:
         if (
             payload.get("run_id") != context.run_id
             or payload.get("config_hash") != context.config_hash
+            or payload.get("git_commit") != context.manifest.get("git_commit")
             or payload.get("source_tree_hash") != context.manifest.get("source_tree_hash")
             or payload.get("dataset_hashes") != context.manifest.get("dataset_hashes")
+            or payload.get("actual_input_receipts")
+            != context.manifest.get("actual_input_receipts")
+            or payload.get("side_input_hashes") != context.manifest.get("side_input_hashes")
+            or payload.get("scientific_input_hash")
+            != context.manifest.get("scientific_input_hash")
         ):
             raise ManuscriptBuildError(f"Run-input snapshot identity is incompatible: {output}")
         snapshots = payload.get("snapshots", [])
@@ -709,11 +726,13 @@ def _write_input_snapshots(context: StageContext) -> list[Path]:
             path = PROJECT_ROOT / str(record.get("snapshot_path", ""))
             if not path.is_file() or sha256_file(path) != record.get("sha256"):
                 raise ManuscriptBuildError(f"Run-input snapshot hash mismatch: {path}")
+            source = PROJECT_ROOT / str(record.get("source_path", ""))
+            if not source.is_file() or sha256_file(source) != record.get("sha256"):
+                raise ManuscriptBuildError(f"Run-input source hash mismatch: {source}")
         return _all_files(output)
     output.mkdir(parents=True, exist_ok=True)
     sources = {
         "canonical_config_snapshot.yaml": context.config_path,
-        "dataset_provenance_snapshot.yaml": PROJECT_ROOT / "configs" / "dataset_provenance.yaml",
         "requirements_snapshot.txt": PROJECT_ROOT / "requirements.txt",
         "requirements_dev_snapshot.txt": PROJECT_ROOT / "requirements-dev.txt",
         "environment_snapshot.yml": PROJECT_ROOT / "environment.yml",
@@ -732,6 +751,34 @@ def _write_input_snapshots(context: StageContext) -> list[Path]:
                 "snapshot_path": _portable(destination),
                 "sha256": sha256_file(destination),
                 "size_bytes": destination.stat().st_size,
+                "input_kind": "build_environment_or_canonical_config",
+            }
+        )
+    side_inputs = context.manifest.get("side_input_hashes")
+    if not isinstance(side_inputs, Mapping) or not side_inputs:
+        raise ManuscriptBuildError("Manifest has no verified scientific side inputs.")
+    for logical_name, record in sorted(side_inputs.items()):
+        if not isinstance(record, Mapping):
+            raise ManuscriptBuildError(f"Invalid side-input record: {logical_name!r}")
+        raw_source = record.get("path")
+        expected_hash = record.get("sha256")
+        if not isinstance(raw_source, str) or not raw_source or not isinstance(expected_hash, str):
+            raise ManuscriptBuildError(f"Incomplete side-input record: {logical_name!r}")
+        source = (PROJECT_ROOT / raw_source).resolve()
+        if not source.is_file() or sha256_file(source) != expected_hash:
+            raise ManuscriptBuildError(f"Scientific side input changed or is missing: {raw_source}")
+        destination = output / "scientific_side_inputs" / Path(raw_source)
+        destination.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copy2(source, destination)
+        copied.append(destination)
+        rows.append(
+            {
+                "logical_name": str(logical_name),
+                "source_path": raw_source,
+                "snapshot_path": _portable(destination),
+                "sha256": sha256_file(destination),
+                "size_bytes": destination.stat().st_size,
+                "input_kind": "scientific_side_input",
             }
         )
     contract = _write_json(
@@ -742,6 +789,9 @@ def _write_input_snapshots(context: StageContext) -> list[Path]:
             "git_commit": context.manifest.get("git_commit"),
             "source_tree_hash": context.manifest.get("source_tree_hash"),
             "dataset_hashes": context.manifest.get("dataset_hashes"),
+            "actual_input_receipts": context.manifest.get("actual_input_receipts"),
+            "side_input_hashes": context.manifest.get("side_input_hashes"),
+            "scientific_input_hash": context.manifest.get("scientific_input_hash"),
             "code_package_versions": context.manifest.get("code_package_versions"),
             "snapshots": rows,
         },

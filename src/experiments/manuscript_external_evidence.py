@@ -31,6 +31,7 @@ import pandas as pd
 from sklearn.model_selection import StratifiedKFold
 from sklearn.pipeline import Pipeline
 
+from src.data.canonical_loader import CanonicalDataset, load_canonical_dataset
 from src.data.external_adapters import (
     ExternalDataset,
     audit_attribute_columns,
@@ -84,6 +85,7 @@ REPORT_METRICS = (
     "average_precision",
     "ece_confidence",
 )
+_CANONICAL_EXTERNAL_INPUTS_KEY = "_canonical_external_inputs"
 
 
 class ExternalEvidenceError(RuntimeError):
@@ -101,6 +103,16 @@ class ExternalRunSpec:
     expected_config_role: str
     expected_labels: tuple[int, ...]
     policies: tuple[str, ...]
+
+
+@dataclass(frozen=True)
+class CanonicalExternalInput:
+    """Runtime-only binding between verified bytes and an explicit mapping."""
+
+    dataset: ExternalDataset
+    receipt: Mapping[str, Any]
+    schema_mapping_reference: str
+    schema_mapping_path: Path
 
 
 RUN_SPECS: tuple[ExternalRunSpec, ...] = (
@@ -192,6 +204,11 @@ def configured_run_specs(config: Mapping[str, Any]) -> tuple[ExternalRunSpec, ..
                 f"Role drift for {spec.config_dataset_key}: expected {spec.expected_config_role!r}, "
                 f"observed {entry.get('role')!r}."
             )
+        mapping_reference = entry.get("schema_mapping_path")
+        if not isinstance(mapping_reference, str) or not mapping_reference.strip():
+            raise ExternalEvidenceError(
+                f"Canonical dataset {spec.config_dataset_key!r} has no explicit schema_mapping_path."
+            )
         registered = external_allowed_claim(spec.dataset_name, spec.target_kind)
         if registered != spec.role:
             raise ExternalEvidenceError(
@@ -207,6 +224,78 @@ def configured_run_specs(config: Mapping[str, Any]) -> tuple[ExternalRunSpec, ..
         if spec.key in {"ibm_attrition", "employee_turnover"} and "not employee-performance validation" not in configured_claim:
             raise ExternalEvidenceError(f"Related-task claim boundary is missing for {spec.config_dataset_key}.")
     return RUN_SPECS
+
+
+def _resolve_schema_mapping_path(settings: Mapping[str, Any], spec: ExternalRunSpec) -> tuple[str, Path]:
+    datasets = settings.get("datasets")
+    entry = datasets.get(spec.config_dataset_key) if isinstance(datasets, Mapping) else None
+    if not isinstance(entry, Mapping):
+        raise ExternalEvidenceError(f"Missing canonical dataset declaration: {spec.config_dataset_key}")
+    reference = entry.get("schema_mapping_path")
+    if not isinstance(reference, str) or not reference.strip():
+        raise ExternalEvidenceError(
+            f"Canonical dataset {spec.config_dataset_key!r} has no explicit schema_mapping_path."
+        )
+    path = Path(reference)
+    if not path.is_absolute():
+        path = PROJECT_ROOT / path
+    path = path.resolve()
+    if not path.is_file():
+        raise ExternalEvidenceError(
+            f"Declared schema mapping is missing for {spec.config_dataset_key!r}: {reference}"
+        )
+    return Path(reference).as_posix(), path
+
+
+def _bind_canonical_external_inputs(
+    config_path: str | Path,
+    settings: Mapping[str, Any],
+    *,
+    preflight_dir: Path,
+) -> Mapping[str, Any]:
+    """Load all canonical stage inputs through the pinned acquisition contract."""
+
+    preflight_dir.mkdir(parents=True, exist_ok=True)
+    bindings: dict[str, Any] = {
+        "inx_primary": load_canonical_dataset(
+            config_path,
+            "inx_primary",
+            allow_download=True,
+            mismatch_report_path=preflight_dir / "inx_primary_acquisition_comparison.json",
+        )
+    }
+    for spec in RUN_SPECS:
+        reference, mapping_path = _resolve_schema_mapping_path(settings, spec)
+        canonical = load_canonical_dataset(
+            config_path,
+            spec.config_dataset_key,
+            allow_download=True,
+            mismatch_report_path=preflight_dir / f"{spec.config_dataset_key}_acquisition_comparison.json",
+        )
+        adapted = load_external_dataset(
+            spec.dataset_name,
+            target_kind=spec.target_kind,
+            raw_frame=canonical.frame,
+            schema_mapping_path=mapping_path,
+        )
+        bindings[spec.key] = CanonicalExternalInput(
+            dataset=adapted,
+            receipt=dict(canonical.receipt),
+            schema_mapping_reference=reference,
+            schema_mapping_path=mapping_path,
+        )
+    runtime_settings = dict(settings)
+    runtime_settings[_CANONICAL_EXTERNAL_INPUTS_KEY] = bindings
+    return runtime_settings
+
+
+def _runtime_bindings(settings: Mapping[str, Any]) -> Mapping[str, Any] | None:
+    value = settings.get(_CANONICAL_EXTERNAL_INPUTS_KEY)
+    if value is None:
+        return None
+    if not isinstance(value, Mapping):
+        raise ExternalEvidenceError("Canonical external runtime bindings are malformed.")
+    return value
 
 
 def target_mapping_table(
@@ -531,7 +620,18 @@ def _run_dataset_task(
     run_id: str,
     config_hash: str,
 ) -> dict[str, Path]:
-    dataset = load_external_dataset(spec.dataset_name, target_kind=spec.target_kind)
+    bindings = _runtime_bindings(settings)
+    bound_input: CanonicalExternalInput | None = None
+    if bindings is not None:
+        candidate = bindings.get(spec.key)
+        if not isinstance(candidate, CanonicalExternalInput):
+            raise ExternalEvidenceError(f"Canonical runtime input is missing for external task {spec.key!r}.")
+        bound_input = candidate
+        dataset = bound_input.dataset
+    else:
+        # Compatibility path for legacy reports and direct exploratory helpers.
+        # The canonical ``run`` entry point always installs verified bindings.
+        dataset = load_external_dataset(spec.dataset_name, target_kind=spec.target_kind)
     if dataset.task_type != spec.task_type:
         raise ExternalEvidenceError(
             f"Adapter task drift for {spec.key}: expected {spec.task_type}, observed {dataset.task_type}."
@@ -826,8 +926,22 @@ def _run_dataset_task(
                 min_support=min_support,
             )
         )
-    source_path = dataset.config.raw_path
-    schema_path = source_path.parent / "schema_mapping.json"
+    if bound_input is not None:
+        raw_dataset_path = str(bound_input.receipt.get("actual_path", ""))
+        raw_dataset_sha256 = str(bound_input.receipt.get("actual_sha256", ""))
+        if not raw_dataset_path or len(raw_dataset_sha256) != 64:
+            raise ExternalEvidenceError(f"Canonical input receipt is incomplete for {spec.key!r}.")
+        schema_mapping_reference = bound_input.schema_mapping_reference
+        schema_mapping_sha256 = sha256_file(bound_input.schema_mapping_path)
+        canonical_input_receipt: Mapping[str, Any] | None = dict(bound_input.receipt)
+    else:
+        source_path = dataset.config.raw_path
+        schema_path = dataset.config.schema_mapping_path or source_path.parent / "schema_mapping.json"
+        raw_dataset_path = str(source_path)
+        raw_dataset_sha256 = sha256_file(source_path)
+        schema_mapping_reference = str(schema_path)
+        schema_mapping_sha256 = sha256_file(schema_path)
+        canonical_input_receipt = None
     paths["metadata"].write_text(
         json.dumps(
             {
@@ -848,10 +962,11 @@ def _run_dataset_task(
                 "effective_cv_splits": effective_splits,
                 "seed": seed,
                 "policies": list(spec.policies),
-                "raw_dataset_path": str(source_path),
-                "raw_dataset_sha256": sha256_file(source_path),
-                "schema_mapping_path": str(schema_path),
-                "schema_mapping_sha256": sha256_file(schema_path),
+                "raw_dataset_path": raw_dataset_path,
+                "raw_dataset_sha256": raw_dataset_sha256,
+                "schema_mapping_path": schema_mapping_reference,
+                "schema_mapping_sha256": schema_mapping_sha256,
+                "canonical_input_receipt": canonical_input_receipt,
                 "completed_at": _utc_now(),
                 "claim_limitations": [
                     "Research-grade decision support only; no autonomous HR decision use.",
@@ -886,16 +1001,29 @@ def compute_transport_assessment(
     if not isinstance(primary, Mapping):
         raise ExternalEvidenceError("Canonical primary feature policy cannot be resolved for transport gate.")
     excluded = {str(value) for value in primary.get("excluded_features", [])}
-    dataset_declarations = settings.get("datasets", {})
-    inx_declaration = dataset_declarations.get("inx_primary", {}) if isinstance(dataset_declarations, Mapping) else {}
-    inx_path = Path(str(inx_declaration.get("path", "")))
-    if not inx_path.is_absolute():
-        inx_path = PROJECT_ROOT / inx_path
-    if not inx_path.is_file():
-        raise ExternalEvidenceError(f"Canonical INX dataset is missing for transport gate: {inx_path}")
-    inx = _read_csv_with_best_effort(inx_path)
+    bindings = _runtime_bindings(settings)
+    if bindings is not None:
+        inx_input = bindings.get("inx_primary")
+        hr_input = bindings.get("hrdataset_v14")
+        if not isinstance(inx_input, CanonicalDataset):
+            raise ExternalEvidenceError("Canonical INX runtime input is missing for the transport gate.")
+        if not isinstance(hr_input, CanonicalExternalInput):
+            raise ExternalEvidenceError("Canonical HRDataset runtime input is missing for the transport gate.")
+        inx = inx_input.frame
+        hr = hr_input.dataset
+    else:
+        # Compatibility path for the legacy standalone helper.  Canonical runs
+        # always take the verified branch above.
+        dataset_declarations = settings.get("datasets", {})
+        inx_declaration = dataset_declarations.get("inx_primary", {}) if isinstance(dataset_declarations, Mapping) else {}
+        inx_path = Path(str(inx_declaration.get("path", "")))
+        if not inx_path.is_absolute():
+            inx_path = PROJECT_ROOT / inx_path
+        if not inx_path.is_file():
+            raise ExternalEvidenceError(f"Canonical INX dataset is missing for transport gate: {inx_path}")
+        inx = _read_csv_with_best_effort(inx_path)
+        hr = load_external_dataset("hrdataset_v14")
     inx_features = {str(column) for column in inx.columns if column not in excluded}
-    hr = load_external_dataset("hrdataset_v14")
     hr_features = set(build_feature_columns(hr, "department_free"))
     common = sorted(inx_features.intersection(hr_features))
     rows = pd.DataFrame(
@@ -1059,6 +1187,17 @@ def run(
     if output.exists() and not output.is_dir():
         raise ExternalEvidenceError(f"External output path is not a directory: {output}")
     output.mkdir(parents=True, exist_ok=True)
+    settings = _settings(config)
+    runtime_settings = _bind_canonical_external_inputs(
+        config_path,
+        settings,
+        preflight_dir=output / "data_preflight",
+    )
+    if "manuscript_final" in config:
+        runtime_config = dict(config)
+        runtime_config["manuscript_final"] = runtime_settings
+    else:
+        runtime_config = runtime_settings
 
     task_paths: dict[str, dict[str, Path]] = {}
     task_summaries: dict[str, pd.DataFrame] = {}
@@ -1066,7 +1205,7 @@ def run(
         paths = _run_dataset_task(
             spec,
             output_dir=output / spec.key,
-            settings=_settings(config),
+            settings=runtime_settings,
             run_id=run_id,
             config_hash=config_hash,
         )
@@ -1094,7 +1233,7 @@ def run(
         ignore_index=True,
     ).to_csv(outputs["related_binary_task_transfer"], index=False)
 
-    overlap, assessment = compute_transport_assessment(config, run_id=run_id, config_hash=config_hash)
+    overlap, assessment = compute_transport_assessment(runtime_config, run_id=run_id, config_hash=config_hash)
     outputs["transport_feature_overlap"].parent.mkdir(parents=True, exist_ok=True)
     overlap.to_csv(outputs["transport_feature_overlap"], index=False)
     outputs["transport_feasibility"].write_text(json.dumps(assessment, indent=2, sort_keys=True) + "\n", encoding="utf-8")
