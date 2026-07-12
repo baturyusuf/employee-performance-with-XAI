@@ -20,3 +20,12 @@ No file under `reports/manuscript_final/latest` is admitted as final v2 evidence
 ## Claim Freeze
 
 No numeric manuscript claim is frozen. The v2 `manuscript_support/results_source_of_truth.md` and `claim_to_artifact_matrix.csv` must be generated only after the clean release run and approved by the user before manuscript editing.
+
+## v2 Scope Contract — Unit 2A
+
+| Accepted scope | Exact datasets | Planned evidence | Explicitly excluded |
+| --- | --- | --- | --- |
+| Core | INX primary; HRDataset_v14 | shared folds, four-model benchmark, leakage ablation, sigmoid calibration, OOF SHAP, subgroup/proxy diagnostics, HR mapped-target replication, core tables/figures | heuristic search, IBM/Turnover, historical artifacts, LLM, chatbot, agent audits |
+| Supplementary | INX primary; IBM performance/attrition; Employee Turnover | heuristic model-scenario search, restricted-target/related-task robustness, supplementary tables/cards | HR replication, historical artifacts, LLM, chatbot, agent audits |
+
+Both scopes are intentionally `release_ready=false`. No v2 scientific artifact or numerical claim has been admitted. Scoped manifest and cache contracts are implementation evidence, not manuscript results.

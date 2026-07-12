@@ -19,7 +19,10 @@ CONFIG_PATH = Path("configs/manuscript_final.yaml")
 
 def test_canonical_external_roles_are_distinct_and_config_backed() -> None:
     config = load_config(CONFIG_PATH)
-    specs = external.configured_run_specs(config)
+    specs = (
+        *external.configured_run_specs(config, scope="core"),
+        *external.configured_run_specs(config, scope="supplementary"),
+    )
     by_key = {spec.key: spec for spec in specs}
 
     assert by_key["hrdataset_v14"].role == "independent external performance-target replication"
@@ -130,6 +133,8 @@ def test_hr_local_shap_is_fold_matched_to_the_oof_prediction(tmp_path: Path) -> 
     assert local.groupby(["sample_index", "class_label"])["feature"].nunique().min() > 0
     assert set(local["run_id"]) == {"oof-shap-test"}
     assert set(local["config_hash"]) == {"a" * 64}
+    assert "actionability_summary" not in paths
+    assert not (tmp_path / "external" / "hrdataset_v14" / "actionability_summary.csv").exists()
 
 
 def test_stage_writes_expected_versioned_layout_and_identity(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
@@ -183,6 +188,7 @@ def test_stage_writes_expected_versioned_layout_and_identity(tmp_path: Path, mon
     output = tmp_path / "manuscript-run" / "external"
     paths = external.run(
         CONFIG_PATH,
+        scope="core",
         output_dir=output,
         run_id="versioned-test",
         config_hash=config_hash,
@@ -194,6 +200,8 @@ def test_stage_writes_expected_versioned_layout_and_identity(tmp_path: Path, mon
     assert set(roles["run_id"]) == {"versioned-test"}
     assert set(roles["config_hash"]) == {config_hash}
     metadata = json.loads(paths["metadata"].read_text(encoding="utf-8"))
+    assert metadata["package_scope"] == "core"
+    assert metadata["task_keys"] == ["hrdataset_v14"]
+    assert metadata["canonical_dataset_keys_consumed"] == ["inx_primary", "hrdataset_v14"]
     assert metadata["paid_api_calls"] == 0
     assert metadata["locked_inx_model_transported"] is False
-

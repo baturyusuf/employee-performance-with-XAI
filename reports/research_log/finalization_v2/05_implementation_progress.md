@@ -108,6 +108,59 @@ Unit 1B production edits have not started at this checkpoint.
 
 V2-001 and V2-002 are recorded as implementation-complete but remain unresolved until a clean, cache-disabled full v2 build and final artifact validation pass. V2-014 remains in progress because raw-data Git tracking and sanitized publication export are not yet implemented.
 
+Checkpoint: commit `5c8b0cd215153befd52f39bcf12e0d582d9b1648` (`fix(provenance): bind manifests and caches to scientific inputs`) records the complete tested Unit 1B implementation. The first commit attempt was blocked by the staged whitespace gate; the corrected attempt passed. No push was performed.
+
+## Unit 2A — Core/supplementary orchestration isolation (planned)
+
+Problem: the canonical stage graph still mixes core XAI evidence with counterfactual, IBM/turnover, LLM and chatbot stages. A core build can therefore import or package out-of-scope modules and cannot demonstrate an offline, no-LLM evidence boundary.
+
+Root cause: one global `STAGE_ORDER`, one external stage combining HRDataset and related-task evidence, and one final claim/package generator were inherited from the broader v1 manuscript scope.
+
+Intended files (subject to read-only dependency audit before edits):
+
+- `configs/manuscript_final.yaml`
+- `src/experiments/build_manuscript_evidence.py`
+- `src/experiments/manuscript_external_evidence.py` or a narrow core/supplementary wrapper reusing it
+- manifest/build-scope validation in `src/governance/manuscript_contract.py` only if required
+- core/supplementary contract tests, including no-LLM/chatbot/API and scoped dataset-input assertions
+- finalization logs
+
+Acceptance criteria:
+
+- core and supplementary stage graphs are explicit and machine-readable;
+- core contains only provenance/preflight, shared folds/model evidence, policy ablation, sigmoid calibration, XGBoost SHAP, subgroup/proxy diagnostics, HRDataset replication and core tables/figures/claims;
+- core imports/executes/packages no LLM, chatbot, counterfactual, IBM attrition/performance or Turnover stage;
+- supplementary keeps heuristic counterfactual and secondary/related-task evidence clearly separated;
+- no paid API path is reachable from either accepted build;
+- scoped manifests bind exactly the datasets/side inputs used by their build scope;
+- historical v1 outputs are never cache inputs;
+- focused and full regression gates pass;
+- no scientific result is generated until the scope contract tests pass.
+
+### Unit 2A Result — Passed implementation checkpoint
+
+- Added immutable `core` and `supplementary` evidence-scope contracts to the canonical config.
+- Core dataset inputs are exactly INX and HRDataset_v14; supplementary inputs are exactly INX, IBM performance/attrition and Employee Turnover. Side-input mappings are scoped the same way.
+- Manifest schema v3 records `evidence_scope`, the exact scope contract and its hash. Dataset receipts, side-input hashes, snapshots, stage cache and aggregate scientific identity are scope-specific; cross-scope reuse fails.
+- Replaced the v1 monolithic accepted graph with explicit planned core and supplementary stage registries. No accepted registry contains an LLM, chatbot, agent or paid-API stage.
+- Removed the LLM/chatbot sections, seeds and package requirements from the canonical core config. Their legacy code remains outside accepted entrypoints.
+- Added separate `build_core_paper_evidence` and `build_supplementary_evidence` entrypoints.
+- Both entrypoints currently fail before creating an output directory because their honest `release_ready` gates are false until all declared scientific stages are rebuilt. This prevents partial or stale packages from being labelled complete.
+- Split external evidence without duplicating the task executor: core runs HRDataset only and its transport-feasibility gate; supplementary runs IBM performance, IBM attrition and Turnover only. The prior zero-denominator placeholder actionability artifact was removed.
+- Dataset-card generation now accepts and validates exact scope dataset keys.
+- Core claim/package path contracts reject legacy, counterfactual, secondary-external, LLM, chatbot, agent-audit and historical output prefixes.
+- The old v1 Figures 1-4 generator is explicitly legacy and fails before writing when invoked with the core config. No replacement scientific figure was fabricated.
+- Real in-memory manifest validation passed for both scopes. Core bound two datasets/five side inputs; supplementary bound four logical datasets/six side inputs.
+- Focused Unit 2A suite: 50 passed, 2 historical-latest skips.
+- Full pytest: 250 passed, 2 skipped, plus 4 subtests.
+- Full unittest: 162 passed, 2 skipped.
+- Compileall, diff hygiene and manuscript no-change checks passed.
+- No scientific experiment, dataset download, network/API call or manuscript edit occurred.
+
+The first full pytest run exposed one legacy figure test that still treated the removed LLM config as canonical. The legacy generator was changed to preflight and fail before writing, and the test now verifies that boundary. The subsequent full suite passed.
+
+Unit 2A deliberately does not set either scope `release_ready=true`: shared folds, nested benchmark/tuning, corrected calibration/uncertainty, new core figures/tables and supplementary heuristic-search freeze remain unfinished.
+
 ### Unit 1A Result — Passed
 
 - Added a pinned acquisition manifest for four physical datasets and five logical tasks.

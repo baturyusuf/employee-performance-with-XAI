@@ -66,9 +66,23 @@ def test_explicit_mapping_must_declare_the_requested_dataset_identity(tmp_path: 
         load_external_config("requested_dataset", schema_mapping_path=mapping)
 
 
-def test_canonical_stage_binds_every_external_task_through_verified_loader(
+@pytest.mark.parametrize(
+    ("scope", "expected_loader_keys", "expected_task_keys"),
+    [
+        ("core", ["inx_primary", "hrdataset_v14"], ["hrdataset_v14"]),
+        (
+            "supplementary",
+            ["ibm_hr_analytics", "ibm_hr_analytics_attrition", "employee_turnover"],
+            ["ibm_performance", "ibm_attrition", "employee_turnover"],
+        ),
+    ],
+)
+def test_canonical_stage_binds_only_the_selected_scope_through_verified_loader(
     tmp_path: Path,
     monkeypatch: pytest.MonkeyPatch,
+    scope: str,
+    expected_loader_keys: list[str],
+    expected_task_keys: list[str],
 ) -> None:
     config = copy.deepcopy(load_config(CONFIG_PATH))
     settings = config["manuscript_final"]
@@ -82,6 +96,7 @@ def test_canonical_stage_binds_every_external_task_through_verified_loader(
 
     loader_calls: list[tuple[str, bool]] = []
     adapter_calls: list[tuple[str, str, Path]] = []
+    transport_calls: list[str] = []
 
     def fake_loader(config_path, dataset_key, *, allow_download, mismatch_report_path):
         loader_calls.append((dataset_key, allow_download))
@@ -122,6 +137,7 @@ def test_canonical_stage_binds_every_external_task_through_verified_loader(
         return {"policy_summary": path}
 
     def fake_transport(config, *, run_id, config_hash):
+        transport_calls.append(run_id)
         runtime = external._settings(config)[external._CANONICAL_EXTERNAL_INPUTS_KEY]
         assert isinstance(runtime["inx_primary"], CanonicalDataset)
         assert isinstance(runtime["hrdataset_v14"], external.CanonicalExternalInput)
@@ -154,17 +170,18 @@ def test_canonical_stage_binds_every_external_task_through_verified_loader(
 
     external.run(
         config_path,
+        scope=scope,
         output_dir=tmp_path / "external",
         run_id="bound-input-test",
         config_hash=config_hash,
     )
 
-    assert loader_calls == [
-        ("inx_primary", True),
-        ("hrdataset_v14", True),
-        ("ibm_hr_analytics", True),
-        ("ibm_hr_analytics_attrition", True),
-        ("employee_turnover", True),
-    ]
-    assert len(adapter_calls) == len(external.RUN_SPECS)
+    assert loader_calls == [(key, True) for key in expected_loader_keys]
+    assert [
+        spec.key
+        for dataset_name, target_kind, _ in adapter_calls
+        for spec in external.RUN_SPECS
+        if spec.dataset_name == dataset_name and spec.target_kind == target_kind
+    ] == expected_task_keys
     assert all(path.is_file() for _, _, path in adapter_calls)
+    assert transport_calls == (["bound-input-test"] if scope == "core" else [])

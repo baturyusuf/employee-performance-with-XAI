@@ -55,10 +55,17 @@ def _project_fixture(tmp_path: Path) -> tuple[Path, Path, Path, dict[str, str]]:
                         "delimiter": ",",
                         "encoding": "utf-8",
                         "target_profiles": {
-                            "performance": {
+                            key: {
                                 "raw_target": "PerformanceRating",
                                 "expected_distribution": {"2": 1, "3": 1, "4": 1},
                             }
+                            for key in (
+                                "inx_primary",
+                                "hrdataset_v14",
+                                "ibm_hr_analytics",
+                                "ibm_hr_analytics_attrition",
+                                "employee_turnover",
+                            )
                         },
                         "acquisition_method": "user_provided_local_file",
                         "approved_download_url": None,
@@ -66,26 +73,33 @@ def _project_fixture(tmp_path: Path) -> tuple[Path, Path, Path, dict[str, str]]:
                     }
                 },
                 "logical_bindings": {
-                    "inx_primary": {
+                    key: {
                         "physical_dataset": "sample_physical",
-                        "target_profile": "performance",
+                        "target_profile": key,
                     }
+                    for key in (
+                        "inx_primary",
+                        "hrdataset_v14",
+                        "ibm_hr_analytics",
+                        "ibm_hr_analytics_attrition",
+                        "employee_turnover",
+                    )
                 },
             }
         },
     )
 
     side_paths = {
-        "data_acquisition_manifest": "configs/data_acquisition.yaml",
+        "data_acquisition_contract": "configs/data_acquisition.yaml",
         "dataset_provenance": "data/contracts/dataset_provenance.yaml",
         "feature_taxonomy": "data/contracts/feature_taxonomy.yaml",
-        "external_hr_schema_mapping": "data/contracts/hr_schema_mapping.json",
-        "baseline_search_space": "data/contracts/baseline_search_space.yaml",
-        "metric_task_schema": "data/contracts/metric_task_schema.yaml",
-        "figure_specification": "data/contracts/figure_specification.yaml",
+        "model_search_space": "data/contracts/model_search_space.yaml",
+        "external_hrdataset_v14_schema_mapping": "data/contracts/hr_schema_mapping.json",
+        "external_ibm_hr_analytics_schema_mapping": "data/contracts/ibm_schema_mapping.json",
+        "external_employee_turnover_schema_mapping": "data/contracts/turnover_schema_mapping.json",
     }
     for logical_name, relative_path in side_paths.items():
-        if logical_name == "data_acquisition_manifest":
+        if logical_name == "data_acquisition_contract":
             continue
         _write_json(
             tmp_path / relative_path,
@@ -94,14 +108,52 @@ def _project_fixture(tmp_path: Path) -> tuple[Path, Path, Path, dict[str, str]]:
 
     config = copy.deepcopy(load_manuscript_config())
     settings = config["manuscript_final"]
-    settings["datasets"] = {
-        "inx_primary": {
-            **settings["datasets"]["inx_primary"],
-            "path": "data/raw/sample.csv",
-        }
-    }
+    for definition in settings["datasets"].values():
+        definition["path"] = "data/raw/sample.csv"
+    settings["datasets"]["hrdataset_v14"]["schema_mapping_path"] = side_paths[
+        "external_hrdataset_v14_schema_mapping"
+    ]
+    settings["datasets"]["ibm_hr_analytics"]["schema_mapping_path"] = side_paths[
+        "external_ibm_hr_analytics_schema_mapping"
+    ]
+    settings["datasets"]["ibm_hr_analytics_attrition"]["schema_mapping_path"] = side_paths[
+        "external_ibm_hr_analytics_schema_mapping"
+    ]
+    settings["datasets"]["employee_turnover"]["schema_mapping_path"] = side_paths[
+        "external_employee_turnover_schema_mapping"
+    ]
     settings["provenance"]["data_acquisition_manifest"] = "configs/data_acquisition.yaml"
     settings["provenance"]["scientific_side_inputs"] = side_paths
+    settings["evidence_scopes"] = {
+        "core": {
+            "dataset_keys": ["inx_primary", "hrdataset_v14"],
+            "side_input_keys": [
+                "data_acquisition_contract",
+                "dataset_provenance",
+                "feature_taxonomy",
+                "model_search_space",
+                "external_hrdataset_v14_schema_mapping",
+            ],
+            "stages": ["core_fixture"],
+        },
+        "supplementary": {
+            "dataset_keys": [
+                "inx_primary",
+                "ibm_hr_analytics",
+                "ibm_hr_analytics_attrition",
+                "employee_turnover",
+            ],
+            "side_input_keys": [
+                "data_acquisition_contract",
+                "dataset_provenance",
+                "feature_taxonomy",
+                "model_search_space",
+                "external_ibm_hr_analytics_schema_mapping",
+                "external_employee_turnover_schema_mapping",
+            ],
+            "stages": ["supplementary_fixture"],
+        },
+    }
     config_path = _write_json(tmp_path / "configs" / "manuscript_final.yaml", config)
     return config_path, acquisition_path, dataset, side_paths
 
@@ -117,6 +169,7 @@ def test_manifest_actual_input_receipt_matches_loader_consumption(tmp_path: Path
     )
     manifest = create_run_manifest(
         config_path,
+        evidence_scope="core",
         project_root=tmp_path,
         run_id="unit_1b_actual_receipt",
     )
@@ -141,11 +194,17 @@ def test_manifest_actual_input_receipt_matches_loader_consumption(tmp_path: Path
 def test_every_declared_side_input_is_hashed_with_portable_identity(tmp_path: Path) -> None:
     config_path, _, _, declared = _project_fixture(tmp_path)
 
-    manifest = create_run_manifest(config_path, project_root=tmp_path, run_id="unit_1b_sides")
+    manifest = create_run_manifest(
+        config_path,
+        evidence_scope="core",
+        project_root=tmp_path,
+        run_id="unit_1b_sides",
+    )
     observed = manifest["side_input_hashes"]
 
-    assert set(observed) == set(declared)
-    for logical_name, relative_path in declared.items():
+    assert set(observed) == set(manifest["scope_contract"]["side_input_keys"])
+    for logical_name in observed:
+        relative_path = declared[logical_name]
         source = tmp_path / relative_path
         assert observed[logical_name] == {
             "path": Path(relative_path).as_posix(),
@@ -157,11 +216,21 @@ def test_every_declared_side_input_is_hashed_with_portable_identity(tmp_path: Pa
 
 def test_side_input_change_alone_changes_aggregate_scientific_identity(tmp_path: Path) -> None:
     config_path, _, _, declared = _project_fixture(tmp_path)
-    first = create_run_manifest(config_path, project_root=tmp_path, run_id="unit_1b_before")
+    first = create_run_manifest(
+        config_path,
+        evidence_scope="core",
+        project_root=tmp_path,
+        run_id="unit_1b_before",
+    )
 
     changed_side = tmp_path / declared["feature_taxonomy"]
     changed_side.write_text('{"schema_version": 2, "changed": true}\n', encoding="utf-8")
-    second = create_run_manifest(config_path, project_root=tmp_path, run_id="unit_1b_after")
+    second = create_run_manifest(
+        config_path,
+        evidence_scope="core",
+        project_root=tmp_path,
+        run_id="unit_1b_after",
+    )
 
     assert second["config_hash"] == first["config_hash"]
     assert second["source_tree_hash"] == first["source_tree_hash"]
@@ -180,8 +249,13 @@ def test_manifest_validation_fails_when_declared_side_input_drifts(
     failure_mode: str,
 ) -> None:
     config_path, _, _, declared = _project_fixture(tmp_path)
-    manifest = create_run_manifest(config_path, project_root=tmp_path, run_id="unit_1b_drift")
-    side_input = tmp_path / declared["metric_task_schema"]
+    manifest = create_run_manifest(
+        config_path,
+        evidence_scope="core",
+        project_root=tmp_path,
+        run_id="unit_1b_drift",
+    )
+    side_input = tmp_path / declared["dataset_provenance"]
     if failure_mode == "missing":
         side_input.unlink()
     else:
@@ -193,7 +267,12 @@ def test_manifest_validation_fails_when_declared_side_input_drifts(
 
 def test_manifest_validation_rejects_tampered_actual_receipt(tmp_path: Path) -> None:
     config_path, _, _, _ = _project_fixture(tmp_path)
-    manifest = create_run_manifest(config_path, project_root=tmp_path, run_id="unit_1b_receipt_tamper")
+    manifest = create_run_manifest(
+        config_path,
+        evidence_scope="core",
+        project_root=tmp_path,
+        run_id="unit_1b_receipt_tamper",
+    )
     manifest["actual_input_receipts"]["inx_primary"]["actual_sha256"] = "0" * 64
 
     with pytest.raises(RunManifestError, match="actual input"):
@@ -209,6 +288,7 @@ def test_run_input_snapshots_preserve_every_side_input_and_reject_source_drift(
         (tmp_path / required).write_text(f"# fixture {required}\n", encoding="utf-8")
     manifest = create_run_manifest(
         config_path,
+        evidence_scope="core",
         project_root=tmp_path,
         run_id="unit_1b_snapshots",
     )
@@ -232,7 +312,7 @@ def test_run_input_snapshots_preserve_every_side_input_and_reject_source_drift(
         for row in contract["snapshots"]
         if row["input_kind"] == "scientific_side_input"
     }
-    assert set(side_rows) == set(declared)
+    assert set(side_rows) == set(manifest["scope_contract"]["side_input_keys"])
     assert contract["actual_input_receipts"] == manifest["actual_input_receipts"]
     assert contract["side_input_hashes"] == manifest["side_input_hashes"]
     assert contract["scientific_input_hash"] == manifest["scientific_input_hash"]

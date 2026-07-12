@@ -25,6 +25,7 @@ from src.governance.manuscript_contract import (
     RunManifestError,
     canonical_config_hash,
     create_run_manifest,
+    evidence_scope_contract,
     finalize_run_manifest,
     load_manuscript_config,
     manuscript_settings,
@@ -41,17 +42,37 @@ from src.governance.manuscript_contract import (
 from src.utils.config_loader import PROJECT_ROOT
 
 
-STAGE_ORDER: tuple[str, ...] = (
-    "policy",
-    "calibration",
-    "shap",
-    "counterfactual",
-    "external",
-    "fairness",
-    "provenance",
-    "llm",
-    "chatbot",
-    "figures",
+CORE_STAGE_ORDER: tuple[str, ...] = (
+    "shared_folds",
+    "model_benchmarks",
+    "policy_ablation",
+    "sigmoid_calibration",
+    "oof_shap",
+    "subgroup_proxy",
+    "external_replication",
+    "dataset_cards",
+    "core_tables",
+    "core_figures",
+)
+SUPPLEMENTARY_STAGE_ORDER: tuple[str, ...] = (
+    "heuristic_counterfactual",
+    "external_robustness",
+    "dataset_cards",
+    "supplementary_tables",
+)
+CANONICAL_STAGE_ORDERS: Mapping[str, tuple[str, ...]] = {
+    "core": CORE_STAGE_ORDER,
+    "supplementary": SUPPLEMENTARY_STAGE_ORDER,
+}
+FORBIDDEN_CANONICAL_STAGE_TOKENS = frozenset({"llm", "chatbot", "agent"})
+_SCOPE_ROOT_ARTIFACTS = frozenset(
+    {
+        "canonical_claim_boundaries.md",
+        "package_status.json",
+        "final_evidence_manifest.csv",
+        "final_evidence_manifest.json",
+        "run_manifest.json",
+    }
 )
 
 PRIMARY_ARTIFACT_EXTENSIONS = frozenset({".csv", ".json", ".jsonl", ".md"})
@@ -59,6 +80,54 @@ PRIMARY_ARTIFACT_EXTENSIONS = frozenset({".csv", ".json", ".jsonl", ".md"})
 
 class ManuscriptBuildError(RuntimeError):
     """Raised when a canonical stage or final package fails its contract."""
+
+
+def validate_scope_release_ready(scopes: Mapping[str, Any], scope_name: str) -> Mapping[str, Any]:
+    """Reject an unknown or technically incomplete canonical evidence scope."""
+
+    if scope_name not in CANONICAL_STAGE_ORDERS:
+        raise ManuscriptBuildError(f"Unknown canonical evidence scope: {scope_name!r}.")
+    definition = scopes.get(scope_name)
+    if not isinstance(definition, Mapping):
+        raise ManuscriptBuildError(f"Evidence scope {scope_name!r} is not declared by the config.")
+    configured_stages = tuple(str(value) for value in definition.get("stages", ()))
+    if configured_stages != CANONICAL_STAGE_ORDERS[scope_name]:
+        raise ManuscriptBuildError(
+            f"Evidence scope {scope_name!r} stage contract differs from the canonical registry."
+        )
+    if definition.get("release_ready") is not True:
+        reason = str(definition.get("blocking_reason", "technical freeze is incomplete"))
+        raise ManuscriptBuildError(
+            f"Evidence scope {scope_name!r} is not release-ready: {reason}"
+        )
+    missing_runners = sorted(set(configured_stages).difference(STAGE_RUNNERS))
+    if missing_runners:
+        raise ManuscriptBuildError(
+            f"Evidence scope {scope_name!r} has no registered runner for stages: {missing_runners}."
+        )
+    return definition
+
+
+def validate_scope_artifact_paths(scope_name: str, relative_paths: Iterable[str]) -> None:
+    """Fail closed when a package path lies outside its immutable stage allowlist."""
+
+    if scope_name not in CANONICAL_STAGE_ORDERS:
+        raise ManuscriptBuildError(f"Unknown artifact evidence scope: {scope_name!r}.")
+    allowed_prefixes = tuple(f"{stage}/" for stage in CANONICAL_STAGE_ORDERS[scope_name]) + (
+        "run_inputs/",
+    )
+    errors: list[str] = []
+    for raw_path in relative_paths:
+        normalized = str(raw_path).replace("\\", "/").lstrip("./")
+        path = Path(normalized)
+        if not normalized or path.is_absolute() or ".." in path.parts:
+            errors.append(f"invalid scope path: {raw_path!r}")
+            continue
+        if normalized in _SCOPE_ROOT_ARTIFACTS or normalized.startswith(allowed_prefixes):
+            continue
+        errors.append(f"forbidden or out-of-scope path: {normalized}")
+    if errors:
+        raise ManuscriptBuildError("Artifact scope validation failed:\n- " + "\n- ".join(errors))
 
 
 @dataclass(frozen=True)
@@ -70,6 +139,8 @@ class StageContext:
     run_id: str
     config_hash: str
     manifest: MutableMapping[str, Any]
+    evidence_scope: str = "core"
+    scope_contract: Mapping[str, Any] | None = None
 
 
 def _write_json(path: Path, payload: Mapping[str, Any]) -> Path:
@@ -130,6 +201,10 @@ def _stage_cache_valid(context: StageContext, stage: str) -> bool:
         return False
     if payload.get("run_id") != context.run_id or payload.get("config_hash") != context.config_hash:
         return False
+    if payload.get("evidence_scope") != context.manifest.get("evidence_scope"):
+        return False
+    if payload.get("scope_contract_hash") != context.manifest.get("scope_contract_hash"):
+        return False
     if payload.get("git_commit") != context.manifest.get("git_commit"):
         return False
     if payload.get("source_tree_hash") != context.manifest.get("source_tree_hash"):
@@ -185,6 +260,8 @@ def _write_stage_metadata(
             "status": "complete",
             "run_id": context.run_id,
             "config_hash": context.config_hash,
+            "evidence_scope": context.manifest.get("evidence_scope"),
+            "scope_contract_hash": context.manifest.get("scope_contract_hash"),
             "git_commit": context.manifest.get("git_commit"),
             "source_tree_hash": context.manifest.get("source_tree_hash"),
             "dataset_hashes": context.manifest.get("dataset_hashes"),
@@ -219,7 +296,7 @@ def _run_policy(context: StageContext) -> Mapping[str, Any]:
 
     return run(
         context.config_path,
-        output_dir=context.run_dir / "policy",
+        output_dir=context.run_dir / "policy_ablation",
         run_id=context.run_id,
         config_hash=context.config_hash,
     )
@@ -230,7 +307,7 @@ def _run_calibration(context: StageContext) -> Mapping[str, Any]:
 
     return run(
         context.config_path,
-        output_dir=context.run_dir / "calibration",
+        output_dir=context.run_dir / "sigmoid_calibration",
         run_id=context.run_id,
         config_hash=context.config_hash,
     )
@@ -241,7 +318,7 @@ def _run_shap(context: StageContext) -> Mapping[str, Any]:
 
     return run(
         context.config_path,
-        output_dir=context.run_dir / "shap",
+        output_dir=context.run_dir / "oof_shap",
         run_id=context.run_id,
         config_hash=context.config_hash,
     )
@@ -257,21 +334,34 @@ def _run_counterfactual(context: StageContext) -> Mapping[str, Any]:
         )
     return run(
         context.config_path,
-        output_dir=context.run_dir / "counterfactual",
+        output_dir=context.run_dir / "heuristic_counterfactual",
         run_id=context.run_id,
         config_hash=context.config_hash,
         max_cases=None,
     )
 
 
-def _run_external(context: StageContext) -> Mapping[str, Any]:
+def _run_external_replication(context: StageContext) -> Mapping[str, Any]:
     from src.experiments.manuscript_external_evidence import run
 
     return run(
         context.config_path,
-        output_dir=context.run_dir / "external",
+        output_dir=context.run_dir / "external_replication",
         run_id=context.run_id,
         config_hash=context.config_hash,
+        scope="core",
+    )
+
+
+def _run_external_robustness(context: StageContext) -> Mapping[str, Any]:
+    from src.experiments.manuscript_external_evidence import run
+
+    return run(
+        context.config_path,
+        output_dir=context.run_dir / "external_robustness",
+        run_id=context.run_id,
+        config_hash=context.config_hash,
+        scope="supplementary",
     )
 
 
@@ -280,7 +370,7 @@ def _run_fairness(context: StageContext) -> Mapping[str, Any]:
 
     return run(
         context.config_path,
-        output_dir=context.run_dir / "fairness",
+        output_dir=context.run_dir / "subgroup_proxy",
         run_id=context.run_id,
         config_hash=context.config_hash,
     )
@@ -292,137 +382,24 @@ def _run_provenance(context: StageContext) -> Mapping[str, Any]:
     return run(
         context.config_path,
         PROJECT_ROOT / "configs" / "dataset_provenance.yaml",
-        output_dir=context.run_dir / "provenance",
+        output_dir=context.run_dir / "dataset_cards",
         run_id=context.run_id,
         config_hash=context.config_hash,
+        dataset_keys=tuple(
+            str(value) for value in (context.scope_contract or {}).get("dataset_keys", ())
+        ),
     )
-
-
-def _run_llm_preflight(context: StageContext) -> Mapping[str, Any]:
-    from src.agents.manuscript_deterministic_audit import run as run_agent_audit
-    from src.llm.manuscript_case_evidence import run
-
-    outputs = dict(run(
-        context.config_path,
-        output_dir=context.run_dir / "llm",
-        run_id=context.run_id,
-        config_hash=context.config_hash,
-        inx_shap_dir=context.run_dir / "shap",
-        calibration_dir=context.run_dir / "calibration",
-        counterfactual_dir=context.run_dir / "counterfactual",
-        fairness_dir=context.run_dir / "fairness",
-        policy_dir=context.run_dir / "policy",
-        hrdataset_dir=context.run_dir / "external" / "hrdataset_v14",
-        require_complete=True,
-    ))
-    audit_outputs = run_agent_audit(
-        outputs["complete_case_evidence"],
-        output_dir=context.run_dir / "llm" / "agent_audits",
-        run_id=context.run_id,
-        config_hash=context.config_hash,
-    )
-    outputs.update({f"agent_{key}": value for key, value in audit_outputs.items()})
-    return outputs
-
-
-def _run_chatbot(context: StageContext) -> Mapping[str, Any]:
-    from src.chatbot.run_guardrail_eval import run
-
-    outputs = run(
-        "configs/chatbot_guardrail_eval.yaml",
-        output_dir_override=context.run_dir / "chatbot",
-        run_id_override=context.run_id,
-        config_hash=context.config_hash,
-        register_run_override=False,
-    )
-    category = outputs.get("category_summary")
-    if isinstance(category, Path) and category.is_file():
-        expected = context.run_dir / "chatbot" / "category_summary.csv"
-        if category.resolve() != expected.resolve():
-            shutil.copy2(category, expected)
-            outputs = dict(outputs)
-            outputs["readiness_category_summary"] = expected
-    return outputs
-
-
-def _copy_figure_sources(context: StageContext, figure_dir: Path) -> list[Path]:
-    sources = figure_dir / "source_data"
-    sources.mkdir(parents=True, exist_ok=True)
-    mappings = {
-        context.run_dir / "calibration" / "figure_5_reliability_source.csv": sources / "figure_5_reliability_source.csv",
-        context.run_dir / "calibration" / "figure_5_metric_source.csv": sources / "figure_5_metric_source.csv",
-        context.run_dir / "shap" / "global_grouped_shap_importance.csv": sources / "figure_6_global_grouped_shap_source.csv",
-        context.run_dir / "shap" / "representative_cases.csv": sources / "figure_7_representative_case_source.csv",
-        context.run_dir / "shap" / "local_grouped_shap_values.csv": sources / "figure_7_all_local_grouped_shap_source.csv",
-        context.run_dir / "shap" / "shap_oof_predictions.csv": sources / "figure_7_oof_prediction_source.csv",
-    }
-    copied: list[Path] = []
-    for source, destination in mappings.items():
-        if not source.is_file():
-            raise ManuscriptBuildError(f"Required figure source is missing: {source}")
-        shutil.copy2(source, destination)
-        copied.append(destination)
-    return copied
-
-
-def _run_figures(context: StageContext) -> Mapping[str, Any]:
-    from src.governance.manuscript_figures import (
-        FIGURE_STEMS,
-        generate_architecture_figures,
-        validate_all_seven_figures,
-    )
-
-    output = context.run_dir / "figures"
-    output.mkdir(parents=True, exist_ok=True)
-    paths: Dict[str, Path] = dict(
-        generate_architecture_figures(
-            context.config_path,
-            output_dir=output,
-            run_dir=context.run_dir,
-            run_id=context.run_id,
-            config_hash=context.config_hash,
-        )
-    )
-    scientific_sources = {
-        5: context.run_dir / "calibration" / f"{FIGURE_STEMS[5]}",
-        6: context.run_dir / "shap" / f"{FIGURE_STEMS[6]}",
-        7: context.run_dir / "shap" / f"{FIGURE_STEMS[7]}",
-    }
-    for number, source_stem in scientific_sources.items():
-        for suffix in (".png", ".svg"):
-            source = source_stem.with_suffix(suffix)
-            destination = output / f"{FIGURE_STEMS[number]}{suffix}"
-            if not source.is_file() or source.stat().st_size == 0:
-                raise ManuscriptBuildError(f"Scientific Figure {number} is missing: {source}")
-            shutil.copy2(source, destination)
-            paths[f"figure_{number}_{suffix.lstrip('.')}"] = destination
-    for path in _copy_figure_sources(context, output):
-        paths[f"source_{path.stem}"] = path
-    validation = validate_all_seven_figures(output)
-    validation_path = _write_json(
-        output / "figure_package_validation.json",
-        {
-            **validation,
-            "run_id": context.run_id,
-            "config_hash": context.config_hash,
-            "forbidden_features": list(primary_excluded_features(context.config)),
-        },
-    )
-    paths["validation"] = validation_path
-    return paths
 
 
 STAGE_RUNNERS: Mapping[str, Callable[[StageContext], Mapping[str, Any]]] = {
-    "policy": _run_policy,
-    "calibration": _run_calibration,
-    "shap": _run_shap,
-    "counterfactual": _run_counterfactual,
-    "external": _run_external,
-    "fairness": _run_fairness,
-    "provenance": _run_provenance,
-    "llm": _run_llm_preflight,
-    "chatbot": _run_chatbot,
-    "figures": _run_figures,
+    "policy_ablation": _run_policy,
+    "sigmoid_calibration": _run_calibration,
+    "oof_shap": _run_shap,
+    "subgroup_proxy": _run_fairness,
+    "external_replication": _run_external_replication,
+    "heuristic_counterfactual": _run_counterfactual,
+    "external_robustness": _run_external_robustness,
+    "dataset_cards": _run_provenance,
 }
 
 
@@ -479,6 +456,13 @@ def _register_stage_files(
         if isinstance(record, Mapping)
     }
     for path in sorted(set(file.resolve() for file in files), key=lambda item: str(item)):
+        try:
+            scope_relative = path.relative_to(context.run_dir.resolve()).as_posix()
+        except ValueError as exc:
+            raise ManuscriptBuildError(
+                f"Stage artifact lies outside the {context.evidence_scope!r} run directory: {path}"
+            ) from exc
+        validate_scope_artifact_paths(context.evidence_scope, [scope_relative])
         portable = _portable(path)
         if portable in already:
             continue
@@ -499,6 +483,8 @@ def build_final_evidence_manifest(
     *,
     run_id: str,
     config_hash: str,
+    evidence_scope: str,
+    scope_contract_hash: str,
     exclude_names: Iterable[str] = ("run_manifest.json", "final_evidence_manifest.csv", "final_evidence_manifest.json"),
 ) -> Dict[str, Path]:
     """Create independent CSV/JSON hashes for every final package artifact."""
@@ -506,6 +492,11 @@ def build_final_evidence_manifest(
     root = Path(run_dir).resolve()
     rows: list[dict[str, Any]] = []
     excluded = set(exclude_names)
+    relative_paths = [
+        path.relative_to(root).as_posix()
+        for path in _all_files(root, exclude_names=excluded)
+    ]
+    validate_scope_artifact_paths(evidence_scope, relative_paths)
     for path in _all_files(root, exclude_names=excluded):
         relative = path.relative_to(root).as_posix()
         stage = relative.split("/", 1)[0]
@@ -513,6 +504,8 @@ def build_final_evidence_manifest(
             {
                 "run_id": run_id,
                 "config_hash": config_hash,
+                "evidence_scope": evidence_scope,
+                "scope_contract_hash": scope_contract_hash,
                 "stage": stage,
                 "path": relative,
                 "file_type": _artifact_type(path),
@@ -532,6 +525,8 @@ def build_final_evidence_manifest(
         {
             "run_id": run_id,
             "config_hash": config_hash,
+            "evidence_scope": evidence_scope,
+            "scope_contract_hash": scope_contract_hash,
             "hash_algorithm": "sha256",
             "n_files": len(rows),
             "files": rows,
@@ -546,6 +541,8 @@ def validate_final_evidence_manifest(
     run_dir: str | Path,
     expected_run_id: str,
     expected_config_hash: str,
+    expected_evidence_scope: str,
+    expected_scope_contract_hash: str,
 ) -> dict[str, Any]:
     path = Path(manifest_path)
     root = Path(run_dir).resolve()
@@ -555,6 +552,10 @@ def validate_final_evidence_manifest(
         errors.append("run_id mismatch")
     if payload.get("config_hash") != expected_config_hash:
         errors.append("config_hash mismatch")
+    if payload.get("evidence_scope") != expected_evidence_scope:
+        errors.append("evidence_scope mismatch")
+    if payload.get("scope_contract_hash") != expected_scope_contract_hash:
+        errors.append("scope_contract_hash mismatch")
     records = payload.get("files")
     if not isinstance(records, list) or not records:
         errors.append("files must be a non-empty list")
@@ -583,6 +584,14 @@ def validate_final_evidence_manifest(
             errors.append(f"size mismatch: {relative}")
         if record.get("run_id") != expected_run_id or record.get("config_hash") != expected_config_hash:
             errors.append(f"identity mismatch: {relative}")
+        if record.get("evidence_scope") != expected_evidence_scope:
+            errors.append(f"scope mismatch: {relative}")
+        if record.get("scope_contract_hash") != expected_scope_contract_hash:
+            errors.append(f"scope-contract mismatch: {relative}")
+    try:
+        validate_scope_artifact_paths(expected_evidence_scope, seen)
+    except ManuscriptBuildError as exc:
+        errors.append(str(exc))
     if errors:
         raise ManuscriptBuildError("Invalid final evidence manifest:\n- " + "\n- ".join(errors))
     return {"status": "passed", "n_files": len(records)}
@@ -590,11 +599,11 @@ def validate_final_evidence_manifest(
 
 def _validate_primary_artifacts(context: StageContext) -> None:
     targets = [
-        context.run_dir / "shap" / "global_grouped_shap_importance.csv",
-        context.run_dir / "shap" / "local_grouped_shap_values.csv",
-        context.run_dir / "shap" / "fold_feature_rankings.csv",
+        context.run_dir / "oof_shap" / "global_grouped_shap_importance.csv",
+        context.run_dir / "oof_shap" / "local_grouped_shap_values.csv",
+        context.run_dir / "oof_shap" / "fold_feature_rankings.csv",
     ]
-    local_dir = context.run_dir / "shap" / "local_reason_codes"
+    local_dir = context.run_dir / "oof_shap" / "local_reason_codes"
     if local_dir.is_dir():
         targets.extend(path for path in local_dir.rglob("*") if path.is_file())
     for path in targets:
@@ -608,64 +617,62 @@ def _validate_primary_artifacts(context: StageContext) -> None:
 
 
 def _write_claim_report(context: StageContext) -> Path:
-    llm_preflight = json.loads((context.run_dir / "llm" / "preflight_report.json").read_text(encoding="utf-8"))
-    complete = int(llm_preflight.get("cases_complete", llm_preflight.get("n_complete", 0)))
-    requested = int(llm_preflight.get("cases_requested", llm_preflight.get("n_requested", 0)))
-    lines = [
+    common = [
         "# Canonical Evidence Claim Boundaries",
         "",
+        f"Evidence scope: `{context.evidence_scope}`  ",
         f"Run ID: `{context.run_id}`  ",
         f"Config hash: `{context.config_hash}`",
         "",
-        "## Supported",
-        "",
-        "- Common-fold, leakage-policy sensitivity for the declared XGBoost contract; the full-feature result is a diagnostic upper bound only.",
-        "- Internal out-of-fold three-class performance, nested calibration, grouped SHAP attribution/stability, and OOF counterfactual scenario evidence for the canonical primary policy.",
-        "- HRDataset_v14 independent external performance-target replication, subject to the recorded mapping and provenance limitations.",
-        "- IBM restricted-target performance robustness and IBM/Employee Turnover related binary-task evidence, reported in separate non-comparable task strata.",
-        "- Support-aware descriptive fairness disparities and department reconstructability as proxy-risk evidence.",
-        f"- Deterministic complete-case evidence readiness for {complete}/{requested} selected LLM-evaluation cases; no canonical paid LLM generation was authorized.",
-        "- Fixed-suite deterministic chatbot guardrail behavior with Wilson intervals; not comprehensive safety validation.",
-        "",
-        "## Unsupported or prohibited",
-        "",
-        "- Autonomous hiring, firing, promotion, ranking, compensation, or other HR decisions.",
-        "- Causal interpretations of SHAP or counterfactuals, or employee prescriptions derived from them.",
-        "- A fairness guarantee from sensitive-feature removal or observed subgroup gaps.",
-        "- Direct employee-performance external validation from attrition, turnover, or restricted-target tasks.",
-        "- Locked INX-model transport to HRDataset_v14 unless explicitly identified as a separate transported-model result.",
-        "- Zero LLM or guardrail failure probability, deployment readiness, or verified dataset licence/source authenticity.",
-        "",
-        "The package is research-grade decision support only and does not authorize autonomous HR use.",
+        "The package is research-grade analysis only and does not authorize autonomous HR use.",
     ]
+    if context.evidence_scope == "core":
+        lines = [
+            *common,
+            "",
+            "## Supported when the referenced stages and uncertainty checks pass",
+            "",
+            "- Paired out-of-fold leakage-policy sensitivity under the declared feature contracts; the full-feature result is a diagnostic upper bound only.",
+            "- Contextual comparison of the primary XGBoost model with the three predeclared predictive baselines on shared folds.",
+            "- Predeclared sigmoid probability calibration evaluated only on outer test folds.",
+            "- Grouped out-of-fold SHAP attribution and descriptive fold stability; attribution is not causality.",
+            "- Support-aware subgroup and proxy-risk diagnostics; sensitive-feature removal is not a fairness guarantee.",
+            "- HRDataset_v14 independent mapped-target performance replication; not locked-model transport.",
+            "",
+            "## Unsupported or prohibited",
+            "",
+            "- Autonomous hiring, firing, promotion, ranking, compensation, or other HR decisions.",
+            "- Human usefulness, trust, usability, deployment readiness, legal compliance or a fairness guarantee.",
+            "- Causal interpretation of model attribution.",
+            "- Verified dataset licence, source authenticity or ethics approval until the recorded manual gates are closed.",
+        ]
+    elif context.evidence_scope == "supplementary":
+        lines = [
+            *common,
+            "",
+            "## Supported when the referenced stages and uncertainty checks pass",
+            "",
+            "- Heuristic model-scenario search success under a declared finite search budget; not causal or prescriptive recourse.",
+            "- Restricted-target and related-task robustness in explicitly non-comparable task strata.",
+            "",
+            "## Unsupported or prohibited",
+            "",
+            "- Employee advice, guaranteed feasibility, causal improvement or autonomous HR decisions.",
+            "- Employee-performance validation inferred from related binary tasks.",
+        ]
+    else:
+        raise ManuscriptBuildError(f"Unknown evidence scope for claim report: {context.evidence_scope!r}")
     path = context.run_dir / "canonical_claim_boundaries.md"
     path.write_text("\n".join(lines) + "\n", encoding="utf-8")
     return path
 
 
-def _validate_llm_preflight(context: StageContext) -> None:
-    path = context.run_dir / "llm" / "preflight_report.json"
-    if not path.is_file():
-        raise ManuscriptBuildError(f"Canonical LLM preflight report is missing: {path}")
-    payload = json.loads(path.read_text(encoding="utf-8"))
-    requested = int(payload.get("cases_requested", payload.get("n_requested", -1)))
-    complete = int(payload.get("cases_complete", payload.get("n_complete", -1)))
-    incomplete = int(payload.get("cases_incomplete", payload.get("n_incomplete", -1)))
-    expected = sum(int(value) for value in context.settings["llm_agent_evaluation"]["scope"].values())
-    if requested != expected or complete != expected or incomplete != 0:
-        raise ManuscriptBuildError(
-            "Canonical CompleteCaseEvidence is not ready: "
-            f"requested={requested}, complete={complete}, incomplete={incomplete}, expected={expected}."
-        )
-    if payload.get("real_api_execution_allowed") is not False:
-        raise ManuscriptBuildError(
-            "Canonical build is deterministic-only; preflight must not authorize real API execution."
-        )
-
-
 def _write_package_status(context: StageContext) -> Path:
     stage_rows = []
-    for stage in STAGE_ORDER:
+    stages = tuple(str(value) for value in (context.scope_contract or {}).get("stages", ()))
+    if not stages:
+        raise ManuscriptBuildError("Evidence scope has no declared stages.")
+    for stage in stages:
         path = _stage_metadata_path(context, stage)
         payload = json.loads(path.read_text(encoding="utf-8"))
         stage_rows.append(
@@ -681,21 +688,13 @@ def _write_package_status(context: StageContext) -> Path:
         {
             "run_id": context.run_id,
             "config_hash": context.config_hash,
+            "evidence_scope": context.evidence_scope,
+            "scope_contract_hash": context.manifest.get("scope_contract_hash"),
             "research_use": "research_grade_decision_support_only",
             "autonomous_hr_decisions_allowed": False,
-            "paid_api_calls_in_canonical_run": 0,
+            "paid_api_calls": 0,
             "stages": stage_rows,
         },
-    )
-
-
-def _write_historical_index(context: StageContext) -> Path:
-    from src.governance.historical_artifact_index import build_historical_artifact_index
-
-    return build_historical_artifact_index(
-        context.run_dir / "historical" / "historical_artifact_index.csv",
-        config_path=context.config_path,
-        canonical_run_id=context.run_id,
     )
 
 
@@ -711,6 +710,9 @@ def _write_input_snapshots(context: StageContext) -> list[Path]:
         if (
             payload.get("run_id") != context.run_id
             or payload.get("config_hash") != context.config_hash
+            or payload.get("evidence_scope") != context.manifest.get("evidence_scope")
+            or payload.get("scope_contract_hash")
+            != context.manifest.get("scope_contract_hash")
             or payload.get("git_commit") != context.manifest.get("git_commit")
             or payload.get("source_tree_hash") != context.manifest.get("source_tree_hash")
             or payload.get("dataset_hashes") != context.manifest.get("dataset_hashes")
@@ -786,6 +788,9 @@ def _write_input_snapshots(context: StageContext) -> list[Path]:
         {
             "run_id": context.run_id,
             "config_hash": context.config_hash,
+            "evidence_scope": context.manifest.get("evidence_scope"),
+            "scope_contract": context.manifest.get("scope_contract"),
+            "scope_contract_hash": context.manifest.get("scope_contract_hash"),
             "git_commit": context.manifest.get("git_commit"),
             "source_tree_hash": context.manifest.get("source_tree_hash"),
             "dataset_hashes": context.manifest.get("dataset_hashes"),
@@ -819,12 +824,17 @@ def _update_latest_pointer(run_dir: Path, output_root: Path) -> Path:
     return latest
 
 
-def _load_existing_manifest(path: Path, config_hash: str) -> dict[str, Any]:
+def _load_existing_manifest(
+    path: Path,
+    config_hash: str,
+    evidence_scope: str,
+) -> dict[str, Any]:
     manifest = json.loads(path.read_text(encoding="utf-8"))
     validate_run_manifest(
         manifest,
         project_root=PROJECT_ROOT,
         expected_config_hash=config_hash,
+        expected_evidence_scope=evidence_scope,
         require_complete=manifest.get("status") == "complete",
         verify_source_tree=True,
     )
@@ -838,6 +848,7 @@ def build(
     *,
     run_id: str | None = None,
     reuse_compatible: bool = True,
+    evidence_scope: str = "core",
 ) -> Dict[str, Path]:
     resolved_config = Path(config_path)
     if not resolved_config.is_absolute():
@@ -845,22 +856,32 @@ def build(
     config = load_manuscript_config(resolved_config)
     settings = manuscript_settings(config)
     config_hash = canonical_config_hash(config)
+    scopes = settings.get("evidence_scopes")
+    if not isinstance(scopes, Mapping):
+        raise ManuscriptBuildError("Canonical config has no evidence_scopes mapping.")
+    scope_contract = evidence_scope_contract(config, evidence_scope)
+    validate_scope_release_ready(scopes, evidence_scope)
+    stage_order = CANONICAL_STAGE_ORDERS[evidence_scope]
     output_root = (PROJECT_ROOT / str(settings["output"]["root"])).resolve()
     output_root.mkdir(parents=True, exist_ok=True)
 
-    initial_command = f"{sys.executable} -m src.experiments.build_manuscript_evidence --config {_portable(resolved_config)}"
+    initial_command = (
+        f"{sys.executable} -m src.experiments.build_manuscript_evidence "
+        f"--config {_portable(resolved_config)} --scope {evidence_scope}"
+    )
     provisional = create_run_manifest(
         resolved_config,
         project_root=PROJECT_ROOT,
         run_id=run_id,
+        evidence_scope=evidence_scope,
         initial_command=initial_command,
     )
     run_id = str(provisional["run_id"])
-    run_dir = output_root / run_id
+    run_dir = output_root / run_id / evidence_scope
     run_dir.mkdir(parents=True, exist_ok=True)
     manifest_path = run_dir / str(settings["output"].get("manifest_filename", "run_manifest.json"))
     if manifest_path.is_file():
-        manifest = _load_existing_manifest(manifest_path, config_hash)
+        manifest = _load_existing_manifest(manifest_path, config_hash, evidence_scope)
         if manifest.get("status") == "complete":
             return {
                 "run_dir": run_dir,
@@ -881,13 +902,15 @@ def build(
         run_id=run_id,
         config_hash=config_hash,
         manifest=manifest,
+        evidence_scope=evidence_scope,
+        scope_contract=scope_contract,
     )
     active_stage = "preflight"
     try:
         input_snapshots = _write_input_snapshots(context)
         _register_stage_files(context, "run_inputs", input_snapshots)
         write_run_manifest(manifest, manifest_path, project_root=PROJECT_ROOT)
-        for stage in STAGE_ORDER:
+        for stage in stage_order:
             active_stage = stage
             started = utc_now_iso()
             command_record = record_command(
@@ -903,26 +926,37 @@ def build(
             write_run_manifest(manifest, manifest_path, project_root=PROJECT_ROOT)
 
         active_stage = "package_validation"
-        _validate_primary_artifacts(context)
-        _validate_llm_preflight(context)
+        if evidence_scope == "core":
+            _validate_primary_artifacts(context)
         claim_report = _write_claim_report(context)
         package_status = _write_package_status(context)
-        historical_index = _write_historical_index(context)
         _register_stage_files(
             context,
             "integration",
-            [claim_report, package_status, historical_index],
+            [claim_report, package_status],
+        )
+        validate_scope_artifact_paths(
+            evidence_scope,
+            [
+                path.relative_to(run_dir).as_posix()
+                for path in _all_files(run_dir)
+                if path.name != str(settings["output"].get("manifest_filename", "run_manifest.json"))
+            ],
         )
         evidence_manifests = build_final_evidence_manifest(
             run_dir,
             run_id=run_id,
             config_hash=config_hash,
+            evidence_scope=evidence_scope,
+            scope_contract_hash=str(manifest["scope_contract_hash"]),
         )
         validate_final_evidence_manifest(
             evidence_manifests["json"],
             run_dir=run_dir,
             expected_run_id=run_id,
             expected_config_hash=config_hash,
+            expected_evidence_scope=evidence_scope,
+            expected_scope_contract_hash=str(manifest["scope_contract_hash"]),
         )
         _register_stage_files(context, "final_manifest", list(evidence_manifests.values()))
         finalize_run_manifest(manifest, status="complete")
@@ -960,6 +994,12 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--config", default=str(DEFAULT_CONFIG_PATH))
     parser.add_argument("--run-id", default=None, help="Explicit identity for a new run or compatible resume.")
     parser.add_argument(
+        "--scope",
+        choices=tuple(CANONICAL_STAGE_ORDERS),
+        default="core",
+        help="Build exactly one immutable evidence scope; default is the core paper scope.",
+    )
+    parser.add_argument(
         "--no-reuse-compatible",
         action="store_true",
         help="Reject all existing stage outputs instead of resuming compatible stages.",
@@ -973,5 +1013,6 @@ if __name__ == "__main__":
         arguments.config,
         run_id=arguments.run_id,
         reuse_compatible=not arguments.no_reuse_compatible,
+        evidence_scope=arguments.scope,
     )
     print(json.dumps({key: str(value) for key, value in result.items()}, indent=2, sort_keys=True))

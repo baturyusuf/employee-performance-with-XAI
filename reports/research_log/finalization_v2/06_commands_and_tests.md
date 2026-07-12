@@ -158,3 +158,50 @@ One hygiene wrapper incorrectly used the PowerShell expression `if (git diff --q
 Network/API result: all paid-service environment variables were cleared; no dataset was missing, no approved acquisition URL was invoked, and no API/network call occurred.
 
 The first Unit 1B commit attempt was correctly blocked before commit by `git diff --cached --check` because a new test file had one blank line at EOF. The whitespace-only defect was removed with no history rewrite; the scientific code and test outcomes were unaffected.
+
+## Unit 2A — Core/Supplementary Scope Isolation
+
+Scoped real-input manifest preflight:
+
+```powershell
+.\myenv\Scripts\python.exe -c "from src.governance.manuscript_contract import create_run_manifest,validate_run_manifest; [(lambda m,s: (validate_run_manifest(m,expected_evidence_scope=s), print(s, sorted(m['actual_input_receipts']), sorted(m['side_input_hashes']), m['scope_contract_hash'], m['scientific_input_hash'])))(create_run_manifest('configs/manuscript_final.yaml',evidence_scope=s,run_id='unit2a_'+s),s) for s in ('core','supplementary')]"
+```
+
+Exit status: 0. Core receipts: `hrdataset_v14`, `inx_primary`; five scoped side inputs. Supplementary receipts: `employee_turnover`, `ibm_hr_analytics`, `ibm_hr_analytics_attrition`, `inx_primary`; six scoped side inputs.
+
+Fail-closed core entrypoint check:
+
+```powershell
+.\myenv\Scripts\python.exe -m src.experiments.build_core_paper_evidence --config configs/manuscript_final.yaml
+```
+
+Expected exit status: 1. The command failed before output creation with `Evidence scope 'core' is not release-ready`; it did not execute or simulate a scientific stage.
+
+Focused contracts:
+
+```powershell
+.\myenv\Scripts\python.exe -m pytest -q tests/test_core_scope_contract.py tests/test_core_build_contains_no_llm_or_chatbot_stage.py tests/test_no_cross_scope_cache_reuse.py tests/test_scoped_run_manifest_inputs.py tests/test_external_scope_contract.py tests/test_external_explicit_input_binding.py tests/test_manuscript_external_evidence.py tests/test_dataset_card_required_fields.py tests/test_final_evidence_manifest_hashes.py tests/test_manuscript_figures_generated.py
+```
+
+Exit status: 0. Result: 50 passed, 2 skipped in 7.44 seconds. Skips refer only to the deliberately rejected historical unscoped `latest` package.
+
+Full regression gates:
+
+```powershell
+$env:OPENAI_API_KEY=$null
+$env:OPENAI_AGENTS_API_KEY=$null
+$env:AZURE_OPENAI_API_KEY=$null
+.\myenv\Scripts\python.exe -m pytest -q
+.\myenv\Scripts\python.exe -m unittest discover -s tests -q
+.\myenv\Scripts\python.exe -m compileall -q src tests
+git diff --check
+git status --porcelain -- manuscript/mdpi_information/main.md
+```
+
+Final results: pytest 250 passed, 2 skipped and 4 subtests passed in 13.99 seconds; unittest 162 passed with 2 skipped in 3.259 seconds; compileall/diff/manuscript gates passed.
+
+An earlier full pytest attempt produced one failure because the legacy Figures 1-4 test still supplied the core config after LLM settings were removed. The legacy generator was made fail-closed before creating files and its test was corrected to assert exclusion from core. The next full run passed.
+
+Network/API result: credentials were cleared; no network function, approved dataset URL or paid service was invoked. Scientific artifacts generated: none.
+
+The first Unit 2A commit attempt was correctly blocked before commit because the staged diff contained one blank line at EOF in each of two new contract tests. Both whitespace-only defects were removed; no history was created or rewritten and scientific/test behavior was unchanged.

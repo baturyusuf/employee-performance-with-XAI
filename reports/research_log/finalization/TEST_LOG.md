@@ -33,3 +33,16 @@ This closes the Unit 1A implementation/test checkpoint only. V2-001 is not resol
 - Paid/API/network calls: zero.
 
 V2-001 and V2-002 have passed implementation and real-input preflight but remain open pending a clean, cache-disabled full v2 build and artifact verification.
+
+## Unit 2A — 2026-07-13
+
+- Scoped manifest/external/orchestration/dataset-card/final-manifest/legacy-figure contracts: 50 passed, 2 historical skips.
+- Core static import graph: no LLM/chatbot/agent/OpenAI reachability.
+- Core/supplementary real-input manifests: passed with exact scoped receipts and side inputs.
+- Core entrypoint incomplete-release gate: expected fail-closed before artifact creation.
+- Full pytest: 250 passed, 2 skipped, plus 4 subtests.
+- Full unittest: 162 passed, 2 skipped.
+- Compileall, diff and manuscript no-change checks: passed.
+- Scientific experiments/artifacts and network/API calls: zero.
+
+V2-011 and V2-013 pass their implementation contracts but remain open until real scope packages are release-ready and validated. V2-012 and V2-021 remain in progress.

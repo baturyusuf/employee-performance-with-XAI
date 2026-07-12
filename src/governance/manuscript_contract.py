@@ -24,7 +24,23 @@ from src.utils.config_loader import PROJECT_ROOT, load_config
 
 
 DEFAULT_CONFIG_PATH = PROJECT_ROOT / "configs" / "manuscript_final.yaml"
-MANIFEST_SCHEMA_VERSION = 2
+MANIFEST_SCHEMA_VERSION = 3
+
+EXPECTED_EVIDENCE_SCOPE_DATASETS: Mapping[str, frozenset[str]] = {
+    "core": frozenset({"inx_primary", "hrdataset_v14"}),
+    "supplementary": frozenset(
+        {
+            "inx_primary",
+            "ibm_hr_analytics",
+            "ibm_hr_analytics_attrition",
+            "employee_turnover",
+        }
+    ),
+}
+
+CORE_PROHIBITED_STAGE_TOKENS = frozenset(
+    {"llm", "chatbot", "counterfactual", "ibm", "turnover"}
+)
 
 ACTUAL_INPUT_IDENTITY_FIELDS = (
     "dataset_key",
@@ -163,6 +179,114 @@ def _string_list(value: Any, context: str, *, allow_empty: bool = False) -> list
     return list(value)
 
 
+def evidence_scope_contract(
+    config: Mapping[str, Any],
+    scope_name: str,
+) -> dict[str, list[str]]:
+    """Return one immutable, config-declared scientific evidence scope.
+
+    Only the fixed ``core`` and ``supplementary`` scopes are accepted.  Dataset
+    membership is hard-checked against the author-approved study boundary so a
+    caller cannot silently manufacture an arbitrary input subset while using a
+    canonical scope name.
+    """
+
+    if not isinstance(scope_name, str) or not scope_name.strip():
+        raise ManuscriptConfigError("evidence_scope must be a non-empty string.")
+    if scope_name not in EXPECTED_EVIDENCE_SCOPE_DATASETS:
+        raise ManuscriptConfigError(
+            f"Unknown evidence scope {scope_name!r}; allowed scopes are "
+            f"{sorted(EXPECTED_EVIDENCE_SCOPE_DATASETS)}."
+        )
+
+    settings = manuscript_settings(config)
+    scopes = _require_mapping(settings, "evidence_scopes", "manuscript_final")
+    if set(scopes) != set(EXPECTED_EVIDENCE_SCOPE_DATASETS):
+        raise ManuscriptConfigError(
+            "manuscript_final.evidence_scopes must define exactly the immutable "
+            f"scopes {sorted(EXPECTED_EVIDENCE_SCOPE_DATASETS)}."
+        )
+    raw_contract = scopes.get(scope_name)
+    if not isinstance(raw_contract, Mapping):
+        raise ManuscriptConfigError(f"Evidence scope {scope_name!r} must be a mapping.")
+
+    required_fields = {"dataset_keys", "side_input_keys", "stages"}
+    missing = sorted(required_fields - set(raw_contract))
+    if missing:
+        raise ManuscriptConfigError(
+            f"Evidence scope {scope_name!r} is missing required fields: {missing}."
+        )
+    contract = {
+        field: _string_list(
+            raw_contract.get(field),
+            f"manuscript_final.evidence_scopes.{scope_name}.{field}",
+        )
+        for field in ("dataset_keys", "side_input_keys", "stages")
+    }
+
+    observed_datasets = set(contract["dataset_keys"])
+    expected_datasets = set(EXPECTED_EVIDENCE_SCOPE_DATASETS[scope_name])
+    if observed_datasets != expected_datasets:
+        raise ManuscriptConfigError(
+            f"Evidence scope {scope_name!r} has a non-canonical dataset set; "
+            f"missing={sorted(expected_datasets - observed_datasets)}, "
+            f"extra={sorted(observed_datasets - expected_datasets)}."
+        )
+
+    datasets = _require_mapping(settings, "datasets", "manuscript_final")
+    unknown_datasets = sorted(observed_datasets - set(datasets))
+    if unknown_datasets:
+        raise ManuscriptConfigError(
+            f"Evidence scope {scope_name!r} references unknown datasets: {unknown_datasets}."
+        )
+    provenance = _require_mapping(settings, "provenance", "manuscript_final")
+    declared_side_inputs = provenance.get("scientific_side_inputs")
+    if not isinstance(declared_side_inputs, Mapping) or not declared_side_inputs:
+        raise ManuscriptConfigError(
+            "manuscript_final.provenance.scientific_side_inputs must be a non-empty mapping."
+        )
+    unknown_side_inputs = sorted(set(contract["side_input_keys"]) - set(declared_side_inputs))
+    if unknown_side_inputs:
+        raise ManuscriptConfigError(
+            f"Evidence scope {scope_name!r} references unknown side inputs: {unknown_side_inputs}."
+        )
+
+    acquisition_manifest = provenance.get("data_acquisition_manifest")
+    selected_side_paths = {
+        declared_side_inputs[key] for key in contract["side_input_keys"]
+    }
+    if acquisition_manifest not in selected_side_paths:
+        raise ManuscriptConfigError(
+            f"Evidence scope {scope_name!r} must include the configured data acquisition manifest."
+        )
+    missing_schema_mappings: list[str] = []
+    for dataset_key in contract["dataset_keys"]:
+        definition = datasets.get(dataset_key)
+        if not isinstance(definition, Mapping):
+            continue
+        mapping_path = definition.get("schema_mapping_path")
+        if isinstance(mapping_path, str) and mapping_path and mapping_path not in selected_side_paths:
+            missing_schema_mappings.append(dataset_key)
+    if missing_schema_mappings:
+        raise ManuscriptConfigError(
+            f"Evidence scope {scope_name!r} omits schema-mapping side inputs for datasets: "
+            f"{sorted(missing_schema_mappings)}."
+        )
+
+    if scope_name == "core":
+        prohibited = {
+            stage
+            for stage in contract["stages"]
+            if any(token in stage.casefold() for token in CORE_PROHIBITED_STAGE_TOKENS)
+        }
+        if prohibited:
+            raise ManuscriptConfigError(
+                "Core evidence stages contain prohibited scope dependencies: "
+                f"{sorted(prohibited)}."
+            )
+    return contract
+
+
 def feature_policy_definitions(config: Mapping[str, Any]) -> Mapping[str, Mapping[str, Any]]:
     settings = manuscript_settings(config)
     policies = _require_mapping(settings, "feature_policies", "manuscript_final")
@@ -269,6 +393,7 @@ def validate_manuscript_config(config: Mapping[str, Any]) -> None:
     required_sections = {
         "package",
         "datasets",
+        "evidence_scopes",
         "target",
         "model",
         "feature_policies",
@@ -278,8 +403,6 @@ def validate_manuscript_config(config: Mapping[str, Any]) -> None:
         "calibration",
         "shap",
         "counterfactuals",
-        "llm_agent_evaluation",
-        "chatbot_guardrails",
         "output",
         "seeds",
         "figures",
@@ -395,6 +518,9 @@ def validate_manuscript_config(config: Mapping[str, Any]) -> None:
     output = _require_mapping(settings, "output", "manuscript_final")
     if not isinstance(output.get("root"), str) or not output.get("root"):
         raise ManuscriptConfigError("output.root must be a non-empty relative path.")
+
+    for scope_name in EXPECTED_EVIDENCE_SCOPE_DATASETS:
+        evidence_scope_contract(config, scope_name)
 
 
 def load_manuscript_config(
@@ -657,6 +783,7 @@ def _sha256_canonical_json(value: Mapping[str, Any]) -> str:
 def declared_side_input_hashes(
     config: Mapping[str, Any],
     *,
+    side_input_keys: Sequence[str] | None = None,
     project_root: str | Path = PROJECT_ROOT,
 ) -> dict[str, dict[str, Any]]:
     """Hash every explicitly declared non-dataset scientific input.
@@ -676,8 +803,18 @@ def declared_side_input_hashes(
             "logical-name to repository-relative path mapping."
         )
 
+    selected = list(side_input_keys) if side_input_keys is not None else list(declared)
+    if not selected or any(not isinstance(name, str) or not name for name in selected):
+        raise ManuscriptConfigError("side_input_keys must be a non-empty sequence of names.")
+    if len(selected) != len(set(selected)):
+        raise ManuscriptConfigError("side_input_keys contains duplicate names.")
+    unknown = sorted(set(selected) - set(declared))
+    if unknown:
+        raise ManuscriptConfigError(f"Unknown declared scientific side inputs: {unknown}.")
+
     records: dict[str, dict[str, Any]] = {}
-    for raw_name, raw_path in sorted(declared.items(), key=lambda item: str(item[0])):
+    for raw_name in sorted(selected):
+        raw_path = declared[raw_name]
         if not isinstance(raw_name, str) or not raw_name.strip():
             raise ManuscriptConfigError("Scientific side-input names must be non-empty strings.")
         try:
@@ -701,6 +838,7 @@ def declared_side_input_hashes(
 def scientific_input_hash(
     *,
     config_hash: str,
+    scope_contract_hash: str,
     dataset_hashes: Mapping[str, Any],
     side_input_hashes: Mapping[str, Any],
 ) -> str:
@@ -708,6 +846,8 @@ def scientific_input_hash(
 
     if not re.fullmatch(r"[0-9a-f]{64}", config_hash):
         raise RunManifestError("config_hash must be a lowercase SHA-256 digest.")
+    if not re.fullmatch(r"[0-9a-f]{64}", scope_contract_hash):
+        raise RunManifestError("scope_contract_hash must be a lowercase SHA-256 digest.")
     if not isinstance(dataset_hashes, Mapping) or not dataset_hashes:
         raise RunManifestError("dataset_hashes must be a non-empty mapping.")
     if not isinstance(side_input_hashes, Mapping) or not side_input_hashes:
@@ -715,6 +855,7 @@ def scientific_input_hash(
     return _sha256_canonical_json(
         {
             "config_hash": config_hash,
+            "scope_contract_hash": scope_contract_hash,
             "dataset_hashes": dict(dataset_hashes),
             "side_input_hashes": dict(side_input_hashes),
         }
@@ -739,6 +880,7 @@ def make_run_id(config: Mapping[str, Any], config_hash: str, *, timestamp: datet
 def create_run_manifest(
     config_path: str | Path = DEFAULT_CONFIG_PATH,
     *,
+    evidence_scope: str,
     project_root: str | Path = PROJECT_ROOT,
     run_id: str | None = None,
     dataset_paths: Mapping[str, str | Path] | None = None,
@@ -748,8 +890,8 @@ def create_run_manifest(
     """Create a schema-v2 manifest from verified actual and side inputs.
 
     ``dataset_paths`` remains as a compatibility assertion only: callers may
-    provide it, but it must exactly match every canonical configured path.  It
-    cannot override the explicit canonical loader contract.
+    provide it, but it must exactly match every path in the named immutable
+    evidence scope.  It cannot override the canonical loader contract.
     """
 
     root = Path(project_root).resolve()
@@ -762,19 +904,21 @@ def create_run_manifest(
     config = load_manuscript_config(resolved_config_path)
     config_hash = canonical_config_hash(config)
     settings = manuscript_settings(config)
+    scope_contract = evidence_scope_contract(config, evidence_scope)
+    scope_contract_hash = _sha256_canonical_json(scope_contract)
 
     datasets = _require_mapping(settings, "datasets", "manuscript_final")
     configured_paths = {
         name: str(definition["path"])
-        for name, definition in datasets.items()
-        if isinstance(definition, Mapping)
+        for name in scope_contract["dataset_keys"]
+        if isinstance((definition := datasets.get(name)), Mapping)
     }
-    if set(configured_paths) != set(datasets):
-        raise ManuscriptConfigError("Every canonical dataset must define an explicit path.")
+    if set(configured_paths) != set(scope_contract["dataset_keys"]):
+        raise ManuscriptConfigError("Every scoped dataset must define an explicit path.")
     if dataset_paths is not None:
         if set(dataset_paths) != set(configured_paths):
             raise RunManifestError(
-                "dataset_paths must name every canonical dataset and cannot select a subset."
+                "dataset_paths must name exactly every dataset in the evidence scope."
             )
         mismatches = {
             name: {"configured": configured_paths[name], "supplied": str(dataset_paths[name])}
@@ -794,7 +938,11 @@ def create_run_manifest(
         raise ManuscriptConfigError(
             "manuscript_final.provenance.data_acquisition_manifest must be a non-empty path."
         )
-    side_input_hashes = declared_side_input_hashes(config, project_root=root)
+    side_input_hashes = declared_side_input_hashes(
+        config,
+        side_input_keys=scope_contract["side_input_keys"],
+        project_root=root,
+    )
 
     try:
         from src.data.canonical_loader import verify_configured_datasets
@@ -802,7 +950,7 @@ def create_run_manifest(
         verified = verify_configured_datasets(
             resolved_config_path,
             acquisition_manifest_path,
-            dataset_keys=list(datasets),
+            dataset_keys=scope_contract["dataset_keys"],
             allow_download=allow_dataset_download,
             project_root=root,
         )
@@ -811,7 +959,7 @@ def create_run_manifest(
 
     actual_input_receipts: dict[str, dict[str, Any]] = {}
     dataset_hashes: dict[str, dict[str, Any]] = {}
-    for name in datasets:
+    for name in scope_contract["dataset_keys"]:
         loaded = verified.get(name)
         if loaded is None or not isinstance(loaded.receipt, Mapping):
             raise RunManifestError(f"Canonical loader returned no receipt for dataset {name!r}.")
@@ -869,11 +1017,15 @@ def create_run_manifest(
         "source_tree_hash": source_tree_hash(root),
         "config_path": _portable_path(resolved_config_path, root),
         "config_hash": config_hash,
+        "evidence_scope": evidence_scope,
+        "scope_contract": scope_contract,
+        "scope_contract_hash": scope_contract_hash,
         "actual_input_receipts": actual_input_receipts,
         "dataset_hashes": dataset_hashes,
         "side_input_hashes": side_input_hashes,
         "scientific_input_hash": scientific_input_hash(
             config_hash=config_hash,
+            scope_contract_hash=scope_contract_hash,
             dataset_hashes=dataset_hashes,
             side_input_hashes=side_input_hashes,
         ),
@@ -1024,6 +1176,7 @@ def validate_run_manifest(
     *,
     project_root: str | Path = PROJECT_ROOT,
     expected_config_hash: str | None = None,
+    expected_evidence_scope: str | None = None,
     require_complete: bool = False,
     verify_source_tree: bool = False,
 ) -> dict[str, Any]:
@@ -1039,6 +1192,9 @@ def validate_run_manifest(
         "git_commit",
         "config_path",
         "config_hash",
+        "evidence_scope",
+        "scope_contract",
+        "scope_contract_hash",
         "actual_input_receipts",
         "dataset_hashes",
         "side_input_hashes",
@@ -1068,6 +1224,24 @@ def validate_run_manifest(
     if expected_config_hash is not None and config_hash != expected_config_hash:
         errors.append(f"config_hash {config_hash!r} does not equal expected {expected_config_hash!r}")
 
+    observed_scope = manifest.get("evidence_scope")
+    if observed_scope not in EXPECTED_EVIDENCE_SCOPE_DATASETS:
+        errors.append(
+            f"evidence_scope must be one of {sorted(EXPECTED_EVIDENCE_SCOPE_DATASETS)}"
+        )
+    if (
+        expected_evidence_scope is not None
+        and expected_evidence_scope not in EXPECTED_EVIDENCE_SCOPE_DATASETS
+    ):
+        errors.append(
+            f"expected_evidence_scope must be one of {sorted(EXPECTED_EVIDENCE_SCOPE_DATASETS)}"
+        )
+    if expected_evidence_scope is not None and observed_scope != expected_evidence_scope:
+        errors.append(
+            f"evidence_scope {observed_scope!r} does not equal expected "
+            f"{expected_evidence_scope!r}"
+        )
+
     loaded_config: dict[str, Any] | None = None
     config_path: Path | None = None
     raw_config_path = manifest.get("config_path")
@@ -1093,6 +1267,32 @@ def validate_run_manifest(
                     errors.append(
                         f"config hash mismatch for {config_path}: manifest={config_hash}, actual={actual_config_hash}"
                     )
+
+    current_scope_contract: dict[str, list[str]] | None = None
+    observed_scope_contract = manifest.get("scope_contract")
+    observed_scope_contract_hash = manifest.get("scope_contract_hash")
+    if not isinstance(observed_scope_contract, Mapping):
+        errors.append("scope_contract must be a mapping")
+    if not isinstance(observed_scope_contract_hash, str) or not re.fullmatch(
+        r"[0-9a-f]{64}", observed_scope_contract_hash
+    ):
+        errors.append("scope_contract_hash must be a lowercase SHA-256 digest")
+    elif isinstance(observed_scope_contract, Mapping):
+        actual_scope_hash = _sha256_canonical_json(dict(observed_scope_contract))
+        if observed_scope_contract_hash != actual_scope_hash:
+            errors.append("scope_contract_hash does not bind the recorded scope_contract")
+    if (
+        loaded_config is not None
+        and isinstance(observed_scope, str)
+        and isinstance(observed_scope_contract, Mapping)
+    ):
+        try:
+            current_scope_contract = evidence_scope_contract(loaded_config, observed_scope)
+        except Exception as exc:
+            errors.append(f"current evidence scope cannot be validated: {exc}")
+        else:
+            if dict(observed_scope_contract) != current_scope_contract:
+                errors.append("scope_contract does not match the current canonical evidence scope")
 
     side_input_hashes = manifest.get("side_input_hashes")
     if not isinstance(side_input_hashes, Mapping) or not side_input_hashes:
@@ -1125,9 +1325,13 @@ def validate_run_manifest(
             if record.get("size_bytes") != path.stat().st_size:
                 errors.append(f"{label} size mismatch")
 
-        if loaded_config is not None:
+        if loaded_config is not None and current_scope_contract is not None:
             try:
-                current_side_inputs = declared_side_input_hashes(loaded_config, project_root=root)
+                current_side_inputs = declared_side_input_hashes(
+                    loaded_config,
+                    side_input_keys=current_scope_contract["side_input_keys"],
+                    project_root=root,
+                )
             except Exception as exc:
                 errors.append(f"declared side inputs cannot be verified: {exc}")
             else:
@@ -1162,15 +1366,10 @@ def validate_run_manifest(
     elif isinstance(actual_input_receipts, Mapping):
         if set(dataset_hashes) != set(actual_input_receipts):
             errors.append("dataset_hashes and actual_input_receipts must name exactly the same datasets")
-        if loaded_config is not None:
-            configured_datasets = _require_mapping(
-                manuscript_settings(loaded_config),
-                "datasets",
-                "manuscript_final",
-            )
-            if set(dataset_hashes) != set(configured_datasets):
+        if current_scope_contract is not None:
+            if set(dataset_hashes) != set(current_scope_contract["dataset_keys"]):
                 errors.append(
-                    "manifest dataset identities do not match every dataset declared by the canonical config"
+                    "manifest dataset identities do not match the exact canonical evidence scope"
                 )
 
         for dataset_name, record in dataset_hashes.items():
@@ -1262,7 +1461,11 @@ def validate_run_manifest(
                         f"actual input receipt {dataset_name!r} acquisition-manifest hash mismatch"
                     )
 
-        if loaded_config is not None and config_path is not None:
+        if (
+            loaded_config is not None
+            and config_path is not None
+            and current_scope_contract is not None
+        ):
             try:
                 from src.data.canonical_loader import verify_configured_datasets
 
@@ -1274,7 +1477,7 @@ def validate_run_manifest(
                 current_verified = verify_configured_datasets(
                     config_path,
                     provenance.get("data_acquisition_manifest"),
-                    dataset_keys=list(dataset_hashes),
+                    dataset_keys=current_scope_contract["dataset_keys"],
                     allow_download=False,
                     project_root=root,
                 )
@@ -1301,6 +1504,8 @@ def validate_run_manifest(
     elif (
         isinstance(config_hash, str)
         and re.fullmatch(r"[0-9a-f]{64}", config_hash)
+        and isinstance(observed_scope_contract_hash, str)
+        and re.fullmatch(r"[0-9a-f]{64}", observed_scope_contract_hash)
         and isinstance(dataset_hashes, Mapping)
         and dataset_hashes
         and isinstance(side_input_hashes, Mapping)
@@ -1309,6 +1514,7 @@ def validate_run_manifest(
         try:
             expected_scientific_hash = scientific_input_hash(
                 config_hash=config_hash,
+                scope_contract_hash=observed_scope_contract_hash,
                 dataset_hashes=dataset_hashes,
                 side_input_hashes=side_input_hashes,
             )
@@ -1426,6 +1632,7 @@ def write_run_manifest(
 __all__ = [
     "ACTUAL_INPUT_IDENTITY_FIELDS",
     "DEFAULT_CONFIG_PATH",
+    "EXPECTED_EVIDENCE_SCOPE_DATASETS",
     "FeaturePolicyConsistencyError",
     "ForbiddenFeatureError",
     "ManuscriptConfigError",
@@ -1435,6 +1642,7 @@ __all__ = [
     "canonical_policy_mapping",
     "create_run_manifest",
     "declared_side_input_hashes",
+    "evidence_scope_contract",
     "feature_policy_definitions",
     "finalize_run_manifest",
     "forbidden_feature_mentions",

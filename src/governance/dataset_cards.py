@@ -142,6 +142,7 @@ def build_dataset_cards(
     run_id: str,
     config_hash: str | None = None,
     project_root: str | Path = PROJECT_ROOT,
+    dataset_keys: Iterable[str] | None = None,
 ) -> list[Dict[str, Any]]:
     manuscript_raw = load_config(manuscript_config_path)
     manuscript = _root_mapping(manuscript_raw, "manuscript_final")
@@ -161,11 +162,20 @@ def build_dataset_cards(
         raise DatasetCardValidationError(
             f"Dataset provenance bindings must exactly cover canonical datasets; missing={missing}, extra={extra}."
         )
+    selected = list(datasets) if dataset_keys is None else [str(value) for value in dataset_keys]
+    if not selected or len(selected) != len(set(selected)):
+        raise DatasetCardValidationError("dataset_keys must be non-empty and contain no duplicates.")
+    unknown = sorted(set(selected).difference(datasets))
+    if unknown:
+        raise DatasetCardValidationError(
+            f"dataset_keys contains datasets outside the canonical config: {unknown}."
+        )
 
     cards: list[Dict[str, Any]] = []
     frame_cache: Dict[str, pd.DataFrame] = {}
     hash_cache: Dict[str, str] = {}
-    for dataset_id, dataset_definition in datasets.items():
+    for dataset_id in selected:
+        dataset_definition = datasets[dataset_id]
         if not isinstance(dataset_definition, Mapping):
             raise DatasetCardValidationError(f"Canonical dataset {dataset_id} must be a mapping.")
         binding = bindings[dataset_id]
@@ -427,20 +437,30 @@ def run(
     run_id: str,
     config_hash: str | None = None,
     project_root: str | Path = PROJECT_ROOT,
+    dataset_keys: Iterable[str] | None = None,
 ) -> Dict[str, Path]:
     manuscript_raw = load_config(manuscript_config_path)
     manuscript = _root_mapping(manuscript_raw, "manuscript_final")
     config_hash = config_hash or canonical_config_hash(manuscript_raw)
+    selected_dataset_keys = (
+        None if dataset_keys is None else tuple(str(value) for value in dataset_keys)
+    )
     cards = build_dataset_cards(
         manuscript_config_path,
         provenance_config_path,
         run_id=run_id,
         config_hash=config_hash,
         project_root=project_root,
+        dataset_keys=selected_dataset_keys,
+    )
+    expected_dataset_ids = (
+        manuscript.get("datasets", {}).keys()
+        if selected_dataset_keys is None
+        else selected_dataset_keys
     )
     validate_dataset_cards(
         cards,
-        expected_dataset_ids=manuscript.get("datasets", {}).keys(),
+        expected_dataset_ids=expected_dataset_ids,
         project_root=project_root,
     )
     output = Path(output_dir)
@@ -458,6 +478,7 @@ def run(
                 "run_id": run_id,
                 "config_hash": config_hash,
                 "provenance_config_hash": cards[0]["provenance_config_hash"],
+                "dataset_keys": [card["dataset_id"] for card in cards],
                 "cards": cards,
             },
             indent=2,
@@ -479,6 +500,7 @@ def run(
                 "run_id": run_id,
                 "config_hash": config_hash,
                 "provenance_config_hash": cards[0]["provenance_config_hash"],
+                "dataset_keys": [card["dataset_id"] for card in cards],
                 "status": "passed",
                 "cards_validated": len(cards),
                 "required_fields": list(REQUIRED_CARD_FIELDS),
@@ -499,6 +521,7 @@ def run(
                 "run_id": run_id,
                 "config_hash": config_hash,
                 "provenance_config_hash": cards[0]["provenance_config_hash"],
+                "dataset_keys": [card["dataset_id"] for card in cards],
                 "generated_at": datetime.now(timezone.utc).isoformat(),
                 "manuscript_config": str(manuscript_config_path),
                 "provenance_config": str(provenance_config_path),
