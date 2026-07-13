@@ -34,9 +34,9 @@ Both scopes are intentionally `release_ready=false`. No v2 scientific artifact o
 
 | New component | Repository source | Current claim status |
 | --- | --- | --- |
-| Shared 10×5 folds | `src/experiments/shared_folds.py` | Engineering tests and verified-real-input in-memory preflight passed; prior 10×3 evidence is superseded and no persisted clean-run fold artifact exists yet |
-| Four-model restrained nested benchmark | `src/experiments/manuscript_model_benchmark.py`, `src/models/canonical_models.py` | Macro-F1/QWK protocol tested and fail-closed; no real model result because the clean trial has not run |
-| Paired OOF bootstrap | `src/models/oof_bootstrap.py` | Tested statistical utility; not yet a manuscript result |
-| Baseline reference stop gate | `src/experiments/build_manuscript_evidence.py`, `src/experiments/run_model_benchmark_trial.py` | Tested point-plus-CI control and isolated offline trial entrypoint; no observed gate outcome |
+| Shared 10×5 folds | `src/experiments/shared_folds.py`; `reports/manuscript_final/trials/benchmark-10x5-20260713-6a80074/core/shared_folds/` | Clean-start trial artifact verified; downstream consumers have not yet adopted it |
+| Four-model restrained nested benchmark | `src/experiments/manuscript_model_benchmark.py`; trial `model_benchmarks/` | Real trial complete and hash-verified; noncanonical decision evidence pending final all-stage rebuild |
+| Paired OOF bootstrap | `src/models/oof_bootstrap.py`; trial `model_summary.csv`, `paired_model_differences.csv` | 5,000 draws complete; model gate evidence valid, manuscript result not yet frozen |
+| Baseline reference stop gate | trial `baseline_xgboost_gate.json`, `run_manifest.json` | Observed gate outcome `false`; no model-reference user decision required |
 
-The real-input 10×5 fold preflight wrote no files and its dirty-worktree hash is expressly noncanonical. The standalone trial command has not executed, `reports/manuscript_final/trials/` contains no new run from this checkpoint, and no baseline gate outcome exists. The preflight supports loader/fold engineering verification only and cannot support a numeric manuscript claim.
+The earlier in-memory 10×5 preflight hashes remain noncanonical. The clean-start real trial is preserved under its versioned trial root and supports the XGBoost-reference gate decision, but `canonical_release_eligible=false`; its numbers are not frozen manuscript claims until the complete core package is regenerated from one final clean commit after warning and downstream-stage fixes.

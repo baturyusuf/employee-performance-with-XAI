@@ -50,3 +50,7 @@ Affected files after user decision: `configs/model_grid.yaml`, `configs/manuscri
 - Operational definition recorded and fail-closed before model fitting: candidates within an inclusive absolute inner-mean macro-F1 difference of `0.001` from the best candidate enter the QWK tie-break pool; highest inner-mean QWK wins, then lowest candidate index. This narrow deterministic threshold is an implementation assumption disclosed to the user before execution.
 
 Expected fit count: 310 Logistic Regression fits plus 410 each for Random Forest, LightGBM and XGBoost = 1,540 fits including outer refits. Estimated local runtime: approximately 10–25 minutes. No paid or network service is involved.
+
+## Observed Unit 2B Gate Outcome — 2026-07-13
+
+Trial `benchmark-10x5-20260713-6a80074` completed all 1,540 fits and 5,000 paired OOF bootstrap draws. No baseline had both a positive macro-F1 point advantage over XGBoost and a paired 95% CI lower bound above zero. The gate did not trigger, so the approved plan continues with XGBoost as the predeclared XAI reference. This does not suppress secondary results: Random Forest had the highest QWK, but QWK was not a gate metric.

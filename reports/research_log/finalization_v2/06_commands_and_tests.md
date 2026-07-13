@@ -350,3 +350,77 @@ print(json.dumps({
 Exit 0 in 3.5 seconds. Result: pinned INX SHA-256 `b8deac0a615b97076622ae540f4cfd0d3c3f1e7acb83ba3ff6560470a9ccf60a`; 1,200 rows; support 194/874/132; 10 outer folds; 10,800 inner assignments; five inner folds; validation size 216; `joblib 1.5.3`; `threadpoolctl 3.6.0`. Dirty diagnostic config hash `7e70bf6646a542ad32e10ab3718654aa8232a46e44e2083ed10e2cfe526da595`, scientific-input hash `8be7c5d79f2b39af3e04f1c8a14a0ae70d2180c48c425595f69f23ac2e76b34a`, and fold hash `f133710d7c45283951f0b5f36e9f87e273bdeb1ed22a317c65fc34cc32a48373` are engineering diagnostics only and must not be cited/reused.
 
 The command `python -m src.experiments.run_model_benchmark_trial` was **not** executed in this checkpoint. `reports/manuscript_final/trials/` did not exist; no real model, trial artifact, gate result, API call or network call occurred. Manuscript status remained empty.
+
+## Real Four-Model Benchmark Trial
+
+Checkpoint and clean-start verification:
+
+```powershell
+git commit -m "fix(protocol): freeze approved 10x5 benchmark trial"
+git status --short --branch
+git rev-parse HEAD
+```
+
+Commit exit 0: `6a80074c1402c11331cafc27a3bb5c1d8a2ed4c3`; worktree porcelain was empty before the trial.
+
+Exact scientific trial command:
+
+```powershell
+$env:OPENAI_API_KEY=$null
+$env:OPENAI_AGENTS_API_KEY=$null
+$env:AZURE_OPENAI_API_KEY=$null
+.\myenv\Scripts\python.exe -m src.experiments.run_model_benchmark_trial --config configs/manuscript_final.yaml --run-id benchmark-10x5-20260713-6a80074
+```
+
+Exit 0 after 725.2 shell seconds. The manifest records start `2026-07-13T07:39:56+00:00`, end `2026-07-13T07:51:58+00:00`, elapsed `722.5215989999706`, clean start, commit `6a80074c1402c11331cafc27a3bb5c1d8a2ed4c3`, two completed stages, `canonical_release_eligible=false`, `latest_pointer_updated=false`, and `decision_required=false`.
+
+Exact post-run manifest verification:
+
+```powershell
+@'
+import json
+from pathlib import Path
+from src.experiments.run_model_benchmark_trial import verify_trial_manifest
+path=Path('reports/manuscript_final/trials/benchmark-10x5-20260713-6a80074/core/run_manifest.json')
+m=verify_trial_manifest(path)
+print(json.dumps({
+ 'verified': True,
+ 'status':m['status'],
+ 'git_commit':m['git_commit'],
+ 'git_worktree_dirty':m['git_worktree_dirty'],
+ 'config_hash':m['config_hash'],
+ 'scientific_input_hash':m['scientific_input_hash'],
+ 'source_tree_hash':m['source_tree_hash'],
+ 'dataset_sha256':m['actual_input_receipts']['inx_primary']['actual_sha256'],
+ 'model_grid_sha256':m['side_input_hashes']['model_search_space']['sha256'],
+ 'output_files':len(m['output_files']),
+ 'executed_stages':m['executed_stages'],
+ 'elapsed_seconds':m['elapsed_seconds'],
+ 'decision_required':m['decision_required'],
+ 'joblib':m['code_package_versions']['joblib'],
+ 'threadpoolctl':m['code_package_versions']['threadpoolctl'],
+}, sort_keys=True))
+'@ | .\myenv\Scripts\python.exe -
+```
+
+Exit 0 in 2.7 seconds. Verification result: 53 manifest outputs; commit/config/source/input/fold/model-grid/bootstrap identities consistent; all registered file hashes/sizes and 40 indexed model hashes valid. The physical package has 54 files including its manifest and totals 91,820,515 bytes.
+
+Completed manifest SHA-256: `1b4c3381489f8b0bf7ae60d57280b3ddd5aa5344cb250b1df63fdaaa6cc7379c`. An independent replay of the fold mapping and all three 5,000-draw paired macro-F1 comparisons matched persisted values within `1e-16`; path/hash/size mismatches were zero.
+
+Authoritative trial paths:
+
+- `reports/manuscript_final/trials/benchmark-10x5-20260713-6a80074/core/run_manifest.json`
+- `reports/manuscript_final/trials/benchmark-10x5-20260713-6a80074/core/model_benchmarks/model_summary.csv`
+- `reports/manuscript_final/trials/benchmark-10x5-20260713-6a80074/core/model_benchmarks/paired_model_differences.csv`
+- `reports/manuscript_final/trials/benchmark-10x5-20260713-6a80074/core/model_benchmarks/baseline_xgboost_gate.json`
+- `reports/manuscript_final/trials/benchmark-10x5-20260713-6a80074/core/model_benchmarks/selected_hyperparameters.csv`
+
+Primary macro-F1: XGBoost `0.621021` (`0.597319–0.644690`), LightGBM `0.605488` (`0.583315–0.629174`), Random Forest `0.592340` (`0.579571–0.604757`), Logistic Regression `0.506221` (`0.480283–0.531841`). Baseline-minus-XGBoost paired differences: LightGBM `-0.015533` (`-0.038121–0.006382`), Random Forest `-0.028681` (`-0.049949–-0.008049`), Logistic Regression `-0.114800` (`-0.147597–-0.083224`). Gate `false`.
+
+Secondary QWK: XGBoost `0.567602`, LightGBM `0.588329`, Random Forest `0.631678`, Logistic Regression `0.371011`. This does not change the predeclared macro-F1 gate.
+
+The command produced repeated sklearn probability-sum warnings for XGBoost and feature-name warnings for LightGBM. A read-only diagnostic on persisted OOF rows found maximum XGBoost row-sum deviation `8.381903171539307e-08`; float64 renormalization produced zero argmax changes, reduced maximum sum deviation to `2.22e-16`, suppressed the probability warning, and changed aggregate log loss by `1.809657979023882e-10`. The macro-F1/QWK selection and gate are unaffected; canonical probability evidence will be regenerated after code/test cleanup.
+
+Paid/API/network calls: zero. The process-local socket/DNS guard remained active. Manuscript edits: none. `latest` was not touched.
+
+Package-provenance caveat: `PyYAML`, `openpyxl` and `xlrd` are recorded as `not_installed`. This trial parsed the JSON-compatible canonical config without PyYAML and consumed verified CSV only; workbook inspection was not a trial stage. The gate is unaffected, but dependency lock/clean-install release readiness remains open.

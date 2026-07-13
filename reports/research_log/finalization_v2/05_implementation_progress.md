@@ -274,3 +274,35 @@ The preflight was intentionally dirty and its fold hash `87a2798724d761e6b3a109e
 - A fresh exact-command in-memory preflight verified the pinned INX bytes, 1,200 rows, support 194/874/132, 10×5 folds, 10,800 inner assignments, validation size 216, `joblib 1.5.3` and `threadpoolctl 3.6.0`. It wrote no file/model.
 
 The standalone real trial command has not executed, `reports/manuscript_final/trials/` does not exist at this checkpoint, and no predictive result or gate outcome exists. This remains an engineering-only checkpoint. Raw-byte source-tree hashing is known to be EOL-sensitive across different checkout policies; the local trial remains hash-complete, but portable release verification is an explicit later blocker.
+
+### Unit 2B real four-model benchmark trial
+
+Checkpoint `6a80074c1402c11331cafc27a3bb5c1d8a2ed4c3` left a clean worktree. The offline noncanonical entrypoint then completed from the verified local INX bytes in 725.2 shell seconds (722.522 manifest seconds), with no network/API call and no `latest` update. Run identity:
+
+- run: `benchmark-10x5-20260713-6a80074`;
+- config: `7e70bf6646a542ad32e10ab3718654aa8232a46e44e2083ed10e2cfe526da595`;
+- scientific input: `8be7c5d79f2b39af3e04f1c8a14a0ae70d2180c48c425595f69f23ac2e76b34a`;
+- INX: `b8deac0a615b97076622ae540f4cfd0d3c3f1e7acb83ba3ff6560470a9ccf60a`;
+- model grid: `d8fb0584d7106f8941ca8e1b0e0a9c58e13f39519c6c75b383ff333d92d41617`;
+- fold contract: `9fd24f0c7d499f0f2055d4f850e6342325ab5046a378b796ebca68e12a06f023`;
+- bootstrap resamples: `3528e4377f9907c2a7c1b51806abf09e0ec2d5513da630618b0a0cb9950a37d0`.
+- completed manifest: `1b4c3381489f8b0bf7ae60d57280b3ddd5aa5344cb250b1df63fdaaa6cc7379c`.
+
+The complete verifier passed after the run: 53 registered outputs plus the manifest (54 physical files, 91,820,515 bytes), 40 model hashes, 4,800 exactly-once OOF predictions, 300 candidate rows, 40 selected rows, 36 model-summary rows, 27 paired rows and 5,000 valid paired stratified draws.
+
+Primary macro-F1 results (paired-bootstrap 95% sample-level intervals):
+
+| Model | Macro-F1 | 95% CI |
+| --- | ---: | ---: |
+| XGBoost | 0.621021 | 0.597319–0.644690 |
+| LightGBM | 0.605488 | 0.583315–0.629174 |
+| Random Forest | 0.592340 | 0.579571–0.604757 |
+| Logistic Regression | 0.506221 | 0.480283–0.531841 |
+
+Baseline-minus-XGBoost macro-F1 differences were LightGBM `-0.015533` (`-0.038121–0.006382`), Random Forest `-0.028681` (`-0.049949–-0.008049`) and Logistic Regression `-0.114800` (`-0.147597–-0.083224`). The gate JSON and recomputation both report `gate_triggered=false`; the approved reference-model decision gate therefore does not pause downstream work.
+
+Secondary QWK point estimates were XGBoost `0.567602`, LightGBM `0.588329`, Random Forest `0.631678` and Logistic Regression `0.371011`. Random Forest's better secondary ordinal score is retained and must not be hidden, but QWK is not gate-eligible under the predeclared macro-F1 protocol.
+
+Warning audit: sklearn repeatedly warned that some XGBoost probabilities did not sum to one at its float64 warning tolerance, although the stage contract allowed absolute deviation up to `1e-6`. Persisted maximum deviation was `8.3819e-08`. Explicit float64 row renormalization changed no argmax and changed aggregate XGBoost log loss by `1.8097e-10`; macro-F1/QWK selection and the gate are exactly unaffected. LightGBM also emitted feature-name metadata warnings while using position-stable transformed arrays. Both warning paths must be cleaned and tested before canonical probability outputs; the completed trial remains immutable and noncanonical.
+
+Independent replay regenerated the fold mapping and all three paired macro-F1 comparisons from the persisted OOF rows; differences matched the package within `1e-16`, and registered-file/path/hash mismatches were zero. `PyYAML`, `openpyxl` and `xlrd` are recorded as `not_installed`; none was used by this JSON-compatible-config/CSV two-stage trial, so the gate remains valid, while clean-install/lock readiness remains open.

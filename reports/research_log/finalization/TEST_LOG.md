@@ -77,3 +77,13 @@ At that historical checkpoint, V2-007 through V2-010 had tested reusable infrast
 - Verified real-INX in-memory preflight: 1,200 rows, support 194/874/132, 10 outer folds, five inner folds, 10,800 inner assignments and validation size 216.
 - Manifest preflight recorded `joblib 1.5.3` and `threadpoolctl 3.6.0`.
 - Real models/trial artifacts/API/network calls: zero. The standalone trial command has not yet executed.
+
+## Real Four-Model Trial — 2026-07-13
+
+- Entry point exit: 0; shell runtime 725.2 seconds; manifest runtime 722.522 seconds.
+- `verify_trial_manifest`: passed after completion.
+- Verified structure: 1,200 shared outer rows; 10×5 folds; 300 candidate rows; 40 selected/fold-metric/model-index rows; 4,800 exactly-once OOF rows; 36 model-summary rows; 27 paired rows; 5,000 valid bootstrap draws; 40 model hashes.
+- Gate: not triggered; all three baseline-minus-XGBoost macro-F1 rows failed the positive-point plus positive-CI-lower condition.
+- Output identity: commit `6a80074`, config `7e70bf66…`, scientific input `8be7c5d7…`, fold contract `9fd24f0c…`, resamples `3528e437…`.
+- Warning diagnostic: exact XGBoost renormalization changed zero argmax labels and aggregate log loss by `1.81e-10`; warning cleanup remains required before canonical probability evidence.
+- API/network/manuscript edits: zero.

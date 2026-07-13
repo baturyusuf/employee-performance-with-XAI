@@ -14,4 +14,6 @@ Accepted on 2026-07-13:
 - Stop gate: trigger only when baseline-minus-XGBoost macro-F1 is positive and the paired OOF bootstrap 95% CI lower bound is greater than zero; then request user direction before choosing the XAI reference model.
 - Bootstrap: 5,000 paired sample-level OOF draws, stratified by outer fold and true class, percentile 95% interval with linear quantiles.
 
+Observed on 2026-07-13: verified trial `benchmark-10x5-20260713-6a80074` did not trigger the baseline superiority gate. XGBoost therefore remains the predeclared XAI reference without a new user decision. Secondary QWK differences remain reportable but do not override the accepted macro-F1 gate.
+
 Still prohibited without explicit approval: force-push, merge, release publication, Git history alteration, unapproved mirror use, or new scientific-protocol choices.
