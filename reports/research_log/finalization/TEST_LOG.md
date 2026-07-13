@@ -178,3 +178,4 @@ At that historical checkpoint, V2-007 through V2-010 had tested reusable infrast
 - Final config validation: `3c9588c1327ac563a85586835b19b30768860165dc26b61fcf7aafbce3bb1421`.
 - Final real-INX no-write/no-network diagnostic: 20 fits, 2,400 exactly-once nominal proxy OOF rows, 5,000 batched draws, exact outer-map match, minimum overall class support 20, minimum nonzero fold support 1, two zero-support cells, 3.776 seconds. Diagnostic values are not manuscript evidence.
 - Final hygiene: manuscript unchanged; zero secret, absolute-path, >100 MB candidate, active leakage-safe or legacy proxy-import matches; 17 README links valid; 27 issue rows parsed; `pip check` clean.
+- Tested implementation checkpoint: `a490d1e` (`feat(fairness): bind subgroup and proxy diagnostics to OOF evidence`). Immediate tracked status was clean; only the excluded historical trial remained untracked.

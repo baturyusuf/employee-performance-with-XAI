@@ -1,7 +1,7 @@
 # Final Readiness Report — Interim Checkpoint
 
 Assessment date: 2026-07-13
-Current state: Units 1A through 2F have tested implementation checkpoints or checkpoint-ready validation; no clean complete v2 scientific rebuild exists.
+Current state: Units 1A through 2F have tested implementation checkpoints, including Unit 2F commit `a490d1e`; no clean complete v2 scientific rebuild exists.
 
 This is a live interim assessment, not a final completion declaration. `../finalization/CURRENT_STATUS.md` is the interruption-resilient status source.
 
