@@ -424,3 +424,117 @@ The command produced repeated sklearn probability-sum warnings for XGBoost and f
 Paid/API/network calls: zero. The process-local socket/DNS guard remained active. Manuscript edits: none. `latest` was not touched.
 
 Package-provenance caveat: `PyYAML`, `openpyxl` and `xlrd` are recorded as `not_installed`. This trial parsed the JSON-compatible canonical config without PyYAML and consumed verified CSV only; workbook inspection was not a trial stage. The gate is unaffected, but dependency lock/clean-install release readiness remains open.
+
+## Unit 2C-0 Probability and Feature Warning Hygiene
+
+Focused tests:
+
+```powershell
+.\myenv\Scripts\python.exe -m pytest -q tests/test_canonical_model_factory.py tests/test_manuscript_model_benchmark.py tests/test_nested_search_outer_test_isolation.py tests/test_model_benchmark_trial_entrypoint.py
+```
+
+Exit 0: 63 passed in 37.39 seconds.
+
+Full gates:
+
+```powershell
+.\myenv\Scripts\python.exe -m pytest -q
+.\myenv\Scripts\python.exe -m unittest discover -s tests -q
+.\myenv\Scripts\python.exe -m compileall -q src tests
+git diff --check
+git status --short -- manuscript
+rg --pcre2 -n '(?<![A-Za-z])sk-(?:proj-)?[A-Za-z0-9_-]{20,}|github_pat_[A-Za-z0-9_]{20,}|gh[pousr]_[A-Za-z0-9]{30,}|AKIA[0-9A-Z]{16}' --glob '!myenv/**' --glob '!reports/manuscript_final/**' --glob '!*.ipynb' .
+```
+
+Results: pytest 350 passed, 2 skipped and 4 subtests in 64.88 seconds; unittest 162 passed with 2 skips in 3.339 seconds; compileall/diff/manuscript passed; high-entropy secret scan had no matches.
+
+Exact read-only fold-1 warning-hygiene replay (rerun with an explicit process-local socket/DNS guard so the invocation is reproducible from this log):
+
+```powershell
+@'
+import json
+import socket
+import warnings
+from pathlib import Path
+
+import numpy as np
+import pandas as pd
+
+from src.data.canonical_loader import load_canonical_dataset
+from src.experiments.manuscript_model_benchmark import exact_primary_feature_frame
+from src.governance.manuscript_contract import primary_excluded_features
+from src.models.canonical_models import aligned_predict_proba, build_model_pipeline
+from src.utils.config_loader import load_config
+
+TRIAL = Path("reports/manuscript_final/trials/benchmark-10x5-20260713-6a80074/core")
+CONFIG = Path("configs/manuscript_final.yaml")
+FOLD = 1
+MODELS = ("lightgbm", "xgboost")
+
+config = load_config(CONFIG)
+settings = config["manuscript_final"]
+frame = load_canonical_dataset(CONFIG, "inx_primary").frame
+excluded = primary_excluded_features(config)
+features = exact_primary_feature_frame(frame, excluded_features=excluded)
+target = frame[settings["target"]["column"]].astype(int)
+labels = [int(value) for value in settings["target"]["labels"]]
+seed = int(settings["seeds"]["model"])
+folds = pd.read_csv(TRIAL / "shared_folds" / "fold_assignments.csv")
+selected = pd.read_csv(TRIAL / "model_benchmarks" / "selected_hyperparameters.csv")
+oof = pd.read_csv(TRIAL / "model_benchmarks" / "oof_predictions.csv")
+train_ids = folds.loc[folds["outer_fold"].ne(FOLD), "sample_index"].astype(int).to_numpy()
+test_ids = folds.loc[folds["outer_fold"].eq(FOLD), "sample_index"].astype(int).to_numpy()
+
+originals = {name: getattr(socket, name) for name in ("socket", "create_connection", "getaddrinfo", "gethostbyname", "gethostbyname_ex")}
+def deny_network(*args, **kwargs):
+    raise RuntimeError("Network access denied during warning-hygiene replay")
+for name in originals:
+    setattr(socket, name, deny_network)
+
+results = []
+try:
+    for model_name in MODELS:
+        row = selected[(selected["outer_fold"].eq(FOLD)) & (selected["model"].eq(model_name))]
+        if len(row) != 1:
+            raise RuntimeError(f"Expected one selected row for {model_name}, found {len(row)}")
+        record = row.iloc[0]
+        pipeline = build_model_pipeline(
+            model_name,
+            features.loc[train_ids],
+            fixed_parameters=json.loads(record["fixed_parameters_json"]),
+            candidate_parameters=json.loads(record["selected_candidate_parameters_json"]),
+            random_state=seed,
+            forbidden_features=excluded,
+        )
+        with warnings.catch_warnings(record=True) as caught:
+            warnings.simplefilter("always")
+            pipeline.fit(features.loc[train_ids], target.loc[train_ids])
+            prediction = np.asarray(pipeline.predict(features.loc[test_ids]), dtype=int)
+            probability = aligned_predict_proba(pipeline, features.loc[test_ids], labels=labels)
+        persisted = oof[(oof["outer_fold"].eq(FOLD)) & (oof["model"].eq(model_name))].set_index("sample_index").loc[test_ids]
+        persisted_probability = persisted[[f"prob_class_{label}" for label in labels]].to_numpy(dtype=np.float64)
+        transformed = pipeline.named_steps["preprocessor"].transform(features.loc[test_ids])
+        results.append({
+            "model": model_name,
+            "n_test": int(len(test_ids)),
+            "label_mismatches": int(np.count_nonzero(prediction != persisted["y_pred"].to_numpy(dtype=int))),
+            "max_probability_delta": float(np.max(np.abs(probability - persisted_probability))),
+            "max_row_sum_deviation": float(np.max(np.abs(probability.sum(axis=1) - 1.0))),
+            "transformed_container": type(transformed).__name__,
+            "transformed_columns": int(transformed.shape[1]),
+            "warnings": [str(item.message) for item in caught],
+        })
+finally:
+    for name, value in originals.items():
+        setattr(socket, name, value)
+
+print(json.dumps({"artifact_written": False, "network_guard": "socket_and_dns_denied", "fold": FOLD, "results": results}, sort_keys=True))
+'@ | .\myenv\Scripts\python.exe -
+```
+
+Exit 0 in 2.7 seconds. The replay loaded the verified trial's fold assignment and selected-parameter records, rebuilt only the selected LightGBM and XGBoost pipelines with the new preprocessing/probability contract, and compared their in-memory predictions against persisted OOF rows. It wrote no output:
+
+- LightGBM: 0/120 label mismatches; maximum probability delta `3.3306690738754696e-16`; maximum row-sum deviation `2.220446049250313e-16`; 46-column pandas transformed output; zero warnings.
+- XGBoost: 0/120 label mismatches; maximum probability delta `7.015278280508852e-08`; maximum row-sum deviation `1.1102230246251565e-16`; 46-column pandas transformed output; zero warnings.
+
+The current code/config identity intentionally differs from the immutable completed trial. No trial file, scientific artifact, API/network resource or manuscript file was modified by this diagnostic.

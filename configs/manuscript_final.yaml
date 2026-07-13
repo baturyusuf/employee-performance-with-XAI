@@ -159,7 +159,9 @@
       "preprocessing": {
         "numeric": "median_imputation_then_standard_scaling",
         "categorical": "most_frequent_imputation_then_dense_one_hot_handle_unknown_ignore",
-        "fit_scope": "training_partition_only"
+        "fit_scope": "training_partition_only",
+        "output_container": "pandas_named_dense",
+        "probability_alignment": "global_label_order_float64_clip_then_row_normalize"
       },
       "xgboost": {
         "n_estimators": 300,

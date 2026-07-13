@@ -8,7 +8,7 @@ Date: 2026-07-13
 - API keys were removed from the subprocess environment
 - Worktree remained clean after tests
 
-Important: baseline green tests do not establish scientific readiness. They do not cover every confirmed v2 issue in `../finalization_v2/02_issue_register.csv`. Real-input preflights have run, but no v2 real-model benchmark or full scientific integration run had completed at this baseline.
+Important: baseline green tests do not establish scientific readiness. They do not cover every confirmed v2 issue in `../finalization_v2/02_issue_register.csv`. The original baseline had only real-input preflights; the later noncanonical 10x5 real-model trial is recorded below, while a full canonical scientific integration run has still not completed.
 
 ## Unit 1A — 2026-07-13
 
@@ -87,3 +87,13 @@ At that historical checkpoint, V2-007 through V2-010 had tested reusable infrast
 - Output identity: commit `6a80074`, config `7e70bf66…`, scientific input `8be7c5d7…`, fold contract `9fd24f0c…`, resamples `3528e437…`.
 - Warning diagnostic: exact XGBoost renormalization changed zero argmax labels and aggregate log loss by `1.81e-10`; warning cleanup remains required before canonical probability evidence.
 - API/network/manuscript edits: zero.
+
+## Unit 2C-0 Probability and Feature Warning Hygiene — 2026-07-13
+
+- Focused canonical-model/benchmark/nested/trial suite: 63 passed.
+- Full pytest: 350 passed, 2 skipped, plus 4 subtests.
+- Full unittest: 162 passed, 2 skipped.
+- Compileall, diff, manuscript-no-change and high-entropy secret scan: passed.
+- Real fold-1 diagnostic: LightGBM and XGBoost each had 0/120 label mismatches versus the immutable trial; transformed output was a named 46-column DataFrame; warnings were zero.
+- Maximum probability difference: LightGBM `3.33e-16`; XGBoost `7.02e-08` from deliberate exact row normalization. New row-sum deviations were at most `2.22e-16`.
+- Scientific artifacts: none. The existing trial was not modified or rerun.

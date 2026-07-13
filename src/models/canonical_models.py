@@ -28,6 +28,8 @@ CANONICAL_MODEL_NAMES = (
     "lightgbm",
     "xgboost",
 )
+COMMON_PREPROCESSOR_OUTPUT_CONTAINER = "pandas_named_dense"
+ALIGNED_PROBABILITY_PROTOCOL = "global_label_order_float64_clip_then_row_normalize"
 
 CANONICAL_ESTIMATOR_PATHS: Mapping[str, str] = MappingProxyType(
     {
@@ -165,7 +167,8 @@ def build_common_preprocessor(frame: pd.DataFrame) -> ColumnTransformer:
         )
     if not transformers:  # protected by the non-empty feature check
         raise CanonicalModelError("No numeric or categorical feature groups were inferred.")
-    return ColumnTransformer(transformers=transformers, remainder="drop")
+    preprocessor = ColumnTransformer(transformers=transformers, remainder="drop")
+    return preprocessor.set_output(transform="pandas")
 
 
 class CanonicalXGBClassifier(ClassifierMixin, BaseEstimator):
@@ -353,7 +356,7 @@ def aligned_predict_proba(
             f"Classifier classes {observed_classes.tolist()} do not match labels "
             f"{expected_classes.tolist()}."
         )
-    probabilities = np.asarray(fitted_estimator.predict_proba(features), dtype=float)
+    probabilities = np.asarray(fitted_estimator.predict_proba(features), dtype=np.float64)
     expected_shape = (len(features), len(observed_classes))
     if probabilities.ndim != 2 or probabilities.shape != expected_shape:
         raise CanonicalModelError(
@@ -361,13 +364,31 @@ def aligned_predict_proba(
             f"{observed_classes.tolist()}; expected {expected_shape}."
         )
     positions = [int(np.where(observed_classes == label)[0][0]) for label in expected_classes]
-    aligned = probabilities[:, positions]
+    aligned = np.asarray(probabilities[:, positions], dtype=np.float64)
     if not np.all(np.isfinite(aligned)):
         raise CanonicalModelError("Predicted probabilities are non-finite.")
     if np.any(aligned < -1e-12) or np.any(aligned > 1.0 + 1e-12):
         raise CanonicalModelError("Predicted probabilities fall outside [0,1].")
-    if not np.allclose(aligned.sum(axis=1), 1.0, rtol=0.0, atol=1e-6):
+    raw_row_sums = aligned.sum(axis=1, dtype=np.float64)
+    if not np.allclose(raw_row_sums, 1.0, rtol=0.0, atol=1e-6):
         raise CanonicalModelError("Predicted probabilities do not sum to one.")
+    # Model libraries may return float32-softmax values whose row sums are valid
+    # at model precision but exceed sklearn's tighter float64 warning threshold
+    # after conversion. Clip only the already-accepted numerical boundary, then
+    # normalize in float64 so every downstream probability metric sees one
+    # deterministic global-label simplex contract.
+    aligned = np.clip(aligned, 0.0, 1.0)
+    normalization = aligned.sum(axis=1, dtype=np.float64)
+    if np.any(normalization <= 0.0) or not np.all(np.isfinite(normalization)):
+        raise CanonicalModelError("Predicted probability rows cannot be normalized.")
+    aligned = aligned / normalization[:, np.newaxis]
+    if not np.allclose(
+        aligned.sum(axis=1, dtype=np.float64),
+        1.0,
+        rtol=0.0,
+        atol=np.finfo(np.float64).eps * max(2, len(expected_classes)),
+    ):
+        raise CanonicalModelError("Normalized probabilities do not sum to one.")
     return aligned
 
 
@@ -375,6 +396,8 @@ __all__ = [
     "CANONICAL_ESTIMATOR_PATHS",
     "CANONICAL_MODEL_NAMES",
     "CANONICAL_PARAMETER_NAMES",
+    "COMMON_PREPROCESSOR_OUTPUT_CONTAINER",
+    "ALIGNED_PROBABILITY_PROTOCOL",
     "CanonicalModelError",
     "CanonicalXGBClassifier",
     "aligned_predict_proba",

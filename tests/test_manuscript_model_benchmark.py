@@ -9,7 +9,11 @@ import pytest
 from src.experiments import manuscript_model_benchmark as benchmark
 from src.experiments.shared_folds import generate_shared_folds
 from src.models.oof_bootstrap import BootstrapProtocol
-from src.models.canonical_models import CANONICAL_ESTIMATOR_PATHS
+from src.models.canonical_models import (
+    ALIGNED_PROBABILITY_PROTOCOL,
+    CANONICAL_ESTIMATOR_PATHS,
+    COMMON_PREPROCESSOR_OUTPUT_CONTAINER,
+)
 from src.utils.config_loader import load_config
 
 
@@ -128,6 +132,9 @@ def test_actual_grid_freezes_the_predeclared_selection_and_gate_protocol() -> No
     assert settings["primary_practical_tie_tolerance"] == pytest.approx(0.001)
     assert settings["baseline_gate_metric"] == benchmark.BASELINE_GATE_METRIC
     assert nested["inner_splits"] == 5
+    preprocessing = manuscript["manuscript_final"]["model"]["preprocessing"]
+    assert preprocessing["output_container"] == COMMON_PREPROCESSOR_OUTPUT_CONTAINER
+    assert preprocessing["probability_alignment"] == ALIGNED_PROBABILITY_PROTOCOL
     assert {"joblib", "threadpoolctl"}.issubset(
         manuscript["manuscript_final"]["provenance"]["package_names"]
     )
@@ -244,6 +251,27 @@ def test_run_blocks_manuscript_model_grid_protocol_mismatch_before_data_access(
             model_grid_sha256=benchmark.sha256_file("configs/model_grid.yaml"),
         )
     assert not output.exists()
+
+
+@pytest.mark.parametrize(
+    ("field", "value"),
+    [
+        ("output_container", "numpy_dense"),
+        ("probability_alignment", "accept_tolerance_without_normalization"),
+    ],
+)
+def test_alignment_rejects_preprocessing_or_probability_contract_drift(
+    field: str,
+    value: str,
+) -> None:
+    settings = benchmark.validate_benchmark_config(load_config("configs/model_grid.yaml"))
+    manuscript = load_config("configs/manuscript_final.yaml")
+    manuscript["manuscript_final"]["model"]["preprocessing"][field] = value
+    with pytest.raises(benchmark.ModelBenchmarkError, match="preprocessing contract mismatch"):
+        benchmark.validate_benchmark_manuscript_alignment(
+            settings,
+            manuscript["manuscript_final"],
+        )
 
 
 def test_run_requires_canonical_ten_outer_fold_configuration_before_fold_access(
@@ -487,14 +515,20 @@ def test_nested_selection_uses_secondary_qwk_only_for_primary_practical_ties(
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
     features, target, folds = _fixture()
+    probability_call_sizes: list[int] = []
 
     class _SelectionPipeline(_FakePipeline):
-        def predict_proba(self, X):
-            token_probability = self.candidate_token / 100.0
-            return np.tile(
-                [token_probability, 0.5, 0.5 - token_probability],
-                (len(X), 1),
+        def predict(self, X):
+            token = self.candidate_token
+            pattern = np.asarray(
+                [2 + token % 3, 2 + (token // 3) % 3, 2 + (token // 9) % 3],
+                dtype=int,
             )
+            return np.resize(pattern, len(X))
+
+        def predict_proba(self, X):
+            probability_call_sizes.append(len(X))
+            return np.tile([0.2, 0.6, 0.2], (len(X), 1))
 
     def _selection_builder(
         model_name,
@@ -508,7 +542,8 @@ def test_nested_selection_uses_secondary_qwk_only_for_primary_practical_ties(
         return _SelectionPipeline(int(next(iter(candidate_parameters.values()))))
 
     def _controlled_metric(metric, y_true, prediction, probability, labels, *, task_type):
-        token = int(round(float(probability[0, 0]) * 100))
+        assert probability is None
+        token = sum((int(prediction[index]) - 2) * (3**index) for index in range(3))
         if metric == "macro_f1":
             return {1: 0.8000, 2: 0.7995}.get(token, 0.7900)
         if metric == "quadratic_weighted_kappa":
@@ -536,6 +571,8 @@ def test_nested_selection_uses_secondary_qwk_only_for_primary_practical_ties(
         "quadratic_weighted_kappa"
     ).all()
     assert result.selected_hyperparameters["primary_practical_tie_tolerance"].eq(0.001).all()
+    assert probability_call_sizes
+    assert 3 not in probability_call_sizes
     search = result.candidate_search_results
     candidate_two = search[search["candidate_index"].eq(1)]
     candidate_three = search[search["candidate_index"].eq(2)]

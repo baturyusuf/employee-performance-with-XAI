@@ -306,3 +306,29 @@ Secondary QWK point estimates were XGBoost `0.567602`, LightGBM `0.588329`, Rand
 Warning audit: sklearn repeatedly warned that some XGBoost probabilities did not sum to one at its float64 warning tolerance, although the stage contract allowed absolute deviation up to `1e-6`. Persisted maximum deviation was `8.3819e-08`. Explicit float64 row renormalization changed no argmax and changed aggregate XGBoost log loss by `1.8097e-10`; macro-F1/QWK selection and the gate are exactly unaffected. LightGBM also emitted feature-name metadata warnings while using position-stable transformed arrays. Both warning paths must be cleaned and tested before canonical probability outputs; the completed trial remains immutable and noncanonical.
 
 Independent replay regenerated the fold mapping and all three paired macro-F1 comparisons from the persisted OOF rows; differences matched the package within `1e-16`, and registered-file/path/hash mismatches were zero. `PyYAML`, `openpyxl` and `xlrd` are recorded as `not_installed`; none was used by this JSON-compatible-config/CSV two-stage trial, so the gate remains valid, while clean-install/lock readiness remains open.
+
+### Unit 2C-0 warning-hygiene plan — recorded before modification
+
+Problem/root cause: aligned XGBoost soft probabilities are converted to float64 but not renormalized; the repository accepts `1e-6` row-sum error while sklearn warns at a tighter float64 tolerance. The common transformer emits unnamed ndarrays, while LightGBM exposes synthetic fitted feature names and warns on every ndarray prediction. Inner selection computes full probability metrics even though both accepted selection metrics are label-only.
+
+Intended files: `src/models/canonical_models.py`, `src/experiments/manuscript_model_benchmark.py`, `configs/manuscript_final.yaml`, focused canonical-model/benchmark tests, and persistent logs. No completed trial artifact will be edited or overwritten.
+
+Acceptance criteria/tests:
+
+- aligned output is finite, clipped only within the existing numerical bound, reordered, float64 row-normalized to machine precision and warning-free in sklearn log loss;
+- normalization changes no argmax for the observed numerical-drift pattern and invalid row sums still fail closed;
+- every canonical model receives the same dense named pandas transformation, with deterministic feature order/lineage; LightGBM predict/proba emits no feature-name warning;
+- label-only inner selection does not call `predict_proba` or calculate unrelated probability metrics;
+- focused/full tests, compileall/diff/manuscript gates pass;
+- the completed noncanonical run stays immutable and is not rerun solely for numerically negligible warnings.
+
+Unit 2C-0 implementation result:
+
+- The common dense ColumnTransformer now emits pandas output with deterministic transformed feature names for all four model families. This removes LightGBM's synthetic-name/unnamed-array mismatch without suppressing warnings or changing transformed values.
+- Probability alignment now converts to float64, enforces the existing finite/range/sum boundary, clips only accepted numerical spillover, normalizes each row, and verifies machine-precision simplex sums.
+- Manuscript config declares and benchmark validation freezes `pandas_named_dense` and `global_label_order_float64_clip_then_row_normalize`.
+- Frozen label-only inner metrics no longer invoke `predict_proba` or calculate unrelated log-loss/Brier/ECE values.
+- Focused suite: 63 passed. Full pytest: 350 passed, 2 skipped, plus 4 subtests. Unittest: 162 passed, 2 skipped. Compileall/diff/manuscript/secret gates passed.
+- Real outer-fold-1 replay refit the selected LightGBM and XGBoost candidates in memory. Both reproduced 120/120 stored labels with no warnings; LightGBM probability delta was `3.33e-16`, XGBoost delta `7.02e-08` from normalization, and maximum new row-sum deviation `2.22e-16`.
+
+No scientific artifact was produced or altered. The previous trial remains bound to commit `6a80074`; later canonical evidence will be regenerated under the warning-clean commit.

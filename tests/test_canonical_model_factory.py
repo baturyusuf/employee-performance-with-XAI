@@ -1,18 +1,23 @@
 from __future__ import annotations
 
+import warnings
 from unittest.mock import patch
 
 import numpy as np
 import pandas as pd
 import pytest
 from sklearn.base import is_classifier
+from sklearn.metrics import log_loss
 
 from src.models.canonical_models import (
+    ALIGNED_PROBABILITY_PROTOCOL,
     CANONICAL_ESTIMATOR_PATHS,
     CANONICAL_MODEL_NAMES,
+    COMMON_PREPROCESSOR_OUTPUT_CONTAINER,
     CanonicalModelError,
     CanonicalXGBClassifier,
     aligned_predict_proba,
+    build_common_preprocessor,
     build_estimator,
     build_model_pipeline,
     validate_model_feature_frame,
@@ -108,6 +113,16 @@ def test_all_four_models_share_the_same_train_fitted_preprocessing_contract() ->
         ("numeric", ("numeric",), ("imputer", "scaler")),
         ("categorical", ("category",), ("imputer", "one_hot")),
     ]
+    transformed = build_common_preprocessor(frame).fit_transform(frame)
+    assert isinstance(transformed, pd.DataFrame)
+    assert transformed.columns.tolist() == [
+        "numeric__numeric",
+        "categorical__category_a",
+        "categorical__category_b",
+        "categorical__category_c",
+    ]
+    assert transformed.columns.is_unique
+    assert COMMON_PREPROCESSOR_OUTPUT_CONTAINER == "pandas_named_dense"
 
 
 def test_xgboost_balanced_weights_are_derived_from_current_fit_labels_only() -> None:
@@ -149,11 +164,78 @@ def test_probability_columns_are_reordered_to_global_label_contract() -> None:
     np.testing.assert_allclose(aligned, [[0.1, 0.3, 0.6], [0.1, 0.3, 0.6]])
 
 
+def test_probability_alignment_normalizes_float64_simplex_without_metric_warning() -> None:
+    raw = np.asarray(
+        [
+            [0.10000001, 0.20000002, 0.70000005],
+            [0.69999995, 0.20000002, 0.10000001],
+        ],
+        dtype=np.float64,
+    )
+
+    class _DriftClassifier:
+        classes_ = np.asarray([2, 3, 4])
+
+        def predict_proba(self, features):
+            return raw.copy()
+
+    aligned = aligned_predict_proba(
+        _DriftClassifier(),
+        _features().iloc[:2],
+        labels=[2, 3, 4],
+    )
+    assert aligned.dtype == np.float64
+    np.testing.assert_array_equal(np.argmax(aligned, axis=1), np.argmax(raw, axis=1))
+    np.testing.assert_allclose(
+        aligned.sum(axis=1),
+        1.0,
+        rtol=0.0,
+        atol=np.finfo(np.float64).eps * 3,
+    )
+    with warnings.catch_warnings(record=True) as caught:
+        warnings.simplefilter("always")
+        log_loss([4, 2], aligned, labels=[2, 3, 4])
+    assert not [warning for warning in caught if "do not sum to one" in str(warning.message)]
+    assert ALIGNED_PROBABILITY_PROTOCOL == (
+        "global_label_order_float64_clip_then_row_normalize"
+    )
+
+
+def test_lightgbm_receives_named_transformed_features_without_prediction_warning() -> None:
+    features = _features()
+    target = pd.Series([2, 3, 4, 2, 3, 4])
+    fixed, candidate = _parameters("lightgbm")
+    pipeline = build_model_pipeline(
+        "lightgbm",
+        features,
+        fixed_parameters=fixed,
+        candidate_parameters=candidate,
+        random_state=42,
+    )
+    with warnings.catch_warnings(record=True) as caught:
+        warnings.simplefilter("always")
+        pipeline.fit(features, target)
+        pipeline.predict(features)
+        aligned_predict_proba(pipeline, features, labels=[2, 3, 4])
+    feature_name_warnings = [
+        warning
+        for warning in caught
+        if "does not have valid feature names" in str(warning.message)
+    ]
+    assert not feature_name_warnings
+    transformed = pipeline.named_steps["preprocessor"].transform(features)
+    assert isinstance(transformed, pd.DataFrame)
+    assert transformed.columns.tolist() == list(
+        pipeline.named_steps["model"].feature_names_in_
+    )
+
+
 @pytest.mark.parametrize(
     "classes, probabilities, labels, message",
     [
         ([2, 3, 4], [[-0.1, 0.5, 0.6], [-0.1, 0.5, 0.6]], [2, 3, 4], "outside"),
         ([2, 3, 4], [[0.2, 0.3, 0.5]], [2, 3, 4], "shape"),
+        ([2, 3, 4], [[0.2, 0.3, 0.5001], [0.2, 0.3, 0.5001]], [2, 3, 4], "sum"),
         ([2, 2, 4], [[0.2, 0.3, 0.5], [0.2, 0.3, 0.5]], [2, 3, 4], "duplicates"),
         ([2, 3, 4], [[0.2, 0.3, 0.5], [0.2, 0.3, 0.5]], [2, 2, 4], "duplicates"),
     ],

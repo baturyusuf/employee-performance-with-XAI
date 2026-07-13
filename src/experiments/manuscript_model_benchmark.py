@@ -30,8 +30,10 @@ from src.governance.manuscript_contract import (
     sha256_file,
 )
 from src.models.canonical_models import (
+    ALIGNED_PROBABILITY_PROTOCOL,
     CANONICAL_ESTIMATOR_PATHS,
     CANONICAL_MODEL_NAMES,
+    COMMON_PREPROCESSOR_OUTPUT_CONTAINER,
     aligned_predict_proba,
     build_estimator,
     build_model_pipeline,
@@ -262,6 +264,20 @@ def validate_benchmark_manuscript_alignment(
                 "Canonical manuscript/model-grid benchmark mismatch for "
                 f"model.nested_tuning.{field}: expected {value!r}, observed {observed!r}."
             )
+    preprocessing = model.get("preprocessing")
+    if not isinstance(preprocessing, Mapping):
+        raise ModelBenchmarkError("Canonical manuscript model.preprocessing mapping is required.")
+    expected_preprocessing = {
+        "output_container": COMMON_PREPROCESSOR_OUTPUT_CONTAINER,
+        "probability_alignment": ALIGNED_PROBABILITY_PROTOCOL,
+    }
+    for field, value in expected_preprocessing.items():
+        observed = preprocessing.get(field)
+        if observed != value:
+            raise ModelBenchmarkError(
+                "Canonical manuscript preprocessing contract mismatch for "
+                f"model.preprocessing.{field}: expected {value!r}, observed {observed!r}."
+            )
     evaluation = manuscript_settings.get("evaluation")
     cv = evaluation.get("cv") if isinstance(evaluation, Mapping) else None
     n_splits = cv.get("n_splits") if isinstance(cv, Mapping) else None
@@ -364,15 +380,16 @@ def _metric_value(
     metric: str,
     y_true: pd.Series,
     prediction: np.ndarray,
-    probability: np.ndarray,
+    probability: np.ndarray | None,
     labels: Sequence[int],
     *,
     task_type: str,
 ) -> float:
+    metric_probability = probability if metric_definition(metric).requires_probabilities else None
     metrics = classification_metrics(
         y_true,
         prediction,
-        probability,
+        metric_probability,
         list(labels),
         task_type=task_type,
     )
@@ -465,6 +482,10 @@ def evaluate_nested_benchmark(
     tie_break_metric = str(settings["selection_tie_break_metric"])
     practical_tie_tolerance = float(settings["primary_practical_tie_tolerance"])
     gate_metric = str(settings["baseline_gate_metric"])
+    inner_probability_required = any(
+        metric_definition(metric).requires_probabilities
+        for metric in (selection_metric, tie_break_metric)
+    )
     selection_direction = metric_definition(selection_metric).better_direction
     model_definitions = settings["models"]
     fold_contract_hash = str(folds.contract["fold_contract_hash"])
@@ -528,10 +549,14 @@ def evaluate_nested_benchmark(
                     validation_prediction = np.asarray(
                         pipeline.predict(features.loc[validation_ids]), dtype=int
                     )
-                    validation_probability = aligned_predict_proba(
-                        pipeline,
-                        features.loc[validation_ids],
-                        labels=labels,
+                    validation_probability = (
+                        aligned_predict_proba(
+                            pipeline,
+                            features.loc[validation_ids],
+                            labels=labels,
+                        )
+                        if inner_probability_required
+                        else None
                     )
                     primary_inner_scores.append(
                         _metric_value(
