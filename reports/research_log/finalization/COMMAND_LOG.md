@@ -92,3 +92,15 @@ The final read-only INX diagnostic used the same no-write/no-network wrapper and
 Non-scientific command failures recorded for reproducibility: an initial Windows wildcard `rg` invocation failed before inspection; the first post-review test exposed the duplicate task-field reference; the second exposed the absent manuscript-table task field; an issue-register audit initially assumed the older remediation column names and was rerun against the actual v2 schema; a later log search repeated the literal Windows wildcard mistake and was corrected with `rg -g '*.md'`. None executed or wrote a scientific stage.
 
 Checkpoint command `git commit -m "feat(fairness): bind subgroup and proxy diagnostics to OOF evidence"` exited 0 and created `a490d1e` with 22 files changed. Immediate status verification showed no tracked change and only the deliberately untracked `reports/manuscript_final/trials/`; `git ls-files` returned no trial file. No push, merge, release or manuscript edit occurred.
+
+## Unit 2G External Replication Read-only Audit - 2026-07-13
+
+Read-only inspection covered `configs/manuscript_final.yaml`, `configs/data_acquisition.yaml`, HRDataset schema mapping, canonical loader/external adapter, `manuscript_external_evidence.py`, builder/scopes/task/claim code, existing tests and historical external packages. A no-network in-memory loader/adaptation command verified SHA-256 `cb199967...`, 311 × 36 rows/columns, raw support 37/243/18/13, mapped support 31/243/37, no unmapped target and the exact current policy feature lists. It wrote no file or model.
+
+```powershell
+.\myenv\Scripts\python.exe -m pytest -q tests/test_manuscript_external_evidence.py tests/test_external_scope_contract.py tests/test_external_explicit_input_binding.py tests/test_external_claim_boundaries.py
+```
+
+Exit 0: 19 passed in 6.46 seconds. These are baseline tests, not evidence that the current stage is canonical. Historical package counts were read only: `latest/external` has 53 files/24.8 MB under config `c664...` and old commit `1834748`; `reports/external_validation` has 192 files/68.3 MB. The old package combines core/supplementary tasks and actionability, so it is incompatible and cannot be reused.
+
+One broad `rg` command again included literal Windows wildcard test arguments and returned exit 1 after the non-wildcard portions printed; the corrected focused command named four files explicitly and passed. No scientific execution or write occurred in the failed inspection command.

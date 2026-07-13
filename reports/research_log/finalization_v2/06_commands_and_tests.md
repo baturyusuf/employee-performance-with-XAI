@@ -1278,3 +1278,17 @@ The final hygiene wrapper found zero high-entropy secret matches, zero home/file
 The final here-string INX diagnostic used current config hash `3c9588c1327ac563a85586835b19b30768860165dc26b61fcf7aafbce3bb1421`, the verified `b8deac...` dataset and process-local write/socket/DNS denials. Exit 0 after 6.9 shell seconds and 3.776 measured evidence seconds: exact historical outer-map match; 20 fits; 2,400 exactly-once OOF rows; nominal proxy task only; 5,000 draws in batches of 200; resample hash `ceca117f41907c8c39965fa168241e4004381a33a1cf7a66cfab1a260beec558`; adapter hash `ab0464e823b773cc79cf512bba2b5bb294e83c73b3a415775983878534ab549f`; minimum overall department support 20; minimum nonzero fold support 1; two zero-support fold/class cells. Macro-F1 estimates/intervals were unchanged from the intermediate diagnostic and remain noncanonical implementation evidence.
 
 Checkpoint command `git commit -m "feat(fairness): bind subgroup and proxy diagnostics to OOF evidence"` exited 0: commit `a490d1e`, 22 files, 4,052 insertions and 658 deletions. Immediate `git status --short --branch` showed only the excluded untracked historical trial; `git ls-files reports/manuscript_final/trials` was empty. No push, merge, release or manuscript edit occurred.
+
+## Unit 2G - Required Read-only External Replication Audit
+
+The audit used `Get-Content`/`rg`/`git` and a process-local no-network Python here-string to inspect canonical config/acquisition/mapping, loader/adapters, the external module, tests and historical packages. The in-memory loader returned the exact expected HRDataset receipt and adapter mapping; it wrote no file and fitted no model. The corrected baseline test command was:
+
+```powershell
+.\myenv\Scripts\python.exe -m pytest -q tests/test_manuscript_external_evidence.py tests/test_external_scope_contract.py tests/test_external_explicit_input_binding.py tests/test_external_claim_boundaries.py
+```
+
+Exit 0: 19 passed in 6.46 seconds. Input evidence: 311 × 36; dataset SHA-256 `cb19996755c93c0a8d6527f59da4701c80aef65eff854906546dce286249813c`; mapping SHA-256 `4988bde12fbd0198102f22f4078fd31ba20ea4285160363d9cf101610e9f19d0`; raw target support 37/243/18/13; mapped 2/3/4 support 31/243/37; zero unmapped. The raw file is Git-tracked and not ignored; source/licence fields remain manual review.
+
+Historical read-only inventory: `reports/manuscript_final/latest/external` contains 53 files and 24,821,361 bytes under stale config `c664...`/commit `1834748`; `reports/external_validation` contains 192 files and 68,261,087 bytes. The former includes HR/IBM/Turnover plus actionability in one scope. Neither may feed v2.
+
+One broad audit command passed literal Windows wildcard test names to `rg` and exited 1 after printing its valid non-wildcard inspection output. The explicit four-file pytest command above passed. No science/write/network/API/manuscript operation occurred.

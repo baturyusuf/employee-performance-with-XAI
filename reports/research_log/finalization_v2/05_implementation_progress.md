@@ -490,3 +490,26 @@ Final validation under config hash `3c9588c1327ac563a85586835b19b30768860165dc26
 No Unit 2F scientific artifact has been generated or admitted. The stage remains fail-closed until benchmark and policy upstreams are regenerated under the same final config/run/scientific identity.
 
 Checkpoint: commit `a490d1e` (`feat(fairness): bind subgroup and proxy diagnostics to OOF evidence`) records the fully tested Unit 2F implementation, tests and traceability. Immediate tracked status was clean; the 91.8 MB local historical trial remained untracked/unstaged, and no push was performed.
+
+### Unit 2G HRDataset_v14 external-replication audit and preimplementation contract
+
+The verified local HRDataset file matches the acquisition contract exactly: SHA-256 `cb19996755c93c0a8d6527f59da4701c80aef65eff854906546dce286249813c`, 311 rows × 36 columns. The explicit mapping hash is `4988bde12fbd0198102f22f4078fd31ba20ea4285160363d9cf101610e9f19d0`; raw target counts Exceeds/Fully Meets/Needs Improvement/PIP are 37/243/18/13 and mapped class 2/3/4 support is 31/243/37 with no unmapped value. Ten outer × five inner folds are feasible. Source authenticity and licence remain manual-review items; no download was attempted.
+
+The pre-modification audit rejects current external evidence for v2. The module runs static rather than nested XGBoost, uses fold-normal intervals rather than 5,000 sample-level paired resamples, lacks predeclared sigmoid replication, has incomplete OOF SHAP stability and support-aware subgroup/proxy uncertainty, imports legacy fairness/SHAP utilities, writes non-atomically and omits scientific/fold/model-grid/model identities. Its policy aliases are false (`DeptID` survives department removal and `PositionID` survives job-role removal), with additional sensitive/status/date aliases and unresolved watchlist-field treatment. Existing focused tests pass 19/19 but do not cover these defects. Historical external packages are stale, mixed-scope and inadmissible.
+
+Intended files after the user policy decision: canonical external protocol/config and schema mapping; neutral external fold/model/calibration/SHAP/subgroup-proxy implementation or carefully reused current v2 primitives; core builder wiring; task/claim/provenance validators; external contract/scientific-behavior/atomic-publication tests; traceability. The manuscript and historical artifacts remain out of scope.
+
+Acceptance criteria:
+
+- freeze one exact HRDataset primary policy and diagnostic/strict variants in canonical config, removing all direct aliases and forbidding sensitive, ID, target, post-outcome and raw-date fields;
+- generate/hash deterministic dataset-specific 10×5 folds; tune XGBoost within each outer train on macro-F1 with QWK tie-break; persist candidate/selection/model/lineage receipts and exactly-once OOF rows;
+- fit the fixed sigmoid calibrator only on five-fold cross-fitted outer-training probabilities and apply it to the corresponding untouched outer-test model; no method/threshold selection;
+- compute 5,000-draw target-stratified sample-level pointwise intervals and paired policy differences; keep fold variability descriptive and record conditional inference;
+- compute exact prediction-model grouped OOF SHAP with class/global tables, fold rankings, descriptive stability and deterministic local cases; forbid removed aliases;
+- use support-aware, denominator-aware external subgroup/proxy diagnostics with valid bootstrap counts/status/limitations and no fairness/causal claim; remove legacy fairness dependency;
+- preserve the computed three-safe-feature INX transport infeasibility as a claim-boundary artifact, never a transported-model result;
+- bind run/config/scientific-input/data/mapping/acquisition/model-grid/fold/model identities, late-revalidate every input, publish atomically with portable paths and reject all historical discovery;
+- keep IBM performance/attrition and Turnover out of core output; no LLM/chatbot/counterfactual/API/network path;
+- pass focused contracts, bounded real-input diagnostics, independent review, full test/compile/hygiene gates before checkpoint.
+
+Estimated production compute is approximately 480 small-data fits plus bootstrap/SHAP/subgroup work, conservatively 3–6 minutes on the current machine. This is below the material compute gate. The external feature-policy choice is material and is awaiting the user; no scientific code change has begun.

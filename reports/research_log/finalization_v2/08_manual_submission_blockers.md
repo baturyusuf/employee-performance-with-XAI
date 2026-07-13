@@ -6,7 +6,9 @@ The user reports that an ethics/IRB application is pending. Institution/universi
 
 ## Dataset Source, Licence and Citation — Blocking
 
-INX, HRDataset_v14, IBM HR Analytics and Employee Turnover all remain `manual_review_required` for source authenticity, licence and citation verification. Until D3 and manual verification are resolved, raw redistribution and final data-availability wording are blocked.
+INX, HRDataset_v14, IBM HR Analytics and Employee Turnover all remain `manual_review_required` for source authenticity, licence and citation verification. D3 acquisition behavior is accepted and the current files are hash/schema verified, but that does not verify legal/source authenticity. Raw redistribution and final data-availability wording remain blocked.
+
+HRDataset_v14 is presently Git-tracked even though its acquisition record says user-provided local file and licence/source authenticity are unverified. The fixed non-distribution decision requires removal from the current publication tip without deleting the user's local copy; public history cleanup remains a separate authorization-bound issue.
 
 ## Public Git History — Blocking for Strict Non-Distribution
 

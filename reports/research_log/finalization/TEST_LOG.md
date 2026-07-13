@@ -179,3 +179,12 @@ At that historical checkpoint, V2-007 through V2-010 had tested reusable infrast
 - Final real-INX no-write/no-network diagnostic: 20 fits, 2,400 exactly-once nominal proxy OOF rows, 5,000 batched draws, exact outer-map match, minimum overall class support 20, minimum nonzero fold support 1, two zero-support cells, 3.776 seconds. Diagnostic values are not manuscript evidence.
 - Final hygiene: manuscript unchanged; zero secret, absolute-path, >100 MB candidate, active leakage-safe or legacy proxy-import matches; 17 README links valid; 27 issue rows parsed; `pip check` clean.
 - Tested implementation checkpoint: `a490d1e` (`feat(fairness): bind subgroup and proxy diagnostics to OOF evidence`). Immediate tracked status was clean; only the excluded historical trial remained untracked.
+
+## Unit 2G External Replication Baseline Audit - 2026-07-13
+
+- Scientific model execution: none; required pre-modification audit only.
+- Verified HRDataset: SHA-256 `cb19996755c93c0a8d6527f59da4701c80aef65eff854906546dce286249813c`, 311 rows, 36 columns, mapping hash `4988bde12fbd0198102f22f4078fd31ba20ea4285160363d9cf101610e9f19d0`.
+- Raw target counts: Exceeds 37, Fully Meets 243, Needs Improvement 18, PIP 13. Mapped counts: class 2 = 31, class 3 = 243, class 4 = 37; no unmapped value; 10 × 5 nested stratification feasible.
+- Baseline external tests: 19 passed in 6.46 seconds.
+- Confirmed uncovered defects: static rather than nested model selection; fold-mean CI; direct department/job-role aliases; ambiguous governance fields; no cross-fitted sigmoid; incomplete SHAP stability; legacy unsupported subgroup helpers; incomplete scientific identity; non-atomic writes.
+- Source/licence authenticity: manual review required. Network/download/model/artifact/manuscript operations: zero.
