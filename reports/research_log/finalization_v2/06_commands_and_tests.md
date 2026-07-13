@@ -538,3 +538,210 @@ Exit 0 in 2.7 seconds. The replay loaded the verified trial's fold assignment an
 - XGBoost: 0/120 label mismatches; maximum probability delta `7.015278280508852e-08`; maximum row-sum deviation `1.1102230246251565e-16`; 46-column pandas transformed output; zero warnings.
 
 The current code/config identity intentionally differs from the immutable completed trial. No trial file, scientific artifact, API/network resource or manuscript file was modified by this diagnostic.
+
+## Unit 2C-A Exact-Model OOF SHAP
+
+Focused and complete validation commands:
+
+```powershell
+.\myenv\Scripts\python.exe -m pytest -q tests/test_benchmark_artifact_contract.py tests/test_canonical_shap_axis.py tests/test_shap_uses_exact_oof_fold_model.py tests/test_shap_outputs_match_primary_policy.py tests/test_stage_runner_scientific_input_binding.py tests/test_shared_fold_assignments_across_models_and_policies.py tests/test_forbidden_features_absent_from_primary_artifacts.py
+.\myenv\Scripts\python.exe -m pytest -q
+.\myenv\Scripts\python.exe -m unittest discover -s tests -q
+.\myenv\Scripts\python.exe -m compileall -q src tests
+git diff --check
+git diff --exit-code -- manuscript/mdpi_information/main.md
+```
+
+Results: focused 59 passed plus 4 subtests in 15.58 seconds; full pytest 389 passed, 2 skipped, plus 4 subtests in 78.40 seconds; unittest 164 passed with 2 skips in 3.531 seconds; compileall/diff/manuscript passed.
+
+Additional exact scans:
+
+```powershell
+$m = rg --pcre2 -n '(?<![A-Za-z])sk-(?:proj-)?[A-Za-z0-9_-]{20,}|github_pat_[A-Za-z0-9_]{20,}|gh[pousr]_[A-Za-z0-9]{30,}|AKIA[0-9A-Z]{16}' --glob '!myenv/**' --glob '!reports/manuscript_final/**' --glob '!*.ipynb' .; if ($LASTEXITCODE -eq 0) { $m; exit 2 } elseif ($LASTEXITCODE -eq 1) { 'NO_SECRET_PATTERN_MATCHES'; exit 0 } else { exit $LASTEXITCODE }
+$m = git diff -- . ':!reports/research_log/**' | Select-String -Pattern 'C:\\Users\\|/home/[^/]+/|file://' -CaseSensitive; if ($m) { $m; exit 2 } else { 'NO_ABSOLUTE_USER_PATHS_IN_SCIENTIFIC_DIFF'; exit 0 }
+$tracked = @(git diff --name-only) + @(git ls-files --others --exclude-standard | Where-Object { $_ -notlike 'reports/manuscript_final/trials/*' }); $bad=@(); foreach($f in ($tracked | Sort-Object -Unique)){ if(Test-Path -LiteralPath $f -PathType Leaf){$n=(Get-Item -LiteralPath $f).Length; if($n -gt 100MB){$bad += "$f`t$n"}}}; if($bad){$bad; exit 2}else{'NO_100MB_CANDIDATE_FILES'; exit 0}
+```
+
+All three scans exited 0 with no matches/failures.
+
+Exact historical reader/OOF replay (read-only, network denied):
+
+```powershell
+@'
+import json
+import socket
+from pathlib import Path
+
+from src.data.canonical_loader import load_canonical_dataset
+from src.experiments.benchmark_artifact_contract import read_xgboost_oof_artifacts, validate_xgboost_oof_replay
+from src.experiments.manuscript_model_benchmark import exact_primary_feature_frame
+from src.governance.manuscript_contract import primary_excluded_features, sha256_file
+from src.utils.config_loader import load_config
+
+trial = Path("reports/manuscript_final/trials/benchmark-10x5-20260713-6a80074/core")
+config_path = Path("configs/manuscript_final.yaml")
+manifest_before = sha256_file(trial / "run_manifest.json")
+config = load_config(config_path)
+settings = config["manuscript_final"]
+canonical = load_canonical_dataset(config_path, "inx_primary")
+features = exact_primary_feature_frame(canonical.frame, excluded_features=primary_excluded_features(config))
+target = canonical.frame[settings["target"]["column"]].astype(int)
+labels = [int(value) for value in settings["target"]["labels"]]
+fold_contract = json.loads((trial / "shared_folds" / "fold_contract.json").read_text(encoding="utf-8"))
+originals = {name: getattr(socket, name) for name in ("socket", "create_connection", "getaddrinfo", "gethostbyname", "gethostbyname_ex")}
+def deny_network(*args, **kwargs):
+    raise RuntimeError("Network access denied during exact-model artifact replay")
+for name in originals:
+    setattr(socket, name, deny_network)
+try:
+    bundle = read_xgboost_oof_artifacts(
+        trial / "shared_folds",
+        trial / "model_benchmarks",
+        expected_run_id=fold_contract["run_id"],
+        expected_config_hash=fold_contract["config_hash"],
+        expected_scientific_input_hash=fold_contract["scientific_input_hash"],
+        expected_feature_columns=features.columns.tolist(),
+        expected_labels=labels,
+    )
+    validate_xgboost_oof_replay(bundle, features, target, labels=labels)
+finally:
+    for name, value in originals.items():
+        setattr(socket, name, value)
+manifest_after = sha256_file(trial / "run_manifest.json")
+print(json.dumps({
+    "artifact_written": False,
+    "network_guard": "socket_and_dns_denied",
+    "historical_trial_only": True,
+    "run_id": bundle.identity.run_id,
+    "fold_contract_hash": bundle.identity.fold_contract_hash,
+    "model_set_sha256": bundle.model_set_sha256,
+    "n_xgboost_models": len(bundle.fold_models),
+    "n_oof_rows": len(bundle.oof_predictions),
+    "gate_triggered": bundle.baseline_gate["gate_triggered"],
+    "manifest_sha256_before": manifest_before,
+    "manifest_sha256_after": manifest_after,
+    "manifest_unchanged": manifest_before == manifest_after,
+}, sort_keys=True))
+'@ | .\myenv\Scripts\python.exe -
+```
+
+Exit 0 in 3.0 seconds: ten XGBoost models; 1,200 exact-once OOF rows; gate false; model-set hash `492aa445efc0df9348b9c85714ec09a539d6195fd46c2151c102b6ba02a1c607`; completed manifest remained `1b4c3381489f8b0bf7ae60d57280b3ddd5aa5344cb250b1df63fdaaa6cc7379c`. This validates the reader only and does not make the historical run canonical.
+
+Exact stale-lineage check:
+
+```powershell
+@'
+import joblib
+from pathlib import Path
+from src.data.canonical_loader import load_canonical_dataset
+from src.experiments.manuscript_model_benchmark import exact_primary_feature_frame
+from src.explainability.canonical_shap_axis import build_canonical_shap_axis
+from src.governance.manuscript_contract import primary_excluded_features
+from src.utils.config_loader import load_config
+config = load_config("configs/manuscript_final.yaml")
+features = exact_primary_feature_frame(
+    load_canonical_dataset("configs/manuscript_final.yaml", "inx_primary").frame,
+    excluded_features=primary_excluded_features(config),
+)
+model = joblib.load(Path("reports/manuscript_final/trials/benchmark-10x5-20260713-6a80074/core/model_benchmarks/models/xgboost/outer_fold_01.joblib"))
+build_canonical_shap_axis(
+    model.named_steps["preprocessor"],
+    raw_feature_order=features.columns.tolist(),
+    forbidden_features=primary_excluded_features(config),
+)
+'@ | .\myenv\Scripts\python.exe -
+```
+
+Expected exit 1 in 1.9 seconds: `CanonicalShapAxisError: one_hot feature_names_in_ must not be empty.` The historical pipeline was fitted before named pandas propagation, so its nested encoder lacks auditable input lineage. This is an intentional fail-closed incompatibility, not a reason to add a heuristic fallback.
+
+Exact current-code real fold-1 axis and grouped-SHAP diagnostic (in memory, network denied, no output):
+
+```powershell
+@'
+import json
+import socket
+import warnings
+from pathlib import Path
+
+import numpy as np
+import pandas as pd
+import shap
+
+from src.data.canonical_loader import load_canonical_dataset
+from src.experiments.manuscript_model_benchmark import exact_primary_feature_frame
+from src.explainability.canonical_shap_axis import build_canonical_shap_axis, group_canonical_shap_values, normalize_multiclass_shap_values
+from src.governance.manuscript_contract import primary_excluded_features, sha256_file
+from src.models.canonical_models import aligned_predict_proba, build_model_pipeline
+from src.utils.config_loader import load_config
+
+trial = Path("reports/manuscript_final/trials/benchmark-10x5-20260713-6a80074/core")
+config_path = Path("configs/manuscript_final.yaml")
+manifest_before = sha256_file(trial / "run_manifest.json")
+config = load_config(config_path)
+settings = config["manuscript_final"]
+canonical = load_canonical_dataset(config_path, "inx_primary")
+excluded = primary_excluded_features(config)
+features = exact_primary_feature_frame(canonical.frame, excluded_features=excluded)
+target = canonical.frame[settings["target"]["column"]].astype(int)
+labels = [int(value) for value in settings["target"]["labels"]]
+folds = pd.read_csv(trial / "shared_folds" / "fold_assignments.csv")
+selected = pd.read_csv(trial / "model_benchmarks" / "selected_hyperparameters.csv")
+persisted = pd.read_csv(trial / "model_benchmarks" / "oof_predictions.csv")
+fold = 1
+train_ids = folds.loc[folds["outer_fold"].ne(fold), "sample_index"].astype(int).to_numpy()
+test_ids = folds.loc[folds["outer_fold"].eq(fold), "sample_index"].astype(int).to_numpy()
+record = selected[(selected["outer_fold"].eq(fold)) & (selected["model"].eq("xgboost"))].iloc[0]
+pipeline = build_model_pipeline(
+    "xgboost",
+    features.loc[train_ids],
+    fixed_parameters=json.loads(record["fixed_parameters_json"]),
+    candidate_parameters=json.loads(record["selected_candidate_parameters_json"]),
+    random_state=int(settings["seeds"]["model"]),
+    forbidden_features=excluded,
+)
+originals = {name: getattr(socket, name) for name in ("socket", "create_connection", "getaddrinfo", "gethostbyname", "gethostbyname_ex")}
+def deny_network(*args, **kwargs):
+    raise RuntimeError("Network access denied during current-contract SHAP diagnostic")
+for name in originals:
+    setattr(socket, name, deny_network)
+try:
+    with warnings.catch_warnings(record=True) as caught:
+        warnings.simplefilter("always")
+        pipeline.fit(features.loc[train_ids], target.loc[train_ids])
+        probability = aligned_predict_proba(pipeline, features.loc[test_ids], labels=labels)
+        prediction = np.asarray(pipeline.predict(features.loc[test_ids]), dtype=int)
+        preprocessor = pipeline.named_steps["preprocessor"]
+        axis = build_canonical_shap_axis(preprocessor, raw_feature_order=features.columns.tolist(), forbidden_features=excluded)
+        transformed = preprocessor.transform(features.loc[test_ids])
+        axis.validate_transformed_matrix(transformed, n_samples=len(test_ids))
+        raw_shap = shap.TreeExplainer(pipeline.named_steps["model"].model_).shap_values(transformed)
+        normalized = normalize_multiclass_shap_values(raw_shap, n_samples=len(test_ids), n_classes=len(labels), n_transformed_features=axis.n_transformed_features)
+        grouped = group_canonical_shap_values(normalized, axis)
+finally:
+    for name, value in originals.items():
+        setattr(socket, name, value)
+old = persisted[(persisted["outer_fold"].eq(fold)) & (persisted["model"].eq("xgboost"))].set_index("sample_index").loc[test_ids]
+manifest_after = sha256_file(trial / "run_manifest.json")
+print(json.dumps({
+    "artifact_written": False,
+    "network_guard": "socket_and_dns_denied",
+    "diagnostic_only": True,
+    "outer_fold": fold,
+    "n_test": len(test_ids),
+    "raw_features": axis.n_raw_features,
+    "transformed_features": axis.n_transformed_features,
+    "grouped_shape": list(grouped.shape),
+    "max_group_sum_error": float(np.max(np.abs(grouped.sum(axis=2) - normalized.sum(axis=2)))),
+    "one_hot_feature_names_in": preprocessor.named_transformers_["categorical"].named_steps["one_hot"].feature_names_in_.tolist(),
+    "label_mismatches_vs_historical_trial": int(np.count_nonzero(prediction != old["y_pred"].to_numpy(dtype=int))),
+    "max_probability_delta_vs_historical_trial": float(np.max(np.abs(probability - old[[f"prob_class_{label}" for label in labels]].to_numpy(dtype=float)))),
+    "max_probability_sum_deviation": float(np.max(np.abs(probability.sum(axis=1) - 1.0))),
+    "warnings": [str(item.message) for item in caught],
+    "manifest_unchanged": manifest_before == manifest_after,
+}, sort_keys=True))
+'@ | .\myenv\Scripts\python.exe -
+```
+
+Exit 0 in 3.3 seconds: 120 test rows; 46 transformed features; 20 raw families; grouped shape `(120,3,20)`; maximum grouped/transformed sum error `0`; zero warnings; zero label mismatches; maximum normalized probability delta from the immutable pre-cleanup trial `7.015278280508852e-08`; manifest unchanged. These are diagnostic compatibility checks, not manuscript results.
+
+No canonical SHAP package or manuscript file was generated or changed. Paid API/network calls were zero.

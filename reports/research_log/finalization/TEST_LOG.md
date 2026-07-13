@@ -97,3 +97,14 @@ At that historical checkpoint, V2-007 through V2-010 had tested reusable infrast
 - Real fold-1 diagnostic: LightGBM and XGBoost each had 0/120 label mismatches versus the immutable trial; transformed output was a named 46-column DataFrame; warnings were zero.
 - Maximum probability difference: LightGBM `3.33e-16`; XGBoost `7.02e-08` from deliberate exact row normalization. New row-sum deviations were at most `2.22e-16`.
 - Scientific artifacts: none. The existing trial was not modified or rerun.
+
+## Unit 2C-A Exact-Model OOF SHAP — 2026-07-13
+
+- Reader/axis/exact-OOF/policy/wiring/shared-fold/forbidden-feature focused suite: 59 passed plus 4 subtests.
+- Full pytest: 389 passed, 2 skipped, plus 4 subtests.
+- Full unittest: 164 passed, 2 skipped.
+- Compileall, diff, manuscript-no-change, high-entropy secret, scientific-diff absolute-path and 100 MB candidate scans: passed.
+- Historical reader replay: 10 exact XGBoost models, 1,200 OOF rows, gate false, model-set SHA-256 `492aa445efc0df9348b9c85714ec09a539d6195fd46c2151c102b6ba02a1c607`; immutable manifest unchanged.
+- Historical axis check: expected fail-closed because old nested OneHotEncoder has no `feature_names_in_`; this proves the historical trial cannot feed canonical SHAP.
+- Current-code real fold-1 SHAP diagnostic: 120 samples, 46 transformed features, 20 raw groups, grouped shape `(120,3,20)`, maximum sum error `0`, zero warnings and zero label mismatches.
+- Scientific artifacts: none; canonical benchmark+SHAP regeneration remains pending.

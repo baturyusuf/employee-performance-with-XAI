@@ -430,14 +430,46 @@ def _run_calibration(context: StageContext) -> Mapping[str, Any]:
     )
 
 
+def _require_compatible_upstream_stage(context: StageContext, stage: str) -> Path:
+    """Return a verified current-run stage directory or fail closed.
+
+    Downstream scientific stages must consume only outputs produced under the
+    active run/config/scientific-input contract.  In particular, they must not
+    discover a similarly named historical report directory when the current
+    run's upstream stage is absent or stale.
+    """
+
+    stage_dir = context.run_dir / stage
+    if not stage_dir.is_dir():
+        raise ManuscriptBuildError(
+            f"Required current-run upstream stage directory is missing: {stage_dir}."
+        )
+    contract_path = _stage_metadata_path(context, stage)
+    if not contract_path.is_file():
+        raise ManuscriptBuildError(
+            f"Required current-run upstream stage contract is missing: {contract_path}."
+        )
+    if not _stage_cache_valid(context, stage):
+        raise ManuscriptBuildError(
+            f"Required upstream stage {stage!r} is incompatible with the active "
+            "run/config/scientific-input contract or has missing/tampered outputs."
+        )
+    return stage_dir
+
+
 def _run_shap(context: StageContext) -> Mapping[str, Any]:
     from src.experiments.manuscript_shap_evidence import run
 
+    shared_folds_dir = _require_compatible_upstream_stage(context, "shared_folds")
+    model_benchmarks_dir = _require_compatible_upstream_stage(context, "model_benchmarks")
     return run(
         context.config_path,
+        shared_folds_dir=shared_folds_dir,
+        model_benchmarks_dir=model_benchmarks_dir,
         output_dir=context.run_dir / "oof_shap",
         run_id=context.run_id,
         config_hash=context.config_hash,
+        scientific_input_hash=str(context.manifest["scientific_input_hash"]),
     )
 
 

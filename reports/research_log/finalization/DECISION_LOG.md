@@ -16,4 +16,6 @@ Accepted on 2026-07-13:
 
 Observed on 2026-07-13: verified trial `benchmark-10x5-20260713-6a80074` did not trigger the baseline superiority gate. XGBoost therefore remains the predeclared XAI reference without a new user decision. Secondary QWK differences remain reportable but do not override the accepted macro-F1 gate.
 
+Engineering decision on 2026-07-13: canonical SHAP must load the exact prediction-producing XGBoost pipeline for each outer fold, replay its OOF evidence at `1e-12` probability tolerance, and contain no model/preprocessor fit or splitter path. The 45 fold pairs are dependent descriptive units, so no pairwise t confidence interval is reported. The historical `6a80074` trial remains immutable and reader-verifiable at its documented `1e-6` tolerance, but its pre-warning-cleanup config/probabilities and missing nested one-hot feature-name lineage make it intentionally ineligible as a canonical SHAP upstream. No user scientific decision was required.
+
 Still prohibited without explicit approval: force-push, merge, release publication, Git history alteration, unapproved mirror use, or new scientific-protocol choices.

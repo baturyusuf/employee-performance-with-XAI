@@ -316,6 +316,9 @@
     },
     "shap": {
       "scope": "canonical_primary_policy_same_oof_model_and_preprocessing_contract",
+      "model_source": "model_benchmarks.persisted_selected_xgboost_outer_fold_pipelines",
+      "model_refit_in_shap_stage": false,
+      "oof_prediction_replay_required": true,
       "group_one_hot_to_raw_feature_families": true,
       "global": {
         "statistic": "mean_absolute_shap",
@@ -328,7 +331,9 @@
       "stability": {
         "fold_rankings": true,
         "top_k": 10,
-        "pairwise_metrics": ["jaccard", "spearman"]
+        "pairwise_metrics": ["jaccard", "spearman"],
+        "uncertainty_type": "descriptive_dependent_fold_pairs",
+        "confidence_interval_applicable": false
       },
       "governance_metadata_required": true,
       "forbidden_features_source": "feature_policies.primary_policy.excluded_features",

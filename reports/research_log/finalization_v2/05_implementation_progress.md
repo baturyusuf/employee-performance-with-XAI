@@ -332,3 +332,33 @@ Unit 2C-0 implementation result:
 - Real outer-fold-1 replay refit the selected LightGBM and XGBoost candidates in memory. Both reproduced 120/120 stored labels with no warnings; LightGBM probability delta was `3.33e-16`, XGBoost delta `7.02e-08` from normalization, and maximum new row-sum deviation `2.22e-16`.
 
 No scientific artifact was produced or altered. The previous trial remains bound to commit `6a80074`; later canonical evidence will be regenerated under the warning-clean commit.
+
+### Unit 2C-A exact-model OOF SHAP plan — recorded before modification
+
+Problem/root cause: the existing manuscript SHAP stage creates its own stratified folds and refits a legacy fixed-parameter XGBoost pipeline. Its transformer/group mapping predates the canonical `numeric`/`categorical` nested pipelines, and its 45 dependent fold pairs receive t-based confidence intervals. Consequently it cannot prove that any local attribution came from the exact model that produced that sample's nested OOF prediction.
+
+Intended files: a new reusable benchmark artifact contract, a canonical fitted-transformer axis/group helper, `src/experiments/manuscript_shap_evidence.py`, core-builder stage wiring, mandatory exact-fold/no-refit/lineage/policy/identity tests, and persistent logs. The old trial may be read only for reader/replay validation; it cannot supply new canonical SHAP evidence after the code identity changes.
+
+Acceptance criteria:
+
+- all ten XGBoost joblib paths, sizes and SHA-256 values are verified before load, and run/config/scientific-input/fold identities agree across gate, folds, OOF rows, selections, model index and lineage;
+- every sample is explained once by its assigned outer-fold pipeline; no estimator/preprocessor fit occurs in the SHAP stage;
+- loaded pipelines replay persisted XGBoost labels/probabilities within an explicit tolerance and expose the exact canonical raw-feature order and transformed lineage;
+- each transformed index maps exactly once to a raw feature family, with no gap/overlap; grouped and transformed SHAP sums agree for every sample/class;
+- forbidden policy fields are absent from raw, transformed, global, local, case and reason-code evidence;
+- stability retains all 45 fold pairs but reports descriptive mean/SD/median/range only, explicitly making no independent-pair confidence-interval claim;
+- every output carries run/config/scientific-input/fold/model-set identity and per-fold outputs carry the exact model SHA/candidate index;
+- tamper, path traversal, wrong-fold, wrong-class, prediction drift, feature-order/lineage drift and no-refit tests fail closed;
+- focused/full pytest, unittest, compileall, diff, path/secret/manuscript checks pass before checkpoint; no API/network/manuscript edit occurs.
+
+Unit 2C-A implementation result:
+
+- Added a fail-closed reader that binds shared 10x5 folds, non-triggered macro-F1 gate, three paired baseline rows, selected candidates, OOF rows, joblib path/hash/size, exact pipeline parameters/classes, transformed lineage and deterministic model-set hash before exposing ten XGBoost models.
+- Replay rechecks model bytes and reproduces every OOF label/probability; the canonical SHAP stage tightens replay tolerance to `1e-12` and contains no `.fit` or splitter path.
+- Added a fitted canonical axis contract based on `transformers_`, `output_indices_`, nested one-hot categories and exact feature-name lineage. Every transformed index has one raw owner, forbidden names fail closed, multiclass layouts normalize explicitly and grouped sums are checked per sample/class.
+- SHAP uses each sample's exact outer-fold pipeline, carries run/config/scientific-input/fold/model-set plus per-fold model/candidate identity, and publishes through a temporary directory atomically. The builder-owned empty stage-shell contract and late-failure cleanup are tested.
+- All 45 fold pairs remain visible, but stability summaries now use mean/SD/median/min/max and explicitly mark confidence intervals inapplicable for dependent pairs.
+- Historical reader/OOF replay passed at its documented tolerance, while its old ndarray preprocessing failed the new one-hot lineage contract as intended. A current-code real fold-1 refit produced warning-free SHAP with exact grouped-sum preservation; no result artifact was saved.
+- Focused suite: 59 passed plus 4 subtests. Full pytest: 389 passed, 2 skipped, plus 4 subtests. Unittest: 164 passed, 2 skipped. Compileall/diff/manuscript/secret/path/large-file gates passed.
+
+No canonical SHAP artifact was generated. The final package must regenerate benchmark and SHAP under one clean current commit/run/config identity; the 91.8 MB historical trial remains unstaged and immutable.

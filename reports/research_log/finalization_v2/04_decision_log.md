@@ -54,3 +54,13 @@ Expected fit count: 310 Logistic Regression fits plus 410 each for Random Forest
 ## Observed Unit 2B Gate Outcome — 2026-07-13
 
 Trial `benchmark-10x5-20260713-6a80074` completed all 1,540 fits and 5,000 paired OOF bootstrap draws. No baseline had both a positive macro-F1 point advantage over XGBoost and a paired 95% CI lower bound above zero. The gate did not trigger, so the approved plan continues with XGBoost as the predeclared XAI reference. This does not suppress secondary results: Random Forest had the highest QWK, but QWK was not a gate metric.
+
+## Unit 2C-A Exact-Model SHAP Engineering Decision — 2026-07-13
+
+- Canonical SHAP loads each exact prediction-producing XGBoost outer-fold pipeline and performs no model/preprocessor fit or split generation.
+- OOF replay uses the same run/config/scientific-input/fold identity and `1e-12` probability tolerance in the canonical consumer.
+- One-hot grouping requires fitted feature-name lineage and exact transformed-index ownership; no name-parsing or positional fallback is allowed.
+- The 45 fold pairs are dependent descriptive comparisons. Mean, SD, median and range are reported; confidence intervals are explicitly inapplicable unless independent repeated-CV units are introduced later.
+- The historical trial remains immutable and can verify the reader at its prior `1e-6` probability contract, but its old probabilities/config and missing nested one-hot feature-name lineage prohibit canonical SHAP reuse. Benchmark and SHAP must be regenerated together under the final clean commit.
+
+This is an implementation/provenance resolution of the already approved same-OOF-model XAI scope. It does not change the user-selected model, target, metric, dataset or claim scope and therefore required no new user decision.
