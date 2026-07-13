@@ -1,6 +1,7 @@
 # Current Status
 
 - Current phase: Unit 2D shared-fold leakage-policy ablation checkpoint is implementation-complete and fully tested; work is paused at the calibration-training decision gate.
+- Completed implementation checkpoint: `984db46` (`feat(policy): bind leakage ablation to shared OOF evidence`) on `finalization/leakage-aware-v2`.
 - Last completed task: the policy stage now reuses exact primary XGBoost OOF evidence, applies the same fold-selected parameter schedule to five non-primary policies on the exact shared folds, persists exactly-once OOF/fit/bootstrap evidence, and removes fold-t/Wilcoxon inference from the canonical path.
 - Work currently in progress: none beyond the user decision gate. Calibration implementation must not start until the within-outer-training design is selected.
 - Files modified but not finalized: none in the Unit 2D checkpoint. The immutable 91.8 MB historical trial directory remains local, read-only, untracked and unstaged under D5.

@@ -35,4 +35,6 @@ Unit 2C-A exact reader/axis/OOF-SHAP commands, the expected historical-lineage f
 
 Unit 2D exact policy/config/README commands, the failed nonexistent-test filename attempt, independent-review corrections, real-INX five-fit fold-1 diagnostic and all final gates are recorded in `../finalization_v2/06_commands_and_tests.md`. Final focused suite passed 92; full pytest passed 403 plus 4 subtests with 2 skips; unittest passed 174 with 2 skips. No canonical artifact/API/network/manuscript operation occurred.
 
+Unit 2D tested implementation checkpoint: `984db46` (`feat(policy): bind leakage ablation to shared OOF evidence`). The untracked historical trial was not staged; tracked worktree verification passed immediately after commit.
+
 The read-only Unit 2E calibration audit and timing diagnostics are also recorded there. They read only the local historical OOF CSV in memory; no file/network/API operation occurred.

@@ -400,6 +400,8 @@ Read-only cross-config audit addendum: `configs/feature_sets.yaml` still maps th
 
 No canonical policy artifact was generated because the historical benchmark is intentionally ineligible for current `1e-12` replay/lineage contracts. Policy evidence must be regenerated together with the benchmark in the final clean all-stage run.
 
+Checkpoint: commit `984db46` (`feat(policy): bind leakage ablation to shared OOF evidence`) records the fully tested Unit 2D implementation, README correction, issue/artifact maps and exact command/test history. The 91.8 MB local historical trial remained untracked and unstaged; no push was performed.
+
 ### Unit 2E calibration audit — no modification
 
 The current calibration module is not v2-admissible: it regenerates folds (1,091/1,200 differ from shared assignments), uses legacy fixed XGBoost settings, ranks raw/sigmoid/isotonic with outer-test results, reports fold-t intervals (including a historical negative severe-error lower bound), writes absolute paths and is non-atomic. Builder wiring supplies no upstream identities.
