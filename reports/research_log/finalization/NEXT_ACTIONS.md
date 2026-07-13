@@ -1,11 +1,9 @@
 # Next Actions
 
-1. Checkpoint the fully tested Unit 2C-A exact-model OOF SHAP implementation while leaving the historical trial package unstaged.
-2. Record the leakage-policy ablation root cause and refactor it to consume the same 10-fold assignment with paired sample-level OOF bootstrap differences.
-3. Decide whether policy variants reuse the primary fold-selected XGBoost parameters or receive nested selection only if that choice materially changes scientific scope/compute; do not silently mix protocols.
-4. Resolve the calibration development/split protocol decision before implementing predeclared sigmoid calibration; outer-test method selection remains prohibited.
-5. Update subgroup/proxy/external consumers, then regenerate benchmark+SHAP together in the complete core build under one final clean commit/config/run identity.
-6. Build the revised core-only figures/tables and claim matrix from that same run; historical SHAP/LLM/chatbot artifacts remain excluded.
-7. Before release claims, make source-tree verification EOL-stable, finish dependency lock/CI, and package large artifacts under D5 without duplicating them in Git.
+1. Obtain the calibration-training decision: recommended five-inner-fold OOF cross-fitted sigmoid refits, equivalent cross-fit predictions persisted by the benchmark stage, or a single 20% calibration holdout with a different reduced-training base model.
+2. After approval, refactor calibration to shared folds, exact benchmark raw OOF, predeclared sigmoid, outer-test isolation, paired 5,000-resample OOF uncertainty, atomic outputs and no core isotonic selection.
+3. Update subgroup/proxy and HRDataset external consumers to the same run/fold/task contracts; keep IBM/turnover supplementary.
+4. Regenerate benchmark, policy, calibration and SHAP together in the complete core build under one clean commit/config/run identity.
+5. Build the revised core-only figures/tables and claim matrix from that same run; finish lock/CI/EOL portability and D5 packaging before release claims.
 
 No model-reference user decision is required because the predeclared macro-F1 gate did not trigger. Do not edit the manuscript, call APIs, publish, push or merge.

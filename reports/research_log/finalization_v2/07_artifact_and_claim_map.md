@@ -40,3 +40,24 @@ Both scopes are intentionally `release_ready=false`. No v2 scientific artifact o
 | Baseline reference stop gate | trial `baseline_xgboost_gate.json`, `run_manifest.json` | Observed gate outcome `false`; no model-reference user decision required |
 
 The earlier in-memory 10×5 preflight hashes remain noncanonical. The clean-start real trial is preserved under its versioned trial root and supports the XGBoost-reference gate decision, but `canonical_release_eligible=false`; its numbers are not frozen manuscript claims until the complete core package is regenerated from one final clean commit after warning and downstream-stage fixes.
+
+## Unit 2D Policy Evidence Contract
+
+No current canonical policy artifact exists. The tested stage declares the following outputs under the future same-run `core/policy/` directory; each must carry the benchmark run/config/scientific-input/fold/model-set identity and must be generated anew after an exact current-code benchmark replay:
+
+| Declared output | Evidence role | Current claim status |
+| --- | --- | --- |
+| `oof_predictions.csv` | Exactly one OOF prediction per INX sample and policy | Implementation/test contract only |
+| `fold_metrics.csv` | Ten-fold descriptive variability; not population inference | Implementation/test contract only |
+| `policy_metric_intervals.csv` | Raw 5,000-draw sample-level bootstrap intervals | Implementation/test contract only |
+| `policy_summary.csv`; `manuscript_policy_table.csv` | OOF estimates, intervals, explicit denominators and role boundaries | Implementation/test contract only |
+| `policy_pairwise_tests.csv`; `leakage_sensitivity_index.csv` | Pointwise paired policy differences and declared leakage-sensitivity contrasts | Implementation/test contract only; no multiplicity-adjusted rejection claim |
+| `policy_feature_contract.csv`; `policy_hyperparameter_schedule.csv`; `policy_fit_receipts.csv` | Exact exclusions, feature lineage, fold-selected parameter reuse and fit denominators | Implementation/test contract only |
+| `figure_leakage_policy_tradeoff_source.csv`; PNG; SVG | Reproducible policy trade-off figure | Implementation/test contract only |
+| `policy_interpretation.md`; `policy_metadata.json` | Diagnostic/audit-only boundaries and provenance | Implementation/test contract only |
+
+The primary policy must reuse the exact benchmark XGBoost OOF rows after `1e-12` replay. Five non-primary policies use the same outer folds and the primary-selected XGBoost candidate for each fold; they are not independently tuned. Therefore the comparison is matched feature-access sensitivity conditional on the primary selection schedule, not a fully optimized leaderboard. The full-feature comparator is diagnostic and nondeployable.
+
+## Unit 2E Calibration Audit
+
+No historical calibration file is admitted. The legacy stage differs on 1,091 of 1,200 fold assignments, uses fixed legacy parameters, selects among methods with outer-test outcomes, applies fold-t intervals, lacks current upstream identities, writes machine-specific paths and is non-atomic. A new artifact map will be added only after the user selects the within-outer-training sigmoid training design and the implementation passes its contract tests.

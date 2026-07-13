@@ -32,3 +32,7 @@ The real offline trial command, manifest verifier, diagnostic commands, runtime,
 Unit 2C-0 exact warning-hygiene commands are recorded in `../finalization_v2/06_commands_and_tests.md`. Focused tests passed 63; full pytest passed 350 plus 4 subtests with 2 skips; unittest passed 162 with 2 skips. A two-model real fold-1 replay produced zero label mismatches and zero warnings. No artifact/API/network/manuscript operation occurred.
 
 Unit 2C-A exact reader/axis/OOF-SHAP commands, the expected historical-lineage failure, current-code fold-1 SHAP diagnostic, and all gates are recorded in `../finalization_v2/06_commands_and_tests.md`. Focused tests passed 59 plus 4 subtests; full pytest passed 389 plus 4 subtests with 2 skips; unittest passed 164 with 2 skips. No scientific artifact/API/network/manuscript operation occurred.
+
+Unit 2D exact policy/config/README commands, the failed nonexistent-test filename attempt, independent-review corrections, real-INX five-fit fold-1 diagnostic and all final gates are recorded in `../finalization_v2/06_commands_and_tests.md`. Final focused suite passed 92; full pytest passed 403 plus 4 subtests with 2 skips; unittest passed 174 with 2 skips. No canonical artifact/API/network/manuscript operation occurred.
+
+The read-only Unit 2E calibration audit and timing diagnostics are also recorded there. They read only the local historical OOF CSV in memory; no file/network/API operation occurred.

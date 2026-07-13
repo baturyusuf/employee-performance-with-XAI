@@ -362,3 +362,46 @@ Unit 2C-A implementation result:
 - Focused suite: 59 passed plus 4 subtests. Full pytest: 389 passed, 2 skipped, plus 4 subtests. Unittest: 164 passed, 2 skipped. Compileall/diff/manuscript/secret/path/large-file gates passed.
 
 No canonical SHAP artifact was generated. The final package must regenerate benchmark and SHAP under one clean current commit/run/config identity; the 91.8 MB historical trial remains unstaged and immutable.
+
+### Unit 2D shared-fold leakage-policy ablation plan — recorded before modification
+
+Problem/root cause: the legacy policy stage independently creates `StratifiedKFold` splits, fits a fixed-parameter legacy XGBoost wrapper, writes a separate fold assignment, treats fold means as independent population samples through t intervals, and uses fold-level Wilcoxon tests. It therefore cannot establish same-sample paired policy differences under the accepted 10×5 benchmark/run contract.
+
+Accepted scientific consequence: D2 explicitly requires that leakage policies are not independently tuned. Each non-primary policy will use the primary policy's selected XGBoost candidate for the corresponding outer fold, so folds, model capacity and hyperparameter-selection evidence are held fixed. The primary policy will reuse the exact benchmark OOF predictions rather than silently refitting a second version. This is a matched sensitivity analysis, not a separately optimized policy leaderboard.
+
+Intended files: `src/experiments/manuscript_policy_ablation.py`, core-builder stage wiring, canonical configuration only where a missing contract must be frozen, policy/shared-fold/bootstrap/identity tests, and persistent logs. Existing historical artifacts will not be edited or copied into new evidence.
+
+Acceptance criteria:
+
+- consume the exact shared 10-fold assignment and compatible benchmark identity; instantiate no independent splitter;
+- bind every policy/fold fit to that fold's primary-selected XGBoost fixed/candidate parameters, with target/ID exclusion and preprocessing fitted only on the outer-train partition;
+- reuse exact benchmark OOF rows for the primary policy, and produce one prediction per sample for every other declared policy;
+- preserve diagnostic/audit-only roles and exact exclusions; never present the full-feature upper bound as deployable evidence;
+- compute primary uncertainty and pairwise policy differences from the accepted 5,000 paired, sample-level, outer-fold-plus-class-stratified bootstrap; keep fold metrics as descriptive variability only;
+- encode metric direction/domain, denominators, resample identity and run/config/scientific-input/fold/model identities in machine-readable outputs;
+- generate all required policy tables/figure source/PNG/SVG atomically with relative metadata paths and no stale fallback;
+- fail on identity drift, missing/tampered benchmark inputs, fold mismatch, forbidden primary features, duplicate/missing OOF predictions, hyperparameter drift or invalid uncertainty;
+- focused/full pytest, unittest, compileall, scientific-diff/path/secret/manuscript checks pass before checkpoint; no API/network/manuscript edit occurs.
+
+Read-only cross-config audit addendum: `configs/feature_sets.yaml` still maps three policy names shared with the canonical config to narrower legacy exclusions (omitting Gender and MaritalStatus), and uses obsolete “leakage-safe” wording. This violates the one-name/one-policy acceptance rule even though the new core runner reads only `manuscript_final.yaml`. Unit 2D will align the shared names, preserve genuinely distinct legacy audit variants under distinct names, and add a repository-level cross-config regression check rather than weakening the canonical policy.
+
+### Unit 2D implementation and independent-review result
+
+- Replaced the canonical policy runner's independent splitter and legacy fixed XGBoost path with explicit current-run `shared_folds` and `model_benchmarks` inputs. Builder wiring verifies both upstream stage contracts before invocation.
+- The primary policy copies the exact benchmark OOF rows only after all ten persisted models, parameters, hashes and identities are validated and their complete OOF predictions replay at `1e-12` tolerance. The five non-primary policies fit on the exact 1,080-row outer-training partitions with the same fold's primary-selected candidate, canonical named preprocessing, every policy exclusion supplied as forbidden input, and a one-thread fit limit.
+- Frozen the six-policy contrast order: full information-rich comparator → no salary hike → sensitive-retaining no attrition → governed no attrition → department-free primary → job-role-free sensitivity. Each adjacent contrast has a defined interpretation; all pairwise intervals remain pointwise with no multiplicity-adjusted rejection claim.
+- Added exactly-once policy OOF predictions, per-fold descriptive metrics, raw bootstrap metric intervals, wide manuscript summaries, paired policy differences, finite-domain-normalized and native-scale leakage sensitivity, exact feature contracts, hyperparameter schedules, fit receipts, interpretation, figure source/PNG/SVG and relative-path metadata. Publication is atomic and late failure leaves no partial target.
+- One deterministic 5,000-draw paired OOF bootstrap is used for all policy systems. Its resample hash must exactly equal the benchmark gate's resample hash; every reported valid-draw denominator must be 5,000. Fold variability fields are mean/SD/min/max only.
+- Aligned every shared policy name in `configs/feature_sets.yaml` to the canonical exclusions, labelled it a legacy compatibility projection, validated drift during direct and orchestrated runs, and added it to the scoped scientific side-input hash/snapshot chain. Active README/config/policy terminology is leakage-aware.
+- Rewrote README status so the old dirty v1 `latest` package is clearly historical, LLM/chatbot are excluded from core, counterfactuals are supplementary-only, and the verified 10×5 trial is decision evidence rather than a canonical release.
+- Independent review reported no critical statistical flaw. Its seven findings (raw interval persistence, late atomic failure, direct projection validation, primary replay, side-input hashing, valid-draw derivation and exact six-policy scope) were all implemented and regression-tested.
+- Real-INX bounded diagnostic refit fold 1 for all five non-primary policies using the historical fold-1 selected parameter schedule under current code: every fit used 1,080 train/120 test rows, feature/parameter lineage passed, probability simplex error was at most `2.22e-16`, warnings were zero, network was process-blocked, files written were zero and the historical manifest hash was unchanged. This is implementation evidence only, not a manuscript result.
+- Final gates: 92 focused tests passed; full pytest 403 passed plus 4 subtests with 2 historical skips; unittest 174 passed with 2 skips; compileall, diff, manuscript no-change, secret, absolute-path, 100 MB candidate, README-link and active leakage-aware terminology scans passed.
+
+No canonical policy artifact was generated because the historical benchmark is intentionally ineligible for current `1e-12` replay/lineage contracts. Policy evidence must be regenerated together with the benchmark in the final clean all-stage run.
+
+### Unit 2E calibration audit — no modification
+
+The current calibration module is not v2-admissible: it regenerates folds (1,091/1,200 differ from shared assignments), uses legacy fixed XGBoost settings, ranks raw/sigmoid/isotonic with outer-test results, reports fold-t intervals (including a historical negative severe-error lower bound), writes absolute paths and is non-atomic. Builder wiring supplies no upstream identities.
+
+The recommended correction is five-inner-fold OOF cross-fitted sigmoid training inside each outer-training partition, followed by application to the exact persisted full-outer-train XGBoost probabilities. It adds 50 fits and preserves one exact primary base model. A single 20% holdout would add 10 fits but evaluates a different base model trained on only 80% of outer training data. Warning-free bootstrap timing measured about 93 seconds for two methods × nine metrics × 5,000 draws; total estimates are 2–3 minutes versus 1.5–2 minutes. This material choice is awaiting the user; no calibration file was modified.

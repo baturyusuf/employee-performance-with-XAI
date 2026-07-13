@@ -11,6 +11,7 @@ from src.governance.manuscript_contract import (
     load_manuscript_config,
     primary_excluded_features,
     primary_policy_name,
+    repository_feature_policy_projection,
     validate_manuscript_config,
     validate_policy_consistency,
 )
@@ -84,6 +85,16 @@ class CanonicalFeaturePolicyConsistencyTests(unittest.TestCase):
         mapping = canonical_policy_mapping(self.config)
         validate_policy_consistency(self.config, {"phase_2_policy_runner": mapping})
 
+    def test_repository_legacy_projection_matches_every_shared_policy_name(self) -> None:
+        projection = repository_feature_policy_projection()
+        validate_policy_consistency(
+            self.config,
+            {"configs/feature_sets.yaml legacy projection": projection},
+        )
+        canonical = canonical_policy_mapping(self.config)
+        shared = set(projection).intersection(canonical)
+        self.assertTrue(set(canonical).issubset(shared))
+
     def test_conflicting_module_policy_mapping_fails_fast(self) -> None:
         conflicting = {
             "no_salary_hike_no_attrition_no_department": [
@@ -101,6 +112,14 @@ class CanonicalFeaturePolicyConsistencyTests(unittest.TestCase):
             "no_salary_hike_no_attrition_no_department"
         ]["excluded_features"].remove("Gender")
         with self.assertRaisesRegex(ManuscriptConfigError, "single exact union"):
+            validate_manuscript_config(malformed)
+
+    def test_policy_comparison_protocol_cannot_enable_independent_tuning(self) -> None:
+        malformed = copy.deepcopy(self.config)
+        malformed["manuscript_final"]["feature_policies"]["comparison_protocol"][
+            "independent_policy_tuning"
+        ] = True
+        with self.assertRaisesRegex(ManuscriptConfigError, "matched-OOF"):
             validate_manuscript_config(malformed)
 
 

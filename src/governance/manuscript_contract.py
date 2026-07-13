@@ -24,6 +24,7 @@ from src.utils.config_loader import PROJECT_ROOT, load_config
 
 
 DEFAULT_CONFIG_PATH = PROJECT_ROOT / "configs" / "manuscript_final.yaml"
+LEGACY_FEATURE_POLICY_PROJECTION_PATH = PROJECT_ROOT / "configs" / "feature_sets.yaml"
 MANIFEST_SCHEMA_VERSION = 3
 
 EXPECTED_EVIDENCE_SCOPE_DATASETS: Mapping[str, frozenset[str]] = {
@@ -383,6 +384,46 @@ def validate_policy_consistency(
                 )
 
 
+def repository_feature_policy_projection(
+    path: str | Path = LEGACY_FEATURE_POLICY_PROJECTION_PATH,
+) -> Mapping[str, Any]:
+    """Load the explicitly labelled legacy policy projection or fail closed.
+
+    The manuscript configuration is the sole canonical policy source.  Older
+    repository modules still read ``feature_sets.yaml`` during their staged
+    retirement, so any policy name shared with the canonical source must remain
+    an exact compatibility projection rather than a second interpretation.
+    """
+
+    projection = load_config(path)
+    metadata = projection.get("policy_source")
+    if not isinstance(metadata, Mapping):
+        raise FeaturePolicyConsistencyError(
+            "configs/feature_sets.yaml must declare its legacy policy-source status."
+        )
+    expected_metadata = {
+        "status": "legacy_compatibility_projection",
+        "canonical_source": "configs/manuscript_final.yaml",
+        "same_named_policy_exclusions_must_match": True,
+    }
+    differences = {
+        key: {"expected": expected, "observed": metadata.get(key)}
+        for key, expected in expected_metadata.items()
+        if metadata.get(key) != expected
+    }
+    if differences:
+        raise FeaturePolicyConsistencyError(
+            "configs/feature_sets.yaml has invalid legacy projection metadata: "
+            + json.dumps(differences, sort_keys=True, ensure_ascii=True)
+        )
+    policies = projection.get("feature_sets")
+    if not isinstance(policies, Mapping):
+        raise FeaturePolicyConsistencyError(
+            "configs/feature_sets.yaml must define a feature_sets mapping."
+        )
+    return policies
+
+
 def validate_manuscript_config(config: Mapping[str, Any]) -> None:
     """Validate required sections and cross-section scientific invariants."""
 
@@ -498,6 +539,37 @@ def validate_manuscript_config(config: Mapping[str, Any]) -> None:
     if strict_extra != {"EmpJobRole"}:
         raise ManuscriptConfigError("The strict policy must add exactly EmpJobRole to the primary exclusions.")
 
+    policy_section = _require_mapping(settings, "feature_policies", "manuscript_final")
+    comparison_protocol = _require_mapping(
+        policy_section,
+        "comparison_protocol",
+        "manuscript_final.feature_policies",
+    )
+    expected_comparison_protocol = {
+        "evaluation_type": "matched_oof_feature_access_sensitivity",
+        "outer_folds_source": "shared_folds.outer_fold_assignments",
+        "primary_oof_source": "model_benchmarks.exact_xgboost_oof_predictions",
+        "primary_oof_replay_probability_atol": 1e-12,
+        "non_primary_hyperparameters_source": (
+            "model_benchmarks.xgboost_selected_candidate_by_outer_fold"
+        ),
+        "independent_policy_tuning": False,
+        "preprocessing_fit_scope": "outer_training_partition_only",
+        "uncertainty_source": "evaluation.bootstrap",
+        "fold_summary_scope": "descriptive_variability_only_no_population_ci",
+        "pairwise_inference": (
+            "pointwise_paired_bootstrap_intervals_no_multiplicity_adjusted_rejection_claim"
+        ),
+        "full_feature_comparator_boundary": (
+            "diagnostic_information_rich_comparator_not_guaranteed_optimized_upper_bound"
+        ),
+    }
+    if dict(comparison_protocol) != expected_comparison_protocol:
+        raise ManuscriptConfigError(
+            "feature_policies.comparison_protocol differs from the frozen matched-OOF "
+            "feature-access sensitivity contract."
+        )
+
     metric_rules = _require_mapping(
         _require_mapping(settings, "evaluation", "manuscript_final"),
         "metric_applicability",
@@ -532,6 +604,10 @@ def load_manuscript_config(
 
     data = load_config(path)
     validate_manuscript_config(data)
+    validate_policy_consistency(
+        data,
+        {"configs/feature_sets.yaml legacy projection": repository_feature_policy_projection()},
+    )
     if policy_sources:
         validate_policy_consistency(data, policy_sources)
     return data
@@ -1633,6 +1709,7 @@ __all__ = [
     "ACTUAL_INPUT_IDENTITY_FIELDS",
     "DEFAULT_CONFIG_PATH",
     "EXPECTED_EVIDENCE_SCOPE_DATASETS",
+    "LEGACY_FEATURE_POLICY_PROJECTION_PATH",
     "FeaturePolicyConsistencyError",
     "ForbiddenFeatureError",
     "ManuscriptConfigError",
@@ -1655,6 +1732,7 @@ __all__ = [
     "record_command",
     "record_failure",
     "register_artifact",
+    "repository_feature_policy_projection",
     "sha256_file",
     "scientific_input_hash",
     "source_tree_hash",

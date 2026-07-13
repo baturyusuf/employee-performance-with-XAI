@@ -745,3 +745,339 @@ print(json.dumps({
 Exit 0 in 3.3 seconds: 120 test rows; 46 transformed features; 20 raw families; grouped shape `(120,3,20)`; maximum grouped/transformed sum error `0`; zero warnings; zero label mismatches; maximum normalized probability delta from the immutable pre-cleanup trial `7.015278280508852e-08`; manifest unchanged. These are diagnostic compatibility checks, not manuscript results.
 
 No canonical SHAP package or manuscript file was generated or changed. Paid API/network calls were zero.
+
+### Unit 2D initial builder and cross-config policy binding — 2026-07-13
+
+```powershell
+.\myenv\Scripts\python.exe -m pytest -q tests/test_canonical_feature_policy_consistency.py tests/test_stage_runner_scientific_input_binding.py
+```
+
+Exit 0: 22 passed in 1.64 seconds (3.6 shell seconds). This check covers fail-closed builder delivery of current-run shared-fold/benchmark identities and exact canonical-to-legacy-projection policy exclusions. The main policy OOF/bootstrap implementation is still in progress, so this is not a scientific completion result. No artifact, API/network call, or manuscript edit occurred.
+
+### Unit 2D complete policy implementation and review closure — 2026-07-13
+
+All Python commands below ran with `OPENAI_API_KEY`, `OPENAI_AGENTS_API_KEY` and `AZURE_OPENAI_API_KEY` removed from the subprocess environment. No paid API or network call was made.
+
+The first broad focused command contained a nonexistent filename:
+
+```powershell
+.\myenv\Scripts\python.exe -m pytest -q tests/test_manuscript_policy_ablation.py tests/test_stage_runner_scientific_input_binding.py tests/test_canonical_feature_policy_consistency.py tests/test_shared_fold_assignments_across_models_and_policies.py tests/test_oof_bootstrap_uncertainty.py tests/test_benchmark_artifact_contract.py tests/test_canonical_model_factory.py
+```
+
+Exit 1 in 1.6 seconds before collection: `ERROR: file or directory not found: tests/test_oof_bootstrap_uncertainty.py`. No test, model fit or scientific stage ran. The corrected repository test modules were then used:
+
+```powershell
+.\myenv\Scripts\python.exe -m pytest -q tests/test_manuscript_policy_ablation.py tests/test_stage_runner_scientific_input_binding.py tests/test_canonical_feature_policy_consistency.py tests/test_shared_fold_artifact_contract.py tests/test_shared_fold_assignments_across_models_and_policies.py tests/test_bootstrap_is_stratified_paired_and_deterministic.py tests/test_oof_bootstrap_intervals_are_domain_valid.py tests/test_paired_model_difference_bootstrap.py tests/test_benchmark_artifact_contract.py
+```
+
+Exit 0: 75 passed in 22.15 seconds.
+
+Independent review found seven gaps: raw interval persistence, a late atomic-publication failure check, direct cross-config projection validation, exact primary OOF replay, independent feature-projection side-input hashing, valid-bootstrap-denominator derivation, and exact six-policy scope. After all seven were corrected:
+
+```powershell
+.\myenv\Scripts\python.exe -m pytest -q tests/test_manuscript_policy_ablation.py tests/test_canonical_feature_policy_consistency.py tests/test_side_input_hash_binding.py tests/test_scoped_run_manifest_inputs.py
+```
+
+Exit 0: 35 passed in 7.82 seconds (9.8 shell seconds).
+
+Final expanded focused command:
+
+```powershell
+.\myenv\Scripts\python.exe -m pytest -q tests/test_manuscript_policy_ablation.py tests/test_stage_runner_scientific_input_binding.py tests/test_canonical_feature_policy_consistency.py tests/test_shared_fold_artifact_contract.py tests/test_shared_fold_assignments_across_models_and_policies.py tests/test_bootstrap_is_stratified_paired_and_deterministic.py tests/test_oof_bootstrap_intervals_are_domain_valid.py tests/test_paired_model_difference_bootstrap.py tests/test_benchmark_artifact_contract.py tests/test_side_input_hash_binding.py tests/test_scoped_run_manifest_inputs.py
+```
+
+Exit 0: 92 passed in 26.85 seconds (about 29 shell seconds).
+
+Complete regression and compilation gates:
+
+```powershell
+.\myenv\Scripts\python.exe -m pytest -q
+.\myenv\Scripts\python.exe -m unittest discover -s tests -q
+.\myenv\Scripts\python.exe -m compileall -q src tests
+git diff --check
+git diff --exit-code -- manuscript/mdpi_information/main.md
+```
+
+Results: pytest 403 passed, 2 skipped, plus 4 subtests in 83.35 seconds; unittest 174 passed with 2 skips in 6.889 seconds; compileall, diff hygiene and manuscript no-change checks exited 0.
+
+Exact hygiene scans:
+
+```powershell
+$m = rg --pcre2 -n '(?<![A-Za-z])sk-(?:proj-)?[A-Za-z0-9_-]{20,}|github_pat_[A-Za-z0-9_]{20,}|gh[pousr]_[A-Za-z0-9]{30,}|AKIA[0-9A-Z]{16}' --glob '!myenv/**' --glob '!reports/manuscript_final/**' --glob '!*.ipynb' .; if ($LASTEXITCODE -eq 0) { $m; exit 2 } elseif ($LASTEXITCODE -eq 1) { 'NO_SECRET_PATTERN_MATCHES'; exit 0 } else { exit $LASTEXITCODE }
+$m = git diff -- . ':!reports/research_log/**' | Select-String -Pattern 'C:\\Users\\|/home/[^/]+/|file://' -CaseSensitive; if ($m) { $m; exit 2 } else { 'NO_ABSOLUTE_USER_PATHS_IN_SCIENTIFIC_DIFF'; exit 0 }
+$tracked = @(git diff --name-only) + @(git ls-files --others --exclude-standard | Where-Object { $_ -notlike 'reports/manuscript_final/trials/*' }); $bad=@(); foreach($f in ($tracked | Sort-Object -Unique)){ if(Test-Path -LiteralPath $f -PathType Leaf){$n=(Get-Item -LiteralPath $f).Length; if($n -gt 100MB){$bad += "$f`t$n"}}}; if($bad){$bad; exit 2}else{'NO_100MB_CANDIDATE_FILES'; exit 0}
+$m = rg -n -i 'leakage[- ]safe' README.md configs/feature_sets.yaml configs/manuscript_final.yaml src/experiments/manuscript_policy_ablation.py; if ($LASTEXITCODE -eq 0) { $m; exit 2 } elseif ($LASTEXITCODE -eq 1) { 'NO_ACTIVE_LEAKAGE_SAFE_TERMINOLOGY'; exit 0 } else { exit $LASTEXITCODE }
+```
+
+All exited 0 with the corresponding no-match/no-large-file markers. The 91.8 MB untracked historical trial was deliberately excluded from the candidate commit scan under accepted D5.
+
+The original exact real-INX bounded diagnostic was:
+
+```powershell
+$env:OPENAI_API_KEY=$null
+$env:OPENAI_AGENTS_API_KEY=$null
+$env:AZURE_OPENAI_API_KEY=$null
+@'
+import hashlib
+import json
+import warnings
+from pathlib import Path
+
+import numpy as np
+from threadpoolctl import threadpool_limits
+
+from src.data.canonical_loader import load_canonical_dataset
+from src.experiments.benchmark_artifact_contract import read_xgboost_oof_artifacts
+from src.experiments.manuscript_policy_ablation import (
+    _json_mapping,
+    _policy_definitions,
+    _selected_policies,
+    _validate_nonprimary_fitted_pipeline,
+    exact_policy_frame,
+)
+from src.experiments.run_model_benchmark_trial import _deny_network_connections
+from src.models.canonical_models import aligned_predict_proba, build_model_pipeline
+from src.utils.config_loader import load_config
+
+root = Path.cwd()
+trial = root / 'reports/manuscript_final/trials/benchmark-10x5-20260713-6a80074/core'
+manifest = trial / 'run_manifest.json'
+before = hashlib.sha256(manifest.read_bytes()).hexdigest()
+config_path = root / 'configs/manuscript_final.yaml'
+raw = load_config(config_path)
+settings = raw['manuscript_final']
+loaded = load_canonical_dataset(config_path, 'inx_primary')
+data = loaded.frame
+target = data['PerformanceRating'].astype(int)
+definitions = _policy_definitions(settings)
+policies = _selected_policies(definitions)
+primary = settings['feature_policies']['primary_policy']
+primary_features, _ = exact_policy_frame(
+    data, primary, definitions[primary], target_column='PerformanceRating', id_column='EmpNumber'
+)
+bundle = read_xgboost_oof_artifacts(
+    trial / 'shared_folds',
+    trial / 'model_benchmarks',
+    expected_run_id='benchmark-10x5-20260713-6a80074',
+    expected_config_hash='7e70bf6646a542ad32e10ab3718654aa8232a46e44e2083ed10e2cfe526da595',
+    expected_scientific_input_hash='8be7c5d79f2b39af3e04f1c8a14a0ae70d2180c48c425595f69f23ac2e76b34a',
+    expected_feature_columns=primary_features.columns,
+    expected_labels=(2, 3, 4),
+)
+selected = bundle.selected_hyperparameters.set_index('outer_fold').loc[1]
+fixed = _json_mapping(selected['fixed_parameters_json'], context='diagnostic fixed')
+candidate = _json_mapping(selected['selected_candidate_parameters_json'], context='diagnostic candidate')
+outer = bundle.folds.outer_assignments
+train_ids = outer.loc[outer['outer_fold'].astype(int).ne(1), 'sample_index'].astype(int).tolist()
+test_ids = outer.loc[outer['outer_fold'].astype(int).eq(1), 'sample_index'].astype(int).tolist()
+records = []
+with _deny_network_connections(), warnings.catch_warnings(record=True) as caught:
+    warnings.simplefilter('always')
+    for policy in policies:
+        if policy == primary:
+            continue
+        features, excluded = exact_policy_frame(
+            data, policy, definitions[policy], target_column='PerformanceRating', id_column='EmpNumber'
+        )
+        pipeline = build_model_pipeline(
+            'xgboost',
+            features.loc[train_ids],
+            fixed_parameters=fixed,
+            candidate_parameters=candidate,
+            random_state=int(settings['seeds']['model']),
+            forbidden_features=tuple(excluded),
+        )
+        with threadpool_limits(limits=1):
+            pipeline.fit(features.loc[train_ids], target.loc[train_ids])
+        _validate_nonprimary_fitted_pipeline(
+            pipeline,
+            feature_columns=features.columns,
+            fixed_parameters=fixed,
+            candidate_parameters=candidate,
+            policy=policy,
+            outer_fold=1,
+        )
+        prediction = np.asarray(pipeline.predict(features.loc[test_ids]), dtype=int)
+        probability = aligned_predict_proba(pipeline, features.loc[test_ids], labels=(2, 3, 4))
+        assert prediction.shape == (120,)
+        assert probability.shape == (120, 3)
+        assert np.isfinite(probability).all()
+        assert np.max(np.abs(probability.sum(axis=1) - 1.0)) <= np.finfo(np.float64).eps * 6
+        assert set(excluded).isdisjoint(features.columns)
+        records.append({
+            'policy': policy,
+            'n_train': len(train_ids),
+            'n_test': len(test_ids),
+            'n_raw_features': features.shape[1],
+            'n_transformed_features': int(pipeline.named_steps['preprocessor'].transform(features.loc[test_ids]).shape[1]),
+            'selected_candidate_index': int(selected['selected_candidate_index']),
+            'probability_simplex_max_error': float(np.max(np.abs(probability.sum(axis=1) - 1.0))),
+        })
+after = hashlib.sha256(manifest.read_bytes()).hexdigest()
+print(json.dumps({
+    'status': 'passed_real_data_fold1_noncanonical_diagnostic_only',
+    'records': records,
+    'warnings': [str(item.message) for item in caught],
+    'trial_manifest_unchanged': before == after,
+    'files_written': 0,
+    'network_guard': 'connect_connect_ex_sendto_create_connection_getaddrinfo_blocked',
+}, sort_keys=True))
+'@ | .\myenv\Scripts\python.exe -
+```
+
+Exit 0 in 4.4 seconds. Five non-primary current-code fits each used 1,080 train and 120 test rows with selected candidate index 3. Raw/transformed feature counts were 26/61, 25/60, 24/58, 21/52 and 19/27 in policy order excluding the primary exact-reuse row. Maximum probability simplex error was `2.22e-16`; warnings were empty; files written were zero; the network guard was active; the historical manifest was unchanged.
+
+A checkpoint recheck on 2026-07-13 repeated the same five current-code fold-1 fits using a direct socket/DNS guard and additionally verified the trial file count stayed 54 and manifest SHA-256 stayed `1b4c3381489f8b0bf7ae60d57280b3ddd5aa5344cb250b1df63fdaaa6cc7379c`. The first recheck attempt exited 1 before model construction because it incorrectly read nonexistent `target.id_column`; the corrected command used `governance_fields.identifier_fields[0]` and exited 0 in 3.3 seconds. Neither attempt wrote a file or contacted a network/API.
+
+These diagnostics are implementation evidence only. The primary policy was deliberately not replayed because the historical trial predates the exact current `1e-12` lineage/probability contract. No policy estimate is admitted until a same-current-commit benchmark and policy stage run together.
+
+Post-change identities:
+
+```powershell
+.\myenv\Scripts\python.exe -c "from src.governance.manuscript_contract import canonical_config_hash, load_manuscript_config, sha256_file; load_manuscript_config('configs/manuscript_final.yaml'); print(canonical_config_hash('configs/manuscript_final.yaml')); print(sha256_file('configs/feature_sets.yaml'))"
+git status --short --branch
+git diff --stat
+git diff --name-only
+```
+
+Exit 0. Config hash: `57da6ae89ef43c3cb25783d7d5eb36a394287c0d647ee1e51bfca2dc431c8f74`. Feature-policy projection SHA-256: `4b270ad6f0b07e2d51ce2d3d3b38f193ad5e15925420e0a9293a361c805d8fc3`.
+
+### Unit 2E calibration read-only audit and timing — 2026-07-13
+
+No calibration code or artifact was modified. Static/read-only inspection established that the historical stage selects methods with outer-test outcomes, generates a fold mapping that differs on 1,091 of 1,200 samples from the current shared-fold contract, uses legacy fixed XGBoost parameters, uses fold-t intervals, lacks builder-supplied run/fold/model/scientific identities, emits absolute paths, and publishes non-atomically. Historical calibration results are therefore inadmissible for v2.
+
+The exact common-bootstrap timing command was:
+
+```powershell
+$env:OPENAI_API_KEY=$null
+$env:OPENAI_AGENTS_API_KEY=$null
+$env:AZURE_OPENAI_API_KEY=$null
+@'
+import time
+import pandas as pd
+from src.models.oof_bootstrap import BootstrapProtocol, ComparisonSpec, compute_paired_oof_bootstrap
+path = r"reports/manuscript_final/trials/benchmark-10x5-20260713-6a80074/core/model_benchmarks/oof_predictions.csv"
+frame = pd.read_csv(path)
+xgb = frame[frame['model'].astype(str).eq('xgboost')].copy()
+raw = xgb.copy(); raw['system_id'] = 'raw'
+sig = xgb.copy(); sig['system_id'] = 'sigmoid'
+pred = pd.concat([raw, sig], ignore_index=True)
+metrics = ('accuracy','balanced_accuracy','macro_f1','quadratic_weighted_kappa','ordinal_mae','severe_error_rate','nll_log_loss','multiclass_brier','ece_confidence')
+start = time.perf_counter()
+result = compute_paired_oof_bootstrap(
+    pred,
+    labels=(2,3,4),
+    task_type='ordinal_multiclass_performance',
+    metrics=metrics,
+    comparisons=(ComparisonSpec('sigmoid_minus_raw','sigmoid','raw'),),
+    protocol=BootstrapProtocol(n_resamples=5000, confidence_level=0.95, seed=42),
+    n_bins=10,
+)
+elapsed = time.perf_counter() - start
+print(f'bootstrap_runtime_seconds={elapsed:.3f}')
+print(f'interval_rows={len(result.metric_intervals)} paired_rows={len(result.paired_differences)} resamples={result.metadata["n_resamples"]}')
+'@ | .\myenv\Scripts\python.exe -
+```
+
+Exit 0 in 95.1 shell seconds: `bootstrap_runtime_seconds=93.032`, `interval_rows=18`, `paired_rows=9`, `resamples=5000`. The immutable historical probabilities produced repeated sklearn probability-sum warnings (9,199 output lines) because they predate current normalization. This is timing only, not calibration or scientific evidence.
+
+The warning-free normalized projection check was:
+
+```powershell
+$env:OPENAI_API_KEY=$null
+$env:OPENAI_AGENTS_API_KEY=$null
+$env:AZURE_OPENAI_API_KEY=$null
+@'
+import time, warnings
+import numpy as np
+import pandas as pd
+from src.models.oof_bootstrap import BootstrapProtocol, ComparisonSpec, compute_paired_oof_bootstrap
+path = r"reports/manuscript_final/trials/benchmark-10x5-20260713-6a80074/core/model_benchmarks/oof_predictions.csv"
+frame = pd.read_csv(path)
+xgb = frame[frame['model'].astype(str).eq('xgboost')].copy()
+cols = ['prob_class_2','prob_class_3','prob_class_4']
+p = np.clip(xgb[cols].to_numpy(dtype=np.float64), 0.0, 1.0)
+p /= p.sum(axis=1, keepdims=True)
+xgb.loc[:, cols] = p
+raw = xgb.copy(); raw['system_id'] = 'raw'
+sig = xgb.copy(); sig['system_id'] = 'sigmoid'
+pred = pd.concat([raw, sig], ignore_index=True)
+metrics = ('accuracy','balanced_accuracy','macro_f1','quadratic_weighted_kappa','ordinal_mae','severe_error_rate','nll_log_loss','multiclass_brier','ece_confidence')
+start = time.perf_counter()
+with warnings.catch_warnings():
+    warnings.simplefilter('error')
+    result = compute_paired_oof_bootstrap(
+        pred, labels=(2,3,4), task_type='ordinal_multiclass_performance', metrics=metrics,
+        comparisons=(ComparisonSpec('sigmoid_minus_raw','sigmoid','raw'),),
+        protocol=BootstrapProtocol(n_resamples=500, confidence_level=0.95, seed=42), n_bins=10,
+    )
+elapsed = time.perf_counter() - start
+print(f'normalized_500_runtime_seconds={elapsed:.3f}')
+print(f'linear_5000_projection_seconds={elapsed * 10:.1f}')
+'@ | .\myenv\Scripts\python.exe -
+```
+
+Exit 0 in 10.9 shell seconds: `normalized_500_runtime_seconds=9.252`; linear 5,000-draw projection `92.5` seconds; warnings-as-errors passed. Both timing commands duplicate the same raw OOF probabilities under two system IDs solely to measure the common paired-bootstrap workload. They read one local CSV in memory, wrote no file, cleared API variables and made no network/API call.
+
+Using the observed benchmark duration, 1,540 fits / 722.522 seconds = about 0.469 seconds per fit. The recommended five-inner-fold cross-fitted sigmoid design adds 50 fits (about 23.5 fit seconds) plus bootstrap/reporting; a single 20% holdout adds 10 fits (about 4.7 fit seconds) but changes the base model. Total conservative local estimates are about 2–3 minutes versus 1.5–2 minutes. This is the pending material scientific decision; no implementation was started.
+
+### Unit 2D checkpoint revalidation after documentation repair — 2026-07-13
+
+The complete pytest command was rerun after the README, issue register, artifact map and readiness-status corrections:
+
+```powershell
+$env:OPENAI_API_KEY=$null
+$env:OPENAI_AGENTS_API_KEY=$null
+$env:AZURE_OPENAI_API_KEY=$null
+.\myenv\Scripts\python.exe -m pytest -q
+```
+
+Exit 0: 403 passed, 2 skipped, plus 4 subtests in 83.35 seconds (86.2 shell seconds). Unittest was also rerun and reported 174 tests, 2 skipped, in 6.904 seconds. Compileall, `git diff --check`, manuscript no-change, secret, scientific-diff absolute-path, 100 MB candidate-file and active-terminology checks all exited 0.
+
+The earlier parallel checkpoint wrapper initially called nonexistent `manuscript_contract.config_hash`, so that wrapper exited 1 before its results were collected. The corrected identity command uses `canonical_config_hash`; this was a command-name error, not a configuration/test failure. The corrected command loaded the full manuscript contract and reproduced config hash `57da6ae89ef43c3cb25783d7d5eb36a394287c0d647ee1e51bfca2dc431c8f74` and feature-policy SHA-256 `4b270ad6f0b07e2d51ce2d3d3b38f193ad5e15925420e0a9293a361c805d8fc3`.
+
+The README clean-checkout link and issue-register audit used:
+
+```powershell
+@'
+import csv
+import re
+import subprocess
+from pathlib import Path
+
+root = Path.cwd()
+text = (root / 'README.md').read_text(encoding='utf-8')
+targets = []
+for raw in re.findall(r'\[[^\]]+\]\(([^)]+)\)', text):
+    target = raw.strip().strip('<>')
+    if target.startswith(('http://', 'https://', 'mailto:', '#')):
+        continue
+    target = target.split('#', 1)[0]
+    if target:
+        targets.append(target)
+problems = []
+for target in targets:
+    path = root / target
+    if not path.exists():
+        problems.append(f'missing:{target}')
+        continue
+    tracked = subprocess.run(
+        ['git', 'ls-files', '--', target], cwd=root, check=True,
+        capture_output=True, text=True,
+    ).stdout.splitlines()
+    if not tracked:
+        problems.append(f'untracked:{target}')
+if problems:
+    raise SystemExit('README_LINK_FAILURES\n' + '\n'.join(problems))
+with (root / 'reports/research_log/finalization_v2/02_issue_register.csv').open(
+    encoding='utf-8', newline=''
+) as handle:
+    rows = list(csv.DictReader(handle))
+if not rows or any(None in row for row in rows):
+    raise SystemExit('ISSUE_REGISTER_CSV_INVALID')
+print(f'README_TRACKED_LOCAL_LINKS_OK count={len(targets)}')
+print(f'ISSUE_REGISTER_CSV_OK rows={len(rows)}')
+'@ | .\myenv\Scripts\python.exe -
+```
+
+Exit 0: `README_TRACKED_LOCAL_LINKS_OK count=17`; `ISSUE_REGISTER_CSV_OK rows=26`. This stronger check verifies that each local README target exists **and** is represented in the Git index; the untracked trial is deliberately plain code text rather than a link.

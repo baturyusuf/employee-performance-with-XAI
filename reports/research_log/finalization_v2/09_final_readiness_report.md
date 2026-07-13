@@ -1,19 +1,21 @@
-# Final Readiness Report
+# Final Readiness Report — Interim Checkpoint
 
 Assessment date: 2026-07-13
-Current state: Units 1A, 1B and 2A implemented and locally tested; scientific rebuild not started
+Current state: Units 1A through 2D have tested implementation checkpoints; no clean complete v2 scientific rebuild exists
+
+This is a live interim assessment, not a final completion declaration. `../finalization/CURRENT_STATUS.md` is the interruption-resilient status source.
 
 ## Engineering readiness
 
-**Not ready.** Actual-input/side-input binding and core/supplementary isolation are implemented. Manifest command finalization, path portability, remaining scientific stages, dependency locking and CI are open.
+**Not ready.** Actual-input/side-input binding, core/supplementary isolation, shared-fold benchmarking, exact-model OOF SHAP, and matched policy ablation are implemented and tested. Manifest command finalization, path portability, calibration and later scientific stages, dependency locking and CI remain open.
 
 ## Scientific readiness
 
-**Not ready.** External scope is split, but baselines/shared folds/nested tuning are absent; calibration selection and primary uncertainty remain invalid; SHAP pair dependence and supplementary heuristic-search terminology remain open.
+**Not ready.** A verified noncanonical real 10x5 four-model trial completed and the baseline superiority gate did not trigger, so XGBoost remains the predeclared XAI reference. Policy and SHAP contracts now consume the same fold/model evidence and use appropriate paired/descriptive uncertainty. Calibration remains scientifically inadmissible pending a user choice of within-outer-training sigmoid protocol; subgroup/proxy, external replication, and supplementary heuristic-search terminology remain open.
 
 ## Reproducibility readiness
 
-**Not ready.** Scoped schema-v3 input/side-input/cache identities pass real-input preflight. Existing scientific evidence still belongs to the rejected old dirty run; no clean cache-disabled v2 package exists.
+**Not ready.** Scoped input/side-input/cache identities pass real-input preflight and the local trial records verified folds, models, OOF rows, bootstrap draws, hashes and a completed command. The trial is intentionally noncanonical and untracked; no clean cache-disabled all-stage v2 package exists.
 
 ## Data/provenance readiness
 
@@ -29,7 +31,7 @@ Current state: Units 1A, 1B and 2A implemented and locally tested; scientific re
 
 ## Remaining blockers
 
-See `02_issue_register.csv` and `08_manual_submission_blockers.md`. D1-D5 are accepted. The next technical gate is the shared-fold nested benchmark; ethics, licence/source authenticity, figure-plan approval and later claim-matrix approval remain manual gates.
+See `02_issue_register.csv` and `08_manual_submission_blockers.md`. D1-D5 are accepted. The immediate scientific gate is the calibration-training design; ethics, licence/source authenticity, figure-plan approval and later claim-matrix approval remain manual gates.
 
 ## Final recommendation
 

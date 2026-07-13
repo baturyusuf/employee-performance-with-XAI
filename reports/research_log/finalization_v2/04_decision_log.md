@@ -51,6 +51,22 @@ Affected files after user decision: `configs/model_grid.yaml`, `configs/manuscri
 
 Expected fit count: 310 Logistic Regression fits plus 410 each for Random Forest, LightGBM and XGBoost = 1,540 fits including outer refits. Estimated local runtime: approximately 10–25 minutes. No paid or network service is involved.
 
+## Unit 2D Matched Policy Consequence — 2026-07-13
+
+Accepted D2 already states “Do not tune each leakage policy independently.” Unit 2D therefore holds the primary policy's fold-selected XGBoost parameter schedule fixed across all six exact policies and uses the exact shared outer folds. The primary policy reuses the prediction-producing benchmark OOF rows; the five other policies are refit only on each outer-training partition. This is reported as matched feature-access sensitivity conditional on primary-policy hyperparameter selection, not as a fully optimized policy leaderboard. The information-rich full-feature comparator is diagnostic/audit-only and not guaranteed to be an empirical upper bound.
+
+All policy uncertainty uses the same 5,000 paired, outer-fold-plus-class-stratified sample-level resample plan as the benchmark. Fold mean/SD/min/max are descriptive only; no t interval, Wilcoxon, Holm-adjusted rejection or policy stop gate is permitted. This followed D2 and did not require another user decision.
+
+## Pending Calibration Training Decision — 2026-07-13
+
+Read-only audit proved that the legacy calibration stage selects methods from outer-test metrics, regenerates incompatible folds, uses legacy fixed parameters and fold-t intervals. Three implementation choices remain:
+
+1. recommended five-inner-fold OOF cross-fitted sigmoid calibration refits inside the calibration stage, then application to exact persisted outer-fold XGBoost probabilities (about 2–3 minutes);
+2. the same cross-fitted predictions captured and persisted by the benchmark stage, avoiding calibration-stage refits but requiring a broader benchmark artifact-contract change and final benchmark regeneration;
+3. single 20% outer-training calibration holdout with a separately fitted base model trained on only 80% of the outer-training rows (about 1.5–2 minutes; scientifically simpler but less directly comparable).
+
+Outer test data is evaluation-only in every design. Isotonic is excluded from core selection. Implementation is paused for this material protocol choice.
+
 ## Observed Unit 2B Gate Outcome — 2026-07-13
 
 Trial `benchmark-10x5-20260713-6a80074` completed all 1,540 fits and 5,000 paired OOF bootstrap draws. No baseline had both a positive macro-F1 point advantage over XGBoost and a paired 95% CI lower bound above zero. The gate did not trigger, so the approved plan continues with XGBoost as the predeclared XAI reference. This does not suppress secondary results: Random Forest had the highest QWK, but QWK was not a gate metric.

@@ -60,6 +60,7 @@
         "side_input_keys": [
           "data_acquisition_contract",
           "dataset_provenance",
+          "feature_policy_projection",
           "feature_taxonomy",
           "model_search_space",
           "external_hrdataset_v14_schema_mapping"
@@ -102,6 +103,7 @@
         "side_input_keys": [
           "data_acquisition_contract",
           "dataset_provenance",
+          "feature_policy_projection",
           "feature_taxonomy",
           "model_search_space",
           "external_ibm_hr_analytics_schema_mapping",
@@ -208,6 +210,19 @@
           "role": "sensitive_retaining_leakage_ablation_non_primary",
           "audit_only": true
         }
+      },
+      "comparison_protocol": {
+        "evaluation_type": "matched_oof_feature_access_sensitivity",
+        "outer_folds_source": "shared_folds.outer_fold_assignments",
+        "primary_oof_source": "model_benchmarks.exact_xgboost_oof_predictions",
+        "primary_oof_replay_probability_atol": 1e-12,
+        "non_primary_hyperparameters_source": "model_benchmarks.xgboost_selected_candidate_by_outer_fold",
+        "independent_policy_tuning": false,
+        "preprocessing_fit_scope": "outer_training_partition_only",
+        "uncertainty_source": "evaluation.bootstrap",
+        "fold_summary_scope": "descriptive_variability_only_no_population_ci",
+        "pairwise_inference": "pointwise_paired_bootstrap_intervals_no_multiplicity_adjusted_rejection_claim",
+        "full_feature_comparator_boundary": "diagnostic_information_rich_comparator_not_guaranteed_optimized_upper_bound"
       }
     },
     "governance_fields": {
@@ -410,6 +425,7 @@
       "scientific_side_inputs": {
         "data_acquisition_contract": "configs/data_acquisition.yaml",
         "dataset_provenance": "configs/dataset_provenance.yaml",
+        "feature_policy_projection": "configs/feature_sets.yaml",
         "feature_taxonomy": "configs/feature_taxonomy.yaml",
         "model_search_space": "configs/model_grid.yaml",
         "external_hrdataset_v14_schema_mapping": "data/external/hrdataset_v14/schema_mapping.json",

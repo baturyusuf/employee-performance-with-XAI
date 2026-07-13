@@ -1,40 +1,40 @@
-# Employee Performance with XAI — Canonical Manuscript Evidence Package
+# Employee Performance with XAI
 
-This repository contains a reproducible, manuscript-support evidence package for employee `PerformanceRating` prediction (classes 2/3/4) with XGBoost. It covers leakage-policy ablation, nested calibration, grouped SHAP attribution and stability, out-of-fold counterfactual scenarios, task-aware external evidence, fairness/proxy diagnostics, governed case evidence, deterministic multi-agent auditing, chatbot guardrails, dataset provenance, and manuscript-ready figures.
+This repository is being finalized as a **leakage-aware XAI audit protocol** for three-class employee `PerformanceRating` prediction (classes 2/3/4). It is a research and reproducibility package, not an autonomous or deployment-ready HR system.
 
-> **Research decision support only.** This project must not be used to make or automate hiring, firing, promotion, compensation, discipline, ranking, screening, or other individual employment decisions. It is not deployment-ready and does not establish legal compliance.
+> **Research use only.** Nothing in this repository authorizes hiring, firing, promotion, compensation, discipline, ranking, screening, or other individual employment decisions. The study does not establish causal effects, legal compliance, fairness, human usefulness, or deployment readiness.
 
-## Canonical Status
+## Current v2 status
 
-The authoritative evidence package is:
+There is **no current canonical v2 manuscript release**. Finalization is active on `finalization/leakage-aware-v2`; the authoritative live status is [`CURRENT_STATUS.md`](reports/research_log/finalization/CURRENT_STATUS.md).
 
-| Item | Value |
-| --- | --- |
-| Run ID | `manuscript_final_20260712T181754Z_c664ef152ff3` |
-| Config | [`configs/manuscript_final.yaml`](configs/manuscript_final.yaml) |
-| Config SHA-256 | `c664ef152ff3a9eef89c53a403b9c2e6f677340bea0307b02d97d07cc54bdfc3` |
-| Versioned output | [`reports/manuscript_final/manuscript_final_20260712T181754Z_c664ef152ff3/`](reports/manuscript_final/manuscript_final_20260712T181754Z_c664ef152ff3/) |
-| Stable handoff | [`reports/manuscript_final/latest/`](reports/manuscript_final/latest/) |
-| Run manifest | [`run_manifest.json`](reports/manuscript_final/latest/run_manifest.json) |
-| Evidence manifest | [`final_evidence_manifest.json`](reports/manuscript_final/latest/final_evidence_manifest.json) |
-| Completion report | [`09_final_completion_report.md`](reports/research_log/manuscript_remediation/09_final_completion_report.md) |
-| Open items | [`08_unresolved_items.md`](reports/research_log/manuscript_remediation/08_unresolved_items.md) |
+The existing [`reports/manuscript_final/latest/`](reports/manuscript_final/latest/) directory and the run `manuscript_final_20260712T181754Z_c664ef152ff3` are **historical v1 evidence**. They were produced from an old commit and dirty worktree, contain incompatible core scope and methods, and must not supply v2 manuscript numbers or claims. Earlier [`manuscript_remediation`](reports/research_log/manuscript_remediation/) records are historical context, not proof that a v2 issue is resolved.
 
-The successful run completed all ten evidence stages, registered 214 outputs, and independently verified all 212 files admitted to the final evidence manifest. Historical reports outside `reports/manuscript_final/latest/` are retained for traceability but are **not** canonical unless explicitly indexed as compatible.
+At this checkpoint:
 
-The current package records a dirty worktree and Git base commit `18347488bdb4eed60f115ceeff70c420071ceef0`. The source-tree hash validates the generating `src/` and `configs/` contents, but a fresh run after committing the remediation is recommended to bind the final package to a clean commit.
+- Actual dataset and side-input binding, scoped core/supplementary orchestration, shared 10-fold assignments, the four-model benchmark contract, paired OOF bootstrap, warning-clean model preprocessing, exact prediction-model-to-OOF-SHAP binding, and shared-fold leakage-policy ablation have implementation/test checkpoints.
+- The policy stage now consumes the shared folds and each fold's primary-selected XGBoost parameters; final scientific policy numbers still require regeneration with the benchmark in one clean current-commit run. Calibration, subgroup/proxy diagnostics, external replication, replacement figures/tables, dependency locking, CI, sanitized publication packaging, and a clean full rebuild remain unfinished.
+- The core and supplementary entry points exist but deliberately fail closed because both scopes have `release_ready: false` in [`configs/manuscript_final.yaml`](configs/manuscript_final.yaml). No full current-commit canonical build or verified release manifest exists yet.
+- The manuscript has not been edited. A claim matrix must be technically frozen and approved before manuscript changes.
 
-The current untracked publication set is approximately 492 MiB because it includes versioned evidence, the physical `latest` mirror, and preserved diagnostic outputs. No individual file exceeds GitHub's 100 MiB hard file limit, but publishing every artifact will create a large commit.
+Open engineering and scientific issues are tracked in [`02_issue_register.csv`](reports/research_log/finalization_v2/02_issue_register.csv). Do not infer readiness from green unit tests alone.
 
-## Canonical Model Contract
+## Fixed study scope
 
-The primary policy is defined once as:
+The v2 core paper scope is:
 
-```text
-no_salary_hike_no_attrition_no_department
-```
+1. Verified INX input/provenance preflight and one shared outer-fold assignment.
+2. XGBoost compared with multinomial Logistic Regression, Random Forest, and LightGBM.
+3. XGBoost feature-policy/leakage ablation on matched folds and parameters.
+4. Predeclared sigmoid calibration evaluated only on outer test folds.
+5. Exact-fold out-of-fold grouped SHAP and descriptive stability analysis.
+6. Support-aware subgroup and proxy-risk diagnostics.
+7. HRDataset_v14 independent mapped-target external replication.
+8. Run-bound tables, figures, claim matrix, and evidence manifest.
 
-The canonical primary model excludes these fields exactly:
+The approved nested benchmark uses **10 outer folds x 5 inner folds**. Macro-F1 is the sole primary inner-selection and baseline-gate metric. QWK is secondary and is used only as the predeclared tie-breaker inside the inclusive `0.001` macro-F1 tie pool. Detailed XAI remains attached to XGBoost unless a baseline has a positive baseline-minus-XGBoost macro-F1 estimate and a paired OOF bootstrap 95% CI lower bound above zero.
+
+The primary feature policy is `no_salary_hike_no_attrition_no_department`. It excludes:
 
 ```text
 Age
@@ -44,134 +44,118 @@ EmpDepartment
 EmpLastSalaryHikePercent
 Attrition
 EmpNumber
-PerformanceRating  # target, never an input
+PerformanceRating  # target; never a model input
 ```
 
-The primary estimator is XGBoost under common stratified 10-fold out-of-fold evaluation. The full-feature model is a diagnostic upper bound only and is never deployable evidence. Sensitive-retaining variants are audit-only.
+The full-feature policy (whose legacy name contains `upper_bound`) is an information-rich diagnostic comparator, not a mathematically guaranteed or separately optimized upper bound. Sensitive-retaining policies are audit-only. SHAP is attribution, not causality; removing sensitive fields does not establish fairness or eliminate proxy risk.
 
-## Generated Evidence Snapshot
+### Core exclusions
 
-These values are summaries of executable run-local artifacts; the linked CSV/JSON files are authoritative.
+- LLM, chatbot, and agent evaluations are excluded from the core pipeline, results, tables, figures, and claims. Preserved code/results are legacy or experimental only and are not v2 scientific evidence. Core builds must be offline and make no paid API calls.
+- Counterfactual analysis is supplementary-only if retained and may report only **heuristic search success**. It must not claim employee actionability, causal recourse, feasible intervention, or advice.
+- IBM performance is supplementary restricted-target robustness. IBM attrition and Employee Turnover are supplementary related binary tasks; none is employee-performance external validation.
+- HRDataset_v14 is an independently trained mapped-target replication, not locked INX-model transport.
 
-| Evidence | Canonical result | Source |
-| --- | --- | --- |
-| Primary internal OOF model | Accuracy 0.8492; macro-F1 0.5987; QWK 0.6380; ordinal MAE 0.1525 | [`policy_summary.csv`](reports/manuscript_final/latest/policy/policy_summary.csv) |
-| Diagnostic full-feature upper bound | Macro-F1 0.9051; primary-policy delta 0.3063; Holm-adjusted p=0.0293; leakage-sensitivity index 0.3383 | [`policy_pairwise_tests.csv`](reports/manuscript_final/latest/policy/policy_pairwise_tests.csv), [`leakage_sensitivity_index.csv`](reports/manuscript_final/latest/policy/leakage_sensitivity_index.csv) |
-| Selected calibration | Sigmoid; log loss 0.4551; multiclass Brier 0.2608; ECE 0.06385 | [`calibration_method_comparison.csv`](reports/manuscript_final/latest/calibration/calibration_method_comparison.csv) |
-| Grouped SHAP stability | Top-10 pairwise Jaccard 0.8465; Spearman 0.9134 | [`shap_stability_summary.csv`](reports/manuscript_final/latest/shap/shap_stability_summary.csv) |
-| OOF counterfactual evaluation | All 1,196 eligible cases evaluated; employee-only 28/1,196 (2.34%); employee+manager 352/1,196 (29.43%); organization/no-salary 359/1,196 (30.02%) | [`actionability_summary.csv`](reports/manuscript_final/latest/counterfactual/actionability_summary.csv) |
-| External performance replication | HRDataset_v14 department-free accuracy 0.8617; macro-F1 0.6437; QWK 0.5942; ordinal MAE 0.1383 | [`performance_target_replication.csv`](reports/manuscript_final/latest/external/performance_target_replication.csv) |
-| LLM case-evidence readiness | 80 requested, 80 complete, 0 incomplete; real API execution disabled | [`preflight_report.json`](reports/manuscript_final/latest/llm/preflight_report.json) |
-| Deterministic chatbot regression suite | 80/80 unsafe prompts refused safely; 34/34 safe prompts answered; Wilson intervals reported | [`guardrail_evaluation_summary.md`](reports/manuscript_final/latest/chatbot/guardrail_evaluation_summary.md) |
+The complete fixed scope and prohibited claims are recorded in [`00_scope_and_fixed_decisions.md`](reports/research_log/finalization_v2/00_scope_and_fixed_decisions.md).
 
-The canonical run made **0 paid API calls**. It validates complete evidence records and deterministic offline governance behavior; it does **not** support real-LLM faithfulness or compliance-rate claims under the new canonical contract. A paid OpenAI batch requires separate cost estimation and explicit user approval.
+## Verified four-model trial (decision evidence, not a canonical release)
 
-## Evidence Map
+The real offline trial `reports/manuscript_final/trials/benchmark-10x5-20260713-6a80074/core/` completed 1,540 fits on the verified 1,200-row INX input and used 5,000 paired OOF bootstrap resamples. Its 91.8 MB package is intentionally local/untracked under D5, so the path is not a GitHub link. Its manifest explicitly records `canonical_release_eligible=false`; it is retained only as verified model-reference decision evidence and must be regenerated with downstream stages under the final clean commit before manuscript numbers are frozen.
 
-| Area | Canonical artifacts |
-| --- | --- |
-| Policy/leakage | [`policy/`](reports/manuscript_final/latest/policy/): folds, summaries, pairwise tests, uncertainty, leakage sensitivity, trade-off figure |
-| Calibration | [`calibration/`](reports/manuscript_final/latest/calibration/): raw/sigmoid/isotonic comparison, class-wise bins, reliability plots, Figure 5 |
-| SHAP/reason codes | [`shap/`](reports/manuscript_final/latest/shap/): grouped global/class/local attribution, fold rankings, stability, validation, Figures 6–7 |
-| Counterfactuals | [`counterfactual/`](reports/manuscript_final/latest/counterfactual/): OOF protocol, all-case results, denominators, failure reasons, uncertainty |
-| External evidence | [`external/`](reports/manuscript_final/latest/external/): task-aware replication/robustness strata and transport feasibility gate |
-| Fairness/proxy | [`fairness/`](reports/manuscript_final/latest/fairness/): subgroup support, bootstrap intervals, proxy comparisons, limitations |
-| LLM/agents | [`llm/`](reports/manuscript_final/latest/llm/): CompleteCaseEvidence, preflight, deterministic seven-role audits |
-| Chatbot | [`chatbot/`](reports/manuscript_final/latest/chatbot/): versioned safe/unsafe suites, category results, Wilson intervals |
-| Provenance | [`provenance/`](reports/manuscript_final/latest/provenance/): machine-readable dataset cards and validation report |
-| Figures | [`figures/`](reports/manuscript_final/latest/figures/): Figures 1–7 in PNG/SVG plus source data and metadata |
-| Claim boundaries | [`canonical_claim_boundaries.md`](reports/manuscript_final/latest/canonical_claim_boundaries.md) |
-| Remediation history | [`reports/research_log/manuscript_remediation/`](reports/research_log/manuscript_remediation/) |
+| Model | Macro-F1 (paired OOF bootstrap 95% CI) | QWK (secondary) |
+| --- | ---: | ---: |
+| XGBoost | 0.621021 (0.597319 to 0.644690) | 0.567602 |
+| LightGBM | 0.605488 (0.583315 to 0.629174) | 0.588329 |
+| Random Forest | 0.592340 (0.579571 to 0.604757) | 0.631678 |
+| Logistic Regression | 0.506221 (0.480283 to 0.531841) | 0.371011 |
 
-The remediation log contains the repository baseline, issue inventory, root-cause analysis, decisions, progress, commands, tests, artifact inventory, unresolved items, and final completion report (`00` through `09`). This is the recommended starting point for human or AI review.
+Baseline-minus-XGBoost macro-F1 differences were:
 
-## Dataset Roles and Allowed Claims
+- LightGBM: `-0.015533` (95% CI `-0.038121` to `0.006382`)
+- Random Forest: `-0.028681` (95% CI `-0.049949` to `-0.008049`)
+- Logistic Regression: `-0.114800` (95% CI `-0.147597` to `-0.083224`)
 
-| Dataset/task | Canonical role | Claim boundary |
-| --- | --- | --- |
-| INX Future Inc Employee Performance | Primary development and internal OOF evaluation | Internal three-class evidence only |
-| HRDataset_v14 | Independent external performance-target replication | Independently trained replication; not locked INX-model transport |
-| IBM performance | Restricted-target performance robustness | Classes 3/4 only; not equivalent to the primary three-class task |
-| IBM attrition | Related binary-task transfer | Not employee-performance validation |
-| Employee Turnover | Related binary-task transfer | Not employee-performance validation |
+The predeclared superiority gate did not trigger, so XGBoost remains the XAI reference. Random Forest's higher secondary QWK does not override the macro-F1 gate.
 
-Only three department-free safe common fields were verified for INX-to-HRDataset transport (`EmpJobRole`, `EmpJobSatisfaction`, and `ExperienceYearsAtThisCompany`), so locked cross-dataset transport is marked infeasible rather than forced. Binary-task ordinal and severe-error metrics are N/A by code, not reported as zero.
+Authoritative local trial records (the 91.8 MB package is intentionally untracked under D5 and is not expected to resolve from a GitHub source checkout):
 
-## Reproduce the Canonical Package
+- `reports/manuscript_final/trials/benchmark-10x5-20260713-6a80074/core/model_benchmarks/model_summary.csv`
+- `reports/manuscript_final/trials/benchmark-10x5-20260713-6a80074/core/model_benchmarks/paired_model_differences.csv`
+- `reports/manuscript_final/trials/benchmark-10x5-20260713-6a80074/core/model_benchmarks/baseline_xgboost_gate.json`
+- `reports/manuscript_final/trials/benchmark-10x5-20260713-6a80074/core/run_manifest.json`, SHA-256 `1b4c3381489f8b0bf7ae60d57280b3ddd5aa5344cb250b1df63fdaaa6cc7379c`
+- Exact command, runtime, input/config/fold/bootstrap hashes, and validation results: [`06_commands_and_tests.md`](reports/research_log/finalization_v2/06_commands_and_tests.md)
 
-Create a virtual environment and install dependencies:
+The trial's old ndarray preprocessing lacks the fitted feature-name lineage required by the current fail-closed grouped-SHAP contract. It therefore cannot be reused as the upstream source of final SHAP artifacts; benchmark and SHAP must be regenerated together.
+
+## Data acquisition and redistribution policy
+
+[`configs/data_acquisition.yaml`](configs/data_acquisition.yaml) pins each local dataset's SHA-256, schema, row/column counts, and target distribution. Scientific stages must consume the configured verified file; they may not silently fall back to an interim file or unapproved mirror.
+
+Current acquisition records classify all datasets as user-provided local files and all licence/source authenticity fields as requiring manual review. The recorded mirror URLs are not approved download URLs. Consequently, if a local file is absent, the current configuration fails closed. Automatic download becomes permissible only after an explicit URL is approved in the acquisition manifest, and downloaded bytes must match every pinned hash/schema/support check. A mismatch must not be used.
+
+Raw datasets with unverified redistribution rights will not be included in the sanitized publication repository. Local raw files must not be deleted. This repository-hygiene step is still open.
+
+## Ethics and publication status
+
+Ethics/IRB confirmation is pending. The previously supplied institution, unit, reference, and date strings were placeholders and are not verified facts. Engineering may continue, but submission readiness remains blocked until authentic institutional metadata is supplied.
+
+The approved publication plan is:
+
+- code plus small source tables/figures/manifests in Git;
+- the full evidence package prepared for GitHub Release or Zenodo;
+- `reports/manuscript_final/latest` reduced to a small pointer rather than a physical duplicate;
+- no release, push, merge, or publication without explicit user approval.
+
+Dataset licence/source verification and ethics confirmation remain manual submission blockers. See [`08_manual_submission_blockers.md`](reports/research_log/finalization_v2/08_manual_submission_blockers.md).
+
+## Build entry points
+
+The intended clean core command is:
 
 ```powershell
-python -m venv myenv
-.\myenv\Scripts\Activate.ps1
-python -m pip install -r requirements.txt
+.\myenv\Scripts\python.exe -m src.experiments.build_manuscript_evidence --config configs/manuscript_final.yaml --scope core --no-reuse-compatible
 ```
 
-Run the single canonical entry point from the repository root:
+The supplementary scope uses `--scope supplementary`. **These are not release-ready commands yet:** the current config intentionally blocks both before scientific stage execution while their `release_ready` flags are false. The flags must be enabled only after every declared stage, contract test, and claim boundary is complete; then the final release requires a clean current-commit, cache-disabled rebuild and manifest verification.
 
-```powershell
-.\myenv\Scripts\python.exe -m src.experiments.build_manuscript_evidence --config configs/manuscript_final.yaml
-```
-
-The command validates inputs, creates a versioned run, executes or reuses only contract-compatible stages, generates tables and Figures 1–7, verifies hashes, and refreshes `reports/manuscript_final/latest/`. It does not perform paid API calls under the canonical configuration.
-
-Run verification:
+Routine validation commands are:
 
 ```powershell
 .\myenv\Scripts\python.exe -m pytest -q
-.\myenv\Scripts\python.exe -m unittest discover -s tests
-.\myenv\Scripts\python.exe -m compileall src tests
+.\myenv\Scripts\python.exe -m unittest discover -s tests -q
+.\myenv\Scripts\python.exe -m compileall -q src tests
 ```
 
-Recorded final checks passed: 188 pytest tests plus 4 subtests, 161 unittest tests, compileall, final-manifest integrity, figure validation, and the declared secret scan. Exact recorded commands and outcomes are in [`06_test_log.md`](reports/research_log/manuscript_remediation/06_test_log.md) and [`05_commands_and_runs.md`](reports/research_log/manuscript_remediation/05_commands_and_runs.md).
+Do not treat the historical v1 test count or package-completion report as current v2 readiness evidence. Current commands and outcomes are recorded in the persistent logs below.
 
-## Scientific and Governance Boundaries
+## Reviewer and agent resumption order
 
-- SHAP values are model attributions, not causal effects.
-- Counterfactuals are constrained model scenarios, not recommendations to employees or managers.
-- Removing sensitive or group variables does not prove fairness or eliminate proxy risk.
-- Department reconstructability is proxy-risk evidence, not proof of causal or discriminatory model use.
-- Fixed-suite guardrail pass rates do not establish comprehensive safety or zero failure probability.
-- Calibration supports cautious probability interpretation; it does not make individual HR decisions reliable or permissible.
-- Attrition, turnover, and restricted-target experiments are not direct external validation of three-class performance prediction.
-- No output authorizes autonomous or individual-level HR action.
+Start with [`AGENTS.md`](AGENTS.md), then read:
 
-## Remaining Manual or Author Decisions
+1. [`CURRENT_STATUS.md`](reports/research_log/finalization/CURRENT_STATUS.md)
+2. [`DECISION_LOG.md`](reports/research_log/finalization/DECISION_LOG.md)
+3. [`NEXT_ACTIONS.md`](reports/research_log/finalization/NEXT_ACTIONS.md)
+4. [`COMMAND_LOG.md`](reports/research_log/finalization/COMMAND_LOG.md)
+5. [`TEST_LOG.md`](reports/research_log/finalization/TEST_LOG.md)
+6. [`02_issue_register.csv`](reports/research_log/finalization_v2/02_issue_register.csv)
+7. Current branch, HEAD, `git status`, and `git diff`
 
-- The author must choose whether manuscript terminology says *leakage-safe*, *leakage-aware*, or *leakage-reduced*; this repository reports the evidence without changing the manuscript title.
-- Dataset source authenticity, licence status, retrieval history, and citations remain `manual_review_required` where code cannot verify them.
-- A canonical real-LLM batch remains optional, paid, and approval-gated.
-- The historical INX workbook-to-CSV provenance comparison still requires the declared `xlrd` dependency and manual source review.
-- The provider billing dashboard should be checked for the earlier preserved pre-safeguard API incident; it is not part of canonical scientific evidence.
+Detailed v2 records are in [`reports/research_log/finalization_v2/`](reports/research_log/finalization_v2/): scope, baseline audit, issue register, root-cause analysis, decisions, implementation progress, exact commands/tests, artifact/claim map, manual blockers, and readiness report. These files must reflect real progress; an issue is not resolved until implementation, real-data execution, tests, and artifact validation all pass.
 
-See [`08_unresolved_items.md`](reports/research_log/manuscript_remediation/08_unresolved_items.md) for the complete bounded list.
-
-## Repository Layout
+## Repository areas
 
 ```text
-configs/                         Canonical and supporting experiment configuration
-data/                            Primary and external datasets plus mappings/cards
-reports/manuscript_final/        Versioned canonical evidence packages and stable latest handoff
-reports/research_log/            Baseline, issue, decision, command, test, and completion records
-src/experiments/                 Canonical orchestration and scientific stages
-src/explainability/              Legacy/supporting XAI implementations
-src/governance/                  Contracts, provenance, claims, figures, and manifests
-src/llm/                         Evidence schemas, preflight, and governed explanation support
-src/chatbot/                     Guardrails and deterministic evaluation
-src/agents/                      Deterministic governance audits
-tests/                           Unit, contract, artifact, and integration tests
-manuscript/                      Author-owned manuscript; not modified by remediation
+configs/                           Canonical scope, acquisition, model, and policy contracts
+data/                              Local scientific inputs and schema mappings; publication policy pending
+src/experiments/                   Core/supplementary orchestration and scientific stages
+src/explainability/                Grouped-SHAP lineage and supporting explainability code
+src/governance/                    Run, provenance, scope, claim, and manifest contracts
+src/llm/, src/chatbot/, src/agents Legacy/experimental modules; forbidden from core evidence
+reports/manuscript_final/          Historical v1 packages and noncanonical v2 trials until final rebuild
+reports/research_log/finalization/ Persistent interruption-safe handoff state
+reports/research_log/finalization_v2/ Detailed v2 audit and implementation evidence
+tests/                             Unit, contract, and integration checks
+manuscript/                        Author-owned manuscript; not edited during technical finalization
 ```
 
-## Suggested Review Order
-
-For another researcher or AI reviewer:
-
-1. Read this README and [`configs/manuscript_final.yaml`](configs/manuscript_final.yaml).
-2. Read the [`final completion report`](reports/research_log/manuscript_remediation/09_final_completion_report.md) and [`unresolved items`](reports/research_log/manuscript_remediation/08_unresolved_items.md).
-3. Inspect [`canonical_claim_boundaries.md`](reports/manuscript_final/latest/canonical_claim_boundaries.md).
-4. Verify [`run_manifest.json`](reports/manuscript_final/latest/run_manifest.json) and [`final_evidence_manifest.json`](reports/manuscript_final/latest/final_evidence_manifest.json).
-5. Use the run-local CSV/JSON files—not historical summaries—as the source for manuscript numbers.
-6. Consult [`01_issue_inventory.csv`](reports/research_log/manuscript_remediation/01_issue_inventory.csv), [`03_decision_log.md`](reports/research_log/manuscript_remediation/03_decision_log.md), and [`06_test_log.md`](reports/research_log/manuscript_remediation/06_test_log.md) for engineering traceability.
-
-The manuscript itself was intentionally not edited during this remediation.
+The governing principle is simple: green tests are necessary but insufficient. Every manuscript claim must trace to verified real input, an approved protocol, correct uncertainty and claim boundaries, and artifacts from one clean run/config/commit identity.

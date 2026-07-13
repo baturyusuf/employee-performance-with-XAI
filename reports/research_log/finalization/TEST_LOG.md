@@ -108,3 +108,30 @@ At that historical checkpoint, V2-007 through V2-010 had tested reusable infrast
 - Historical axis check: expected fail-closed because old nested OneHotEncoder has no `feature_names_in_`; this proves the historical trial cannot feed canonical SHAP.
 - Current-code real fold-1 SHAP diagnostic: 120 samples, 46 transformed features, 20 raw groups, grouped shape `(120,3,20)`, maximum sum error `0`, zero warnings and zero label mismatches.
 - Scientific artifacts: none; canonical benchmark+SHAP regeneration remains pending.
+
+## Unit 2D Initial Policy Binding Checks — 2026-07-13
+
+- Builder current-run upstream binding plus repository cross-config policy projection suite: 22 passed in 1.64 seconds.
+- The shared policy names in `configs/feature_sets.yaml` now match the canonical exclusions, and the file is explicitly labelled a legacy compatibility projection whose shared names fail closed on drift.
+- Main policy execution/bootstrap refactor and its broader tests are still in progress; no scientific artifact was generated.
+
+## Unit 2D Final Shared-Fold Policy Gates — 2026-07-13
+
+- Initial comprehensive policy/shared-fold/bootstrap/reader suite: 75 passed in 22.15 seconds.
+- Post-independent-review policy/config/side-input suite: 35 passed in 7.82 seconds.
+- Final expanded focused suite: 92 passed in 26.85 seconds.
+- Full pytest: 403 passed, 2 skipped, plus 4 subtests in 83.35 seconds.
+- Full unittest: 174 passed, 2 skipped in 6.889 seconds.
+- Compileall, diff check, manuscript no-change, high-entropy secret, absolute user-path, 100 MB candidate-file, README local-link and active leakage-aware terminology gates: passed.
+- Real INX fold-1 diagnostic: five non-primary fits each used 1,080 train/120 test rows; feature/selected-parameter lineage passed; maximum probability simplex error `2.22e-16`; warnings/files/network calls zero; historical trial manifest unchanged.
+- One attempted focused command failed before collection because it named nonexistent `tests/test_oof_bootstrap_uncertainty.py`; the corrected exact suite used the three repository bootstrap test modules and passed. No scientific execution occurred in the failed attempt.
+- Canonical Unit 2D artifact package: not generated; requires the new same-commit benchmark upstream.
+
+## Unit 2D Checkpoint Revalidation — 2026-07-13
+
+- Full pytest after README/traceability repairs: 403 passed, 2 skipped, plus 4 subtests in 83.35 seconds.
+- Full unittest: 174 passed, 2 skipped in 6.904 seconds.
+- Compileall, diff, manuscript no-change, secret, scientific-diff absolute-path, 100 MB candidate and active leakage-aware terminology checks: passed.
+- README clean-checkout audit: all 17 local links exist and are represented in the Git index; the local untracked trial path is plain text, not a broken GitHub link.
+- Issue register CSV: 26 rows parsed with the declared schema.
+- One parallel wrapper failed because it imported nonexistent `config_hash`; corrected `canonical_config_hash` loading passed and reproduced the recorded config/feature-policy hashes. This was not a scientific/test failure.

@@ -411,11 +411,16 @@ def _run_model_benchmarks(context: StageContext) -> Mapping[str, Any]:
 def _run_policy(context: StageContext) -> Mapping[str, Any]:
     from src.experiments.manuscript_policy_ablation import run
 
+    shared_folds_dir = _require_compatible_upstream_stage(context, "shared_folds")
+    model_benchmarks_dir = _require_compatible_upstream_stage(context, "model_benchmarks")
     return run(
         context.config_path,
+        shared_folds_dir=shared_folds_dir,
+        model_benchmarks_dir=model_benchmarks_dir,
         output_dir=context.run_dir / "policy_ablation",
         run_id=context.run_id,
         config_hash=context.config_hash,
+        scientific_input_hash=str(context.manifest["scientific_input_hash"]),
     )
 
 
