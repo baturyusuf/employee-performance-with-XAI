@@ -13,7 +13,13 @@ from src.models.canonical_models import CANONICAL_ESTIMATOR_PATHS
 from src.utils.config_loader import load_config
 
 
-def _grid(*, selection_metric: str | None = "macro_f1") -> dict:
+def _grid(
+    *,
+    selection_metric: str | None = "macro_f1",
+    tie_break_metric: str | None = "quadratic_weighted_kappa",
+    practical_tie_tolerance: float | None = 0.001,
+    gate_metric: str | None = "macro_f1",
+) -> dict:
     models = {}
     for model_name, count in benchmark.EXPECTED_CANDIDATE_COUNTS.items():
         fixed = {"n_jobs": 1} if model_name != "logistic_regression" else {}
@@ -32,11 +38,17 @@ def _grid(*, selection_metric: str | None = "macro_f1") -> dict:
         }
     return {
         "model_benchmark": {
-            "schema_version": 2,
+            "schema_version": 3,
+            "protocol_name": "restrained_nested_tuning_v2_10x5",
             "selection_metric": selection_metric,
-            "baseline_gate_metric": selection_metric,
+            "selection_tie_break_metric": tie_break_metric,
+            "primary_practical_tie_tolerance": practical_tie_tolerance,
+            "baseline_gate_metric": gate_metric,
             "candidate_failure_policy": "fail_entire_stage",
-            "tie_breaking": "highest_inner_mean_then_lowest_candidate_index",
+            "tie_breaking": (
+                "highest_macro_f1_within_0_001_then_highest_qwk_then_"
+                "lowest_candidate_index"
+            ),
             "models": models,
         }
     }
@@ -45,12 +57,12 @@ def _grid(*, selection_metric: str | None = "macro_f1") -> dict:
 def _fixture():
     frame = pd.DataFrame(
         {
-            "EmpNumber": [f"E{index:03d}" for index in range(18)],
-            "numeric": np.arange(18, dtype=float),
-            "category": ["a", "b", "c"] * 6,
-            "PerformanceRating": [2, 3, 4] * 6,
+            "EmpNumber": [f"E{index:03d}" for index in range(30)],
+            "numeric": np.arange(30, dtype=float),
+            "category": ["a", "b", "c"] * 10,
+            "PerformanceRating": [2, 3, 4] * 10,
         },
-        index=range(18),
+        index=range(30),
     )
     folds = generate_shared_folds(
         frame,
@@ -62,7 +74,7 @@ def _fixture():
         dataset_key="inx_primary",
         dataset_sha256="c" * 64,
         outer_splits=2,
-        inner_splits=3,
+        inner_splits=5,
         seed=42,
         inner_seed=43,
     )
@@ -101,15 +113,24 @@ def _fake_builder(
     return _FakePipeline(int(next(iter(candidate_parameters.values()))))
 
 
-def test_actual_grid_is_predeclared_but_metric_decision_blocks_real_execution() -> None:
+def test_actual_grid_freezes_the_predeclared_selection_and_gate_protocol() -> None:
     actual = load_config("configs/model_grid.yaml")
-    with pytest.raises(benchmark.ModelBenchmarkError, match="selection_metric is pending"):
-        benchmark.validate_benchmark_config(actual)
-
-    decided = copy.deepcopy(actual)
-    decided["model_benchmark"]["selection_metric"] = "macro_f1"
-    decided["model_benchmark"]["baseline_gate_metric"] = "macro_f1"
-    settings = benchmark.validate_benchmark_config(decided)
+    settings = benchmark.validate_benchmark_config(actual)
+    manuscript = load_config("configs/manuscript_final.yaml")
+    nested = benchmark.validate_benchmark_manuscript_alignment(
+        settings,
+        manuscript["manuscript_final"],
+    )
+    assert settings["schema_version"] == benchmark.BENCHMARK_SCHEMA_VERSION
+    assert settings["protocol_name"] == benchmark.BENCHMARK_PROTOCOL_NAME
+    assert settings["selection_metric"] == benchmark.PRIMARY_SELECTION_METRIC
+    assert settings["selection_tie_break_metric"] == benchmark.SELECTION_TIE_BREAK_METRIC
+    assert settings["primary_practical_tie_tolerance"] == pytest.approx(0.001)
+    assert settings["baseline_gate_metric"] == benchmark.BASELINE_GATE_METRIC
+    assert nested["inner_splits"] == 5
+    assert {"joblib", "threadpoolctl"}.issubset(
+        manuscript["manuscript_final"]["provenance"]["package_names"]
+    )
     assert set(settings["models"]) == set(benchmark.CANONICAL_MODEL_NAMES)
     assert {
         name: len(definition["candidates"])
@@ -117,16 +138,64 @@ def test_actual_grid_is_predeclared_but_metric_decision_blocks_real_execution() 
     } == benchmark.EXPECTED_CANDIDATE_COUNTS
 
 
-def test_pending_metric_preflight_blocks_before_data_or_output_access(
+@pytest.mark.parametrize(
+    ("field", "value", "message"),
+    [
+        ("schema_version", 2, "schema_version must be 3"),
+        ("protocol_name", "restrained_nested_tuning_v1", "protocol_name must be"),
+        ("selection_metric", "quadratic_weighted_kappa", "selection_metric must be"),
+        ("selection_tie_break_metric", "macro_f1", "selection_tie_break_metric must be"),
+        ("baseline_gate_metric", "quadratic_weighted_kappa", "strictly 'macro_f1'"),
+    ],
+)
+def test_validator_rejects_selection_or_gate_protocol_drift(
+    field: str,
+    value: object,
+    message: str,
+) -> None:
+    config = _grid()
+    config["model_benchmark"][field] = value
+    with pytest.raises(benchmark.ModelBenchmarkError, match=message):
+        benchmark.validate_benchmark_config(config)
+
+
+@pytest.mark.parametrize("value", [None, True, float("nan"), -0.001, 1.001])
+def test_validator_rejects_invalid_practical_tie_tolerance(value: object) -> None:
+    config = _grid()
+    config["model_benchmark"]["primary_practical_tie_tolerance"] = value
+    with pytest.raises(benchmark.ModelBenchmarkError, match="finite numeric value"):
+        benchmark.validate_benchmark_config(config)
+
+
+def test_validator_rejects_practical_tie_tolerance_protocol_drift() -> None:
+    config = _grid()
+    config["model_benchmark"]["primary_practical_tie_tolerance"] = 0.002
+    with pytest.raises(benchmark.ModelBenchmarkError, match="must remain exactly 0.001"):
+        benchmark.validate_benchmark_config(config)
+
+    config["model_benchmark"]["tie_breaking"] = (
+        "highest_macro_f1_within_0_002_then_highest_qwk_then_lowest_candidate_index"
+    )
+    with pytest.raises(benchmark.ModelBenchmarkError, match="must remain exactly 0.001"):
+        benchmark.validate_benchmark_config(config)
+
+
+def test_invalid_selection_protocol_blocks_before_data_or_output_access(
     tmp_path,
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
-    def _data_access_forbidden(*args, **kwargs):
-        raise AssertionError("data loader must not be reached while metric decision is pending")
+    invalid = _grid(tie_break_metric=None)
 
+    def _load_grid_only(*args, **kwargs):
+        return invalid
+
+    def _data_access_forbidden(*args, **kwargs):
+        raise AssertionError("data loader must not be reached for an invalid selection protocol")
+
+    monkeypatch.setattr(benchmark, "load_config", _load_grid_only)
     monkeypatch.setattr(benchmark, "load_canonical_dataset", _data_access_forbidden)
     output = tmp_path / "benchmark-output"
-    with pytest.raises(benchmark.ModelBenchmarkError, match="selection_metric is pending"):
+    with pytest.raises(benchmark.ModelBenchmarkError, match="selection_tie_break_metric"):
         benchmark.run(
             "configs/manuscript_final.yaml",
             model_grid_path="configs/model_grid.yaml",
@@ -134,6 +203,114 @@ def test_pending_metric_preflight_blocks_before_data_or_output_access(
             output_dir=output,
             run_id="blocked",
             config_hash="a" * 64,
+            scientific_input_hash="b" * 64,
+            model_grid_sha256=benchmark.sha256_file("configs/model_grid.yaml"),
+        )
+    assert not output.exists()
+
+
+def test_run_blocks_manuscript_model_grid_protocol_mismatch_before_data_access(
+    tmp_path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    model_grid = load_config("configs/model_grid.yaml")
+    manuscript = load_config("configs/manuscript_final.yaml")
+    mismatched = copy.deepcopy(manuscript)
+    mismatched["manuscript_final"]["model"]["nested_tuning"][
+        "selection_tie_break_metric"
+    ] = "macro_f1"
+
+    def _load_config(path):
+        if str(path).replace("\\", "/").endswith("configs/model_grid.yaml"):
+            return model_grid
+        return mismatched
+
+    def _data_access_forbidden(*args, **kwargs):
+        raise AssertionError("fold/data access must not follow a protocol mismatch")
+
+    monkeypatch.setattr(benchmark, "load_config", _load_config)
+    monkeypatch.setattr(benchmark, "read_shared_folds", _data_access_forbidden)
+    monkeypatch.setattr(benchmark, "load_canonical_dataset", _data_access_forbidden)
+    output = tmp_path / "benchmark-output"
+    with pytest.raises(benchmark.ModelBenchmarkError, match="manuscript/model-grid benchmark mismatch"):
+        benchmark.run(
+            "configs/manuscript_final.yaml",
+            model_grid_path="configs/model_grid.yaml",
+            shared_folds_dir=tmp_path / "missing-folds",
+            output_dir=output,
+            run_id="blocked",
+            config_hash=benchmark.canonical_config_hash(mismatched),
+            scientific_input_hash="b" * 64,
+            model_grid_sha256=benchmark.sha256_file("configs/model_grid.yaml"),
+        )
+    assert not output.exists()
+
+
+def test_run_requires_canonical_ten_outer_fold_configuration_before_fold_access(
+    tmp_path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    model_grid = load_config("configs/model_grid.yaml")
+    manuscript = load_config("configs/manuscript_final.yaml")
+    mismatched = copy.deepcopy(manuscript)
+    mismatched["manuscript_final"]["evaluation"]["cv"]["n_splits"] = 9
+
+    def _load_config(path):
+        if str(path).replace("\\", "/").endswith("configs/model_grid.yaml"):
+            return model_grid
+        return mismatched
+
+    def _fold_or_data_access_forbidden(*args, **kwargs):
+        raise AssertionError("fold/data access must not follow a 9-fold manuscript config")
+
+    monkeypatch.setattr(benchmark, "load_config", _load_config)
+    monkeypatch.setattr(benchmark, "read_shared_folds", _fold_or_data_access_forbidden)
+    monkeypatch.setattr(benchmark, "load_canonical_dataset", _fold_or_data_access_forbidden)
+    output = tmp_path / "benchmark-output"
+    with pytest.raises(benchmark.ModelBenchmarkError, match="n_splits must be exactly 10"):
+        benchmark.run(
+            "configs/manuscript_final.yaml",
+            model_grid_path="configs/model_grid.yaml",
+            shared_folds_dir=tmp_path / "missing-folds",
+            output_dir=output,
+            run_id="blocked",
+            config_hash=benchmark.canonical_config_hash(mismatched),
+            scientific_input_hash="b" * 64,
+            model_grid_sha256=benchmark.sha256_file("configs/model_grid.yaml"),
+        )
+    assert not output.exists()
+
+
+def test_run_requires_persisted_ten_outer_fold_contract_before_data_access(
+    tmp_path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    model_grid = load_config("configs/model_grid.yaml")
+    manuscript = load_config("configs/manuscript_final.yaml")
+
+    def _load_config(path):
+        if str(path).replace("\\", "/").endswith("configs/model_grid.yaml"):
+            return model_grid
+        return manuscript
+
+    class _FoldStub:
+        contract = {"outer_splits": 9, "inner_splits": 5}
+
+    def _data_access_forbidden(*args, **kwargs):
+        raise AssertionError("data access must not follow a 9-fold persisted contract")
+
+    monkeypatch.setattr(benchmark, "load_config", _load_config)
+    monkeypatch.setattr(benchmark, "read_shared_folds", lambda *args, **kwargs: _FoldStub())
+    monkeypatch.setattr(benchmark, "load_canonical_dataset", _data_access_forbidden)
+    output = tmp_path / "benchmark-output"
+    with pytest.raises(benchmark.ModelBenchmarkError, match="outer_splits must be exactly 10"):
+        benchmark.run(
+            "configs/manuscript_final.yaml",
+            model_grid_path="configs/model_grid.yaml",
+            shared_folds_dir=tmp_path / "nine-folds",
+            output_dir=output,
+            run_id="blocked",
+            config_hash=benchmark.canonical_config_hash(manuscript),
             scientific_input_hash="b" * 64,
             model_grid_sha256=benchmark.sha256_file("configs/model_grid.yaml"),
         )
@@ -164,8 +341,34 @@ def test_model_grid_hash_mismatch_blocks_before_config_or_data_use(
     assert not output.exists()
 
 
-def test_candidate_selection_is_deterministic_and_uses_lowest_index_on_tie() -> None:
-    assert benchmark.select_candidate_index([0.5, 0.7, 0.7], better_direction="higher") == 1
+def test_candidate_selection_uses_qwk_only_inside_the_primary_tolerance() -> None:
+    primary = [0.8000, 0.7995, 0.7989]
+    secondary = [0.50, 0.90, 1.00]
+    assert benchmark.select_candidate_index(
+        primary,
+        secondary,
+        practical_tie_tolerance=0.001,
+    ) == 1
+
+
+def test_candidate_selection_includes_the_numeric_tolerance_boundary() -> None:
+    assert benchmark.select_candidate_index(
+        [0.8, 0.799],
+        [0.2, 0.9],
+        practical_tie_tolerance=0.001,
+    ) == 1
+
+
+def test_candidate_selection_is_deterministic_and_uses_lowest_index_on_full_tie() -> None:
+    inputs = ([0.5, 0.7, 0.7], [0.1, 0.9, 0.9])
+    observed = [
+        benchmark.select_candidate_index(
+            *inputs,
+            practical_tie_tolerance=0.001,
+        )
+        for _ in range(10)
+    ]
+    assert observed == [1] * 10
     assert benchmark.select_candidate_index([0.5, 0.2, 0.2], better_direction="lower") == 1
 
 
@@ -254,7 +457,7 @@ def test_nested_benchmark_uses_inner_validation_only_and_oof_exactly_once(
         bootstrap_protocol=BootstrapProtocol(n_resamples=4, seed=42),
     )
 
-    # Outer-test partitions contain nine samples; selection saw only the
+    # Outer-test partitions contain 15 samples; selection saw only the
     # three-sample inner validation partitions supplied by the fold contract.
     assert observed_selection_sizes
     assert set(observed_selection_sizes) == {3}
@@ -271,6 +474,75 @@ def test_nested_benchmark_uses_inner_validation_only_and_oof_exactly_once(
         1.0,
     )
     assert result.baseline_gate["gate_metric"] == "macro_f1"
+    assert result.baseline_gate["trigger_rule"] == (
+        "point_estimate_gt_zero_and_paired_ci_low_gt_zero"
+    )
+    eligible_metrics = result.paired_model_differences.loc[
+        result.paired_model_differences["gate_eligible"].astype(bool), "metric"
+    ]
+    assert set(eligible_metrics) == {"macro_f1"}
+
+
+def test_nested_selection_uses_secondary_qwk_only_for_primary_practical_ties(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    features, target, folds = _fixture()
+
+    class _SelectionPipeline(_FakePipeline):
+        def predict_proba(self, X):
+            token_probability = self.candidate_token / 100.0
+            return np.tile(
+                [token_probability, 0.5, 0.5 - token_probability],
+                (len(X), 1),
+            )
+
+    def _selection_builder(
+        model_name,
+        training_features,
+        *,
+        fixed_parameters,
+        candidate_parameters,
+        random_state,
+        forbidden_features,
+    ):
+        return _SelectionPipeline(int(next(iter(candidate_parameters.values()))))
+
+    def _controlled_metric(metric, y_true, prediction, probability, labels, *, task_type):
+        token = int(round(float(probability[0, 0]) * 100))
+        if metric == "macro_f1":
+            return {1: 0.8000, 2: 0.7995}.get(token, 0.7900)
+        if metric == "quadratic_weighted_kappa":
+            return {1: 0.5000, 2: 0.9000}.get(token, 0.9900)
+        raise AssertionError(f"unexpected inner-selection metric: {metric}")
+
+    monkeypatch.setattr(benchmark, "build_model_pipeline", _selection_builder)
+    monkeypatch.setattr(benchmark, "_metric_value", _controlled_metric)
+    result = benchmark.evaluate_nested_benchmark(
+        features,
+        target,
+        folds,
+        _grid(),
+        labels=[2, 3, 4],
+        run_id="benchmark-unit",
+        config_hash="a" * 64,
+        scientific_input_hash="b" * 64,
+        random_state=42,
+        bootstrap_protocol=BootstrapProtocol(n_resamples=4, seed=42),
+    )
+
+    assert result.selected_hyperparameters["selected_candidate_index"].eq(1).all()
+    assert result.selected_hyperparameters["selection_metric"].eq("macro_f1").all()
+    assert result.selected_hyperparameters["selection_tie_break_metric"].eq(
+        "quadratic_weighted_kappa"
+    ).all()
+    assert result.selected_hyperparameters["primary_practical_tie_tolerance"].eq(0.001).all()
+    search = result.candidate_search_results
+    candidate_two = search[search["candidate_index"].eq(1)]
+    candidate_three = search[search["candidate_index"].eq(2)]
+    assert candidate_two["within_primary_practical_tie"].eq(True).all()
+    assert candidate_two["selected_by_protocol"].eq(True).all()
+    assert candidate_three["within_primary_practical_tie"].eq(False).all()
+    assert candidate_three["selected_by_protocol"].eq(False).all()
 
 
 def test_any_candidate_or_inner_fold_failure_aborts_entire_stage(

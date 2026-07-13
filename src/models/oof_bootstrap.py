@@ -642,7 +642,9 @@ def compute_paired_oof_bootstrap(
                     "primary_metric": primary_metric,
                     "primary_gate_comparison": bool(comparison.primary_gate),
                     "gate_eligible": gate_eligible,
-                    "gate_triggered": bool(gate_eligible and oriented_low > 0.0),
+                    "gate_triggered": bool(
+                        gate_eligible and oriented_point > 0.0 and oriented_low > 0.0
+                    ),
                 }
             )
 

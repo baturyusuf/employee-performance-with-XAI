@@ -8,7 +8,7 @@ Date: 2026-07-13
 - API keys were removed from the subprocess environment
 - Worktree remained clean after tests
 
-Important: baseline green tests do not establish scientific readiness. They do not cover the confirmed v2 issues in `../finalization_v2/02_issue_register.csv`. No v2 real-data integration test has run.
+Important: baseline green tests do not establish scientific readiness. They do not cover every confirmed v2 issue in `../finalization_v2/02_issue_register.csv`. Real-input preflights have run, but no v2 real-model benchmark or full scientific integration run had completed at this baseline.
 
 ## Unit 1A — 2026-07-13
 
@@ -56,4 +56,24 @@ V2-011 and V2-013 pass their implementation contracts but remain open until real
 - Real canonical-loader fold preflight: 1,200 samples, 10 outer folds, 10,800 inner assignments, three inner folds per outer fold; passed in memory with no written artifact.
 - Paid/API/network calls and real model fits: zero.
 
-V2-007 through V2-010 now have tested reusable infrastructure but remain open until the metric is fixed, the real benchmark succeeds, and every downstream primary stage consumes the same folds and exact fold models.
+At that historical checkpoint, V2-007 through V2-010 had tested reusable infrastructure but the metric decision was still pending. That condition is superseded by the accepted 10×5 correction below; the issues remain open until the real benchmark and downstream adoption succeed.
+
+## Unit 2B 10×5 Correction — 2026-07-13
+
+- Corrected trial/benchmark/fold/bootstrap/input-binding focused suite: 104 passed.
+- Full pytest: 343 passed, 2 skipped, plus 4 subtests.
+- Full unittest: 162 passed, 2 skipped.
+- Compileall, diff and manuscript no-change checks: passed.
+- Verified real-INX 10×5 preflight: passed in memory; 1,200 rows, five inner folds, validation partitions of 216; no model fit/artifact.
+- Offline network denial regression: passed.
+- Real four-model benchmark: not yet run; requires clean correction checkpoint first.
+
+## Unit 2B 10×5 Final Hardening — 2026-07-13
+
+- Focused benchmark/trial tests after exact tie-tolerance, bootstrap, denominator and dependency-provenance hardening: 41 passed.
+- Full pytest: 345 passed, 2 skipped, plus 4 subtests.
+- Full unittest: 162 passed, 2 skipped.
+- Compileall, diff, manuscript-no-change and high-entropy secret-pattern scan: passed.
+- Verified real-INX in-memory preflight: 1,200 rows, support 194/874/132, 10 outer folds, five inner folds, 10,800 inner assignments and validation size 216.
+- Manifest preflight recorded `joblib 1.5.3` and `threadpoolctl 3.6.0`.
+- Real models/trial artifacts/API/network calls: zero. The standalone trial command has not yet executed.

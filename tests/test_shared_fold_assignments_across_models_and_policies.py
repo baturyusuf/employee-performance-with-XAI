@@ -29,7 +29,7 @@ def _artifacts():
         dataset_key="inx_primary",
         dataset_sha256="c" * 64,
         outer_splits=10,
-        inner_splits=3,
+        inner_splits=5,
         seed=42,
         inner_seed=43,
     )

@@ -70,6 +70,7 @@ def test_gate_triggers_only_for_the_explicit_primary_metric_with_ci_strictly_abo
     )
     rows = result.paired_differences.set_index("metric")
     assert rows.loc["macro_f1", "improvement_ci_low"] > 0
+    assert rows.loc["macro_f1", "improvement_oriented_difference"] > 0
     assert bool(rows.loc["macro_f1", "gate_eligible"]) is True
     assert bool(rows.loc["macro_f1", "gate_triggered"]) is True
     for secondary in ("ordinal_mae", "severe_error_rate"):

@@ -229,3 +229,48 @@ Checkpoint note: commit `f4e2dd7` captured the tested Unit 1A implementation. It
 Unit 2B is not scientifically complete. `selection_metric` and `baseline_gate_metric` intentionally remain null pending the user's A/B/C metric decision, so real nested benchmarking fails closed. Policy ablation, calibration, SHAP and subgroup/proxy stages still instantiate independent folds/models and must be refactored to consume this fold/model contract before either scope becomes release-ready. The obsolete fixed XGBoost block remains a documented open conflict until that consumer refactor; it is not used by the new benchmark stage.
 
 Checkpoint: commit `8e9b5b9b9f66815abf7f9a599535a36737ea1706` (`feat(protocol): add shared nested OOF benchmark contract`) records this tested, deliberately predecision/fail-closed implementation. No push was performed.
+
+### Unit 2B correction and real benchmark — in progress
+
+Problem: the checkpoint encoded three inner folds, while the user's approved D2 protocol is five inner folds. The selection metric was also intentionally null pending a decision.
+
+Root cause: the initial D2 handoff was interpreted as restrained nested tuning without carrying forward the user's exact 10×5 fold count. The benchmark hard-coded three inner folds in its validator/loop and tests, so changing only config would have produced a contract failure rather than the approved run.
+
+Intended files: canonical/model-grid configs, shared-fold default and tests, benchmark selection/validation/tests, build gate validation, persistent logs, and a new versioned real benchmark trial directory after all tests pass.
+
+Acceptance criteria:
+
+- production and canonical tests require exactly 10 outer × 5 inner folds;
+- macro-F1 alone drives primary selection and the baseline stop gate;
+- QWK is secondary and used only inside the predeclared `0.001` macro-F1 tie pool;
+- gate requires a positive point difference and paired OOF 95% CI lower bound above zero;
+- verified INX bytes and all side inputs match scoped manifest receipts/hashes;
+- exactly-once aligned OOF predictions exist for all 1,200 samples and four models;
+- 5,000 paired stratified bootstrap resamples complete;
+- artifacts, hashes, commands, runtime, failures and results are persisted;
+- a triggered gate stops before downstream XAI; otherwise the approved plan continues;
+- no API/network/manuscript edit occurs.
+
+Correction implementation result before the real run:
+
+- Frozen model-grid schema v3 and protocol `restrained_nested_tuning_v2_10x5`.
+- Macro-F1 is the only primary inner-selection and gate metric. Candidates within `0.001` of the best mean macro-F1 are tie-broken by mean QWK, then candidate index. Both per-inner metrics, tie-pool membership and selection rationale are persisted.
+- Production benchmark requires canonical outer folds=10, inner folds=5 and exact manuscript/model-grid protocol alignment before reading fold/data inputs.
+- Gate logic and persisted verifier require both positive baseline-minus-XGBoost macro-F1 point estimate and paired OOF bootstrap CI lower bound above zero; no secondary metric is gate-eligible.
+- Added a dedicated clean-worktree, offline, noncanonical benchmark-trial entrypoint. It runs only `shared_folds` and `model_benchmarks`, writes under `reports/manuscript_final/trials/<run_id>/core`, never updates `latest`, records complete/failed command runtimes, and denies TCP/UDP/DNS operations in process.
+- Final trial validation requires 1,200 outer samples, 10×5 folds, 300 candidate rows, 40 selected rows, 40 fold rows, 4,800 exact-once OOF rows with normalized probabilities, 36 model-summary rows, 27 paired rows, a consistent 5,000-resample hash, exact gate recomputation, and 40 model files matching their index hashes/sizes.
+- Independent review caught a production filename mismatch (`outer_fold_assignments.csv` versus actual `fold_assignments.csv`) before execution. The verifier now imports the production filename constant and its success fixture uses the same name.
+- Corrected focused suite: 104 passed. Full pytest: 343 passed, 2 skipped, plus 4 subtests. Unittest: 162 passed, 2 skipped. Compileall, diff and manuscript no-change gates passed.
+- Verified real-INX in-memory preflight: target support 194/874/132; 1,200 outer rows; 10 outer folds; 10,800 inner rows; five inner folds per outer fold; every inner validation partition has 216 samples. No artifacts or models were written.
+
+The preflight was intentionally dirty and its fold hash `87a2798724d761e6b3a109ee6c33079e7d4d405d2b31ad3c260f0c9261afa6b7` is diagnostic only. The real trial must begin from the forthcoming clean checkpoint and will receive a new run-bound fold hash.
+
+### Unit 2B final pre-run hardening
+
+- Independent audit found and closed three pre-run provenance/contract gaps: the `0.001` practical-tie threshold is now an immutable validator constant; the bootstrap is frozen to 5,000 paired stratified percentile draws at 95% confidence with `outer_fold+y_true` strata and linear quantiles; every real-INX fold-metric row must report exactly 1,080 train and 120 test cases.
+- `joblib` and `threadpoolctl` are now direct declared dependencies and manifest-recorded package versions because fitted-model serialization and single-thread fit control depend on them.
+- The trial manifest records the fold, tie and bootstrap contracts and its final verifier requires exact equality.
+- Focused benchmark/trial tests passed 41. Full pytest passed 345 with 2 historical skips and 4 subtests; unittest passed 162 with 2 skips; compileall, diff, manuscript-no-change and high-entropy secret scans passed.
+- A fresh exact-command in-memory preflight verified the pinned INX bytes, 1,200 rows, support 194/874/132, 10×5 folds, 10,800 inner assignments, validation size 216, `joblib 1.5.3` and `threadpoolctl 3.6.0`. It wrote no file/model.
+
+The standalone real trial command has not executed, `reports/manuscript_final/trials/` does not exist at this checkpoint, and no predictive result or gate outcome exists. This remains an engineering-only checkpoint. Raw-byte source-tree hashing is known to be EOL-sensitive across different checkout policies; the local trial remains hash-complete, but portable release verification is an explicit later blocker.

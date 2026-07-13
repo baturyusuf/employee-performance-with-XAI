@@ -240,3 +240,113 @@ Network/API result: credentials were cleared; no dataset acquisition, network/AP
 The first Unit 2B staged checkpoint gate was blocked by `git diff --cached --check` because two new bootstrap test files had one blank line at EOF. The whitespace-only defects were removed with `apply_patch`; no commit or history mutation occurred before correction.
 
 Checkpoint command `git commit -m "feat(protocol): add shared nested OOF benchmark contract"` exited 0 and created `8e9b5b9b9f66815abf7f9a599535a36737ea1706`. No push, merge, release or history rewrite occurred.
+
+## Unit 2B 10×5 Correction and Trial Preflight
+
+Accepted contract: macro-F1 primary selection/gate; QWK secondary tie-break only within an inclusive absolute `0.001` macro-F1 pool; 10 outer × 5 inner folds; gate requires positive point estimate and paired OOF 95% CI lower bound above zero.
+
+Focused corrected protocol/trial/input suite:
+
+```powershell
+$env:OPENAI_API_KEY=$null
+$env:OPENAI_AGENTS_API_KEY=$null
+$env:AZURE_OPENAI_API_KEY=$null
+.\myenv\Scripts\python.exe -m pytest -q tests/test_model_benchmark_trial_entrypoint.py tests/test_manuscript_model_benchmark.py tests/test_canonical_model_factory.py tests/test_shared_fold_artifact_contract.py tests/test_shared_fold_assignments_across_models_and_policies.py tests/test_nested_search_outer_test_isolation.py tests/test_bootstrap_is_stratified_paired_and_deterministic.py tests/test_oof_bootstrap_intervals_are_domain_valid.py tests/test_paired_model_difference_bootstrap.py tests/test_paired_model_gate_contract.py tests/test_stage_runner_scientific_input_binding.py tests/test_actual_input_hash_binding.py tests/test_side_input_hash_binding.py
+```
+
+Exit status: 0. Result: 104 passed in 47.36 seconds.
+
+Full gates:
+
+```powershell
+.\myenv\Scripts\python.exe -m pytest -q
+.\myenv\Scripts\python.exe -m unittest discover -s tests -q
+.\myenv\Scripts\python.exe -m compileall -q src tests
+git diff --check
+git status --porcelain -- manuscript/mdpi_information/main.md
+```
+
+Results: pytest 343 passed, 2 skipped and 4 subtests in 64.84 seconds; unittest 162 passed with 2 skips in 3.334 seconds; compileall/diff/manuscript gates passed.
+
+The verified-INX 10×5 in-memory preflight invoked the canonical loader, scoped manifest creation, `generate_shared_folds` using config counts/seeds and `validate_shared_folds` without writing. Exit 0: 1,200 rows; target 2/3/4 support 194/874/132; 10 outer folds; 10,800 nested rows; five inner folds per outer fold; inner validation size 216. INX SHA-256 `b8deac0a615b97076622ae540f4cfd0d3c3f1e7acb83ba3ff6560470a9ccf60a`; config hash `87198ca980d867a4889ee402fd5979fdae0d6a5563c8390b863295fdd66161e5`; diagnostic dirty scientific-input hash `3434668a5a7778ce0e70095fe8cbf3c39718d82c44d4604f16f5c6deced8fc58`. No artifact/model was created.
+
+During review, the semantic verifier initially referenced a nonexistent `outer_fold_assignments.csv`; production writes `fold_assignments.csv`. This was caught before the expensive run, replaced with `OUTER_ASSIGNMENT_FILENAME`, and covered by the real filename fixture. A process-local socket/DNS denial was then added and tested. No network/API call or manuscript edit occurred.
+
+## Unit 2B Final Pre-Run Hardening
+
+Focused command:
+
+```powershell
+.\myenv\Scripts\python.exe -m pytest -q tests/test_model_benchmark_trial_entrypoint.py tests/test_manuscript_model_benchmark.py
+```
+
+Exit 0: 41 passed in 35.99 seconds.
+
+Full gates:
+
+```powershell
+.\myenv\Scripts\python.exe -m pytest -q
+.\myenv\Scripts\python.exe -m unittest discover -s tests -q
+.\myenv\Scripts\python.exe -m compileall -q src tests
+git diff --check
+git status --short -- manuscript
+rg --pcre2 -n '(?<![A-Za-z])sk-(?:proj-)?[A-Za-z0-9_-]{20,}|github_pat_[A-Za-z0-9_]{20,}|gh[pousr]_[A-Za-z0-9]{30,}|AKIA[0-9A-Z]{16}' --glob '!myenv/**' --glob '!reports/manuscript_final/**' --glob '!*.ipynb' .
+```
+
+Results: pytest 345 passed, 2 skipped and 4 subtests in 64.70 seconds; unittest 162 passed with 2 skips in 3.244 seconds; compileall/diff/manuscript gates passed; the secret expression returned no match. The `rg` no-match exit is the expected passing condition.
+
+Exact fresh real-input in-memory preflight command:
+
+```powershell
+$env:OPENAI_API_KEY=$null
+$env:OPENAI_AGENTS_API_KEY=$null
+$env:AZURE_OPENAI_API_KEY=$null
+@'
+import json
+from src.data.canonical_loader import load_canonical_dataset
+from src.experiments.shared_folds import generate_shared_folds, validate_shared_folds
+from src.governance.manuscript_contract import create_run_manifest, load_manuscript_config, manuscript_settings
+config_path = "configs/manuscript_final.yaml"
+config = load_manuscript_config(config_path)
+settings = manuscript_settings(config)
+manifest = create_run_manifest(config_path, evidence_scope="core", run_id="dirty-preflight-10x5", allow_dataset_download=False)
+loaded = load_canonical_dataset(config_path, "inx_primary")
+receipt = manifest["actual_input_receipts"]["inx_primary"]
+folds = generate_shared_folds(
+    loaded.frame,
+    target_column=settings["target"]["column"],
+    id_column=settings["governance_fields"]["identifier_fields"][0],
+    run_id=manifest["run_id"],
+    config_hash=manifest["config_hash"],
+    scientific_input_hash=manifest["scientific_input_hash"],
+    dataset_key="inx_primary",
+    dataset_sha256=receipt["actual_sha256"],
+    outer_splits=settings["evaluation"]["cv"]["n_splits"],
+    inner_splits=settings["model"]["nested_tuning"]["inner_splits"],
+    seed=settings["seeds"][settings["evaluation"]["cv"]["seed"]],
+    inner_seed=settings["seeds"][settings["model"]["nested_tuning"]["inner_seed"]],
+)
+validate_shared_folds(folds)
+print(json.dumps({
+    "artifact_written": False,
+    "git_worktree_dirty": manifest["git_worktree_dirty"],
+    "config_hash": manifest["config_hash"],
+    "scientific_input_hash": manifest["scientific_input_hash"],
+    "inx_sha256": receipt["actual_sha256"],
+    "rows": len(loaded.frame),
+    "target_support": receipt["target_distribution"],
+    "outer_rows": len(folds.outer_assignments),
+    "outer_folds": folds.contract["outer_splits"],
+    "inner_rows": len(folds.inner_assignments),
+    "inner_folds": folds.contract["inner_splits"],
+    "inner_validation_sizes": sorted({row["n_inner_validation"] for row in folds.contract["inner_fold_summaries"]}),
+    "fold_contract_hash": folds.contract["fold_contract_hash"],
+    "joblib_version": manifest["code_package_versions"]["joblib"],
+    "threadpoolctl_version": manifest["code_package_versions"]["threadpoolctl"],
+}, sort_keys=True))
+'@ | .\myenv\Scripts\python.exe -
+```
+
+Exit 0 in 3.5 seconds. Result: pinned INX SHA-256 `b8deac0a615b97076622ae540f4cfd0d3c3f1e7acb83ba3ff6560470a9ccf60a`; 1,200 rows; support 194/874/132; 10 outer folds; 10,800 inner assignments; five inner folds; validation size 216; `joblib 1.5.3`; `threadpoolctl 3.6.0`. Dirty diagnostic config hash `7e70bf6646a542ad32e10ab3718654aa8232a46e44e2083ed10e2cfe526da595`, scientific-input hash `8be7c5d79f2b39af3e04f1c8a14a0ae70d2180c48c425595f69f23ac2e76b34a`, and fold hash `f133710d7c45283951f0b5f36e9f87e273bdeb1ed22a317c65fc34cc32a48373` are engineering diagnostics only and must not be cited/reused.
+
+The command `python -m src.experiments.run_model_benchmark_trial` was **not** executed in this checkpoint. `reports/manuscript_final/trials/` did not exist; no real model, trial artifact, gate result, API call or network call occurred. Manuscript status remained empty.

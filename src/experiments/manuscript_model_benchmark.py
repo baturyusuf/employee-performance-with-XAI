@@ -71,6 +71,12 @@ BENCHMARK_METRICS = (
     "ece_confidence",
 )
 FIT_THREAD_LIMIT = 1
+PRIMARY_SELECTION_METRIC = "macro_f1"
+SELECTION_TIE_BREAK_METRIC = "quadratic_weighted_kappa"
+PRIMARY_PRACTICAL_TIE_TOLERANCE = 0.001
+BASELINE_GATE_METRIC = "macro_f1"
+BENCHMARK_SCHEMA_VERSION = 3
+BENCHMARK_PROTOCOL_NAME = "restrained_nested_tuning_v2_10x5"
 
 
 class ModelBenchmarkError(RuntimeError):
@@ -101,31 +107,81 @@ def _benchmark_settings(config: Mapping[str, Any]) -> Mapping[str, Any]:
     return settings
 
 
+def _tolerance_rule_token(value: float) -> str:
+    """Encode the declared tolerance in the human-readable protocol label."""
+
+    return np.format_float_positional(value, trim="-").replace(".", "_")
+
+
+def _validated_practical_tie_tolerance(settings: Mapping[str, Any]) -> float:
+    value = settings.get("primary_practical_tie_tolerance")
+    if isinstance(value, bool) or not isinstance(value, (int, float, np.integer, np.floating)):
+        raise ModelBenchmarkError(
+            "primary_practical_tie_tolerance must be a finite numeric value in [0, 1]."
+        )
+    tolerance = float(value)
+    if not math.isfinite(tolerance) or not 0.0 <= tolerance <= 1.0:
+        raise ModelBenchmarkError(
+            "primary_practical_tie_tolerance must be a finite numeric value in [0, 1]."
+        )
+    if tolerance != PRIMARY_PRACTICAL_TIE_TOLERANCE:
+        raise ModelBenchmarkError(
+            "primary_practical_tie_tolerance must remain exactly "
+            f"{PRIMARY_PRACTICAL_TIE_TOLERANCE}."
+        )
+    return tolerance
+
+
 def validate_benchmark_config(config: Mapping[str, Any]) -> Mapping[str, Any]:
     """Validate the frozen model/search contract before touching any dataset."""
 
     settings = _benchmark_settings(config)
-    if settings.get("schema_version") != 2:
-        raise ModelBenchmarkError("model_benchmark.schema_version must be 2.")
+    if settings.get("schema_version") != BENCHMARK_SCHEMA_VERSION:
+        raise ModelBenchmarkError(
+            f"model_benchmark.schema_version must be {BENCHMARK_SCHEMA_VERSION}."
+        )
+    if settings.get("protocol_name") != BENCHMARK_PROTOCOL_NAME:
+        raise ModelBenchmarkError(
+            f"model_benchmark.protocol_name must be {BENCHMARK_PROTOCOL_NAME!r}."
+        )
     if settings.get("candidate_failure_policy") != "fail_entire_stage":
         raise ModelBenchmarkError("Candidate failures must fail the entire benchmark stage.")
-    if settings.get("tie_breaking") != "highest_inner_mean_then_lowest_candidate_index":
-        raise ModelBenchmarkError("The deterministic candidate tie-break contract is missing.")
     selection_metric = settings.get("selection_metric")
+    tie_break_metric = settings.get("selection_tie_break_metric")
     gate_metric = settings.get("baseline_gate_metric")
-    if not isinstance(selection_metric, str) or not selection_metric.strip():
+    if selection_metric != PRIMARY_SELECTION_METRIC:
         raise ModelBenchmarkError(
-            "selection_metric is pending; real nested benchmark execution is prohibited."
+            f"selection_metric must be the predeclared {PRIMARY_SELECTION_METRIC!r}."
         )
-    if not isinstance(gate_metric, str) or not gate_metric.strip():
+    if tie_break_metric != SELECTION_TIE_BREAK_METRIC:
         raise ModelBenchmarkError(
-            "baseline_gate_metric is pending; real nested benchmark execution is prohibited."
+            "selection_tie_break_metric must be the predeclared "
+            f"{SELECTION_TIE_BREAK_METRIC!r}."
         )
-    for metric in (selection_metric, gate_metric):
+    if gate_metric != BASELINE_GATE_METRIC:
+        raise ModelBenchmarkError(
+            f"baseline_gate_metric must remain strictly {BASELINE_GATE_METRIC!r}."
+        )
+    tolerance = _validated_practical_tie_tolerance(settings)
+    expected_tie_rule = (
+        "highest_macro_f1_within_"
+        f"{_tolerance_rule_token(tolerance)}"
+        "_then_highest_qwk_then_lowest_candidate_index"
+    )
+    if settings.get("tie_breaking") != expected_tie_rule:
+        raise ModelBenchmarkError(
+            "The deterministic candidate tie-break contract does not match the declared "
+            f"primary_practical_tie_tolerance; expected {expected_tie_rule!r}."
+        )
+    for metric in (selection_metric, tie_break_metric, gate_metric):
         try:
-            metric_definition(metric)
+            definition = metric_definition(metric)
         except Exception as exc:
             raise ModelBenchmarkError(f"Unsupported benchmark metric {metric!r}: {exc}") from exc
+        if definition.better_direction != "higher":
+            raise ModelBenchmarkError(
+                f"Selection protocol metric {metric!r} must have higher-is-better direction."
+            )
 
     models = settings.get("models")
     if not isinstance(models, Mapping) or set(models) != set(CANONICAL_MODEL_NAMES):
@@ -170,19 +226,138 @@ def validate_benchmark_config(config: Mapping[str, Any]) -> Mapping[str, Any]:
     return settings
 
 
-def select_candidate_index(scores: Sequence[float], *, better_direction: str) -> int:
-    """Select the best finite mean, resolving exact ties by candidate index."""
+def validate_benchmark_manuscript_alignment(
+    settings: Mapping[str, Any],
+    manuscript_settings: Mapping[str, Any],
+) -> Mapping[str, Any]:
+    """Fail when the canonical manuscript and model-grid protocols diverge."""
+
+    model = manuscript_settings.get("model")
+    nested = model.get("nested_tuning") if isinstance(model, Mapping) else None
+    if not isinstance(nested, Mapping):
+        raise ModelBenchmarkError("Canonical manuscript model.nested_tuning mapping is required.")
+    expected = {
+        "protocol": settings["protocol_name"],
+        "inner_splits": 5,
+        "selection_metric": settings["selection_metric"],
+        "selection_tie_break_metric": settings["selection_tie_break_metric"],
+        "primary_practical_tie_tolerance": settings[
+            "primary_practical_tie_tolerance"
+        ],
+        "baseline_gate_metric": settings["baseline_gate_metric"],
+    }
+    for field, value in expected.items():
+        observed = nested.get(field)
+        if isinstance(value, float):
+            matches = (
+                not isinstance(observed, bool)
+                and isinstance(observed, (int, float, np.integer, np.floating))
+                and math.isfinite(float(observed))
+                and float(observed) == value
+            )
+        else:
+            matches = observed == value
+        if not matches:
+            raise ModelBenchmarkError(
+                "Canonical manuscript/model-grid benchmark mismatch for "
+                f"model.nested_tuning.{field}: expected {value!r}, observed {observed!r}."
+            )
+    evaluation = manuscript_settings.get("evaluation")
+    cv = evaluation.get("cv") if isinstance(evaluation, Mapping) else None
+    n_splits = cv.get("n_splits") if isinstance(cv, Mapping) else None
+    if (
+        isinstance(n_splits, bool)
+        or not isinstance(n_splits, (int, np.integer))
+        or int(n_splits) != 10
+    ):
+        raise ModelBenchmarkError(
+            "Canonical manuscript evaluation.cv.n_splits must be exactly 10."
+        )
+    return nested
+
+
+def _validate_persisted_benchmark_fold_protocol(folds: SharedFoldArtifacts) -> None:
+    """Require the release benchmark's persisted 10x5 fold contract."""
+
+    for field, expected in (("outer_splits", 10), ("inner_splits", 5)):
+        observed = folds.contract.get(field)
+        if (
+            isinstance(observed, bool)
+            or not isinstance(observed, (int, np.integer))
+            or int(observed) != expected
+        ):
+            raise ModelBenchmarkError(
+                f"Persisted benchmark folds.contract.{field} must be exactly {expected}."
+            )
+
+
+def _candidate_pool_within_tolerance(
+    scores: Sequence[float],
+    *,
+    better_direction: str,
+    practical_tie_tolerance: float,
+) -> tuple[np.ndarray, np.ndarray]:
+    """Return eligible indices and their nonnegative distance from the optimum."""
 
     values = np.asarray(scores, dtype=float)
     if values.ndim != 1 or len(values) == 0 or not np.all(np.isfinite(values)):
         raise ModelBenchmarkError("Candidate means must be a non-empty finite vector.")
+    if isinstance(practical_tie_tolerance, bool):
+        raise ModelBenchmarkError("Candidate practical-tie tolerance must be finite and nonnegative.")
+    tolerance = float(practical_tie_tolerance)
+    if not math.isfinite(tolerance) or tolerance < 0.0:
+        raise ModelBenchmarkError("Candidate practical-tie tolerance must be finite and nonnegative.")
     if better_direction == "higher":
         optimum = float(values.max())
+        distances = optimum - values
     elif better_direction == "lower":
         optimum = float(values.min())
+        distances = values - optimum
     else:
         raise ModelBenchmarkError(f"Unknown metric direction: {better_direction!r}.")
-    return int(np.flatnonzero(values == optimum)[0])
+    numerical_slack = np.finfo(float).eps * 8.0 * max(
+        1.0,
+        abs(optimum),
+        abs(tolerance),
+        float(np.max(np.abs(values))),
+    )
+    eligible = np.flatnonzero(distances <= tolerance + numerical_slack)
+    if len(eligible) == 0:  # defensive: the optimum must always be eligible
+        raise ModelBenchmarkError("No candidate remained inside the primary practical-tie pool.")
+    return eligible.astype(int), distances
+
+
+def select_candidate_index(
+    primary_scores: Sequence[float],
+    secondary_scores: Sequence[float] | None = None,
+    *,
+    practical_tie_tolerance: float = 0.0,
+    better_direction: str = "higher",
+) -> int:
+    """Select by primary score, secondary score inside tolerance, then index.
+
+    The canonical benchmark supplies macro-F1 as ``primary_scores`` and QWK as
+    ``secondary_scores``. The generic direction argument is retained for the
+    exact-tie helper contract, while the benchmark validator freezes both
+    scientific metrics to higher-is-better.
+    """
+
+    eligible, _ = _candidate_pool_within_tolerance(
+        primary_scores,
+        better_direction=better_direction,
+        practical_tie_tolerance=practical_tie_tolerance,
+    )
+    if secondary_scores is None:
+        return int(eligible[0])
+    secondary = np.asarray(secondary_scores, dtype=float)
+    primary = np.asarray(primary_scores, dtype=float)
+    if secondary.ndim != 1 or len(secondary) != len(primary) or not np.all(np.isfinite(secondary)):
+        raise ModelBenchmarkError(
+            "Secondary candidate means must be finite and align one-to-one with primary means."
+        )
+    best_secondary = float(np.max(secondary[eligible]))
+    winners = eligible[secondary[eligible] == best_secondary]
+    return int(winners[0])
 
 
 def _metric_value(
@@ -272,8 +447,9 @@ def evaluate_nested_benchmark(
     observed_target = target.sort_index()
     if not np.array_equal(persisted_target.to_numpy(), observed_target.to_numpy()):
         raise ModelBenchmarkError("Target values do not match the shared-fold contract.")
-    if int(folds.contract.get("inner_splits", -1)) != 3:
-        raise ModelBenchmarkError("Restrained nested tuning requires exactly three inner folds.")
+    inner_splits = int(folds.contract.get("inner_splits", -1))
+    if inner_splits != 5:
+        raise ModelBenchmarkError("Restrained nested tuning v2 requires exactly five inner folds.")
     for field, expected in (
         ("run_id", run_id),
         ("config_hash", config_hash),
@@ -286,6 +462,8 @@ def evaluate_nested_benchmark(
     if set(target.astype(int).unique()) != set(labels):
         raise ModelBenchmarkError("Observed target support does not equal declared benchmark labels.")
     selection_metric = str(settings["selection_metric"])
+    tie_break_metric = str(settings["selection_tie_break_metric"])
+    practical_tie_tolerance = float(settings["primary_practical_tie_tolerance"])
     gate_metric = str(settings["baseline_gate_metric"])
     selection_direction = metric_definition(selection_metric).better_direction
     model_definitions = settings["models"]
@@ -314,10 +492,13 @@ def evaluate_nested_benchmark(
             definition = model_definitions[model_name]
             fixed_parameters = dict(definition["fixed_params"])
             candidates = [dict(value) for value in definition["candidates"]]
-            candidate_means: list[float] = []
+            candidate_primary_means: list[float] = []
+            candidate_tie_break_means: list[float] = []
+            model_candidate_rows: list[dict[str, Any]] = []
             for candidate_index, candidate_parameters in enumerate(candidates):
-                inner_scores: list[float] = []
-                for inner_fold in (1, 2, 3):
+                primary_inner_scores: list[float] = []
+                tie_break_inner_scores: list[float] = []
+                for inner_fold in range(1, inner_splits + 1):
                     validation_ids = scoped_inner.loc[
                         scoped_inner["inner_fold"].astype(int) == inner_fold,
                         "sample_index",
@@ -352,7 +533,7 @@ def evaluate_nested_benchmark(
                         features.loc[validation_ids],
                         labels=labels,
                     )
-                    inner_scores.append(
+                    primary_inner_scores.append(
                         _metric_value(
                             selection_metric,
                             target.loc[validation_ids],
@@ -362,9 +543,21 @@ def evaluate_nested_benchmark(
                             task_type=task_type,
                         )
                     )
-                mean_score = float(np.mean(inner_scores))
-                candidate_means.append(mean_score)
-                candidate_rows.append(
+                    tie_break_inner_scores.append(
+                        _metric_value(
+                            tie_break_metric,
+                            target.loc[validation_ids],
+                            validation_prediction,
+                            validation_probability,
+                            labels,
+                            task_type=task_type,
+                        )
+                    )
+                primary_mean = float(np.mean(primary_inner_scores))
+                tie_break_mean = float(np.mean(tie_break_inner_scores))
+                candidate_primary_means.append(primary_mean)
+                candidate_tie_break_means.append(tie_break_mean)
+                model_candidate_rows.append(
                     {
                         "run_id": run_id,
                         "config_hash": config_hash,
@@ -375,19 +568,37 @@ def evaluate_nested_benchmark(
                         "candidate_index": candidate_index,
                         "parameters_json": _json_dumps(candidate_parameters),
                         "selection_metric": selection_metric,
-                        "inner_fold_scores_json": _json_dumps(inner_scores),
-                        "inner_mean": mean_score,
-                        "inner_std": float(np.std(inner_scores, ddof=1)),
-                        "n_inner_folds": 3,
+                        "inner_fold_scores_json": _json_dumps(primary_inner_scores),
+                        "inner_mean": primary_mean,
+                        "inner_std": float(np.std(primary_inner_scores, ddof=1)),
+                        "selection_tie_break_metric": tie_break_metric,
+                        "tie_break_inner_fold_scores_json": _json_dumps(tie_break_inner_scores),
+                        "tie_break_inner_mean": tie_break_mean,
+                        "tie_break_inner_std": float(np.std(tie_break_inner_scores, ddof=1)),
+                        "primary_practical_tie_tolerance": practical_tie_tolerance,
+                        "n_inner_folds": inner_splits,
                         "candidate_status": "complete",
                         "outer_test_used_for_selection": False,
                     }
                 )
 
             selected_index = select_candidate_index(
-                candidate_means,
+                candidate_primary_means,
+                candidate_tie_break_means,
                 better_direction=selection_direction,
+                practical_tie_tolerance=practical_tie_tolerance,
             )
+            tie_pool, primary_distances = _candidate_pool_within_tolerance(
+                candidate_primary_means,
+                better_direction=selection_direction,
+                practical_tie_tolerance=practical_tie_tolerance,
+            )
+            tie_pool_set = set(int(value) for value in tie_pool)
+            for candidate_index, candidate_row in enumerate(model_candidate_rows):
+                candidate_row["primary_gap_from_best"] = float(primary_distances[candidate_index])
+                candidate_row["within_primary_practical_tie"] = candidate_index in tie_pool_set
+                candidate_row["selected_by_protocol"] = candidate_index == selected_index
+            candidate_rows.extend(model_candidate_rows)
             selected_candidate = candidates[selected_index]
             final_pipeline = build_model_pipeline(
                 model_name,
@@ -431,8 +642,13 @@ def evaluate_nested_benchmark(
                     "selected_candidate_parameters_json": _json_dumps(selected_candidate),
                     "fixed_parameters_json": _json_dumps(fixed_parameters),
                     "selection_metric": selection_metric,
-                    "selected_inner_mean": candidate_means[selected_index],
+                    "selected_inner_mean": candidate_primary_means[selected_index],
+                    "selection_tie_break_metric": tie_break_metric,
+                    "selected_tie_break_inner_mean": candidate_tie_break_means[selected_index],
+                    "primary_practical_tie_tolerance": practical_tie_tolerance,
+                    "primary_tie_candidate_indices_json": _json_dumps(tie_pool.tolist()),
                     "tie_breaking": settings["tie_breaking"],
+                    "outer_test_used_for_selection": False,
                 }
             )
             fold_rows.append(
@@ -482,7 +698,7 @@ def evaluate_nested_benchmark(
         group_columns=("model",),
     )
     metrics_for_uncertainty = tuple(
-        dict.fromkeys([*BENCHMARK_METRICS, selection_metric, gate_metric])
+        dict.fromkeys([*BENCHMARK_METRICS, selection_metric, tie_break_metric, gate_metric])
     )
     validate_aligned_oof_predictions(
         oof_frame,
@@ -515,7 +731,7 @@ def evaluate_nested_benchmark(
     gate_payload = {
         "gate_metric": gate_metric,
         "comparison_direction": "baseline_improvement_over_xgboost",
-        "trigger_rule": "paired_improvement_ci_low_greater_than_zero",
+        "trigger_rule": "point_estimate_gt_zero_and_paired_ci_low_gt_zero",
         "gate_triggered": bool(gate_rows["gate_triggered"].any()),
         "triggered_comparisons": gate_rows.loc[
             gate_rows["gate_triggered"].astype(bool), "comparison_id"
@@ -607,7 +823,7 @@ def run(
     scientific_input_hash: str,
     model_grid_sha256: str,
 ) -> dict[str, Path]:
-    """Run and persist the real benchmark; pending metric choices block first."""
+    """Run and persist the benchmark under the frozen selection protocol."""
 
     model_grid_path = Path(model_grid_path)
     observed_model_grid_hash = sha256_file(model_grid_path)
@@ -627,7 +843,11 @@ def run(
     if observed_config_hash != config_hash:
         raise ModelBenchmarkError("Supplied config_hash does not match the canonical config.")
     manuscript_settings = manuscript.get("manuscript_final", manuscript)
+    if not isinstance(manuscript_settings, Mapping):
+        raise ModelBenchmarkError("Canonical manuscript configuration must be a mapping.")
+    validate_benchmark_manuscript_alignment(settings, manuscript_settings)
     folds = read_shared_folds(shared_folds_dir)
+    _validate_persisted_benchmark_fold_protocol(folds)
     canonical = load_canonical_dataset(config_path, "inx_primary")
     if canonical.receipt.get("actual_sha256") != folds.contract.get("dataset_sha256"):
         raise ModelBenchmarkError(
@@ -739,7 +959,14 @@ def run(
             "scientific_input_hash": scientific_input_hash,
             "model_grid_sha256": model_grid_sha256,
             "fold_contract_hash": folds.contract["fold_contract_hash"],
+            "benchmark_schema_version": settings["schema_version"],
+            "benchmark_protocol_name": settings["protocol_name"],
             "selection_metric": settings["selection_metric"],
+            "selection_tie_break_metric": settings["selection_tie_break_metric"],
+            "primary_practical_tie_tolerance": settings[
+                "primary_practical_tie_tolerance"
+            ],
+            "tie_breaking": settings["tie_breaking"],
             "baseline_gate_metric": settings["baseline_gate_metric"],
             "models": list(CANONICAL_MODEL_NAMES),
             "candidate_counts": EXPECTED_CANDIDATE_COUNTS,
@@ -753,14 +980,20 @@ def run(
 
 
 __all__ = [
+    "BASELINE_GATE_METRIC",
     "BENCHMARK_METRICS",
+    "BENCHMARK_PROTOCOL_NAME",
+    "BENCHMARK_SCHEMA_VERSION",
     "BenchmarkResult",
     "EXPECTED_CANDIDATE_COUNTS",
     "ModelBenchmarkError",
+    "PRIMARY_SELECTION_METRIC",
+    "SELECTION_TIE_BREAK_METRIC",
     "exact_primary_feature_frame",
     "evaluate_nested_benchmark",
     "run",
     "select_candidate_index",
     "thread_determinism_metadata",
     "validate_benchmark_config",
+    "validate_benchmark_manuscript_alignment",
 ]

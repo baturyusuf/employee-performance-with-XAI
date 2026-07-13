@@ -306,7 +306,7 @@ def generate_shared_folds(
     dataset_key: str,
     dataset_sha256: str,
     outer_splits: int = 10,
-    inner_splits: int = 3,
+    inner_splits: int = 5,
     seed: int = 42,
     inner_seed: int | None = None,
 ) -> SharedFoldArtifacts:

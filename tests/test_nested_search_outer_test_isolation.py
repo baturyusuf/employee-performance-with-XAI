@@ -31,7 +31,7 @@ def _artifacts():
         dataset_key="inx_primary",
         dataset_sha256="c" * 64,
         outer_splits=10,
-        inner_splits=3,
+        inner_splits=5,
         seed=73,
         inner_seed=74,
     )
@@ -50,7 +50,7 @@ def test_every_inner_search_population_is_exactly_the_outer_training_partition()
         assert inner_population == all_samples - outer_test
         assert inner_population.isdisjoint(outer_test)
         assert scoped["sample_index"].is_unique
-        assert set(scoped["inner_fold"]) == {1, 2, 3}
+        assert set(scoped["inner_fold"]) == {1, 2, 3, 4, 5}
 
 
 def test_outer_test_target_changes_cannot_change_that_outer_folds_inner_assignment() -> None:
@@ -58,7 +58,7 @@ def test_outer_test_target_changes_cannot_change_that_outer_folds_inner_assignme
     outer = artifacts.outer_assignments.copy()
     baseline = generate_inner_assignments(
         outer,
-        inner_splits=3,
+        inner_splits=5,
         inner_seed=74,
         fold_contract_hash=str(artifacts.contract["fold_contract_hash"]),
     )
@@ -66,7 +66,7 @@ def test_outer_test_target_changes_cannot_change_that_outer_folds_inner_assignme
     outer.loc[held_out, "y_true"] = outer.loc[held_out, "y_true"].map({2: 3, 3: 4, 4: 2})
     changed = generate_inner_assignments(
         outer,
-        inner_splits=3,
+        inner_splits=5,
         inner_seed=74,
         fold_contract_hash=str(artifacts.contract["fold_contract_hash"]),
     )

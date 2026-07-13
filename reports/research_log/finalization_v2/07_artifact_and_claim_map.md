@@ -34,9 +34,9 @@ Both scopes are intentionally `release_ready=false`. No v2 scientific artifact o
 
 | New component | Repository source | Current claim status |
 | --- | --- | --- |
-| Shared 10×3 folds | `src/experiments/shared_folds.py` | Tested infrastructure only; no persisted canonical fold artifact yet |
-| Four-model restrained nested benchmark | `src/experiments/manuscript_model_benchmark.py`, `src/models/canonical_models.py` | Tested/fail-closed; no real model result because the primary metric is pending |
+| Shared 10×5 folds | `src/experiments/shared_folds.py` | Engineering tests and verified-real-input in-memory preflight passed; prior 10×3 evidence is superseded and no persisted clean-run fold artifact exists yet |
+| Four-model restrained nested benchmark | `src/experiments/manuscript_model_benchmark.py`, `src/models/canonical_models.py` | Macro-F1/QWK protocol tested and fail-closed; no real model result because the clean trial has not run |
 | Paired OOF bootstrap | `src/models/oof_bootstrap.py` | Tested statistical utility; not yet a manuscript result |
-| Baseline reference stop gate | `src/experiments/build_manuscript_evidence.py` | Tested orchestration control; no observed gate outcome |
+| Baseline reference stop gate | `src/experiments/build_manuscript_evidence.py`, `src/experiments/run_model_benchmark_trial.py` | Tested point-plus-CI control and isolated offline trial entrypoint; no observed gate outcome |
 
-The real-input fold preflight wrote no files and its printed dirty/predecision hash is expressly noncanonical. It supports loader/fold engineering verification only and cannot support a numeric manuscript claim.
+The real-input 10×5 fold preflight wrote no files and its dirty-worktree hash is expressly noncanonical. The standalone trial command has not executed, `reports/manuscript_final/trials/` contains no new run from this checkpoint, and no baseline gate outcome exists. The preflight supports loader/fold engineering verification only and cannot support a numeric manuscript claim.

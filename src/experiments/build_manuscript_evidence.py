@@ -591,9 +591,9 @@ def enforce_baseline_reference_gate(context: StageContext) -> Mapping[str, Any]:
         character not in "0123456789abcdef" for character in resample_hash
     ):
         raise ManuscriptBuildError("Baseline reference gate has no valid resample hash.")
-    if not isinstance(gate.get("gate_metric"), str) or not gate["gate_metric"]:
-        raise ManuscriptBuildError("Baseline reference gate has no predeclared metric.")
-    if gate.get("trigger_rule") != "paired_improvement_ci_low_greater_than_zero":
+    if gate.get("gate_metric") != "macro_f1":
+        raise ManuscriptBuildError("Baseline reference gate metric must be predeclared macro-F1.")
+    if gate.get("trigger_rule") != "point_estimate_gt_zero_and_paired_ci_low_gt_zero":
         raise ManuscriptBuildError("Baseline reference gate trigger rule drifted.")
     if not isinstance(gate.get("gate_triggered"), bool):
         raise ManuscriptBuildError("Baseline reference gate result must be boolean.")

@@ -43,7 +43,7 @@ def _generate(frame: pd.DataFrame | None = None):
         dataset_key="inx_primary",
         dataset_sha256="c" * 64,
         outer_splits=10,
-        inner_splits=3,
+        inner_splits=5,
         seed=42,
         inner_seed=43,
     )
@@ -64,7 +64,7 @@ def test_generated_artifacts_have_complete_schema_and_nested_membership() -> Non
     assert len(inner) == 90 * 9
     assert inner.groupby("outer_fold")["sample_index"].nunique().eq(81).all()
     assert inner.groupby(["outer_fold", "sample_index"]).size().eq(1).all()
-    assert set(inner["inner_fold"]) == {1, 2, 3}
+    assert set(inner["inner_fold"]) == {1, 2, 3, 4, 5}
     assert contract["identifier_used_for_model"] is False
     assert contract["target_used_for_model"] is False
     assert contract["model_feature_exclusions"] == ["EmpNumber", "PerformanceRating"]

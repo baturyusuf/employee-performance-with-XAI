@@ -25,7 +25,7 @@ def _context(tmp_path, *, gate_triggered: bool = False):
         "fold_contract_hash": fold_hash,
         "gate_metric": "macro_f1",
         "comparison_direction": "baseline_improvement_over_xgboost",
-        "trigger_rule": "paired_improvement_ci_low_greater_than_zero",
+        "trigger_rule": "point_estimate_gt_zero_and_paired_ci_low_gt_zero",
         "gate_triggered": gate_triggered,
         "triggered_comparisons": comparisons,
         "user_decision_required_if_triggered": True,
