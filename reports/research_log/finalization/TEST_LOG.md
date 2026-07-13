@@ -135,3 +135,19 @@ At that historical checkpoint, V2-007 through V2-010 had tested reusable infrast
 - README clean-checkout audit: all 17 local links exist and are represented in the Git index; the local untracked trial path is plain text, not a broken GitHub link.
 - Issue register CSV: 26 rows parsed with the declared schema.
 - One parallel wrapper failed because it imported nonexistent `config_hash`; corrected `canonical_config_hash` loading passed and reproduced the recorded config/feature-policy hashes. This was not a scientific/test failure.
+
+## Unit 2E Option-A Calibration Implementation - 2026-07-13
+
+- Calibration/config/upstream/bootstrap focused suite: 85 passed plus 7 subtests in 19.77 seconds after all independent-review fixes.
+- Independent read-only review suite: 48 passed plus 7 subtests; no material implementation blocker.
+- Compileall and diff checks: passed.
+- Warning-free sigmoid smoke: passed on scikit-learn 1.8.0 with one-thread L2 fitting; zero warnings and exact parameter replay.
+- Real INX fold-1 diagnostic: five inner fits; 1,080 cross-fitted training rows; 120 untouched outer-test rows; zero warnings; 1.082 fit seconds; maximum calibrated simplex error `2.22e-16`.
+- Canonical real-run status: not run. Current config hash `d755ecc3...` is incompatible with immutable historical benchmark hash `7e70bf66...`; this fail-closed state is expected. A same-config run is deferred until all remaining core inputs are frozen.
+- First full-pytest attempt failed during collection because the supplementary counterfactual module imported deleted private calibration helper `_fit_pipeline`. It ran no test/scientific stage. The module was decoupled to a local canonical one-thread supplementary fit helper; the two direct counterfactual modules then passed 5 tests.
+- Full pytest after the fix: 425 passed, 2 skipped and 11 subtests in 83.64 seconds.
+- Full unittest: 173 passed with 2 skips in 7.089 seconds.
+- Added a static regression preventing future supplementary imports of calibration private helpers; combined calibration/counterfactual focus passed 25 tests.
+- Final hygiene: manuscript unchanged; no secret-pattern match; no absolute user path in scientific diff; no candidate file over 100 MB; no active leakage-safe terminology; `pip check` clean; 17 README local links tracked; issue register parsed 26 rows.
+- Final post-regression rerun after adding the private-import guard: pytest 426 passed, 2 skipped and 11 subtests in 88.59 seconds; unittest 174 passed with 2 skips in 7.128 seconds; compileall and diff check passed.
+- Final all-ten-fold real-INX diagnostic: 50/50 selected-candidate inner fits, ten calibrators, 10,800 training OOF rows, 1,200 raw plus 1,200 sigmoid test rows, ten source-model hashes and zero warnings in 12.303 seconds. Noncanonical in-memory diagnostic only; no artifact.

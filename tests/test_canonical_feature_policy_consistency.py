@@ -122,6 +122,61 @@ class CanonicalFeaturePolicyConsistencyTests(unittest.TestCase):
         with self.assertRaisesRegex(ManuscriptConfigError, "matched-OOF"):
             validate_manuscript_config(malformed)
 
+    def test_calibration_contract_is_predeclared_cross_fitted_sigmoid(self) -> None:
+        calibration = self.config["manuscript_final"]["calibration"]
+
+        self.assertEqual(calibration["primary_method"], "sigmoid")
+        self.assertEqual(calibration["comparison_systems"], ["raw", "sigmoid"])
+        self.assertEqual(
+            calibration["method_selection"],
+            "predeclared_not_outer_test_selected",
+        )
+        self.assertFalse(calibration["selection_performed"])
+        self.assertEqual(
+            calibration["training_protocol"],
+            "five_fold_cross_fitted_outer_training_only",
+        )
+        self.assertEqual(calibration["inner_splits"], 5)
+        self.assertEqual(calibration["outer_test_usage"], "evaluation_only")
+        self.assertFalse(calibration["outer_model_refit_in_calibration_stage"])
+        self.assertFalse(
+            calibration["outer_test_used_for_tuning_fitting_selection_or_thresholds"]
+        )
+        self.assertEqual(
+            calibration["sigmoid"],
+            {
+                "algorithm": "one_vs_rest_platt_logit_then_row_renormalize",
+                "implementation_dependency": "scikit-learn>=1.8,<1.9",
+                "solver": "lbfgs",
+                "regularization": "l2_via_l1_ratio_zero",
+                "l1_ratio": 0.0,
+                "C": 1.0,
+                "fit_intercept": True,
+                "max_iter": 1000,
+                "tol": 1.0e-10,
+                "probability_clip": 1.0e-6,
+                "solver_threadpool_limit": 1,
+            },
+        )
+
+    def test_calibration_contract_rejects_outer_test_use_or_protocol_drift(self) -> None:
+        mutations = {
+            "selection_performed": True,
+            "outer_model_refit_in_calibration_stage": True,
+            "outer_test_usage": "fit_and_evaluation",
+            "outer_test_used_for_tuning_fitting_selection_or_thresholds": True,
+            "inner_splits": 3,
+            "primary_method": "isotonic",
+            "comparison_systems": ["raw", "sigmoid", "isotonic"],
+        }
+
+        for field, value in mutations.items():
+            with self.subTest(field=field):
+                malformed = copy.deepcopy(self.config)
+                malformed["manuscript_final"]["calibration"][field] = value
+                with self.assertRaisesRegex(ManuscriptConfigError, "calibration differs"):
+                    validate_manuscript_config(malformed)
+
 
 if __name__ == "__main__":
     unittest.main()

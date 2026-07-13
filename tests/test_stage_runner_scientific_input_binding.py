@@ -212,6 +212,37 @@ def test_policy_runner_receives_only_current_run_upstreams_and_full_identity(
     }
 
 
+def test_calibration_runner_receives_only_current_run_upstreams_and_full_identity(
+    tmp_path,
+    monkeypatch,
+) -> None:
+    from src.experiments import manuscript_calibration
+
+    context = _context(tmp_path)
+    _write_compatible_upstream_contracts(context)
+    captured = {}
+
+    def fake_run(config_path, **kwargs):
+        captured["config_path"] = config_path
+        captured.update(kwargs)
+        return {"status": "captured"}
+
+    monkeypatch.setattr(manuscript_calibration, "run", fake_run)
+
+    result = manuscript_build._run_calibration(context)
+
+    assert result == {"status": "captured"}
+    assert captured == {
+        "config_path": context.config_path,
+        "shared_folds_dir": context.run_dir / "shared_folds",
+        "model_benchmarks_dir": context.run_dir / "model_benchmarks",
+        "output_dir": context.run_dir / "sigmoid_calibration",
+        "run_id": context.run_id,
+        "config_hash": context.config_hash,
+        "scientific_input_hash": context.manifest["scientific_input_hash"],
+    }
+
+
 @pytest.mark.parametrize("stage", ["shared_folds", "model_benchmarks"])
 def test_policy_runner_fails_when_current_run_upstream_is_missing(
     tmp_path,
@@ -236,6 +267,32 @@ def test_policy_runner_rejects_incompatible_upstream_identity(tmp_path) -> None:
 
     with pytest.raises(manuscript_build.ManuscriptBuildError, match="incompatible"):
         manuscript_build._run_policy(context)
+
+
+@pytest.mark.parametrize("stage", ["shared_folds", "model_benchmarks"])
+def test_calibration_runner_fails_when_current_run_upstream_is_missing(
+    tmp_path,
+    stage: str,
+) -> None:
+    context = _context(tmp_path)
+    _write_compatible_upstream_contracts(context)
+    contract = context.run_dir / stage / "stage_contract.json"
+    contract.unlink()
+
+    with pytest.raises(manuscript_build.ManuscriptBuildError, match="contract is missing"):
+        manuscript_build._run_calibration(context)
+
+
+def test_calibration_runner_rejects_incompatible_upstream_identity(tmp_path) -> None:
+    context = _context(tmp_path)
+    _write_compatible_upstream_contracts(context)
+    contract = context.run_dir / "model_benchmarks" / "stage_contract.json"
+    payload = json.loads(contract.read_text(encoding="utf-8"))
+    payload["scientific_input_hash"] = "f" * 64
+    contract.write_text(json.dumps(payload), encoding="utf-8")
+
+    with pytest.raises(manuscript_build.ManuscriptBuildError, match="incompatible"):
+        manuscript_build._run_calibration(context)
 
 
 @pytest.mark.parametrize("stage", ["shared_folds", "model_benchmarks"])

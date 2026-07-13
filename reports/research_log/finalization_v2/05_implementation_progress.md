@@ -407,3 +407,39 @@ Checkpoint: commit `984db46` (`feat(policy): bind leakage ablation to shared OOF
 The current calibration module is not v2-admissible: it regenerates folds (1,091/1,200 differ from shared assignments), uses legacy fixed XGBoost settings, ranks raw/sigmoid/isotonic with outer-test results, reports fold-t intervals (including a historical negative severe-error lower bound), writes absolute paths and is non-atomic. Builder wiring supplies no upstream identities.
 
 The recommended correction is five-inner-fold OOF cross-fitted sigmoid training inside each outer-training partition, followed by application to the exact persisted full-outer-train XGBoost probabilities. It adds 50 fits and preserves one exact primary base model. A single 20% holdout would add 10 fits but evaluates a different base model trained on only 80% of outer training data. Warning-free bootstrap timing measured about 93 seconds for two methods × nine metrics × 5,000 draws; total estimates are 2–3 minutes versus 1.5–2 minutes. This material choice is awaiting the user; no calibration file was modified.
+
+### Unit 2E option-A implementation plan — recorded before modification
+
+User decision: five-inner-fold outer-training-only cross-fitted sigmoid calibration. The exact persisted benchmark XGBoost outer-fold model and its untouched outer-test probabilities must be preserved. No outer-test value may affect tuning, calibrator fitting, method selection or thresholds.
+
+Root causes to remove: the legacy runner creates its own outer splits, uses one 20% holdout and a reduced-training base model, uses legacy fixed parameters, evaluates raw/sigmoid/isotonic and selects among them from outer-test metrics, computes fold-t intervals, lacks upstream identities, publishes absolute paths and is non-atomic.
+
+Intended files: `configs/manuscript_final.yaml`, `src/governance/manuscript_contract.py`, `src/experiments/manuscript_calibration.py`, `src/experiments/build_manuscript_evidence.py`, calibration/stage-runner contract tests, and persistent logs. Benchmark models/folds and the manuscript are out of scope and must not change.
+
+Acceptance criteria:
+
+- consume only current-run shared 10×5 folds and exact benchmark XGBoost artifacts after `1e-12` OOF replay;
+- run exactly 50 inner fits using each outer fold's selected fixed/candidate parameters and model seed, with preprocessing fitted only on inner development rows;
+- cover every outer-training sample once in cross-fit predictions and exclude every corresponding outer-test sample;
+- fit exactly ten one-vs-rest logit sigmoid calibrators only from cross-fit rows; fail on missing/degenerate class evidence;
+- reuse exact benchmark raw outer-test rows, apply the calibrator without outer-model refit, and record calibrator-to-model hashes/denominators;
+- keep sigmoid fixed regardless of outer-test metrics, exclude isotonic and threshold selection, and use declared argmax labels;
+- persist exactly-once raw/sigmoid OOF rows, fold-descriptive metrics, 5,000-draw paired sample-level intervals/differences, complete denominators and the benchmark resample hash;
+- generate 10-bin class reliability evidence, Figure 5 PNG/SVG/source, rationale/warnings and relative-path metadata atomically;
+- fail before/without partial output on input, identity, fold, parameter, probability, denominator or publication errors;
+- pass focused tests, bounded verified-INX diagnostics, independent review, full pytest/unittest/compileall and hygiene gates before checkpoint.
+
+### Unit 2E option-A implementation result - 2026-07-13
+
+- Replaced the legacy independent-split calibration path with the exact shared 10x5 contract. Each outer fold receives five selected-candidate inner-development fits and one cross-fitted probability row per outer-training sample; outer-test rows cannot enter fitting.
+- Fits exactly one predeclared one-vs-rest logit sigmoid per outer fold and applies it only to the exact persisted benchmark XGBoost outer-test probabilities. The stage never refits the outer model, selects a method, selects a threshold or includes isotonic.
+- Persists 50 fit receipts, 10 calibrator/model relationships, 30 class parameter rows, 10,800 cross-fit rows, 1,200 raw plus 1,200 sigmoid OOF rows, 20 descriptive fold rows, raw 5,000-draw intervals/differences, 60 reliability bins, complete denominators, protocol/rationale/validation metadata and PNG/SVG sources through atomic staging.
+- Raw benchmark floats are never silently renormalized. Persisted values and calibrator parameters are re-read with round-trip float parsing and replayed exactly; calibrated values are explicitly row-normalized.
+- Froze the paired 95% sample bootstrap strata to `(outer_fold, y_true)`, reuses the benchmark resample hash, removes fold-t inference and renders percentile interval endpoints even when a valid interval does not contain its observed point.
+- Bounded scikit-learn to `>=1.8,<1.9` for its warning-free L2 API and limits both XGBoost and sigmoid numerical fits to one thread. All model/calibrator warnings fail closed and thread limits are recorded.
+- Re-reads and replays the config, actual dataset hash, shared folds, benchmark files and all ten model bytes immediately before atomic publication, blocking any mid-run upstream mutation.
+- Independent code review found no remaining material implementation defect. Its findings on float replay, bootstrap freezing, dependency API, solver determinism, upstream races and CI rendering were implemented and regression-tested.
+- Expanded focused suite passed 85 tests plus 7 subtests; independent review passed 48 plus 7 subtests. A real INX fold-1 diagnostic passed five fits, 1,080 cross-fit rows, 120 untouched test rows, zero warnings and `2.22e-16` maximum calibrated simplex error in 1.082 fit seconds.
+- No canonical calibration artifact was generated. Current config `d755ecc3...` correctly rejects historical benchmark config `7e70bf66...`; rerunning the expensive benchmark now would be invalidated by planned downstream core-config changes. Same-config real execution remains required after complete core input freeze.
+- Full-suite collection exposed one supplementary dependency on the deleted legacy calibration `_fit_pipeline`. The counterfactual module now owns a clearly supplementary, one-thread canonical-model fit helper and a regression forbids private calibration imports. This restores module isolation without generating or admitting counterfactual evidence; the full suite then passed.
+- A final all-ten-fold real-INX in-memory diagnostic exercised the complete 50-fit/calibrator binding loop against the immutable historical bundle: 10,800 cross-fit rows, 50 receipts, 30 class-parameter rows, ten distinct calibrator hashes, ten source model hashes, 2,400 evaluation rows and zero warnings in 12.303 seconds. It deliberately retained historical raw float32 probabilities and wrote no artifact; it is implementation evidence only.

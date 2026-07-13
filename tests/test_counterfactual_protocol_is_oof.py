@@ -1,9 +1,11 @@
 from __future__ import annotations
 
+import inspect
 import unittest
 
 import pandas as pd
 
+from src.experiments import manuscript_counterfactual_actionability as counterfactual_module
 from src.experiments.manuscript_counterfactual_actionability import (
     build_candidates,
     intervention_features,
@@ -13,6 +15,11 @@ from src.experiments.manuscript_counterfactual_actionability import (
 
 
 class CounterfactualProtocolIsOOFTests(unittest.TestCase):
+    def test_supplementary_module_does_not_import_calibration_private_helpers(self) -> None:
+        source = inspect.getsource(counterfactual_module)
+        self.assertNotIn("manuscript_calibration", source)
+        self.assertNotIn("_fit_pipeline", source)
+
     def test_candidates_use_supplied_training_prototypes_and_observed_values(self) -> None:
         training = pd.DataFrame(
             {

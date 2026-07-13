@@ -570,6 +570,58 @@ def validate_manuscript_config(config: Mapping[str, Any]) -> None:
             "feature-access sensitivity contract."
         )
 
+    calibration = _require_mapping(settings, "calibration", "manuscript_final")
+    expected_calibration = {
+        "scope": "canonical_primary_policy_exact_benchmark_model",
+        "primary_method": "sigmoid",
+        "comparison_systems": ["raw", "sigmoid"],
+        "method_selection": "predeclared_not_outer_test_selected",
+        "selection_performed": False,
+        "training_protocol": "five_fold_cross_fitted_outer_training_only",
+        "outer_folds_source": "shared_folds.outer_fold_assignments",
+        "inner_folds_source": "shared_folds.inner_fold_assignments",
+        "inner_splits": 5,
+        "inner_model_parameters_source": (
+            "model_benchmarks.xgboost_selected_candidate_by_outer_fold"
+        ),
+        "inner_model_seed_source": "seeds.model",
+        "preprocessing_fit_scope": "inner_development_partition_only",
+        "calibrator_fit_scope": "outer_training_cross_fitted_probabilities_only",
+        "outer_model_source": (
+            "model_benchmarks.persisted_selected_xgboost_outer_fold_pipeline"
+        ),
+        "outer_model_refit_in_calibration_stage": False,
+        "outer_test_probability_source": "model_benchmarks.exact_xgboost_oof_predictions",
+        "outer_test_usage": "evaluation_only",
+        "outer_test_used_for_tuning_fitting_selection_or_thresholds": False,
+        "sigmoid": {
+            "algorithm": "one_vs_rest_platt_logit_then_row_renormalize",
+            "implementation_dependency": "scikit-learn>=1.8,<1.9",
+            "solver": "lbfgs",
+            "regularization": "l2_via_l1_ratio_zero",
+            "l1_ratio": 0.0,
+            "C": 1.0,
+            "fit_intercept": True,
+            "max_iter": 1000,
+            "tol": 1e-10,
+            "probability_clip": 1e-6,
+            "solver_threadpool_limit": 1,
+        },
+        "label_decision_rule": "argmax_fixed_label_order_2_3_4",
+        "threshold_selection": "none",
+        "n_bins": 10,
+        "uncertainty_source": "evaluation.bootstrap",
+        "fold_summary_scope": "descriptive_variability_only_no_population_ci",
+        "probability_warning": (
+            "Calibrated probabilities are uncertain research outputs and must not be used "
+            "as autonomous HR decision thresholds."
+        ),
+    }
+    if dict(calibration) != expected_calibration:
+        raise ManuscriptConfigError(
+            "calibration differs from the frozen five-inner-fold cross-fitted sigmoid contract."
+        )
+
     metric_rules = _require_mapping(
         _require_mapping(settings, "evaluation", "manuscript_final"),
         "metric_applicability",

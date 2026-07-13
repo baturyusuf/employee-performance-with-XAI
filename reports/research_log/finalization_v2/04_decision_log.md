@@ -67,6 +67,12 @@ Read-only audit proved that the legacy calibration stage selects methods from ou
 
 Outer test data is evaluation-only in every design. Isotonic is excluded from core selection. Implementation is paused for this material protocol choice.
 
+## Accepted Calibration Option A — 2026-07-13
+
+The user selected five-inner-fold cross-fitted sigmoid calibration. Within each outer-training partition, the exact persisted shared inner-fold assignments must generate one raw probability row per outer-training sample from a model that did not train on that sample. The fold-specific sigmoid calibrator is fitted only on those inner-OOF probabilities and labels. It is then applied to the exact selected benchmark outer-fold XGBoost model's untouched outer-test probabilities; that benchmark model is never refit or replaced.
+
+Outer-test features, labels, predictions and metrics are evaluation-only. They cannot influence hyperparameter tuning, calibrator fitting, calibration-method selection or threshold selection. Sigmoid is predeclared primary, raw is the comparator, isotonic is excluded from the core stage, and class labels use the fixed argmax rule rather than a selected threshold. Every calibrator must record the corresponding outer fold, selected candidate, benchmark model SHA-256, model-set/fold/run/config/scientific-input identities and cross-fit evidence hash.
+
 ## Observed Unit 2B Gate Outcome — 2026-07-13
 
 Trial `benchmark-10x5-20260713-6a80074` completed all 1,540 fits and 5,000 paired OOF bootstrap draws. No baseline had both a positive macro-F1 point advantage over XGBoost and a paired 95% CI lower bound above zero. The gate did not trigger, so the approved plan continues with XGBoost as the predeclared XAI reference. This does not suppress secondary results: Random Forest had the highest QWK, but QWK was not a gate metric.
@@ -80,3 +86,12 @@ Trial `benchmark-10x5-20260713-6a80074` completed all 1,540 fits and 5,000 paire
 - The historical trial remains immutable and can verify the reader at its prior `1e-6` probability contract, but its old probabilities/config and missing nested one-hot feature-name lineage prohibit canonical SHAP reuse. Benchmark and SHAP must be regenerated together under the final clean commit.
 
 This is an implementation/provenance resolution of the already approved same-OOF-model XAI scope. It does not change the user-selected model, target, metric, dataset or claim scope and therefore required no new user decision.
+
+## Unit 2E Reproducibility and Execution Timing Decision - 2026-07-13
+
+- The calibrated-probability implementation uses the warning-free scikit-learn `>=1.8,<1.9` L2 contract (`l1_ratio=0.0`) under a one-thread solver limit. Config, requirements, calibrator parameters and protocol hashes record this contract.
+- Persisted benchmark probabilities are validated within their upstream float32 simplex tolerance but are not silently renormalized; sigmoid outputs are explicitly normalized. CSV readback uses round-trip float parsing so parameters and probabilities replay exactly.
+- Calibration uncertainty is frozen to the same 5,000 paired sample-level draws, 95% confidence, `(outer_fold, y_true)` strata and linear percentile quantiles as the benchmark.
+- All upstream files and model bytes are re-read/replayed immediately before publication. A mutation during the 50-fit run blocks atomic rename.
+- No historical hash is patched or relabelled. Current config `d755ecc3...` and historical benchmark config `7e70bf66...` are intentionally incompatible.
+- Another 1,540-fit benchmark is deferred until fairness/external/figure and dependency side inputs are frozen. Running it earlier would knowingly create another noncanonical package after later config changes. This is an execution-order safeguard, not a change to the accepted model/folds/metric/calibration protocol.

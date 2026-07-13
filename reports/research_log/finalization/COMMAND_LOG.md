@@ -38,3 +38,5 @@ Unit 2D exact policy/config/README commands, the failed nonexistent-test filenam
 Unit 2D tested implementation checkpoint: `984db46` (`feat(policy): bind leakage ablation to shared OOF evidence`). The untracked historical trial was not staged; tracked worktree verification passed immediately after commit.
 
 The read-only Unit 2E calibration audit and timing diagnostics are also recorded there. They read only the local historical OOF CSV in memory; no file/network/API operation occurred.
+
+Unit 2E option-A implementation commands, warning/API compatibility probes, focused test reruns, independent-review findings and the bounded real-INX fold-1 diagnostic are recorded in `../finalization_v2/06_commands_and_tests.md`. The final expanded focused suite passed 85 tests plus 7 subtests; independent read-only review passed 48 tests plus 7 subtests and found no remaining code-level blocker. No canonical calibration artifact was generated because current config `d755ecc3...` must reject historical benchmark config `7e70bf66...`.

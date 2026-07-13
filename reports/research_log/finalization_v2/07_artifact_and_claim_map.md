@@ -58,6 +58,17 @@ No current canonical policy artifact exists. The tested stage declares the follo
 
 The primary policy must reuse the exact benchmark XGBoost OOF rows after `1e-12` replay. Five non-primary policies use the same outer folds and the primary-selected XGBoost candidate for each fold; they are not independently tuned. Therefore the comparison is matched feature-access sensitivity conditional on the primary selection schedule, not a fully optimized leaderboard. The full-feature comparator is diagnostic and nondeployable.
 
-## Unit 2E Calibration Audit
+## Unit 2E Calibration Evidence Contract
 
-No historical calibration file is admitted. The legacy stage differs on 1,091 of 1,200 fold assignments, uses fixed legacy parameters, selects among methods with outer-test outcomes, applies fold-t intervals, lacks current upstream identities, writes machine-specific paths and is non-atomic. A new artifact map will be added only after the user selects the within-outer-training sigmoid training design and the implementation passes its contract tests.
+No historical calibration file is admitted and no new canonical calibration artifact exists yet. Option A is implemented and independently reviewed; the future same-run `core/sigmoid_calibration/` package declares:
+
+| Declared output | Evidence role | Current claim status |
+| --- | --- | --- |
+| `calibration_training_oof_predictions.csv`; `calibration_fit_receipts.csv` | Exactly-once outer-training cross-fit rows and 50 isolated inner-fit receipts | Implementation/real-fold diagnostic only |
+| `sigmoid_calibrator_parameters.csv`; `calibrator_model_relationships.csv` | Replayable ten-fold sigmoid coefficients and exact benchmark-model bindings | Implementation/test contract only |
+| `calibration_predictions.csv`; `calibration_fold_metrics.csv` | 1,200 raw plus 1,200 sigmoid OOF rows; fold variability descriptive only | Implementation/test contract only |
+| `calibration_metric_intervals.csv`; `calibration_paired_differences.csv`; `bootstrap_metadata.json` | Frozen 5,000-draw paired 95% OOF uncertainty and benchmark resample identity | Implementation/test contract only |
+| `calibration_bins.csv`; class reliability PNG/SVG; calibration summary PNG/SVG/source | Ten-bin class reliability and manuscript-figure source evidence | Implementation/test contract only |
+| `calibration_protocol.json`; `predeclared_method_rationale.md`; `calibration_validation.json`; `calibration_metadata.json` | Fixed sigmoid/no-selection contract, warning and hash/provenance validation | Implementation/test contract only |
+
+The raw rows must equal current-run benchmark OOF values exactly and every sigmoid calibrator must be trained only from the corresponding outer-training cross-fit rows. Current config `d755ecc3...` rejects historical benchmark config `7e70bf66...`; therefore no numerical calibration claim is admitted until the benchmark and calibration run under one final frozen identity and the persisted validator/manifest pass.

@@ -1081,3 +1081,145 @@ print(f'ISSUE_REGISTER_CSV_OK rows={len(rows)}')
 ```
 
 Exit 0: `README_TRACKED_LOCAL_LINKS_OK count=17`; `ISSUE_REGISTER_CSV_OK rows=26`. This stronger check verifies that each local README target exists **and** is represented in the Git index; the untracked trial is deliberately plain code text rather than a link.
+
+## Unit 2E Option-A Calibration Implementation - 2026-07-13
+
+Builder/config focused command:
+
+```powershell
+.\myenv\Scripts\python.exe -m pytest -q tests/test_stage_runner_scientific_input_binding.py tests/test_canonical_feature_policy_consistency.py
+```
+
+The first run exited 1 with 1 failed, 28 passed and 6 subtests because the new test used obsolete field `outer_test_evaluation_only`. After binding the test to the actual frozen fields, the rerun exited 0 with 29 passed and 7 subtests in 1.86 seconds. This was a test-field error before scientific execution.
+
+Calibration-only command:
+
+```powershell
+.\myenv\Scripts\python.exe -m pytest -q tests/test_manuscript_calibration.py tests/test_calibration_is_predeclared_sigmoid.py tests/test_calibration_outer_test_not_used_for_selection.py
+```
+
+The initial implementation passed 12 tests but exposed nine scikit-learn 1.8 `FutureWarning` records from explicit `penalty='l2'`. After moving the same L2 contract to warning-free `l1_ratio=0.0`, freezing one thread and bounding scikit-learn to `>=1.8,<1.9`, the command exited 0 with 13 passed in 1.76 seconds and no warning summary.
+
+Repeated source checks:
+
+```powershell
+.\myenv\Scripts\python.exe -m compileall -q src\experiments\manuscript_calibration.py src\experiments\build_manuscript_evidence.py src\governance\manuscript_contract.py
+git diff --check
+```
+
+Exit 0. Git printed only LF-to-CRLF notices; no whitespace error occurred.
+
+Final expanded focused command before the full regression gate:
+
+```powershell
+.\myenv\Scripts\python.exe -m pytest -q tests/test_manuscript_calibration.py tests/test_calibration_is_predeclared_sigmoid.py tests/test_calibration_outer_test_not_used_for_selection.py tests/test_stage_runner_scientific_input_binding.py tests/test_canonical_feature_policy_consistency.py tests/test_benchmark_artifact_contract.py tests/test_shared_fold_artifact_contract.py tests/test_bootstrap_is_stratified_paired_and_deterministic.py tests/test_oof_bootstrap_intervals_are_domain_valid.py tests/test_paired_model_difference_bootstrap.py
+```
+
+Exit 0: 85 passed plus 7 subtests in 19.77 seconds. An earlier pre-review run passed 79 plus 7 subtests; the increase is added regression coverage.
+
+The warning-free sigmoid smoke exited 0 on scikit-learn 1.8.0: zero warnings, parameter SHA-256 `8d11d5ccabf19409275f5f26a9bcca3019622e44f65f8a4057e0ec4c2f853117`, and maximum row-sum error 0. A direct API probe confirmed `l1_ratio=0.0` is warning-free while explicit `penalty='l2'` is deprecated in 1.8.
+
+The bounded real-INX fold-1 diagnostic loaded the verified local dataset and immutable historical fold/model files through `load_canonical_dataset`, `read_xgboost_oof_artifacts`, `cross_fit_outer_training`, `fit_sigmoid_calibrator` and `apply_sigmoid_calibrator`; it did not call the canonical stage runner or write output. Exit 0: 5 fits, 1,080 cross-fit rows, 120 untouched test rows, zero warnings, 1.082 fit seconds, calibrator SHA-256 `ee7a5bc816f5b6ed41db6a54b229ca12c28bfb502d14a2854e178900925e856c`, and maximum simplex error `2.22e-16`.
+
+Exact diagnostic invocation:
+
+```powershell
+@'
+import json, time
+from pathlib import Path
+from src.data.canonical_loader import load_canonical_dataset
+from src.governance.manuscript_contract import load_manuscript_config, manuscript_settings
+from src.experiments.manuscript_policy_ablation import exact_policy_frame
+from src.experiments.benchmark_artifact_contract import read_xgboost_oof_artifacts
+from src.experiments.manuscript_calibration import cross_fit_outer_training, fit_sigmoid_calibrator, apply_sigmoid_calibrator
+root=Path('reports/manuscript_final/trials/benchmark-10x5-20260713-6a80074/core')
+meta=json.loads((root/'model_benchmarks/stage_metadata.json').read_text(encoding='utf-8')); gate=meta['baseline_gate']
+cfg=load_manuscript_config('configs/manuscript_final.yaml'); s=manuscript_settings(cfg)
+loaded=load_canonical_dataset('configs/manuscript_final.yaml','inx_primary'); data=loaded.frame
+policy=s['feature_policies']['primary_policy']; definition=s['feature_policies']['definitions'][policy]
+X,excluded=exact_policy_frame(data,policy,definition,target_column=s['target']['column'],id_column=s['governance_fields']['identifier_fields'][0]); y=data[s['target']['column']].astype(int)
+bundle=read_xgboost_oof_artifacts(root/'shared_folds',root/'model_benchmarks',expected_run_id=gate['run_id'],expected_config_hash=gate['config_hash'],expected_scientific_input_hash=gate['scientific_input_hash'],expected_feature_columns=X.columns.tolist(),expected_labels=(2,3,4))
+identity={'run_id':gate['run_id'],'config_hash':gate['config_hash'],'scientific_input_hash':gate['scientific_input_hash'],'fold_contract_hash':bundle.identity.fold_contract_hash,'xgboost_model_set_sha256':bundle.model_set_sha256,'dataset_sha256':loaded.receipt['actual_sha256'],'calibration_protocol_sha256':'0'*64}
+started=time.perf_counter(); pred,receipts=cross_fit_outer_training(features=X,target=y,bundle=bundle,outer_fold=1,forbidden_features=excluded,model_seed=s['seeds']['model'],identity=identity); elapsed=time.perf_counter()-started
+cal=fit_sigmoid_calibrator(pred[['prob_class_2','prob_class_3','prob_class_4']].to_numpy(float),pred.y_true,(2,3,4),seed=s['seeds']['calibration'],settings=s['calibration']['sigmoid'])
+raw=bundle.oof_predictions[bundle.oof_predictions.outer_fold==1].sort_values('sample_index')[['prob_class_2','prob_class_3','prob_class_4']].to_numpy(float); out=apply_sigmoid_calibrator(cal,raw)
+print({'inner_fits':len(receipts),'training_rows':len(pred),'outer_test_rows':len(raw),'warnings':int(receipts.warning_count.sum()),'elapsed_seconds':round(elapsed,3),'calibrator_sha256':cal.parameter_sha256,'max_sigmoid_simplex_error':float(abs(out.sum(axis=1)-1).max())})
+'@ | .\myenv\Scripts\python.exe -
+```
+
+Independent read-only final review reran 48 tests plus 7 subtests and found no material code-level calibration blocker. Current config `d755ecc39e516cab51269b314a7736ee4cea66bf500fa407d44fa81021ea0d18` correctly rejects historical benchmark config `7e70bf6646a542ad32e10ab3718654aa8232a46e44e2083ed10e2cfe526da595`. No hash was patched or relabelled; the same-config real run is deferred until all remaining core inputs freeze.
+
+Two exploratory shell probes exited 1 without scientific execution: one printed XGBoost simplex residuals before a final lookup used a stale DataFrame index; another guessed obsolete artifact names before listing and using the actual `stage_metadata.json` and `fold_contract.json`. Both were corrected immediately and changed no file.
+
+### Unit 2E full regression and hygiene gate
+
+The first full run:
+
+```powershell
+$env:OPENAI_API_KEY=$null
+$env:OPENAI_AGENTS_API_KEY=$null
+$env:AZURE_OPENAI_API_KEY=$null
+.\myenv\Scripts\python.exe -m pytest -q
+```
+
+exited 1 during collection after 5.7 shell seconds because supplementary `manuscript_counterfactual_actionability.py` imported private legacy calibration helper `_fit_pipeline`, which the option-A replacement correctly removed. No test or scientific stage executed. The supplementary module was decoupled from calibration internals and now builds its noncanonical heuristic model through a local one-thread canonical-model helper. A first attempted focused command also named two not-yet-existing counterfactual tests and exited 1 before collection; the corrected exact repository command was:
+
+```powershell
+.\myenv\Scripts\python.exe -m pytest -q tests/test_counterfactual_denominators_reported.py tests/test_counterfactual_protocol_is_oof.py
+```
+
+Exit 0: 5 passed in 1.38 seconds. After adding the private-import regression, the combined calibration/counterfactual focus passed 25 tests in 2.14 seconds.
+
+The corrected complete commands were:
+
+```powershell
+$env:OPENAI_API_KEY=$null
+$env:OPENAI_AGENTS_API_KEY=$null
+$env:AZURE_OPENAI_API_KEY=$null
+.\myenv\Scripts\python.exe -m pytest -q
+.\myenv\Scripts\python.exe -m unittest discover -s tests -q
+```
+
+Results: pytest 425 passed, 2 skipped and 11 subtests in 83.64 seconds; unittest ran 173 tests in 7.089 seconds with 2 skips and exited 0.
+
+Final hygiene command set:
+
+```powershell
+git diff --exit-code -- manuscript/mdpi_information/main.md
+$m = rg --pcre2 -n '(?<![A-Za-z])sk-(?:proj-)?[A-Za-z0-9_-]{20,}|github_pat_[A-Za-z0-9_]{20,}|gh[pousr]_[A-Za-z0-9]{30,}|AKIA[0-9A-Z]{16}' --glob '!myenv/**' --glob '!reports/manuscript_final/**' --glob '!*.ipynb' .
+$m = git diff -- . ':!reports/research_log/**' | Select-String -Pattern 'C:\\Users\\|/home/[^/]+/|file://' -CaseSensitive
+$tracked = @(git diff --name-only) + @(git ls-files --others --exclude-standard | Where-Object { $_ -notlike 'reports/manuscript_final/trials/*' })
+$m = rg -n -i 'leakage[- ]safe' README.md configs/feature_sets.yaml configs/manuscript_final.yaml src/experiments/manuscript_policy_ablation.py src/experiments/manuscript_calibration.py
+.\myenv\Scripts\python.exe -m pip check
+```
+
+All gates exited 0 after applying the documented no-match/100 MB conditions: no manuscript change, secret match, scientific-diff home path, large candidate or active leakage-safe term; pip reported no broken requirements. The README/index and issue-register audit exited 0 with 17 tracked local links and 26 well-formed issue rows.
+
+Final post-regression rerun after adding the supplementary private-import guard:
+
+```powershell
+.\myenv\Scripts\python.exe -m pytest -q
+.\myenv\Scripts\python.exe -m unittest discover -s tests -q
+.\myenv\Scripts\python.exe -m compileall -q src tests
+git diff --check
+```
+
+All exited 0: pytest 426 passed, 2 skipped and 11 subtests in 88.59 seconds; unittest 174 passed with 2 skips in 7.128 seconds; compileall and diff check passed.
+
+Final real-INX all-fold diagnostic used the same loader/bundle construction shown in the exact fold-1 script above, then invoked the complete internal evidence loop exactly as follows:
+
+```python
+training, receipts, params, relations, predictions = _calibration_evidence(
+    features=X,
+    target=y,
+    bundle=bundle,
+    forbidden_features=excluded,
+    model_seed=s["seeds"]["model"],
+    calibration_seed=s["seeds"]["calibration"],
+    sigmoid_settings=s["calibration"]["sigmoid"],
+    primary_policy=policy,
+    identity=identity,
+)
+```
+
+The PowerShell wrapper was the same `@' ... '@ | .\myenv\Scripts\python.exe -` form and wrote no file. Exit 0 in 15.4 shell seconds (12.303 measured fit/evidence seconds): 50 receipts over ten folds; 10,800 cross-fit rows; 30 parameter rows; ten distinct sigmoid hashes; ten relationships/source model hashes; 1,200 raw and 1,200 sigmoid rows; zero warnings. The combined maximum probability-sum residual `8.381903171539307e-08` is the unchanged historical float32 raw comparator, not a sigmoid normalization failure.
