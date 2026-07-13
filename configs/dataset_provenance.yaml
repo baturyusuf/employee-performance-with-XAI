@@ -104,7 +104,8 @@
           "Exceeds": 4,
           "Exceptional": 4
         },
-        "target_mapping_note": "Predeclared performance-score mapping to canonical ordinal labels 2, 3, and 4."
+        "target_mapping_note": "Predeclared mapped-target replication merges PIP and Needs Improvement as label 2, maps Fully Meets to label 3, and maps Exceeds or Exceptional to label 4 so the observed ordered performance strata can be evaluated on the canonical 2/3/4 scale.",
+        "target_mapping_limitation": "The mapping is dataset-specific and does not prove semantic, measurement, or prevalence equivalence with the INX PerformanceRating target; observed raw and mapped support must be reported."
       },
       "ibm_hr_analytics": {
         "physical_source": "ibm_hr_analytics",

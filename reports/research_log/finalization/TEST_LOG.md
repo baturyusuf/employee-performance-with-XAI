@@ -188,3 +188,52 @@ At that historical checkpoint, V2-007 through V2-010 had tested reusable infrast
 - Baseline external tests: 19 passed in 6.46 seconds.
 - Confirmed uncovered defects: static rather than nested model selection; fold-mean CI; direct department/job-role aliases; ambiguous governance fields; no cross-fitted sigmoid; incomplete SHAP stability; legacy unsupported subgroup helpers; incomplete scientific identity; non-atomic writes.
 - Source/licence authenticity: manual review required. Network/download/model/artifact/manuscript operations: zero.
+
+## Unit 2G Implementation Gate - 2026-07-13
+
+- Broad external implementation/config/model/calibration/bootstrap/SHAP/subgroup/stage/manifest regression: 120 passed in 33.61 seconds.
+- Post-review selected suite: 68 passed in 20.94 seconds.
+- Earlier manifest/stage identity focus: 12 passed in 2.10 seconds.
+- Compileall: passed.
+- `git diff --check`: passed.
+- Manuscript diff: unchanged.
+- Independent read-only review: no remaining P0/P1 defect.
+- Real-data execution: pending; implementation status must not be upgraded to scientific-result completion until its artifact manifest, identities, schemas and claims are validated.
+- Expected department proxy status: `not_estimated_insufficient_outer_training_class_support`; this is a support limitation, not a test failure and not a numerical result.
+
+## Unit 2G Interrupted Full-Gate and Recovery Record - 2026-07-13
+
+- Full pytest attempt: 519 passed, 2 skipped, 11 subtests passed, 11 failed in 103.20 seconds. Four failures were validation-order message contracts; seven were temporary-project side-input roots/fixtures. Production validation order/root inference and fixtures were corrected; the exact combined focus then passed 64.
+- Independent review then found that stage-start cleanliness rejected builder-created current-run files. Exact current-run allowance plus unrelated-untracked rejection was added; integration focus passed 97.
+- Two subsequent full-suite processes were deliberately terminated, not failed or abandoned: the first when review found the builder-output collision, the second when review found the still-open builder-resume collision. Process recovery confirmed neither remained running and neither wrote a scientific artifact.
+- Current external/config/stage/input focus after exact output-root and date-fallback hardening: 96 passed in 10.54 seconds; compileall and diff check passed.
+- Full pytest/unittest/hygiene gate is pending until the builder-resume regression is fixed.
+
+## Unit 2G Final Publication-Contract Gate - 2026-07-13
+
+- Resume/trust focus after interruption: 125 passed, 2 platform symlink skips.
+- External scientific focus before final independent audit: 80 passed.
+- Scientific P0 regressions added for case-insensitive forbidden aliases and canonical probability replay; post-fix independent external focus: 96 passed, 1 platform skip.
+- Integrated trust/science focus after all fixes: 161 passed, 1 platform skip. One preceding assertion-only failure was caused by an outdated expected error regex and was corrected without changing production behavior.
+- Independent post-fix trust focus: 132 passed, 2 platform skips; no P0 remained. Its release-ready promotion P1 was then fixed and tested.
+- Final trust/release focus: 141 passed, 2 platform skips. A preceding two-failure run exposed only incomplete synthetic timing/runner fixtures; production validation was not weakened.
+- Final full pytest: 648 passed, 3 skipped, 11 subtests passed in 109.16 seconds.
+- Final unittest: 178 passed, 2 skipped in 7.573 seconds.
+- Compileall: exit 0.
+- `pip check`: `No broken requirements found`, exit 0.
+- Canonical config validation: `5af0262e83a3720f8dca0b4d6795bdffc6bb2cefedc901ae0a47f9262d07f305`; scope hashes unchanged.
+- Git diff check and manuscript no-change check: passed before documentation synchronization; repeated final hygiene follows before staging.
+- Independent Unit 2G real-input diagnostic: exact 10x5 fold structure and production evaluator path, reduced candidate/bootstrap test budget, exact SHAP replay error 0, no file/network/API output. Diagnostic-only; it is not canonical evidence.
+- Production 8-candidate/5,000-draw Unit 2G execution: not run. V2-028 remains open pending clean-commit execution and artifact validation.
+
+## Unit 2G checkpoint documentation/hygiene gate - 2026-07-13
+
+- `git diff --check`: passed.
+- Manuscript no-change gate: passed.
+- Index/raw/100 MB/reparse/secret/active-terminology gates: passed with zero findings.
+- README audit: 17 local-link occurrences, 15 unique targets; every target exists and is represented in the Git index.
+- Issue register: 28 rows with all required v2 columns.
+- Historical trial preservation: 54 files, 91,820,515 bytes, untracked and locally excluded; no trial file entered the candidate set.
+- Candidate portability review: four path-like literals, all required sanitization regexes or intentional negative-test fixtures; zero artifact/metadata machine-path leakage.
+- This is a repository checkpoint gate, not a scientific execution. No production Unit 2G artifact was generated.
+- One staged-review wrapper failed before evaluation because `$home` conflicts with PowerShell's read-only `$HOME`; rerunning it with `$pathHits` passed. No file or staged content changed during the failed wrapper.

@@ -16,6 +16,7 @@ from src.governance.manuscript_contract import (
     load_manuscript_config,
     validate_run_manifest,
 )
+from src.utils.config_loader import PROJECT_ROOT
 
 
 def _sha256(path: Path) -> str:
@@ -101,9 +102,21 @@ def _project_fixture(tmp_path: Path) -> tuple[Path, Path, Path, dict[str, str]]:
     for logical_name, relative_path in side_paths.items():
         if logical_name == "data_acquisition_contract":
             continue
+        if logical_name == "external_hrdataset_v14_schema_mapping":
+            payload = json.loads(
+                (PROJECT_ROOT / "data/external/hrdataset_v14/schema_mapping.json").read_text(
+                    encoding="utf-8"
+                )
+            )
+        elif logical_name == "dataset_provenance":
+            payload = json.loads(
+                (PROJECT_ROOT / "configs/dataset_provenance.yaml").read_text(encoding="utf-8")
+            )
+        else:
+            payload = {"logical_name": logical_name, "schema_version": 1}
         _write_json(
             tmp_path / relative_path,
-            {"logical_name": logical_name, "schema_version": 1},
+            payload,
         )
 
     config = copy.deepcopy(load_manuscript_config())
@@ -124,6 +137,7 @@ def _project_fixture(tmp_path: Path) -> tuple[Path, Path, Path, dict[str, str]]:
     ]
     settings["provenance"]["data_acquisition_manifest"] = "configs/data_acquisition.yaml"
     settings["provenance"]["scientific_side_inputs"] = side_paths
+    settings["provenance"]["dataset_cards_config"] = side_paths["dataset_provenance"]
     settings["evidence_scopes"] = {
         "core": {
             "dataset_keys": ["inx_primary", "hrdataset_v14"],
@@ -303,6 +317,7 @@ def test_run_input_snapshots_preserve_every_side_input_and_reject_source_drift(
         manifest=manifest,
     )
     monkeypatch.setattr(manuscript_build, "PROJECT_ROOT", tmp_path)
+    context.run_dir.mkdir(parents=True)
 
     manuscript_build._write_input_snapshots(context)
     contract_path = context.run_dir / "run_inputs" / "input_contract.json"
@@ -318,11 +333,89 @@ def test_run_input_snapshots_preserve_every_side_input_and_reject_source_drift(
     assert contract["scientific_input_hash"] == manifest["scientific_input_hash"]
     for logical_name, row in side_rows.items():
         source = tmp_path / declared[logical_name]
-        snapshot = tmp_path / row["snapshot_path"]
+        snapshot = context.run_dir / "run_inputs" / row["snapshot_path"]
         assert snapshot.read_bytes() == source.read_bytes()
-        assert row["sha256"] == _sha256(source)
+        assert row["source_sha256"] == _sha256(source)
+        assert row["snapshot_sha256"] == _sha256(source)
 
     drifted = tmp_path / declared["feature_taxonomy"]
     drifted.write_text('{"changed_after_snapshot": true}\n', encoding="utf-8")
-    with pytest.raises(manuscript_build.ManuscriptBuildError, match="source hash mismatch"):
+    with pytest.raises(
+        manuscript_build.ManuscriptBuildError,
+        match="side input changed|source hash mismatch",
+    ):
+        manuscript_build._write_input_snapshots(context)
+
+
+def _snapshot_context(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+    *,
+    run_id: str,
+) -> StageContext:
+    config_path, _, _, _ = _project_fixture(tmp_path)
+    for required in ("requirements.txt", "requirements-dev.txt", "environment.yml"):
+        (tmp_path / required).write_text(f"# fixture {required}\n", encoding="utf-8")
+    manifest = create_run_manifest(
+        config_path,
+        evidence_scope="core",
+        project_root=tmp_path,
+        run_id=run_id,
+    )
+    config = load_manuscript_config(config_path)
+    context = StageContext(
+        config_path=config_path,
+        config=config,
+        settings=config["manuscript_final"],
+        run_dir=tmp_path / "reports" / "manuscript_final" / run_id,
+        run_id=run_id,
+        config_hash=manifest["config_hash"],
+        manifest=manifest,
+    )
+    monkeypatch.setattr(manuscript_build, "PROJECT_ROOT", tmp_path)
+    context.run_dir.mkdir(parents=True)
+    return context
+
+
+def test_run_input_snapshots_are_closed_world_and_valid_resume_is_read_only(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    context = _snapshot_context(tmp_path, monkeypatch, run_id="closed_world_inputs")
+    first = manuscript_build._write_input_snapshots(context)
+    before = {path.relative_to(context.run_dir).as_posix(): _sha256(path) for path in first}
+
+    second = manuscript_build._write_input_snapshots(context)
+    after = {path.relative_to(context.run_dir).as_posix(): _sha256(path) for path in second}
+    assert after == before
+
+    hidden = context.run_dir / "run_inputs" / ".partial.tmp"
+    hidden.write_text("must not be admitted\n", encoding="utf-8")
+    with pytest.raises(manuscript_build.ManuscriptBuildError, match="closed-world|extra_files"):
+        manuscript_build._write_input_snapshots(context)
+    assert hidden.read_text(encoding="utf-8") == "must not be admitted\n"
+
+
+def test_snapshot_copy_failure_never_publishes_final_run_inputs(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    context = _snapshot_context(tmp_path, monkeypatch, run_id="atomic_input_failure")
+    original_copy = manuscript_build.shutil.copy2
+    calls = {"count": 0}
+
+    def fail_second_copy(source, destination, *args, **kwargs):
+        calls["count"] += 1
+        if calls["count"] == 2:
+            raise OSError("intentional snapshot copy failure")
+        return original_copy(source, destination, *args, **kwargs)
+
+    monkeypatch.setattr(manuscript_build.shutil, "copy2", fail_second_copy)
+    with pytest.raises(OSError, match="intentional snapshot copy failure"):
+        manuscript_build._write_input_snapshots(context)
+
+    assert not (context.run_dir / "run_inputs").exists()
+    staging = list(context.run_dir.glob("run_inputs.__staging__.*"))
+    assert len(staging) == 1
+    with pytest.raises(manuscript_build.ManuscriptBuildError, match="staging"):
         manuscript_build._write_input_snapshots(context)

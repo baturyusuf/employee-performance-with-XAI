@@ -127,7 +127,13 @@ RUN_SPECS: tuple[ExternalRunSpec, ...] = (
         role="independent external performance-target replication",
         expected_config_role="independent_external_performance_target_replication",
         expected_labels=(2, 3, 4),
-        policies=("department_including", "department_free", "department_job_role_free"),
+        policies=(
+            "conservative_primary",
+            "department_including_audit",
+            "job_role_free_audit",
+            "proxy_rich_audit",
+            "temporality_restricted_audit",
+        ),
     ),
     ExternalRunSpec(
         key="ibm_performance",
@@ -737,7 +743,7 @@ def _run_dataset_task(
                 labels=labels,
             )
             y_test = y.iloc[test_positions]
-            if spec.key == "hrdataset_v14" and policy == "department_free":
+            if spec.key == "hrdataset_v14" and policy == "conservative_primary":
                 oof_local_shap_rows.extend(
                     _fold_local_shap_rows(
                         pipeline=pipeline,
@@ -875,7 +881,7 @@ def _run_dataset_task(
     if spec.key == "hrdataset_v14":
         local_shap = pd.DataFrame(oof_local_shap_rows)
         expected_case_class_feature_rows = len(dataset.canonical) * len(labels) * int(
-            next(row["n_features"] for row in policy_rows if row["policy"] == "department_free")
+            next(row["n_features"] for row in policy_rows if row["policy"] == "conservative_primary")
         )
         if len(local_shap) != expected_case_class_feature_rows:
             raise ExternalEvidenceError(
@@ -883,7 +889,7 @@ def _run_dataset_task(
                 f"expected {expected_case_class_feature_rows}, observed {len(local_shap)}."
             )
         identity = local_shap.groupby(["sample_index", "fold", "predicted_class"], dropna=False).size().reset_index()
-        predicted_identity = predictions[predictions["policy"] == "department_free"][
+        predicted_identity = predictions[predictions["policy"] == "conservative_primary"][
             ["sample_index", "fold", "y_pred"]
         ].rename(columns={"y_pred": "predicted_class"})
         if len(identity) != len(dataset.canonical) or not identity[
@@ -894,7 +900,7 @@ def _run_dataset_task(
             .reset_index(drop=True)
         ):
             raise ExternalEvidenceError("HRDataset local SHAP does not match the OOF prediction identity.")
-        shap_dir = output_dir / "shap" / "department_free"
+        shap_dir = output_dir / "shap" / "conservative_primary"
         shap_dir.mkdir(parents=True, exist_ok=True)
         paths["oof_local_shap"] = shap_dir / "local_grouped_shap_values.csv"
         paths["oof_global_shap"] = shap_dir / "global_grouped_shap_importance.csv"
@@ -910,7 +916,7 @@ def _run_dataset_task(
                 dataset_key=spec.key,
                 task_type=spec.task_type,
                 role=spec.role,
-                policy="department_free",
+                policy="conservative_primary",
                 evaluation_scope="out_of_fold_only",
             )[
                 [
@@ -1037,7 +1043,7 @@ def compute_transport_assessment(
         inx = _read_csv_with_best_effort(inx_path)
         hr = load_external_dataset("hrdataset_v14")
     inx_features = {str(column) for column in inx.columns if column not in excluded}
-    hr_features = set(build_feature_columns(hr, "department_free"))
+    hr_features = set(build_feature_columns(hr, "conservative_primary"))
     common = sorted(inx_features.intersection(hr_features))
     rows = pd.DataFrame(
         [
@@ -1046,7 +1052,7 @@ def compute_transport_assessment(
                 "config_hash": config_hash,
                 "feature": feature,
                 "in_inx_canonical_primary": feature in inx_features,
-                "in_hrdataset_department_free": feature in hr_features,
+                "in_hrdataset_conservative_primary": feature in hr_features,
                 "common_safe_feature": feature in common,
             }
             for feature in sorted(inx_features.union(hr_features))

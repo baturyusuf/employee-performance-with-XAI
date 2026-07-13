@@ -7,10 +7,14 @@ from pathlib import Path
 
 from src.experiments.build_manuscript_evidence import (
     ManuscriptBuildError,
-    _update_latest_pointer,
     build_final_evidence_manifest,
     validate_final_evidence_manifest,
 )
+
+
+GIT_COMMIT = "d" * 40
+SOURCE_TREE_HASH = "e" * 64
+SCIENTIFIC_INPUT_HASH = "f" * 64
 
 
 class FinalEvidenceManifestHashTests(unittest.TestCase):
@@ -31,6 +35,9 @@ class FinalEvidenceManifestHashTests(unittest.TestCase):
                 config_hash="a" * 64,
                 evidence_scope="core",
                 scope_contract_hash="c" * 64,
+                git_commit=GIT_COMMIT,
+                source_tree_hash=SOURCE_TREE_HASH,
+                scientific_input_hash=SCIENTIFIC_INPUT_HASH,
             )
             result = validate_final_evidence_manifest(
                 outputs["json"],
@@ -39,6 +46,9 @@ class FinalEvidenceManifestHashTests(unittest.TestCase):
                 expected_config_hash="a" * 64,
                 expected_evidence_scope="core",
                 expected_scope_contract_hash="c" * 64,
+                expected_git_commit=GIT_COMMIT,
+                expected_source_tree_hash=SOURCE_TREE_HASH,
+                expected_scientific_input_hash=SCIENTIFIC_INPUT_HASH,
             )
             self.assertEqual(result["n_files"], 2)
             payload = json.loads(outputs["json"].read_text(encoding="utf-8"))
@@ -59,6 +69,9 @@ class FinalEvidenceManifestHashTests(unittest.TestCase):
                 config_hash="b" * 64,
                 evidence_scope="core",
                 scope_contract_hash="d" * 64,
+                git_commit=GIT_COMMIT,
+                source_tree_hash=SOURCE_TREE_HASH,
+                scientific_input_hash=SCIENTIFIC_INPUT_HASH,
             )
             evidence.write_text("metric,value\naccuracy,0.9\n", encoding="utf-8")
             with self.assertRaisesRegex(ManuscriptBuildError, "hash mismatch"):
@@ -69,6 +82,9 @@ class FinalEvidenceManifestHashTests(unittest.TestCase):
                     expected_config_hash="b" * 64,
                     expected_evidence_scope="core",
                     expected_scope_contract_hash="d" * 64,
+                    expected_git_commit=GIT_COMMIT,
+                    expected_source_tree_hash=SOURCE_TREE_HASH,
+                    expected_scientific_input_hash=SCIENTIFIC_INPUT_HASH,
                 )
 
     def test_latest_canonical_manifest_verifies_when_present(self) -> None:
@@ -77,7 +93,13 @@ class FinalEvidenceManifestHashTests(unittest.TestCase):
         if not manifest.is_file():
             self.skipTest("Canonical end-to-end run has not been generated yet.")
         payload = json.loads(manifest.read_text(encoding="utf-8"))
-        if "evidence_scope" not in payload or "scope_contract_hash" not in payload:
+        if not {
+            "evidence_scope",
+            "scope_contract_hash",
+            "git_commit",
+            "source_tree_hash",
+            "scientific_input_hash",
+        }.issubset(payload):
             self.skipTest("Existing latest package is historical and not a scoped v2 package.")
         result = validate_final_evidence_manifest(
             manifest,
@@ -86,6 +108,9 @@ class FinalEvidenceManifestHashTests(unittest.TestCase):
             expected_config_hash=str(payload["config_hash"]),
             expected_evidence_scope=str(payload["evidence_scope"]),
             expected_scope_contract_hash=str(payload["scope_contract_hash"]),
+            expected_git_commit=str(payload["git_commit"]),
+            expected_source_tree_hash=str(payload["source_tree_hash"]),
+            expected_scientific_input_hash=str(payload["scientific_input_hash"]),
         )
         self.assertEqual(result["n_files"], payload["n_files"])
 
@@ -95,8 +120,9 @@ class FinalEvidenceManifestHashTests(unittest.TestCase):
             run = root / "canonical-run"
             (run / "nested").mkdir(parents=True)
             (run / "nested" / "artifact.csv").write_text("a,b\n1,2\n", encoding="utf-8")
-            latest = _update_latest_pointer(run, root)
-            self.assertTrue((latest / "nested" / "artifact.csv").is_file())
+            # Physical package duplication is prohibited; pointer promotion is
+            # covered by the scoped latest-pointer contract tests.
+            self.assertTrue((run / "nested" / "artifact.csv").is_file())
 
 
 if __name__ == "__main__":

@@ -12,9 +12,11 @@ The existing [`reports/manuscript_final/latest/`](reports/manuscript_final/lates
 
 At this checkpoint:
 
-- Actual dataset and side-input binding, scoped core/supplementary orchestration, shared 10-fold assignments, the four-model benchmark contract, paired OOF bootstrap, warning-clean model preprocessing, exact prediction-model-to-OOF-SHAP binding, and shared-fold leakage-policy ablation have implementation/test checkpoints.
-- The policy stage now consumes the shared folds and each fold's primary-selected XGBoost parameters; final scientific policy numbers still require regeneration with the benchmark in one clean current-commit run. Calibration, subgroup/proxy diagnostics, external replication, replacement figures/tables, dependency locking, CI, sanitized publication packaging, and a clean full rebuild remain unfinished.
+- Actual dataset and side-input binding, scoped core/supplementary orchestration, shared 10-fold assignments, the four-model benchmark contract, paired OOF bootstrap, warning-clean model preprocessing, exact prediction-model-to-OOF-SHAP binding, shared-fold leakage-policy ablation, cross-fitted sigmoid calibration, support-aware subgroup/proxy diagnostics, and conservative HRDataset_v14 replication now have implementation/test checkpoints.
+- These downstream stages are implemented but have **not** yet been regenerated together as one canonical scientific package. Final benchmark, policy, calibration, SHAP, subgroup/proxy, and external numbers still require one clean current-commit run. Replacement figures/tables, dependency locking, CI, sanitized publication packaging, and the complete rebuild remain unfinished.
+- Unit 2G uses 10 outer x 5 inner nested XGBoost, cross-fitted sigmoid, 5,000 paired/bootstrap draws, exact prediction-model OOF grouped SHAP, and atomic provenance-bound output. Its real-input preflight now reaches the production evaluator with a case-insensitively unique date exclusion, and SHAP replay uses the identical normalized probability contract as OOF prediction. The checkpoint suite passes 648 tests with 3 platform/historical skips and 11 subtests; unittest passes 178 tests with 2 skips. These are implementation gates only: no production Unit 2G artifact or numerical v2 claim exists yet.
 - The core and supplementary entry points exist but deliberately fail closed because both scopes have `release_ready: false` in [`configs/manuscript_final.yaml`](configs/manuscript_final.yaml). No full current-commit canonical build or verified release manifest exists yet.
+- Global core-build network denial and its CI assertion are not implemented yet (V2-020). Individual offline stages are not a substitute for that final no-network release gate.
 - The manuscript has not been edited. A claim matrix must be technically frozen and approved before manuscript changes.
 
 Open engineering and scientific issues are tracked in [`02_issue_register.csv`](reports/research_log/finalization_v2/02_issue_register.csv). Do not infer readiness from green unit tests alone.
@@ -55,6 +57,10 @@ The full-feature policy (whose legacy name contains `upper_bound`) is an informa
 - Counterfactual analysis is supplementary-only if retained and may report only **heuristic search success**. It must not claim employee actionability, causal recourse, feasible intervention, or advice.
 - IBM performance is supplementary restricted-target robustness. IBM attrition and Employee Turnover are supplementary related binary tasks; none is employee-performance external validation.
 - HRDataset_v14 is an independently trained mapped-target replication, not locked INX-model transport.
+
+The conservative HRDataset_v14 primary policy excludes department/position/status/marriage/diversity aliases, identifiers, sensitive fields, raw dates, Salary, State, Zip, and RecruitmentSource. Its exact seven retained feature families are `EmpJobRole`, `EngagementSurvey`, `EmpJobSatisfaction`, `SpecialProjectsCount`, `DaysLateLast30`, `Absences`, and derived `ExperienceYearsAtThisCompany`. Engagement/attendance timing is unverified and has a separate temporality-restricted audit. Two negative tenure durations are explicitly set missing; source/reference date support is schema-bound with no current-date or dataset-maximum fallback.
+
+The HRDataset department proxy diagnostic is expected to be `not_estimated_insufficient_outer_training_class_support` because a singleton class is absent from at least one outer-training split. This is insufficient support, not evidence of fairness or low proxy risk; classes are not silently merged or dropped.
 
 The complete fixed scope and prohibited claims are recorded in [`00_scope_and_fixed_decisions.md`](reports/research_log/finalization_v2/00_scope_and_fixed_decisions.md).
 
@@ -104,7 +110,7 @@ The approved publication plan is:
 - code plus small source tables/figures/manifests in Git;
 - the full evidence package prepared for GitHub Release or Zenodo;
 - `reports/manuscript_final/latest` reduced to a small pointer rather than a physical duplicate;
-- no release, push, merge, or publication without explicit user approval.
+- checkpoint pushes are permitted only on `finalization/leakage-aware-v2` after tests, staged-file review, secret/raw-data checks, and README synchronization; no force-push, merge, release, Zenodo upload, history rewrite, or publication is permitted.
 
 Dataset licence/source verification and ethics confirmation remain manual submission blockers. See [`08_manual_submission_blockers.md`](reports/research_log/finalization_v2/08_manual_submission_blockers.md).
 
@@ -117,6 +123,8 @@ The intended clean core command is:
 ```
 
 The supplementary scope uses `--scope supplementary`. **These are not release-ready commands yet:** the current config intentionally blocks both before scientific stage execution while their `release_ready` flags are false. The flags must be enabled only after every declared stage, contract test, and claim boundary is complete; then the final release requires a clean current-commit, cache-disabled rebuild and manifest verification.
+
+An interrupted build may be resumed only with its explicit existing `--run-id` and compatible reuse enabled. The original manifest must show a clean start and match current commit/source/config/dataset/side-input/scientific identities. A completed sibling scope under the same run ID is excluded from the clean-start check only after strict package validation; all other untracked paths remain disallowed. Per-scope locks prevent concurrent writers, stale locks are never taken over automatically, and promotion rejects locked or non-release-ready packages. New runs still require a completely clean worktree.
 
 Routine validation commands are:
 

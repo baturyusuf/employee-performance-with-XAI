@@ -16,6 +16,7 @@ from src.governance.manuscript_contract import (
     load_manuscript_config,
     validate_run_manifest,
 )
+from src.utils.config_loader import PROJECT_ROOT
 
 
 def _sha256(path: Path) -> str:
@@ -77,11 +78,29 @@ def _scoped_project(tmp_path: Path) -> tuple[Path, dict[str, str]]:
     for logical_name, relative_path in side_inputs.items():
         if logical_name == "data_acquisition_contract":
             continue
+        if logical_name == "external_hrdataset_v14_schema_mapping":
+            payload = json.loads(
+                (
+                    PROJECT_ROOT
+                    / "data/external/hrdataset_v14/schema_mapping.json"
+                ).read_text(encoding="utf-8")
+            )
+        elif logical_name == "dataset_provenance":
+            payload = json.loads(
+                (PROJECT_ROOT / "configs/dataset_provenance.yaml").read_text(
+                    encoding="utf-8"
+                )
+            )
+        else:
+            payload = {"logical_name": logical_name, "schema_version": 1}
         _write_json(
             tmp_path / relative_path,
-            {"logical_name": logical_name, "schema_version": 1},
+            payload,
         )
     settings["provenance"]["data_acquisition_manifest"] = "configs/data_acquisition.yaml"
+    settings["provenance"]["dataset_cards_config"] = side_inputs[
+        "dataset_provenance"
+    ]
     config_path = _write_json(tmp_path / "configs" / "manuscript_final.yaml", config)
     return config_path, side_inputs
 

@@ -20,4 +20,8 @@ The workbook exists and is hashed. A one-time Excel COM comparison found its fir
 
 ## Claim Matrix — Pending
 
-The claim matrix cannot be approved until the Unit 2B primary metric is predeclared, all D1-D5 implementations and manual provenance/ethics gates are resolved as applicable, and a clean real-data v2 build completes. D1-D5 themselves have been answered; the bracketed D4 identity/reference fields remain intentionally unverified placeholders.
+Macro-F1 is already the predeclared primary metric and QWK the fixed tie-breaker; D1-D5 are answered. The claim matrix remains pending because no clean complete v2 package exists and no source-of-truth result/table/figure map can yet be frozen. Author approval is required only after that package exists. Ethics and dataset source/licence facts remain separate explicit blockers; the bracketed D4 identity/reference fields remain intentionally unverified placeholders.
+
+## HRDataset Department Proxy Estimate — Unsupported by Available Support
+
+The configured nominal department proxy target contains a singleton class. Under the exact approved outer folds, at least one outer-training partition cannot contain all target classes, so the fail-closed external diagnostic is `not_estimated_insufficient_outer_training_class_support`. This does not block the mapped performance-target replication itself, but it blocks any numerical HRDataset department-reconstructability claim. Merging or dropping classes would change the estimand and has not been authorized.

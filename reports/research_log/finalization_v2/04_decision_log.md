@@ -95,3 +95,20 @@ This is an implementation/provenance resolution of the already approved same-OOF
 - All upstream files and model bytes are re-read/replayed immediately before publication. A mutation during the 50-fit run blocks atomic rename.
 - No historical hash is patched or relabelled. Current config `d755ecc3...` and historical benchmark config `7e70bf66...` are intentionally incompatible.
 - Another 1,540-fit benchmark is deferred until fairness/external/figure and dependency side inputs are frozen. Running it earlier would knowingly create another noncanonical package after later config changes. This is an execution-order safeguard, not a change to the accepted model/folds/metric/calibration protocol.
+
+## Unit 2G Conservative External Policy Consequences - 2026-07-13
+
+- Policy A is executable without changing the mapped target: 311 rows and class support 31/243/37 remain intact.
+- The primary model has exactly seven features. Salary, State, Zip, RecruitmentSource, direct department/position/status/marriage/diversity aliases, sensitive fields, identifiers and raw dates are forbidden. Proxy-rich and temporality variants are explicitly audit-only.
+- Two invalid negative date-derived tenure values are set missing under a schema-count contract; raw dates remain excluded and fold-local preprocessing performs imputation. This is deterministic data-quality handling, not an outcome or feature-policy relaxation.
+- Department proxy reconstructability cannot be estimated under exact outer folds because of a singleton class. No class merge/drop or alternative estimand is authorized; the result remains explicit insufficient support.
+- Scope and scientific-input hashes are recomputed inside the stage, with exact dataset and side-input key equality. HEAD, source tree and worktree cleanliness are actual checks, not trusted manifest labels.
+- No new user decision was required because these choices enforce the accepted conservative policy, fixed statistical protocol and fail-closed provenance boundary.
+
+## Unit 2G Final Trust and Figure-Scope Consequences - 2026-07-13
+
+- The verified raw HR schema spelling `DateofHire` is the single case-insensitive forbidden-name representative. `DateOfHire` is not a second contract entry; the case-insensitive scan still excludes either spelling. This repairs an internal alias contradiction without changing the approved raw-date exclusion.
+- Exact-fold diagnostic replay uses the same `aligned_predict_proba` implementation as OOF generation. The `1e-12` replay tolerance remains unchanged; no tolerance was relaxed to accommodate XGBoost float32 output.
+- A pre-existing lock is never deleted or taken over automatically. A human must verify and archive/remove a stale lock. This conservative choice prevents duplicate writers and does not change scientific scope.
+- Complete reuse and promotion require lock absence and `release_ready:true`; the builder's own final check alone may inspect the package while holding the exact owned token. Promotion remains a separate pointer-only operation after both scopes pass.
+- Under the unattended Option-A rule, the replacement main-figure plan is fixed as: study design/leakage-aware pipeline; feature-policy trade-off; four-model comparison; predeclared sigmoid calibration; global grouped OOF SHAP; SHAP stability; and HRDataset_v14 mapped-target replication summary. Deterministic representative local OOF explanations remain table/supplementary evidence. LLM/chatbot/agent dashboards remain excluded. This resolves the plan decision only; figure generation is still pending.

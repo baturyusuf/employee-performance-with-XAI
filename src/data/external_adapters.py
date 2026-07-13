@@ -371,18 +371,65 @@ def _strip_string_values(df: pd.DataFrame) -> pd.DataFrame:
 def _add_derived_features(canonical: pd.DataFrame, raw: pd.DataFrame, config: ExternalDatasetConfig) -> None:
     derived = config.derived_features or {}
     for feature_name, spec in derived.items():
+        if not isinstance(spec, dict):
+            raise ValueError(f"Derived feature {feature_name!r} must define a mapping contract.")
         source = spec.get("from")
         reference = spec.get("reference")
-        if not source or source not in raw.columns:
-            continue
+        if not isinstance(source, str) or not source or source not in raw.columns:
+            raise ValueError(
+                f"Derived feature {feature_name!r} source column is missing: {source!r}."
+            )
+        if not isinstance(reference, str) or not reference or reference not in raw.columns:
+            raise ValueError(
+                f"Derived feature {feature_name!r} reference column is missing: {reference!r}."
+            )
         start = pd.to_datetime(raw[source], errors="coerce")
-        if reference and reference in raw.columns:
-            end = pd.to_datetime(raw[reference], errors="coerce")
-            fallback = end.dropna().max()
-            end = end.fillna(fallback)
-        else:
-            end = pd.Series(pd.Timestamp("today").normalize(), index=raw.index)
-        canonical[feature_name] = ((end - start).dt.days / 365.25).round(3)
+        end = pd.to_datetime(raw[reference], errors="coerce")
+        date_policy = spec.get("missing_or_invalid_date_policy")
+        if date_policy != "preserve_missing_and_require_expected_counts":
+            raise ValueError(
+                f"Derived feature {feature_name!r} has no approved missing/invalid date policy: "
+                f"{date_policy!r}."
+            )
+        observed_source_invalid = int(start.isna().sum())
+        observed_reference_invalid = int(end.isna().sum())
+        expected_source_invalid = spec.get("expected_missing_or_invalid_source_count")
+        expected_reference_invalid = spec.get("expected_missing_or_invalid_reference_count")
+        if (
+            isinstance(expected_source_invalid, bool)
+            or not isinstance(expected_source_invalid, int)
+            or observed_source_invalid != expected_source_invalid
+        ):
+            raise ValueError(
+                f"Derived feature {feature_name!r} source-date support drifted: "
+                f"expected={expected_source_invalid!r}, observed={observed_source_invalid}."
+            )
+        if (
+            isinstance(expected_reference_invalid, bool)
+            or not isinstance(expected_reference_invalid, int)
+            or observed_reference_invalid != expected_reference_invalid
+        ):
+            raise ValueError(
+                f"Derived feature {feature_name!r} reference-date support drifted: "
+                f"expected={expected_reference_invalid!r}, observed={observed_reference_invalid}."
+            )
+        duration = ((end - start).dt.days / 365.25).round(3)
+        invalid_policy = spec.get("invalid_duration_policy")
+        if invalid_policy == "set_negative_to_missing":
+            negative = duration < 0
+            expected_count = spec.get("expected_invalid_negative_count")
+            if not isinstance(expected_count, int) or int(negative.sum()) != expected_count:
+                raise ValueError(
+                    f"Derived feature {feature_name!r} negative-duration support drifted: "
+                    f"expected={expected_count!r}, observed={int(negative.sum())}."
+                )
+            duration = duration.mask(negative)
+        elif invalid_policy is not None:
+            raise ValueError(
+                f"Unknown invalid-duration policy for derived feature {feature_name!r}: "
+                f"{invalid_policy!r}."
+            )
+        canonical[feature_name] = duration
 
 
 def _map_target(

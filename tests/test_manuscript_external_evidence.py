@@ -104,7 +104,7 @@ def test_hr_local_shap_is_fold_matched_to_the_oof_prediction(tmp_path: Path) -> 
     config["evaluation"]["cv"]["n_splits"] = 2
     config["model"]["xgboost"]["n_estimators"] = 10
     config["model"]["xgboost"]["n_jobs"] = 1
-    spec = replace(external.RUN_SPECS[0], policies=("department_free",))
+    spec = replace(external.RUN_SPECS[0], policies=("conservative_primary",))
     paths = external._run_dataset_task(
         spec,
         output_dir=tmp_path / "external" / "hrdataset_v14",

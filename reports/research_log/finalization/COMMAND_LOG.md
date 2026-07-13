@@ -104,3 +104,62 @@ Read-only inspection covered `configs/manuscript_final.yaml`, `configs/data_acqu
 Exit 0: 19 passed in 6.46 seconds. These are baseline tests, not evidence that the current stage is canonical. Historical package counts were read only: `latest/external` has 53 files/24.8 MB under config `c664...` and old commit `1834748`; `reports/external_validation` has 192 files/68.3 MB. The old package combines core/supplementary tasks and actionability, so it is incompatible and cannot be reused.
 
 One broad `rg` command again included literal Windows wildcard test arguments and returned exit 1 after the non-wildcard portions printed; the corrected focused command named four files explicitly and passed. No scientific execution or write occurred in the failed inspection command.
+
+## Unit 2G Implementation and Independent Review - 2026-07-13
+
+The implementation commands and full file-level record are mirrored in `../finalization_v2/06_commands_and_tests.md`. The completed stage implementation provides the accepted exact feature policies, 10 outer x 5 inner nested XGBoost selection, fixed cross-fitted sigmoid, common 5,000-draw paired bootstrap, exact-model OOF SHAP, support-aware diagnostics, three-feature transport infeasibility and atomic portable publication. No production stage execution is implied.
+
+Validation commands:
+
+```powershell
+.\myenv\Scripts\python.exe -m pytest -q tests/test_external_replication_config_contract.py tests/test_external_nested_selection_contract.py tests/test_external_sigmoid_isolation.py tests/test_external_oof_bootstrap_contract.py tests/test_external_shap_contract.py tests/test_external_subgroup_proxy_contract.py tests/test_hrdataset_replication_stage_contract.py tests/test_external_validation.py tests/test_manuscript_external_evidence.py
+.\myenv\Scripts\python.exe -m compileall -q src tests
+git diff --check
+git diff --exit-code -- manuscript/mdpi_information/main.md
+```
+
+The interrupted broad run resumed and exited 0 with 120 passed in 33.61 seconds. After the final independent-review identity fix, the selected external suite exited 0 with 68 passed in 20.94 seconds; compileall and diff checks passed. A first attempted focused command used the Windows Store `python.exe` shim and failed before test execution; it was immediately rerun with the repository interpreter `.\myenv\Scripts\python.exe`. No scientific model, artifact, network/API operation or manuscript write occurred in that failed command.
+
+No real Unit 2G stage artifact has yet been generated. The next recorded command must be the full gate and checkpoint, followed by the clean real-data stage.
+
+## Unit 2G Interruption Recovery - 2026-07-13
+
+Recovery read `AGENTS.md` and all required finalization/Unit 2G records, confirmed branch `finalization/leakage-aware-v2` at `e4c3f0d`, inspected unstaged/cached diffs and 15 commits, and checked Win32 process command lines. No Python, pytest, XGBoost or LightGBM process was running; no process was terminated. `git diff --cached` was empty. No `.tmp`, `.lock`, `.partial`, `.incomplete` or staging path was found outside excluded environments/trials. The only untracked research evidence remained the intact 91,820,515-byte historical benchmark trial; no file was deleted or reset.
+
+The audit found that the prior interruption occurred before the planned builder-resume fix was applied. Current stage output binding/date-fallback fixes and their tests are present. A broad `rg` hygiene command again passed a literal Windows wildcard (`tests/test_external_*`) and exited 1 after completing the preceding read-only checks; the corrected audit uses explicit files or `-g`. No code, data or artifact was changed by that command.
+
+## Unit 2G Publication-Contract Recovery and Final Checkpoint Gates - 2026-07-13
+
+The resumed work repaired the exact-run resume path and then independently audited the complete-package trust boundary. The following repository-interpreter commands were run with OpenAI/Azure/Anthropic API variables removed:
+
+```powershell
+.\myenv\Scripts\python.exe -m py_compile src\experiments\build_manuscript_evidence.py src\governance\manuscript_contract.py tests\test_manifest_completion_contract.py
+.\myenv\Scripts\python.exe -m pytest -q tests/test_manifest_completion_contract.py tests/test_builder_path_contract.py tests/test_builder_resume_contract.py tests/test_atomic_stage_resume_contract.py tests/test_latest_pointer_contract.py tests/test_artifact_run_manifest_consistency.py tests/test_final_evidence_manifest_hashes.py tests/test_scoped_run_manifest_inputs.py tests/test_side_input_hash_binding.py
+.\myenv\Scripts\python.exe -m pytest -q tests/test_external_replication_config_contract.py tests/test_external_nested_selection_contract.py tests/test_external_sigmoid_isolation.py tests/test_external_oof_bootstrap_contract.py tests/test_external_shap_contract.py tests/test_external_subgroup_proxy_contract.py tests/test_hrdataset_replication_stage_contract.py tests/test_external_validation.py tests/test_manuscript_external_evidence.py
+.\myenv\Scripts\python.exe -m pytest -q
+.\myenv\Scripts\python.exe -m unittest discover -s tests -q
+.\myenv\Scripts\python.exe -m compileall -q src tests
+.\myenv\Scripts\python.exe -m pip check
+git diff --check
+git diff --exit-code -- manuscript/mdpi_information/main.md
+```
+
+Initial trust focus: 125 passed with 2 platform symlink skips. Initial external focus: 80 passed. Independent review then exposed and the implementation closed: incompatible same-run sibling cleanliness; arbitrary command/stage admission; non-closed package/run-input/stage inventories; unlocked promotion/reuse; stale-lock takeover race; non-semantic claim/status/final-manifest rows; missing release-ready promotion gate; and a promotion CLI scope ambiguity.
+
+Scientific review exposed two real-path P0 defects before any production artifact was written. The exclusion contract contained both `DateofHire` and `DateOfHire`, which are duplicates under the evaluator's case-insensitive contract; it now retains the verified raw spelling only. Exact SHAP replay used direct XGBoost probabilities while OOF generation used the normalized canonical helper; diagnostics now call the identical `aligned_predict_proba` path. The real-input production preflight and reduced no-write/no-network diagnostic then reached exact-fold SHAP with replay error zero. It remains noncanonical because candidates/resamples were test-reduced and no file was published.
+
+One 161-test focus first failed only because an existing test regex did not include the new explicit `hidden or cache directory` error; after updating the assertion, 161 passed with one platform skip. The first post-release-gate trust focus had two fixture failures (new timing fields absent from a synthetic receipt; synthetic release-ready scopes named table/figure stages without runners); fixtures were corrected without weakening production checks. Final trust focus passed 141 with 2 skips. Independent post-fix focuses passed 132 with 2 skips for trust and 96 with 1 skip for Unit 2G science.
+
+The final current-code full gate passed 648 tests with 3 skips and 11 subtests in 109.16 seconds. Unittest then ran 178 tests in 7.573 seconds with 2 skips; compileall and `pip check` exited 0. Config validation produced `5af0262e83a3720f8dca0b4d6795bdffc6bb2cefedc901ae0a47f9262d07f305`; core/supplementary scope hashes remain `af80b8a7...` and `18bbb5cb...`.
+
+A combined read-only hygiene wrapper printed all component results but returned exit 1 because internal `git ls-files --error-unmatch` probes left a native nonzero status. Its reported facts were retained, but it is not treated as the final hygiene command. It found 45 checkpoint candidates, zero raw candidates, zero >=100 MB candidates, zero high-entropy secret matches, no reparse points, 17/17 valid tracked README links, 28 issue rows, no manuscript diff and an empty index. A broad whole-file path scan reported historical/log and intentional negative-test literals; the final candidate-diff portability gate is recorded separately after documentation synchronization.
+
+No paid API, dataset download, network acquisition, manuscript edit, production Unit 2G artifact or canonical release operation occurred.
+
+## Unit 2G checkpoint hygiene - 2026-07-13
+
+After README and traceability synchronization, the checkpoint was validated with `git diff --check`, `git diff --exit-code -- manuscript/mdpi_information/main.md`, `git diff --cached --name-only`, `git ls-files --others --exclude-standard`, `git check-ignore`, `git ls-files --error-unmatch`, `Import-Csv`, `Get-Item`, `Get-ChildItem`, and `rg --pcre2` checks. The checks covered staged state, raw-data candidates, 100 MB candidates, reparse points, high-entropy credential patterns, active `leakage-safe` terminology, the issue-register schema/count, README local-link existence/index membership, and preservation/exclusion of the historical trial.
+
+The consolidated gate exited 0: 45 candidates (28 modified, 17 untracked), zero staged/raw/large/reparse/secret/active-terminology/manuscript-change failures, 28 well-formed issue rows, and 17 README local-link occurrences (15 unique targets), all present and Git-tracked. The local historical trial remained 54 files/91,820,515 bytes, untracked and locally excluded. A candidate path-literal scan found only two sanitization regexes and two intentional negative-test fixtures; no machine-specific path is serialized as data or metadata. V2-005 remains open for the separately tracked historical-tree cleanup and final real-package content scan.
+
+The first staged-review wrapper used the PowerShell variable name `$home`, which is case-insensitively reserved as read-only `$HOME`; it exited 1 before producing a verdict and changed no file or index entry. The corrected wrapper used `$pathHits` and exited 0: exactly 45 staged files, zero unstaged/untracked candidates, and zero raw, 100 MB, secret, actual-user-home or manuscript paths.

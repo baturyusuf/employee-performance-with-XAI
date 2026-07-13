@@ -3,6 +3,7 @@ from __future__ import annotations
 import copy
 import hashlib
 import json
+import shutil
 import tempfile
 import unittest
 from pathlib import Path
@@ -17,6 +18,7 @@ from src.governance.manuscript_contract import (
     validate_run_manifest,
     write_run_manifest,
 )
+from src.utils.config_loader import PROJECT_ROOT
 
 
 class ArtifactRunManifestConsistencyTests(unittest.TestCase):
@@ -28,7 +30,6 @@ class ArtifactRunManifestConsistencyTests(unittest.TestCase):
         config = copy.deepcopy(load_manuscript_config())
         for definition in config["manuscript_final"]["datasets"].values():
             definition["path"] = "data/sample.csv"
-            definition.pop("schema_mapping_path", None)
         acquisition_path = root / "configs" / "data_acquisition.yaml"
         acquisition_path.parent.mkdir(parents=True, exist_ok=True)
         dataset_hash = hashlib.sha256(dataset.read_bytes()).hexdigest()
@@ -72,26 +73,22 @@ class ArtifactRunManifestConsistencyTests(unittest.TestCase):
         )
         provenance = config["manuscript_final"]["provenance"]
         provenance["data_acquisition_manifest"] = "configs/data_acquisition.yaml"
-        provenance["scientific_side_inputs"] = {
-            "data_acquisition_contract": "configs/data_acquisition.yaml"
-        }
-        config["manuscript_final"]["evidence_scopes"] = {
-            "core": {
-                "dataset_keys": ["inx_primary", "hrdataset_v14"],
-                "side_input_keys": ["data_acquisition_contract"],
-                "stages": ["fixture_core"],
-            },
-            "supplementary": {
-                "dataset_keys": [
-                    "inx_primary",
-                    "ibm_hr_analytics",
-                    "ibm_hr_analytics_attrition",
-                    "employee_turnover",
-                ],
-                "side_input_keys": ["data_acquisition_contract"],
-                "stages": ["fixture_supplementary"],
-            },
-        }
+        provenance["scientific_side_inputs"][
+            "data_acquisition_contract"
+        ] = "configs/data_acquisition.yaml"
+        for key, reference in provenance["scientific_side_inputs"].items():
+            if key == "data_acquisition_contract":
+                continue
+            source = (PROJECT_ROOT / reference).resolve()
+            destination = (root / reference).resolve()
+            destination.parent.mkdir(parents=True, exist_ok=True)
+            shutil.copyfile(source, destination)
+        config["manuscript_final"]["evidence_scopes"]["core"]["stages"] = [
+            "fixture_core"
+        ]
+        config["manuscript_final"]["evidence_scopes"]["supplementary"]["stages"] = [
+            "fixture_supplementary"
+        ]
         config_path = root / "configs" / "manuscript_final.yaml"
         config_path.parent.mkdir(parents=True, exist_ok=True)
         config_path.write_text(json.dumps(config, indent=2), encoding="utf-8")
@@ -113,6 +110,11 @@ class ArtifactRunManifestConsistencyTests(unittest.TestCase):
             project_root=root,
             stage="policy_ablation",
             artifact_type="table_csv",
+        )
+        manifest["commands"][0].update(
+            status="complete",
+            ended_at="2026-07-13T00:00:01+00:00",
+            return_code=0,
         )
         finalize_run_manifest(manifest, status="complete")
         return config_path, artifact, manifest

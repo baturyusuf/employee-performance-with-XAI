@@ -20,12 +20,29 @@ from importlib import metadata
 from pathlib import Path
 from typing import Any, Iterable, Mapping, MutableMapping, Sequence
 
+from src.governance.external_replication_contract import (
+    ExternalReplicationContractError,
+    validate_external_replication_settings,
+    validate_external_replication_side_inputs,
+)
 from src.utils.config_loader import PROJECT_ROOT, load_config
 
 
 DEFAULT_CONFIG_PATH = PROJECT_ROOT / "configs" / "manuscript_final.yaml"
 LEGACY_FEATURE_POLICY_PROJECTION_PATH = PROJECT_ROOT / "configs" / "feature_sets.yaml"
 MANIFEST_SCHEMA_VERSION = 3
+
+_PORTABLE_RUN_ID = re.compile(r"[A-Za-z0-9](?:[A-Za-z0-9._-]{0,158}[A-Za-z0-9])?\Z")
+_WINDOWS_RESERVED_BASENAMES = frozenset(
+    {
+        "CON",
+        "PRN",
+        "AUX",
+        "NUL",
+        *(f"COM{index}" for index in range(1, 10)),
+        *(f"LPT{index}" for index in range(1, 10)),
+    }
+)
 
 EXPECTED_EVIDENCE_SCOPE_DATASETS: Mapping[str, frozenset[str]] = {
     "core": frozenset({"inx_primary", "hrdataset_v14"}),
@@ -103,6 +120,25 @@ class ForbiddenFeatureError(ManuscriptContractError):
 
 class RunManifestError(ManuscriptContractError):
     """Raised when a run manifest or a referenced artifact is incompatible."""
+
+
+def validate_portable_run_id(value: Any) -> str:
+    """Return one portable, single-component run identifier or fail closed."""
+
+    if (
+        not isinstance(value, str)
+        or value != value.strip()
+        or not _PORTABLE_RUN_ID.fullmatch(value)
+    ):
+        raise RunManifestError(
+            "run_id must be 1-160 portable ASCII characters, start and end with an "
+            "alphanumeric character, and contain only alphanumerics, '.', '_' or '-'."
+        )
+    if value in {".", ".."} or Path(value).name != value or "/" in value or "\\" in value:
+        raise RunManifestError("run_id must be one portable path component.")
+    if value.split(".", 1)[0].upper() in _WINDOWS_RESERVED_BASENAMES:
+        raise RunManifestError("run_id uses a reserved Windows device basename.")
+    return value
 
 
 def utc_now_iso() -> str:
@@ -288,6 +324,15 @@ def evidence_scope_contract(
     return contract
 
 
+def evidence_scope_contract_hash(
+    config: Mapping[str, Any],
+    scope_name: str,
+) -> str:
+    """Return the canonical SHA-256 identity of a validated evidence scope."""
+
+    return _sha256_canonical_json(evidence_scope_contract(config, scope_name))
+
+
 def feature_policy_definitions(config: Mapping[str, Any]) -> Mapping[str, Mapping[str, Any]]:
     settings = manuscript_settings(config)
     policies = _require_mapping(settings, "feature_policies", "manuscript_final")
@@ -435,6 +480,7 @@ def validate_manuscript_config(config: Mapping[str, Any]) -> None:
         "package",
         "datasets",
         "evidence_scopes",
+        "external_replication",
         "target",
         "model",
         "feature_policies",
@@ -455,6 +501,23 @@ def validate_manuscript_config(config: Mapping[str, Any]) -> None:
         raise ManuscriptConfigError(f"Canonical config is missing sections: {missing_sections}")
     for section in required_sections:
         _require_mapping(settings, section, "manuscript_final")
+
+    seeds = _require_mapping(settings, "seeds", "manuscript_final")
+    if not seeds or any(
+        isinstance(seed, bool) or not isinstance(seed, int) for seed in seeds.values()
+    ):
+        raise ManuscriptConfigError("All canonical protocol seeds must be explicit integers.")
+    missing_required_seeds = sorted({"bootstrap", "fairness"}.difference(seeds))
+    if missing_required_seeds:
+        raise ManuscriptConfigError(
+            "Canonical subgroup/proxy seed references are missing: "
+            f"{missing_required_seeds}."
+        )
+
+    try:
+        validate_external_replication_settings(settings)
+    except ExternalReplicationContractError as exc:
+        raise ManuscriptConfigError(str(exc)) from exc
 
     package = _require_mapping(settings, "package", "manuscript_final")
     if package.get("autonomous_hr_decisions_allowed") is not False:
@@ -883,21 +946,35 @@ def validate_manuscript_config(config: Mapping[str, Any]) -> None:
         if "severe_error_rate" not in not_applicable:
             raise ManuscriptConfigError(f"severe_error_rate must be N/A for {task}.")
 
-    seeds = _require_mapping(settings, "seeds", "manuscript_final")
-    if not seeds or any(
-        isinstance(seed, bool) or not isinstance(seed, int) for seed in seeds.values()
-    ):
-        raise ManuscriptConfigError("All canonical seeds must be explicit integers.")
-    missing_required_seeds = sorted({"bootstrap", "fairness"}.difference(seeds))
-    if missing_required_seeds:
-        raise ManuscriptConfigError(
-            "Canonical subgroup/proxy seed references are missing: "
-            f"{missing_required_seeds}."
-        )
-
     output = _require_mapping(settings, "output", "manuscript_final")
-    if not isinstance(output.get("root"), str) or not output.get("root"):
-        raise ManuscriptConfigError("output.root must be a non-empty relative path.")
+    raw_output_root = output.get("root")
+    if (
+        not isinstance(raw_output_root, str)
+        or not raw_output_root
+        or raw_output_root != raw_output_root.strip()
+        or "\\" in raw_output_root
+    ):
+        raise ManuscriptConfigError("output.root must be a portable repository-relative path.")
+    output_root_path = Path(raw_output_root)
+    if (
+        output_root_path.is_absolute()
+        or output_root_path.drive
+        or raw_output_root in {".", ".."}
+        or any(part in {".", ".."} for part in output_root_path.parts)
+    ):
+        raise ManuscriptConfigError("output.root must remain below the repository root.")
+    if output.get("manifest_filename") != "run_manifest.json":
+        raise ManuscriptConfigError(
+            "output.manifest_filename is fixed to the portable leaf 'run_manifest.json'."
+        )
+    if output.get("run_directory_template") != "{root}/{run_id}/{evidence_scope}":
+        raise ManuscriptConfigError(
+            "output.run_directory_template must bind root, run_id, and evidence_scope exactly."
+        )
+    if output.get("latest_pointer") != f"{raw_output_root}/latest":
+        raise ManuscriptConfigError(
+            "output.latest_pointer must be the pointer-only '<output.root>/latest' path."
+        )
 
     for scope_name in EXPECTED_EVIDENCE_SCOPE_DATASETS:
         evidence_scope_contract(config, scope_name)
@@ -907,17 +984,47 @@ def load_manuscript_config(
     path: str | Path = DEFAULT_CONFIG_PATH,
     *,
     policy_sources: Mapping[str, Mapping[str, Any]] | None = None,
+    project_root: str | Path | None = None,
 ) -> dict[str, Any]:
     """Load and validate the canonical manuscript configuration."""
 
-    data = load_config(path)
+    resolved_path = Path(path).resolve()
+    if project_root is not None:
+        validation_root = Path(project_root).resolve()
+    else:
+        try:
+            resolved_path.relative_to(PROJECT_ROOT.resolve())
+            validation_root = PROJECT_ROOT.resolve()
+        except ValueError:
+            validation_root = (
+                resolved_path.parent.parent
+                if resolved_path.parent.name.casefold() == "configs"
+                else resolved_path.parent
+            )
+    data = load_config(resolved_path)
     validate_manuscript_config(data)
+    raw_output_root = manuscript_settings(data)["output"]["root"]
+    try:
+        _resolve_portable_reference(
+            raw_output_root,
+            validation_root,
+            context="manuscript_final.output.root",
+        )
+    except RunManifestError as exc:
+        raise ManuscriptConfigError(str(exc)) from exc
     validate_policy_consistency(
         data,
         {"configs/feature_sets.yaml legacy projection": repository_feature_policy_projection()},
     )
     if policy_sources:
         validate_policy_consistency(data, policy_sources)
+    try:
+        validate_external_replication_side_inputs(
+            manuscript_settings(data),
+            project_root=validation_root,
+        )
+    except ExternalReplicationContractError as exc:
+        raise ManuscriptConfigError(str(exc)) from exc
     return data
 
 
@@ -1063,6 +1170,59 @@ def _run_git(project_root: Path, *args: str) -> str:
     except (OSError, subprocess.CalledProcessError):
         return "unavailable"
     return completed.stdout.strip()
+
+
+def _scoped_git_status(
+    project_root: Path,
+    allowed_untracked_roots: Sequence[str | Path],
+) -> tuple[str, list[str]]:
+    """Return tracked/disallowed-untracked status plus declared evidence exclusions."""
+
+    root = project_root.resolve()
+    allowed: list[Path] = []
+    portable_allowed: list[str] = []
+    for raw in allowed_untracked_roots:
+        candidate = Path(raw)
+        if not candidate.is_absolute():
+            candidate = root / candidate
+        candidate = candidate.resolve()
+        try:
+            relative = candidate.relative_to(root)
+        except ValueError as exc:
+            raise RunManifestError("Allowed untracked evidence root escapes the repository.") from exc
+        if not relative.parts:
+            raise RunManifestError("The repository root cannot be an allowed untracked evidence root.")
+        allowed.append(candidate)
+        portable_allowed.append(relative.as_posix())
+    if len(set(portable_allowed)) != len(portable_allowed):
+        raise RunManifestError("Allowed untracked evidence roots contain duplicates.")
+
+    tracked = _run_git(root, "status", "--porcelain", "--untracked-files=no")
+    if tracked == "unavailable":
+        return "unavailable", sorted(portable_allowed)
+    try:
+        completed = subprocess.run(
+            ["git", "ls-files", "--others", "--exclude-standard", "-z"],
+            cwd=root,
+            check=True,
+            capture_output=True,
+            text=True,
+            encoding="utf-8",
+            errors="replace",
+        )
+    except (OSError, subprocess.CalledProcessError):
+        return "unavailable", sorted(portable_allowed)
+    disallowed: list[str] = []
+    for relative in (value for value in completed.stdout.split("\0") if value):
+        candidate = (root / relative).resolve()
+        if not any(
+            candidate == allowed_root or allowed_root in candidate.parents
+            for allowed_root in allowed
+        ):
+            disallowed.append(relative.replace("\\", "/"))
+    status_rows = [value for value in tracked.splitlines() if value]
+    status_rows.extend(f"?? {value}" for value in sorted(disallowed))
+    return "\n".join(status_rows), sorted(portable_allowed)
 
 
 def source_tree_hash(
@@ -1256,9 +1416,11 @@ def make_run_id(config: Mapping[str, Any], config_hash: str, *, timestamp: datet
     settings = manuscript_settings(config)
     package = _require_mapping(settings, "package", "manuscript_final")
     prefix = str(package.get("run_id_prefix", "manuscript_final"))
-    safe_prefix = re.sub(r"[^A-Za-z0-9_.-]+", "_", prefix).strip("_") or "manuscript_final"
+    safe_prefix = re.sub(r"[^A-Za-z0-9_-]+", "_", prefix).strip("_") or "manuscript_final"
     when = (timestamp or datetime.now(timezone.utc)).astimezone(timezone.utc)
-    return f"{safe_prefix}_{when.strftime('%Y%m%dT%H%M%SZ')}_{config_hash[:12]}"
+    return validate_portable_run_id(
+        f"{safe_prefix}_{when.strftime('%Y%m%dT%H%M%SZ')}_{config_hash[:12]}"
+    )
 
 
 def create_run_manifest(
@@ -1270,6 +1432,7 @@ def create_run_manifest(
     dataset_paths: Mapping[str, str | Path] | None = None,
     allow_dataset_download: bool = False,
     initial_command: str | None = None,
+    allowed_untracked_roots: Sequence[str | Path] = (),
 ) -> dict[str, Any]:
     """Create a schema-v2 manifest from verified actual and side inputs.
 
@@ -1279,17 +1442,19 @@ def create_run_manifest(
     """
 
     root = Path(project_root).resolve()
+    if run_id is not None:
+        run_id = validate_portable_run_id(run_id)
     raw_config_path = Path(config_path)
     rooted_config_path = root / raw_config_path if not raw_config_path.is_absolute() else raw_config_path
     resolved_config_path = rooted_config_path.resolve()
     if not resolved_config_path.is_file():
         raise RunManifestError(f"Canonical config is missing: {resolved_config_path}")
     _portable_path(resolved_config_path, root)
-    config = load_manuscript_config(resolved_config_path)
+    config = load_manuscript_config(resolved_config_path, project_root=root)
     config_hash = canonical_config_hash(config)
     settings = manuscript_settings(config)
     scope_contract = evidence_scope_contract(config, evidence_scope)
-    scope_contract_hash = _sha256_canonical_json(scope_contract)
+    scope_contract_hash = evidence_scope_contract_hash(config, evidence_scope)
 
     datasets = _require_mapping(settings, "datasets", "manuscript_final")
     configured_paths = {
@@ -1384,7 +1549,14 @@ def create_run_manifest(
         raise ManuscriptConfigError("provenance.package_names must be a list.")
 
     git_commit = _run_git(root, "rev-parse", "HEAD")
-    git_status = _run_git(root, "status", "--porcelain", "--untracked-files=all")
+    if allowed_untracked_roots:
+        git_status, portable_allowed_untracked = _scoped_git_status(
+            root,
+            allowed_untracked_roots,
+        )
+    else:
+        git_status = _run_git(root, "status", "--porcelain", "--untracked-files=all")
+        portable_allowed_untracked = []
     if provenance.get("git_commit_required") is True and git_commit == "unavailable" and root == PROJECT_ROOT.resolve():
         raise RunManifestError("A Git commit is required but could not be resolved.")
 
@@ -1398,6 +1570,7 @@ def create_run_manifest(
             if git_status != "unavailable"
             else "unavailable"
         ),
+        "preexisting_evidence_roots_ignored_for_clean_start": portable_allowed_untracked,
         "source_tree_hash": source_tree_hash(root),
         "config_path": _portable_path(resolved_config_path, root),
         "config_hash": config_hash,
@@ -1592,6 +1765,8 @@ def validate_run_manifest(
         "status",
         "failure_information",
         "source_tree_hash",
+        "git_worktree_dirty",
+        "git_status_sha256",
     }
     missing_fields = sorted(required_fields - set(manifest))
     if missing_fields:
@@ -1601,12 +1776,47 @@ def validate_run_manifest(
         errors.append(f"unsupported manifest schema version: {manifest.get('manifest_schema_version')!r}")
     run_id = manifest.get("run_id")
     config_hash = manifest.get("config_hash")
-    if not isinstance(run_id, str) or not run_id:
-        errors.append("run_id must be a non-empty string")
+    try:
+        validate_portable_run_id(run_id)
+    except RunManifestError as exc:
+        errors.append(str(exc))
     if not isinstance(config_hash, str) or not re.fullmatch(r"[0-9a-f]{64}", config_hash):
         errors.append("config_hash must be a lowercase SHA-256 digest")
     if expected_config_hash is not None and config_hash != expected_config_hash:
         errors.append(f"config_hash {config_hash!r} does not equal expected {expected_config_hash!r}")
+
+    worktree_dirty = manifest.get("git_worktree_dirty")
+    git_status_hash = manifest.get("git_status_sha256")
+    if not isinstance(worktree_dirty, bool):
+        errors.append("git_worktree_dirty must be boolean")
+    if git_status_hash != "unavailable" and not (
+        isinstance(git_status_hash, str)
+        and re.fullmatch(r"[0-9a-f]{64}", git_status_hash)
+    ):
+        errors.append("git_status_sha256 must be a lowercase SHA-256 digest or 'unavailable'")
+    clean_status_hash = hashlib.sha256(b"").hexdigest()
+    if (
+        worktree_dirty is False
+        and manifest.get("git_commit") != "unavailable"
+        and git_status_hash != clean_status_hash
+    ):
+        errors.append(
+            "git_worktree_dirty=False must be bound to the SHA-256 of an empty Git status"
+        )
+    preexisting_roots = manifest.get("preexisting_evidence_roots_ignored_for_clean_start", [])
+    if not isinstance(preexisting_roots, list) or any(
+        not isinstance(value, str) or not value or "\\" in value
+        for value in preexisting_roots
+    ):
+        errors.append("preexisting evidence roots must be a list of portable paths")
+    elif len(preexisting_roots) != len(set(preexisting_roots)):
+        errors.append("preexisting evidence roots contain duplicates")
+    else:
+        for value in preexisting_roots:
+            try:
+                _resolve_portable_reference(value, root, context="preexisting evidence root")
+            except RunManifestError as exc:
+                errors.append(str(exc))
 
     observed_scope = manifest.get("evidence_scope")
     if observed_scope not in EXPECTED_EVIDENCE_SCOPE_DATASETS:
@@ -1642,7 +1852,7 @@ def validate_run_manifest(
             errors.append(f"config file is missing: {config_path}")
         else:
             try:
-                loaded_config = load_manuscript_config(config_path)
+                loaded_config = load_manuscript_config(config_path, project_root=root)
                 actual_config_hash = canonical_config_hash(loaded_config)
             except Exception as exc:  # validation reports all manifest defects together
                 errors.append(f"config cannot be loaded or hashed: {exc}")
@@ -1677,6 +1887,26 @@ def validate_run_manifest(
         else:
             if dict(observed_scope_contract) != current_scope_contract:
                 errors.append("scope_contract does not match the current canonical evidence scope")
+    if loaded_config is not None:
+        try:
+            loaded_settings = manuscript_settings(loaded_config)
+            expected_seeds = dict(_require_mapping(loaded_settings, "seeds", "manuscript_final"))
+            provenance_settings = _require_mapping(
+                loaded_settings,
+                "provenance",
+                "manuscript_final",
+            )
+            package_names = provenance_settings.get("package_names", [])
+            if not isinstance(package_names, list):
+                raise ManuscriptConfigError("provenance.package_names must be a list")
+            expected_versions = _package_versions(package_names)
+        except Exception as exc:
+            errors.append(f"runtime identity cannot be reconstructed: {exc}")
+        else:
+            if manifest.get("random_seeds") != expected_seeds:
+                errors.append("random_seeds do not match the canonical config")
+            if manifest.get("code_package_versions") != expected_versions:
+                errors.append("code_package_versions do not match the current runtime")
 
     side_input_hashes = manifest.get("side_input_hashes")
     if not isinstance(side_input_hashes, Mapping) or not side_input_hashes:
@@ -1910,6 +2140,50 @@ def validate_run_manifest(
                     "scientific_input_hash does not bind the recorded config, datasets, and side inputs"
                 )
 
+    commands = manifest.get("commands")
+    command_records: list[Mapping[str, Any]] = []
+    if not isinstance(commands, list):
+        errors.append("commands must be a list")
+    else:
+        for index, record in enumerate(commands):
+            label = f"commands[{index}]"
+            if not isinstance(record, Mapping):
+                errors.append(f"{label} must be a mapping")
+                continue
+            command_records.append(record)
+            for field in ("command", "stage", "started_at"):
+                if not isinstance(record.get(field), str) or not str(record.get(field)).strip():
+                    errors.append(f"{label}.{field} must be a non-empty string")
+            command_status = record.get("status")
+            ended_at = record.get("ended_at")
+            return_code = record.get("return_code")
+            if command_status not in {"started", "complete", "failed", "interrupted"}:
+                errors.append(f"{label} has invalid command status {command_status!r}")
+            elif command_status == "started":
+                if ended_at is not None or return_code is not None:
+                    errors.append(
+                        f"{label} started command must have null ended_at and return_code"
+                    )
+            else:
+                if not isinstance(ended_at, str) or not ended_at.strip():
+                    errors.append(f"{label} terminal command requires ended_at")
+                if command_status == "complete" and return_code != 0:
+                    errors.append(f"{label} complete command requires return_code=0")
+                elif command_status == "failed" and (
+                    not isinstance(return_code, int)
+                    or isinstance(return_code, bool)
+                    or return_code == 0
+                ):
+                    errors.append(f"{label} failed command requires a nonzero return_code")
+                elif command_status == "interrupted" and return_code is not None and (
+                    not isinstance(return_code, int)
+                    or isinstance(return_code, bool)
+                    or return_code == 0
+                ):
+                    errors.append(
+                        f"{label} interrupted command return_code must be null or nonzero"
+                    )
+
     outputs = manifest.get("output_files")
     if not isinstance(outputs, list):
         errors.append("output_files must be a list")
@@ -1960,12 +2234,83 @@ def validate_run_manifest(
         errors.append("a finalized run requires end_timestamp")
     if status == "complete" and manifest.get("failure_information"):
         errors.append("a complete run cannot contain failure_information")
+    failures = manifest.get("failure_information")
+    if not isinstance(failures, list):
+        errors.append("failure_information must be a list")
+    if status == "complete":
+        if worktree_dirty is not False:
+            errors.append("a complete run must originate from a clean git_worktree_dirty=False state")
+        if not isinstance(outputs, list) or not outputs:
+            errors.append("a complete run requires at least one registered output artifact")
+        entrypoints = [record for record in command_records if record.get("stage") == "entrypoint"]
+        successful_entrypoints = [
+            record
+            for record in entrypoints
+            if record.get("status") == "complete" and record.get("return_code") == 0
+        ]
+        if len(successful_entrypoints) != 1:
+            errors.append("a complete run requires exactly one successful terminal entrypoint command")
+        unfinished = [
+            str(record.get("stage"))
+            for record in command_records
+            if record.get("status") in {"started", "failed"}
+        ]
+        if unfinished:
+            errors.append(
+                f"a complete run contains unfinished or failed command records: {unfinished}"
+            )
+    if status == "failed":
+        if not isinstance(failures, list) or not failures:
+            errors.append("a failed run requires non-empty failure_information")
+        entrypoint_records = [
+            record for record in command_records if record.get("stage") == "entrypoint"
+        ]
+        failed_entrypoints = [
+            record
+            for record in entrypoint_records
+            if record.get("status") == "failed"
+            and isinstance(record.get("return_code"), int)
+            and not isinstance(record.get("return_code"), bool)
+            and record.get("return_code") != 0
+        ]
+        if len(failed_entrypoints) != 1:
+            errors.append("a failed run requires exactly one terminal failed entrypoint command")
+        noninterrupted_prior_entrypoints = [
+            str(record.get("status"))
+            for record in entrypoint_records
+            if record.get("status") in {"complete", "started"}
+        ]
+        if noninterrupted_prior_entrypoints:
+            errors.append(
+                "a failed run cannot contain complete or started entrypoint commands; "
+                "prior entrypoint attempts may only be interrupted"
+            )
+        started_commands = [
+            str(record.get("stage"))
+            for record in command_records
+            if record.get("status") == "started"
+        ]
+        if started_commands:
+            errors.append(f"a failed run contains started command records: {started_commands}")
 
     if verify_source_tree:
         actual_source_hash = source_tree_hash(root)
         if manifest.get("source_tree_hash") != actual_source_hash:
             errors.append(
                 "source tree hash mismatch: the experiment/config source changed after the run manifest was created"
+            )
+        current_commit = _run_git(root, "rev-parse", "HEAD")
+        if manifest.get("git_commit") != current_commit:
+            errors.append(
+                "git commit mismatch: HEAD changed after the run manifest was created"
+            )
+        tracked_status = _run_git(root, "status", "--porcelain", "--untracked-files=no")
+        if tracked_status == "unavailable":
+            errors.append("tracked worktree status could not be verified")
+        elif tracked_status:
+            errors.append(
+                "tracked worktree changed after the run started: "
+                + hashlib.sha256(tracked_status.encode("utf-8")).hexdigest()
             )
 
     if errors:
@@ -1988,8 +2333,14 @@ def write_run_manifest(
             manifest,
             project_root=project_root,
             require_complete=require_complete,
+            verify_source_tree=(
+                require_complete
+                and Path(project_root).resolve() == PROJECT_ROOT.resolve()
+            ),
         )
-    destination = Path(path)
+    root = Path(project_root).resolve()
+    destination = _resolve_from_root(path, root)
+    _portable_path(destination, root)
     destination.parent.mkdir(parents=True, exist_ok=True)
     serialized = json.dumps(manifest, indent=2, sort_keys=True, ensure_ascii=False) + "\n"
     file_descriptor, temporary_name = tempfile.mkstemp(
@@ -2028,6 +2379,7 @@ __all__ = [
     "create_run_manifest",
     "declared_side_input_hashes",
     "evidence_scope_contract",
+    "evidence_scope_contract_hash",
     "feature_policy_definitions",
     "finalize_run_manifest",
     "forbidden_feature_mentions",
@@ -2047,6 +2399,7 @@ __all__ = [
     "validate_artifact_forbidden_features",
     "validate_manuscript_config",
     "validate_policy_consistency",
+    "validate_portable_run_id",
     "validate_primary_feature_names",
     "validate_run_manifest",
     "write_run_manifest",

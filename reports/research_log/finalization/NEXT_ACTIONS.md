@@ -1,10 +1,12 @@
 # Next Actions
 
-1. Freeze accepted conservative policy A in canonical config/mapping and add fail-closed alias/temporality/proxy-role tests.
-2. Refactor HRDataset_v14 as the core independent mapped-target replication with current-run/hash/task/claim binding; remove canonical dependencies on legacy SHAP/fairness helpers.
-3. Keep IBM performance, IBM attrition and Employee Turnover supplementary-only and task-aware; never place them in the primary employee-performance leaderboard.
-4. Freeze remaining core figure/table, lock/CI and side-input contracts before another expensive benchmark execution.
-5. Regenerate benchmark, policy, calibration, SHAP, subgroup/proxy and HR replication together in one clean complete core build under a single final commit/config/run identity; never relabel the incompatible historical trial.
-6. Generate core-only figures/tables and the claim matrix from that run, then request claim-matrix approval before any manuscript edit.
+1. Complete the post-documentation README/link, secret, candidate-path, raw-staging, large-file, issue-register, manuscript-no-change and diff gates; review every staged path explicitly.
+2. Keep the local 91.8 MB diagnostic trial, raw datasets, caches, environments, partial outputs and historical packages out of staging. Keep the trial exclusion local-only.
+3. Create and push the authorized Unit 2G implementation checkpoint on `finalization/leakage-aware-v2`; do not force, merge, publish or alter history.
+4. From that clean checkpoint, execute the real HRDataset_v14 production stage offline with all eight candidates and 5,000 resamples. Validate every persisted input, side input, fold, model, OOF, calibration, SHAP, support, path and artifact hash. Retain it as stage-validation evidence until the complete core package exists.
+5. If that stage fails, preserve the failure and fix only demonstrated implementation defects; do not relax the approved feature policy, folds, primary metric, calibration or claim boundary to improve scores.
+6. Continue the supplementary heuristic-search/task-bounded robustness work, task-aware metric schema, dataset acquisition/publication transition, replacement table/figure set, dependency lock, global core no-network guard/CI assertion, and manuscript-support source maps.
+7. Enable a scope's `release_ready` flag only when every declared runner and contract is complete. Then run the final clean two-scope rebuild, explicitly migrate the historical physical `latest`, and promote only the verified package-level pointer.
+8. Freeze the claim matrix exclusively from that complete clean package. Manuscript editing remains outside the current authorization.
 
-No model-reference user decision is required because the predeclared macro-F1 gate did not trigger. Do not edit the manuscript, call paid APIs, publish, push or merge.
+Do not call paid APIs, invent ethics/licence facts, delete local raw data, admit historical/diagnostic output as v2 evidence, or make causal/fairness/deployment/actionability claims.

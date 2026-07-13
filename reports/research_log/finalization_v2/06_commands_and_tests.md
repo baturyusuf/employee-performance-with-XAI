@@ -1292,3 +1292,63 @@ Exit 0: 19 passed in 6.46 seconds. Input evidence: 311 × 36; dataset SHA-256 `c
 Historical read-only inventory: `reports/manuscript_final/latest/external` contains 53 files and 24,821,361 bytes under stale config `c664...`/commit `1834748`; `reports/external_validation` contains 192 files and 68,261,087 bytes. The former includes HR/IBM/Turnover plus actionability in one scope. Neither may feed v2.
 
 One broad audit command passed literal Windows wildcard test names to `rg` and exited 1 after printing its valid non-wildcard inspection output. The explicit four-file pytest command above passed. No science/write/network/API/manuscript operation occurred.
+
+## Unit 2G Implementation and Final Review
+
+The resumed pre-review test runner completed with 120 passed in 33.61 seconds. Its exact invocation was started before the usage-limit interruption and is not reconstructed from memory; only the captured exit/output is reported here. The post-review commands were executed exactly as follows:
+
+```powershell
+.\myenv\Scripts\python.exe -m pytest tests/test_hrdataset_replication_stage_contract.py tests/test_artifact_run_manifest_consistency.py -q
+.\myenv\Scripts\python.exe -m compileall -q src/governance/manuscript_contract.py src/experiments/manuscript_hrdataset_replication.py
+.\myenv\Scripts\python.exe -m pytest -q tests/test_hrdataset_replication_stage_contract.py tests/test_external_replication_config_contract.py tests/test_external_nested_selection_contract.py tests/test_external_sigmoid_isolation.py tests/test_external_oof_bootstrap_contract.py tests/test_external_shap_contract.py tests/test_external_subgroup_proxy_contract.py tests/test_artifact_run_manifest_consistency.py
+.\myenv\Scripts\python.exe -m compileall -q src tests
+git diff --check
+.\myenv\Scripts\python.exe -c "from src.governance.manuscript_contract import load_manuscript_config,canonical_config_hash,evidence_scope_contract_hash; p='configs/manuscript_final.yaml'; c=load_manuscript_config(p); print(canonical_config_hash(c)); print(evidence_scope_contract_hash(c,'core'))"
+git diff --exit-code -- manuscript/mdpi_information/main.md
+```
+
+Exit 0 results: 12 passed in 2.10 seconds; then 68 passed in 20.94 seconds; both compile commands, diff check and manuscript no-change check passed. Config hash is `b7188f3d883c5ea90563ceb458c2ec4e721299659ddb0be62ab0dd27cabb7ed4`; core scope hash is `af80b8a7c355a57b3ad8cd39775132fcc6c87e19983df901bf5e503b422c90dc`.
+
+One attempted focused invocation used bare `python`, which resolves on this machine to the unavailable Windows Store shim; it failed before collection with `Program 'python.exe' failed to run`. The repository interpreter command above replaced it. No scientific output, network/API operation or manuscript write occurred.
+
+Independent read-only review reran 67 focused tests, compileall and diff checks and reported no remaining P0/P1 defect. It confirmed that the department proxy will be `not_estimated` because of singleton-class outer-training support. The real full stage remains pending and no Unit 2G number is yet an authoritative manuscript result.
+
+### Interruption recovery and full-gate failures
+
+The first checkpoint full-suite command exited 1 after 103.20 seconds: 519 passed, 2 skipped and 11 subtests passed; 11 tests failed. Four failures expected the pre-existing subgroup/proxy seed error boundaries, while seven temporary-project manifest tests revealed external side-input validation incorrectly rooted at the real repository and used incomplete semantic fixtures. The implementation now performs generic seed-shape validation before exact external-seed equality, resolves semantic side inputs against the supplied/inferred project root, and uses complete schema/provenance fixture bytes. The corrected focus passed 64.
+
+Two later full-suite commands were intentionally terminated after independent review delivered new integration findings; they were not allowed to continue under already-superseded code. No result count is claimed for either. Recovery process inspection found no surviving child process or partial artifact.
+
+Exact recovery inspection included branch/HEAD, all persistent records, `git status --short`, unstaged/cached diffs, 15 commits, Win32 process command lines, artifact roots, and temp/lock/partial searches. One read-only `rg` tail used a literal Windows wildcard and exited 1; no mutation or scientific execution occurred. The latest exact focus command before recovery passed 96 in 10.54 seconds and compile/diff checks passed. Builder resume remains the only open P1 before the next full gate.
+
+## Unit 2G Final Recovery, Trust Boundary and Checkpoint Gate
+
+The principal exact invocations after interruption were:
+
+```powershell
+.\myenv\Scripts\python.exe -m py_compile src\experiments\build_manuscript_evidence.py src\governance\manuscript_contract.py tests\test_manifest_completion_contract.py
+.\myenv\Scripts\python.exe -m pytest -q tests/test_manifest_completion_contract.py tests/test_builder_path_contract.py tests/test_builder_resume_contract.py tests/test_atomic_stage_resume_contract.py tests/test_latest_pointer_contract.py tests/test_artifact_run_manifest_consistency.py tests/test_final_evidence_manifest_hashes.py tests/test_scoped_run_manifest_inputs.py tests/test_side_input_hash_binding.py
+.\myenv\Scripts\python.exe -m pytest -q tests/test_external_replication_config_contract.py tests/test_external_nested_selection_contract.py tests/test_external_sigmoid_isolation.py tests/test_external_oof_bootstrap_contract.py tests/test_external_shap_contract.py tests/test_external_subgroup_proxy_contract.py tests/test_hrdataset_replication_stage_contract.py tests/test_external_validation.py tests/test_manuscript_external_evidence.py
+.\myenv\Scripts\python.exe -m pytest -q tests/test_manifest_completion_contract.py tests/test_latest_pointer_contract.py tests/test_builder_resume_contract.py tests/test_atomic_stage_resume_contract.py tests/test_builder_path_contract.py tests/test_artifact_run_manifest_consistency.py tests/test_final_evidence_manifest_hashes.py tests/test_scoped_run_manifest_inputs.py tests/test_side_input_hash_binding.py tests/test_core_scope_contract.py
+.\myenv\Scripts\python.exe -m pytest -q
+.\myenv\Scripts\python.exe -m unittest discover -s tests -q
+.\myenv\Scripts\python.exe -m compileall -q src tests
+.\myenv\Scripts\python.exe -m pip check
+.\myenv\Scripts\python.exe -c "from src.governance.manuscript_contract import load_manuscript_config,canonical_config_hash,evidence_scope_contract_hash; p='configs/manuscript_final.yaml'; c=load_manuscript_config(p); print(canonical_config_hash(c)); print(evidence_scope_contract_hash(c,'core')); print(evidence_scope_contract_hash(c,'supplementary'))"
+git diff --check
+git diff --exit-code -- manuscript/mdpi_information/main.md
+```
+
+Results: first trust focus 125 passed/2 skipped; external focus 80 passed; integrated post-fix focus 161 passed/1 skipped; independent trust 132 passed/2 skipped; independent external 96 passed/1 skipped; final release/trust focus 141 passed/2 skipped. The current full run passed 648 tests, 3 skips and 11 subtests in 109.16 seconds. Unittest ran 178 tests with 2 skips in 7.573 seconds. Compileall and `pip check` exited 0.
+
+Failure record: the first integrated 161-test run had one assertion regex mismatch after production began emitting an explicit hidden/cache-directory error; the assertion was updated. The first final trust focus had two synthetic fixture failures: missing timing fields in a hand-built stage receipt and table/figure stage names without registered fixture runners. Both fixtures were corrected while production timing and release checks remained strict. Earlier 519-pass/11-failure and deliberately terminated superseded runs remain recorded above.
+
+Scientific reviews used only the verified local HR file and process-local no-write/no-network diagnostics. They found and closed the case-insensitive date-alias contradiction and the direct-versus-normalized probability replay mismatch. The reduced diagnostic used an explicit test-only execution budget and produced no file; it is not an artifact or result source. No production eight-candidate/5,000-draw stage was executed.
+
+Final identity pre-check: config `5af0262e83a3720f8dca0b4d6795bdffc6bb2cefedc901ae0a47f9262d07f305`; core scope `af80b8a7c355a57b3ad8cd39775132fcc6c87e19983df901bf5e503b422c90dc`; supplementary scope `18bbb5cb3dae267eac18f3cc60082e5023843b01bd565f8912555fc9c83aa329`. No API, acquisition-network, manuscript or scientific-artifact write occurred.
+
+### Final Unit 2G checkpoint hygiene
+
+The final post-documentation checks used `git diff --check`, `git diff --exit-code -- manuscript/mdpi_information/main.md`, `git diff --cached --name-only`, `git diff --name-only`, `git ls-files --others --exclude-standard`, `git ls-files --error-unmatch`, `git check-ignore -q`, `Import-Csv`, `Get-Item`, `Get-ChildItem` and `rg --pcre2` credential/terminology scans. An additional zero-context diff plus untracked-file `Select-String` scan classified all home-path-shaped literals.
+
+The consolidated command exited 0: 45 candidates; zero staged, raw, 100 MB, reparse, secret, active `leakage-safe`, missing README target, untracked README target or manuscript-diff findings; 28 valid issue rows; and 17 local README link occurrences across 15 unique tracked targets. The immutable trial remains 54 files/91,820,515 bytes, untracked and locally excluded. The path scan returned only the two production sanitization regexes and the two negative-test fixture paths. V2-005 was narrowed honestly to new-package implementation complete with historical cleanup and real-package validation still pending.

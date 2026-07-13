@@ -14,7 +14,9 @@
       "Fully Meets": 3,
       "Exceeds": 4,
       "Exceptional": 4
-    }
+    },
+    "mapping_rationale": "Predeclared mapped-target replication merges PIP and Needs Improvement as label 2, maps Fully Meets to label 3, and maps Exceeds or Exceptional to label 4 so the observed ordered performance strata can be evaluated on the canonical 2/3/4 scale.",
+    "mapping_limitation": "The mapping is dataset-specific and does not prove semantic, measurement, or prevalence equivalence with the INX PerformanceRating target; observed raw and mapped support must be reported."
   },
   "id_columns": ["EmpID", "Employee_Name"],
   "rename_columns": {
@@ -37,13 +39,20 @@
     "ExperienceYearsAtThisCompany": {
       "from": "DateofHire",
       "reference": "LastPerformanceReview_Date",
-      "description": "Approximate tenure at last available performance review date."
+      "description": "Approximate tenure at last available performance review date.",
+      "missing_or_invalid_date_policy": "preserve_missing_and_require_expected_counts",
+      "expected_missing_or_invalid_source_count": 0,
+      "expected_missing_or_invalid_reference_count": 0,
+      "invalid_duration_policy": "set_negative_to_missing",
+      "expected_invalid_negative_count": 2,
+      "lineage_limitation": "Derived only as a timing-unverified tenure context; raw date fields remain forbidden model inputs and the derived value is not causal or actionable."
     }
   },
   "leakage_risk_columns": [
     "PerformanceScore",
     "PerfScoreID",
     "Termd",
+    "EmpStatusID",
     "EmploymentStatus",
     "DateofTermination",
     "TermReason",
@@ -56,18 +65,22 @@
     "Gender",
     "Sex",
     "GenderID",
+    "MarriedID",
     "MaritalStatus",
     "MaritalDesc",
     "MaritalStatusID",
     "RaceEthnicity",
     "RaceDesc",
     "HispanicLatino",
-    "CitizenDesc"
+    "CitizenDesc",
+    "FromDiversityJobFairID"
   ],
   "proxy_risk_columns": [
     "Salary",
     "EmpDepartment",
+    "DeptID",
     "EmpJobRole",
+    "PositionID",
     "RecruitmentSource",
     "State",
     "Zip",
@@ -77,17 +90,81 @@
     "DaysLateLast30"
   ],
   "feature_policy_variants": {
-    "department_including": {
-      "description": "Leakage-safe candidate retaining department and job role but excluding direct sensitive/audit-only fields.",
-      "exclude_columns": []
+    "conservative_primary": {
+      "role": "canonical_external_primary",
+      "audit_only": false,
+      "description": "Conservative leakage-aware external primary policy excluding direct and encoded identifiers, targets, leakage/post-outcome fields, sensitive fields, department, and the declared high-risk salary/location/recruitment proxies while retaining EmpJobRole.",
+      "restored_features": [],
+      "additional_excluded_features": [],
+      "exclude_columns": [
+        "Employee_Name", "EmpID", "EmpNumber", "ExternalSampleId", "ManagerName", "ManagerID",
+        "PerformanceScore", "PerformanceRating", "PerfScoreID",
+        "Termd", "EmpStatusID", "EmploymentStatus", "DateofTermination", "TermReason", "LastPerformanceReview_Date",
+        "DOB", "Gender", "Sex", "GenderID", "MarriedID", "MaritalStatus", "MaritalDesc", "MaritalStatusID", "RaceEthnicity", "RaceDesc", "HispanicLatino", "CitizenDesc", "FromDiversityJobFairID",
+        "DeptID", "PositionID", "DateofHire",
+        "EmpDepartment", "Salary", "State", "Zip", "RecruitmentSource"
+      ]
     },
-    "department_free": {
-      "description": "Primary external analog of the INX department-free research model.",
-      "exclude_columns": ["EmpDepartment"]
+    "department_including_audit": {
+      "role": "department_text_including_sensitivity_audit",
+      "audit_only": true,
+      "description": "Audit-only sensitivity variant restoring EmpDepartment text while DeptID and every other always-forbidden alias remain excluded.",
+      "restored_features": ["EmpDepartment"],
+      "additional_excluded_features": [],
+      "exclude_columns": [
+        "Employee_Name", "EmpID", "EmpNumber", "ExternalSampleId", "ManagerName", "ManagerID",
+        "PerformanceScore", "PerformanceRating", "PerfScoreID",
+        "Termd", "EmpStatusID", "EmploymentStatus", "DateofTermination", "TermReason", "LastPerformanceReview_Date",
+        "DOB", "Gender", "Sex", "GenderID", "MarriedID", "MaritalStatus", "MaritalDesc", "MaritalStatusID", "RaceEthnicity", "RaceDesc", "HispanicLatino", "CitizenDesc", "FromDiversityJobFairID",
+        "DeptID", "PositionID", "DateofHire",
+        "Salary", "State", "Zip", "RecruitmentSource"
+      ]
     },
-    "department_job_role_free": {
-      "description": "Strict proxy sensitivity candidate excluding department and job role.",
-      "exclude_columns": ["EmpDepartment", "EmpJobRole"]
+    "job_role_free_audit": {
+      "role": "job_role_removed_proxy_sensitivity_audit",
+      "audit_only": true,
+      "description": "Audit-only proxy sensitivity variant adding EmpJobRole to the conservative primary exclusions while PositionID remains forbidden.",
+      "restored_features": [],
+      "additional_excluded_features": ["EmpJobRole"],
+      "exclude_columns": [
+        "Employee_Name", "EmpID", "EmpNumber", "ExternalSampleId", "ManagerName", "ManagerID",
+        "PerformanceScore", "PerformanceRating", "PerfScoreID",
+        "Termd", "EmpStatusID", "EmploymentStatus", "DateofTermination", "TermReason", "LastPerformanceReview_Date",
+        "DOB", "Gender", "Sex", "GenderID", "MarriedID", "MaritalStatus", "MaritalDesc", "MaritalStatusID", "RaceEthnicity", "RaceDesc", "HispanicLatino", "CitizenDesc", "FromDiversityJobFairID",
+        "DeptID", "PositionID", "DateofHire",
+        "EmpDepartment", "Salary", "State", "Zip", "RecruitmentSource", "EmpJobRole"
+      ]
+    },
+    "proxy_rich_audit": {
+      "role": "proxy_rich_sensitivity_audit",
+      "audit_only": true,
+      "description": "Audit-only sensitivity variant restoring Salary, State, and RecruitmentSource; Zip and all always-forbidden aliases remain excluded.",
+      "restored_features": ["Salary", "State", "RecruitmentSource"],
+      "additional_excluded_features": [],
+      "exclude_columns": [
+        "Employee_Name", "EmpID", "EmpNumber", "ExternalSampleId", "ManagerName", "ManagerID",
+        "PerformanceScore", "PerformanceRating", "PerfScoreID",
+        "Termd", "EmpStatusID", "EmploymentStatus", "DateofTermination", "TermReason", "LastPerformanceReview_Date",
+        "DOB", "Gender", "Sex", "GenderID", "MarriedID", "MaritalStatus", "MaritalDesc", "MaritalStatusID", "RaceEthnicity", "RaceDesc", "HispanicLatino", "CitizenDesc", "FromDiversityJobFairID",
+        "DeptID", "PositionID", "DateofHire",
+        "EmpDepartment", "Zip"
+      ]
+    },
+    "temporality_restricted_audit": {
+      "role": "temporality_restricted_robustness_audit",
+      "audit_only": true,
+      "description": "Audit-only temporal-availability sensitivity variant additionally excluding survey, satisfaction, project, lateness, and absence fields from the conservative primary policy.",
+      "restored_features": [],
+      "additional_excluded_features": ["EngagementSurvey", "EmpJobSatisfaction", "SpecialProjectsCount", "DaysLateLast30", "Absences"],
+      "exclude_columns": [
+        "Employee_Name", "EmpID", "EmpNumber", "ExternalSampleId", "ManagerName", "ManagerID",
+        "PerformanceScore", "PerformanceRating", "PerfScoreID",
+        "Termd", "EmpStatusID", "EmploymentStatus", "DateofTermination", "TermReason", "LastPerformanceReview_Date",
+        "DOB", "Gender", "Sex", "GenderID", "MarriedID", "MaritalStatus", "MaritalDesc", "MaritalStatusID", "RaceEthnicity", "RaceDesc", "HispanicLatino", "CitizenDesc", "FromDiversityJobFairID",
+        "DeptID", "PositionID", "DateofHire",
+        "EmpDepartment", "Salary", "State", "Zip", "RecruitmentSource",
+        "EngagementSurvey", "EmpJobSatisfaction", "SpecialProjectsCount", "DaysLateLast30", "Absences"
+      ]
     }
   }
 }
