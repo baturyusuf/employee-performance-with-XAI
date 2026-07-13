@@ -1,6 +1,6 @@
 # Next Actions
 
-1. Commit and push the checkpoint-hash/log synchronization; verify the tracked worktree is clean and no Unit 2G process is active.
+1. Commit the push-failure record; verify the tracked worktree is clean and no Git or Unit 2G process is active. Do not spend the final permitted push retry until a later natural checkpoint.
 2. Keep the local 91.8 MB diagnostic trial, raw datasets, caches, environments, partial outputs and historical packages outside version control. Keep the trial exclusion local-only.
 3. Execute the real HRDataset_v14 production stage offline from the clean checkpoint with all eight candidates and 5,000 resamples. Use a visibly noncanonical stage-validation run ID and do not create/promote a complete package manifest.
 4. Validate every persisted input, side input, fold, model, OOF, calibration, SHAP, support, path and artifact hash. Retain the output only as stage-validation evidence until the complete core package exists.
