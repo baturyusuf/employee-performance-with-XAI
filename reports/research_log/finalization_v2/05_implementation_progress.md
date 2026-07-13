@@ -547,3 +547,5 @@ Current config hash is `5af0262e83a3720f8dca0b4d6795bdffc6bb2cefedc901ae0a47f926
 ### Unit 2G pre-commit hygiene completion
 
 The synchronized checkpoint gate passed with 45 reviewed candidates, an empty index, no raw-data candidate, no file at or above 100 MB, no reparse point, no credential-pattern match, no active `leakage-safe` terminology, no manuscript diff, 28 valid issue rows, and all 17 README local-link occurrences resolving to 15 tracked targets. The historical 91,820,515-byte trial remains untracked and locally excluded. Four candidate path-like literals were classified as production sanitization regexes or intentional negative test values; none is an emitted machine path. Historical tracked path-bearing logs/artifacts remain explicitly open under V2-005.
+
+Checkpoint `ae5cf5a8e57f8e9bf0bcf3f458391f2c42d58411` committed the reviewed Unit 2G and publication-trust implementation. The next scientific action is the clean-commit standalone production stage-validation run; the checkpoint itself does not close V2-028 or authorize any numerical manuscript claim.
