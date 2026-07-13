@@ -1223,3 +1223,11 @@ training, receipts, params, relations, predictions = _calibration_evidence(
 ```
 
 The PowerShell wrapper was the same `@' ... '@ | .\myenv\Scripts\python.exe -` form and wrote no file. Exit 0 in 15.4 shell seconds (12.303 measured fit/evidence seconds): 50 receipts over ten folds; 10,800 cross-fit rows; 30 parameter rows; ten distinct sigmoid hashes; ten relationships/source model hashes; 1,200 raw and 1,200 sigmoid rows; zero warnings. The combined maximum probability-sum residual `8.381903171539307e-08` is the unchanged historical float32 raw comparator, not a sigmoid normalization failure.
+
+Checkpoint command:
+
+```powershell
+git commit -m "feat(calibration): cross-fit sigmoid on benchmark folds"
+```
+
+Exit 0: commit `0f820b3`, 22 files changed, 3,175 insertions and 400 deletions. The local historical trial was not staged; no push, merge, release or manuscript edit occurred.

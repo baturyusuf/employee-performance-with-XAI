@@ -1,15 +1,15 @@
 # Current Status
 
-- Current phase: Unit 2E predeclared cross-fitted sigmoid calibration final verification.
-- Completed implementation checkpoint: `984db46` (`feat(policy): bind leakage ablation to shared OOF evidence`) on `finalization/leakage-aware-v2`.
+- Current phase: Unit 2E complete; preparing Unit 2F support-aware subgroup/proxy audit.
+- Completed implementation checkpoint: `0f820b3` (`feat(calibration): cross-fit sigmoid on benchmark folds`) on `finalization/leakage-aware-v2`.
 - Last completed task: the legacy calibration runner was replaced by the accepted option-A implementation: 50 shared-inner-fold XGBoost cross-fits, ten predeclared sigmoid calibrators, exact benchmark raw OOF reuse, no outer-model refit/selection/threshold path, paired 5,000-draw OOF uncertainty, complete denominators, portable atomic artifacts and calibrator-to-model receipts.
-- Work currently in progress: independent-review closure, full regression/hygiene gates, persistent-log finalization and the tested Unit 2E checkpoint commit.
-- Files modified but not finalized: canonical calibration config/validator/runner/builder wiring, the scikit-learn 1.8 compatibility bound, calibration and stage-binding tests, and persistent logs. The immutable 91.8 MB historical trial remains local, read-only, untracked and unstaged under D5.
+- Work currently in progress: record the Unit 2E checkpoint identity, then begin read-only subgroup/proxy baseline and root-cause audit before changing that scientific stage.
+- Files modified but not finalized: this checkpoint-identity log update only. The immutable 91.8 MB historical trial remains local, read-only, untracked and unstaged under D5.
 - Latest tests: final full pytest passed 426 with 2 historical skips and 11 subtests; final full unittest passed 174 with 2 skips; focused calibration/upstream/bootstrap passed 85 plus 7 subtests; calibration/counterfactual compatibility passed 25. Compileall, diff, manuscript no-change, secret, path, 100 MB, terminology, pip-check, README-link and issue-register gates passed.
 - Real benchmark result: XGBoost macro-F1 `0.621021` (95% CI `0.597319–0.644690`). Baseline-minus-XGBoost macro-F1 differences were Logistic Regression `-0.114800` (`-0.147597–-0.083224`), Random Forest `-0.028681` (`-0.049949–-0.008049`) and LightGBM `-0.015533` (`-0.038121–0.006382`). No baseline met the positive-point plus positive-CI-lower gate.
 - Secondary result: QWK was XGBoost `0.567602`, LightGBM `0.588329`, Random Forest `0.631678`, Logistic Regression `0.371011`. QWK is reported but is not gate-eligible under the user-approved protocol.
 - Known failures/open risks: no canonical policy/calibration artifact exists yet. Current config hash `d755ecc39e516cab51269b314a7736ee4cea66bf500fa407d44fa81021ea0d18` is intentionally incompatible with historical benchmark config `7e70bf...`; hashes will not be patched or relabelled. The expensive benchmark rerun is deferred until all remaining core config/hashed side inputs are frozen. Fairness/external/figures/tables/lock/licence/history/EOL blockers remain.
-- Exact next action: finalize log/test-count consistency, stage only tracked Unit 2E source/tests/logs, create the authorized checkpoint commit, verify the tracked worktree, then continue to subgroup/proxy contract remediation without launching a knowingly soon-to-be-invalid benchmark rerun.
+- Exact next action: commit this checkpoint log, verify the tracked worktree, then inspect the subgroup/proxy runner, config, tests and historical reports before recording the Unit 2F implementation plan.
 - Decisions awaiting the user: none for Unit 2E; verified ethics metadata later; acquisition mismatch only if triggered.
 - Paid API/network calls in this phase: zero; both real-data diagnostics installed explicit process-local TCP/UDP/DNS denial guards.
 - Manuscript edits: none.
