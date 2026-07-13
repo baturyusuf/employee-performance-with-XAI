@@ -234,7 +234,16 @@
     },
     "fairness": {
       "scope": "support_aware_primary_task_oof_audit",
-      "policy_comparisons_source": "proxy_analysis.common_fold_policy_comparisons",
+      "prediction_contract": {
+        "required_upstream_stages": ["shared_folds", "model_benchmarks", "policy_ablation"],
+        "outer_folds_source": "shared_folds.outer_fold_assignments",
+        "oof_predictions_source": "policy_ablation.exact_oof_predictions",
+        "primary_model_provenance_source": "model_benchmarks.xgboost_selected_candidate_by_outer_fold",
+        "model_refit_in_stage": false,
+        "probability_source": "policy_ablation.raw_uncalibrated_oof_probabilities",
+        "probability_semantics": "raw_uncalibrated_for_matched_cross_policy_audit"
+      },
+      "policy_comparisons_source": "policy_ablation.exact_oof_predictions",
       "protected_or_sensitive_source": "governance_fields.fairness_sensitive_fields",
       "exploratory_operational_source": "governance_fields.fairness_audit_fields_minus_sensitive",
       "minimum_group_support": 30,
@@ -253,26 +262,144 @@
         }
       },
       "bootstrap_source": "evaluation.bootstrap",
-      "bootstrap_stratify_by": ["fold", "y_true"],
+      "bootstrap_stratify_by": ["outer_fold", "y_true"],
       "bootstrap_batch_size": 200,
+      "bootstrap_contract": {
+        "n_resamples_source": "evaluation.bootstrap.n_resamples",
+        "method_source": "evaluation.bootstrap.method",
+        "confidence_level_source": "evaluation.bootstrap.confidence_level",
+        "quantile_method_source": "evaluation.bootstrap.quantile_method",
+        "seed_source": "seeds.bootstrap",
+        "same_resamples_across_policies": true,
+        "resample_hash_required": true,
+        "resample_hash_source": "policy_ablation.bootstrap_metadata.resample_hash",
+        "resample_hash_equality_required_with": "model_benchmarks.baseline_xgboost_gate.resample_hash"
+      },
       "stability": {
         "minimum_valid_bootstrap_fraction": 0.8,
         "wide_interval_threshold": 0.25
       },
+      "support_status_rules": {
+        "below_threshold_rows_retained": true,
+        "below_threshold_rows_eligible_for_gap": false,
+        "class_specific_metrics_use_metric_denominator": true,
+        "minimum_two_eligible_groups_for_gap": true,
+        "eligibility_scope": "fixed_from_complete_oof_before_resampling",
+        "paired_policy_common_group_scope": "intersection_of_complete_oof_eligible_groups_per_pair_attribute_metric_class",
+        "paired_policy_minimum_common_groups": 2,
+        "paired_status_values": [
+          "insufficient_common_subgroup_or_metric_support",
+          "unstable_insufficient_valid_bootstrap_replicates",
+          "support_sufficient_but_interval_wide",
+          "support_sufficient_descriptive_estimate"
+        ],
+        "status_values": [
+          "insufficient_subgroup_or_metric_support",
+          "unstable_insufficient_valid_bootstrap_replicates",
+          "support_sufficient_but_interval_wide",
+          "support_sufficient_descriptive_estimate"
+        ]
+      },
+      "headline_rules": {
+        "eligible_statuses": ["support_sufficient_descriptive_estimate"],
+        "wide_interval_rows_headline_eligible": false,
+        "unstable_rows_headline_eligible": false,
+        "insufficient_support_rows_headline_eligible": false,
+        "paired_policy_rows_headline_eligible": false,
+        "require_minimum_subgroup_support_context": true,
+        "require_minimum_metric_denominator_context": true,
+        "require_valid_bootstrap_context": true,
+        "boundary_value_one_requires_explicit_support_context": true
+      },
+      "inference_scope": {
+        "intervals": "pointwise_descriptive",
+        "multiplicity_adjustment": "none",
+        "simultaneous_or_familywise_claims_allowed": false,
+        "observed_gap_ranking": "descriptive_only_no_selection_adjusted_inference"
+      },
       "claim_boundary": "Subgroup gaps are descriptive OOF audit evidence with support and uncertainty constraints; they do not establish discrimination, fairness, or causality."
     },
     "proxy_analysis": {
+      "task_type": "nominal_multiclass_proxy_diagnostic",
       "target": "EmpDepartment",
       "watchlist": ["EmpJobRole", "EducationBackground", "BusinessTravelFrequency"],
       "interpretation": "Reconstructability is proxy-risk evidence, not proof of causal or discriminatory use by the performance model.",
-      "classifier": "class_weight_balanced_logistic_regression",
+      "outer_folds_source": "shared_folds.outer_fold_assignments",
+      "classifier": {
+        "estimator": "sklearn.linear_model.LogisticRegression",
+        "solver": "lbfgs",
+        "regularization": "l2_via_l1_ratio_zero",
+        "l1_ratio": 0.0,
+        "C": 1.0,
+        "class_weight": "balanced",
+        "fit_intercept": true,
+        "max_iter": 5000,
+        "tol": 0.0001,
+        "multiclass_mode": "native_multinomial_for_three_or_more_classes",
+        "random_state_source": "seeds.fairness",
+        "estimator_threads": 1
+      },
+      "preprocessing": {
+        "numeric": "median_imputation_then_standard_scaling",
+        "categorical": "most_frequent_imputation_then_dense_one_hot_handle_unknown_ignore",
+        "fit_scope": "outer_training_partition_only"
+      },
       "target_removed_from_all_proxy_predictors": true,
       "metrics": ["accuracy", "balanced_accuracy", "macro_f1"],
-      "common_fold_policy_comparisons": [
+      "unique_predictor_contracts": {
+        "no_salary_hike_no_attrition_no_department": {
+          "source_policy": "no_salary_hike_no_attrition_no_department",
+          "job_role_retained": true,
+          "proxy_target_removed": true
+        },
+        "no_salary_hike_no_attrition_no_department_no_job_role": {
+          "source_policy": "no_salary_hike_no_attrition_no_department_no_job_role",
+          "job_role_retained": false,
+          "proxy_target_removed": true
+        }
+      },
+      "policy_aliases": {
+        "no_salary_hike_no_attrition": "no_salary_hike_no_attrition_no_department"
+      },
+      "reported_policy_order": [
         "no_salary_hike_no_attrition",
         "no_salary_hike_no_attrition_no_department",
         "no_salary_hike_no_attrition_no_department_no_job_role"
-      ]
+      ],
+      "oof_contract": {
+        "exactly_once_per_sample_per_unique_predictor_contract": true,
+        "fold_assignment_source": "shared_folds.outer_fold_assignments",
+        "proxy_target_absent_from_predictors": true
+      },
+      "bootstrap": {
+        "n_resamples": 5000,
+        "method_source": "evaluation.bootstrap.method",
+        "confidence_level_source": "evaluation.bootstrap.confidence_level",
+        "quantile_method_source": "evaluation.bootstrap.quantile_method",
+        "seed_source": "seeds.fairness",
+        "stratify_by": ["outer_fold", "proxy_target"],
+        "paired_across_unique_predictor_contracts": true,
+        "resample_hash_required": true,
+        "resample_hash_scope": "proxy_target_oof_bootstrap_indices",
+        "separate_from_performance_policy_bootstrap": true,
+        "batch_size_source": "fairness.bootstrap_batch_size",
+        "semantic_strata_adapter": {
+          "semantic_columns": ["outer_fold", "proxy_target"],
+          "internal_columns": ["outer_fold", "y_true"],
+          "internal_y_true_semantics": "deterministic_sorted_proxy_target_class_codes",
+          "performance_target_used": false,
+          "adapter_receipt_required": true,
+          "adapter_hash_required": true
+        }
+      },
+      "primary_uncertainty": "paired_sample_level_stratified_percentile_bootstrap",
+      "fold_summary_scope": "descriptive_mean_std_min_max_only_no_population_ci",
+      "inference_scope": {
+        "intervals": "pointwise_descriptive",
+        "multiplicity_adjustment": "none",
+        "simultaneous_or_familywise_claims_allowed": false,
+        "paired_rows_headline_eligible": false
+      }
     },
     "evaluation": {
       "cv": {
@@ -306,6 +433,11 @@
           "applicable": ["accuracy", "balanced_accuracy", "macro_f1", "nll_log_loss", "ece_confidence"],
           "not_applicable": ["quadratic_weighted_kappa", "ordinal_mae", "severe_error_rate", "multiclass_brier"],
           "cross_task_comparability": "Robustness-only; do not present as equivalent to the primary three-class task."
+        },
+        "nominal_multiclass_proxy_diagnostic": {
+          "applicable": ["accuracy", "balanced_accuracy", "macro_f1"],
+          "not_applicable": ["quadratic_weighted_kappa", "ordinal_mae", "severe_error_rate"],
+          "cross_task_comparability": "Proxy-risk reconstructability only; never present as employee-performance validation, fairness proof, discrimination evidence, or a causal finding."
         },
         "binary_attrition_transfer": {
           "applicable": ["accuracy", "balanced_accuracy", "macro_f1", "roc_auc", "average_precision", "nll_log_loss", "binary_brier", "ece_confidence"],

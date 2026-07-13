@@ -12,6 +12,7 @@ def _context(tmp_path, *, gate_triggered: bool = False):
     run_dir = tmp_path / "run" / "core"
     (run_dir / "shared_folds").mkdir(parents=True)
     (run_dir / "model_benchmarks").mkdir(parents=True)
+    (run_dir / "policy_ablation").mkdir(parents=True)
     fold_hash = "d" * 64
     (run_dir / "shared_folds" / "fold_contract.json").write_text(
         json.dumps({"fold_contract_hash": fold_hash}),
@@ -34,6 +35,10 @@ def _context(tmp_path, *, gate_triggered: bool = False):
     }
     (run_dir / "model_benchmarks" / "baseline_xgboost_gate.json").write_text(
         json.dumps(gate),
+        encoding="utf-8",
+    )
+    (run_dir / "policy_ablation" / "oof_predictions.csv").write_text(
+        "run_id,policy,sample_index\nbinding-test,primary,0\n",
         encoding="utf-8",
     )
     return manuscript_build.StageContext(
@@ -75,6 +80,7 @@ def _write_compatible_upstream_contracts(
     for stage, output_name in (
         ("shared_folds", "fold_contract.json"),
         ("model_benchmarks", "baseline_xgboost_gate.json"),
+        ("policy_ablation", "oof_predictions.csv"),
     ):
         manuscript_build._write_stage_metadata(
             context,
@@ -243,6 +249,38 @@ def test_calibration_runner_receives_only_current_run_upstreams_and_full_identit
     }
 
 
+def test_fairness_runner_receives_only_current_run_upstreams_and_full_identity(
+    tmp_path,
+    monkeypatch,
+) -> None:
+    from src.experiments import manuscript_fairness_proxy
+
+    context = _context(tmp_path)
+    _write_compatible_upstream_contracts(context)
+    captured = {}
+
+    def fake_run(config_path, **kwargs):
+        captured["config_path"] = config_path
+        captured.update(kwargs)
+        return {"status": "captured"}
+
+    monkeypatch.setattr(manuscript_fairness_proxy, "run", fake_run)
+
+    result = manuscript_build._run_fairness(context)
+
+    assert result == {"status": "captured"}
+    assert captured == {
+        "config_path": context.config_path,
+        "shared_folds_dir": context.run_dir / "shared_folds",
+        "model_benchmarks_dir": context.run_dir / "model_benchmarks",
+        "policy_ablation_dir": context.run_dir / "policy_ablation",
+        "output_dir": context.run_dir / "subgroup_proxy",
+        "run_id": context.run_id,
+        "config_hash": context.config_hash,
+        "scientific_input_hash": context.manifest["scientific_input_hash"],
+    }
+
+
 @pytest.mark.parametrize("stage", ["shared_folds", "model_benchmarks"])
 def test_policy_runner_fails_when_current_run_upstream_is_missing(
     tmp_path,
@@ -293,6 +331,48 @@ def test_calibration_runner_rejects_incompatible_upstream_identity(tmp_path) -> 
 
     with pytest.raises(manuscript_build.ManuscriptBuildError, match="incompatible"):
         manuscript_build._run_calibration(context)
+
+
+@pytest.mark.parametrize(
+    "stage",
+    ["shared_folds", "model_benchmarks", "policy_ablation"],
+)
+def test_fairness_runner_fails_when_current_run_upstream_is_missing(
+    tmp_path,
+    stage: str,
+) -> None:
+    context = _context(tmp_path)
+    _write_compatible_upstream_contracts(context)
+    contract = context.run_dir / stage / "stage_contract.json"
+    contract.unlink()
+
+    with pytest.raises(manuscript_build.ManuscriptBuildError, match="contract is missing"):
+        manuscript_build._run_fairness(context)
+
+
+def test_fairness_runner_rejects_incompatible_policy_identity(tmp_path) -> None:
+    context = _context(tmp_path)
+    _write_compatible_upstream_contracts(context)
+    contract = context.run_dir / "policy_ablation" / "stage_contract.json"
+    payload = json.loads(contract.read_text(encoding="utf-8"))
+    payload["scientific_input_hash"] = "f" * 64
+    contract.write_text(json.dumps(payload), encoding="utf-8")
+
+    with pytest.raises(manuscript_build.ManuscriptBuildError, match="incompatible"):
+        manuscript_build._run_fairness(context)
+
+
+def test_fairness_runner_rejects_tampered_policy_output(tmp_path) -> None:
+    context = _context(tmp_path)
+    _write_compatible_upstream_contracts(context)
+    output = context.run_dir / "policy_ablation" / "oof_predictions.csv"
+    output.write_text(
+        output.read_text(encoding="utf-8") + "binding-test,primary,1\n",
+        encoding="utf-8",
+    )
+
+    with pytest.raises(manuscript_build.ManuscriptBuildError, match="incompatible"):
+        manuscript_build._run_fairness(context)
 
 
 @pytest.mark.parametrize("stage", ["shared_folds", "model_benchmarks"])

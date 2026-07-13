@@ -527,11 +527,18 @@ def _run_external_robustness(context: StageContext) -> Mapping[str, Any]:
 def _run_fairness(context: StageContext) -> Mapping[str, Any]:
     from src.experiments.manuscript_fairness_proxy import run
 
+    shared_folds_dir = _require_compatible_upstream_stage(context, "shared_folds")
+    model_benchmarks_dir = _require_compatible_upstream_stage(context, "model_benchmarks")
+    policy_ablation_dir = _require_compatible_upstream_stage(context, "policy_ablation")
     return run(
         context.config_path,
+        shared_folds_dir=shared_folds_dir,
+        model_benchmarks_dir=model_benchmarks_dir,
+        policy_ablation_dir=policy_ablation_dir,
         output_dir=context.run_dir / "subgroup_proxy",
         run_id=context.run_id,
         config_hash=context.config_hash,
+        scientific_input_hash=str(context.manifest["scientific_input_hash"]),
     )
 
 

@@ -439,6 +439,7 @@ def validate_manuscript_config(config: Mapping[str, Any]) -> None:
         "model",
         "feature_policies",
         "governance_fields",
+        "fairness",
         "proxy_analysis",
         "evaluation",
         "calibration",
@@ -570,6 +571,223 @@ def validate_manuscript_config(config: Mapping[str, Any]) -> None:
             "feature-access sensitivity contract."
         )
 
+    fairness = _require_mapping(settings, "fairness", "manuscript_final")
+    expected_fairness = {
+        "scope": "support_aware_primary_task_oof_audit",
+        "prediction_contract": {
+            "required_upstream_stages": [
+                "shared_folds",
+                "model_benchmarks",
+                "policy_ablation",
+            ],
+            "outer_folds_source": "shared_folds.outer_fold_assignments",
+            "oof_predictions_source": "policy_ablation.exact_oof_predictions",
+            "primary_model_provenance_source": (
+                "model_benchmarks.xgboost_selected_candidate_by_outer_fold"
+            ),
+            "model_refit_in_stage": False,
+            "probability_source": "policy_ablation.raw_uncalibrated_oof_probabilities",
+            "probability_semantics": "raw_uncalibrated_for_matched_cross_policy_audit",
+        },
+        "policy_comparisons_source": "policy_ablation.exact_oof_predictions",
+        "protected_or_sensitive_source": "governance_fields.fairness_sensitive_fields",
+        "exploratory_operational_source": (
+            "governance_fields.fairness_audit_fields_minus_sensitive"
+        ),
+        "minimum_group_support": 30,
+        "minimum_class_metric_denominator": 10,
+        "attribute_transforms": {
+            "Age": {
+                "type": "numeric_bins",
+                "edges": [17, 29, 39, 49, 59, 200],
+                "labels": ["18-29", "30-39", "40-49", "50-59", "60+"],
+            }
+        },
+        "metrics_by_task": {
+            "ordinal_multiclass_performance": {
+                "overall": ["accuracy", "macro_f1"],
+                "class_specific": [
+                    "positive_prediction_rate",
+                    "true_positive_rate",
+                    "false_positive_rate",
+                    "precision",
+                    "mean_predicted_probability",
+                ],
+            }
+        },
+        "bootstrap_source": "evaluation.bootstrap",
+        "bootstrap_stratify_by": ["outer_fold", "y_true"],
+        "bootstrap_batch_size": 200,
+        "bootstrap_contract": {
+            "n_resamples_source": "evaluation.bootstrap.n_resamples",
+            "method_source": "evaluation.bootstrap.method",
+            "confidence_level_source": "evaluation.bootstrap.confidence_level",
+            "quantile_method_source": "evaluation.bootstrap.quantile_method",
+            "seed_source": "seeds.bootstrap",
+            "same_resamples_across_policies": True,
+            "resample_hash_required": True,
+            "resample_hash_source": (
+                "policy_ablation.bootstrap_metadata.resample_hash"
+            ),
+            "resample_hash_equality_required_with": (
+                "model_benchmarks.baseline_xgboost_gate.resample_hash"
+            ),
+        },
+        "stability": {
+            "minimum_valid_bootstrap_fraction": 0.8,
+            "wide_interval_threshold": 0.25,
+        },
+        "support_status_rules": {
+            "below_threshold_rows_retained": True,
+            "below_threshold_rows_eligible_for_gap": False,
+            "class_specific_metrics_use_metric_denominator": True,
+            "minimum_two_eligible_groups_for_gap": True,
+            "eligibility_scope": "fixed_from_complete_oof_before_resampling",
+            "paired_policy_common_group_scope": (
+                "intersection_of_complete_oof_eligible_groups_per_pair_"
+                "attribute_metric_class"
+            ),
+            "paired_policy_minimum_common_groups": 2,
+            "paired_status_values": [
+                "insufficient_common_subgroup_or_metric_support",
+                "unstable_insufficient_valid_bootstrap_replicates",
+                "support_sufficient_but_interval_wide",
+                "support_sufficient_descriptive_estimate",
+            ],
+            "status_values": [
+                "insufficient_subgroup_or_metric_support",
+                "unstable_insufficient_valid_bootstrap_replicates",
+                "support_sufficient_but_interval_wide",
+                "support_sufficient_descriptive_estimate",
+            ],
+        },
+        "headline_rules": {
+            "eligible_statuses": ["support_sufficient_descriptive_estimate"],
+            "wide_interval_rows_headline_eligible": False,
+            "unstable_rows_headline_eligible": False,
+            "insufficient_support_rows_headline_eligible": False,
+            "paired_policy_rows_headline_eligible": False,
+            "require_minimum_subgroup_support_context": True,
+            "require_minimum_metric_denominator_context": True,
+            "require_valid_bootstrap_context": True,
+            "boundary_value_one_requires_explicit_support_context": True,
+        },
+        "inference_scope": {
+            "intervals": "pointwise_descriptive",
+            "multiplicity_adjustment": "none",
+            "simultaneous_or_familywise_claims_allowed": False,
+            "observed_gap_ranking": (
+                "descriptive_only_no_selection_adjusted_inference"
+            ),
+        },
+        "claim_boundary": (
+            "Subgroup gaps are descriptive OOF audit evidence with support and uncertainty "
+            "constraints; they do not establish discrimination, fairness, or causality."
+        ),
+    }
+    if dict(fairness) != expected_fairness:
+        raise ManuscriptConfigError(
+            "fairness differs from the frozen exact-OOF support/status/headline contract."
+        )
+
+    expected_proxy = {
+        "task_type": "nominal_multiclass_proxy_diagnostic",
+        "target": "EmpDepartment",
+        "watchlist": ["EmpJobRole", "EducationBackground", "BusinessTravelFrequency"],
+        "interpretation": (
+            "Reconstructability is proxy-risk evidence, not proof of causal or "
+            "discriminatory use by the performance model."
+        ),
+        "outer_folds_source": "shared_folds.outer_fold_assignments",
+        "classifier": {
+            "estimator": "sklearn.linear_model.LogisticRegression",
+            "solver": "lbfgs",
+            "regularization": "l2_via_l1_ratio_zero",
+            "l1_ratio": 0.0,
+            "C": 1.0,
+            "class_weight": "balanced",
+            "fit_intercept": True,
+            "max_iter": 5000,
+            "tol": 0.0001,
+            "multiclass_mode": "native_multinomial_for_three_or_more_classes",
+            "random_state_source": "seeds.fairness",
+            "estimator_threads": 1,
+        },
+        "preprocessing": {
+            "numeric": "median_imputation_then_standard_scaling",
+            "categorical": (
+                "most_frequent_imputation_then_dense_one_hot_handle_unknown_ignore"
+            ),
+            "fit_scope": "outer_training_partition_only",
+        },
+        "target_removed_from_all_proxy_predictors": True,
+        "metrics": ["accuracy", "balanced_accuracy", "macro_f1"],
+        "unique_predictor_contracts": {
+            "no_salary_hike_no_attrition_no_department": {
+                "source_policy": "no_salary_hike_no_attrition_no_department",
+                "job_role_retained": True,
+                "proxy_target_removed": True,
+            },
+            "no_salary_hike_no_attrition_no_department_no_job_role": {
+                "source_policy": (
+                    "no_salary_hike_no_attrition_no_department_no_job_role"
+                ),
+                "job_role_retained": False,
+                "proxy_target_removed": True,
+            },
+        },
+        "policy_aliases": {
+            "no_salary_hike_no_attrition": (
+                "no_salary_hike_no_attrition_no_department"
+            )
+        },
+        "reported_policy_order": [
+            "no_salary_hike_no_attrition",
+            "no_salary_hike_no_attrition_no_department",
+            "no_salary_hike_no_attrition_no_department_no_job_role",
+        ],
+        "oof_contract": {
+            "exactly_once_per_sample_per_unique_predictor_contract": True,
+            "fold_assignment_source": "shared_folds.outer_fold_assignments",
+            "proxy_target_absent_from_predictors": True,
+        },
+        "bootstrap": {
+            "n_resamples": 5000,
+            "method_source": "evaluation.bootstrap.method",
+            "confidence_level_source": "evaluation.bootstrap.confidence_level",
+            "quantile_method_source": "evaluation.bootstrap.quantile_method",
+            "seed_source": "seeds.fairness",
+            "stratify_by": ["outer_fold", "proxy_target"],
+            "paired_across_unique_predictor_contracts": True,
+            "resample_hash_required": True,
+            "resample_hash_scope": "proxy_target_oof_bootstrap_indices",
+            "separate_from_performance_policy_bootstrap": True,
+            "batch_size_source": "fairness.bootstrap_batch_size",
+            "semantic_strata_adapter": {
+                "semantic_columns": ["outer_fold", "proxy_target"],
+                "internal_columns": ["outer_fold", "y_true"],
+                "internal_y_true_semantics": (
+                    "deterministic_sorted_proxy_target_class_codes"
+                ),
+                "performance_target_used": False,
+                "adapter_receipt_required": True,
+                "adapter_hash_required": True,
+            },
+        },
+        "primary_uncertainty": "paired_sample_level_stratified_percentile_bootstrap",
+        "fold_summary_scope": "descriptive_mean_std_min_max_only_no_population_ci",
+        "inference_scope": {
+            "intervals": "pointwise_descriptive",
+            "multiplicity_adjustment": "none",
+            "simultaneous_or_familywise_claims_allowed": False,
+            "paired_rows_headline_eligible": False,
+        },
+    }
+    if dict(proxy) != expected_proxy:
+        raise ManuscriptConfigError(
+            "proxy_analysis differs from the frozen shared-fold predictor/bootstrap contract."
+        )
+
     calibration = _require_mapping(settings, "calibration", "manuscript_final")
     expected_calibration = {
         "scope": "canonical_primary_policy_exact_benchmark_model",
@@ -622,12 +840,42 @@ def validate_manuscript_config(config: Mapping[str, Any]) -> None:
             "calibration differs from the frozen five-inner-fold cross-fitted sigmoid contract."
         )
 
+    evaluation = _require_mapping(settings, "evaluation", "manuscript_final")
+    evaluation_bootstrap = _require_mapping(
+        evaluation,
+        "bootstrap",
+        "manuscript_final.evaluation",
+    )
+    expected_bootstrap_fields = {
+        "n_resamples": 5000,
+        "confidence_level": 0.95,
+        "seed": "bootstrap",
+        "method": "paired_stratified_percentile",
+        "stratify_by": ["outer_fold", "y_true"],
+        "quantile_method": "linear",
+        "conditional_inference_note": (
+            "Intervals condition on the observed employees and fixed fold/model-training "
+            "protocol; they do not estimate model-training instability."
+        ),
+    }
+    observed_bootstrap_fields = {
+        key: evaluation_bootstrap.get(key) for key in expected_bootstrap_fields
+    }
+    if observed_bootstrap_fields != expected_bootstrap_fields:
+        raise ManuscriptConfigError(
+            "evaluation.bootstrap differs from the frozen 5000-resample paired OOF contract."
+        )
+
     metric_rules = _require_mapping(
-        _require_mapping(settings, "evaluation", "manuscript_final"),
+        evaluation,
         "metric_applicability",
         "manuscript_final.evaluation",
     )
-    for task in ("binary_attrition_transfer", "binary_turnover_transfer"):
+    for task in (
+        "binary_attrition_transfer",
+        "binary_turnover_transfer",
+        "nominal_multiclass_proxy_diagnostic",
+    ):
         task_rules = _require_mapping(metric_rules, task, "metric_applicability")
         not_applicable = set(
             _string_list(task_rules.get("not_applicable"), f"metric_applicability.{task}.not_applicable")
@@ -636,8 +884,16 @@ def validate_manuscript_config(config: Mapping[str, Any]) -> None:
             raise ManuscriptConfigError(f"severe_error_rate must be N/A for {task}.")
 
     seeds = _require_mapping(settings, "seeds", "manuscript_final")
-    if not seeds or any(not isinstance(seed, int) for seed in seeds.values()):
+    if not seeds or any(
+        isinstance(seed, bool) or not isinstance(seed, int) for seed in seeds.values()
+    ):
         raise ManuscriptConfigError("All canonical seeds must be explicit integers.")
+    missing_required_seeds = sorted({"bootstrap", "fairness"}.difference(seeds))
+    if missing_required_seeds:
+        raise ManuscriptConfigError(
+            "Canonical subgroup/proxy seed references are missing: "
+            f"{missing_required_seeds}."
+        )
 
     output = _require_mapping(settings, "output", "manuscript_final")
     if not isinstance(output.get("root"), str) or not output.get("root"):

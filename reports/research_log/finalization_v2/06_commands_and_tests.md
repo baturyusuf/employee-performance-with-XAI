@@ -1231,3 +1231,48 @@ git commit -m "feat(calibration): cross-fit sigmoid on benchmark folds"
 ```
 
 Exit 0: commit `0f820b3`, 22 files changed, 3,175 insertions and 400 deletions. The local historical trial was not staged; no push, merge, release or manuscript edit occurred.
+
+## Unit 2F - Focused Implementation and Real-INX Diagnostic
+
+One initial read-only `rg` command used the literal Windows wildcard `tests/test_fairness*` and exited 1 with a filename-syntax error. It performed no write or scientific execution. The corrected commands named files explicitly.
+
+```powershell
+.\myenv\Scripts\python.exe -m pytest -q tests/test_fairness_support_and_ci_fields.py tests/test_stage_runner_scientific_input_binding.py tests/test_fairness_proxy_config_contract.py tests/test_fairness_proxy_stage_contract.py tests/test_shared_fold_assignments_across_models_and_policies.py tests/test_manuscript_policy_ablation.py tests/test_benchmark_artifact_contract.py
+.\myenv\Scripts\python.exe -m pytest -q tests/test_fairness_proxy_scientific_behavior.py tests/test_fairness_support_and_ci_fields.py tests/test_fairness_proxy_config_contract.py tests/test_fairness_proxy_stage_contract.py tests/test_stage_runner_scientific_input_binding.py tests/test_shared_fold_assignments_across_models_and_policies.py tests/test_manuscript_policy_ablation.py tests/test_benchmark_artifact_contract.py
+.\myenv\Scripts\python.exe -m py_compile src/experiments/manuscript_fairness_proxy.py src/governance/manuscript_contract.py src/experiments/build_manuscript_evidence.py
+.\myenv\Scripts\python.exe -c "from pathlib import Path; from src.governance.manuscript_contract import load_manuscript_config,canonical_config_hash; load_manuscript_config(Path('configs/manuscript_final.yaml')); print(canonical_config_hash(Path('configs/manuscript_final.yaml')))"
+git diff --check
+```
+
+All exited 0. Initial focus: 79 passed in 21.38 seconds. Expanded scientific-behavior focus: 84 passed in 20.02 seconds. Post-hardening direct subset: 31 passed in 4.29 seconds. Intermediate pre-review config hash: `be2b3f9f7e052df42ad9dc413d10e29bfc2ad6dd63a38513d21957aa9908523f`; this is superseded by the final hash below.
+
+The intermediate pre-review real diagnostic used a PowerShell here-string piped to `python.exe -`. The script installed process-local `socket`, DNS and connection denial guards, loaded `inx_primary` through the canonical loader, generated 10 outer x 5 inner shared folds in memory using configured seeds, compared the outer map to the immutable historical trial, and invoked `generate_proxy_oof_evidence`. It created no output path and wrote no file.
+
+Exit 0 after 9.7 shell seconds; measured evidence runtime 5.233 seconds. Dataset: 1,200x28, SHA-256 `b8deac0a615b97076622ae540f4cfd0d3c3f1e7acb83ba3ff6560470a9ccf60a`; historical outer map exact match `true`; 20 fold-fit rows; 2,400 exactly-once proxy OOF rows; 5,000 resamples; batch size 200; proxy resample SHA-256 `ceca117f41907c8c39965fa168241e4004381a33a1cf7a66cfab1a260beec558`; adapter SHA-256 `ab0464e823b773cc79cf512bba2b5bb294e83c73b3a415775983878534ab549f`; RSS before/after 239.64/234.00 MiB. Diagnostic macro-F1 was 0.968543 (pointwise 95% CI 0.956635-0.980215) for the job-role-retained system and 0.247368 (0.226694-0.268709) for the job-role-removed system. The alias fit flag was false. These values are noncanonical implementation diagnostics and are not admitted manuscript evidence.
+
+At this intermediate point, independent final review and the full repository gates remained pending. The completed final results follow.
+
+### Unit 2F final review, regression and hygiene gate
+
+The first post-review focused run failed one dynamic proxy test because a duplicate dictionary field referenced nonexistent `row.task_type`; after removal, the rerun failed one assertion because the manuscript proxy row omitted its nominal task field. Both serialization defects were fixed and no artifact was written. The corrected commands were:
+
+```powershell
+.\myenv\Scripts\python.exe -m py_compile src/models/task_schema.py src/governance/manuscript_contract.py src/experiments/manuscript_fairness_proxy.py
+.\myenv\Scripts\python.exe -m pytest -q tests/test_task_metric_applicability.py tests/test_fairness_proxy_config_contract.py tests/test_fairness_proxy_scientific_behavior.py tests/test_fairness_support_and_ci_fields.py tests/test_fairness_proxy_stage_contract.py
+.\myenv\Scripts\python.exe -m pytest -q tests/test_task_metric_applicability.py tests/test_fairness_proxy_scientific_behavior.py tests/test_fairness_support_and_ci_fields.py tests/test_fairness_proxy_config_contract.py tests/test_fairness_proxy_stage_contract.py tests/test_stage_runner_scientific_input_binding.py tests/test_shared_fold_assignments_across_models_and_policies.py tests/test_manuscript_policy_ablation.py tests/test_benchmark_artifact_contract.py
+$env:OPENAI_API_KEY=$null
+$env:OPENAI_AGENTS_API_KEY=$null
+$env:AZURE_OPENAI_API_KEY=$null
+.\myenv\Scripts\python.exe -m pytest -q
+.\myenv\Scripts\python.exe -m unittest discover -s tests -q
+.\myenv\Scripts\python.exe -m compileall -q src tests
+git diff --check
+git diff --exit-code -- manuscript/mdpi_information/main.md
+.\myenv\Scripts\python.exe -m pip check
+```
+
+Exit 0: direct focus 44 passed in 3.83 seconds; expanded focus 102 passed in 20.30 seconds; full pytest 467 passed, 2 skipped and 11 subtests in 85.74 seconds; unittest ran 178 tests with 2 skips in 7.045 seconds; compileall, diff, manuscript and dependency gates passed. Independent follow-up review reran 102 tests in 21.01 seconds, compiled the changed modules, passed diff checks and found no remaining P0/P1 issue.
+
+The final hygiene wrapper found zero high-entropy secret matches, zero home/file-URI strings in the scientific diff, zero candidate files over 100 MB, zero active leakage-safe terms and zero canonical imports from legacy `proxy_analysis.py`. It verified 17 README local links and 27 issue-register rows. Its first issue-register attempt expected the older remediation column names and exited before completing the wrapper; the corrected audit used the actual v2 schema. A later read-only log search repeated the documented Windows literal-wildcard error and was corrected with `rg -g '*.md'`. Neither command changed files or executed science.
+
+The final here-string INX diagnostic used current config hash `3c9588c1327ac563a85586835b19b30768860165dc26b61fcf7aafbce3bb1421`, the verified `b8deac...` dataset and process-local write/socket/DNS denials. Exit 0 after 6.9 shell seconds and 3.776 measured evidence seconds: exact historical outer-map match; 20 fits; 2,400 exactly-once OOF rows; nominal proxy task only; 5,000 draws in batches of 200; resample hash `ceca117f41907c8c39965fa168241e4004381a33a1cf7a66cfab1a260beec558`; adapter hash `ab0464e823b773cc79cf512bba2b5bb294e83c73b3a415775983878534ab549f`; minimum overall department support 20; minimum nonzero fold support 1; two zero-support fold/class cells. Macro-F1 estimates/intervals were unchanged from the intermediate diagnostic and remain noncanonical implementation evidence.

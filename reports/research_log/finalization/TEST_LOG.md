@@ -152,3 +152,29 @@ At that historical checkpoint, V2-007 through V2-010 had tested reusable infrast
 - Final post-regression rerun after adding the private-import guard: pytest 426 passed, 2 skipped and 11 subtests in 88.59 seconds; unittest 174 passed with 2 skips in 7.128 seconds; compileall and diff check passed.
 - Final all-ten-fold real-INX diagnostic: 50/50 selected-candidate inner fits, ten calibrators, 10,800 training OOF rows, 1,200 raw plus 1,200 sigmoid test rows, ten source-model hashes and zero warnings in 12.303 seconds. Noncanonical in-memory diagnostic only; no artifact.
 - Tested implementation checkpoint: `0f820b3` (`feat(calibration): cross-fit sigmoid on benchmark folds`). Tracked files were clean immediately after commit; only the deliberately unstaged local historical trial remained visible.
+
+## Unit 2F Baseline Audit - 2026-07-13
+
+- Test/model execution: none; this was the required pre-modification read-only audit.
+- Tracked worktree: clean at audit start; only the immutable historical trial was untracked.
+- Historical/shared fold comparison: 1,200 rows each, 1,091 mismatches, 109 matches (`9.0833%`).
+- Historical v1 subgroup/proxy package: rejected for v2 because config/run/scientific identity is stale/incomplete and metadata contains absolute Windows paths.
+- Proxy inference: rejected because published CIs are Student-t intervals over ten dependent CV folds.
+- Positive controls to preserve: metric-specific denominators, group-support fields, sensitive/operational categories, target removal and limitations.
+- Three independent audits completed without edits and agreed on the Unit 2F acceptance contract.
+
+## Unit 2F Focused Implementation Validation - 2026-07-13
+
+- Initial exact-upstream/config/support/builder suite: 79 passed in 21.38 seconds.
+- Expanded suite including dynamic common-estimand, deterministic batching and real-sklearn synthetic proxy behavior: 84 passed in 20.02 seconds.
+- Post-hardening direct subgroup/proxy subset: 31 passed in 4.29 seconds.
+- `py_compile`, canonical config validation and `git diff --check`: passed. Intermediate pre-review config hash: `be2b3f9f7e052df42ad9dc413d10e29bfc2ad6dd63a38513d21957aa9908523f`; it is superseded below.
+- Dynamic tests prove: canonical `outer_fold` only; two common groups required for paired gaps; identical systems yield exact-zero paired point/CI independent of row order; batch sizes produce bit-identical subgroup/proxy draws; two unique proxy systems create 20 shared-fold fits and exactly-once OOF rows; the alias performs no fit; proxy target, performance target and identifier are absent from raw and transformed predictors.
+- Intermediate pre-review real INX in-memory diagnostic: 1,200 rows, 20 warning-free fits, 2,400 exactly-once OOF rows, 5,000 target-specific bootstrap draws in batches of 200, 5.233 measured seconds, exact historical outer-map match, zero files/network/API calls. Diagnostic-only macro-F1: job-role-retained `0.968543` (pointwise 95% CI `0.956635-0.980215`); job-role-removed `0.247368` (`0.226694-0.268709`). No manuscript claim is admitted; the final diagnostic is recorded below.
+- Post-review direct focus: 44 passed. Expanded integration focus: 102 passed in 20.30 seconds.
+- Full repository pytest: 467 passed, 2 skipped and 11 subtests in 85.74 seconds.
+- Full unittest: 178 tests passed with 2 skips in 7.045 seconds. Compileall passed.
+- Independent follow-up review: 102 focused tests passed; no remaining P0/P1 defect.
+- Final config validation: `3c9588c1327ac563a85586835b19b30768860165dc26b61fcf7aafbce3bb1421`.
+- Final real-INX no-write/no-network diagnostic: 20 fits, 2,400 exactly-once nominal proxy OOF rows, 5,000 batched draws, exact outer-map match, minimum overall class support 20, minimum nonzero fold support 1, two zero-support cells, 3.776 seconds. Diagnostic values are not manuscript evidence.
+- Final hygiene: manuscript unchanged; zero secret, absolute-path, >100 MB candidate, active leakage-safe or legacy proxy-import matches; 17 README links valid; 27 issue rows parsed; `pip check` clean.

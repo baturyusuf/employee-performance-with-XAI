@@ -71,4 +71,22 @@ No historical calibration file is admitted and no new canonical calibration arti
 | `calibration_bins.csv`; class reliability PNG/SVG; calibration summary PNG/SVG/source | Ten-bin class reliability and manuscript-figure source evidence | Implementation/test contract only |
 | `calibration_protocol.json`; `predeclared_method_rationale.md`; `calibration_validation.json`; `calibration_metadata.json` | Fixed sigmoid/no-selection contract, warning and hash/provenance validation | Implementation/test contract only |
 
-The raw rows must equal current-run benchmark OOF values exactly and every sigmoid calibrator must be trained only from the corresponding outer-training cross-fit rows. Current config `d755ecc3...` rejects historical benchmark config `7e70bf66...`; therefore no numerical calibration claim is admitted until the benchmark and calibration run under one final frozen identity and the persisted validator/manifest pass.
+The raw rows must equal current-run benchmark OOF values exactly and every sigmoid calibrator must be trained only from the corresponding outer-training cross-fit rows. The Unit 2E checkpoint config was `d755ecc3...`; the later Unit 2F config is also intentionally incompatible with historical benchmark config `7e70bf66...`. Therefore no numerical calibration claim is admitted until benchmark and calibration run under one final frozen identity and the persisted validator/manifest pass.
+
+## Unit 2F Subgroup/Proxy Evidence Contract
+
+No historical fairness/proxy file is admitted and no new canonical Unit 2F artifact exists yet. The future same-run `core/subgroup_proxy/` package declares:
+
+| Declared output | Evidence role | Current claim status |
+| --- | --- | --- |
+| `fairness_oof_predictions.csv` | Exact three-policy raw performance OOF rows; no stage refit | Implementation/test contract only |
+| `fairness_group_support_and_metrics.csv` | Visible group counts, numerators, metric denominators and fixed complete-OOF eligibility | Implementation/test contract only |
+| `fairness_disparity_uncertainty.csv` | Pointwise support/status-aware 5,000-draw subgroup gap intervals | Implementation/real-data diagnostic only; no fairness claim |
+| `fairness_policy_paired_gap_differences.csv` | Paired policy gaps over identical common eligible group sets | Implementation/test contract only; no multiplicity-adjusted claim |
+| `proxy_feature_contracts.csv`; `proxy_equivalence.csv` | Two unique target/ID-free predictor contracts and one explicit no-fit alias | Implementation/real-data diagnostic only |
+| `proxy_oof_predictions.csv`; `proxy_fold_metrics.csv`; `proxy_descriptive_fold_summary.csv` | Exactly-once shared-fold proxy OOF evidence and descriptive fold variability | Implementation/real-data diagnostic only |
+| `proxy_metric_intervals.csv`; `proxy_policy_paired_differences.csv` | Separate target-stratified pointwise 5,000-draw nominal proxy-risk uncertainty with overall/fold class support | Implementation/real-data diagnostic only; reconstructability is not causal/discrimination evidence |
+| `performance_subgroup_bootstrap_metadata.json`; `proxy_bootstrap_metadata.json` | Performance resample equality plus proxy semantic-adapter/strata/batch hashes | Implementation/test contract only |
+| `proxy_label_mapping.json`; `proxy_watchlist_associations.csv`; `manuscript_fairness_proxy_table.csv`; interpretation/metadata | Identity-bound nominal target mapping, config-sourced exploratory associations, support/conditional-inference limitations and portable provenance | Implementation/test contract only |
+
+Current config hash `3c9588c1327ac563a85586835b19b30768860165dc26b61fcf7aafbce3bb1421` rejects all prior benchmark/policy/fairness artifacts. Department reconstructability is explicitly `nominal_multiclass_proxy_diagnostic`, not a restricted performance task. The real-INX 20-fit diagnostic generated no file and is not an authoritative result. Any future manuscript statement must cite the complete clean-run files and must use `support-aware subgroup diagnostics` and `proxy-risk reconstructability`, not a fairness guarantee or causal use claim.

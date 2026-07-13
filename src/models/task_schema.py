@@ -6,6 +6,7 @@ from typing import Any, Mapping, Optional
 
 ORDINAL_MULTICLASS_PERFORMANCE = "ordinal_multiclass_performance"
 RESTRICTED_TARGET_PERFORMANCE_ROBUSTNESS = "restricted_target_performance_robustness"
+NOMINAL_MULTICLASS_PROXY_DIAGNOSTIC = "nominal_multiclass_proxy_diagnostic"
 BINARY_ATTRITION_TRANSFER = "binary_attrition_transfer"
 BINARY_TURNOVER_TRANSFER = "binary_turnover_transfer"
 
@@ -87,6 +88,18 @@ TASK_SCHEMAS: Mapping[str, TaskSchema] = {
             "3/4-only target is restricted and is not comparable with the primary 2/3/4 task."
         ),
     ),
+    NOMINAL_MULTICLASS_PROXY_DIAGNOSTIC: TaskSchema(
+        name=NOMINAL_MULTICLASS_PROXY_DIAGNOSTIC,
+        comparison_group="nominal_proxy_risk_diagnostic",
+        applicable_metrics=(
+            _COMMON_METRICS | _COMMON_CALIBRATION_METRICS | {"multiclass_brier"}
+        ),
+        ordinal_metrics_comparable=False,
+        applicability_note=(
+            "Department reconstructability is a nominal multiclass proxy-risk diagnostic. "
+            "It is not an employee-performance task and ordinal metrics are inapplicable."
+        ),
+    ),
     BINARY_ATTRITION_TRANSFER: TaskSchema(
         name=BINARY_ATTRITION_TRANSFER,
         comparison_group="related_binary_task_transfer",
@@ -123,6 +136,8 @@ TASK_TYPE_ALIASES: Mapping[str, str] = {
     "restricted_ordinal_performance": RESTRICTED_TARGET_PERFORMANCE_ROBUSTNESS,
     "restricted_performance": RESTRICTED_TARGET_PERFORMANCE_ROBUSTNESS,
     RESTRICTED_TARGET_PERFORMANCE_ROBUSTNESS: RESTRICTED_TARGET_PERFORMANCE_ROBUSTNESS,
+    NOMINAL_MULTICLASS_PROXY_DIAGNOSTIC: NOMINAL_MULTICLASS_PROXY_DIAGNOSTIC,
+    "nominal_proxy_diagnostic": NOMINAL_MULTICLASS_PROXY_DIAGNOSTIC,
     "binary_attrition": BINARY_ATTRITION_TRANSFER,
     BINARY_ATTRITION_TRANSFER: BINARY_ATTRITION_TRANSFER,
     "binary_turnover": BINARY_TURNOVER_TRANSFER,
