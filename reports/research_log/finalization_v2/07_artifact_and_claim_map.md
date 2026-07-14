@@ -253,3 +253,22 @@ No standalone scientific artifact is admitted by this implementation unit. Every
 No scientific result, table, figure or release artifact is created by V2-019. `.github/workflows/ci.yml`, `.github/workflows/validate-release-candidate.yml` and `src/governance/ci_repository_gate.py` are executable engineering contracts only. Hosted CI may install the locked dependency graph and run tests, but scientific build execution remains offline and API-credential-free. The trusted self-hosted workflow validates an already complete local two-scope package and prints a read-only validation receipt to the job log; it cannot promote `latest`, upload evidence or publish a release. A future workflow log is reproducibility evidence, not manuscript evidence or a canonical package.
 
 Hosted run `29351557672` is the first passed execution receipt for this engineering contract. Its data-free skips are limited to exact tests whose ignored local input is absent; the trusted release workflow refuses to run without those inputs. The Actions log remains CI evidence only and supplies no manuscript number, scientific result or canonical release identity.
+
+## V2-021 core-figure generator and future artifact inventory
+
+The production runner is `src/experiments/manuscript_core_figures.py`; it is registered only as canonical stage `core_figures`. It may consume only the 24 paths frozen under `manuscript_final.figures.definitions` in the active run root. It has no historical/latest fallback.
+
+The future exact runner-owned inventory is 29 files:
+
+- `figure_1_study_design_leakage_aware_pipeline.{png,svg}` plus its source CSV and technical caption;
+- `figure_2_feature_policy_tradeoff.{png,svg}` plus its source CSV and technical caption;
+- `figure_3_xgboost_vs_baselines.{png,svg}` plus its source CSV and technical caption;
+- `figure_4_cross_fitted_sigmoid_calibration.{png,svg}` plus its source CSV and technical caption;
+- `figure_5_global_grouped_oof_shap.{png,svg}` plus its source CSV and technical caption;
+- `figure_6_oof_shap_stability.{png,svg}` plus its source CSV and technical caption;
+- `figure_7_hrdataset_v14_mapped_target_replication.{png,svg}` plus its source CSV and technical caption;
+- `figure_manifest.json`.
+
+The orchestrator adds `core_figures/stage_contract.json`, yielding 30 stage files. `core_figure_package.py` requires exact source hashes/sizes, run/config/scientific-input/source-tree identity, portable containment, valid image dimensions, caption identity, primary/HR external forbidden-feature absence and a closed-world inventory.
+
+Allowed claim role: technical visualization of already validated current-run source tables under each frozen claim boundary. Prohibited: using the synthetic test package, historical v1 images, the noncanonical Unit 2G stage, manual values, causal/fairness/actionability/deployment claims, or calling any image canonical before the future real package validator passes. No V2-021 scientific artifact currently exists.

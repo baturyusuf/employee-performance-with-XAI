@@ -41,3 +41,7 @@ V2-013 is implementation-complete, but all three task strata have not yet run un
 ## Trusted Release Validator - Candidate-Bound Engineering Gate
 
 V2-019 hosted run `29351557672` passes. The manual release validator still requires a user-operated Windows self-hosted runner with the custom `publication-release` label and every ignored scientific input. It must not be provisioned or dispatched until an exact-commit complete candidate exists. This is a candidate-bound engineering/release gate, not ethics approval, source/licence verification or scientific evidence.
+
+## Core Tables and Figures - Canonical Execution Pending
+
+The source-bound seven-figure generator and closed-world validator are implemented and tested, but the only rendered package was a temporary synthetic unit-test fixture. No real Figure 1-7 artifact or core table is canonical. V2-022 metric-schema/core-table implementation and one clean complete real-data build remain required before any result/table/figure map or claim matrix can be frozen. Historical v1 figures and the noncanonical Unit 2G stage are inadmissible sources.

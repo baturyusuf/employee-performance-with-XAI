@@ -571,7 +571,38 @@ def _stage_cache_valid(context: StageContext, stage: str) -> bool:
         return False
     if actual != seen:
         return False
+    if stage == "core_figures":
+        try:
+            _validate_stage_specific_output(context, stage)
+        except ManuscriptBuildError:
+            return False
     return True
+
+
+def _validate_stage_specific_output(context: StageContext, stage: str) -> Mapping[str, Any]:
+    """Apply a fail-closed package contract beyond the generic stage receipt."""
+
+    if stage != "core_figures":
+        return {"status": "not_applicable", "stage": stage}
+    from src.governance.core_figure_package import (
+        CoreFigurePackageError,
+        validate_core_figure_package,
+    )
+
+    try:
+        return validate_core_figure_package(
+            context.run_dir / "core_figures",
+            run_root=context.run_dir,
+            config=context.config,
+            run_id=context.run_id,
+            config_hash=context.config_hash,
+            scientific_input_hash=str(context.manifest["scientific_input_hash"]),
+            source_tree_hash=str(context.manifest["source_tree_hash"]),
+        )
+    except CoreFigurePackageError as exc:
+        raise ManuscriptBuildError(
+            f"Stage {stage!r} failed its specialized production package contract: {exc}"
+        ) from exc
 
 
 def _write_stage_metadata(
@@ -893,6 +924,33 @@ def _run_provenance(context: StageContext) -> Mapping[str, Any]:
     )
 
 
+def _run_core_figures(context: StageContext) -> Mapping[str, Any]:
+    from src.experiments.manuscript_core_figures import run
+
+    figure_plan = context.settings.get("figures")
+    definitions = figure_plan.get("definitions") if isinstance(figure_plan, Mapping) else None
+    if not isinstance(definitions, Mapping):
+        raise ManuscriptBuildError("Canonical core-figure definitions are missing.")
+    upstream_stages = {
+        str(source.get("stage"))
+        for definition in definitions.values()
+        if isinstance(definition, Mapping)
+        for source in definition.get("sources", ())
+        if isinstance(source, Mapping) and source.get("stage") != "run_inputs"
+    }
+    for stage in sorted(upstream_stages):
+        _require_compatible_upstream_stage(context, stage)
+    return run(
+        context.config_path,
+        run_root=context.run_dir,
+        output_dir=context.run_dir / "core_figures",
+        run_id=context.run_id,
+        config_hash=context.config_hash,
+        scientific_input_hash=str(context.manifest["scientific_input_hash"]),
+        source_tree_hash=str(context.manifest["source_tree_hash"]),
+    )
+
+
 STAGE_RUNNERS: Mapping[str, Callable[[StageContext], Mapping[str, Any]]] = {
     "shared_folds": _run_shared_folds,
     "model_benchmarks": _run_model_benchmarks,
@@ -904,11 +962,15 @@ STAGE_RUNNERS: Mapping[str, Callable[[StageContext], Mapping[str, Any]]] = {
     "heuristic_counterfactual": _run_counterfactual,
     "external_robustness": _run_external_robustness,
     "dataset_cards": _run_provenance,
+    "core_figures": _run_core_figures,
 }
-ATOMIC_DIRECTORY_STAGE_RUNNERS = frozenset({"external_replication", "external_robustness"})
+ATOMIC_DIRECTORY_STAGE_RUNNERS = frozenset(
+    {"external_replication", "external_robustness", "core_figures"}
+)
 STAGE_ORPHAN_PREFIXES: Mapping[str, tuple[str, ...]] = {
     "external_replication": (".hrdataset-replication-", "external_replication.__staging__"),
     "external_robustness": ("external_robustness.__staging__.",),
+    "core_figures": ("core_figures.__staging__.",),
 }
 
 
@@ -970,6 +1032,13 @@ def _execute_stage(context: StageContext, stage: str, *, reuse_compatible: bool)
         started_at=started_at,
         elapsed_seconds=time.perf_counter() - started,
     )
+    if not _stage_cache_valid(context, stage):
+        # Re-run the specialized validator only on failure so its precise
+        # contract error is surfaced; the successful path validates once.
+        _validate_stage_specific_output(context, stage)
+        raise ManuscriptBuildError(
+            f"Stage {stage!r} failed validation after its completion contract was written."
+        )
     return [*outputs, metadata]
 
 

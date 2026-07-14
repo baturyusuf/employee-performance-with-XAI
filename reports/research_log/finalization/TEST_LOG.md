@@ -455,3 +455,19 @@ Push/recovery gate: the normal push timed out after 184 seconds with no remote r
 - Post-fix local pytest: 730 passed, 2 skipped and 11 subtests in 123.44 seconds, exit 0 (127.411 seconds wall).
 - Post-fix local unittest: 177 tests, 1 skipped in 7.945 seconds, exit 0 (11.733 seconds wall). Compileall: exit 0 in 0.103 seconds.
 - Green hosted run `29351557672` at commit `700adb235e66927df0ea4bf6b78ec811c9ffc1ee`: all steps passed. Focus 35 in 0.67 seconds; pytest 709 passed, 23 explicit skips and 11 subtests in 104.65 seconds; unittest 177 in 6.516 seconds with 10 skips; compileall and the production repository gate passed.
+
+## V2-021 production core-figure gate - 2026-07-14
+
+- Hosted predecessor receipt: Actions run `29352015443` completed successfully at synchronized commit `ea34ed658c141ad9158cf1543c409718753d2464`.
+- Locked disposable environment: corrected exact-lock install exit 0 in 83.4 seconds; `pip check` and pandas/Matplotlib/pytest imports passed. The first command used the wrong lock path and installed nothing.
+- Initial combined focus: 38 passed/one failed in 6.70 seconds (11.774 wall); failure was the existing SVG declaration prohibition. Production fix removes `DOCTYPE` and rejects any remaining declaration/entity.
+- Corrected combined focus: 39 passed in 5.51 seconds (8.683 wall).
+- Real-schema generator focus after SHAP/calibration alignment: 3 passed in 4.44 seconds (7.527 wall).
+- Complete pytest one: 732 passed, two skipped, 11 subtests and one generic promotion-fixture failure in 131.27 seconds (135.211 wall). Production validation was not weakened.
+- Exact fixture regression: one passed in 0.35 seconds (3.338 wall).
+- Final complete pytest: 733 passed, two skipped and 11 subtests in 128.34 seconds (132.292 wall), exit 0.
+- Final unittest: 177 tests, one skipped in 7.334 seconds (11.190 wall), exit 0.
+- Compileall: exit 0 in 0.121 seconds.
+- Config/source contract: exit 0 in 0.177 seconds; config `a866bd6f...`, source tree `fcae16c9...`.
+- Retained scientific/figure artifact, real-data refit, Unit 2G rerun, network/API scientific call and manuscript modification: zero.
+- Consolidated manifest/config, forbidden-feature, raw/secret, portability, README-link, manuscript-diff, large-file/staging and no-network-import gate: exit 0 in 1.143 seconds; 16 candidates, 32 issues, 29 local links/23 unique targets, maximum 127,236 bytes and zero findings.

@@ -1491,3 +1491,17 @@ Checkpoint `498e8ad` was pushed. Clean receipt generation exited 0 in 0.685 seco
 Focused chronology: 92 passed in 5.41 seconds; after restricting Git to exact read-only subcommands, 93 passed in 4.65 seconds. Full one returned 724 passed/one failed because an existing source-order test inspected the new wrapper instead of `_build_impl`. The corrected post-fix focus passed 107 in 3.35 seconds. Final pytest passed 725/2 skips/11 subtests in 122.38 seconds (126.377 wall); unittest passed 176/one skip in 7.563 seconds (11.357 wall); compileall passed in 0.115 seconds.
 
 The real-config core entrypoint was invoked with dummy OpenAI/Anthropic credentials. It activated the boundary, exited at the intentional release-ready gate, restored caller environment and produced no run in 0.139 seconds. No actual network/API call was attempted.
+
+## V2-021 production core-figure generator - 2026-07-14
+
+Recovery confirmed clean synchronized branch HEAD `ea34ed658c141ad9158cf1543c409718753d2464`. Public Actions status inspection confirmed receipt run `29352015443` completed successfully at that exact commit. No rerun or repository change was needed for V2-019.
+
+The first disposable-environment command created the intended CPython 3.14 environment but referenced nonexistent `requirements-lock-py314.txt`; pip printed an exact file-not-found error and installed nothing. The corrected command used `constraints/py314-lock.txt`, exited 0 after 83.4 seconds, passed `pip check`, and imported pandas 3.0.2, Matplotlib 3.10.8 and pytest 9.1.1.
+
+Initial combined focus over the new generator, figure package/plan and core-scope tests reported 38 passes/one failure in 6.70 seconds (11.774 wall). Matplotlib emitted an SVG `DOCTYPE` prohibited by the existing security validator. The production writer now removes it and fails if any `DOCTYPE`/entity remains. The repeated combined focus passed 39 in 5.51 seconds (8.683 wall).
+
+Read-only schema comparison against the production writers then found that canonical main-task SHAP stability uses `outer_fold_a/b`, `spearman_all_features` and wide `jaccard_*`/`spearman_*` summary columns, while calibration intentionally emits null coordinates for zero-support bins. The generator and fixture were corrected to those real schemas; a direct generator focus passed 3 in 4.44 seconds (7.527 wall).
+
+Complete pytest cycle one reported 732 passes, two skips/11 subtests and one failure in 131.27 seconds (135.211 wall). The failure was the promotion-order fixture's generic placeholder `core_figures` receipt reaching the new specialized validator. Production was not weakened: that fixture now isolates the specialized step, which is independently exercised by the rendered-package test. The exact failing test passed in 0.35 seconds. The allowed post-fix complete cycle passed 733 with two skips/11 subtests in 128.34 seconds (132.292 wall). Unittest passed 177 with one skip in 7.334 seconds (11.190 wall); compileall passed in 0.121 seconds.
+
+Canonical config/source validation exited 0 in 0.177 seconds and produced config `a866bd6f9851fffce9af4238459d05fc1c6540f9e11d3668698a11c23811107d` and source tree `fcae16c902fc759be087a9c42c451799bdc97fc49b6c396eb54260086a1e5987`. No real scientific stage, Unit 2G rerun, API/network scientific call, manuscript edit, retained figure artifact, promotion or release occurred.

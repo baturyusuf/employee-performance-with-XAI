@@ -37,8 +37,8 @@ CORE_FIGURE_PROHIBITED_TOKENS = (
     "historical",
 )
 CORE_FIGURE_BLOCKING_REASON = (
-    "Production core-figure generation, source-identity manifests, and canonical "
-    "figure artifacts are not yet implemented and validated."
+    "Production core-figure generation and package validation are implemented; "
+    "canonical artifacts remain pending the final clean real-data build."
 )
 
 

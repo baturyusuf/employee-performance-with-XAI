@@ -427,6 +427,15 @@ def test_promotion_runs_the_production_strict_validator_for_both_scopes(
     monkeypatch.setattr(builder, "validate_run_manifest", lambda *args, **kwargs: {})
     monkeypatch.setattr(builder, "_validate_resume_worktree", lambda *_args, **_kwargs: None)
     monkeypatch.setattr(builder, "_validate_primary_artifacts", lambda _context: None)
+    # This fixture exercises promotion ordering and the complete-package
+    # traversal with generic stage receipts.  The production core-figure
+    # package contract is exercised independently with a real rendered
+    # seven-figure fixture in test_manuscript_core_figures.py.
+    monkeypatch.setattr(
+        builder,
+        "_validate_stage_specific_output",
+        lambda _context, stage: {"status": "fixture_isolated", "stage": stage},
+    )
     monkeypatch.setattr(
         builder,
         "_validate_input_snapshot_contract",
