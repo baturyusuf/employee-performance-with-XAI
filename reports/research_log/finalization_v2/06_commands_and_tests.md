@@ -1370,3 +1370,5 @@ Focused command:
 Exit 0: 72 passed in 29.58 seconds. Current-HEAD validation of the provisional input manifest produced the expected noncanonical `git commit mismatch`; it was caught and asserted, so the diagnostic command exited 0. No canonical manifest/promotion exists.
 
 `git rm --cached -r -- reports/manuscript_final/stage_validation_hrdataset_20260713T175045Z_5af0262e83a3` exited 0. Verification found all 126 files/65,412,766 bytes preserved locally, zero tracked paths under the run root and the exact path ignored. This is D5 tip cleanup, not scientific deletion or history rewrite.
+
+Commit `b7b2ad3074ff4b27f358fd3b9394b4ae2b1ad4a2` exited 0 after exact staged review. The subsequent normal `git push origin finalization/leakage-aware-v2` timed out after 184 seconds while Git Credential Manager awaited a response. The verified push/remote PID tree was bounded and removed after a graceful close failed; Credential Manager was not terminated. An unauthenticated GitHub ref query confirmed remote SHA `e25f403`. No second retry, force option, credential change, merge, release or history rewrite occurred.

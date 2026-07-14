@@ -117,7 +117,7 @@ Run/config/scientific identity: `stage_validation_hrdataset_20260713T175045Z_5af
 
 Generation source commit: `17a3dcd36390291b8eab24b4b3a746092dacee77`
 
-The root is intentionally local/ignored under D5. Commit `e25f403` contains an accidental historical copy, but the current publication tip removes it without rewriting history. The following files are authoritative only for validating Unit 2G implementation behavior; they are not canonical manuscript sources:
+The root is intentionally local/ignored under D5. Commit `e25f403` contains an accidental remote/historical copy; local tip `b7b2ad3` removes it without rewriting history, but that cleanup remains unpushed after Git authentication timeout. The following files are authoritative only for validating Unit 2G implementation behavior; they are not canonical manuscript sources:
 
 | Local artifact | Verified role | Claim status |
 | --- | --- | --- |

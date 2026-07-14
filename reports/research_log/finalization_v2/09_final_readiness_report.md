@@ -20,7 +20,7 @@ This is a live interim assessment, not a final completion declaration. `../final
 
 ## Data/provenance readiness
 
-**Blocked.** Pinned user-provided/acquisition contracts pass for current local inputs, but raw-data distribution and source/licence authenticity still require the accepted sanitized-publication workflow and manual verification. The 65.4 MB noncanonical Unit 2G package is preserved locally and removed from the current Git tip under D5, but commit `e25f403` remains in history because rewriting/force-push is prohibited. No ambiguous licence/source judgement has been invented.
+**Blocked.** Pinned user-provided/acquisition contracts pass for current local inputs, but raw-data distribution and source/licence authenticity still require the accepted sanitized-publication workflow and manual verification. The 65.4 MB noncanonical Unit 2G package is preserved locally and removed from local tip `b7b2ad3` under D5. Its normal push timed out, so the remote tip still points to `e25f403`; that commit also remains in history because rewriting/force-push is prohibited. No ambiguous licence/source judgement has been invented.
 
 ## Ethics readiness
 
@@ -32,7 +32,7 @@ This is a live interim assessment, not a final completion declaration. `../final
 
 ## Remaining blockers
 
-See `02_issue_register.csv` and `08_manual_submission_blockers.md`. D1-D5, cross-fitted sigmoid, HRDataset policy A and the Option-A replacement figure plan are accepted. The real HRDataset stage and artifact audit are complete; next are the reporting metadata fix, remaining supplementary science, figure/table generation, dependency/CI contracts, sanitized publication transition and final integration. Ethics and source/licence authenticity remain external manual gates; claim-matrix author approval occurs only after the final package exists.
+See `02_issue_register.csv` and `08_manual_submission_blockers.md`. D1-D5, cross-fitted sigmoid, HRDataset policy A and the Option-A replacement figure plan are accepted. The real HRDataset stage and artifact audit are complete; the tested D5 cleanup remains unpushed due Git authentication timeout. Next are the reporting metadata fix, remaining supplementary science, figure/table generation, dependency/CI contracts, sanitized publication transition and final integration. Ethics and source/licence authenticity remain external manual gates; claim-matrix author approval occurs only after the final package exists.
 
 ## Final recommendation
 

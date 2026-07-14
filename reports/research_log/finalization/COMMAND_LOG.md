@@ -234,3 +234,21 @@ Exit 0. Post-command verification found 126 local files/65,412,766 bytes, zero t
 The first consolidated hygiene wrapper on 2026-07-14 reached successful compileall, `pip check`, manuscript/diff, README and issue checks, then exited 1 before its final scans because it reused PowerShell's case-insensitive read-only `$HOME` name. It changed no file or index entry. The corrected wrapper used `$pathHits` and exited 0: 20 README links/16 unique targets, 30 well-formed issue rows, 141 candidate paths consisting of documentation plus intentional stage deletions, zero raw additions, zero files at or above 100 MB, zero secret/absolute-path/active-`leakage-safe` additions, zero tracked stage files, and all 126 local stage files/65,412,766 bytes preserved.
 
 Final staged review used `git diff --cached --check`, manuscript-scoped diff, exact path allowlisting, deletion-only status validation for the run root, added-line secret/home-path scans, and a fresh SHA-256 pass over every local artifact/stage-contract record. Exit 0: 141 staged paths = 126 deletion-only stage entries + 15 small approved files; 0 unstaged; 0 untracked; 0 secret/home-path findings; 122/122 artifact and 124/124 contract hashes still valid.
+
+Checkpoint commit exited 0:
+
+```powershell
+git commit -m "chore(publication): validate Unit 2G and untrack full evidence"
+```
+
+It created `b7b2ad3074ff4b27f358fd3b9394b4ae2b1ad4a2` with 141 paths: 126 current-tip deletions and 15 small documentation/ignore records. All 126 ignored local evidence files remained present.
+
+The authorized normal push was attempted once:
+
+```powershell
+git push origin finalization/leakage-aware-v2
+```
+
+It produced no output and timed out after 184 seconds. Process inspection recorded the verified repository tree created at 2026-07-14 11:35:29: wrapper PID 27992; `git push` PIDs 18496/36788; `git remote-https` PID 28948; `git-remote-https` PID 41176; no listening TCP/UDP endpoints. Git Credential Manager PIDs 18728/17356 were observed but explicitly left untouched. Graceful `taskkill /PID 18496` returned 1 because force was required; the four verified push/remote PIDs were then individually terminated after the wrapper timeout. Follow-up found zero surviving verified push PIDs/listeners/endpoints while both credential-manager processes remained untouched.
+
+A read-only unauthenticated GitHub ref request returned `e25f403d82082f97e34aa4f8174bfc001fced5d8`, confirming the remote did not move. No force option, credential/security change or additional push retry was used. `b7b2ad3` and this following log synchronization remain local.
