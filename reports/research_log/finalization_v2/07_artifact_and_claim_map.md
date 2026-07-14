@@ -289,3 +289,12 @@ No V2-022 scientific artifact currently exists. The production runner will creat
 | Scope table 13 | Metric registry, reproducibility and claim boundaries | Contract/provenance only; no new scientific estimate or release-readiness claim |
 
 Every row must carry run/config/scientific-input/source-tree and metric-schema hashes; dataset/model/evaluation/denominator/uncertainty resolution; and the exact source path/hash. A fixture-generated CSV, manually entered value, historical artifact, diagnostic run or Unit 2G stage output cannot be admitted as canonical.
+
+## Failed clean-build artifact inventory - 2026-07-14
+
+Two builder-owned packages are preserved locally as forensic evidence and excluded from Git:
+
+- `reports/manuscript_final/canonical_v2_20260714T175804Z_4d08ca2/`: 16 files, 141,235 bytes, failed before model fit at shared-fold import.
+- `reports/manuscript_final/canonical_v2_20260714T180533Z_770c8d0/`: 71 files, 92,337,983 bytes, shared folds and benchmark present, failed before policy fitting.
+
+Both manifests record failure. Neither package is a stage-validation, canonical, promoted or manuscript-support source; neither may be resumed, cache-reused, relabelled, copied into a new run or used for a numerical claim. The next admissible artifact must be generated from a new clean exact-commit run identity and pass both complete scopes plus promotion validation.

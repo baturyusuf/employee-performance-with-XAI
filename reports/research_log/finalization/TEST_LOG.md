@@ -507,3 +507,15 @@ Push/recovery gate: the normal push timed out after 184 seconds with no remote r
 - Final compileall: exit 0; 0.114 seconds.
 - Fresh-process sklearn import under the active offline boundary: passed.
 - Source-tree hash before checkpoint: `868a69aac143fe852a5738dd5a720be5f217243dfcd410d69c4954ca617ca8f7`.
+
+## Registry/report-subset clean-build repair - 2026-07-14
+
+- Failed production attempt: `canonical_v2_20260714T180533Z_770c8d0`, exit 1 after 635.282 seconds; shared folds and benchmark completed, policy fitting never started, package `status=failed`, 71 files/92,337,983 bytes preserved and inadmissible.
+- Environment invocation diagnostics: Windows Store `python` failed before interpreter startup; bare CPython 3.14 reported `No module named pytest`; one repository-interpreter invocation named nonexistent tests and collected zero. None is a code-test verdict.
+- Corrected focused pytest: exit 0; 43 passed; 4.99 seconds pytest / 8.272 seconds wall.
+- Complete pytest: exit 0; 747 passed, 2 skipped, 11 subtests passed; 140.55 seconds pytest / 144.800 seconds wall.
+- Unittest discovery: exit 0; 179 tests, 1 skipped; 7.552 seconds unittest / 11.531 seconds wall.
+- Compileall over `src` and `tests`: exit 0; 0.125 seconds.
+- Config hash: `51415c2ce68c89d9ce2b042b0a7a811fe3e98180b72460006f9d0465f6bf49b7`.
+- Pre-checkpoint source-tree hash: `0285772ef5941d55837750edeaa8e688754ac2dbb5fec5a0954fa35917468096`.
+- Metric-registry hash: `98ae57b622a56983192975c5bff94374ed51322f13c76af633c3c96ceb198cdd`.

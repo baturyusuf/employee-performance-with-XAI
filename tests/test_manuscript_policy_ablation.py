@@ -406,6 +406,30 @@ def _fake_bootstrap(predictions: pd.DataFrame, **kwargs: object) -> BootstrapRes
 
 
 class ManuscriptPolicyAblationTests(unittest.TestCase):
+    def test_complete_applicability_registry_does_not_expand_report_metric_set(self) -> None:
+        settings = _config()["manuscript_final"]
+        task = settings["evaluation"]["metric_applicability"]["ordinal_multiclass_performance"]
+        task["applicable"].extend(
+            [
+                "weighted_f1",
+                "macro_precision",
+                "weighted_precision",
+                "macro_recall",
+                "weighted_recall",
+                "adjacent_accuracy",
+            ]
+        )
+
+        self.assertEqual(policy_module._configured_metrics(settings), PRIMARY_METRIC_ORDER)
+
+    def test_report_metric_must_remain_in_complete_applicability_registry(self) -> None:
+        settings = _config()["manuscript_final"]
+        task = settings["evaluation"]["metric_applicability"]["ordinal_multiclass_performance"]
+        task["applicable"].remove("macro_f1")
+
+        with self.assertRaisesRegex(PolicyAblationError, "missing_report_metrics"):
+            policy_module._configured_metrics(settings)
+
     def test_exact_policy_frame_requires_explicit_id_and_target(self) -> None:
         frame = pd.DataFrame({"EmpNumber": ["E1"], "Age": [30], "PerformanceRating": [3]})
         with self.assertRaises(PolicyAblationError):

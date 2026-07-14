@@ -12,10 +12,15 @@ import matplotlib.pyplot as plt
 
 from src.experiments import manuscript_calibration as calibration
 from src.governance.manuscript_contract import canonical_config_hash
+from src.utils.config_loader import load_config
 
 
 ROOT = Path(__file__).resolve().parents[1]
 CONFIG_PATH = ROOT / "configs" / "manuscript_final.yaml"
+
+
+def _settings() -> dict[str, object]:
+    return load_config(CONFIG_PATH)["manuscript_final"]
 
 
 def _training_evidence() -> tuple[np.ndarray, np.ndarray]:
@@ -33,6 +38,23 @@ def _training_evidence() -> tuple[np.ndarray, np.ndarray]:
         dtype=float,
     )
     return probabilities, y_true
+
+
+def test_complete_applicability_registry_does_not_expand_calibration_metrics() -> None:
+    settings = _settings()
+
+    assert calibration._configured_metrics(
+        settings, calibration.PRIMARY_TASK
+    ) == calibration.METRICS
+
+
+def test_calibration_metric_must_remain_in_complete_applicability_registry() -> None:
+    settings = _settings()
+    task = settings["evaluation"]["metric_applicability"][calibration.PRIMARY_TASK]
+    task["applicable"].remove("nll_log_loss")
+
+    with pytest.raises(calibration.CalibrationContractError, match="missing_report_metrics"):
+        calibration._configured_metrics(settings, calibration.PRIMARY_TASK)
 
 
 def _parameter_frame(

@@ -725,3 +725,11 @@ Focus passes 114. The first complete run found nine stale side-input fixture fai
 The first clean core execution failed before model fitting because the process-wide boundary replaced `subprocess.Popen` with a function and Python 3.14's late asyncio import subclasses Popen. The failed 16-file/141,235-byte run remains immutable and noncanonical.
 
 `offline_runtime.py` now installs a class-compatible Popen subclass backed by one process-wide active state. It retains exact child-command denial, works across worker threads, supports late stdlib/library subclass creation and becomes inert after the boundary. A fresh-process sklearn import directly freezes the failed path. Final focus passes 51; pytest passes 743/2 skips/11 subtests; unittest 177/one skip and compileall pass. A new clean commit/run identity is required; the failed attempt cannot be resumed.
+
+## Registry/report-subset production integration repair - 2026-07-14
+
+The second clean core run reached the production policy stage only after shared folds and the complete benchmark had passed. It exposed that policy ablation interpreted the V2-022 complete task applicability registry as an exact report order. Calibration contained the same dormant assumption. Neither defect changed a scientific result because the run failed before policy fitting and never reached calibration.
+
+Both stages now treat applicability as the complete authoritative superset. They reject duplicates and task-invalid metrics, require every predeclared stage report metric to remain present, and emit only the immutable stage-specific subset. Supplementary tasks already use an explicit separate report list and required no change. The config and 18-metric schema remain unchanged.
+
+Focused validation passes 43. Complete pytest passes 747 with two skips/11 subtests; unittest passes 179 with one skip; compileall passes. Config/source/metric hashes are `51415c2c...`, `0285772e...`, and `98ae57b6...` before checkpoint. The failed 92.3 MB run is preserved, ignored and inadmissible; a new clean shared run identity is required for core and supplementary execution.

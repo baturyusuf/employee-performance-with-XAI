@@ -69,6 +69,7 @@ from src.models.oof_bootstrap import (
     compute_paired_oof_bootstrap,
     validate_aligned_oof_predictions,
 )
+from src.models.task_schema import get_task_schema
 
 
 DEFAULT_CONFIG = Path("configs/manuscript_final.yaml")
@@ -665,11 +666,19 @@ def _configured_metrics(settings: Mapping[str, Any], task_type: str) -> tuple[st
     applicability = settings.get("evaluation", {}).get("metric_applicability", {})
     task = applicability.get(task_type, {})
     metrics = tuple(str(value) for value in task.get("applicable", ()))
-    if metrics != METRICS:
+    if len(set(metrics)) != len(metrics):
         raise CalibrationContractError(
-            f"Primary calibration metrics must remain {list(METRICS)}; received {list(metrics)}."
+            f"Metric applicability for {task_type!r} contains duplicates."
         )
-    return metrics
+    schema = get_task_schema(task_type)
+    invalid = sorted(metric for metric in metrics if metric not in schema.applicable_metrics)
+    missing = sorted(set(METRICS).difference(metrics))
+    if invalid or missing:
+        raise CalibrationContractError(
+            "Calibration report metrics must be an applicable subset of the complete task registry; "
+            f"invalid={invalid}, missing_report_metrics={missing}."
+        )
+    return METRICS
 
 
 def _resolve_seed(settings: Mapping[str, Any], key: str) -> int:

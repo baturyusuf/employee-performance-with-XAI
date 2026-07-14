@@ -174,6 +174,8 @@ cython_debug/
 /reports/manuscript_final/stage_validation_hrdataset_20260713T175045Z_5af0262e83a3/
 # Failed first canonical-build attempt is preserved locally for forensic recovery.
 /reports/manuscript_final/canonical_v2_20260714T175804Z_4d08ca2/
+# Failed post-benchmark canonical-build attempt is preserved locally for forensic recovery.
+/reports/manuscript_final/canonical_v2_20260714T180533Z_770c8d0/
 
 # User-provided HR data and row-level/fit-derived working data remain local.
 # Dataset cards, schema mappings, README files, and directory placeholders stay tracked.

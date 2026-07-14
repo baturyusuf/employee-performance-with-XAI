@@ -63,6 +63,7 @@ from src.models.oof_bootstrap import (
     metric_definition,
     validate_aligned_oof_predictions,
 )
+from src.models.task_schema import get_task_schema
 from src.utils.config_loader import load_config
 
 
@@ -305,16 +306,23 @@ def _configured_metrics(settings: Mapping[str, Any]) -> tuple[str, ...]:
     applicability = settings.get("evaluation", {}).get("metric_applicability", {})
     task = applicability.get(PRIMARY_TASK, {}) if isinstance(applicability, Mapping) else {}
     metrics = tuple(str(value) for value in task.get("applicable", ())) if isinstance(task, Mapping) else ()
-    if metrics != PRIMARY_METRIC_ORDER:
+    if len(set(metrics)) != len(metrics):
+        raise PolicyAblationError("Primary-task metric applicability contains duplicates.")
+    schema = get_task_schema(PRIMARY_TASK)
+    invalid = sorted(
+        metric
+        for metric in metrics
+        if metric not in schema.applicable_metrics
+    )
+    missing = sorted(set(PRIMARY_METRIC_ORDER).difference(metrics))
+    if invalid or missing:
         raise PolicyAblationError(
-            "Primary policy metrics must match the predeclared ordinal metric order exactly; "
-            f"observed={metrics}, expected={PRIMARY_METRIC_ORDER}."
+            "Primary policy report metrics must be an applicable subset of the complete task registry; "
+            f"invalid={invalid}, missing_report_metrics={missing}."
         )
-    if "weighted_f1" in metrics:
-        raise PolicyAblationError("weighted_f1 is not a canonical policy-ablation metric.")
-    for metric in metrics:
+    for metric in PRIMARY_METRIC_ORDER:
         metric_definition(metric)
-    return metrics
+    return PRIMARY_METRIC_ORDER
 
 
 def _validate_comparison_protocol(settings: Mapping[str, Any]) -> Mapping[str, Any]:

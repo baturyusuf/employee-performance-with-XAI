@@ -169,3 +169,10 @@ This is an implementation/provenance resolution of the already approved same-OOF
 - Common paid-API credentials are removed for the execution and restored afterward. Socket denial remains the authoritative barrier if code recreates a credential.
 - Any attempted prohibited operation poisons completion even if immediate failure is caught. A complete `package_status.json` must serialize the exact zero-attempt policy.
 - Package installation/index resolution remains outside the scientific runtime and is governed separately by V2-018/V2-019.
+
+## V2-022 Registry/Report Boundary Consequence - 2026-07-14
+
+- A task's applicability projection is exhaustive registry metadata, not a stage report order.
+- Policy ablation and calibration keep their frozen report subsets and require each subset metric to remain valid/applicable.
+- Valid task metrics outside a stage subset do not expand that stage's output; duplicates and invalid metrics still fail closed.
+- This integration repair changes no fold, model, target, metric definition, selection rule, uncertainty plan or accepted scientific scope.

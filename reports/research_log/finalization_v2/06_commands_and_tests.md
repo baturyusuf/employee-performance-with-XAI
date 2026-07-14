@@ -1523,3 +1523,11 @@ Runner inventory reported `core []` and `supplementary []` for missing stage imp
 `python -m src.experiments.build_manuscript_evidence --scope core --run-id canonical_v2_20260714T175804Z_4d08ca2 --no-reuse-compatible` exited 1 in 1.239 seconds before model fit. Exact cause: late `asyncio.windows_utils.Popen(subprocess.Popen)` received the boundary's function replacement. The failed package contains 16 files/141,235 bytes and remains `status=failed`.
 
 After implementing a process-state-backed class-compatible guard, the first focus reported 50 passes/one test-design failure; the corrected focus passed 51 in 4.15 seconds. Final pytest passed 743/2 skips/11 subtests in 134.15 seconds; unittest passed 177/one skip in 8.087 seconds; compileall passed in 0.114 seconds. A fresh-process sklearn import under the boundary passes. No scientific value was generated.
+
+## Second clean-build failure and metric-scope repair - 2026-07-14
+
+`myenv/Scripts/python.exe -m src.experiments.build_manuscript_evidence --config configs/manuscript_final.yaml --scope core --run-id canonical_v2_20260714T180533Z_770c8d0 --no-reuse-compatible` exited 1 in 635.282 seconds. Shared-fold and model-benchmark stages completed. Policy-ablation setup rejected the complete applicability registry before any policy model fit. The failed 71-file/92,337,983-byte output is `status=failed`, locally preserved and exactly ignored.
+
+The applicability audit and repair changed only policy/calibration report-subset validation. The successful focused command covered policy ablation, calibration, task metric applicability and calibration-selection guards: 43 passed in 4.99 seconds (8.272 wall), exit 0. The final complete cycle passed 747/2 skips/11 subtests in 140.55 seconds (144.800 wall), exit 0; unittest passed 179/one skip in 7.552 seconds (11.531 wall); compileall passed in 0.125 seconds.
+
+Interpreter diagnostics did not execute tests: the Windows Store shim could not launch, bare `py` lacked pytest, and one corrected-runtime command named absent test files and collected zero. No dependency installation or environment mutation occurred.
