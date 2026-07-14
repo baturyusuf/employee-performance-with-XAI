@@ -201,3 +201,17 @@ The production output root is the future current-run supplementary stage `extern
 | `<task>/artifact_manifest.csv`; `stage_artifact_manifest.csv`; builder `stage_contract.json` | Runner/task/package envelope integrity | Artifact integrity only |
 
 All scientific rows bind run/config/scientific-input/source-tree/Git/scope, raw and parsed content, schema, policy, fold, model-set and source-artifact identities at the applicable aggregation level. No artifact supports direct primary-task external validation, locked-model transport, transportability, causal, fairness, deployment or autonomous-HR claims.
+
+## V2-015 INX workbook/CSV provenance receipt
+
+The planned compact artifact is `11_inx_workbook_equivalence_receipt.json`. It is generated only from a clean implementation commit and contains no employee cell value.
+
+| Receipt evidence | Bound role | Claim boundary |
+| --- | --- | --- |
+| Workbook/CSV paths, sizes and byte SHA-256 values | Exact local-byte identity for the tracked workbook and canonical experiment CSV | Byte identity only; no upstream authenticity or redistribution right |
+| Reader engine/version, exact sheet order and shapes | Reproducible BIFF8 inspection context | Software/structure evidence only |
+| Normalization contract, both normalized content hashes, mismatch count/coordinates | Exact first-sheet to CSV cell equivalence without publishing values | Equivalence under the declared normalization only |
+| `Data Definitions` sheet/block/mapping hashes and 7/28 coverage | Partial codebook provenance with explicit column alias | Not a complete or authoritative dictionary |
+| Config/source-tree/validator/Git identities plus atomic/privacy/API flags | Execution and publication-contract identity | Not a scientific result or canonical package promotion |
+
+The CSV remains the sole canonical experiment input. The receipt cannot establish source authenticity, licence, citation, retrieval date, ethics status or any predictive result.

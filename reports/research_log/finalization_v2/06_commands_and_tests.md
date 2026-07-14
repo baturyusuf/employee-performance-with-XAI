@@ -1443,3 +1443,19 @@ The sole complete regression `myenv\Scripts\python.exe -m pytest -q` exited 0 in
 Post-regression unittest discovery exited 0 with 176 tests/one skip in 7.370 seconds (11.312 wall); compileall exited 0 in 0.112 seconds; `pip check` exited 0 in 0.631 seconds with no broken requirements.
 
 The first staged review covered 22 exact files, 2,196 insertions/29 deletions and a 119,380-byte maximum. Config/protocol, issue CSV, README links, secret, raw/model/environment, large-file, portability, manuscript-diff, active `leakage-safe`, and network/paid-API-import gates passed. No raw dataset, model artifact, diagnostic output, credential, environment file or manuscript file is staged.
+
+## V2-015 executable workbook equivalence - 2026-07-14
+
+The implementation was recovered and compiled with the repository environment. A no-write read-only Excel COM diagnostic directly invoked `read_workbook`, `compare_matrices` and the codebook summary. It exited 0 in 1.012 seconds with Excel 16.0, exact sheet order, shapes 1201 x 28 and 36 x 2, zero mismatches, common normalized matrix hash `b5caa2eec9a46ad184cc452e1d1df01abc80658db7fdd61e2cb8939943e23fbb`, seven exact mapped codebook blocks and `complete_data_dictionary=false`.
+
+Focused command:
+
+```text
+.\myenv\Scripts\python.exe -m pytest -q tests/test_inx_workbook_equivalence.py tests/test_data_acquisition_preflight.py tests/test_actual_input_hash_binding.py tests/test_side_input_hash_binding.py
+```
+
+Initial result: exit 1, 20 passed/3 failed in 2.68 seconds (5.850 wall) due to Windows `Path` separator handling. After the production path-boundary fix: exit 0, 23 passed in 2.01 seconds (5.176 wall).
+
+Integration command added artifact-run consistency, scoped manifests, external replication config and config loading: exit 0, 77 passed in 4.73 seconds (7.814 wall). Complete `pytest -q`: exit 0, 696 passed/2 skipped/11 subtests in 119.04 seconds (123.193 wall). `unittest discover -s tests -q`: exit 0, 176 tests/one skip in 7.276 seconds (11.102 wall). `compileall -q src tests`: exit 0 in 0.114 seconds. No network, paid API, manuscript write, scientific fit or retained diagnostic receipt occurred.
+
+Staged review found that `_atomic_write_json` preserved its primary error but swallowed a secondary temporary-file unlink error. The implementation now adds that cleanup failure as an exception note, and a negative test asserts the primary and secondary failures remain visible. The allowed post-review cycle passed: focus 24 in 1.87 seconds (4.903 wall), full pytest 697/2 skips/11 subtests in 117.32 seconds (121.237 wall), unittest 176/one skip in 7.196 seconds (11.059 wall), and compileall in 0.122 seconds.

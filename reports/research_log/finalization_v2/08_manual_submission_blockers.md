@@ -14,9 +14,9 @@ HRDataset_v14 is presently Git-tracked even though its acquisition record says u
 
 Raw datasets already exist in public history. Removing them from the current tip does not remove historical copies. A sanitized publication repository/history strategy requires explicit user authorization because force-push/history rewriting is prohibited by default.
 
-## INX Workbook Equivalence — Open
+## INX Workbook Semantics and Source Authority - Manual Review Required
 
-The workbook exists and is hashed. A one-time Excel COM comparison found its first sheet equivalent to the normalized CSV, but executable repository-level equivalence is not yet established because no script/test exists and the locked Python environment lacks `xlrd`/`openpyxl`. The data-definition sheet also remains outside the provenance chain.
+Executable workbook/CSV byte, structure and normalized-cell equivalence is implemented and regression-tested; a clean compact receipt is pending the implementation checkpoint. The live Excel 16 diagnostic found zero mismatches and the same normalized matrix hash. The `Data Definitions` sheet is now hash-bound through an explicit column alias, but it covers only seven of 28 data columns. Engineering equivalence does not verify that this partial codebook is authoritative, and it does not resolve upstream authenticity, licence, citation or retrieval-date review.
 
 ## Claim Matrix — Pending
 

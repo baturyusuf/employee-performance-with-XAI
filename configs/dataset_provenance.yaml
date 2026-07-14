@@ -16,6 +16,13 @@
         "licence_verification_status": "manual_review_required",
         "citation_source": "INX Future Inc Employee Performance dataset title and repository-local raw file; upstream bibliographic source is not independently verified.",
         "citation_verification_status": "manual_review_required",
+        "source_workbook_path": "data/raw/INX_Future_Inc_Employee_Performance_CDS_Project2_Data_V1.8.xls",
+        "source_workbook_sha256": "d7d224e7c8f50693e0aba7621e56a55a84b0c2c156ff95afd2b156daa5d0f003",
+        "workbook_csv_equivalence_receipt": "reports/research_log/finalization_v2/11_inx_workbook_equivalence_receipt.json",
+        "workbook_equivalence_contract_status": "executable_receipt_required",
+        "data_definitions_scope": "partial_seven_field_codebook_hash_and_coverage_only",
+        "data_definitions_column_alias": "RelationshipSatisfaction -> EmpRelationshipSatisfaction",
+        "data_definitions_semantic_authority_status": "manual_review_required",
         "unresolved_manual_verification_items": [
           "Confirm the upstream retrieval URL and actual retrieval date.",
           "Confirm the authoritative source and mirror chain.",

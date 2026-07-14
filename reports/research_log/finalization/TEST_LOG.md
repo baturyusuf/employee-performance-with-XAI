@@ -366,3 +366,19 @@ Push/recovery gate: the normal push timed out after 184 seconds with no remote r
 - Staged-diff/hygiene gate: 22 exact allowlisted files; 2,196 insertions/29 deletions; maximum 119,380 bytes; 32 unique issues; 24 README links/18 unique targets; zero staged raw/model/environment/large files, secret/absolute/manuscript/active-legacy/network findings. Existing tracked raw-history blockers remain documented and were not added by V2-013.
 - Checkpoint/push gate: commit `906f6360a971833d4cec39fd0d19873b7c567169` created successfully; one normal authenticated push exited 0 and synchronized local/origin.
 - No production artifact, network/API call, manuscript edit or Unit 2G mutation occurred.
+
+## V2-015 workbook/CSV provenance gate - 2026-07-14
+
+- Byte/schema contract: passed. Tracked BIFF8 signature and SHA-256 `d7d224e7...`, canonical CSV SHA-256 `b8deac0a...`, portable paths, exact two-sheet order, 1200 x 28 data contract and config/provenance bindings are explicit.
+- Live normalized comparison: passed with Excel COM 16.0 in 1.012 seconds. Workbook and CSV shapes are both 1201 x 28 including the header; both normalized content hashes are `b5caa2eec9a46ad184cc452e1d1df01abc80658db7fdd61e2cb8939943e23fbb`; mismatch count is zero.
+- Partial codebook gate: passed. Seven exact blocks are hash-bound through a complete explicit mapping, including `RelationshipSatisfaction -> EmpRelationshipSatisfaction`; every mapped target exists. `complete_data_dictionary=false` because coverage is 7/28, and semantic/source/licence authority remains manual.
+- Privacy/atomicity gate: passed in tests. Receipts contain no employee values; mismatch evidence contains coordinates/column names only; writes are sibling-temp, flushed/fsynced and atomically replaced; dirty/test-reader output is noncanonical.
+- Development failure retained: initial focus reported 20 passed/3 failed because Windows `Path` defaults were not normalized to portable separators. The production fix changed the boundary, not the acceptance criteria.
+- Final focused gate before staged review: 23 passed in 2.01 seconds, exit 0 (5.176 seconds wall).
+- Provenance/manifest integration: 77 passed in 4.73 seconds, exit 0 (7.814 seconds wall).
+- Initial complete pytest: 696 passed, 2 skipped and 11 subtests in 119.04 seconds, exit 0 (123.193 seconds wall).
+- Staged-review finding: fixed. Atomic-write cleanup can no longer swallow a secondary unlink failure; the primary exception carries an explicit cleanup note. The new negative test passes.
+- Final post-review focus: 24 passed in 1.87 seconds, exit 0 (4.903 seconds wall).
+- Final post-review pytest: 697 passed, 2 skipped and 11 subtests in 117.32 seconds, exit 0 (121.237 seconds wall).
+- Final post-review unittest: 176 tests, 1 skipped in 7.196 seconds, exit 0 (11.059 seconds wall). Compileall: exit 0 in 0.122 seconds.
+- Clean production receipt: intentionally pending the pushed implementation commit; no diagnostic receipt is admitted.
