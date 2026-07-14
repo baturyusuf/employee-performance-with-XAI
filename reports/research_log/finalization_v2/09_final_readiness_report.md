@@ -8,7 +8,7 @@ This is a live interim assessment, not a final completion declaration. `../final
 
 ## Engineering readiness
 
-**Not ready.** Actual-input/side-input binding, core/supplementary isolation, shared-fold benchmarking, exact-model OOF SHAP, matched policy ablation, cross-fitted sigmoid calibration, support-aware subgroup/proxy contracts, conservative HRDataset replication, closed-world completion/promotion, seven-figure package admission, supplementary heuristic search, task-bounded external contracts, executable INX workbook/CSV equivalence, forward raw-tip sanitation and dependency locking are implemented and tested. The current full gate passes 712 pytest tests with 2 skips and 11 subtests. Production figures/tables, global no-network enforcement, CI/release workflows and final all-stage integration remain open.
+**Not ready.** Actual-input/side-input binding, core/supplementary isolation, shared-fold benchmarking, exact-model OOF SHAP, matched policy ablation, cross-fitted sigmoid calibration, support-aware subgroup/proxy contracts, conservative HRDataset replication, closed-world completion/promotion, seven-figure package admission, supplementary heuristic search, task-bounded external contracts, executable INX workbook/CSV equivalence, forward raw-tip sanitation, dependency locking and complete-build offline enforcement are implemented and tested. The current full gate passes 725 pytest tests with 2 skips and 11 subtests. Production figures/tables, CI/release workflows and final all-stage integration remain open.
 
 ## Scientific readiness
 
@@ -32,7 +32,7 @@ This is a live interim assessment, not a final completion declaration. `../final
 
 ## Remaining blockers
 
-See `02_issue_register.csv` and `08_manual_submission_blockers.md`. D1-D5, cross-fitted sigmoid, HRDataset policy A and the Option-A figure plan are accepted. The real HRDataset stage/reusable audit and V2-015/V2-014/V2-018 receipts are complete. V2-020 no-network enforcement is next, followed by V2-019 CI, source-bound table/figure generators and final integration. Ethics, source/licence authenticity and historical-publication strategy remain external manual gates.
+See `02_issue_register.csv` and `08_manual_submission_blockers.md`. D1-D5, cross-fitted sigmoid, HRDataset policy A and the Option-A figure plan are accepted. The real HRDataset stage/reusable audit and V2-015/V2-014/V2-018 receipts are complete. V2-020 local enforcement passes; V2-019 CI is next, followed by source-bound table/figure generators and final integration. Ethics, source/licence authenticity and historical-publication strategy remain external manual gates.
 
 ## Final recommendation
 

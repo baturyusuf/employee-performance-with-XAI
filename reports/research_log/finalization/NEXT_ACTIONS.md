@@ -8,7 +8,7 @@
 6. Preserve the passed V2-015 receipt `../finalization_v2/11_inx_workbook_equivalence_receipt.json`, generation commit `8f02e55`, source-tree hash `d2407e99...` and receipt hash `90e75733...`. Do not call the partial seven-field `Data Definitions` sheet a complete or authoritative dictionary.
 7. Preserve V2-014 implementation commit `9342b0c`, the 14 ignored byte-identical local files and the passed compact receipt `../finalization_v2/12_publication_export_receipt.json`. Do not retain the ephemeral ZIP, rewrite history, or describe this narrow technical export as a scientific/release package.
 8. Preserve V2-018 implementation commit `498e8ad`, exact lock SHA-256 `482cbf32...`, clean inventory SHA-256 `a7ac622b...` and passed compact receipt `../finalization_v2/13_dependency_lock_receipt.json`. The temporary environment is removed; do not add excluded optional packages to core/supplementary.
-9. Implement V2-020 global no-network/API enforcement for the complete core build, then V2-019 PR/manual-release CI before source-bound table/figure generation.
+9. V2-020 complete-build no-network/API enforcement and tests pass. Review/commit/push the exact runtime boundary and package-status contract, then implement V2-019 PR/manual-release CI with the same offline assertion before source-bound table/figure generation.
 10. Enable `release_ready` only after every declared runner/output/contract exists. Then perform one clean cache-disabled current-config two-scope rebuild from real inputs and validate all manifests, hashes, tables, figures, portable paths, and V2-029 reporting fields.
 11. Freeze the claim matrix only from that future canonical package and obtain author approval before editing `manuscript/mdpi_information/main.md`.
 

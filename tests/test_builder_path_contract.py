@@ -333,7 +333,7 @@ def test_promotion_cli_rejects_build_only_scope_option() -> None:
 
 
 def test_stage_started_command_is_persisted_before_runner_execution() -> None:
-    source = inspect.getsource(builder.build)
+    source = inspect.getsource(builder._build_impl)
     loop = source[source.index("command_record = record_command") :]
     assert loop.index("write_run_manifest") < loop.index("_execute_stage")
 

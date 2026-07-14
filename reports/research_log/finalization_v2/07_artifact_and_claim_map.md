@@ -243,3 +243,7 @@ The admitted compact artifact is `13_dependency_lock_receipt.json`, generated fr
 | Zero missing/unlocked/mismatched packages plus `pip check` | Internal dependency consistency | Does not assert future package-index availability |
 
 No package-install log, local machine path, credential or dataset value enters the receipt. Package-index resolution is installation activity; it does not authorize network access during scientific execution.
+
+## V2-020 runtime policy in canonical package status
+
+No standalone scientific artifact is admitted by this implementation unit. Every future complete core/supplementary `package_status.json` must include `network_calls=0`, `paid_api_calls=0` and the exact runtime policy payload: zero attempts/successes, the blocked socket surface, cleared credential keys and exact local Git allowlist. Because any attempted operation poisons completion, this policy can appear only after an attempt-free run. It does not cover package installation and remains unproven for the final release until the real complete package exists.

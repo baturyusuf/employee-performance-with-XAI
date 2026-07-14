@@ -420,3 +420,15 @@ Push/recovery gate: the normal push timed out after 184 seconds with no remote r
 - Clean exact-commit dependency receipt: production exit 0 in 0.685 seconds; canonical-eligible core profile, source tree `a2b361b8...`, config `65519abf...`, lock `482cbf32...`, 31 distributions, inventory `a7ac622b...`, 13 direct versions and zero missing/unlocked/mismatched/core-forbidden packages.
 - Independent receipt validation: exit 0 in 0.218 seconds; receipt SHA-256 `8b77e727...`, size 2,476 bytes, zero atomic temp siblings.
 - Temporary environment cleanup: passed after the first safety scan self-matched and refused deletion. Exact contained run path had no external process owner and was removed; zero matching temp directories remain.
+
+## V2-020 complete-build no-network/API gate - 2026-07-14
+
+- Runtime contract: process-wide socket/DNS/connect/send/listener denial; caught-attempt poisoning; six API credential variables cleared/restored; shell/non-Git/remote-Git child rejection; exact local read-only Git allowlist; zero-attempt package-status contract.
+- Initial focus: 92 passed in 5.41 seconds, exit 0 (8.595 seconds wall).
+- Post-Git-allowlist focus: 93 passed in 4.65 seconds, exit 0 (7.677 seconds wall).
+- First complete pytest: 724 passed, 1 failed, 2 skipped and 11 subtests in 123.57 seconds. Failure was an existing source-introspection test looking for stage code in the new public wrapper.
+- Compatibility fix: test inspects `_build_impl`, where command persistence still occurs; production code unchanged.
+- Post-fix focus: 107 passed in 3.35 seconds, exit 0 (6.329 seconds wall).
+- Final pytest: 725 passed, 2 skipped and 11 subtests in 122.38 seconds, exit 0 (126.377 seconds wall).
+- Unittest: 176 tests, 1 skipped in 7.563 seconds, exit 0 (11.357 seconds wall). Compileall: exit 0 in 0.115 seconds.
+- Real release-blocked core entrypoint: expected `ManuscriptBuildError`, exit 0 diagnostic in 0.139 seconds; credential environment restored and no run created.

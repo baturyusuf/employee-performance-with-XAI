@@ -161,3 +161,11 @@ This is an implementation/provenance resolution of the already approved same-OOF
 - CatBoost, imbalanced-learn, InterpretML, Streamlit, OpenAI, OpenAI Agents, dotenv and the Windows COM fallback are explicitly legacy/optional. Development includes that group only because existing repository tests cover retained modules.
 - CPython 3.14 and `constraints/py314-lock.txt` are the controlled baseline. Bounded direct ranges document the admitted window; the exact constraints determine installation.
 - Package-index access during installation is distinct from scientific execution. V2-020 must still enforce zero network/API access for the complete core build.
+
+## V2-020 Complete-Build Offline Runtime Consequence - 2026-07-14
+
+- The public core and supplementary build entrypoint always activates the offline runtime boundary; callers cannot opt out with a CLI flag or environment variable.
+- DNS, TCP, UDP, listeners, socket sends, shell children, non-Git children and remote/mutating Git subcommands are prohibited. Only exact local read-only Git provenance commands are admitted.
+- Common paid-API credentials are removed for the execution and restored afterward. Socket denial remains the authoritative barrier if code recreates a credential.
+- Any attempted prohibited operation poisons completion even if immediate failure is caught. A complete `package_status.json` must serialize the exact zero-attempt policy.
+- Package installation/index resolution remains outside the scientific runtime and is governed separately by V2-018/V2-019.

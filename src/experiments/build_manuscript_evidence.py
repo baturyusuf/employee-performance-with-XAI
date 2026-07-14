@@ -47,6 +47,11 @@ from src.governance.manuscript_contract import (
     validate_run_manifest,
     write_run_manifest,
 )
+from src.governance.offline_runtime import (
+    active_policy_receipt,
+    enforce_offline_runtime,
+    validate_policy_receipt,
+)
 from src.utils.config_loader import PROJECT_ROOT
 
 
@@ -1667,7 +1672,11 @@ def _write_claim_report(context: StageContext) -> Path:
     return path
 
 
-def _expected_package_status_payload(context: StageContext) -> dict[str, Any]:
+def _expected_package_status_payload(
+    context: StageContext,
+    *,
+    runtime_network_policy: Mapping[str, Any] | None = None,
+) -> dict[str, Any]:
     stage_rows: list[dict[str, Any]] = []
     stages = tuple(str(value) for value in (context.scope_contract or {}).get("stages", ()))
     expected_stages = CANONICAL_STAGE_ORDERS[context.evidence_scope]
@@ -1705,6 +1714,11 @@ def _expected_package_status_payload(context: StageContext) -> dict[str, Any]:
                 "n_outputs": len(outputs),
             }
         )
+    policy = (
+        active_policy_receipt()
+        if runtime_network_policy is None
+        else validate_policy_receipt(runtime_network_policy)
+    )
     return {
         "run_id": context.run_id,
         "config_hash": context.config_hash,
@@ -1712,7 +1726,9 @@ def _expected_package_status_payload(context: StageContext) -> dict[str, Any]:
         "scope_contract_hash": context.manifest.get("scope_contract_hash"),
         "research_use": "research_grade_decision_support_only",
         "autonomous_hr_decisions_allowed": False,
+        "network_calls": 0,
         "paid_api_calls": 0,
+        "runtime_network_policy": policy,
         "stages": stage_rows,
     }
 
@@ -1732,7 +1748,16 @@ def _validate_package_status_contract(context: StageContext) -> Mapping[str, Any
         payload = json.loads(path.read_text(encoding="utf-8"))
     except (OSError, json.JSONDecodeError) as exc:
         raise ManuscriptBuildError(f"Cannot read package status receipt: {exc}") from exc
-    expected = _expected_package_status_payload(context)
+    raw_policy = payload.get("runtime_network_policy") if isinstance(payload, Mapping) else None
+    if not isinstance(raw_policy, Mapping):
+        raise ManuscriptBuildError("Package status has no valid runtime no-network/API policy.")
+    try:
+        expected = _expected_package_status_payload(
+            context,
+            runtime_network_policy=raw_policy,
+        )
+    except Exception as exc:
+        raise ManuscriptBuildError(f"Package runtime no-network/API policy failed: {exc}") from exc
     if payload != expected:
         raise ManuscriptBuildError(
             "Package status semantic contract failed: the receipt is not an exact rendering "
@@ -2605,7 +2630,7 @@ def _select_start_manifest(
     return provisional, False
 
 
-def build(
+def _build_impl(
     config_path: str | Path = DEFAULT_CONFIG_PATH,
     *,
     run_id: str | None = None,
@@ -2835,6 +2860,24 @@ def build(
         raise
     finally:
         _release_run_lock(lock_path, lock_token)
+
+
+def build(
+    config_path: str | Path = DEFAULT_CONFIG_PATH,
+    *,
+    run_id: str | None = None,
+    reuse_compatible: bool = True,
+    evidence_scope: str = "core",
+) -> Dict[str, Path]:
+    """Run the complete scientific build under the global offline boundary."""
+
+    with enforce_offline_runtime():
+        return _build_impl(
+            config_path,
+            run_id=run_id,
+            reuse_compatible=reuse_compatible,
+            evidence_scope=evidence_scope,
+        )
 
 
 def parse_args(argv: Sequence[str] | None = None) -> argparse.Namespace:

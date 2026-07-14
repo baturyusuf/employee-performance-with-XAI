@@ -130,7 +130,8 @@ def _strict_complete_scope(output_root: Path, scope: str) -> Path:
     input_contract.parent.mkdir()
     input_contract.write_text('{"status":"complete"}\n', encoding="utf-8")
     builder._write_claim_report(context)
-    builder._write_package_status(context)
+    with builder.enforce_offline_runtime():
+        builder._write_package_status(context)
     final_paths = builder.build_final_evidence_manifest(
         run_dir,
         run_id=RUN_ID,

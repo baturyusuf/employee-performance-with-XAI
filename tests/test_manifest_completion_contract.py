@@ -638,7 +638,8 @@ def test_package_status_and_claim_boundaries_are_semantically_validated(tmp_path
             started_at="2026-07-13T00:00:00+00:00",
             elapsed_seconds=1.0,
         )
-    status_path = builder._write_package_status(context)
+    with builder.enforce_offline_runtime():
+        status_path = builder._write_package_status(context)
     builder._write_claim_report(context)
 
     builder._validate_package_status_contract(context)
@@ -653,19 +654,22 @@ def test_package_status_and_claim_boundaries_are_semantically_validated(tmp_path
     with pytest.raises(builder.ManuscriptBuildError, match="paid_api_calls|semantic"):
         builder._validate_package_status_contract(context)
 
-    status = json.loads(builder._write_package_status(context).read_text(encoding="utf-8"))
+    with builder.enforce_offline_runtime():
+        status = json.loads(builder._write_package_status(context).read_text(encoding="utf-8"))
     status["stages"][0]["elapsed_seconds"] = float("nan")
     status_path.write_text(json.dumps(status) + "\n", encoding="utf-8")
     with pytest.raises(builder.ManuscriptBuildError, match="semantic|runtime"):
         builder._validate_package_status_contract(context)
 
-    status = json.loads(builder._write_package_status(context).read_text(encoding="utf-8"))
+    with builder.enforce_offline_runtime():
+        status = json.loads(builder._write_package_status(context).read_text(encoding="utf-8"))
     status["stages"][0]["n_outputs"] = 999999
     status_path.write_text(json.dumps(status) + "\n", encoding="utf-8")
     with pytest.raises(builder.ManuscriptBuildError, match="semantic"):
         builder._validate_package_status_contract(context)
 
-    builder._write_package_status(context)
+    with builder.enforce_offline_runtime():
+        builder._write_package_status(context)
     claim_path = run_dir / "canonical_claim_boundaries.md"
     claim_path.write_text(
         claim_path.read_text(encoding="utf-8")
