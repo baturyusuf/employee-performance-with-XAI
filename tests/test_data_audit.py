@@ -7,7 +7,14 @@ from pathlib import Path
 from src.data.audit import run_data_audit
 
 
+ROOT = Path(__file__).resolve().parents[1]
+
+
 class DataAuditTests(unittest.TestCase):
+    @unittest.skipUnless(
+        (ROOT / "data/raw/inx_employee_performance.csv").is_file(),
+        "requires the ignored local INX dataset",
+    )
     def test_run_data_audit_writes_required_outputs(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             outputs = run_data_audit(output_dir=Path(tmp), write_registry=False)

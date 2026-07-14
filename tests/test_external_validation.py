@@ -13,7 +13,14 @@ from src.models.evaluate import multiclass_brier
 from src.utils.config import SETTINGS
 
 
+ROOT = Path(__file__).resolve().parents[1]
+HR_RAW = ROOT / "data/external/hrdataset_v14/raw.csv"
+IBM_RAW = ROOT / "data/external/ibm_hr_analytics/raw.csv"
+TURNOVER_RAW = ROOT / "data/external/employee_turnover/raw.csv"
+
+
 class ExternalValidationTests(unittest.TestCase):
+    @unittest.skipUnless(HR_RAW.is_file(), "requires the ignored local HRDataset_v14 dataset")
     def test_hrdataset_performance_score_mapping(self) -> None:
         dataset = load_external_dataset("hrdataset_v14")
         counts = dataset.canonical[dataset.target_column].value_counts().sort_index().to_dict()
@@ -22,12 +29,14 @@ class ExternalValidationTests(unittest.TestCase):
         self.assertEqual(counts, {2: 31, 3: 243, 4: 37})
         self.assertEqual(dataset.labels, [2, 3, 4])
 
+    @unittest.skipUnless(IBM_RAW.is_file(), "requires the ignored local IBM dataset")
     def test_ibm_performance_target_space_is_restricted(self) -> None:
         dataset = load_external_dataset("ibm_hr_analytics")
 
         self.assertEqual(dataset.labels, [3, 4])
         self.assertEqual(dataset.task_type, "restricted_target_performance_robustness")
 
+    @unittest.skipUnless(HR_RAW.is_file(), "requires the ignored local HRDataset_v14 dataset")
     def test_external_policy_excludes_leakage_and_sensitive_columns(self) -> None:
         dataset = load_external_dataset("hrdataset_v14")
         features = set(build_feature_columns(dataset, "conservative_primary"))
@@ -40,6 +49,7 @@ class ExternalValidationTests(unittest.TestCase):
         self.assertNotIn(dataset.target_column, features)
         self.assertNotIn("EmpNumber", features)
 
+    @unittest.skipUnless(TURNOVER_RAW.is_file(), "requires the ignored local turnover dataset")
     def test_employee_turnover_last_evaluation_sensitivity(self) -> None:
         dataset = load_external_dataset("employee_turnover")
         with_eval = set(build_feature_columns(dataset, "with_last_evaluation"))

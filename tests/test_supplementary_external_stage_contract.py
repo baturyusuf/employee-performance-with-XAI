@@ -7,6 +7,7 @@ from pathlib import Path
 
 import numpy as np
 import pandas as pd
+import pytest
 
 from src.data.canonical_loader import load_canonical_dataset
 from src.experiments import manuscript_supplementary_external as supplementary
@@ -16,6 +17,7 @@ from src.utils.config_loader import load_config
 
 
 CONFIG_PATH = Path("configs/manuscript_final.yaml")
+IBM_RAW = Path(__file__).resolve().parents[1] / "data/external/ibm_hr_analytics/raw.csv"
 
 
 class _DeterministicBinaryPipeline:
@@ -79,6 +81,7 @@ def test_builder_uses_only_the_v2_task_bounded_runner() -> None:
     assert "expected_side_input_hashes" in source
 
 
+@pytest.mark.skipif(not IBM_RAW.is_file(), reason="requires the ignored local IBM dataset")
 def test_stage_atomically_emits_exact_oof_model_lineage_and_no_combined_task_table(
     tmp_path: Path,
     monkeypatch,

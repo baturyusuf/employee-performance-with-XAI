@@ -16,6 +16,19 @@ from src.governance.dataset_cards import (
 )
 
 
+ROOT = Path(__file__).resolve().parents[1]
+LOCAL_DATA_AVAILABLE = all(
+    (ROOT / relative).is_file()
+    for relative in (
+        "data/raw/inx_employee_performance.csv",
+        "data/external/hrdataset_v14/raw.csv",
+        "data/external/ibm_hr_analytics/raw.csv",
+        "data/external/employee_turnover/raw.csv",
+    )
+)
+
+
+@unittest.skipUnless(LOCAL_DATA_AVAILABLE, "requires all ignored local canonical datasets")
 class DatasetCardRequiredFieldsTests(unittest.TestCase):
     def test_canonical_cards_cover_every_logical_dataset_role(self) -> None:
         cards = build_dataset_cards(run_id="card_test", config_hash="b" * 64)

@@ -67,6 +67,11 @@ def test_manual_release_workflow_is_local_read_only_and_nonpublishing() -> None:
         "python -m unittest discover",
         "python -m compileall -q src",
         "python -m src.governance.ci_repository_gate --release-run-id $env:RELEASE_RUN_ID",
+        "Require every local real-data integration input",
+        "data/raw/inx_employee_performance.csv",
+        "data/external/hrdataset_v14/raw.csv",
+        "data/external/ibm_hr_analytics/raw.csv",
+        "data/external/employee_turnover/raw.csv",
     )
     assert all(value in text for value in required)
     lowered = text.casefold()

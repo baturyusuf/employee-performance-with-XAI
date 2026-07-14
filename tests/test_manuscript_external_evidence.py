@@ -15,6 +15,10 @@ from src.utils.config_loader import load_config
 
 
 CONFIG_PATH = Path("configs/manuscript_final.yaml")
+ROOT = Path(__file__).resolve().parents[1]
+INX_RAW = ROOT / "data/raw/inx_employee_performance.csv"
+HR_RAW = ROOT / "data/external/hrdataset_v14/raw.csv"
+REAL_INPUTS_AVAILABLE = INX_RAW.is_file() and HR_RAW.is_file()
 
 
 def test_canonical_external_roles_are_distinct_and_config_backed() -> None:
@@ -32,6 +36,7 @@ def test_canonical_external_roles_are_distinct_and_config_backed() -> None:
     assert all(spec.role != "employee-performance external validation" for spec in specs)
 
 
+@pytest.mark.skipif(not HR_RAW.is_file(), reason="requires the ignored local HRDataset_v14 dataset")
 def test_target_mapping_support_and_transport_infeasibility_are_computed() -> None:
     config = load_config(CONFIG_PATH)
     config_hash = canonical_config_hash(config)
@@ -99,6 +104,7 @@ def test_inapplicable_binary_and_restricted_metrics_cannot_be_numeric() -> None:
         external.validate_task_metric_rows(invalid)
 
 
+@pytest.mark.skipif(not HR_RAW.is_file(), reason="requires the ignored local HRDataset_v14 dataset")
 def test_hr_local_shap_is_fold_matched_to_the_oof_prediction(tmp_path: Path) -> None:
     config = copy.deepcopy(load_config(CONFIG_PATH)["manuscript_final"])
     config["evaluation"]["cv"]["n_splits"] = 2
@@ -137,6 +143,7 @@ def test_hr_local_shap_is_fold_matched_to_the_oof_prediction(tmp_path: Path) -> 
     assert not (tmp_path / "external" / "hrdataset_v14" / "actionability_summary.csv").exists()
 
 
+@pytest.mark.skipif(not REAL_INPUTS_AVAILABLE, reason="requires ignored local INX and HRDataset inputs")
 def test_stage_writes_expected_versioned_layout_and_identity(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
     config = load_config(CONFIG_PATH)
     config_hash = canonical_config_hash(config)

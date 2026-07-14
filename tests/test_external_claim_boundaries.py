@@ -1,8 +1,10 @@
 from __future__ import annotations
 
 import json
+from pathlib import Path
 
 import pandas as pd
+import pytest
 
 from src.data.external_adapters import load_external_dataset
 from src.governance.external_claims import HRDATASET_REPLICATION_CLAIM, external_allowed_claim
@@ -19,6 +21,9 @@ from src.models.task_schema import (
     RESTRICTED_TARGET_PERFORMANCE_ROBUSTNESS,
 )
 from src.utils.config import SETTINGS
+
+
+HR_RAW = Path(__file__).resolve().parents[1] / "data/external/hrdataset_v14/raw.csv"
 
 
 def test_dataset_claims_use_registered_conservative_labels() -> None:
@@ -76,6 +81,7 @@ def test_report_renderers_do_not_emit_prohibited_external_validation_labels() ->
     assert "related binary task transfer" in reports
 
 
+@pytest.mark.skipif(not HR_RAW.is_file(), reason="requires the ignored local HRDataset_v14 dataset")
 def test_hrdataset_mapping_support_and_three_safe_feature_transport_gate_are_preserved() -> None:
     dataset = load_external_dataset("hrdataset_v14")
     assert dataset.canonical[dataset.target_column].value_counts().sort_index().to_dict() == {2: 31, 3: 243, 4: 37}

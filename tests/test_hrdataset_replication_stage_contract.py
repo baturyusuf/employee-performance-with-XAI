@@ -25,6 +25,9 @@ from src.utils.config_loader import PROJECT_ROOT
 
 CONFIG = PROJECT_ROOT / "configs" / "manuscript_final.yaml"
 SCHEMA = PROJECT_ROOT / "data" / "external" / "hrdataset_v14" / "schema_mapping.json"
+INX_RAW = PROJECT_ROOT / "data" / "raw" / "inx_employee_performance.csv"
+HR_RAW = PROJECT_ROOT / "data" / "external" / "hrdataset_v14" / "raw.csv"
+REAL_INPUTS_AVAILABLE = INX_RAW.is_file() and HR_RAW.is_file()
 
 
 def _preflight():
@@ -63,6 +66,7 @@ def test_core_builder_routes_external_replication_only_to_new_stage() -> None:
     assert "expected_git_worktree_dirty" in source
 
 
+@pytest.mark.skipif(not REAL_INPUTS_AVAILABLE, reason="requires ignored local INX and HRDataset inputs")
 def test_real_preflight_has_exact_policy_features_and_three_feature_transport_gate() -> None:
     config, external, inx, raw_hr, dataset, frames, roles, forbidden, rows = _preflight()
     assert list(frames) == list(stage.POLICY_ORDER)
@@ -129,6 +133,7 @@ def test_real_preflight_has_exact_policy_features_and_three_feature_transport_ga
     }
 
 
+@pytest.mark.skipif(not REAL_INPUTS_AVAILABLE, reason="requires ignored local INX and HRDataset inputs")
 def test_governance_adapter_is_complete_and_never_defaults_primary_metadata() -> None:
     _, external, _, _, _, frames, _, _, _ = _preflight()
     governance = stage._governance_mapping(external)
@@ -156,6 +161,7 @@ def test_portability_and_scope_validator_rejects_user_paths_and_core_leakage(tmp
         stage._validate_portability_and_scope(clean)
 
 
+@pytest.mark.skipif(not REAL_INPUTS_AVAILABLE, reason="requires ignored local INX and HRDataset inputs")
 def test_derived_feature_quality_receipt_is_machine_readable() -> None:
     config, _, _, raw_hr, dataset, _, _, _, _ = _preflight()
     identity = {
@@ -282,6 +288,7 @@ def test_output_contract_rejects_broad_or_noncanonical_run_roots() -> None:
             )
 
 
+@pytest.mark.skipif(not REAL_INPUTS_AVAILABLE, reason="requires ignored local INX and HRDataset inputs")
 def test_stage_recomputes_scope_side_input_and_composite_scientific_identity() -> None:
     manifest = create_run_manifest(CONFIG, evidence_scope="core")
     config = load_manuscript_config(CONFIG)

@@ -25,6 +25,9 @@ from src.governance.manuscript_contract import (
     manuscript_settings,
     validate_manuscript_config,
 )
+
+
+HR_RAW = Path(__file__).resolve().parents[1] / "data/external/hrdataset_v14/raw.csv"
 from src.utils.config_loader import PROJECT_ROOT
 
 
@@ -177,6 +180,7 @@ def test_primary_feature_governance_keys_and_temporality_are_exact() -> None:
     assert "causal" in warning and "actionable" in warning and "employee advice" in warning
 
 
+@pytest.mark.skipif(not HR_RAW.is_file(), reason="requires the ignored local HRDataset_v14 dataset")
 def test_derived_tenure_negative_durations_are_explicitly_set_missing() -> None:
     loaded = load_canonical_dataset(CONFIG_PATH, "hrdataset_v14")
     dataset = load_external_dataset(
@@ -189,6 +193,7 @@ def test_derived_tenure_negative_durations_are_explicitly_set_missing() -> None:
     assert not (tenure.dropna() < 0).any()
 
 
+@pytest.mark.skipif(not HR_RAW.is_file(), reason="requires the ignored local HRDataset_v14 dataset")
 def test_derived_tenure_has_no_missing_column_or_date_fallback() -> None:
     loaded = load_canonical_dataset(CONFIG_PATH, "hrdataset_v14")
     missing_reference = loaded.frame.drop(columns=["LastPerformanceReview_Date"])

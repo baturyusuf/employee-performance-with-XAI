@@ -18,6 +18,9 @@ from src.governance.sanitized_publication_export import (
 from src.utils.config_loader import PROJECT_ROOT, load_config
 
 
+LOCAL_WORKBOOK = PROJECT_ROOT / "data/raw/INX_Future_Inc_Employee_Performance_CDS_Project2_Data_V1.8.xls"
+
+
 def _git(root: Path, *arguments: str) -> str:
     return subprocess.run(
         ["git", *arguments],
@@ -138,6 +141,7 @@ def test_cli_defaults_are_portable(monkeypatch: pytest.MonkeyPatch) -> None:
     assert "\\" not in arguments.output
 
 
+@pytest.mark.skipif(not LOCAL_WORKBOOK.is_file(), reason="requires preserved ignored local source files")
 def test_repository_local_preservation_contract_matches_bytes_and_git_index() -> None:
     config = load_config(PROJECT_ROOT / "configs/publication_export.yaml")["publication_export"]
     entries = config["local_preservation"]

@@ -23,6 +23,7 @@ from src.utils.config_loader import PROJECT_ROOT, load_config
 DATA_SHEET = "INX_Future_Inc_Employee_Perform"
 DEFINITION_SHEET = "Data Definitions"
 OUTPUT = Path("reports/research_log/finalization_v2/11_inx_workbook_equivalence_receipt.json")
+LOCAL_WORKBOOK = PROJECT_ROOT / "data/raw/INX_Future_Inc_Employee_Performance_CDS_Project2_Data_V1.8.xls"
 
 
 def _write_json(path: Path, payload: object) -> None:
@@ -244,6 +245,7 @@ def test_atomic_writer_reports_secondary_cleanup_failure(
     assert any("Atomic receipt cleanup also failed" in note for note in error.value.__notes__)
 
 
+@pytest.mark.skipif(not LOCAL_WORKBOOK.is_file(), reason="requires the ignored local INX workbook")
 def test_repository_contract_binds_tracked_workbook_csv_and_explicit_alias() -> None:
     acquisition = load_config(PROJECT_ROOT / "configs/data_acquisition.yaml")
     provenance = load_config(PROJECT_ROOT / "configs/dataset_provenance.yaml")
