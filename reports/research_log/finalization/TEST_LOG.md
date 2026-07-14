@@ -399,4 +399,6 @@ Push/recovery gate: the normal push timed out after 184 seconds with no remote r
 - Provenance/path/data integration: 84 passed in 6.04 seconds, exit 0 (9.222 seconds wall).
 - Complete pytest: 703 passed, 2 skipped and 11 subtests in 120.78 seconds, exit 0 (124.708 seconds wall).
 - Unittest: 176 tests, 1 skipped in 7.336 seconds, exit 0 (11.177 seconds wall). Compileall: exit 0 in 0.114 seconds.
-- Clean history-free export receipt: pending the implementation/current-tip checkpoint; no provisional archive or receipt is admitted.
+- Implementation checkpoint/push: commit `9342b0c9a02788ff9e9867b13f2f824662fd1cf3`, normal push exit 0; local/origin synchronized.
+- Clean history-free export receipt: production exit 0 in 2.24 seconds from clean commit `9342b0c`; `canonical_eligible=true`, 305 members, 1,077,955 archive bytes, 4,005,919 uncompressed bytes, archive SHA-256 `1917059f...`, member-manifest SHA-256 `df89a3a6...`, no retained archive and no raw employee value in the receipt.
+- Independent archive rebuild: exit 0 in 1.122 seconds; exact archive hash reproduced. All 14 local files/2,335,429 bytes remain present and ignored. Forbidden tracked/member paths, Git metadata, portable-content findings, secrets, symlinks, network/API calls and residual temporary siblings are zero. Receipt SHA-256 is `3ddad1b7...`.

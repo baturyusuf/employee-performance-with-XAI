@@ -12,7 +12,7 @@ HRDataset_v14 and the other declared local data paths are staged for removal fro
 
 ## Public Git History — Blocking for Strict Non-Distribution
 
-Raw datasets already exist in public history. Current-tip untracking and a history-free `git archive` export do not remove historical copies. Publishing or sanitizing existing public history requires explicit user authorization because force-push/history rewriting is prohibited.
+Raw datasets already exist in public history. Current-tip untracking and the independently passed history-free `git archive` receipt do not remove historical copies. Publishing or sanitizing existing public history requires explicit user authorization because force-push/history rewriting is prohibited. V2-014 therefore resolves the forward-tip engineering defect but does not close this manual blocker.
 
 ## INX Workbook Semantics and Source Authority - Manual Review Required
 

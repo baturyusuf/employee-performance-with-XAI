@@ -218,7 +218,7 @@ The CSV remains the sole canonical experiment input. The receipt cannot establis
 
 ## V2-014 history-free technical export receipt
 
-The planned compact artifact is `12_publication_export_receipt.json`. It will bind an ephemeral exact-commit allowlisted ZIP; the ZIP is deliberately deleted after validation and is not a release artifact.
+The admitted compact artifact is `12_publication_export_receipt.json`. It binds an ephemeral exact-commit allowlisted ZIP from clean commit `9342b0c`; the ZIP is deliberately deleted after validation and is not a release artifact. Receipt SHA-256 is `3ddad1b7d2206a13b7bcfc63cae1ee02e5eaf6ba1c9dbb2e1632a71b7939d549`.
 
 | Receipt evidence | Bound role | Claim boundary |
 | --- | --- | --- |

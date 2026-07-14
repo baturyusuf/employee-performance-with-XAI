@@ -146,3 +146,10 @@ This is an implementation/provenance resolution of the already approved same-OOF
 - Restricted PerformanceRating uses class 4 as the predeclared positive class, so binary Brier, ROC AUC and average precision are applicable. This does not make the 3/4 target equivalent to the main three-class target.
 - Each task has its own paired 5,000-draw sample-level OOF bootstrap, persisted exact outer models and closed-world artifact inventory. Raw probabilities are reported; no supplementary calibration claim is introduced.
 - No retained task is direct employee-performance external validation, locked-model transport or evidence of transportability. No new core numerical claim is introduced.
+
+## V2-014 Forward-Sanitation Completion Consequence - 2026-07-14
+
+- Clean pushed commit `9342b0c` is the exact current-tip identity for the sanitation/export receipt.
+- `12_publication_export_receipt.json` is canonical-eligible only as compact evidence for the narrow history-free technical-export contract. It is not a canonical scientific package, a release publication, or a licence decision.
+- The exact validation archive is reconstructed from the allowlist and deleted. It must not be retained as an unreviewed release-sized artifact.
+- Earlier public Git history remains unchanged. Any history sanitation or redistribution decision still requires explicit external authorization and must not use force-push under the current contract.
