@@ -155,7 +155,7 @@ def _project_fixture(tmp_path: Path) -> tuple[Path, Path, Path, dict[str, str]]:
                 "core_fixture",
                 canonical_core_stages[-1],
             ],
-            "release_ready": False,
+            "release_ready": True,
             "blocking_reason": canonical_core_scope["blocking_reason"],
         },
         "supplementary": {

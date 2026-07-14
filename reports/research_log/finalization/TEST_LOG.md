@@ -487,3 +487,13 @@ Push/recovery gate: the normal push timed out after 184 seconds with no remote r
 - Metric-schema hash: `98ae57b622a56983192975c5bff94374ed51322f13c76af633c3c96ceb198cdd`.
 - Pre-commit `ci_repository_gate`: expected exit 1 at the clean-worktree precondition; repeat required after the checkpoint commit.
 - No manuscript edit, real-data fit, production table/figure artifact, API call, promotion or release occurred.
+## V2-023 execution-readiness scope freeze - 2026-07-14
+
+- Focused scope/figure/manifest/builder validation: exit 0; 114 passed; 5.50 seconds pytest / 8.635 seconds wall.
+- Initial complete pytest: exit 1; 732 passed, 2 skipped, 11 subtests passed, 9 fixture failures; 131.34 seconds pytest / 135.344 seconds wall.
+- Corrected affected focus: exit 0; 31 passed; 2.62 seconds pytest / 5.605 seconds wall.
+- Final complete pytest: exit 0; 741 passed, 2 skipped, 11 subtests passed; 132.28 seconds pytest / 136.238 seconds wall.
+- Final unittest discovery: exit 0; 177 tests, 1 skipped; 7.937 seconds unittest / 11.797 seconds wall.
+- Final compileall: exit 0; 0.117 seconds.
+- The nine initial failures were a stale test fixture with `release_ready=false`; no production contract was weakened.
+- No scientific build or artifact execution occurred.

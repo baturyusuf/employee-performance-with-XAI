@@ -1,8 +1,8 @@
 """Fail-closed contract for the v2 manuscript core-figure plan.
 
-This module freezes figure scope and lineage declarations only.  It does not
-generate figures and must not be treated as evidence that the ``core_figures``
-stage is implemented or release-ready.
+This module freezes figure scope and lineage declarations.  Production
+generation and closed-world validation are implemented separately; readiness
+here authorizes execution but is not evidence that canonical figures exist.
 """
 
 from __future__ import annotations
@@ -253,7 +253,7 @@ def expected_core_figure_plan() -> dict[str, Any]:
     return {
         "plan_version": CORE_FIGURE_PLAN_VERSION,
         "scope": "core",
-        "release_ready": False,
+        "release_ready": True,
         "blocking_reason": CORE_FIGURE_BLOCKING_REASON,
         "publication_dpi": 300,
         "output_formats": ["png", "svg"],
@@ -371,11 +371,11 @@ def validate_core_figure_plan(
         raise CoreFigureContractError(
             "manuscript_final.figures differs from the frozen leakage-aware core plan."
         )
-    if core_scope_release_ready is not False:
+    if core_scope_release_ready is not True:
         raise CoreFigureContractError(
-            "The core scope must remain release_ready=false until figure generation is implemented."
+            "The implemented core figure stage requires release_ready=true before execution."
         )
     if not isinstance(core_scope_blocking_reason, str) or not core_scope_blocking_reason.strip():
         raise CoreFigureContractError(
-            "The non-release-ready core scope requires a non-empty blocking_reason."
+            "The core scope requires a non-empty canonical-execution readiness note."
         )

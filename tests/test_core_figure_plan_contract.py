@@ -28,14 +28,14 @@ def _canonical_context() -> tuple[dict, list[str], str]:
     return config, list(core["stages"]), str(core["blocking_reason"])
 
 
-def test_canonical_core_figure_plan_is_exact_and_release_blocking() -> None:
+def test_canonical_core_figure_plan_is_exact_and_execution_ready() -> None:
     config, core_stages, core_blocking_reason = _canonical_context()
     figures = config["manuscript_final"]["figures"]
 
     assert figures == expected_core_figure_plan()
     assert tuple(figures["definitions"]) == CORE_FIGURE_KEYS
-    assert figures["release_ready"] is False
-    assert config["manuscript_final"]["evidence_scopes"]["core"]["release_ready"] is False
+    assert figures["release_ready"] is True
+    assert config["manuscript_final"]["evidence_scopes"]["core"]["release_ready"] is True
     assert core_stages[-1] == "core_figures"
     assert core_blocking_reason.strip()
 
@@ -57,14 +57,14 @@ def test_canonical_plan_contains_no_excluded_core_subject() -> None:
         "traversal_source",
         "wrong_stage_prefix",
         "duplicate_source",
-        "figure_release_ready",
-        "core_release_ready",
+        "figure_release_not_ready",
+        "core_release_not_ready",
     ],
 )
 def test_figure_plan_drift_fails_closed(mutation: str) -> None:
     config, core_stages, core_blocking_reason = _canonical_context()
     figures = deepcopy(config["manuscript_final"]["figures"])
-    core_release_ready = False
+    core_release_ready = True
 
     if mutation == "remove_figure":
         figures["definitions"].pop("figure_7")
@@ -91,10 +91,10 @@ def test_figure_plan_drift_fails_closed(mutation: str) -> None:
     elif mutation == "duplicate_source":
         source = deepcopy(figures["definitions"]["figure_3"]["sources"][0])
         figures["definitions"]["figure_3"]["sources"].append(source)
-    elif mutation == "figure_release_ready":
-        figures["release_ready"] = True
-    elif mutation == "core_release_ready":
-        core_release_ready = True
+    elif mutation == "figure_release_not_ready":
+        figures["release_ready"] = False
+    elif mutation == "core_release_not_ready":
+        core_release_ready = False
     else:  # pragma: no cover - guarded by the parameter list
         raise AssertionError(mutation)
 
@@ -137,8 +137,8 @@ def test_declared_sources_are_portable_and_precede_core_figures() -> None:
             seen.add(path)
 
 
-def test_core_scope_contract_still_has_no_figure_runner_claim() -> None:
+def test_core_scope_contract_admits_the_implemented_figure_runner() -> None:
     config, _, _ = _canonical_context()
     contract = evidence_scope_contract(config, "core")
     assert contract["stages"][-1] == "core_figures"
-    assert config["manuscript_final"]["figures"]["release_ready"] is False
+    assert config["manuscript_final"]["figures"]["release_ready"] is True

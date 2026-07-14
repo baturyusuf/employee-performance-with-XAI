@@ -89,10 +89,17 @@ def test_accepted_stage_graphs_exclude_llm_chatbot_agents_and_api_stages() -> No
 
 
 @pytest.mark.parametrize("scope_name", ["core", "supplementary"])
-def test_incomplete_scope_graphs_fail_closed_before_artifact_execution(scope_name: str) -> None:
+def test_complete_scope_graphs_are_release_executable(scope_name: str) -> None:
     scopes = _scope_settings()
-    assert scopes[scope_name]["release_ready"] is False
+    assert scopes[scope_name]["release_ready"] is True
+    assert scopes[scope_name]["blocking_reason"].strip()
+    assert manuscript_build.validate_scope_release_ready(scopes, scope_name) == scopes[scope_name]
 
+
+@pytest.mark.parametrize("scope_name", ["core", "supplementary"])
+def test_release_gate_still_fails_closed_when_readiness_is_revoked(scope_name: str) -> None:
+    scopes = _scope_settings()
+    scopes[scope_name] = {**scopes[scope_name], "release_ready": False}
     with pytest.raises(manuscript_build.ManuscriptBuildError, match="release.ready|not ready"):
         manuscript_build.validate_scope_release_ready(
             scopes,

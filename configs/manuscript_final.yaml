@@ -90,8 +90,8 @@
           "agent_audits/",
           "historical/"
         ],
-        "release_ready": false,
-        "blocking_reason": "Required v2 shared-fold, benchmark, uncertainty, scoped-table and core-figure stages are not yet technically frozen."
+        "release_ready": true,
+        "blocking_reason": "All declared core runners and validators are technically frozen; canonical execution and promotion remain pending."
       },
       "supplementary": {
         "dataset_keys": [
@@ -123,8 +123,8 @@
           "agent_audits/",
           "historical/"
         ],
-        "release_ready": false,
-        "blocking_reason": "Supplementary heuristic-search and secondary robustness stages are not yet technically frozen."
+        "release_ready": true,
+        "blocking_reason": "All declared supplementary runners and validators are technically frozen; canonical execution and promotion remain pending."
       }
     },
     "external_replication": {
@@ -1011,7 +1011,7 @@
     "figures": {
       "plan_version": "leakage_aware_core_figures_v2",
       "scope": "core",
-      "release_ready": false,
+      "release_ready": true,
       "blocking_reason": "Production core-figure generation and package validation are implemented; canonical artifacts remain pending the final clean real-data build.",
       "publication_dpi": 300,
       "output_formats": ["png", "svg"],
