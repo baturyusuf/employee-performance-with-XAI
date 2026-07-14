@@ -279,3 +279,11 @@ Full checkpoint regression was then run concurrently:
 Both exited 0. Pytest: 656 passed, 3 skipped and 11 subtests passed in 143.88 seconds. Unittest: 178 passed, 2 skipped in 10.895 seconds. A non-required `python -m ruff check ...` probe exited 1 because Ruff is not installed in the locked environment; no lint result was claimed and no dependency was installed or changed.
 
 Final pre-stage hygiene reran `pip check`, compileall, diff/manuscript checks, issue uniqueness/completeness, README links, changed-file raw/100-MB/secret/absolute-path scans and repository-process enumeration. Exit 0: no broken requirements; 20 small tracked candidates; 30 issues; 21 README links; zero raw, large, secret, absolute-path, manuscript or active-process findings.
+
+Explicit staged review covered exactly 20 files and found zero raw/manuscript/100-MB/secret/absolute-path candidates with no unstaged or untracked file. Commit command completed successfully:
+
+```powershell
+git commit -m "feat(external): bind reporting semantics to OOF evidence"
+```
+
+Checkpoint: `9c603534268e7ba953cc1a05b23225b4fde488f5` (444 insertions, 23 deletions across 20 small files). The branch became three commits ahead of remote; no artifact, raw dataset or manuscript file entered the commit.

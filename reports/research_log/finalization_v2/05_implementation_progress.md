@@ -575,3 +575,5 @@ Seven production/config/test files plus README/traceability were changed. Compil
 An independent final diff review found no P0/P1 defect and passed 66 relevant tests in 6.01 seconds. The synchronized checkpoint gate reran 80 tests and compile/hygiene checks with zero prohibited findings. No validated Unit 2G artifact was modified.
 
 The full checkpoint gate then passed 656 pytest tests with 3 skips and 11 subtests, plus 178 unittest tests with 2 skips. This supersedes the earlier 648-test repository count for current HEAD. V2-029 still remains pending canonical artifact generation rather than being marked scientifically resolved.
+
+Checkpoint `9c603534268e7ba953cc1a05b23225b4fde488f5` (`feat(external): bind reporting semantics to OOF evidence`) records the 20-file V2-029 implementation, tests, README and traceability after exact staged review. The branch is three commits ahead of remote pending a normal push; no artifact or manuscript file was committed.

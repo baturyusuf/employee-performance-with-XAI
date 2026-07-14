@@ -2,7 +2,7 @@
 
 Assessment date: 2026-07-14
 
-Current state: Units 1A through 2G have tested implementation commits. The full Unit 2G verified-real-data stage completed from clean source commit `17a3dcd` and passed independent atomic/scientific validation. It remains noncanonical stage evidence; no clean complete v2 scientific rebuild exists.
+Current state: Units 1A through 2G and V2-029 have tested implementation commits; V2-029 is local checkpoint `9c60353`. The full Unit 2G verified-real-data stage completed from clean source commit `17a3dcd` and passed independent atomic/scientific validation. It remains noncanonical stage evidence; no clean complete v2 scientific rebuild exists.
 
 This is a live interim assessment, not a final completion declaration. `../finalization/CURRENT_STATUS.md` is the interruption-resilient status source.
 
