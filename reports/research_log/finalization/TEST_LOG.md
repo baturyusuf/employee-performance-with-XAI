@@ -349,3 +349,4 @@ Push/recovery gate: the normal push timed out after 184 seconds with no remote r
 - Post-fix bounded real-INX diagnostic: exit 0 in 3.946 seconds; one actual fold-model hash, one model-set hash, 48 case rows, four OOF rows and 11 inventory entries all mapped/hashed correctly; temporary output removed.
 - Final post-fix pytest: 687 passed, 2 skipped and 11 subtests in 118.36 seconds, exit 0 (122.461 seconds wall time).
 - Final post-fix unittest: 176 tests, 1 skipped in 7.389 seconds, exit 0 (11.319 seconds wall time). Compileall: exit 0 in 0.114 seconds.
+- Exact staged-diff gate: exit 0 in 0.617 seconds; 23 allowlisted files, 1,896 insertions/707 deletions, maximum 118,791 bytes, zero unstaged/untracked/raw/model/environment/10-MB/secret/absolute/manuscript/network/legacy findings, 32 valid issues, 24 README links and 26 model-identity references. Checkpoint `7226effd30835fc678b0bb21644f45ac0464dff6` was created.
