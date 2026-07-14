@@ -157,13 +157,26 @@ def _git_worktree_file(project_root: Path, commit: str, relative_path: str) -> b
 def _source_tree_hash_at_commit(project_root: Path, commit: str) -> str:
     listing = _git(project_root, "ls-tree", "-r", "--name-only", commit, text=True)
     assert isinstance(listing, str)
+    listed_paths = listing.splitlines()
+    dependency_contract_present = "configs/dependency_contract.yaml" in listed_paths
+    expanded_dependency_files = {
+        "requirements.txt",
+        "requirements-core.txt",
+        "requirements-supplementary.txt",
+        "requirements-legacy-optional.txt",
+        "requirements-dev.txt",
+        "constraints/py314-lock.txt",
+        "environment.yml",
+    }
+    legacy_dependency_files = {"requirements.txt", "requirements-dev.txt"}
     candidates = sorted(
         path
-        for path in listing.splitlines()
+        for path in listed_paths
         if (
             path.startswith("src/")
             or path.startswith("configs/")
-            or path in {"requirements.txt", "requirements-dev.txt"}
+            or path
+            in (expanded_dependency_files if dependency_contract_present else legacy_dependency_files)
         )
         and "/__pycache__/" not in path
         and not path.endswith(".pyc")

@@ -35,7 +35,8 @@ class OpenAIChatStructuredClient(LLMClient):
             from openai import OpenAI
         except ImportError as exc:
             raise OpenAIClientConfigurationError(
-                "The OpenAI SDK is not installed. Run: pip install -r requirements.txt"
+                "The OpenAI SDK is not installed. Install the explicitly excluded legacy optional "
+                "group: pip install -r requirements-legacy-optional.txt"
             ) from exc
 
         resolved_key = api_key or os.getenv("OPENAI_API_KEY")

@@ -1,0 +1,3 @@
+# Approved supplementary heuristic-search and task-bounded external stages use
+# the same scientific libraries as the core and add no network/API dependency.
+-r requirements-core.txt

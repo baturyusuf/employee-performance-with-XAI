@@ -1769,11 +1769,31 @@ def _validated_relative_posix_path(raw: Any, *, field: str) -> str:
 def _expected_input_snapshot_specs(context: StageContext) -> list[dict[str, str]]:
     fixed = (
         ("canonical_config", context.config_path, "canonical_config_snapshot.yaml"),
-        ("requirements_core", PROJECT_ROOT / "requirements.txt", "requirements_snapshot.txt"),
+        ("requirements_compatibility", PROJECT_ROOT / "requirements.txt", "requirements_snapshot.txt"),
+        (
+            "requirements_core",
+            PROJECT_ROOT / "requirements-core.txt",
+            "requirements_core_snapshot.txt",
+        ),
+        (
+            "requirements_supplementary",
+            PROJECT_ROOT / "requirements-supplementary.txt",
+            "requirements_supplementary_snapshot.txt",
+        ),
+        (
+            "requirements_legacy_optional",
+            PROJECT_ROOT / "requirements-legacy-optional.txt",
+            "requirements_legacy_optional_snapshot.txt",
+        ),
         (
             "requirements_development",
             PROJECT_ROOT / "requirements-dev.txt",
             "requirements_dev_snapshot.txt",
+        ),
+        (
+            "dependency_constraints",
+            PROJECT_ROOT / "constraints" / "py314-lock.txt",
+            "constraints_py314_lock_snapshot.txt",
         ),
         ("environment", PROJECT_ROOT / "environment.yml", "environment_snapshot.yml"),
     )

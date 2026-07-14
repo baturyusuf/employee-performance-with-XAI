@@ -153,3 +153,11 @@ This is an implementation/provenance resolution of the already approved same-OOF
 - `12_publication_export_receipt.json` is canonical-eligible only as compact evidence for the narrow history-free technical-export contract. It is not a canonical scientific package, a release publication, or a licence decision.
 - The exact validation archive is reconstructed from the allowlist and deleted. It must not be retained as an unreviewed release-sized artifact.
 - Earlier public Git history remains unchanged. Any history sanitation or redistribution decision still requires explicit external authorization and must not use force-push under the current contract.
+
+## V2-018 Dependency Isolation Consequence - 2026-07-14
+
+- `requirements.txt` remains the compatibility entry point but installs canonical core only.
+- Approved supplementary stages add no dependency beyond core. This preserves their scientific scope and introduces no LLM/UI/network library.
+- CatBoost, imbalanced-learn, InterpretML, Streamlit, OpenAI, OpenAI Agents, dotenv and the Windows COM fallback are explicitly legacy/optional. Development includes that group only because existing repository tests cover retained modules.
+- CPython 3.14 and `constraints/py314-lock.txt` are the controlled baseline. Bounded direct ranges document the admitted window; the exact constraints determine installation.
+- Package-index access during installation is distinct from scientific execution. V2-020 must still enforce zero network/API access for the complete core build.

@@ -306,8 +306,17 @@ def test_run_input_snapshots_preserve_every_side_input_and_reject_source_drift(
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
     config_path, _, _, declared = _project_fixture(tmp_path)
-    for required in ("requirements.txt", "requirements-dev.txt", "environment.yml"):
+    for required in (
+        "requirements.txt",
+        "requirements-core.txt",
+        "requirements-supplementary.txt",
+        "requirements-legacy-optional.txt",
+        "requirements-dev.txt",
+        "environment.yml",
+    ):
         (tmp_path / required).write_text(f"# fixture {required}\n", encoding="utf-8")
+    (tmp_path / "constraints").mkdir()
+    (tmp_path / "constraints" / "py314-lock.txt").write_text("# fixture lock\n", encoding="utf-8")
     manifest = create_run_manifest(
         config_path,
         evidence_scope="core",
@@ -362,8 +371,17 @@ def _snapshot_context(
     run_id: str,
 ) -> StageContext:
     config_path, _, _, _ = _project_fixture(tmp_path)
-    for required in ("requirements.txt", "requirements-dev.txt", "environment.yml"):
+    for required in (
+        "requirements.txt",
+        "requirements-core.txt",
+        "requirements-supplementary.txt",
+        "requirements-legacy-optional.txt",
+        "requirements-dev.txt",
+        "environment.yml",
+    ):
         (tmp_path / required).write_text(f"# fixture {required}\n", encoding="utf-8")
+    (tmp_path / "constraints").mkdir()
+    (tmp_path / "constraints" / "py314-lock.txt").write_text("# fixture lock\n", encoding="utf-8")
     manifest = create_run_manifest(
         config_path,
         evidence_scope="core",

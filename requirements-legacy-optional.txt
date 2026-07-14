@@ -1,0 +1,13 @@
+# Legacy/exploratory repository modules only. These packages are excluded from
+# core and approved supplementary evidence and must never be installed by the
+# canonical runtime entry point.
+-c constraints/py314-lock.txt
+
+catboost>=1.2.10,<1.3
+imbalanced-learn>=0.14.1,<0.15
+interpret>=0.7.8,<0.8
+streamlit>=1.56,<1.57
+openai>=2.43,<2.44
+openai-agents>=0.17.6,<0.18
+python-dotenv>=1.2,<1.3
+pywin32>=312,<313; platform_system == "Windows"

@@ -402,3 +402,18 @@ Push/recovery gate: the normal push timed out after 184 seconds with no remote r
 - Implementation checkpoint/push: commit `9342b0c9a02788ff9e9867b13f2f824662fd1cf3`, normal push exit 0; local/origin synchronized.
 - Clean history-free export receipt: production exit 0 in 2.24 seconds from clean commit `9342b0c`; `canonical_eligible=true`, 305 members, 1,077,955 archive bytes, 4,005,919 uncompressed bytes, archive SHA-256 `1917059f...`, member-manifest SHA-256 `df89a3a6...`, no retained archive and no raw employee value in the receipt.
 - Independent archive rebuild: exit 0 in 1.122 seconds; exact archive hash reproduced. All 14 local files/2,335,429 bytes remain present and ignored. Forbidden tracked/member paths, Git metadata, portable-content findings, secrets, symlinks, network/API calls and residual temporary siblings are zero. Receipt SHA-256 is `3ddad1b7...`.
+
+## V2-018 dependency isolation/lock gate - 2026-07-14
+
+- Static contract: passed; 4 exact groups, 22 unique direct packages, 96 sorted exact pins, one CPython 3.14 baseline, safe relative includes, and zero forbidden legacy/OpenAI packages in core/supplementary.
+- Initial focused gate: 79 passed with one Python 3.14 invalid-escape warning in a new negative-test regex. Test literal corrected to a raw string; no production behavior changed.
+- Corrected focused gate: 79 passed in 4.69 seconds, exit 0 (7.758 seconds wall), no warnings.
+- Resolver checks: core dry run exit 0 in 5.728 seconds; full development dry run exit 0 in 20.953 seconds. No install occurred in either dry run.
+- Complete pytest: 711 passed, 2 skipped and 11 subtests in 122.21 seconds, exit 0 (126.185 seconds wall). The preceding wrapper timeout produced no pytest verdict and left no process; it is not counted as a suite run.
+- Unittest: 176 tests, 1 skipped in 7.361 seconds, exit 0 (11.192 seconds wall). Compileall: exit 0 in 0.114 seconds.
+- Fresh isolated core install: passed. CPython 3.14.0, 31 locked non-bootstrap distributions, all 13 direct imports, `pip check` passed, production environment validator passed, inventory SHA-256 `a7ac622b...`.
+- Final review finding: fixed. Development validation now evaluates the exact Windows-only `pywin32` marker instead of requiring that package on Linux; arbitrary direct markers are rejected.
+- Post-marker focused gate: 80 passed in 5.07 seconds, exit 0 (8.245 seconds wall).
+- Final post-fix pytest: 712 passed, 2 skipped and 11 subtests in 122.06 seconds, exit 0 (126.148 seconds wall).
+- Final post-fix unittest: 176 tests, 1 skipped in 7.303 seconds, exit 0 (11.100 seconds wall). Compileall: exit 0 in 0.122 seconds.
+- Clean exact-commit dependency receipt: pending the implementation checkpoint; the isolated environment is retained only for that receipt.

@@ -1,2 +1,6 @@
--r requirements.txt
-pytest>=8.0.0
+# Complete repository test/development environment. The legacy optional group
+# is included only because historical/guardrail tests import those modules.
+-r requirements-supplementary.txt
+-r requirements-legacy-optional.txt
+
+pytest>=9.1,<9.2

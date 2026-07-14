@@ -1376,7 +1376,15 @@ def source_tree_hash(
     project_root: str | Path,
     *,
     roots: Sequence[str] = ("src", "configs"),
-    files: Sequence[str] = ("requirements.txt", "requirements-dev.txt"),
+    files: Sequence[str] = (
+        "requirements.txt",
+        "requirements-core.txt",
+        "requirements-supplementary.txt",
+        "requirements-legacy-optional.txt",
+        "requirements-dev.txt",
+        "constraints/py314-lock.txt",
+        "environment.yml",
+    ),
 ) -> str:
     """Hash experiment/config source content independently of Git state."""
 

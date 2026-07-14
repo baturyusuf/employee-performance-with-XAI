@@ -69,7 +69,8 @@ def _agents_imports() -> tuple[Any, Any, Any, Any]:
         from agents import Agent, ModelSettings, Runner, function_tool, trace
     except ImportError as exc:
         raise OpenAIClientConfigurationError(
-            "openai-agents is not installed. Run: .\\myenv\\Scripts\\pip.exe install -r requirements.txt"
+            "openai-agents is not installed. Install the explicitly excluded legacy optional group: "
+            ".\\myenv\\Scripts\\pip.exe install -r requirements-legacy-optional.txt"
         ) from exc
     return Agent, ModelSettings, Runner, function_tool, trace
 

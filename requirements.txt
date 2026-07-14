@@ -1,26 +1,4 @@
-# Canonical scientific runtime (validated on the versions recorded in each
-# manuscript run manifest). Upper bounds prevent silent major-version drift.
-numpy>=2.0,<3
-pandas>=2.2,<4
-scipy>=1.13,<2
-scikit-learn>=1.8,<1.9
-joblib>=1.4,<2
-threadpoolctl>=3.5,<4
-xgboost>=3.0,<4
-shap>=0.48,<1
-matplotlib>=3.9,<4
-PyYAML>=6.0,<7
-
-# Model-family comparison modules retained by the research repository.
-lightgbm>=4.5,<5
-catboost>=1.2,<2
-
-# Raw-workbook provenance inspection; the canonical experiment consumes CSV.
-xlrd>=2.0,<3
-openpyxl>=3.1,<4
-
-# Governed LLM evaluation. The canonical command is deterministic/offline;
-# paid execution additionally requires explicit runtime flags and user approval.
-openai>=2.0,<3
-openai-agents>=0.3,<1
-python-dotenv>=1.0,<2
+# Compatibility entry point: canonical scientific runtime only.
+# Use requirements-dev.txt for repository development/tests. Legacy UI/LLM
+# extras are deliberately excluded from the scientific core.
+-r requirements-core.txt

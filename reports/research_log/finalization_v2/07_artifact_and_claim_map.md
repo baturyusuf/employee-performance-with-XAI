@@ -229,3 +229,17 @@ The admitted compact artifact is `12_publication_export_receipt.json`. It binds 
 | Zero history/`.git`, raw path, machine path, secret, symlink and oversize findings | Export hygiene | Not a legal, ethics, licence or source-authenticity decision |
 
 No raw employee value is written to the receipt. No archive is retained or published by this unit.
+
+## V2-018 dependency-lock receipt
+
+The planned compact artifact is `13_dependency_lock_receipt.json`, generated only from the clean implementation commit inside the isolated core environment.
+
+| Receipt evidence | Bound role | Claim boundary |
+| --- | --- | --- |
+| Dependency/config/constraints SHA-256 map | Exact dependency taxonomy and lock identity | Environment definition only; not a scientific result |
+| Git commit and source-tree hash | Exact implementation provenance | Does not admit later uncommitted source |
+| Python/platform/profile and direct package versions | Clean core execution identity | CPython 3.14 validation baseline only |
+| Installed inventory semantic hash and count | Closed isolated distribution set | Full versions remain reproducible from the tracked constraints file |
+| Zero missing/unlocked/mismatched packages plus `pip check` | Internal dependency consistency | Does not assert future package-index availability |
+
+No package-install log, local machine path, credential or dataset value enters the receipt. Package-index resolution is installation activity; it does not authorize network access during scientific execution.

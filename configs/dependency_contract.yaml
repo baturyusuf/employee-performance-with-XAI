@@ -1,0 +1,48 @@
+{
+  "dependency_contract": {
+    "schema_version": 1,
+    "python_minor": "3.14",
+    "constraints_path": "constraints/py314-lock.txt",
+    "compatibility_entrypoint": "requirements.txt",
+    "groups": {
+      "core": {
+        "path": "requirements-core.txt",
+        "includes": [],
+        "constraints": ["constraints/py314-lock.txt"],
+        "direct_packages": [
+          "joblib", "lightgbm", "matplotlib", "numpy", "openpyxl", "pandas",
+          "pyyaml", "scikit-learn", "scipy", "shap", "threadpoolctl", "xgboost", "xlrd"
+        ]
+      },
+      "supplementary": {
+        "path": "requirements-supplementary.txt",
+        "includes": ["requirements-core.txt"],
+        "constraints": [],
+        "direct_packages": []
+      },
+      "legacy_optional": {
+        "path": "requirements-legacy-optional.txt",
+        "includes": [],
+        "constraints": ["constraints/py314-lock.txt"],
+        "direct_packages": [
+          "catboost", "imbalanced-learn", "interpret", "openai", "openai-agents",
+          "python-dotenv", "pywin32", "streamlit"
+        ]
+      },
+      "development": {
+        "path": "requirements-dev.txt",
+        "includes": ["requirements-legacy-optional.txt", "requirements-supplementary.txt"],
+        "constraints": [],
+        "direct_packages": ["pytest"]
+      }
+    },
+    "compatibility_includes": ["requirements-core.txt"],
+    "forbidden_core_packages": [
+      "catboost", "imbalanced-learn", "interpret", "openai", "openai-agents",
+      "python-dotenv", "pywin32", "streamlit"
+    ],
+    "bootstrap_packages": ["pip", "setuptools"],
+    "receipt_path": "reports/research_log/finalization_v2/13_dependency_lock_receipt.json",
+    "claim_boundary": "The lock establishes a reproducible Python dependency environment. It does not license datasets, authorize network access during scientific execution, or admit a scientific result."
+  }
+}

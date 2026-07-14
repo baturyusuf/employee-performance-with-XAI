@@ -34,7 +34,10 @@ def check_setup() -> Dict[str, Any]:
 def _required_setup(openai_installed: bool, api_key_present: bool) -> list[str]:
     items = []
     if not openai_installed:
-        items.append("Run: .\\myenv\\Scripts\\pip.exe install -r requirements.txt")
+        items.append(
+            "Install the explicitly excluded legacy optional group: "
+            ".\\myenv\\Scripts\\pip.exe install -r requirements-legacy-optional.txt"
+        )
     if not api_key_present:
         items.append("Set OPENAI_API_KEY in the shell or .env before real LLM runs.")
     return items
