@@ -155,3 +155,9 @@ Config hash `eef3539be6470644cc1b3892e1aa6bb8c3186aeb9df0d61ec56635a64e978a44` f
 | 7 | HRDataset_v14 independent mapped-target replication | target support, raw/calibrated intervals, calibration/policy differences and external metadata | Replication plan only; no locked transport/direct validation claim |
 
 The figure contract requires `run_id`, `config_hash`, `scientific_input_hash` and `source_tree_hash`, SHA-256 source binding, portable paths, exact ordering and PNG/SVG plus compact source/caption outputs. Both figure and core scopes remain `release_ready:false`. Obsolete numbered SHAP Figure 6/7 previews and the legacy v1 stem validator are tracked under V2-032 and must be retired before generator implementation or canonical execution.
+
+## Unit 2G checkpoint validator and source-table contract
+
+The reusable validator is `../../../src/governance/unit2g_stage_validator.py`; its small repository receipt is `10_unit2g_checkpoint_summary.json`. The receipt binds validation status to run ID, generation commit, config/scientific-input/source-tree hashes, raw/canonical/schema/policy hashes, side-input receipts, exact replay counts and noncanonical publication state. It does not replace the ignored full evidence package or promote it.
+
+The manifest-bound source tables for the future HRDataset figure/manuscript table are `target_support.csv`, `raw_metric_intervals.csv`, `calibration_metric_intervals.csv`, `calibration_paired_differences.csv`, `policy_pairwise_differences.csv` and `external_replication_metadata.json`. Their current numbers remain stage-validation findings only. No manually entered manuscript table, frozen numerical claim or canonical figure artifact exists.

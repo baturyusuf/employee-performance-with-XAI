@@ -301,3 +301,18 @@ Push/recovery gate: the normal push timed out after 184 seconds with no remote r
 - Figure/artifact generation, scientific stage execution, API/network acquisition, Unit 2G rerun and manuscript edit: zero.
 - Final post-documentation focus: 66 passed in 9.84 seconds; diff and manuscript no-change checks passed.
 - Tested implementation checkpoint: `6da8273b458fd249d47d9bb5c75ebe9ff364617f` (`feat(figures): freeze leakage-aware core plan`).
+
+## Unit 2G reusable acceptance gate - 2026-07-14
+
+- Recovery gate: passed on required branch `finalization/leakage-aware-v2` at synchronized local/upstream HEAD `eab2b32150245fe7d406afcfb64827be67797752`; worktree/index were clean before changes.
+- Process/endpoint gate: passed. No task-owned Python, pytest, Git, Node, shell, model or validation execution and no repository/run listener; no PID terminated.
+- Residue/preservation gate: passed. No lock, partial, temporary, incomplete, staging or interrupted atomic output. The ignored 126-file/65,412,766-byte stage is preserved locally with zero tracked paths.
+- Independent stage validator: exit 0 in 12.6 seconds. All 124 contract outputs, 122 manifest artifacts and 125 stage files passed the closed-world path/size/SHA-256 inventory. Raw bytes, canonical parsed content, schema, policy, side inputs, source/config/scientific identities and generation receipt agree.
+- Scientific replay: passed. Exactly 311 outer rows, 10 outer x 5 inner folds, 400 candidates, 50 selected persisted models, 1,555 raw OOF predictions, 50 calibration fits, 2,799 calibration-training rows, ten sigmoid calibrators, 311 calibrated predictions, 5,000 paired bootstrap draws and 6,531 grouped-SHAP rows were verified. Maximum model, calibrator and SHAP replay error was zero; maximum recorded additivity error was `4.468303814064711e-06`.
+- Policy/claim gate: passed. Forbidden primary features are absent from model, SHAP and reason-code evidence; mapped target support is 31/243/37; subgroup/proxy/transport denominators agree; proxy estimation fails closed; transport is infeasible; source tables are manifest-bound. The enclosing package remains provisional/noncanonical with no promotion, frozen claim matrix or release-ready flag.
+- Focused Unit 2G/manifest gate: 126 passed, 1 skipped in 22.09 seconds, exit 0 (25.7 seconds wall time).
+- Complete pytest gate: 676 passed, 3 skipped and 11 subtests in 100.44 seconds, exit 0 (104.4 seconds wall time).
+- Complete unittest gate: 178 tests, 2 skipped in 6.608 seconds, exit 0 (10.6 seconds wall time).
+- Compile gate: `compileall -q src tests` exited 0 in 0.3 seconds.
+- Scientific rerun, model refit, manuscript edit, network call and paid API call: zero.
+- Consolidated manifest/receipt, forbidden-feature, raw/secret, portability, README-link, manuscript-diff, large-file and no-network/no-paid-API hygiene gate: exit 0 in 1.192 seconds; 24 README links and 14 exact checkpoint candidates checked, with zero prohibited findings.

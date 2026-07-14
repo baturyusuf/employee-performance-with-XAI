@@ -1382,3 +1382,9 @@ Independent review passed 66 relevant tests with no P0/P1 finding. Full pytest t
 Exact staged review passed for 20 small tracked files. Commit `9c603534268e7ba953cc1a05b23225b4fde488f5` completed successfully with no raw dataset, scientific artifact, manuscript, secret, absolute path or oversized file.
 
 Documentation-only sync commit `1639e182f877839995799319b434e1c356d131c1` passed its 9-file review. A normal non-force push exited 1 in 2 seconds because noninteractive HTTPS credentials were unavailable. Public `git ls-remote` confirmed remote `e25f403`; local remained ahead four and no orphan process existed.
+
+## Unit 2G recovery and acceptance gate - 2026-07-14
+
+Exact recovery, validator and test commands, timings, failures and exit codes are recorded in `../finalization/COMMAND_LOG.md`; acceptance results are summarized in `../finalization/TEST_LOG.md`. The final validator invocation exited 0 in 12.6 seconds. The focused gate passed 126 tests with one skip in 22.09 seconds; complete pytest passed 676 with three skips/11 subtests in 100.44 seconds; unittest passed 178 with two skips in 6.608 seconds; compileall exited 0 in 0.3 seconds.
+
+The successful receipt records zero model fitting, network calls and paid API calls. No HRDataset scientific artifact or manuscript file changed. The stage was reused, not regenerated.

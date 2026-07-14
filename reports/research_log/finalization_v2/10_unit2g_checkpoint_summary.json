@@ -1,0 +1,78 @@
+{
+  "counts": {
+    "artifact_manifest_rows": 122,
+    "bootstrap_draws": 5000,
+    "calibration_fit_receipts": 50,
+    "calibration_training_oof_rows": 2799,
+    "candidate_fit_receipts": 400,
+    "classes": {
+      "2": 31,
+      "3": 243,
+      "4": 37
+    },
+    "inner_folds_per_outer": 5,
+    "local_grouped_shap_rows": 6531,
+    "outer_folds": 10,
+    "persisted_outer_models": 50,
+    "raw_oof_rows": 1555,
+    "samples": 311,
+    "sigmoid_oof_rows": 311,
+    "stage_contract_outputs": 124,
+    "stage_files_including_contract": 125,
+    "subgroup_disparity_rows": 85,
+    "subgroup_headline_eligible_rows": 30,
+    "subgroup_metric_rows": 391
+  },
+  "generation_identity": {
+    "bootstrap_resample_hash": "9b95a1e4a6f87c1abad1b110b8dadec8b48e5258e5362d01ad87d794c612f46e",
+    "canonical_content_hash_algorithm": "sha256_utf8_json_rows_csv_utf8_sig_v1",
+    "canonical_content_sha256": "e6d5bb365c3548e9185f4c24f20737210cde62c758d6e1d1ce3462846f4c0983",
+    "config_hash": "5af0262e83a3720f8dca0b4d6795bdffc6bb2cefedc901ae0a47f9262d07f305",
+    "feature_policy_contract_sha256": "e08625831afd057d1102d0fc42e06d56c9cd51a5632d04780aafe880888d78e5",
+    "fold_contract_hash": "a07d0508a26d7b40a3bfd66063ee4cf002559daff2d5d2e8e3f74e46a8f06422",
+    "git_commit": "17a3dcd36390291b8eab24b4b3a746092dacee77",
+    "model_set_sha256": "2bf06c3044af28029419b70e6eeb026281de57582f0bb2e1126a2c0909983c81",
+    "raw_dataset_sha256": "cb19996755c93c0a8d6527f59da4701c80aef65eff854906546dce286249813c",
+    "schema_mapping_sha256": "65c40fecc75235f57209cff6231d7386e4279ebedca9390f53ad2bb67ae63788",
+    "scientific_input_hash": "71f1fc4699113876d70c6853abfdc8d3ec4f9419bb88897414fae28ae166422a",
+    "scope_contract_hash": "af80b8a7c355a57b3ad8cd39775132fcc6c87e19983df901bf5e503b422c90dc",
+    "source_tree_hash": "706690fcc28c8e308dcb667872035f72c8382bcc02f8585698a0968a8b8f873a"
+  },
+  "network_calls": 0,
+  "paid_api_calls": 0,
+  "publication_boundary": {
+    "atomic_stage_status": "complete",
+    "canonical_package": false,
+    "dataset_source_licence_status": "manual_review_required",
+    "enclosing_manifest_status": "running",
+    "ethics_status": "pending_manual_submission_blocker",
+    "locked_transport_status": "infeasible_too_few_common_safe_features",
+    "manuscript_claims_frozen": false,
+    "promoted_to_latest": false,
+    "proxy_status": "not_estimated_insufficient_outer_training_class_support",
+    "source_tables": [
+      "target_support.csv",
+      "raw_metric_intervals.csv",
+      "calibration_metric_intervals.csv",
+      "calibration_paired_differences.csv",
+      "policy_pairwise_differences.csv",
+      "external_replication_metadata.json"
+    ],
+    "stage_role": "independent_mapped_target_replication_stage_validation"
+  },
+  "replay": {
+    "maximum_grouped_shap_value_error": 0.0,
+    "maximum_outer_model_probability_error": 0.0,
+    "maximum_shap_additivity_error": 4.468303814064711e-06,
+    "maximum_sigmoid_probability_error": 0.0
+  },
+  "reused_existing_output": true,
+  "run_id": "stage_validation_hrdataset_20260713T175045Z_5af0262e83a3",
+  "schema_version": 1,
+  "scientific_stage_rerun": false,
+  "stage_root": "reports/manuscript_final/stage_validation_hrdataset_20260713T175045Z_5af0262e83a3/core/external_replication",
+  "status": "passed",
+  "validated_at_utc": "2026-07-14T12:31:49.199819+00:00",
+  "validation_head": "eab2b32150245fe7d406afcfb64827be67797752",
+  "validation_scope": "unit_2g_atomic_stage_acceptance_noncanonical"
+}
