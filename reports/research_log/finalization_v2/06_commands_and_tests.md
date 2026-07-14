@@ -1463,3 +1463,11 @@ Staged review found that `_atomic_write_json` preserved its primary error but sw
 After checkpoint `e524879` was pushed, `python -m src.governance.inx_workbook_equivalence --engine excel_com_windows` exited 1 in 0.122 seconds before opening Excel or writing output. Argparse had converted `DEFAULT_OUTPUT` to a Windows-backslash string; the portable path gate correctly failed. The CLI defaults now call `.as_posix()`, and a direct argv regression test covers all three defaults. Post-fix focus passed 25 in 2.56 seconds (5.541 wall); full pytest passed 698/2 skips/11 subtests in 117.97 seconds (121.926 wall); unittest passed 176/one skip in 7.287 seconds (11.093 wall); compileall passed in 0.114 seconds. No partial receipt was created.
 
 Checkpoint `8f02e55` was pushed, then the same production CLI command exited 0 in 1.408 seconds. Independent `validate_receipt` exited 0 in 0.216 seconds. It binds clean Git commit `8f02e55`, source tree `d2407e99...`, acquisition/provenance configs `a5e820a7...`/`1375d50a...`, validator source `7fcfb9c4...`, workbook/CSV bytes, exact sheets/shapes, normalized content `b5caa2ee...`, zero mismatches, the partial-codebook mapping and all manual statuses. The 6,331-byte receipt hashes to `90e75733...`; no temp sibling remains.
+
+## V2-014 forward current-tip sanitation - 2026-07-14
+
+The pre-untrack script parsed `configs/publication_export.yaml` and verified 14/14 local sizes/hashes. One exact `git rm --cached` invocation staged 14 index deletions. Post-command checks found 14/14 files still present and ignored; total local size is 2,335,429 bytes. Dataset cards, mappings, README and placeholder files were not removed.
+
+Focused command over export, acquisition, actual-input, cards and interim-fallback contracts first returned 19 passed/1 failed. The failure identified absolute receipt-path double joining in the internal validator. The corrected focus passed 20 in 2.73 seconds (5.950 wall). Integration over export, builder portability, config, data/audit, acquisition, cards, side-input and scoped-manifest tests passed 84 in 6.04 seconds (9.222 wall).
+
+Complete pytest passed 703 with two skips/11 subtests in 120.78 seconds (124.708 wall). Unittest passed 176/one skip in 7.336 seconds (11.177 wall); compileall passed in 0.114 seconds. No production archive/receipt exists before the clean commit.

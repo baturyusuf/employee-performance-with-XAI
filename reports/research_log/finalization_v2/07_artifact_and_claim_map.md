@@ -215,3 +215,17 @@ The admitted compact artifact is `11_inx_workbook_equivalence_receipt.json`, gen
 | Config/source-tree/validator/Git identities plus atomic/privacy/API flags | Execution and publication-contract identity | Not a scientific result or canonical package promotion |
 
 The CSV remains the sole canonical experiment input. The receipt cannot establish source authenticity, licence, citation, retrieval date, ethics status or any predictive result.
+
+## V2-014 history-free technical export receipt
+
+The planned compact artifact is `12_publication_export_receipt.json`. It will bind an ephemeral exact-commit allowlisted ZIP; the ZIP is deliberately deleted after validation and is not a release artifact.
+
+| Receipt evidence | Bound role | Claim boundary |
+| --- | --- | --- |
+| Fourteen local path/size/SHA-256 inventory aggregate | Proof that index-only sanitation preserved every declared local working file | Local preservation only; no redistribution permission |
+| Exact commit/config/source/validator identities | Reproducible export implementation identity | Current commit only; prior history is unchanged |
+| Tracked-tree forbidden-path and required-document counts | Current-tip sanitation | Does not remove earlier Git objects |
+| ZIP SHA-256, size, closed member count and member-manifest hash | Deterministic allowlisted archive proof | Ephemeral technical export, not final scientific/release package |
+| Zero history/`.git`, raw path, machine path, secret, symlink and oversize findings | Export hygiene | Not a legal, ethics, licence or source-authenticity decision |
+
+No raw employee value is written to the receipt. No archive is retained or published by this unit.

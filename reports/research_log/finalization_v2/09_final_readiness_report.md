@@ -2,13 +2,13 @@
 
 Assessment date: 2026-07-14
 
-Current state: Units 1A through 2G, V2-029, the V2-021a/V2-032 figure contracts, V2-012 supplementary heuristic search, V2-013 task-bounded supplementary external implementation and V2-015 workbook/CSV equivalence are tested. Unit 2G scientific checkpoint `0e3f50c`, receipt `fa6f4b1`, V2-032 checkpoints `5cd144a`/`5f893ec`, V2-012 checkpoints `7226eff`/`08bc14e`, and V2-015 implementation/fix checkpoints `e524879`/`8f02e55` are pushed. The V2-015 clean compact receipt passes independently. No clean complete v2 scientific rebuild exists.
+Current state: Units 1A through 2G, V2-029, the V2-021a/V2-032 figure contracts, V2-012 supplementary heuristic search, V2-013 task-bounded supplementary external implementation and V2-015 workbook/CSV equivalence are tested. V2-014 current-tip sanitation/export implementation is also tested, with its clean export receipt pending the checkpoint. The V2-015 clean compact receipt passes independently. No clean complete v2 scientific rebuild exists.
 
 This is a live interim assessment, not a final completion declaration. `../finalization/CURRENT_STATUS.md` is the interruption-resilient status source.
 
 ## Engineering readiness
 
-**Not ready.** Actual-input/side-input binding, core/supplementary isolation, shared-fold benchmarking, exact-model OOF SHAP, matched policy ablation, cross-fitted sigmoid calibration, support-aware subgroup/proxy contracts, conservative HRDataset replication, closed-world completion/promotion, seven-figure package admission, supplementary heuristic search, task-bounded external contracts and executable INX workbook/CSV equivalence are implemented and tested. V2-015 adds exact normalized-cell comparison and partial-codebook provenance without recording employee values. The current full gate passes 698 pytest tests with 2 skips and 11 subtests; the final unittest gate is recorded in the persistent test log. Production figures/tables, dependency locking, CI/release workflows, raw-tip sanitation and final all-stage integration remain open.
+**Not ready.** Actual-input/side-input binding, core/supplementary isolation, shared-fold benchmarking, exact-model OOF SHAP, matched policy ablation, cross-fitted sigmoid calibration, support-aware subgroup/proxy contracts, conservative HRDataset replication, closed-world completion/promotion, seven-figure package admission, supplementary heuristic search, task-bounded external contracts, executable INX workbook/CSV equivalence and forward raw-tip sanitation are implemented and tested. The current full gate passes 703 pytest tests with 2 skips and 11 subtests. Production figures/tables, dependency locking, CI/release workflows and final all-stage integration remain open.
 
 ## Scientific readiness
 
@@ -20,7 +20,7 @@ This is a live interim assessment, not a final completion declaration. `../final
 
 ## Data/provenance readiness
 
-**Blocked.** Pinned user-provided/acquisition contracts pass for current local inputs. The V2-015 clean receipt proves exact workbook/CSV normalized content equivalence and binds the seven-block partial codebook, but semantic/source/licence authenticity still requires manual verification. Raw-data distribution requires the accepted sanitized-publication workflow. The 65.4 MB noncanonical Unit 2G package is preserved locally and removed from the branch tip by forward cleanup `b7b2ad3` under D5; historical blobs remain because rewriting/force-push is prohibited.
+**Blocked.** Pinned user-provided/acquisition contracts pass for current local inputs. Fourteen data/working-artifact paths are removed from the current index with 2,335,429 local bytes preserved; the clean allowlisted archive receipt is pending. Semantic/source/licence authenticity still requires manual verification, and raw files remain in prior Git history because rewriting/force-push is prohibited. The 65.4 MB noncanonical Unit 2G package is likewise absent from the tip but present historically.
 
 ## Ethics readiness
 
@@ -32,7 +32,7 @@ This is a live interim assessment, not a final completion declaration. `../final
 
 ## Remaining blockers
 
-See `02_issue_register.csv` and `08_manual_submission_blockers.md`. D1-D5, cross-fitted sigmoid, HRDataset policy A and the Option-A figure plan are accepted. The real HRDataset stage/reusable audit and V2-015 receipt are complete; V2-029, V2-032, V2-012 and V2-013 are implementation-complete. The exact next unit is V2-014 forward raw-tip sanitation, followed by dependency/CI/no-network contracts, source-bound table/figure generators and final integration. Ethics and source/licence authenticity remain external manual gates; claim-matrix author approval occurs only after the final package exists.
+See `02_issue_register.csv` and `08_manual_submission_blockers.md`. D1-D5, cross-fitted sigmoid, HRDataset policy A and the Option-A figure plan are accepted. The real HRDataset stage/reusable audit and V2-015 receipt are complete; V2-014 implementation awaits its clean receipt. The exact next action is that receipt, followed by dependency/CI/no-network contracts, source-bound table/figure generators and final integration. Ethics, source/licence authenticity and historical-publication strategy remain external manual gates.
 
 ## Final recommendation
 

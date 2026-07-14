@@ -173,6 +173,16 @@ cython_debug/
 # Small publication summaries may be committed separately after the canonical freeze.
 /reports/manuscript_final/stage_validation_hrdataset_20260713T175045Z_5af0262e83a3/
 
+# User-provided HR data and row-level/fit-derived working data remain local.
+# Dataset cards, schema mappings, README files, and directory placeholders stay tracked.
+/data/raw/*
+!/data/raw/.gitkeep
+/data/external/*/raw.csv
+/data/interim/*
+!/data/interim/.gitkeep
+/data/processed/*
+!/data/processed/.gitkeep
+
 # Ruff stuff:
 .ruff_cache/
 

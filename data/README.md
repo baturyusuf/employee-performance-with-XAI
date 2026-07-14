@@ -22,10 +22,12 @@ physical IBM file with different target profiles.
    substitute an older interim/cache copy. Produce a mismatch report and obtain
    a scientific decision before changing the pinned contract or dataset.
 
-The raw datasets currently present in this development checkout match the
-contract recorded on the finalization branch. Their presence is not evidence
-that their source authenticity, licence, citation, or redistribution rights
-have been verified.
+The local datasets currently present in the working checkout match the pinned
+contract. They are ignored and absent from the current publication branch tip;
+their presence is not evidence that source authenticity, licence, citation, or
+redistribution rights have been verified. Dataset cards, schema mappings, and
+directory placeholders remain tracked because they contain the reproducibility
+contract rather than employee-level records.
 
 ## Missing files and downloads
 
@@ -46,15 +48,16 @@ Acquisition and publication tooling must not delete a user's local raw files.
 Removing a file from version control, when separately authorized, must preserve
 the working-tree copy (for example, by using an index-only untracking step).
 
-The current repository and its existing Git history are development history;
-they may contain previously tracked raw inputs and historical artifacts. The
-approved publication strategy is a separate sanitized repository or export in
-which unverified raw datasets are absent from all published history. Creating
-that export does not rewrite this development repository's history. Code,
-small manuscript-facing tables and figures, and integrity manifests may remain
-in Git; larger evidence packages are prepared for a separately approved
-GitHub Release or Zenodo deposit. No release or deposit is authorized merely by
-this data policy.
+The current branch tip does not track the declared raw, interim, or processed
+working-data paths. Existing Git history is development history and still
+contains earlier copies. The approved publication strategy is therefore a
+separate allowlisted `git archive` export from a verified commit tree; it
+contains no `.git` history and no unverified data path. Creating that export
+does not rewrite this development repository's history. Code, small
+manuscript-facing tables and figures, and integrity manifests may remain in
+Git; larger evidence packages are prepared for a separately approved GitHub
+Release or Zenodo deposit. No release or deposit is authorized merely by this
+data policy.
 
 ## Manual submission blockers
 

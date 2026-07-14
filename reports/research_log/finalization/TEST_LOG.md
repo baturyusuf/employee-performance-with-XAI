@@ -388,3 +388,15 @@ Push/recovery gate: the normal push timed out after 184 seconds with no remote r
 - Final post-CLI-fix unittest: 176 tests, 1 skipped in 7.287 seconds, exit 0 (11.093 seconds wall). Compileall: exit 0 in 0.114 seconds.
 - Clean production receipt: passed in 1.408 seconds from Git commit `8f02e5569f1073b1dd3e0861e29d5f9189d79173` using Excel COM 16.0. `canonical_eligible=true`, `git_worktree_dirty=false`, exact sheet order, zero matrix mismatches, no employee values, zero network/API calls and zero residual temp sibling.
 - Independent receipt validation: passed in 0.216 seconds. Workbook SHA-256 `d7d224e7...`, CSV SHA-256 `b8deac0a...`, normalized content SHA-256 `b5caa2ee...`, source-tree SHA-256 `d2407e99...`, and receipt SHA-256 `90e75733...` are bound. The codebook remains explicitly incomplete at 7/28 columns.
+
+## V2-014 current-tip/export gate - 2026-07-14
+
+- Local preservation: passed. Fourteen exact files, 2,335,429 total bytes and every configured SHA-256 remained present after index-only removal; all 14 are ignored.
+- Current-tip contract: staged state removes exactly those 14 paths while retaining cards, schema mappings, data README and placeholders. No local deletion/history rewrite is performed.
+- Export contract: tests pass for exact-commit allowlisting, closed ZIP membership/hashes/sizes, required tracked documentation, forbidden data-path rejection, history/`.git` absence, portable paths/content, secret scan, no symlinks and ephemeral archive cleanup.
+- Development failure retained: 19 passed/1 failed because an absolute internal receipt `Path` was joined twice on Windows. Explicit containment plus drive-letter rejection fixed production behavior without weakening the contract.
+- Final focused gate: 20 passed in 2.73 seconds, exit 0 (5.950 seconds wall).
+- Provenance/path/data integration: 84 passed in 6.04 seconds, exit 0 (9.222 seconds wall).
+- Complete pytest: 703 passed, 2 skipped and 11 subtests in 120.78 seconds, exit 0 (124.708 seconds wall).
+- Unittest: 176 tests, 1 skipped in 7.336 seconds, exit 0 (11.177 seconds wall). Compileall: exit 0 in 0.114 seconds.
+- Clean history-free export receipt: pending the implementation/current-tip checkpoint; no provisional archive or receipt is admitted.

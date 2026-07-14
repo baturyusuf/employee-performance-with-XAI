@@ -8,11 +8,11 @@ The user reports that an ethics/IRB application is pending. Institution/universi
 
 INX, HRDataset_v14, IBM HR Analytics and Employee Turnover all remain `manual_review_required` for source authenticity, licence and citation verification. D3 acquisition behavior is accepted and the current files are hash/schema verified, but that does not verify legal/source authenticity. Raw redistribution and final data-availability wording remain blocked.
 
-HRDataset_v14 is presently Git-tracked even though its acquisition record says user-provided local file and licence/source authenticity are unverified. The fixed non-distribution decision requires removal from the current publication tip without deleting the user's local copy; public history cleanup remains a separate authorization-bound issue.
+HRDataset_v14 and the other declared local data paths are staged for removal from the current Git tip with all local bytes preserved and ignored. The clean export receipt is pending. Source/licence authenticity remains unresolved independently of Git tracking; public-history cleanup remains a separate authorization-bound issue.
 
 ## Public Git History — Blocking for Strict Non-Distribution
 
-Raw datasets already exist in public history. Removing them from the current tip does not remove historical copies. A sanitized publication repository/history strategy requires explicit user authorization because force-push/history rewriting is prohibited by default.
+Raw datasets already exist in public history. Current-tip untracking and a history-free `git archive` export do not remove historical copies. Publishing or sanitizing existing public history requires explicit user authorization because force-push/history rewriting is prohibited.
 
 ## INX Workbook Semantics and Source Authority - Manual Review Required
 

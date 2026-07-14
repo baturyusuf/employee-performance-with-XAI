@@ -1,0 +1,152 @@
+{
+  "publication_export": {
+    "schema_version": 1,
+    "contract_status": "approved_d3_forward_tip_sanitation",
+    "scope": "history_free_allowlisted_technical_export_without_local_hr_data",
+    "archive_method": "git_archive_exact_commit_allowlist_zip_v1",
+    "receipt_path": "reports/research_log/finalization_v2/12_publication_export_receipt.json",
+    "include_paths": [
+      ".env.example",
+      ".gitattributes",
+      ".gitignore",
+      "AGENTS.md",
+      "README.md",
+      "environment.yml",
+      "requirements-dev.txt",
+      "requirements.txt",
+      "app",
+      "configs",
+      "src",
+      "tests",
+      "data/README.md",
+      "data/external/employee_turnover/dataset_card.md",
+      "data/external/employee_turnover/schema_mapping.json",
+      "data/external/hrdataset_v14/dataset_card.md",
+      "data/external/hrdataset_v14/schema_mapping.json",
+      "data/external/ibm_hr_analytics/dataset_card.md",
+      "data/external/ibm_hr_analytics/schema_mapping.json",
+      "reports/research_log/finalization",
+      "reports/research_log/finalization_v2"
+    ],
+    "required_tracked_paths": [
+      "data/README.md",
+      "data/external/.gitkeep",
+      "data/external/employee_turnover/dataset_card.md",
+      "data/external/employee_turnover/schema_mapping.json",
+      "data/external/hrdataset_v14/dataset_card.md",
+      "data/external/hrdataset_v14/schema_mapping.json",
+      "data/external/ibm_hr_analytics/dataset_card.md",
+      "data/external/ibm_hr_analytics/schema_mapping.json",
+      "data/interim/.gitkeep",
+      "data/processed/.gitkeep",
+      "data/raw/.gitkeep"
+    ],
+    "forbidden_tracked_globs": [
+      "data/raw/*",
+      "data/external/*/raw.csv",
+      "data/interim/*",
+      "data/processed/*"
+    ],
+    "allowed_placeholder_paths": [
+      "data/raw/.gitkeep",
+      "data/interim/.gitkeep",
+      "data/processed/.gitkeep"
+    ],
+    "portable_content_prefixes": [
+      "README.md",
+      "configs/",
+      "data/",
+      "reports/research_log/finalization/",
+      "reports/research_log/finalization_v2/"
+    ],
+    "maximum_archive_bytes": 15000000,
+    "maximum_member_bytes": 5000000,
+    "local_preservation": [
+      {
+        "path": "data/raw/INX_Future_Inc_Employee_Performance_CDS_Project2_Data_V1.8.xls",
+        "sha256": "d7d224e7c8f50693e0aba7621e56a55a84b0c2c156ff95afd2b156daa5d0f003",
+        "size_bytes": 410624,
+        "category": "source_workbook"
+      },
+      {
+        "path": "data/raw/inx_employee_performance.csv",
+        "sha256": "b8deac0a615b97076622ae540f4cfd0d3c3f1e7acb83ba3ff6560470a9ccf60a",
+        "size_bytes": 152715,
+        "category": "source_dataset"
+      },
+      {
+        "path": "data/external/employee_turnover/raw.csv",
+        "sha256": "2510e274a90547f34c7b0db5a4ab70282c2710eb54252f14921bf980b81a928c",
+        "size_bytes": 566778,
+        "category": "source_dataset"
+      },
+      {
+        "path": "data/external/hrdataset_v14/raw.csv",
+        "sha256": "cb19996755c93c0a8d6527f59da4701c80aef65eff854906546dce286249813c",
+        "size_bytes": 76857,
+        "category": "source_dataset"
+      },
+      {
+        "path": "data/external/ibm_hr_analytics/raw.csv",
+        "sha256": "a5c31e38bd7fafc9bc333884eb181b06b41b8e5e488e8f7ccb27199fb3be7659",
+        "size_bytes": 227977,
+        "category": "source_dataset"
+      },
+      {
+        "path": "data/interim/inx_employee_performance_validated.csv",
+        "sha256": "afc97e8b8aba4bae1e1ca62e17c8c0c18b73f2c6e53c846ffbee2d0d4c495a7e",
+        "size_bytes": 152712,
+        "category": "row_level_interim"
+      },
+      {
+        "path": "data/processed/X_test_preprocessed.csv",
+        "sha256": "715b4c4e29abd2776f0e15b5ca265ca7bb3362b1eb53fc146103054aa336f133",
+        "size_bytes": 123115,
+        "category": "row_level_processed"
+      },
+      {
+        "path": "data/processed/X_test_raw.csv",
+        "sha256": "b10189c200ce46fcd6314ac10abe58eb0005cbd4f82ab049cd082cc8fc278afc",
+        "size_bytes": 24964,
+        "category": "row_level_processed"
+      },
+      {
+        "path": "data/processed/X_train_preprocessed.csv",
+        "sha256": "262dd0ae5235e7549b54f969d8097a1eecfcc02635bd4d0e062aafda9630e3e5",
+        "size_bytes": 487169,
+        "category": "row_level_processed"
+      },
+      {
+        "path": "data/processed/X_train_raw.csv",
+        "sha256": "e96e709fb45b91299bcda42986e0e65ee50084a4ebc73b2db0b98b4259964a90",
+        "size_bytes": 98961,
+        "category": "row_level_processed"
+      },
+      {
+        "path": "data/processed/preprocessing_metadata.json",
+        "sha256": "391ec7c60ec2302f78759b4c26639c726f3e28de0d78f7b3df833f25cfbbf97e",
+        "size_bytes": 2265,
+        "category": "historical_fit_metadata"
+      },
+      {
+        "path": "data/processed/sklearn_preprocessor.joblib",
+        "sha256": "80eff1e676f70eb51ef41aef60a39d3948bedf823f96c09e55f2827038af1071",
+        "size_bytes": 7654,
+        "category": "historical_fitted_object"
+      },
+      {
+        "path": "data/processed/y_test.csv",
+        "sha256": "540688f8a2750ba2013552b528637b466c3d5d7dee75c3bf41ed81eb8ee57ee5",
+        "size_bytes": 739,
+        "category": "row_level_target"
+      },
+      {
+        "path": "data/processed/y_train.csv",
+        "sha256": "ea0ab8a02ca6a028f2b84eeb7ead2f54627a91c9a830e710854e96acb0f61daa",
+        "size_bytes": 2899,
+        "category": "row_level_target"
+      }
+    ],
+    "claim_boundary": "This contract removes local HR data from the current branch tip and builds a history-free allowlisted technical export. It does not erase development Git history, verify redistribution rights, publish a release, or admit historical/scientific artifacts as canonical evidence."
+  }
+}

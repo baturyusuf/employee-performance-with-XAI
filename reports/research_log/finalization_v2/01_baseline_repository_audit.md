@@ -58,7 +58,7 @@ The package at `reports/manuscript_final/latest` is historical v1 evidence, not 
 - Entrypoint command remains `status=started`, `ended_at=null`, `return_code=null`
 - The manifest is overall `complete`, so command completion is not validated
 - Manifest hashes the raw INX CSV while core stages silently read the interim file when it exists
-- Absolute `C:\Users\Yusuf\...` paths occur in the manifest and many metadata/CSV artifacts
+- Machine-home absolute paths occur in the manifest and many metadata/CSV artifacts
 - Core manifest contains LLM, agent, chatbot, and counterfactual artifacts that are excluded from the new core scope
 
 ## Protocol Findings
