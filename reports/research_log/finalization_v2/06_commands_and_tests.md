@@ -1388,3 +1388,5 @@ Documentation-only sync commit `1639e182f877839995799319b434e1c356d131c1` passed
 Exact recovery, validator and test commands, timings, failures and exit codes are recorded in `../finalization/COMMAND_LOG.md`; acceptance results are summarized in `../finalization/TEST_LOG.md`. The final validator invocation exited 0 in 12.6 seconds. The focused gate passed 126 tests with one skip in 22.09 seconds; complete pytest passed 676 with three skips/11 subtests in 100.44 seconds; unittest passed 178 with two skips in 6.608 seconds; compileall exited 0 in 0.3 seconds.
 
 The successful receipt records zero model fitting, network calls and paid API calls. No HRDataset scientific artifact or manuscript file changed. The stage was reused, not regenerated.
+
+Staged review passed for exactly 14 allowlisted files and commit `0e3f50c91693b0a0f22502c2f006d516178b5d88` was created. Push attempt one timed out after 124 seconds at Credential Manager; attempt two exited 128 in 1.3 seconds with noninteractive HTTPS username unavailable. Exact PID/ref/error evidence is in `../finalization/COMMAND_LOG.md`. Remote remains `eab2b32`; no third attempt is authorized in this chat.

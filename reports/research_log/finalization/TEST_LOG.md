@@ -316,3 +316,5 @@ Push/recovery gate: the normal push timed out after 184 seconds with no remote r
 - Compile gate: `compileall -q src tests` exited 0 in 0.3 seconds.
 - Scientific rerun, model refit, manuscript edit, network call and paid API call: zero.
 - Consolidated manifest/receipt, forbidden-feature, raw/secret, portability, README-link, manuscript-diff, large-file and no-network/no-paid-API hygiene gate: exit 0 in 1.192 seconds; 24 README links and 14 exact checkpoint candidates checked, with zero prohibited findings.
+- Exact staged-diff gate: exit 0 in 0.535 seconds; 14 allowlisted files, zero unstaged/untracked/raw/model/environment/large/secret/absolute/manuscript/full-package findings, and `git diff --cached --check` passed. Scientific checkpoint `0e3f50c91693b0a0f22502c2f006d516178b5d88` was created from that index.
+- Push is externally blocked, not a scientific/test failure. Attempt one timed out after 124 seconds at Credential Manager and its exact Git-only transport chain was stopped; attempt two exited 128 in 1.3 seconds because no noninteractive HTTPS username was available. Remote stayed `eab2b32`; no process or ref ambiguity remains.

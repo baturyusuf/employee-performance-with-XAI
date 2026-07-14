@@ -2,7 +2,7 @@
 
 Assessment date: 2026-07-14
 
-Current state: Units 1A through 2G, V2-029 and the V2-021a figure-plan contract have tested implementation commits present on local and remote branch checkpoint `eab2b32`. The full Unit 2G verified-real-data stage completed from clean source commit `17a3dcd` and now passes the reusable independent atomic/scientific validator with a small committed receipt. It remains noncanonical stage evidence; no clean complete v2 scientific rebuild exists.
+Current state: Units 1A through 2G, V2-029 and the V2-021a figure-plan contract have tested implementation commits. Local Unit 2G scientific checkpoint is `0e3f50c`; remote remains at prior synchronized checkpoint `eab2b32` because both allowed normal push attempts were authentication-blocked. The full Unit 2G verified-real-data stage completed from clean source commit `17a3dcd` and now passes the reusable independent atomic/scientific validator with a small committed receipt. It remains noncanonical stage evidence; no clean complete v2 scientific rebuild exists.
 
 This is a live interim assessment, not a final completion declaration. `../finalization/CURRENT_STATUS.md` is the interruption-resilient status source.
 
@@ -20,7 +20,7 @@ This is a live interim assessment, not a final completion declaration. `../final
 
 ## Data/provenance readiness
 
-**Blocked.** Pinned user-provided/acquisition contracts pass for current local inputs, but raw-data distribution and source/licence authenticity still require the accepted sanitized-publication workflow and manual verification. The 65.4 MB noncanonical Unit 2G package is preserved locally and removed from the local and remote branch tips by forward cleanup `b7b2ad3` under D5. Recovery confirmed synchronized tip `eab2b32`, resolving the prior authentication blocker. The large package remains in history because rewriting/force-push is prohibited. No ambiguous licence/source judgement has been invented.
+**Blocked.** Pinned user-provided/acquisition contracts pass for current local inputs, but raw-data distribution and source/licence authenticity still require the accepted sanitized-publication workflow and manual verification. The 65.4 MB noncanonical Unit 2G package is preserved locally and removed from the local and remote branch tips by forward cleanup `b7b2ad3` under D5. Recovery confirmed synchronized remote tip `eab2b32`; new small scientific checkpoint `0e3f50c` is locally complete but its two allowed normal push attempts were authentication-blocked. The large package remains in history because rewriting/force-push is prohibited. No ambiguous licence/source judgement has been invented.
 
 ## Ethics readiness
 
@@ -32,7 +32,7 @@ This is a live interim assessment, not a final completion declaration. `../final
 
 ## Remaining blockers
 
-See `02_issue_register.csv` and `08_manual_submission_blockers.md`. D1-D5, cross-fitted sigmoid, HRDataset policy A and the Option-A replacement figure plan are accepted. The real HRDataset stage and reusable artifact audit are complete; V2-029 and the frozen figure-plan contract are code/test complete. The D5 forward cleanup is present on the remote tip, while history sanitation remains unauthorized and open. The exact next independent unit is V2-032: retire obsolete numbered SHAP Figure 6/7 previews and the legacy v1 stem validator before generator work. Remaining supplementary science, generator implementation, dependency/CI contracts, sanitized publication transition and final integration follow in later chats. Ethics and source/licence authenticity remain external manual gates; claim-matrix author approval occurs only after the final package exists.
+See `02_issue_register.csv` and `08_manual_submission_blockers.md`. D1-D5, cross-fitted sigmoid, HRDataset policy A and the Option-A replacement figure plan are accepted. The real HRDataset stage and reusable artifact audit are complete; V2-029 and the frozen figure-plan contract are code/test complete. The D5 forward cleanup is present on the remote tip, the new small checkpoint awaits authenticated push, and history sanitation remains unauthorized and open. After that external push step, the exact next independent unit is V2-032: retire obsolete numbered SHAP Figure 6/7 previews and the legacy v1 stem validator before generator work. Remaining supplementary science, generator implementation, dependency/CI contracts, sanitized publication transition and final integration follow in later chats. Ethics and source/licence authenticity remain external manual gates; claim-matrix author approval occurs only after the final package exists.
 
 ## Final recommendation
 
