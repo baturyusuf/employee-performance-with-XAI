@@ -25,3 +25,7 @@ Macro-F1 is already the predeclared primary metric and QWK the fixed tie-breaker
 ## HRDataset Department Proxy Estimate — Unsupported by Available Support
 
 The configured nominal department proxy target contains a singleton class. Under the exact approved outer folds, at least one outer-training partition cannot contain all target classes, so the fail-closed external diagnostic is `not_estimated_insufficient_outer_training_class_support`. This does not block the mapped performance-target replication itself, but it blocks any numerical HRDataset department-reconstructability claim. Merging or dropping classes would change the estimand and has not been authorized.
+
+## Noncanonical Evidence in Git History - Publication Hygiene Blocker
+
+Commit `e25f403` pushed 126 Unit 2G stage-validation files totaling 65,412,766 bytes, including persisted models and row-level derivative evidence, contrary to D5. The current branch tip removes the directory through a normal index-only forward change and preserves the validated package locally. Because force-push and history rewriting are prohibited, the blobs remain retrievable from repository history. A later sanitized-publication/history strategy requires explicit authorization; until then this remains a publication-hygiene and repository-size blocker, especially while dataset source/licence authenticity is unverified.

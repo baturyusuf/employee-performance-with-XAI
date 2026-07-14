@@ -1352,3 +1352,21 @@ Final identity pre-check: config `5af0262e83a3720f8dca0b4d6795bdffc6bb2cefedc901
 The final post-documentation checks used `git diff --check`, `git diff --exit-code -- manuscript/mdpi_information/main.md`, `git diff --cached --name-only`, `git diff --name-only`, `git ls-files --others --exclude-standard`, `git ls-files --error-unmatch`, `git check-ignore -q`, `Import-Csv`, `Get-Item`, `Get-ChildItem` and `rg --pcre2` credential/terminology scans. An additional zero-context diff plus untracked-file `Select-String` scan classified all home-path-shaped literals.
 
 The consolidated command exited 0: 45 candidates; zero staged, raw, 100 MB, reparse, secret, active `leakage-safe`, missing README target, untracked README target or manuscript-diff findings; 28 valid issue rows; and 17 local README link occurrences across 15 unique tracked targets. The immutable trial remains 54 files/91,820,515 bytes, untracked and locally excluded. The path scan returned only the two production sanitization regexes and the two negative-test fixture paths. V2-005 was narrowed honestly to new-package implementation complete with historical cleanup and real-package validation still pending.
+
+## Unit 2G real stage and recovery validation - 2026-07-13/14
+
+Production invocation, identity and runtime are recorded verbatim in `../finalization/COMMAND_LOG.md`. Exit 0: wrapper 491.424 seconds; atomic stage 477.803 seconds; run `stage_validation_hrdataset_20260713T175045Z_5af0262e83a3`; source commit `17a3dcd`; config `5af0262e...`; scientific input `71f1fc46...`; source tree `706690fc...`; zero network/API calls.
+
+Recovery inspected Win32 processes, parent/child command lines, TCP listeners, UDP endpoints, Git state/diffs/15 commits, every run file, and lock/partial/temp/staging paths. No repository/run process or listener existed, so nothing was terminated. No duplicate stage was started.
+
+The independent closed-world validator exited 0 with 122 artifact rows, 124 stage outputs and 125 stage files; all paths, sizes and SHA-256 values match. It verified 311 exactly-once outer rows; 2,799 inner rows; 400 candidate fits; 50 persisted models; 1,555 raw and 311 sigmoid OOF rows; 50 calibration fits; ten model-calibrator relationships; a `(5000,311)` bootstrap matrix; 6,531 local SHAP rows; 85 disparity rows; fail-closed proxy non-estimation; and transport infeasibility. Independent model and calibrator reconstruction produced maximum probability replay error zero.
+
+Focused command:
+
+```powershell
+.\myenv\Scripts\python.exe -m pytest -q tests/test_external_replication_config_contract.py tests/test_external_nested_selection_contract.py tests/test_external_sigmoid_isolation.py tests/test_external_oof_bootstrap_contract.py tests/test_external_shap_contract.py tests/test_external_subgroup_proxy_contract.py tests/test_hrdataset_replication_stage_contract.py tests/test_artifact_run_manifest_consistency.py
+```
+
+Exit 0: 72 passed in 29.58 seconds. Current-HEAD validation of the provisional input manifest produced the expected noncanonical `git commit mismatch`; it was caught and asserted, so the diagnostic command exited 0. No canonical manifest/promotion exists.
+
+`git rm --cached -r -- reports/manuscript_final/stage_validation_hrdataset_20260713T175045Z_5af0262e83a3` exited 0. Verification found all 126 files/65,412,766 bytes preserved locally, zero tracked paths under the run root and the exact path ignored. This is D5 tip cleanup, not scientific deletion or history rewrite.

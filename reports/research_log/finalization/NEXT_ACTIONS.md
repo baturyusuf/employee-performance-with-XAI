@@ -1,12 +1,11 @@
 # Next Actions
 
-1. Commit the push-failure record; verify the tracked worktree is clean and no Git or Unit 2G process is active. Do not spend the final permitted push retry until a later natural checkpoint.
-2. Keep the local 91.8 MB diagnostic trial, raw datasets, caches, environments, partial outputs and historical packages outside version control. Keep the trial exclusion local-only.
-3. Execute the real HRDataset_v14 production stage offline from the clean checkpoint with all eight candidates and 5,000 resamples. Use a visibly noncanonical stage-validation run ID and do not create/promote a complete package manifest.
-4. Validate every persisted input, side input, fold, model, OOF, calibration, SHAP, support, path and artifact hash. Retain the output only as stage-validation evidence until the complete core package exists.
-5. If that stage fails, preserve the failure and fix only demonstrated implementation defects; do not relax the approved feature policy, folds, primary metric, calibration or claim boundary to improve scores.
-6. Continue the supplementary heuristic-search/task-bounded robustness work, task-aware metric schema, dataset acquisition/publication transition, replacement table/figure set, dependency lock, global core no-network guard/CI assertion, and manuscript-support source maps.
-7. Enable a scope's `release_ready` flag only when every declared runner and contract is complete. Then run the final clean two-scope rebuild, explicitly migrate the historical physical `latest`, and promote only the verified package-level pointer.
-8. Freeze the claim matrix exclusively from that complete clean package. Manuscript editing remains outside the current authorization.
+1. Complete the post-Unit-2G README/log/issue synchronization, run focused tests plus diff, manuscript, secret, path, raw-data, large-file and README-link gates, then create and push the tested forward-cleanup checkpoint. Preserve the validated local stage; do not rerun it.
+2. Keep `stage_validation_hrdataset_20260713T175045Z_5af0262e83a3` and the 91.8 MB benchmark trial local/ignored under D5. Do not recommit row-level evidence/models or present either noncanonical package as a release. Record that `e25f403` remains in public history unless a separately authorized publication-history strategy is later chosen.
+3. Add explicit `probability_method=raw` plus source-OOF identity to the external subgroup package and explicit raw-margin units to grouped SHAP summaries before the canonical build. Cover both with contract tests; do not alter the validated stage retrospectively.
+4. Continue the remaining approved implementation: supplementary heuristic-search/task-bounded robustness, task-aware metric enforcement, dataset acquisition/publication transition, dependency lock, global core no-network guard/CI assertion, replacement source-bound tables/Figures 1-7, and manuscript-support source maps.
+5. Enable a scope's `release_ready` flag only after every declared runner, output and contract exists. Then perform one clean, cache-disabled, current-commit two-scope rebuild with verified real inputs and side inputs; validate manifests, hashes, figures/tables and portable paths.
+6. Replace the historical physical `reports/manuscript_final/latest` only through the approved pointer migration after both compatible scopes pass strict completion. Never promote this Unit 2G stage-validation run.
+7. Freeze the claim matrix exclusively from the complete canonical package and request author approval before any manuscript edit.
 
-Do not call paid APIs, invent ethics/licence facts, delete local raw data, admit historical/diagnostic output as v2 evidence, or make causal/fairness/deployment/actionability claims.
+Do not call paid APIs, invent ethics/licence facts, delete local raw data/evidence, admit historical or diagnostic output as canonical v2 evidence, rewrite Git history, or make causal/fairness/deployment/actionability claims.

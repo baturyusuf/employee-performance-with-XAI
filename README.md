@@ -12,10 +12,10 @@ The existing [`reports/manuscript_final/latest/`](reports/manuscript_final/lates
 
 At this checkpoint:
 
-- Unit 2G implementation and publication-contract checkpoint: `ae5cf5a` on `finalization/leakage-aware-v2`; its log synchronization is `b1cc50c`. Both are currently local because the first normal push and one prompt-disabled retry timed out in Git HTTPS without a remote response. The production stage-validation run and complete canonical package are still pending.
+- Unit 2G implementation is recorded by `ae5cf5a`; the verified-real-data stage was generated from clean source commit `17a3dcd`. Commit `e25f403` then accidentally pushed the complete 65.4 MB noncanonical evidence package. The current checkpoint preserves that package locally and removes it from the Git tip under D5 without rewriting history.
 - Actual dataset and side-input binding, scoped core/supplementary orchestration, shared 10-fold assignments, the four-model benchmark contract, paired OOF bootstrap, warning-clean model preprocessing, exact prediction-model-to-OOF-SHAP binding, shared-fold leakage-policy ablation, cross-fitted sigmoid calibration, support-aware subgroup/proxy diagnostics, and conservative HRDataset_v14 replication now have implementation/test checkpoints.
 - These downstream stages are implemented but have **not** yet been regenerated together as one canonical scientific package. Final benchmark, policy, calibration, SHAP, subgroup/proxy, and external numbers still require one clean current-commit run. Replacement figures/tables, dependency locking, CI, sanitized publication packaging, and the complete rebuild remain unfinished.
-- Unit 2G uses 10 outer x 5 inner nested XGBoost, cross-fitted sigmoid, 5,000 paired/bootstrap draws, exact prediction-model OOF grouped SHAP, and atomic provenance-bound output. Its real-input preflight now reaches the production evaluator with a case-insensitively unique date exclusion, and SHAP replay uses the identical normalized probability contract as OOF prediction. The checkpoint suite passes 648 tests with 3 platform/historical skips and 11 subtests; unittest passes 178 tests with 2 skips. These are implementation gates only: no production Unit 2G artifact or numerical v2 claim exists yet.
+- Unit 2G uses 10 outer x 5 inner nested XGBoost, cross-fitted sigmoid, 5,000 paired/bootstrap draws, exact-model OOF grouped SHAP, support-aware diagnostics, and atomic provenance-bound output. Its full stage-validation artifact passed independent hash/model/calibrator/OOF/SHAP review plus a 72-test recovery suite. This validates the stage only: its outer input manifest is provisional, no complete package manifest exists, and no numerical v2 manuscript claim is frozen.
 - The core and supplementary entry points exist but deliberately fail closed because both scopes have `release_ready: false` in [`configs/manuscript_final.yaml`](configs/manuscript_final.yaml). No full current-commit canonical build or verified release manifest exists yet.
 - Global core-build network denial and its CI assertion are not implemented yet (V2-020). Individual offline stages are not a substitute for that final no-network release gate.
 - The manuscript has not been edited. A claim matrix must be technically frozen and approved before manuscript changes.
@@ -64,6 +64,20 @@ The conservative HRDataset_v14 primary policy excludes department/position/statu
 The HRDataset department proxy diagnostic is expected to be `not_estimated_insufficient_outer_training_class_support` because a singleton class is absent from at least one outer-training split. This is insufficient support, not evidence of fairness or low proxy risk; classes are not silently merged or dropped.
 
 The complete fixed scope and prohibited claims are recorded in [`00_scope_and_fixed_decisions.md`](reports/research_log/finalization_v2/00_scope_and_fixed_decisions.md).
+
+## Verified HRDataset_v14 stage (not a canonical release)
+
+The local run `stage_validation_hrdataset_20260713T175045Z_5af0262e83a3` completed offline on the verified 311-row HRDataset input under config `5af0262e83a3720f8dca0b4d6795bdffc6bb2cefedc901ae0a47f9262d07f305`. Its closed-world stage contract contains 124 hash-verified outputs; 50 persisted fold models and all ten sigmoid calibrators replay their OOF probabilities exactly. The package is local/ignored under D5 and is not expected to resolve from a GitHub checkout.
+
+Stage-validation results establish reporting constraints, not frozen manuscript numbers:
+
+- Raw conservative macro-F1 is `0.666355` (paired-bootstrap 95% CI `0.628073` to `0.704690`); QWK is `0.541220` (`0.485143` to `0.598791`).
+- Predeclared sigmoid improves log loss (`0.536253` to `0.422393`) and multiclass Brier (`0.301308` to `0.235226`), but lowers macro-F1 by `-0.041104` (`-0.074614` to `-0.008355`) and produces no class-4 argmax predictions. Probability quality and class-decision performance must therefore be reported separately.
+- Removing timing-unverified engagement/attendance fields lowers macro-F1 by `-0.366008` (`-0.412759` to `-0.319906`), so temporality is a major limitation rather than a robustness success.
+- Exact-fold grouped SHAP contains only the seven permitted primary features. The leading attributions are `DaysLateLast30`, `EngagementSurvey`, derived tenure and `Absences`; these raw-margin attributions are noncausal.
+- Department proxy reconstructability is not estimated because one outer-training split lacks the singleton department class. Locked INX transport is infeasible because only three safe common features pass the overlap contract.
+
+The run has no completed canonical run manifest, final evidence manifest, claim matrix or `latest` promotion. Its provisional input manifest correctly fails validation against later HEAD commits. Full commands, identities, validation results and limitations are recorded in [`COMMAND_LOG.md`](reports/research_log/finalization/COMMAND_LOG.md), [`TEST_LOG.md`](reports/research_log/finalization/TEST_LOG.md), and [`07_artifact_and_claim_map.md`](reports/research_log/finalization_v2/07_artifact_and_claim_map.md).
 
 ## Verified four-model trial (decision evidence, not a canonical release)
 

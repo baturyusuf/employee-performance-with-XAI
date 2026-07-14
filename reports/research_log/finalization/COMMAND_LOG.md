@@ -169,3 +169,68 @@ Checkpoint commit created: `ae5cf5a8e57f8e9bf0bcf3f458391f2c42d58411` (`feat(ext
 An initial unstaged log draft expanded the short commit hash incorrectly; `git rev-parse HEAD` detected it before staging, and every draft occurrence was corrected to the exact hash above. No commit or scientific metadata ever contained the incorrect value.
 
 The normal `git push origin finalization/leakage-aware-v2` produced no output and remained in Git HTTPS for about 90 seconds; the yielded wrapper was terminated and its exact orphaned Git process tree was then identified by creation time/command line and stopped. Upstream remained two commits behind. One retry with `GIT_TERMINAL_PROMPT=0` hit the 60-second tool timeout with the same Git HTTPS state; its proven process tree was also stopped. No credential/security setting was changed, no force flag was used, and no remote ref moved. A maximum of one later retry remains under the user's two-retry limit; local scientific work continues.
+
+## Unit 2G production stage and post-interruption recovery - 2026-07-13/14
+
+The full verified-real-data stage was invoked from clean source commit `17a3dcd36390291b8eab24b4b3a746092dacee77` with the repository interpreter, canonical config, explicit output, run/config/scientific identities and the saved input receipt:
+
+```powershell
+.\myenv\Scripts\python.exe -m src.experiments.manuscript_hrdataset_replication --config configs/manuscript_final.yaml --output-dir reports/manuscript_final/stage_validation_hrdataset_20260713T175045Z_5af0262e83a3/core/external_replication --run-id stage_validation_hrdataset_20260713T175045Z_5af0262e83a3 --config-hash 5af0262e83a3720f8dca0b4d6795bdffc6bb2cefedc901ae0a47f9262d07f305 --scientific-input-hash 71f1fc4699113876d70c6853abfdc8d3ec4f9419bb88897414fae28ae166422a --manifest-inputs reports/manuscript_final/stage_validation_hrdataset_20260713T175045Z_5af0262e83a3/core/stage_validation_input_manifest.json
+```
+
+The wrapper returned 0 after 491.424 seconds; the atomic stage contract records 477.803 seconds, `status=complete`, source tree `706690fcc28c8e308dcb667872035f72c8382bcc02f8585698a0968a8b8f873a`, zero network calls and zero paid API calls. No canonical run/final manifest or `latest` promotion was requested. The generated package was later committed and pushed as `e25f403`; that publication-policy error is remediated forward below.
+
+The 2026-07-14 interruption audit used read-only Windows process and endpoint enumeration plus Git/artifact inspection:
+
+```powershell
+Get-CimInstance Win32_Process
+Get-NetTCPConnection -State Listen
+Get-NetUDPEndpoint
+git status --short --branch
+git diff
+git diff --cached
+git log -15 --oneline --decorate
+Get-ChildItem reports/manuscript_final/stage_validation_hrdataset_20260713T175045Z_5af0262e83a3 -Recurse -Force
+```
+
+No command line or descendant referenced the repository/run after excluding the audit shell itself. No owned listener, duplicate model/test process, lock, partial, temporary or staging directory existed. No process was terminated and no file was deleted.
+
+A read-only inline Python validator rehashed the closed-world artifact and stage inventories; replayed fold/model/OOF/calibration/SHAP relationships; decompressed and checked the 5,000-draw bootstrap array; checked subgroup/proxy/transport boundaries; and asserted absence of package promotion. Exit 0 results: 122 artifact rows, 124 stage-contract outputs, 125 stage files, 10 outer x 5 inner folds, 50 hashed outer models, 1,555 raw OOF rows, 311 sigmoid rows, 6,531 grouped-SHAP rows, 85 subgroup disparity rows and fail-closed proxy non-estimation.
+
+The provisional input manifest was deliberately tested against current HEAD:
+
+```powershell
+@'
+from pathlib import Path
+from src.governance.manuscript_contract import RunManifestError, validate_run_manifest
+p = Path('reports/manuscript_final/stage_validation_hrdataset_20260713T175045Z_5af0262e83a3/core/stage_validation_input_manifest.json')
+try:
+    validate_run_manifest(p, require_complete=False, verify_source_tree=True)
+except RunManifestError as exc:
+    print('EXPECTED_NONCANONICAL_REJECTION:', exc)
+else:
+    raise SystemExit('provisional manifest unexpectedly validated')
+'@ | .\myenv\Scripts\python.exe -
+```
+
+Exit 0 with the expected diagnostic: `git commit mismatch: HEAD changed after the run manifest was created`. This confirms noncanonical status; it does not invalidate the separately verified atomic stage receipt.
+
+Focused regression command:
+
+```powershell
+.\myenv\Scripts\python.exe -m pytest -q tests/test_external_replication_config_contract.py tests/test_external_nested_selection_contract.py tests/test_external_sigmoid_isolation.py tests/test_external_oof_bootstrap_contract.py tests/test_external_shap_contract.py tests/test_external_subgroup_proxy_contract.py tests/test_hrdataset_replication_stage_contract.py tests/test_artifact_run_manifest_consistency.py
+```
+
+Exit 0: 72 passed in 29.58 seconds (34.3 seconds shell time).
+
+D5 forward remediation preserved every local byte while removing the package from the current Git tip:
+
+```powershell
+git rm --cached -r -- reports/manuscript_final/stage_validation_hrdataset_20260713T175045Z_5af0262e83a3
+```
+
+Exit 0. Post-command verification found 126 local files/65,412,766 bytes, zero tracked paths under the run root, and the exact root ignored by `.gitignore`. `.idea/misc.xml` is excluded only through `.git/info/exclude`; it is not a checkpoint candidate.
+
+The first consolidated hygiene wrapper on 2026-07-14 reached successful compileall, `pip check`, manuscript/diff, README and issue checks, then exited 1 before its final scans because it reused PowerShell's case-insensitive read-only `$HOME` name. It changed no file or index entry. The corrected wrapper used `$pathHits` and exited 0: 20 README links/16 unique targets, 30 well-formed issue rows, 141 candidate paths consisting of documentation plus intentional stage deletions, zero raw additions, zero files at or above 100 MB, zero secret/absolute-path/active-`leakage-safe` additions, zero tracked stage files, and all 126 local stage files/65,412,766 bytes preserved.
+
+Final staged review used `git diff --cached --check`, manuscript-scoped diff, exact path allowlisting, deletion-only status validation for the run root, added-line secret/home-path scans, and a fresh SHA-256 pass over every local artifact/stage-contract record. Exit 0: 141 staged paths = 126 deletion-only stage entries + 15 small approved files; 0 unstaged; 0 untracked; 0 secret/home-path findings; 122/122 artifact and 124/124 contract hashes still valid.

@@ -237,3 +237,25 @@ At that historical checkpoint, V2-007 through V2-010 had tested reusable infrast
 - Candidate portability review: four path-like literals, all required sanitization regexes or intentional negative-test fixtures; zero artifact/metadata machine-path leakage.
 - This is a repository checkpoint gate, not a scientific execution. No production Unit 2G artifact was generated.
 - One staged-review wrapper failed before evaluation because `$home` conflicts with PowerShell's read-only `$HOME`; rerunning it with `$pathHits` passed. No file or staged content changed during the failed wrapper.
+
+## Unit 2G atomic-output recovery validation - 2026-07-14
+
+- Orphan/process/port/lock audit: passed. Zero repository/run processes or listeners, zero duplicate experiments, zero stage locks/partials/staging residue; no process terminated.
+- Closed-world stage inventory: passed. 124/124 contract outputs and 122/122 JSON/CSV artifact records match path, size and SHA-256; 125 stage files are non-empty and portable.
+- Input and side-input binding: passed against saved generation identity. Actual HRDataset/INX receipts, six side inputs, config `5af0262e...`, core scope `af80b8a7...`, scientific input `71f1fc46...` and source tree `706690fc...` recompute/match.
+- Outer/inner folds: passed. 311 samples exactly once across 10 outer folds; every outer-training row exactly once across five inner folds; no outer-test intersection.
+- Nested tuning/models: passed. 400 candidate fit receipts, 80 candidate summaries, ten selected schedules and 50 model artifacts; all model hashes/sizes/partitions validate and independent replay gives maximum raw-OOF probability error zero.
+- Cross-fitted sigmoid: passed. 50 inner fits, 2,799 outer-training OOF rows, ten source-model relationships and 30 class parameters; all outer-test selection/fit flags false; reconstructed calibrators replay with maximum error zero.
+- Bootstrap: passed. Compressed/uncompressed hashes, shape `(5000, 311)`, sample order and index bounds validate.
+- OOF SHAP: passed. `311 x 3 x 7 = 6,531` local rows from the exact ten prediction models; forbidden features absent; replay error zero; maximum additivity error `4.47e-06`; no refit; 45 descriptive dependent fold pairs and six deterministic cases.
+- Subgroup/proxy: passed. Support thresholds 30/10 and 5,000 draws are explicit; 61 estimable/24 unsupported disparity intervals, 30 stable headline-eligible rows. Department proxy correctly publishes no fabricated estimate (`models_fitted=0`) because fold 4 lacks the singleton class in training.
+- Transport/claim boundary: passed. Three safe common features are below the five-feature gate, locked transport is false, and the only admitted role is independent mapped-target replication.
+- Package boundary: passed as a negative gate. No canonical run/final manifest, package status, claim matrix or `latest` promotion exists. The provisional input manifest correctly fails current-HEAD validation; the complete atomic stage remains valid under its saved identity.
+- Focused pytest: `72 passed in 29.58s` (exit 0).
+- D5 preservation check: passed. All 126 files and 65,412,766 bytes remain local after index-only removal; zero run-root paths remain tracked at the pending tip.
+
+Scientific reporting checks found no atomic-stage defect but established two mandatory limitations for the canonical package: external subgroup rows need explicit raw-OOF/source identity, and grouped SHAP summaries need explicit raw-margin units. Sigmoid probability-quality gains must be separated from its macro-F1 reduction and zero class-4 argmax count. Unit 2G is not rerun.
+
+Checkpoint documentation/hygiene gate: compileall, `pip check`, `git diff --check`, manuscript no-change, README link existence, issue CSV schema/uniqueness/completeness, raw candidate, 100 MB, secret, added absolute-path, active terminology and D5 local-preservation checks all passed. Counts: 20 README links (16 unique), 30 issues, 141 candidate paths (126 intentional deletions plus 15 small tracked files), zero prohibited findings, zero tracked stage files and 126 preserved local stage files. One first wrapper attempt used reserved `$HOME` as `$home` and exited before final scan evaluation; the corrected `$pathHits` wrapper passed and no file/index state changed during the failed attempt.
+
+Final staged review: 141 paths consist exactly of 126 deletion-only entries under the ignored stage-validation root and 15 approved small documentation/log/ignore files. Unstaged and untracked counts are zero. Added-line secret and absolute-home scans are zero; manuscript diff is zero. A post-index-removal rehash again passed all 122 artifact-manifest rows and 124 stage-contract outputs, proving the local evidence bytes were not altered.

@@ -108,3 +108,28 @@ Post-interruption production-path tests additionally require every external poli
 No package may become reusable or promotable solely because files and hashes exist. Strict completion requires: a release-ready scope; exact configured layout; a regular unlocked scope root; canonical ordered successful commands; valid closed-world stage receipts; exact run-input snapshot closure; deterministic claim and package-status renderings; final-manifest row/path/type/hash parity; and complete run-manifest registration. A same-run sibling scope is ignored for clean-start status only after this entire strict validation passes. Promotion requires both scopes to share commit/config/runtime/seed identities and writes only `latest/pointer.json`; historical physical `latest` remains unmodified until a separate approved migration.
 
 The full implementation suite passes, but there is no complete package to which this trust contract has yet been applied. Therefore all manuscript claims remain unfrozen and both scope flags correctly remain `release_ready:false`.
+
+## Unit 2G validated local stage receipt - noncanonical
+
+Local source root: `reports/manuscript_final/stage_validation_hrdataset_20260713T175045Z_5af0262e83a3/core/external_replication/`
+
+Run/config/scientific identity: `stage_validation_hrdataset_20260713T175045Z_5af0262e83a3` / `5af0262e...` / `71f1fc46...`
+
+Generation source commit: `17a3dcd36390291b8eab24b4b3a746092dacee77`
+
+The root is intentionally local/ignored under D5. Commit `e25f403` contains an accidental historical copy, but the current publication tip removes it without rewriting history. The following files are authoritative only for validating Unit 2G implementation behavior; they are not canonical manuscript sources:
+
+| Local artifact | Verified role | Claim status |
+| --- | --- | --- |
+| `stage_contract.json`; `artifact_manifest.json/csv` | Closed-world 124-output stage receipt and 122 scientific artifact hashes | Valid atomic-stage evidence; not a package manifest |
+| `folds/fold_contract.json`; assignments | Dataset-specific 10 outer x 5 inner isolation, 311 exact OOF samples | Valid stage protocol evidence |
+| `candidate_*`; `selected_hyperparameters.csv`; `outer_model_receipts.csv`; `models/` | Eight-candidate nested selection and 50 replayed policy/fold models | Valid stage model evidence; full bundle stays out of Git |
+| `raw_oof_predictions.csv`; `raw_metric_intervals.csv`; `policy_pairwise_differences.csv` | Five-policy OOF estimates and 5,000-draw paired uncertainty | Stage-validation numbers only; not frozen manuscript claims |
+| `calibration_*`; `sigmoid_oof_predictions.csv` | Five-fold cross-fitted sigmoid bound to exact source fold models | Probability-quality benefit may be discussed only with macro-F1/class-4 harm and noncanonical label |
+| `shap/` | Exact-model OOF grouped attribution, class/global/local evidence and descriptive stability | Attribution only; raw-margin unit must be explicit in canonical output |
+| `subgroup_diagnostics/` | Support/denominator-aware descriptive gaps | No fairness, discrimination, causal or legal claim; canonical rows need explicit raw-OOF/source label |
+| `proxy_diagnostics/proxy_status.csv` | Insufficient department-class support, zero fitted proxy models | Numerical reconstructability claim unsupported |
+| `cross_dataset_transport/transport_feasibility.json` | Three safe common features below gate five | Locked transport infeasible; independent mapped-target replication only |
+| `stage_validation_input_manifest.json` | Provisional generation input receipt | Not a complete run manifest; current-HEAD validation must reject it |
+
+Supported by the stage: the configured pipeline can produce internally coherent HRDataset independent mapped-target replication evidence from verified local input under the approved protocol. Unsupported: canonical/release completeness, universal or transported validation, fairness, causality, deployment, target semantic equivalence, licence/source authenticity, or frozen manuscript numbers.
