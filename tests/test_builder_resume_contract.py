@@ -56,6 +56,27 @@ def test_resume_worktree_allows_exact_run_files_and_rejects_unrelated(
     with pytest.raises(builder.ManuscriptBuildError, match="exact current run root"):
         builder._validate_resume_worktree(run_dir)
 
+    pointer = PROJECT_ROOT / "reports/manuscript_final/latest/pointer.json"
+    install(
+        "reports/manuscript_final/resume-contract/core/run_manifest.json\0"
+        "reports/manuscript_final/latest/pointer.json\0"
+    )
+    builder._validate_resume_worktree(
+        run_dir,
+        allowed_untracked_files=(pointer,),
+    )
+
+    install(
+        "reports/manuscript_final/resume-contract/core/run_manifest.json\0"
+        "reports/manuscript_final/latest/pointer.json\0"
+        "reports/manuscript_final/latest/rogue.json\0"
+    )
+    with pytest.raises(builder.ManuscriptBuildError, match="rogue.json"):
+        builder._validate_resume_worktree(
+            run_dir,
+            allowed_untracked_files=(pointer,),
+        )
+
 
 def test_dirty_explicit_resume_loads_only_matching_original_clean_manifest(
     tmp_path: Path,

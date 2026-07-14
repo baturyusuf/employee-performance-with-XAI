@@ -1441,6 +1441,7 @@ def _validate_completed_run_package(
     config_hash: str,
     evidence_scope: str,
     allowed_untracked_root: Path | None = None,
+    allowed_untracked_files: Sequence[Path] = (),
     enforce_configured_layout: bool = True,
     allowed_lock_token: str | None = None,
 ) -> dict[str, Any]:
@@ -1452,7 +1453,14 @@ def _validate_completed_run_package(
         evidence_scope=evidence_scope,
         allowed_lock_token=allowed_lock_token,
     )
-    _validate_resume_worktree(allowed_untracked_root or run_dir)
+    resume_root = allowed_untracked_root or run_dir
+    if allowed_untracked_files:
+        _validate_resume_worktree(
+            resume_root,
+            allowed_untracked_files=allowed_untracked_files,
+        )
+    else:
+        _validate_resume_worktree(resume_root)
     try:
         validate_run_manifest(
             manifest,
@@ -2273,6 +2281,7 @@ def _validated_release_candidate(
             config_hash=str(run_manifest.get("config_hash", "")),
             evidence_scope=evidence_scope,
             allowed_untracked_root=package_dir,
+            allowed_untracked_files=(root / "latest" / "pointer.json",),
         )
         observed_common = {
             "manifest_schema_version": run_manifest.get("manifest_schema_version"),
@@ -2500,14 +2509,28 @@ _RESUME_IDENTITY_FIELDS: tuple[str, ...] = (
 )
 
 
-def _validate_resume_worktree(run_dir: Path) -> None:
-    """Allow only exact current-run files when resuming an interrupted build."""
+def _validate_resume_worktree(
+    run_dir: Path,
+    *,
+    allowed_untracked_files: Sequence[Path] = (),
+) -> None:
+    """Allow only exact current-run files plus explicitly named publication files."""
 
     allowed_root = run_dir.resolve()
     try:
         allowed_root.relative_to(PROJECT_ROOT.resolve())
     except ValueError as exc:
         raise ManuscriptBuildError("Resume run root must remain inside the repository.") from exc
+    allowed_files: set[Path] = set()
+    for raw_path in allowed_untracked_files:
+        candidate = Path(raw_path).resolve()
+        try:
+            candidate.relative_to(PROJECT_ROOT.resolve())
+        except ValueError as exc:
+            raise ManuscriptBuildError(
+                "An allowed untracked publication file must remain inside the repository."
+            ) from exc
+        allowed_files.add(candidate)
     try:
         tracked_status = subprocess.run(
             ["git", "status", "--porcelain", "--untracked-files=no"],
@@ -2534,13 +2557,16 @@ def _validate_resume_worktree(run_dir: Path) -> None:
     disallowed: list[str] = []
     for relative in (value for value in untracked_output.split("\0") if value):
         candidate = (PROJECT_ROOT / relative).resolve()
+        if candidate in allowed_files:
+            continue
         try:
             candidate.relative_to(allowed_root)
         except ValueError:
             disallowed.append(relative.replace("\\", "/"))
     if disallowed:
         raise ManuscriptBuildError(
-            "A compatible resume permits untracked files only under the exact current run root; "
+            "A compatible resume permits untracked files only under the exact current run root "
+            "or at explicitly declared publication paths; "
             f"disallowed={sorted(disallowed)}."
         )
 
