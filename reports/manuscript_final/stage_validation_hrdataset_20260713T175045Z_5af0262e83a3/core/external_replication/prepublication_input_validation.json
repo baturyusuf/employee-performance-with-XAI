@@ -1,0 +1,20 @@
+{
+  "actual_input_sha256": {
+    "hrdataset_v14": "cb19996755c93c0a8d6527f59da4701c80aef65eff854906546dce286249813c",
+    "inx_primary": "b8deac0a615b97076622ae540f4cfd0d3c3f1e7acb83ba3ff6560470a9ccf60a"
+  },
+  "config_hash": "5af0262e83a3720f8dca0b4d6795bdffc6bb2cefedc901ae0a47f9262d07f305",
+  "git_commit": "17a3dcd36390291b8eab24b4b3a746092dacee77",
+  "side_input_sha256": {
+    "data_acquisition_contract": "dc84f37c9b58befac336b166a3d352508871b771f1426d76a8e932c15cd2b468",
+    "dataset_provenance": "5091a920ed3f85cefa5b995b8efc2d3040c75d20d9168e3849e95de951df98a8",
+    "external_hrdataset_v14_schema_mapping": "65c40fecc75235f57209cff6231d7386e4279ebedca9390f53ad2bb67ae63788",
+    "feature_policy_projection": "4b270ad6f0b07e2d51ce2d3d3b38f193ad5e15925420e0a9293a361c805d8fc3",
+    "feature_taxonomy": "9c2b1fb68666b616e322acfeea7e00f0dabdbb76a3d43661ecf5d729fb2620fd",
+    "model_search_space": "d8fb0584d7106f8941ca8e1b0e0a9c58e13f39519c6c75b383ff333d92d41617"
+  },
+  "source_tree_hash": "706690fcc28c8e308dcb667872035f72c8382bcc02f8585698a0968a8b8f873a",
+  "status": "passed_before_atomic_publication",
+  "tracked_worktree_clean_at_publication": true,
+  "untracked_files_restricted_to_current_run_root": true
+}

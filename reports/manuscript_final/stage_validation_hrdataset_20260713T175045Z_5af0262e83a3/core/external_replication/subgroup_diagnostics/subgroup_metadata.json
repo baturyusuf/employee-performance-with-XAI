@@ -1,0 +1,90 @@
+{
+  "analysis_type": "support_aware_subgroup_diagnostics_not_fairness_proof",
+  "attributes": [
+    {
+      "category": "protected_sensitive",
+      "name": "Gender",
+      "transform": "categorical"
+    },
+    {
+      "category": "protected_sensitive",
+      "name": "RaceEthnicity",
+      "transform": "categorical"
+    },
+    {
+      "category": "protected_sensitive",
+      "name": "HispanicLatino",
+      "transform": "categorical"
+    },
+    {
+      "category": "protected_sensitive",
+      "name": "MaritalStatus",
+      "transform": "categorical"
+    },
+    {
+      "category": "exploratory_operational",
+      "name": "EmpDepartment",
+      "transform": "categorical"
+    }
+  ],
+  "batch_size": 200,
+  "confidence_level": 0.95,
+  "config_hash": "5af0262e83a3720f8dca0b4d6795bdffc6bb2cefedc901ae0a47f9262d07f305",
+  "dataset_sha256": "cb19996755c93c0a8d6527f59da4701c80aef65eff854906546dce286249813c",
+  "feature_policy_contract_sha256": "e08625831afd057d1102d0fc42e06d56c9cd51a5632d04780aafe880888d78e5",
+  "fold_contract_hash": "a07d0508a26d7b40a3bfd66063ee4cf002559daff2d5d2e8e3f74e46a8f06422",
+  "inference_scope": "pointwise_descriptive",
+  "limitations": "Pointwise descriptive OOF subgroup estimate conditional on the observed samples, fixed folds, and fitted models; no multiplicity adjustment, causal interpretation, discrimination finding, or fairness guarantee.",
+  "minimum_group_support": 30,
+  "minimum_metric_denominator": 10,
+  "minimum_valid_fraction": 0.8,
+  "model_set_sha256": "2bf06c3044af28029419b70e6eeb026281de57582f0bb2e1126a2c0909983c81",
+  "multiplicity_adjustment": "none",
+  "n_resamples": 5000,
+  "policies": [
+    "conservative_primary"
+  ],
+  "resample_hash": "9b95a1e4a6f87c1abad1b110b8dadec8b48e5258e5362d01ad87d794c612f46e",
+  "run_id": "stage_validation_hrdataset_20260713T175045Z_5af0262e83a3",
+  "schema_mapping_sha256": "65c40fecc75235f57209cff6231d7386e4279ebedca9390f53ad2bb67ae63788",
+  "scientific_input_hash": "71f1fc4699113876d70c6853abfdc8d3ec4f9419bb88897414fae28ae166422a",
+  "seed": 42,
+  "strata_columns": [
+    "outer_fold",
+    "y_true"
+  ],
+  "stratum_counts": {
+    "[1, 2]": 4,
+    "[1, 3]": 25,
+    "[1, 4]": 3,
+    "[10, 2]": 3,
+    "[10, 3]": 24,
+    "[10, 4]": 4,
+    "[2, 2]": 3,
+    "[2, 3]": 25,
+    "[2, 4]": 3,
+    "[3, 2]": 3,
+    "[3, 3]": 25,
+    "[3, 4]": 3,
+    "[4, 2]": 3,
+    "[4, 3]": 24,
+    "[4, 4]": 4,
+    "[5, 2]": 3,
+    "[5, 3]": 24,
+    "[5, 4]": 4,
+    "[6, 2]": 3,
+    "[6, 3]": 24,
+    "[6, 4]": 4,
+    "[7, 2]": 3,
+    "[7, 3]": 24,
+    "[7, 4]": 4,
+    "[8, 2]": 3,
+    "[8, 3]": 24,
+    "[8, 4]": 4,
+    "[9, 2]": 3,
+    "[9, 3]": 24,
+    "[9, 4]": 4
+  },
+  "task_type": "ordinal_multiclass_performance",
+  "wide_interval_threshold": 0.25
+}
