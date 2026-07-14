@@ -161,7 +161,7 @@ py -3.14 -m venv myenv
 .\myenv\Scripts\python.exe -m pip install -r requirements.txt
 ```
 
-`requirements-supplementary.txt` adds no network/API package beyond core. `requirements-dev.txt` composes the complete test environment. `requirements-legacy-optional.txt` is explicitly excluded from core and approved supplementary evidence; it contains retained CatBoost/UI/OpenAI modules only. A fresh isolated core install resolves 31 locked non-bootstrap distributions, imports all 13 direct packages, and passes `pip check` plus the production dependency validator. The clean-commit receipt remains pending the dependency checkpoint.
+`requirements-supplementary.txt` adds no network/API package beyond core. `requirements-dev.txt` composes the complete test environment. `requirements-legacy-optional.txt` is explicitly excluded from core and approved supplementary evidence; it contains retained CatBoost/UI/OpenAI modules only. A fresh isolated core install resolved 31 locked non-bootstrap distributions, imported all 13 direct packages, and passed `pip check` plus the production dependency validator. Its canonical-eligible [`dependency receipt`](reports/research_log/finalization_v2/13_dependency_lock_receipt.json) binds clean commit `498e8ad`, source tree `a2b361b8...`, exact lock SHA-256 `482cbf32...`, and zero missing/unlocked/mismatched/core-forbidden packages. The temporary environment was removed after independent validation.
 
 The intended clean core command is:
 

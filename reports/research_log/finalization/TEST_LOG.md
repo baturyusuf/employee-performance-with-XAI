@@ -416,4 +416,7 @@ Push/recovery gate: the normal push timed out after 184 seconds with no remote r
 - Post-marker focused gate: 80 passed in 5.07 seconds, exit 0 (8.245 seconds wall).
 - Final post-fix pytest: 712 passed, 2 skipped and 11 subtests in 122.06 seconds, exit 0 (126.148 seconds wall).
 - Final post-fix unittest: 176 tests, 1 skipped in 7.303 seconds, exit 0 (11.100 seconds wall). Compileall: exit 0 in 0.122 seconds.
-- Clean exact-commit dependency receipt: pending the implementation checkpoint; the isolated environment is retained only for that receipt.
+- Implementation checkpoint/push: commit `498e8ad59166f275d120f78ce133cce122961f13`, normal push exit 0; local/origin synchronized.
+- Clean exact-commit dependency receipt: production exit 0 in 0.685 seconds; canonical-eligible core profile, source tree `a2b361b8...`, config `65519abf...`, lock `482cbf32...`, 31 distributions, inventory `a7ac622b...`, 13 direct versions and zero missing/unlocked/mismatched/core-forbidden packages.
+- Independent receipt validation: exit 0 in 0.218 seconds; receipt SHA-256 `8b77e727...`, size 2,476 bytes, zero atomic temp siblings.
+- Temporary environment cleanup: passed after the first safety scan self-matched and refused deletion. Exact contained run path had no external process owner and was removed; zero matching temp directories remain.

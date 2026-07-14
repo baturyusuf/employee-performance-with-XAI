@@ -2,7 +2,7 @@
 
 Assessment date: 2026-07-14
 
-Current state: Units 1A through 2G, V2-029, the V2-021a/V2-032 figure contracts, V2-012 supplementary heuristic search, V2-013 task-bounded supplementary external implementation and V2-015 workbook/CSV equivalence are tested. V2-014 current-tip sanitation/export and its clean compact receipt pass independently. V2-018 dependency isolation/lock and a fresh clean core install pass; its clean-commit receipt is pending. No clean complete v2 scientific rebuild exists.
+Current state: Units 1A through 2G, V2-029, the V2-021a/V2-032 figure contracts, V2-012 supplementary heuristic search, V2-013 task-bounded supplementary external implementation and V2-015 workbook/CSV equivalence are tested. V2-014 current-tip sanitation/export and V2-018 dependency isolation/lock have independently passing clean receipts. No clean complete v2 scientific rebuild exists.
 
 This is a live interim assessment, not a final completion declaration. `../finalization/CURRENT_STATUS.md` is the interruption-resilient status source.
 
@@ -32,7 +32,7 @@ This is a live interim assessment, not a final completion declaration. `../final
 
 ## Remaining blockers
 
-See `02_issue_register.csv` and `08_manual_submission_blockers.md`. D1-D5, cross-fitted sigmoid, HRDataset policy A and the Option-A figure plan are accepted. The real HRDataset stage/reusable audit and V2-015/V2-014 receipts are complete. V2-018 implementation and clean install pass; its exact-commit receipt is next, followed by V2-020 no-network enforcement, V2-019 CI, source-bound table/figure generators and final integration. Ethics, source/licence authenticity and historical-publication strategy remain external manual gates.
+See `02_issue_register.csv` and `08_manual_submission_blockers.md`. D1-D5, cross-fitted sigmoid, HRDataset policy A and the Option-A figure plan are accepted. The real HRDataset stage/reusable audit and V2-015/V2-014/V2-018 receipts are complete. V2-020 no-network enforcement is next, followed by V2-019 CI, source-bound table/figure generators and final integration. Ethics, source/licence authenticity and historical-publication strategy remain external manual gates.
 
 ## Final recommendation
 

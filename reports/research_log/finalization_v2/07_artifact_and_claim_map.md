@@ -232,7 +232,7 @@ No raw employee value is written to the receipt. No archive is retained or publi
 
 ## V2-018 dependency-lock receipt
 
-The planned compact artifact is `13_dependency_lock_receipt.json`, generated only from the clean implementation commit inside the isolated core environment.
+The admitted compact artifact is `13_dependency_lock_receipt.json`, generated from clean implementation commit `498e8ad` inside the isolated core environment. Receipt SHA-256 is `8b77e72702865f3950b91092cd458c79149d3378bcb8b703b323aec0c4033c20`.
 
 | Receipt evidence | Bound role | Claim boundary |
 | --- | --- | --- |
