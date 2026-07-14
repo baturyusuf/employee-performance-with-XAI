@@ -176,6 +176,8 @@ cython_debug/
 /reports/manuscript_final/canonical_v2_20260714T175804Z_4d08ca2/
 # Failed post-benchmark canonical-build attempt is preserved locally for forensic recovery.
 /reports/manuscript_final/canonical_v2_20260714T180533Z_770c8d0/
+# Valid pre-migration candidate is preserved locally but cannot satisfy the later migration commit identity.
+/reports/manuscript_final/canonical_v2_20260714T182539Z_35b121b/
 
 # User-provided HR data and row-level/fit-derived working data remain local.
 # Dataset cards, schema mappings, README files, and directory placeholders stay tracked.

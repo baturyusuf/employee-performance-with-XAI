@@ -176,3 +176,11 @@ This is an implementation/provenance resolution of the already approved same-OOF
 - Policy ablation and calibration keep their frozen report subsets and require each subset metric to remain valid/applicable.
 - Valid task metrics outside a stage subset do not expand that stage's output; duplicates and invalid metrics still fail closed.
 - This integration repair changes no fold, model, target, metric definition, selection rule, uncertainty plan or accepted scientific scope.
+
+## V2-017 Historical Alias Migration Consequence - 2026-07-14
+
+- The tracked physical `latest` is not unique evidence: all 215 scientific files are byte-identical to the tracked named v1 run.
+- The sole alias-only file is a 139-byte pointer already naming that run; removing it loses no scientific byte or provenance target.
+- Forward migration removes only the redundant alias, records a compact inventory receipt and reserves `latest` for the atomic pointer-only contract.
+- Git history is not rewritten. The named v1 run remains historical/non-admitted.
+- A validated package generated before this migration cannot be relabelled after HEAD changes; strict promotion requires a fresh exact-commit package.

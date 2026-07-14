@@ -1,8 +1,0 @@
-name: employee-performance-xai
-channels:
-  - conda-forge
-dependencies:
-  - python>=3.11,<3.15
-  - pip
-  - pip:
-      - -r requirements-dev.txt

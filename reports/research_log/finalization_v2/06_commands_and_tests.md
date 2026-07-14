@@ -1531,3 +1531,11 @@ After implementing a process-state-backed class-compatible guard, the first focu
 The applicability audit and repair changed only policy/calibration report-subset validation. The successful focused command covered policy ablation, calibration, task metric applicability and calibration-selection guards: 43 passed in 4.99 seconds (8.272 wall), exit 0. The final complete cycle passed 747/2 skips/11 subtests in 140.55 seconds (144.800 wall), exit 0; unittest passed 179/one skip in 7.552 seconds (11.531 wall); compileall passed in 0.125 seconds.
 
 Interpreter diagnostics did not execute tests: the Windows Store shim could not launch, bare `py` lacked pytest, and one corrected-runtime command named absent test files and collected zero. No dependency installation or environment mutation occurred.
+
+## Complete validated candidate and historical alias migration - 2026-07-14
+
+`myenv/Scripts/python.exe -m src.experiments.build_manuscript_evidence --config configs/manuscript_final.yaml --scope core --run-id canonical_v2_20260714T182539Z_35b121b --no-reuse-compatible` exited 0 in 1,614.358 seconds. The same command with `--scope supplementary` exited 0 in 1,862.575 seconds. Both used commit `35b121b`, config `51415c2c...` and source `0285772e...`.
+
+`--validate-run-id canonical_v2_20260714T182539Z_35b121b` exited 0 in 5.673 seconds and returned `status=valid`, core/supplementary scientific inputs `34a5e692...`/`e2b41f9f...`, run-manifest hashes `b207d7c4...`/`83a209dd...`, and final-manifest hashes `c68d8fe3...`/`4720a149...`.
+
+Read-only historical comparison reported 216 physical-alias files/166,264,782 bytes versus 215 named-run files/166,264,643 bytes. Common paths were exact; `run_pointer.json` was the sole alias-only file and named the preserved run. Containment/reparse/tracked-preservation checks passed. `git rm -r -- reports/manuscript_final/latest` then removed only the redundant tracked alias; the 215-file named run remains intact. Receipt `14_latest_migration_receipt.json` records inventory `ea023749...`.

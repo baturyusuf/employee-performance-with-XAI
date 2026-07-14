@@ -733,3 +733,11 @@ The second clean core run reached the production policy stage only after shared 
 Both stages now treat applicability as the complete authoritative superset. They reject duplicates and task-invalid metrics, require every predeclared stage report metric to remain present, and emit only the immutable stage-specific subset. Supplementary tasks already use an explicit separate report list and required no change. The config and 18-metric schema remain unchanged.
 
 Focused validation passes 43. Complete pytest passes 747 with two skips/11 subtests; unittest passes 179 with one skip; compileall passes. Config/source/metric hashes are `51415c2c...`, `0285772e...`, and `98ae57b6...` before checkpoint. The failed 92.3 MB run is preserved, ignored and inadmissible; a new clean shared run identity is required for core and supplementary execution.
+
+## Complete pre-migration candidate and pointer-contract migration - 2026-07-14
+
+The first repaired cache-disabled build completed every core and supplementary stage under one clean run identity. Both builders exited 0 and the independent release-candidate validator returned `status=valid`. This proves the complete production graph, real source tables, seven figures and strict two-scope manifests execute successfully from the frozen source/config.
+
+Pointer promotion correctly refused to overwrite the tracked historical physical `latest`. Exact inventory established that its 215 scientific files are byte-identical to the already tracked named v1 run; its only extra file is the pointer naming that run. The redundant alias is removed after a contained-path, no-reparse and preserved-byte audit. A compact receipt records both inventory hashes and the preservation statement.
+
+The migration changes only tracked historical report aliases, not the scientific source-tree hash or config. Nevertheless, the promotion contract requires exact generation commit equality, so the valid pre-migration package remains noncanonical. A new cache-disabled build from the migration checkpoint is required before atomic pointer promotion.

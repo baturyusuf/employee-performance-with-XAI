@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "migration_kind": "historical_latest_duplicate_alias_to_pointer_contract",
+  "status": "complete",
+  "pre_migration_git_commit": "35b121bc9e541cf2736cfe0fc2912e327d86dbd2",
+  "historical_alias": "reports/manuscript_final/latest",
+  "preserved_named_run": "reports/manuscript_final/manuscript_final_20260712T181754Z_c664ef152ff3",
+  "historical_alias_file_count": 216,
+  "historical_alias_bytes": 166264782,
+  "preserved_named_run_file_count": 215,
+  "preserved_named_run_bytes": 166264643,
+  "preserved_named_run_inventory_sha256": "ea0237497fd9bf38057e6303c0ed3c60b5a4fc12be512847e86aed19dc427db9",
+  "historical_alias_inventory_sha256": "8a6fa7101949e699c42f36f289044d8dd33bbcb1664798245fca7608d9c0f633",
+  "common_path_content_drift_count": 0,
+  "only_historical_alias_paths": [
+    "run_pointer.json"
+  ],
+  "run_pointer_bytes": 139,
+  "run_pointer_sha256": "e9a96a5dee96763b7ef869a1b8777050281466ee4b95281f18f0df761461b4df",
+  "run_pointer_relative_target": "../manuscript_final_20260712T181754Z_c664ef152ff3",
+  "tracked_historical_alias_file_count_before_migration": 216,
+  "tracked_preserved_named_run_file_count": 215,
+  "reparse_point_count": 0,
+  "migration_action": "remove_redundant_tracked_alias_then_allow_atomic_pointer_only_latest",
+  "preservation_statement": "Every historical evidence byte remains in the tracked named immutable run; only the duplicate alias and its redundant pointer are removed.",
+  "claim_boundary": "This receipt proves byte-preserving alias migration only. It does not admit the historical v1 package, validate a v2 scientific result, publish a release, grant a licence, or rewrite Git history."
+}

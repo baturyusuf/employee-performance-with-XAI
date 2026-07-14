@@ -298,3 +298,7 @@ Two builder-owned packages are preserved locally as forensic evidence and exclud
 - `reports/manuscript_final/canonical_v2_20260714T180533Z_770c8d0/`: 71 files, 92,337,983 bytes, shared folds and benchmark present, failed before policy fitting.
 
 Both manifests record failure. Neither package is a stage-validation, canonical, promoted or manuscript-support source; neither may be resumed, cache-reused, relabelled, copied into a new run or used for a numerical claim. The next admissible artifact must be generated from a new clean exact-commit run identity and pass both complete scopes plus promotion validation.
+
+The later package `reports/manuscript_final/canonical_v2_20260714T182539Z_35b121b/` is different: both scopes completed and strict release-candidate validation passed. It remains noncanonical because its exact generation commit predates the historical-`latest` migration checkpoint required for pointer-only promotion. It is preserved locally and ignored; its scientific results may be used only to verify deterministic equivalence with the final exact-commit rebuild, never as the promoted source.
+
+Historical alias migration is recorded in `14_latest_migration_receipt.json`. The 215-file named v1 run remains tracked and byte-identical to every common former `latest` file; the sole removed-only alias file was a 139-byte pointer naming that same run. The migrated `latest` path is reserved exclusively for one atomic `pointer.json` referencing a strictly validated v2 run.

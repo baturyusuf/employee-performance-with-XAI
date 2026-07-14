@@ -519,3 +519,14 @@ Push/recovery gate: the normal push timed out after 184 seconds with no remote r
 - Config hash: `51415c2ce68c89d9ce2b042b0a7a811fe3e98180b72460006f9d0465f6bf49b7`.
 - Pre-checkpoint source-tree hash: `0285772ef5941d55837750edeaa8e688754ac2dbb5fec5a0954fa35917468096`.
 - Metric-registry hash: `98ae57b622a56983192975c5bff94374ed51322f13c76af633c3c96ceb198cdd`.
+
+## Pre-migration complete candidate and alias-migration validation - 2026-07-14
+
+- Clean repository gate at `35b121b`: exit 0; 1,947 tracked files; 32 issue rows; 30 README links; zero raw/environment/large/secret/machine-path findings.
+- Core build `canonical_v2_20260714T182539Z_35b121b`: exit 0; 1,614.358 seconds; 354 files/224,172,392 bytes at immediate scope completion.
+- Supplementary build under the same run: exit 0; 1,862.575 seconds.
+- Strict two-scope read-only release validation: exit 0; 5.673 seconds; `status=valid`.
+- Identity: commit `35b121bc9e541cf2736cfe0fc2912e327d86dbd2`; config `51415c2c...`; source `0285772e...`; core/supplementary scientific inputs `34a5e692...`/`e2b41f9f...`.
+- Historical alias comparison: 215 common files exact; zero missing named-run files; zero content drift; one alias-only 139-byte pointer; zero reparse points.
+- Preserved named v1 run: 215 tracked files, 166,264,643 bytes, inventory SHA-256 `ea0237497fd9bf38057e6303c0ed3c60b5a4fc12be512847e86aed19dc427db9` after alias removal.
+- Promotion status: intentionally pending. The valid candidate predates the required migration commit and strict Git identity prohibits relabelling it.
