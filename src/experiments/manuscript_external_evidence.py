@@ -24,13 +24,15 @@ import math
 from dataclasses import dataclass
 from datetime import datetime, timezone
 from pathlib import Path
-from typing import Any, Mapping, Sequence
+from types import MappingProxyType
+from typing import Any, Literal, Mapping, Sequence
 
 import numpy as np
 import pandas as pd
 from sklearn.model_selection import StratifiedKFold
 from sklearn.pipeline import Pipeline
 
+from src.data.canonical_loader import CanonicalDataset, load_canonical_dataset
 from src.data.external_adapters import (
     ExternalDataset,
     audit_attribute_columns,
@@ -84,6 +86,8 @@ REPORT_METRICS = (
     "average_precision",
     "ece_confidence",
 )
+_CANONICAL_EXTERNAL_INPUTS_KEY = "_canonical_external_inputs"
+ExternalEvidenceScope = Literal["core", "supplementary"]
 
 
 class ExternalEvidenceError(RuntimeError):
@@ -103,6 +107,16 @@ class ExternalRunSpec:
     policies: tuple[str, ...]
 
 
+@dataclass(frozen=True)
+class CanonicalExternalInput:
+    """Runtime-only binding between verified bytes and an explicit mapping."""
+
+    dataset: ExternalDataset
+    receipt: Mapping[str, Any]
+    schema_mapping_reference: str
+    schema_mapping_path: Path
+
+
 RUN_SPECS: tuple[ExternalRunSpec, ...] = (
     ExternalRunSpec(
         key="hrdataset_v14",
@@ -113,7 +127,13 @@ RUN_SPECS: tuple[ExternalRunSpec, ...] = (
         role="independent external performance-target replication",
         expected_config_role="independent_external_performance_target_replication",
         expected_labels=(2, 3, 4),
-        policies=("department_including", "department_free", "department_job_role_free"),
+        policies=(
+            "conservative_primary",
+            "department_including_audit",
+            "job_role_free_audit",
+            "proxy_rich_audit",
+            "temporality_restricted_audit",
+        ),
     ),
     ExternalRunSpec(
         key="ibm_performance",
@@ -150,6 +170,28 @@ RUN_SPECS: tuple[ExternalRunSpec, ...] = (
     ),
 )
 
+EXTERNAL_SCOPE_TASK_KEYS: Mapping[str, tuple[str, ...]] = MappingProxyType(
+    {
+        "core": ("hrdataset_v14",),
+        "supplementary": ("ibm_performance", "ibm_attrition", "employee_turnover"),
+    }
+)
+
+
+def specs_for_scope(scope: str) -> tuple[ExternalRunSpec, ...]:
+    """Return one predeclared external scope; arbitrary subsets are prohibited."""
+
+    if scope not in EXTERNAL_SCOPE_TASK_KEYS:
+        raise ExternalEvidenceError(
+            f"Unknown external evidence scope {scope!r}; expected exactly 'core' or 'supplementary'."
+        )
+    by_key = {spec.key: spec for spec in RUN_SPECS}
+    keys = EXTERNAL_SCOPE_TASK_KEYS[scope]
+    missing = sorted(set(keys).difference(by_key))
+    if missing:
+        raise ExternalEvidenceError(f"External evidence scope registry references unknown tasks: {missing}")
+    return tuple(by_key[key] for key in keys)
+
 
 def _utc_now() -> str:
     return datetime.now(timezone.utc).replace(microsecond=0).isoformat()
@@ -171,14 +213,19 @@ def _resolve_seed(settings: Mapping[str, Any], value: Any) -> int:
     return int(seeds[value])
 
 
-def configured_run_specs(config: Mapping[str, Any]) -> tuple[ExternalRunSpec, ...]:
+def configured_run_specs(
+    config: Mapping[str, Any],
+    *,
+    scope: ExternalEvidenceScope,
+) -> tuple[ExternalRunSpec, ...]:
     """Validate canonical dataset declarations against the immutable claim registry."""
 
+    specs = specs_for_scope(scope)
     settings = _settings(config)
     datasets = settings.get("datasets")
     if not isinstance(datasets, Mapping):
         raise ExternalEvidenceError("manuscript_final.datasets must be a mapping.")
-    for spec in RUN_SPECS:
+    for spec in specs:
         entry = datasets.get(spec.config_dataset_key)
         if not isinstance(entry, Mapping):
             raise ExternalEvidenceError(f"Missing canonical dataset declaration: {spec.config_dataset_key}")
@@ -191,6 +238,11 @@ def configured_run_specs(config: Mapping[str, Any]) -> tuple[ExternalRunSpec, ..
             raise ExternalEvidenceError(
                 f"Role drift for {spec.config_dataset_key}: expected {spec.expected_config_role!r}, "
                 f"observed {entry.get('role')!r}."
+            )
+        mapping_reference = entry.get("schema_mapping_path")
+        if not isinstance(mapping_reference, str) or not mapping_reference.strip():
+            raise ExternalEvidenceError(
+                f"Canonical dataset {spec.config_dataset_key!r} has no explicit schema_mapping_path."
             )
         registered = external_allowed_claim(spec.dataset_name, spec.target_kind)
         if registered != spec.role:
@@ -206,7 +258,81 @@ def configured_run_specs(config: Mapping[str, Any]) -> tuple[ExternalRunSpec, ..
             raise ExternalEvidenceError("IBM performance must be labelled restricted-target robustness.")
         if spec.key in {"ibm_attrition", "employee_turnover"} and "not employee-performance validation" not in configured_claim:
             raise ExternalEvidenceError(f"Related-task claim boundary is missing for {spec.config_dataset_key}.")
-    return RUN_SPECS
+    return specs
+
+
+def _resolve_schema_mapping_path(settings: Mapping[str, Any], spec: ExternalRunSpec) -> tuple[str, Path]:
+    datasets = settings.get("datasets")
+    entry = datasets.get(spec.config_dataset_key) if isinstance(datasets, Mapping) else None
+    if not isinstance(entry, Mapping):
+        raise ExternalEvidenceError(f"Missing canonical dataset declaration: {spec.config_dataset_key}")
+    reference = entry.get("schema_mapping_path")
+    if not isinstance(reference, str) or not reference.strip():
+        raise ExternalEvidenceError(
+            f"Canonical dataset {spec.config_dataset_key!r} has no explicit schema_mapping_path."
+        )
+    path = Path(reference)
+    if not path.is_absolute():
+        path = PROJECT_ROOT / path
+    path = path.resolve()
+    if not path.is_file():
+        raise ExternalEvidenceError(
+            f"Declared schema mapping is missing for {spec.config_dataset_key!r}: {reference}"
+        )
+    return Path(reference).as_posix(), path
+
+
+def _bind_canonical_external_inputs(
+    config_path: str | Path,
+    settings: Mapping[str, Any],
+    *,
+    preflight_dir: Path,
+    specs: Sequence[ExternalRunSpec],
+    include_inx_primary: bool,
+) -> Mapping[str, Any]:
+    """Load all canonical stage inputs through the pinned acquisition contract."""
+
+    preflight_dir.mkdir(parents=True, exist_ok=True)
+    bindings: dict[str, Any] = {}
+    if include_inx_primary:
+        bindings["inx_primary"] = load_canonical_dataset(
+            config_path,
+            "inx_primary",
+            allow_download=True,
+            mismatch_report_path=preflight_dir / "inx_primary_acquisition_comparison.json",
+        )
+    for spec in specs:
+        reference, mapping_path = _resolve_schema_mapping_path(settings, spec)
+        canonical = load_canonical_dataset(
+            config_path,
+            spec.config_dataset_key,
+            allow_download=True,
+            mismatch_report_path=preflight_dir / f"{spec.config_dataset_key}_acquisition_comparison.json",
+        )
+        adapted = load_external_dataset(
+            spec.dataset_name,
+            target_kind=spec.target_kind,
+            raw_frame=canonical.frame,
+            schema_mapping_path=mapping_path,
+        )
+        bindings[spec.key] = CanonicalExternalInput(
+            dataset=adapted,
+            receipt=dict(canonical.receipt),
+            schema_mapping_reference=reference,
+            schema_mapping_path=mapping_path,
+        )
+    runtime_settings = dict(settings)
+    runtime_settings[_CANONICAL_EXTERNAL_INPUTS_KEY] = bindings
+    return runtime_settings
+
+
+def _runtime_bindings(settings: Mapping[str, Any]) -> Mapping[str, Any] | None:
+    value = settings.get(_CANONICAL_EXTERNAL_INPUTS_KEY)
+    if value is None:
+        return None
+    if not isinstance(value, Mapping):
+        raise ExternalEvidenceError("Canonical external runtime bindings are malformed.")
+    return value
 
 
 def target_mapping_table(
@@ -531,7 +657,18 @@ def _run_dataset_task(
     run_id: str,
     config_hash: str,
 ) -> dict[str, Path]:
-    dataset = load_external_dataset(spec.dataset_name, target_kind=spec.target_kind)
+    bindings = _runtime_bindings(settings)
+    bound_input: CanonicalExternalInput | None = None
+    if bindings is not None:
+        candidate = bindings.get(spec.key)
+        if not isinstance(candidate, CanonicalExternalInput):
+            raise ExternalEvidenceError(f"Canonical runtime input is missing for external task {spec.key!r}.")
+        bound_input = candidate
+        dataset = bound_input.dataset
+    else:
+        # Compatibility path for legacy reports and direct exploratory helpers.
+        # The canonical ``run`` entry point always installs verified bindings.
+        dataset = load_external_dataset(spec.dataset_name, target_kind=spec.target_kind)
     if dataset.task_type != spec.task_type:
         raise ExternalEvidenceError(
             f"Adapter task drift for {spec.key}: expected {spec.task_type}, observed {dataset.task_type}."
@@ -606,7 +743,7 @@ def _run_dataset_task(
                 labels=labels,
             )
             y_test = y.iloc[test_positions]
-            if spec.key == "hrdataset_v14" and policy == "department_free":
+            if spec.key == "hrdataset_v14" and policy == "conservative_primary":
                 oof_local_shap_rows.extend(
                     _fold_local_shap_rows(
                         pipeline=pipeline,
@@ -729,7 +866,6 @@ def _run_dataset_task(
         "fold_metrics": output_dir / "fold_metrics.csv",
         "policy_summary": output_dir / "performance_metrics.csv",
         "representative_cases": output_dir / "representative_cases.csv",
-        "actionability_summary": output_dir / "actionability_summary.csv",
         "metadata": output_dir / "experiment_metadata.json",
     }
     mapping.to_csv(paths["target_mapping"], index=False)
@@ -741,28 +877,11 @@ def _run_dataset_task(
     _representative_cases(predictions, run_id=run_id, config_hash=config_hash).to_csv(
         paths["representative_cases"], index=False
     )
-    pd.DataFrame(
-        [
-            {
-                "run_id": run_id,
-                "config_hash": config_hash,
-                "dataset_key": spec.key,
-                "task_type": spec.task_type,
-                "role": spec.role,
-                "policy": policy,
-                "actionability_status": "not_evaluated_for_external_dataset_replication",
-                "validity": None,
-                "denominator": 0,
-                "warning": "No external counterfactual validity claim; model scenarios would not be employee prescriptions.",
-            }
-            for policy in spec.policies
-        ]
-    ).to_csv(paths["actionability_summary"], index=False)
 
     if spec.key == "hrdataset_v14":
         local_shap = pd.DataFrame(oof_local_shap_rows)
         expected_case_class_feature_rows = len(dataset.canonical) * len(labels) * int(
-            next(row["n_features"] for row in policy_rows if row["policy"] == "department_free")
+            next(row["n_features"] for row in policy_rows if row["policy"] == "conservative_primary")
         )
         if len(local_shap) != expected_case_class_feature_rows:
             raise ExternalEvidenceError(
@@ -770,7 +889,7 @@ def _run_dataset_task(
                 f"expected {expected_case_class_feature_rows}, observed {len(local_shap)}."
             )
         identity = local_shap.groupby(["sample_index", "fold", "predicted_class"], dropna=False).size().reset_index()
-        predicted_identity = predictions[predictions["policy"] == "department_free"][
+        predicted_identity = predictions[predictions["policy"] == "conservative_primary"][
             ["sample_index", "fold", "y_pred"]
         ].rename(columns={"y_pred": "predicted_class"})
         if len(identity) != len(dataset.canonical) or not identity[
@@ -781,7 +900,7 @@ def _run_dataset_task(
             .reset_index(drop=True)
         ):
             raise ExternalEvidenceError("HRDataset local SHAP does not match the OOF prediction identity.")
-        shap_dir = output_dir / "shap" / "department_free"
+        shap_dir = output_dir / "shap" / "conservative_primary"
         shap_dir.mkdir(parents=True, exist_ok=True)
         paths["oof_local_shap"] = shap_dir / "local_grouped_shap_values.csv"
         paths["oof_global_shap"] = shap_dir / "global_grouped_shap_importance.csv"
@@ -797,7 +916,7 @@ def _run_dataset_task(
                 dataset_key=spec.key,
                 task_type=spec.task_type,
                 role=spec.role,
-                policy="department_free",
+                policy="conservative_primary",
                 evaluation_scope="out_of_fold_only",
             )[
                 [
@@ -826,8 +945,22 @@ def _run_dataset_task(
                 min_support=min_support,
             )
         )
-    source_path = dataset.config.raw_path
-    schema_path = source_path.parent / "schema_mapping.json"
+    if bound_input is not None:
+        raw_dataset_path = str(bound_input.receipt.get("actual_path", ""))
+        raw_dataset_sha256 = str(bound_input.receipt.get("actual_sha256", ""))
+        if not raw_dataset_path or len(raw_dataset_sha256) != 64:
+            raise ExternalEvidenceError(f"Canonical input receipt is incomplete for {spec.key!r}.")
+        schema_mapping_reference = bound_input.schema_mapping_reference
+        schema_mapping_sha256 = sha256_file(bound_input.schema_mapping_path)
+        canonical_input_receipt: Mapping[str, Any] | None = dict(bound_input.receipt)
+    else:
+        source_path = dataset.config.raw_path
+        schema_path = dataset.config.schema_mapping_path or source_path.parent / "schema_mapping.json"
+        raw_dataset_path = str(source_path)
+        raw_dataset_sha256 = sha256_file(source_path)
+        schema_mapping_reference = str(schema_path)
+        schema_mapping_sha256 = sha256_file(schema_path)
+        canonical_input_receipt = None
     paths["metadata"].write_text(
         json.dumps(
             {
@@ -848,10 +981,11 @@ def _run_dataset_task(
                 "effective_cv_splits": effective_splits,
                 "seed": seed,
                 "policies": list(spec.policies),
-                "raw_dataset_path": str(source_path),
-                "raw_dataset_sha256": sha256_file(source_path),
-                "schema_mapping_path": str(schema_path),
-                "schema_mapping_sha256": sha256_file(schema_path),
+                "raw_dataset_path": raw_dataset_path,
+                "raw_dataset_sha256": raw_dataset_sha256,
+                "schema_mapping_path": schema_mapping_reference,
+                "schema_mapping_sha256": schema_mapping_sha256,
+                "canonical_input_receipt": canonical_input_receipt,
                 "completed_at": _utc_now(),
                 "claim_limitations": [
                     "Research-grade decision support only; no autonomous HR decision use.",
@@ -886,17 +1020,30 @@ def compute_transport_assessment(
     if not isinstance(primary, Mapping):
         raise ExternalEvidenceError("Canonical primary feature policy cannot be resolved for transport gate.")
     excluded = {str(value) for value in primary.get("excluded_features", [])}
-    dataset_declarations = settings.get("datasets", {})
-    inx_declaration = dataset_declarations.get("inx_primary", {}) if isinstance(dataset_declarations, Mapping) else {}
-    inx_path = Path(str(inx_declaration.get("path", "")))
-    if not inx_path.is_absolute():
-        inx_path = PROJECT_ROOT / inx_path
-    if not inx_path.is_file():
-        raise ExternalEvidenceError(f"Canonical INX dataset is missing for transport gate: {inx_path}")
-    inx = _read_csv_with_best_effort(inx_path)
+    bindings = _runtime_bindings(settings)
+    if bindings is not None:
+        inx_input = bindings.get("inx_primary")
+        hr_input = bindings.get("hrdataset_v14")
+        if not isinstance(inx_input, CanonicalDataset):
+            raise ExternalEvidenceError("Canonical INX runtime input is missing for the transport gate.")
+        if not isinstance(hr_input, CanonicalExternalInput):
+            raise ExternalEvidenceError("Canonical HRDataset runtime input is missing for the transport gate.")
+        inx = inx_input.frame
+        hr = hr_input.dataset
+    else:
+        # Compatibility path for the legacy standalone helper.  Canonical runs
+        # always take the verified branch above.
+        dataset_declarations = settings.get("datasets", {})
+        inx_declaration = dataset_declarations.get("inx_primary", {}) if isinstance(dataset_declarations, Mapping) else {}
+        inx_path = Path(str(inx_declaration.get("path", "")))
+        if not inx_path.is_absolute():
+            inx_path = PROJECT_ROOT / inx_path
+        if not inx_path.is_file():
+            raise ExternalEvidenceError(f"Canonical INX dataset is missing for transport gate: {inx_path}")
+        inx = _read_csv_with_best_effort(inx_path)
+        hr = load_external_dataset("hrdataset_v14")
     inx_features = {str(column) for column in inx.columns if column not in excluded}
-    hr = load_external_dataset("hrdataset_v14")
-    hr_features = set(build_feature_columns(hr, "department_free"))
+    hr_features = set(build_feature_columns(hr, "conservative_primary"))
     common = sorted(inx_features.intersection(hr_features))
     rows = pd.DataFrame(
         [
@@ -905,7 +1052,7 @@ def compute_transport_assessment(
                 "config_hash": config_hash,
                 "feature": feature,
                 "in_inx_canonical_primary": feature in inx_features,
-                "in_hrdataset_department_free": feature in hr_features,
+                "in_hrdataset_conservative_primary": feature in hr_features,
                 "common_safe_feature": feature in common,
             }
             for feature in sorted(inx_features.union(hr_features))
@@ -931,7 +1078,13 @@ def compute_transport_assessment(
     return rows, assessment
 
 
-def _roles_table(config: Mapping[str, Any], *, run_id: str, config_hash: str) -> pd.DataFrame:
+def _roles_table(
+    config: Mapping[str, Any],
+    *,
+    specs: Sequence[ExternalRunSpec],
+    run_id: str,
+    config_hash: str,
+) -> pd.DataFrame:
     settings = _settings(config)
     datasets = settings["datasets"]
     return pd.DataFrame(
@@ -952,14 +1105,19 @@ def _roles_table(config: Mapping[str, Any], *, run_id: str, config_hash: str) ->
                 "research_grade_decision_support_only": True,
                 "autonomous_hr_decisions_allowed": False,
             }
-            for spec in RUN_SPECS
+            for spec in specs
         ]
     )
 
 
-def _metric_applicability_table(*, run_id: str, config_hash: str) -> pd.DataFrame:
+def _metric_applicability_table(
+    *,
+    specs: Sequence[ExternalRunSpec],
+    run_id: str,
+    config_hash: str,
+) -> pd.DataFrame:
     rows: list[dict[str, Any]] = []
-    for spec in RUN_SPECS:
+    for spec in specs:
         schema = get_task_schema(spec.task_type)
         for metric in REPORT_METRICS:
             applicable = metric in KNOWN_METRICS and schema.is_metric_applicable(metric)
@@ -981,40 +1139,69 @@ def _metric_applicability_table(*, run_id: str, config_hash: str) -> pd.DataFram
 
 def _interpretation_markdown(
     *,
+    scope: ExternalEvidenceScope,
     run_id: str,
     config_hash: str,
-    assessment: Mapping[str, Any],
+    assessment: Mapping[str, Any] | None = None,
 ) -> str:
-    common = ", ".join(str(v) for v in assessment["common_safe_features"]) or "none"
-    return "\n".join(
+    specs_for_scope(scope)
+    lines = [
+        "# Canonical External Evidence Interpretation",
+        "",
+        f"Run ID: `{run_id}`  ",
+        f"Config hash: `{config_hash}`  ",
+        f"Package scope: `{scope}`",
+        "",
+    ]
+    if scope == "core":
+        if not isinstance(assessment, Mapping):
+            raise ExternalEvidenceError("Core external interpretation requires a transport assessment.")
+        common = ", ".join(str(v) for v in assessment["common_safe_features"]) or "none"
+        lines.extend(
+            [
+                "## Independent mapped-target replication",
+                "",
+                "- HRDataset_v14 is independently trained external performance-target replication under the declared mapped three-class target.",
+                "- This is not locked-model transport and does not establish universal employee-performance validity.",
+                "",
+                "## Locked-model transport gate",
+                "",
+                f"Status: `{assessment['status']}`. Common safe features: {assessment['n_common_safe_features']} ({common}).",
+                "No locked INX model was transported. The overlap result is a feasibility finding, not a transport performance estimate.",
+                "",
+            ]
+        )
+    else:
+        if assessment is not None:
+            raise ExternalEvidenceError("Supplementary external evidence must not contain a transport assessment.")
+        lines.extend(
+            [
+                "## Secondary robustness evidence",
+                "",
+                "- IBM PerformanceRating is restricted-target robustness because only classes 3 and 4 are observed.",
+                "- IBM attrition and Employee Turnover are related binary task-transfer evidence.",
+                "- These tasks are non-comparable with the primary three-class employee-performance task and provide no employee-performance validation.",
+                "",
+            ]
+        )
+    lines.extend(
         [
-            "# Canonical External Evidence Interpretation",
-            "",
-            f"Run ID: `{run_id}`  ",
-            f"Config hash: `{config_hash}`",
-            "",
-            "## Separated evidence roles",
-            "",
-            "- HRDataset_v14 is independent external performance-target replication using independently trained, dataset-specific models.",
-            "- IBM PerformanceRating is restricted-target robustness because only classes 3 and 4 are observed.",
-            "- IBM attrition and Employee Turnover are related binary task-transfer evidence; they supply no validation evidence for the employee-performance model.",
-            "- These task families are reported in separate tables and must not be ranked as directly equivalent outcomes.",
-            "",
-            "## Locked-model transport gate",
-            "",
-            f"Status: `{assessment['status']}`. Common safe features: {assessment['n_common_safe_features']} ({common}).",
-            "No locked INX model was transported. The overlap result is a feasibility finding, not a transport performance estimate.",
-            "",
             "## Claim limits",
             "",
-            "- Research-grade decision support only; no autonomous hiring, firing, promotion, ranking, or discipline decisions.",
+            "- Research-grade analysis only; no autonomous hiring, firing, promotion, ranking, or discipline decisions.",
             "- Target mappings and class support are recorded beside each task and constrain interpretation.",
-            "- Binary-task ordinal metrics are N/A, never zero.",
-            "- Restricted-target ordinal-distance metrics are N/A and non-comparable.",
             "- Removing group variables does not establish fairness, and model attribution is not causality.",
-            "",
         ]
     )
+    if scope == "supplementary":
+        lines.extend(
+            [
+                "- Binary-task ordinal metrics are N/A, never zero.",
+                "- Restricted-target ordinal-distance metrics are N/A and non-comparable.",
+            ]
+        )
+    lines.append("")
+    return "\n".join(lines)
 
 
 def _write_stage_manifest(output_dir: Path, *, run_id: str, config_hash: str) -> Path:
@@ -1039,16 +1226,17 @@ def _write_stage_manifest(output_dir: Path, *, run_id: str, config_hash: str) ->
 def run(
     config_path: str | Path = DEFAULT_CONFIG,
     *,
+    scope: ExternalEvidenceScope,
     output_dir: str | Path,
     run_id: str,
     config_hash: str | None = None,
 ) -> dict[str, Path]:
-    """Generate the complete canonical external-evidence stage."""
+    """Generate one exact canonical external-evidence scope."""
 
     if not str(run_id).strip():
         raise ExternalEvidenceError("run_id must be non-empty.")
     config = load_config(config_path)
-    configured_run_specs(config)
+    specs = configured_run_specs(config, scope=scope)
     observed_hash = canonical_config_hash(config)
     if config_hash is not None and config_hash != observed_hash:
         raise ExternalEvidenceError(
@@ -1059,14 +1247,27 @@ def run(
     if output.exists() and not output.is_dir():
         raise ExternalEvidenceError(f"External output path is not a directory: {output}")
     output.mkdir(parents=True, exist_ok=True)
+    settings = _settings(config)
+    runtime_settings = _bind_canonical_external_inputs(
+        config_path,
+        settings,
+        preflight_dir=output / "data_preflight",
+        specs=specs,
+        include_inx_primary=scope == "core",
+    )
+    if "manuscript_final" in config:
+        runtime_config = dict(config)
+        runtime_config["manuscript_final"] = runtime_settings
+    else:
+        runtime_config = runtime_settings
 
     task_paths: dict[str, dict[str, Path]] = {}
     task_summaries: dict[str, pd.DataFrame] = {}
-    for spec in RUN_SPECS:
+    for spec in specs:
         paths = _run_dataset_task(
             spec,
             output_dir=output / spec.key,
-            settings=_settings(config),
+            settings=runtime_settings,
             run_id=run_id,
             config_hash=config_hash,
         )
@@ -1076,41 +1277,73 @@ def run(
     outputs: dict[str, Path] = {
         "external_dataset_roles": output / "external_dataset_roles.csv",
         "metric_applicability": output / "external_metric_applicability.csv",
-        "performance_target_replication": output / "performance_target_replication.csv",
-        "restricted_target_robustness": output / "restricted_target_robustness.csv",
-        "related_binary_task_transfer": output / "related_binary_task_transfer.csv",
-        "transport_feature_overlap": output / "cross_dataset_transport" / "feature_overlap.csv",
-        "transport_feasibility": output / "cross_dataset_transport" / "transport_feasibility.json",
-        "transport_interpretation": output / "cross_dataset_transport" / "transport_feasibility.md",
         "interpretation": output / "external_evidence_interpretation.md",
         "metadata": output / "stage_metadata.json",
     }
-    _roles_table(config, run_id=run_id, config_hash=config_hash).to_csv(outputs["external_dataset_roles"], index=False)
-    _metric_applicability_table(run_id=run_id, config_hash=config_hash).to_csv(outputs["metric_applicability"], index=False)
-    task_summaries["hrdataset_v14"].to_csv(outputs["performance_target_replication"], index=False)
-    task_summaries["ibm_performance"].to_csv(outputs["restricted_target_robustness"], index=False)
-    pd.concat(
-        [task_summaries["ibm_attrition"], task_summaries["employee_turnover"]],
-        ignore_index=True,
-    ).to_csv(outputs["related_binary_task_transfer"], index=False)
+    _roles_table(config, specs=specs, run_id=run_id, config_hash=config_hash).to_csv(
+        outputs["external_dataset_roles"], index=False
+    )
+    _metric_applicability_table(specs=specs, run_id=run_id, config_hash=config_hash).to_csv(
+        outputs["metric_applicability"], index=False
+    )
 
-    overlap, assessment = compute_transport_assessment(config, run_id=run_id, config_hash=config_hash)
-    outputs["transport_feature_overlap"].parent.mkdir(parents=True, exist_ok=True)
-    overlap.to_csv(outputs["transport_feature_overlap"], index=False)
-    outputs["transport_feasibility"].write_text(json.dumps(assessment, indent=2, sort_keys=True) + "\n", encoding="utf-8")
-    outputs["transport_interpretation"].write_text(
-        "# INX-to-HRDataset Locked-Model Transport Feasibility\n\n"
-        f"Run ID: `{run_id}`  \nConfig hash: `{config_hash}`\n\n"
-        + _interpretation_markdown(run_id=run_id, config_hash=config_hash, assessment=assessment).split(
-            "## Locked-model transport gate", 1
-        )[1].split("## Claim limits", 1)[0].strip()
-        + "\n",
-        encoding="utf-8",
-    )
+    assessment: Mapping[str, Any] | None = None
+    if scope == "core":
+        outputs.update(
+            {
+                "performance_target_replication": output / "performance_target_replication.csv",
+                "transport_feature_overlap": output / "cross_dataset_transport" / "feature_overlap.csv",
+                "transport_feasibility": output / "cross_dataset_transport" / "transport_feasibility.json",
+                "transport_interpretation": output / "cross_dataset_transport" / "transport_feasibility.md",
+            }
+        )
+        task_summaries["hrdataset_v14"].to_csv(outputs["performance_target_replication"], index=False)
+        overlap, assessment = compute_transport_assessment(
+            runtime_config,
+            run_id=run_id,
+            config_hash=config_hash,
+        )
+        outputs["transport_feature_overlap"].parent.mkdir(parents=True, exist_ok=True)
+        overlap.to_csv(outputs["transport_feature_overlap"], index=False)
+        outputs["transport_feasibility"].write_text(
+            json.dumps(assessment, indent=2, sort_keys=True) + "\n",
+            encoding="utf-8",
+        )
+        common = ", ".join(str(value) for value in assessment["common_safe_features"]) or "none"
+        outputs["transport_interpretation"].write_text(
+            "# INX-to-HRDataset Locked-Model Transport Feasibility\n\n"
+            f"Run ID: `{run_id}`  \nConfig hash: `{config_hash}`\n\n"
+            f"Status: `{assessment['status']}`. Common safe features: "
+            f"{assessment['n_common_safe_features']} ({common}).\n\n"
+            "No locked INX model was transported. This schema-overlap result is a feasibility finding, "
+            "not a transport performance estimate.\n",
+            encoding="utf-8",
+        )
+    else:
+        outputs.update(
+            {
+                "restricted_target_robustness": output / "restricted_target_robustness.csv",
+                "related_binary_task_transfer": output / "related_binary_task_transfer.csv",
+            }
+        )
+        task_summaries["ibm_performance"].to_csv(outputs["restricted_target_robustness"], index=False)
+        pd.concat(
+            [task_summaries["ibm_attrition"], task_summaries["employee_turnover"]],
+            ignore_index=True,
+        ).to_csv(outputs["related_binary_task_transfer"], index=False)
+
     outputs["interpretation"].write_text(
-        _interpretation_markdown(run_id=run_id, config_hash=config_hash, assessment=assessment),
+        _interpretation_markdown(
+            scope=scope,
+            run_id=run_id,
+            config_hash=config_hash,
+            assessment=assessment,
+        ),
         encoding="utf-8",
     )
+    consumed_dataset_keys = [spec.config_dataset_key for spec in specs]
+    if scope == "core":
+        consumed_dataset_keys.insert(0, "inx_primary")
     outputs["metadata"].write_text(
         json.dumps(
             {
@@ -1119,7 +1352,9 @@ def run(
                 "status": "completed",
                 "started_and_completed_by": "manuscript_external_evidence",
                 "completed_at": _utc_now(),
-                "task_keys": [spec.key for spec in RUN_SPECS],
+                "package_scope": scope,
+                "task_keys": [spec.key for spec in specs],
+                "canonical_dataset_keys_consumed": consumed_dataset_keys,
                 "locked_inx_model_transported": False,
                 "paid_api_calls": 0,
                 "outputs": {name: path.relative_to(output).as_posix() for name, path in outputs.items() if name != "metadata"},
@@ -1141,6 +1376,7 @@ def run(
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Build canonical versioned external evidence.")
     parser.add_argument("--config", default=str(DEFAULT_CONFIG))
+    parser.add_argument("--scope", required=True, choices=tuple(EXTERNAL_SCOPE_TASK_KEYS))
     parser.add_argument("--output-dir", required=True)
     parser.add_argument("--run-id", required=True)
     parser.add_argument("--config-hash", default=None)
@@ -1152,6 +1388,7 @@ if __name__ == "__main__":
     print(
         run(
             args.config,
+            scope=args.scope,
             output_dir=args.output_dir,
             run_id=args.run_id,
             config_hash=args.config_hash,

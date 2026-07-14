@@ -1,7 +1,9 @@
 from __future__ import annotations
 
 import copy
+import hashlib
 import json
+import shutil
 import tempfile
 import unittest
 from pathlib import Path
@@ -16,6 +18,7 @@ from src.governance.manuscript_contract import (
     validate_run_manifest,
     write_run_manifest,
 )
+from src.utils.config_loader import PROJECT_ROOT
 
 
 class ArtifactRunManifestConsistencyTests(unittest.TestCase):
@@ -27,8 +30,72 @@ class ArtifactRunManifestConsistencyTests(unittest.TestCase):
         config = copy.deepcopy(load_manuscript_config())
         for definition in config["manuscript_final"]["datasets"].values():
             definition["path"] = "data/sample.csv"
+        acquisition_path = root / "configs" / "data_acquisition.yaml"
+        acquisition_path.parent.mkdir(parents=True, exist_ok=True)
+        dataset_hash = hashlib.sha256(dataset.read_bytes()).hexdigest()
+        dataset_names = list(config["manuscript_final"]["datasets"])
+        acquisition_path.write_text(
+            json.dumps(
+                {
+                    "data_acquisition": {
+                        "schema_version": 1,
+                        "physical_datasets": {
+                            "fixture": {
+                                "local_path": "data/sample.csv",
+                                "expected_sha256": dataset_hash,
+                                "expected_rows": 1,
+                                "expected_column_count": 2,
+                                "expected_columns": ["feature", "target"],
+                                "format": "csv",
+                                "delimiter": ",",
+                                "encoding": "utf-8",
+                                "target_profiles": {
+                                    "main": {
+                                        "raw_target": "target",
+                                        "expected_distribution": {"2": 1},
+                                    }
+                                },
+                                "automatic_download_allowed": False,
+                            }
+                        },
+                        "logical_bindings": {
+                            name: {
+                                "physical_dataset": "fixture",
+                                "target_profile": "main",
+                            }
+                            for name in dataset_names
+                        },
+                    }
+                },
+                indent=2,
+            ),
+            encoding="utf-8",
+        )
+        provenance = config["manuscript_final"]["provenance"]
+        provenance["data_acquisition_manifest"] = "configs/data_acquisition.yaml"
+        provenance["scientific_side_inputs"][
+            "data_acquisition_contract"
+        ] = "configs/data_acquisition.yaml"
+        for key, reference in provenance["scientific_side_inputs"].items():
+            if key == "data_acquisition_contract":
+                continue
+            source = (PROJECT_ROOT / reference).resolve()
+            destination = (root / reference).resolve()
+            destination.parent.mkdir(parents=True, exist_ok=True)
+            shutil.copyfile(source, destination)
+        canonical_core_stages = list(
+            config["manuscript_final"]["evidence_scopes"]["core"]["stages"]
+        )
+        config["manuscript_final"]["evidence_scopes"]["core"]["stages"] = [
+            *canonical_core_stages[:-1],
+            "fixture_core",
+            canonical_core_stages[-1],
+        ]
+        config["manuscript_final"]["evidence_scopes"]["supplementary"]["stages"] = [
+            "fixture_supplementary"
+        ]
         config_path = root / "configs" / "manuscript_final.yaml"
-        config_path.parent.mkdir(parents=True)
+        config_path.parent.mkdir(parents=True, exist_ok=True)
         config_path.write_text(json.dumps(config, indent=2), encoding="utf-8")
 
         artifact = root / "reports" / "manuscript_final" / "test_run" / "table.csv"
@@ -37,6 +104,7 @@ class ArtifactRunManifestConsistencyTests(unittest.TestCase):
 
         manifest = create_run_manifest(
             config_path,
+            evidence_scope="core",
             project_root=root,
             run_id="manuscript_final_test_contract",
             initial_command="python -m src.experiments.build_manuscript_evidence",
@@ -47,6 +115,11 @@ class ArtifactRunManifestConsistencyTests(unittest.TestCase):
             project_root=root,
             stage="policy_ablation",
             artifact_type="table_csv",
+        )
+        manifest["commands"][0].update(
+            status="complete",
+            ended_at="2026-07-13T00:00:01+00:00",
+            return_code=0,
         )
         finalize_run_manifest(manifest, status="complete")
         return config_path, artifact, manifest

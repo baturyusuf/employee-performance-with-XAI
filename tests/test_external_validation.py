@@ -30,7 +30,7 @@ class ExternalValidationTests(unittest.TestCase):
 
     def test_external_policy_excludes_leakage_and_sensitive_columns(self) -> None:
         dataset = load_external_dataset("hrdataset_v14")
-        features = set(build_feature_columns(dataset, "department_free"))
+        features = set(build_feature_columns(dataset, "conservative_primary"))
 
         for col in role_columns(dataset, "leakage"):
             self.assertNotIn(col, features)

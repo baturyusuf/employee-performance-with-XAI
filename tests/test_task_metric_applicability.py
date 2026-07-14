@@ -7,6 +7,7 @@ from src.models.evaluate import classification_metrics
 from src.models.task_schema import (
     BINARY_ATTRITION_TRANSFER,
     BINARY_TURNOVER_TRANSFER,
+    NOMINAL_MULTICLASS_PROXY_DIAGNOSTIC,
     ORDINAL_METRICS,
     ORDINAL_MULTICLASS_PERFORMANCE,
     RESTRICTED_TARGET_PERFORMANCE_ROBUSTNESS,
@@ -61,6 +62,16 @@ def test_restricted_target_metrics_are_not_presented_as_three_class_ordinal_metr
     assert metrics["multiclass_brier"] is None
     for metric in ORDINAL_METRICS:
         assert metrics[metric] is None
+
+
+def test_nominal_proxy_task_is_not_labelled_as_performance_or_ordinal() -> None:
+    schema = get_task_schema(NOMINAL_MULTICLASS_PROXY_DIAGNOSTIC)
+
+    assert schema.comparison_group == "nominal_proxy_risk_diagnostic"
+    assert schema.is_metric_applicable("macro_f1")
+    assert not schema.ordinal_metrics_comparable
+    assert not schema.is_metric_applicable("quadratic_weighted_kappa")
+    assert "not an employee-performance task" in schema.applicability_note
 
 
 def test_three_class_ordinal_task_retains_ordinal_and_multiclass_probability_metrics() -> None:

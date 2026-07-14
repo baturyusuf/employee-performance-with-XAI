@@ -1,3 +1,5 @@
+"""Legacy v1 governance figures retained outside the canonical v2 core build."""
+
 from __future__ import annotations
 
 import argparse
@@ -345,6 +347,12 @@ def generate_architecture_figures(
     readiness: pd.DataFrame | None = None,
 ) -> Dict[str, Path]:
     config = load_manuscript_config(config_path)
+    legacy_llm = config["manuscript_final"].get("llm_agent_evaluation")
+    if not isinstance(legacy_llm, Mapping):
+        raise ManuscriptFigureError(
+            "Legacy governance Figures 1-4 require an explicit legacy configuration and are "
+            "excluded from the canonical leakage-aware core figure scope."
+        )
     config_hash = config_hash or canonical_config_hash(config)
     output = ensure_dir(Path(output_dir))
     sources = ensure_dir(output / "source_data")
@@ -383,7 +391,7 @@ def validate_all_seven_figures(figure_dir: str | Path) -> Dict[str, Any]:
 
 
 def parse_args() -> argparse.Namespace:
-    parser = argparse.ArgumentParser(description="Generate canonical manuscript architecture/readiness figures 1–4.")
+    parser = argparse.ArgumentParser(description="Generate legacy v1 governance figures 1-4.")
     parser.add_argument("--config", default="configs/manuscript_final.yaml")
     parser.add_argument("--output-dir", required=True)
     parser.add_argument("--run-dir", required=True)

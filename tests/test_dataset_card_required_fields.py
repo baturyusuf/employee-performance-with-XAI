@@ -65,6 +65,22 @@ class DatasetCardRequiredFieldsTests(unittest.TestCase):
             self.assertEqual(report["status"], "passed")
             self.assertFalse(report["manual_source_or_licence_authenticity_decisions_made"])
 
+    def test_generator_respects_exact_scope_dataset_keys(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary_directory:
+            outputs = run(
+                output_dir=Path(temporary_directory),
+                run_id="core_card_test",
+                config_hash="c" * 64,
+                dataset_keys=("inx_primary", "hrdataset_v14"),
+            )
+            payload = json.loads(outputs["dataset_cards_json"].read_text(encoding="utf-8"))
+            self.assertEqual(payload["dataset_keys"], ["inx_primary", "hrdataset_v14"])
+            self.assertEqual(
+                {card["dataset_id"] for card in payload["cards"]},
+                {"inx_primary", "hrdataset_v14"},
+            )
+            self.assertFalse((Path(temporary_directory) / "cards" / "ibm_hr_analytics.md").exists())
+
 
 if __name__ == "__main__":
     unittest.main()

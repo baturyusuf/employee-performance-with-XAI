@@ -4,20 +4,22 @@ import argparse
 import json
 import math
 import time
+import warnings
 from pathlib import Path
 from typing import Any, Dict, Iterable, Mapping, Sequence
 
 import numpy as np
 import pandas as pd
 from sklearn.model_selection import StratifiedKFold
+from threadpoolctl import threadpool_limits
 
 from src.core.io_utils import ensure_dir, write_json, write_jsonl
-from src.data.preprocess import load_validated_or_raw_data
+from src.data.canonical_loader import load_canonical_dataset
 from src.experiments.final_evidence_common import align_proba, predict_labels_from_proba
-from src.experiments.manuscript_calibration import _fit_pipeline
 from src.experiments.manuscript_policy_ablation import _model_parameters, exact_policy_frame, resolve_seed
 from src.features.feature_sets import taxonomy_by_feature
 from src.governance.manuscript_contract import canonical_config_hash
+from src.models.canonical_models import CanonicalModelError, build_model_pipeline
 from src.utils.config_loader import load_config
 
 
@@ -31,6 +33,39 @@ RELATIONAL_CONSTRAINTS = (
 
 class CounterfactualProtocolError(RuntimeError):
     """Raised when actionability evidence would violate the OOF protocol."""
+
+
+def _fit_supplementary_pipeline(
+    X_train: pd.DataFrame,
+    y_train: pd.Series,
+    parameters: Mapping[str, Any],
+    seed: int,
+    *,
+    forbidden_features: Sequence[str],
+) -> Any:
+    """Fit the supplementary heuristic model without importing calibration internals."""
+
+    fixed = dict(parameters)
+    fixed.pop("random_state", None)
+    fixed["n_jobs"] = 1
+    try:
+        pipeline = build_model_pipeline(
+            "xgboost",
+            X_train,
+            fixed_parameters=fixed,
+            candidate_parameters={},
+            random_state=int(seed),
+            forbidden_features=forbidden_features,
+        )
+        with threadpool_limits(limits=1):
+            with warnings.catch_warnings():
+                warnings.simplefilter("error")
+                pipeline.fit(X_train, y_train)
+    except (CanonicalModelError, TypeError, ValueError, Warning) as exc:
+        raise CounterfactualProtocolError(
+            f"Supplementary counterfactual model fit failed: {type(exc).__name__}: {exc}"
+        ) from exc
+    return pipeline
 
 
 def wilson_interval(successes: int, denominator: int, confidence: float = 0.95) -> tuple[float, float]:
@@ -410,7 +445,7 @@ def run(
     labels = [int(value) for value in target.get("labels", [2, 3, 4])]
     identifier_fields = settings.get("governance_fields", {}).get("identifier_fields", ["EmpNumber"])
     id_column = str(identifier_fields[0] if identifier_fields else "EmpNumber")
-    data = load_validated_or_raw_data()
+    data = load_canonical_dataset(config_path, "inx_primary").frame
     X, excluded = exact_policy_frame(data, primary_policy, definition, target_column=target_column, id_column=id_column)
     y = data[target_column].astype(int)
 
@@ -443,7 +478,13 @@ def run(
         y_train = y.iloc[train_positions]
         X_test = X.iloc[test_positions]
         y_test = y.iloc[test_positions]
-        pipeline = _fit_pipeline(X_train, y_train, parameters, seed)
+        pipeline = _fit_supplementary_pipeline(
+            X_train,
+            y_train,
+            parameters,
+            seed,
+            forbidden_features=excluded,
+        )
         probability = align_proba(pipeline.predict_proba(X_test), pipeline.named_steps["model"].classes_, labels)
         predicted = predict_labels_from_proba(probability, labels)
         scales = training_scales(X_train)

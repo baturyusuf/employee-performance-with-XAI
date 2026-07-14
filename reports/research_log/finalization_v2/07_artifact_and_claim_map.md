@@ -1,0 +1,163 @@
+# Artifact and Claim Map — Baseline
+
+## Status Rule
+
+No file under `reports/manuscript_final/latest` is admitted as final v2 evidence. It may be used only as historical diagnostic context until a clean-current-commit v2 build regenerates the result from explicitly bound inputs.
+
+| Historical area | Current path | Baseline finding | v2 disposition |
+| --- | --- | --- | --- |
+| Policy ablation | `reports/manuscript_final/latest/policy/` | Common folds and exact primary exclusions exist; input binding and uncertainty are invalid for v2 | Regenerate core |
+| Calibration | `reports/manuscript_final/latest/calibration/` | Nested split exists; primary method selected from outer-test results | Regenerate with predeclared sigmoid |
+| SHAP | `reports/manuscript_final/latest/shap/` | OOF fold models/grouping useful; dependent-pair t-CI and absolute paths invalid | Refactor and regenerate core |
+| Fairness/proxy | `reports/manuscript_final/latest/fairness/` | Support-aware subgroup bootstrap useful; proxy uncertainty/input contract incomplete | Refactor and regenerate core |
+| HRDataset | `reports/manuscript_final/latest/external/hrdataset_v14/` | Correct claim boundary; mapping side input not bound | Regenerate in the future same-identity clean core run; D3 is already accepted |
+| IBM/turnover | `reports/manuscript_final/latest/external/` | Roles bounded but mixed into core | Regenerate supplementary only |
+| Counterfactual | `reports/manuscript_final/latest/counterfactual/` | OOF search exists; terminology/modes/sensitivity violate v2 scope | Supplementary refactor only |
+| LLM/agents/chatbot | `reports/manuscript_final/latest/llm/`, `chatbot/` | Historical offline diagnostics | Exclude from core and paper claims |
+| Figures 1-7 | `reports/manuscript_final/latest/figures/` | Run-bound but wrong v2 scope for Figures 1-4 | Replace complete core figure set |
+| Manifest | `reports/manuscript_final/latest/run_manifest.json` | Old dirty commit, incomplete entrypoint, wrong actual input, absolute path | Reject and rebuild |
+
+## Claim Freeze
+
+No numeric manuscript claim is frozen. The v2 `manuscript_support/results_source_of_truth.md` and `claim_to_artifact_matrix.csv` must be generated only after the clean release run and approved by the user before manuscript editing.
+
+## v2 Scope Contract — Unit 2A
+
+| Accepted scope | Exact datasets | Planned evidence | Explicitly excluded |
+| --- | --- | --- | --- |
+| Core | INX primary; HRDataset_v14 | shared folds, four-model benchmark, leakage ablation, sigmoid calibration, OOF SHAP, subgroup/proxy diagnostics, HR mapped-target replication, core tables/figures | heuristic search, IBM/Turnover, historical artifacts, LLM, chatbot, agent audits |
+| Supplementary | INX primary; IBM performance/attrition; Employee Turnover | heuristic model-scenario search, restricted-target/related-task robustness, supplementary tables/cards | HR replication, historical artifacts, LLM, chatbot, agent audits |
+
+Both scopes are intentionally `release_ready=false`. No v2 scientific artifact or numerical claim has been admitted. Scoped manifest and cache contracts are implementation evidence, not manuscript results.
+
+## Unit 2B Infrastructure Status
+
+| New component | Repository source | Current claim status |
+| --- | --- | --- |
+| Shared 10×5 folds | `src/experiments/shared_folds.py`; `reports/manuscript_final/trials/benchmark-10x5-20260713-6a80074/core/shared_folds/` | Clean-start trial artifact verified; downstream consumers have not yet adopted it |
+| Four-model restrained nested benchmark | `src/experiments/manuscript_model_benchmark.py`; trial `model_benchmarks/` | Real trial complete and hash-verified; noncanonical decision evidence pending final all-stage rebuild |
+| Paired OOF bootstrap | `src/models/oof_bootstrap.py`; trial `model_summary.csv`, `paired_model_differences.csv` | 5,000 draws complete; model gate evidence valid, manuscript result not yet frozen |
+| Baseline reference stop gate | trial `baseline_xgboost_gate.json`, `run_manifest.json` | Observed gate outcome `false`; no model-reference user decision required |
+
+The earlier in-memory 10×5 preflight hashes remain noncanonical. The clean-start real trial is preserved under its versioned trial root and supports the XGBoost-reference gate decision, but `canonical_release_eligible=false`; its numbers are not frozen manuscript claims until the complete core package is regenerated from one final clean commit after warning and downstream-stage fixes.
+
+## Unit 2D Policy Evidence Contract
+
+No current canonical policy artifact exists. The tested stage declares the following outputs under the future same-run `core/policy/` directory; each must carry the benchmark run/config/scientific-input/fold/model-set identity and must be generated anew after an exact current-code benchmark replay:
+
+| Declared output | Evidence role | Current claim status |
+| --- | --- | --- |
+| `oof_predictions.csv` | Exactly one OOF prediction per INX sample and policy | Implementation/test contract only |
+| `fold_metrics.csv` | Ten-fold descriptive variability; not population inference | Implementation/test contract only |
+| `policy_metric_intervals.csv` | Raw 5,000-draw sample-level bootstrap intervals | Implementation/test contract only |
+| `policy_summary.csv`; `manuscript_policy_table.csv` | OOF estimates, intervals, explicit denominators and role boundaries | Implementation/test contract only |
+| `policy_pairwise_tests.csv`; `leakage_sensitivity_index.csv` | Pointwise paired policy differences and declared leakage-sensitivity contrasts | Implementation/test contract only; no multiplicity-adjusted rejection claim |
+| `policy_feature_contract.csv`; `policy_hyperparameter_schedule.csv`; `policy_fit_receipts.csv` | Exact exclusions, feature lineage, fold-selected parameter reuse and fit denominators | Implementation/test contract only |
+| `figure_leakage_policy_tradeoff_source.csv`; PNG; SVG | Reproducible policy trade-off figure | Implementation/test contract only |
+| `policy_interpretation.md`; `policy_metadata.json` | Diagnostic/audit-only boundaries and provenance | Implementation/test contract only |
+
+The primary policy must reuse the exact benchmark XGBoost OOF rows after `1e-12` replay. Five non-primary policies use the same outer folds and the primary-selected XGBoost candidate for each fold; they are not independently tuned. Therefore the comparison is matched feature-access sensitivity conditional on the primary selection schedule, not a fully optimized leaderboard. The full-feature comparator is diagnostic and nondeployable.
+
+## Unit 2E Calibration Evidence Contract
+
+No historical calibration file is admitted and no new canonical calibration artifact exists yet. Option A is implemented and independently reviewed; the future same-run `core/sigmoid_calibration/` package declares:
+
+| Declared output | Evidence role | Current claim status |
+| --- | --- | --- |
+| `calibration_training_oof_predictions.csv`; `calibration_fit_receipts.csv` | Exactly-once outer-training cross-fit rows and 50 isolated inner-fit receipts | Implementation/real-fold diagnostic only |
+| `sigmoid_calibrator_parameters.csv`; `calibrator_model_relationships.csv` | Replayable ten-fold sigmoid coefficients and exact benchmark-model bindings | Implementation/test contract only |
+| `calibration_predictions.csv`; `calibration_fold_metrics.csv` | 1,200 raw plus 1,200 sigmoid OOF rows; fold variability descriptive only | Implementation/test contract only |
+| `calibration_metric_intervals.csv`; `calibration_paired_differences.csv`; `bootstrap_metadata.json` | Frozen 5,000-draw paired 95% OOF uncertainty and benchmark resample identity | Implementation/test contract only |
+| `calibration_bins.csv`; class reliability PNG/SVG; calibration summary PNG/SVG/source | Ten-bin class reliability and manuscript-figure source evidence | Implementation/test contract only |
+| `calibration_protocol.json`; `predeclared_method_rationale.md`; `calibration_validation.json`; `calibration_metadata.json` | Fixed sigmoid/no-selection contract, warning and hash/provenance validation | Implementation/test contract only |
+
+The raw rows must equal current-run benchmark OOF values exactly and every sigmoid calibrator must be trained only from the corresponding outer-training cross-fit rows. The Unit 2E checkpoint config was `d755ecc3...`; the later Unit 2F config is also intentionally incompatible with historical benchmark config `7e70bf66...`. Therefore no numerical calibration claim is admitted until benchmark and calibration run under one final frozen identity and the persisted validator/manifest pass.
+
+## Unit 2F Subgroup/Proxy Evidence Contract
+
+No historical fairness/proxy file is admitted and no new canonical Unit 2F artifact exists yet. The future same-run `core/subgroup_proxy/` package declares:
+
+| Declared output | Evidence role | Current claim status |
+| --- | --- | --- |
+| `fairness_oof_predictions.csv` | Exact three-policy raw performance OOF rows; no stage refit | Implementation/test contract only |
+| `fairness_group_support_and_metrics.csv` | Visible group counts, numerators, metric denominators and fixed complete-OOF eligibility | Implementation/test contract only |
+| `fairness_disparity_uncertainty.csv` | Pointwise support/status-aware 5,000-draw subgroup gap intervals | Implementation/real-data diagnostic only; no fairness claim |
+| `fairness_policy_paired_gap_differences.csv` | Paired policy gaps over identical common eligible group sets | Implementation/test contract only; no multiplicity-adjusted claim |
+| `proxy_feature_contracts.csv`; `proxy_equivalence.csv` | Two unique target/ID-free predictor contracts and one explicit no-fit alias | Implementation/real-data diagnostic only |
+| `proxy_oof_predictions.csv`; `proxy_fold_metrics.csv`; `proxy_descriptive_fold_summary.csv` | Exactly-once shared-fold proxy OOF evidence and descriptive fold variability | Implementation/real-data diagnostic only |
+| `proxy_metric_intervals.csv`; `proxy_policy_paired_differences.csv` | Separate target-stratified pointwise 5,000-draw nominal proxy-risk uncertainty with overall/fold class support | Implementation/real-data diagnostic only; reconstructability is not causal/discrimination evidence |
+| `performance_subgroup_bootstrap_metadata.json`; `proxy_bootstrap_metadata.json` | Performance resample equality plus proxy semantic-adapter/strata/batch hashes | Implementation/test contract only |
+| `proxy_label_mapping.json`; `proxy_watchlist_associations.csv`; `manuscript_fairness_proxy_table.csv`; interpretation/metadata | Identity-bound nominal target mapping, config-sourced exploratory associations, support/conditional-inference limitations and portable provenance | Implementation/test contract only |
+
+The Unit 2F checkpoint config hash `3c9588c1327ac563a85586835b19b30768860165dc26b61fcf7aafbce3bb1421` rejects earlier benchmark/policy/fairness artifacts and is itself superseded by later contracts. Department reconstructability is explicitly `nominal_multiclass_proxy_diagnostic`, not a restricted performance task. The real-INX 20-fit diagnostic generated no file and is not an authoritative result. Any future manuscript statement must cite the complete clean-run files and must use `support-aware subgroup diagnostics` and `proxy-risk reconstructability`, not a fairness guarantee or causal use claim.
+
+## Unit 2G HRDataset External Replication Evidence Contract
+
+No file in historical `latest/external` or `reports/external_validation` is admitted. The future core-only `<run_id>/core/external_replication/` package must contain verified input/mapping/target receipts; deterministic outer/inner folds; exact feature-policy contracts; nested candidate/selection/model/lineage receipts; raw/sigmoid exactly-once OOF evidence; descriptive fold metrics; 5,000-draw pointwise intervals and paired policy differences; exact-model grouped OOF SHAP/global/class/fold/stability/local cases; support-aware subgroup/proxy evidence; the three-safe-feature transport-infeasibility assessment; portable stage metadata and an artifact manifest.
+
+The only permitted main-paper role is `independent mapped-target replication` or `independent external performance-target replication`. It is not locked INX transport, universal/direct validation, a fairness guarantee, a causal explanation, an employee prescription or autonomous HR evidence. Existing numerical results remain unsupported until this package is regenerated under one clean final identity.
+
+Policy A is accepted and implemented. The conservative primary has exactly seven features; proxy-rich and temporality-restricted alternatives are audit-only. Two invalid date-derived tenure values are explicitly recorded as missing. The independently validated local Unit 2G stage below proves the production stage can emit these outputs, but it is tied to an older config/commit and lacks a finalized package manifest. Therefore no declared output is a canonical manuscript source.
+
+The department proxy output is predeclared as `not_estimated_insufficient_outer_training_class_support` because a singleton department class is absent from at least one outer-training partition. The claim matrix must list the numerical proxy-reconstructability question as unsupported/insufficient-support; it must not reinterpret the absent estimate as evidence of fairness or low proxy risk.
+
+Post-interruption production-path tests additionally require every external policy's forbidden list to be case-insensitively unique and require SHAP replay through the same canonical probability normalizer as OOF generation. The Unit 2G stage-generation config hash is `5af0262e83a3720f8dca0b4d6795bdffc6bb2cefedc901ae0a47f9262d07f305`; the V2-029 implementation advances current config to `ac32f7d80695e95adbad458ef31d9f1790b16e1eec306aaba57c5233f304e2f8`. The reduced real-data diagnostic is not listed as an artifact because it wrote no file and used an explicit test-only budget.
+
+## Complete-Package Trust Contract
+
+No package may become reusable or promotable solely because files and hashes exist. Strict completion requires: a release-ready scope; exact configured layout; a regular unlocked scope root; canonical ordered successful commands; valid closed-world stage receipts; exact run-input snapshot closure; deterministic claim and package-status renderings; final-manifest row/path/type/hash parity; and complete run-manifest registration. A same-run sibling scope is ignored for clean-start status only after this entire strict validation passes. Promotion requires both scopes to share commit/config/runtime/seed identities and writes only `latest/pointer.json`; historical physical `latest` remains unmodified until a separate approved migration.
+
+The full implementation suite passes, but there is no complete package to which this trust contract has yet been applied. Therefore all manuscript claims remain unfrozen and both scope flags correctly remain `release_ready:false`.
+
+## Unit 2G validated local stage receipt - noncanonical
+
+Local source root: `reports/manuscript_final/stage_validation_hrdataset_20260713T175045Z_5af0262e83a3/core/external_replication/`
+
+Run/config/scientific identity: `stage_validation_hrdataset_20260713T175045Z_5af0262e83a3` / `5af0262e...` / `71f1fc46...`
+
+Generation source commit: `17a3dcd36390291b8eab24b4b3a746092dacee77`
+
+The root is intentionally local/ignored under D5. Commit `e25f403` contains an accidental remote/historical copy; local tip `b7b2ad3` removes it without rewriting history, but that cleanup remains unpushed after Git authentication timeout. The following files are authoritative only for validating Unit 2G implementation behavior; they are not canonical manuscript sources:
+
+| Local artifact | Verified role | Claim status |
+| --- | --- | --- |
+| `stage_contract.json`; `artifact_manifest.json/csv` | Closed-world 124-output stage receipt and 122 scientific artifact hashes | Valid atomic-stage evidence; not a package manifest |
+| `folds/fold_contract.json`; assignments | Dataset-specific 10 outer x 5 inner isolation, 311 exact OOF samples | Valid stage protocol evidence |
+| `candidate_*`; `selected_hyperparameters.csv`; `outer_model_receipts.csv`; `models/` | Eight-candidate nested selection and 50 replayed policy/fold models | Valid stage model evidence; full bundle stays out of Git |
+| `raw_oof_predictions.csv`; `raw_metric_intervals.csv`; `policy_pairwise_differences.csv` | Five-policy OOF estimates and 5,000-draw paired uncertainty | Stage-validation numbers only; not frozen manuscript claims |
+| `calibration_*`; `sigmoid_oof_predictions.csv` | Five-fold cross-fitted sigmoid bound to exact source fold models | Probability-quality benefit may be discussed only with macro-F1/class-4 harm and noncanonical label |
+| `shap/` | Exact-model OOF grouped attribution, class/global/local evidence and descriptive stability | Attribution only; old stage predates the now-tested explicit raw-margin-unit contract |
+| `subgroup_diagnostics/` | Support/denominator-aware descriptive gaps | No fairness, discrimination, causal or legal claim; old stage predates the now-tested raw-OOF semantic-source contract |
+| `proxy_diagnostics/proxy_status.csv` | Insufficient department-class support, zero fitted proxy models | Numerical reconstructability claim unsupported |
+| `cross_dataset_transport/transport_feasibility.json` | Three safe common features below gate five | Locked transport infeasible; independent mapped-target replication only |
+| `stage_validation_input_manifest.json` | Provisional generation input receipt | Not a complete run manifest; current-HEAD validation must reject it |
+
+Supported by the stage: the configured pipeline can produce internally coherent HRDataset independent mapped-target replication evidence from verified local input under the approved protocol. Unsupported: canonical/release completeness, universal or transported validation, fairness, causality, deployment, target semantic equivalence, licence/source authenticity, or frozen manuscript numbers.
+
+## V2-029 future canonical reporting fields
+
+Current-config subgroup outputs must include singleton `probability_method=raw`, identical `source_oof_semantic_sha256`, `source_oof_hash_scope=exact_consumed_policy_oof_rows`, `source_oof_hash_algorithm=sha256_canonical_csv_utf8_float17g`, and the ordered hash-column contract across `group_metrics.csv`, `disparity_intervals.csv` and `subgroup_metadata.json`. The digest binds the exact consumed policy row set and is not the whole-file artifact SHA.
+
+Current-config SHAP numeric tables, fold receipts, metadata and local reason-code JSON/Markdown must explicitly declare `attribution_unit=xgboost_raw_margin_score`; additivity evidence declares `additivity_output_space=xgboost_raw_margin`. These fields support only unit/source interpretation. They do not convert SHAP to probability effects, causality or prescriptions. The old stage lacks the explicit fields and remains stage-validation-only.
+
+## V2-021a frozen core figure-plan contract
+
+Config hash `eef3539be6470644cc1b3892e1aa6bb8c3186aeb9df0d61ec56635a64e978a44` freezes seven future core figure identities. The source declarations below are contracts only; no PNG, SVG, source-data CSV, caption or figure manifest is admitted yet.
+
+| Figure | Frozen subject | Required current-run upstream sources | Current claim status |
+| --- | --- | --- | --- |
+| 1 | Study design and leakage-aware XAI audit pipeline | `run_inputs/canonical_config_snapshot.yaml`; `run_inputs/input_contract.json`; `shared_folds/fold_contract.json` | Plan contract only |
+| 2 | Feature-policy/leakage-risk trade-off | `policy_ablation/figure_leakage_policy_tradeoff_source.csv` | Plan contract only |
+| 3 | XGBoost versus three predeclared baselines | `model_benchmarks/model_summary.csv`; paired differences; superiority gate | Plan contract only |
+| 4 | Predeclared cross-fitted sigmoid calibration | calibration bins, method comparison, intervals, paired differences and figure-source receipt | Plan contract only |
+| 5 | Global grouped OOF SHAP | global grouped importance and SHAP metadata | Attribution plan only; noncausal |
+| 6 | Descriptive grouped OOF SHAP stability | fold rankings, pairwise stability, summary and SHAP metadata | Descriptive plan only; no fold-pair population CI |
+| 7 | HRDataset_v14 independent mapped-target replication | target support, raw/calibrated intervals, calibration/policy differences and external metadata | Replication plan only; no locked transport/direct validation claim |
+
+The figure contract requires `run_id`, `config_hash`, `scientific_input_hash` and `source_tree_hash`, SHA-256 source binding, portable paths, exact ordering and PNG/SVG plus compact source/caption outputs. Both figure and core scopes remain `release_ready:false`. Obsolete numbered SHAP Figure 6/7 previews and the legacy v1 stem validator are tracked under V2-032 and must be retired before generator implementation or canonical execution.
+
+## Unit 2G checkpoint validator and source-table contract
+
+The reusable validator is `../../../src/governance/unit2g_stage_validator.py`; its small repository receipt is `10_unit2g_checkpoint_summary.json`. The receipt binds validation status to run ID, generation commit, config/scientific-input/source-tree hashes, raw/canonical/schema/policy hashes, side-input receipts, exact replay counts and noncanonical publication state. It does not replace the ignored full evidence package or promote it.
+
+The manifest-bound source tables for the future HRDataset figure/manuscript table are `target_support.csv`, `raw_metric_intervals.csv`, `calibration_metric_intervals.csv`, `calibration_paired_differences.csv`, `policy_pairwise_differences.csv` and `external_replication_metadata.json`. Their current numbers remain stage-validation findings only. No manually entered manuscript table, frozen numerical claim or canonical figure artifact exists.

@@ -10,21 +10,29 @@ from __future__ import annotations
 
 import argparse
 import csv
+import hashlib
 import json
+import math
 import os
+import platform
+import re
 import shutil
-import sys
+import stat
+import subprocess
 import tempfile
 import time
 from dataclasses import dataclass
+from datetime import datetime
 from pathlib import Path
 from typing import Any, Callable, Dict, Iterable, Mapping, MutableMapping, Sequence
 
 from src.governance.manuscript_contract import (
+    ACTUAL_INPUT_IDENTITY_FIELDS,
     DEFAULT_CONFIG_PATH,
     RunManifestError,
     canonical_config_hash,
     create_run_manifest,
+    evidence_scope_contract,
     finalize_run_manifest,
     load_manuscript_config,
     manuscript_settings,
@@ -35,23 +43,44 @@ from src.governance.manuscript_contract import (
     sha256_file,
     utc_now_iso,
     validate_artifact_forbidden_features,
+    validate_portable_run_id,
     validate_run_manifest,
     write_run_manifest,
 )
 from src.utils.config_loader import PROJECT_ROOT
 
 
-STAGE_ORDER: tuple[str, ...] = (
-    "policy",
-    "calibration",
-    "shap",
-    "counterfactual",
-    "external",
-    "fairness",
-    "provenance",
-    "llm",
-    "chatbot",
-    "figures",
+CORE_STAGE_ORDER: tuple[str, ...] = (
+    "shared_folds",
+    "model_benchmarks",
+    "policy_ablation",
+    "sigmoid_calibration",
+    "oof_shap",
+    "subgroup_proxy",
+    "external_replication",
+    "dataset_cards",
+    "core_tables",
+    "core_figures",
+)
+SUPPLEMENTARY_STAGE_ORDER: tuple[str, ...] = (
+    "heuristic_counterfactual",
+    "external_robustness",
+    "dataset_cards",
+    "supplementary_tables",
+)
+CANONICAL_STAGE_ORDERS: Mapping[str, tuple[str, ...]] = {
+    "core": CORE_STAGE_ORDER,
+    "supplementary": SUPPLEMENTARY_STAGE_ORDER,
+}
+FORBIDDEN_CANONICAL_STAGE_TOKENS = frozenset({"llm", "chatbot", "agent"})
+_SCOPE_ROOT_ARTIFACTS = frozenset(
+    {
+        "canonical_claim_boundaries.md",
+        "package_status.json",
+        "final_evidence_manifest.csv",
+        "final_evidence_manifest.json",
+        "run_manifest.json",
+    }
 )
 
 PRIMARY_ARTIFACT_EXTENSIONS = frozenset({".csv", ".json", ".jsonl", ".md"})
@@ -59,6 +88,91 @@ PRIMARY_ARTIFACT_EXTENSIONS = frozenset({".csv", ".json", ".jsonl", ".md"})
 
 class ManuscriptBuildError(RuntimeError):
     """Raised when a canonical stage or final package fails its contract."""
+
+
+class BaselineReferenceDecisionRequired(ManuscriptBuildError):
+    """Raised when a baseline has a conclusive paired-OOF advantage over XGBoost."""
+
+
+_USER_ABSOLUTE_PATH_PATTERNS = (
+    re.compile(r"[A-Za-z]:[\\/]Users[\\/][^\s\"']+", re.IGNORECASE),
+    re.compile(r"/home/[^/\s\"']+(?:/[^\s\"']*)?", re.IGNORECASE),
+)
+
+
+def _sanitized_failure_message(message: str) -> str:
+    """Remove machine-specific user paths before persisting a failure receipt."""
+
+    sanitized = str(message)
+    for raw in {str(PROJECT_ROOT), PROJECT_ROOT.as_posix()}:
+        if raw:
+            sanitized = sanitized.replace(raw, "<repository>")
+    for raw in {str(Path.home()), Path.home().as_posix()}:
+        if raw:
+            sanitized = sanitized.replace(raw, "<home>")
+    for pattern in _USER_ABSOLUTE_PATH_PATTERNS:
+        sanitized = pattern.sub("<user-path>", sanitized)
+    return sanitized
+
+
+def validate_scope_release_ready(scopes: Mapping[str, Any], scope_name: str) -> Mapping[str, Any]:
+    """Reject an unknown or technically incomplete canonical evidence scope."""
+
+    if scope_name not in CANONICAL_STAGE_ORDERS:
+        raise ManuscriptBuildError(f"Unknown canonical evidence scope: {scope_name!r}.")
+    definition = scopes.get(scope_name)
+    if not isinstance(definition, Mapping):
+        raise ManuscriptBuildError(f"Evidence scope {scope_name!r} is not declared by the config.")
+    configured_stages = tuple(str(value) for value in definition.get("stages", ()))
+    if configured_stages != CANONICAL_STAGE_ORDERS[scope_name]:
+        raise ManuscriptBuildError(
+            f"Evidence scope {scope_name!r} stage contract differs from the canonical registry."
+        )
+    if definition.get("release_ready") is not True:
+        reason = str(definition.get("blocking_reason", "technical freeze is incomplete"))
+        raise ManuscriptBuildError(
+            f"Evidence scope {scope_name!r} is not release-ready: {reason}"
+        )
+    missing_runners = sorted(set(configured_stages).difference(STAGE_RUNNERS))
+    if missing_runners:
+        raise ManuscriptBuildError(
+            f"Evidence scope {scope_name!r} has no registered runner for stages: {missing_runners}."
+        )
+    return definition
+
+
+def validate_scope_artifact_paths(scope_name: str, relative_paths: Iterable[str]) -> None:
+    """Fail closed when a package path lies outside its immutable stage allowlist."""
+
+    if scope_name not in CANONICAL_STAGE_ORDERS:
+        raise ManuscriptBuildError(f"Unknown artifact evidence scope: {scope_name!r}.")
+    allowed_prefixes = tuple(f"{stage}/" for stage in CANONICAL_STAGE_ORDERS[scope_name]) + (
+        "run_inputs/",
+    )
+    errors: list[str] = []
+    for raw_path in relative_paths:
+        raw = str(raw_path)
+        if (
+            not raw
+            or raw != raw.strip()
+            or raw.startswith(("/", "\\"))
+            or "\\" in raw
+            or raw.startswith("./")
+            or any(part in {".", ".."} for part in raw.split("/"))
+            or any(part.startswith(".") or part == "__pycache__" for part in raw.split("/"))
+        ):
+            errors.append(f"invalid scope path: {raw_path!r}")
+            continue
+        normalized = raw
+        path = Path(normalized)
+        if not normalized or path.is_absolute() or ".." in path.parts:
+            errors.append(f"invalid scope path: {raw_path!r}")
+            continue
+        if normalized in _SCOPE_ROOT_ARTIFACTS or normalized.startswith(allowed_prefixes):
+            continue
+        errors.append(f"forbidden or out-of-scope path: {normalized}")
+    if errors:
+        raise ManuscriptBuildError("Artifact scope validation failed:\n- " + "\n- ".join(errors))
 
 
 @dataclass(frozen=True)
@@ -70,6 +184,67 @@ class StageContext:
     run_id: str
     config_hash: str
     manifest: MutableMapping[str, Any]
+    evidence_scope: str = "core"
+    scope_contract: Mapping[str, Any] | None = None
+
+
+def _validate_loaded_dataset_receipt(
+    context: StageContext,
+    dataset_key: str,
+    observed: Mapping[str, Any],
+) -> None:
+    """Bind a stage's freshly loaded bytes to the manifest's verified receipt."""
+
+    receipts = context.manifest.get("actual_input_receipts")
+    expected = receipts.get(dataset_key) if isinstance(receipts, Mapping) else None
+    if not isinstance(expected, Mapping):
+        raise ManuscriptBuildError(
+            f"Run manifest has no actual-input receipt for {dataset_key!r}."
+        )
+    identity_fields = (*ACTUAL_INPUT_IDENTITY_FIELDS, "size_bytes")
+    differences = {
+        field: {"manifest": expected.get(field), "stage_loader": observed.get(field)}
+        for field in identity_fields
+        if expected.get(field) != observed.get(field)
+    }
+    if differences:
+        raise ManuscriptBuildError(
+            f"Stage loader receipt for {dataset_key!r} does not match the run manifest: "
+            + json.dumps(differences, sort_keys=True, ensure_ascii=True)
+        )
+
+
+def _validated_side_input_path(
+    context: StageContext,
+    side_input_key: str,
+    configured_path: str | Path,
+) -> tuple[Path, str]:
+    """Resolve and re-hash a side input against the scoped manifest record."""
+
+    records = context.manifest.get("side_input_hashes")
+    record = records.get(side_input_key) if isinstance(records, Mapping) else None
+    if not isinstance(record, Mapping):
+        raise ManuscriptBuildError(
+            f"Run manifest has no scoped side-input record for {side_input_key!r}."
+        )
+    candidate = Path(configured_path)
+    if not candidate.is_absolute():
+        candidate = PROJECT_ROOT / candidate
+    candidate = candidate.resolve()
+    expected = (PROJECT_ROOT / str(record.get("path", ""))).resolve()
+    if candidate != expected:
+        raise ManuscriptBuildError(
+            f"Configured {side_input_key!r} path does not match the run manifest: "
+            f"configured={_portable(candidate)!r}, manifest={record.get('path')!r}."
+        )
+    if not candidate.is_file():
+        raise ManuscriptBuildError(f"Scientific side input is missing: {_portable(candidate)}")
+    digest = sha256_file(candidate)
+    if digest != record.get("sha256") or candidate.stat().st_size != record.get("size_bytes"):
+        raise ManuscriptBuildError(
+            f"Scientific side input {side_input_key!r} changed after manifest creation."
+        )
+    return candidate, digest
 
 
 def _write_json(path: Path, payload: Mapping[str, Any]) -> Path:
@@ -95,32 +270,212 @@ def _portable(path: Path) -> str:
     resolved = path.resolve()
     try:
         return resolved.relative_to(PROJECT_ROOT.resolve()).as_posix()
-    except ValueError:
-        return str(resolved)
+    except ValueError as exc:
+        raise ManuscriptBuildError(
+            f"Scientific artifact path escapes the repository: {resolved}"
+        ) from exc
+
+
+def _validated_output_layout(
+    settings: Mapping[str, Any],
+    *,
+    run_id: str | None,
+    evidence_scope: str,
+) -> tuple[Path, Path | None, Path | None]:
+    """Validate the canonical output layout before any directory is created."""
+
+    output = settings.get("output")
+    if not isinstance(output, Mapping):
+        raise ManuscriptBuildError("Canonical config has no output mapping.")
+    raw_root = output.get("root")
+    if (
+        not isinstance(raw_root, str)
+        or not raw_root
+        or raw_root != raw_root.strip()
+        or "\\" in raw_root
+    ):
+        raise ManuscriptBuildError("output.root must be a portable repository-relative path.")
+    relative_root = Path(raw_root)
+    if (
+        relative_root.is_absolute()
+        or relative_root.drive
+        or raw_root in {".", ".."}
+        or any(part in {".", ".."} for part in relative_root.parts)
+    ):
+        raise ManuscriptBuildError("output.root must remain below the repository root.")
+    manifest_filename = output.get("manifest_filename")
+    if manifest_filename != "run_manifest.json":
+        raise ManuscriptBuildError(
+            "output.manifest_filename must be the fixed portable leaf 'run_manifest.json'."
+        )
+    lexical_output_root = PROJECT_ROOT.resolve() / relative_root
+    output_root = lexical_output_root.resolve()
+    if output_root != lexical_output_root:
+        raise ManuscriptBuildError("output.root contains a symlink, junction, or reparse redirect.")
+    cursor = PROJECT_ROOT.resolve()
+    for part in relative_root.parts:
+        cursor = cursor / part
+        if os.path.lexists(cursor) and _is_linklike(cursor):
+            raise ManuscriptBuildError(
+                "output.root contains a symlink, junction, or reparse component."
+            )
+    try:
+        output_relative = output_root.relative_to(PROJECT_ROOT.resolve())
+    except ValueError as exc:
+        raise ManuscriptBuildError("output.root escapes the repository.") from exc
+    if not output_relative.parts:
+        raise ManuscriptBuildError("output.root cannot be the repository root itself.")
+    if run_id is None:
+        return output_root, None, None
+    try:
+        portable_run_id = validate_portable_run_id(run_id)
+    except RunManifestError as exc:
+        raise ManuscriptBuildError(str(exc)) from exc
+    if evidence_scope not in CANONICAL_STAGE_ORDERS:
+        raise ManuscriptBuildError(f"Unknown canonical evidence scope: {evidence_scope!r}.")
+    run_dir = (output_root / portable_run_id / evidence_scope).resolve()
+    expected_relative = Path(portable_run_id) / evidence_scope
+    try:
+        observed_relative = run_dir.relative_to(output_root)
+    except ValueError as exc:
+        raise ManuscriptBuildError("Canonical run directory escapes output.root.") from exc
+    if observed_relative != expected_relative:
+        raise ManuscriptBuildError("Canonical run directory is not an exact output-root child.")
+    return output_root, run_dir, run_dir / "run_manifest.json"
+
+
+def _portable_entrypoint_command(
+    config_path: Path,
+    *,
+    evidence_scope: str,
+    run_id: str,
+    reuse_compatible: bool,
+) -> str:
+    """Return the exact portable reproduction command recorded by a run."""
+
+    portable_run_id = validate_portable_run_id(run_id)
+    if evidence_scope not in CANONICAL_STAGE_ORDERS:
+        raise ManuscriptBuildError(f"Unknown canonical evidence scope: {evidence_scope!r}.")
+    command = (
+        "python -m src.experiments.build_manuscript_evidence "
+        f"--config {_portable(config_path)} --scope {evidence_scope} --run-id {portable_run_id}"
+    )
+    if not reuse_compatible:
+        command += " --no-reuse-compatible"
+    return command
+
+
+def _is_linklike(path: Path) -> bool:
+    """Return whether an existing path is a symlink, junction, or reparse point."""
+
+    if path.is_symlink():
+        return True
+    is_junction = getattr(path, "is_junction", None)
+    if callable(is_junction) and is_junction():
+        return True
+    try:
+        attributes = int(getattr(path.lstat(), "st_file_attributes", 0))
+    except OSError:
+        return False
+    return bool(attributes & int(getattr(stat, "FILE_ATTRIBUTE_REPARSE_POINT", 0)))
+
+
+def _exact_child_path(parent: Path, child_name: str) -> Path:
+    """Return one lexical child while rejecting link-like redirection."""
+
+    child = Path(child_name)
+    if child.is_absolute() or len(child.parts) != 1 or child.name in {"", ".", ".."}:
+        raise ManuscriptBuildError(f"Invalid exact child name: {child_name!r}.")
+    parent_resolved = parent.resolve()
+    candidate = parent_resolved / child.name
+    if os.path.lexists(candidate):
+        if _is_linklike(candidate):
+            raise ManuscriptBuildError(
+                f"Exact child path is a symlink, junction, or reparse point: {child.name!r}."
+            )
+        if not candidate.is_dir():
+            raise ManuscriptBuildError(f"Exact child path is not a directory: {child.name!r}.")
+        if candidate.resolve() != candidate:
+            raise ManuscriptBuildError(f"Exact child directory resolves unexpectedly: {child.name!r}.")
+    return candidate
+
+
+def _validate_package_root_inventory(package_dir: Path, *, require_both_scopes: bool) -> None:
+    """Require a run package root to contain only regular canonical scope dirs."""
+
+    if not package_dir.is_dir() or _is_linklike(package_dir):
+        raise ManuscriptBuildError("Canonical package root is absent or link-like.")
+    observed: set[str] = set()
+    for child in package_dir.iterdir():
+        if _is_linklike(child) or not child.is_dir():
+            raise ManuscriptBuildError(
+                f"Canonical package root contains a rogue or link-like entry: {child.name!r}."
+            )
+        if child.name not in CANONICAL_STAGE_ORDERS:
+            raise ManuscriptBuildError(
+                f"Canonical package root contains an unknown scope: {child.name!r}."
+            )
+        observed.add(child.name)
+    expected = set(CANONICAL_STAGE_ORDERS)
+    if require_both_scopes and observed != expected:
+        raise ManuscriptBuildError(
+            f"Canonical package requires exactly both scopes; observed={sorted(observed)}."
+        )
 
 
 def _all_files(directory: Path, *, exclude_names: Iterable[str] = ()) -> list[Path]:
+    """Inventory every file; exclusions apply only to exact root-level names."""
+
     excluded = set(exclude_names)
-    return sorted(
-        (
-            path
-            for path in directory.rglob("*")
-            if path.is_file()
-            and path.name not in excluded
-            and "__pycache__" not in path.parts
-            and not path.name.startswith(".")
-        ),
-        key=lambda path: path.relative_to(directory).as_posix(),
-    )
+    files: list[Path] = []
+    for path in directory.rglob("*"):
+        relative = path.relative_to(directory)
+        if _is_linklike(path):
+            raise ManuscriptBuildError(
+                f"Scientific artifact tree contains a symlink, junction, or reparse path: "
+                f"{relative.as_posix()!r}."
+            )
+        if path.is_dir():
+            if any(part.startswith(".") or part == "__pycache__" for part in relative.parts):
+                raise ManuscriptBuildError(
+                    f"Scientific artifact tree contains a hidden or cache directory: "
+                    f"{relative.as_posix()!r}."
+                )
+            try:
+                next(path.iterdir())
+            except StopIteration:
+                raise ManuscriptBuildError(
+                    f"Scientific artifact tree contains an unmanifested empty directory: "
+                    f"{relative.as_posix()!r}."
+                )
+            continue
+        if not path.is_file():
+            raise ManuscriptBuildError(
+                f"Scientific artifact tree contains a non-regular path: {relative.as_posix()!r}."
+            )
+        if len(relative.parts) == 1 and relative.name in excluded:
+            continue
+        files.append(path)
+    return sorted(files, key=lambda path: path.relative_to(directory).as_posix())
 
 
 def _stage_metadata_path(context: StageContext, stage: str) -> Path:
     return context.run_dir / stage / "stage_contract.json"
 
 
+def _parsed_aware_timestamp(value: Any) -> datetime | None:
+    if not isinstance(value, str) or not value:
+        return None
+    try:
+        parsed = datetime.fromisoformat(value)
+    except ValueError:
+        return None
+    return parsed if parsed.tzinfo is not None else None
+
+
 def _stage_cache_valid(context: StageContext, stage: str) -> bool:
     path = _stage_metadata_path(context, stage)
-    if not path.is_file():
+    if not path.is_file() or _is_linklike(path):
         return False
     try:
         payload = json.loads(path.read_text(encoding="utf-8"))
@@ -128,15 +483,48 @@ def _stage_cache_valid(context: StageContext, stage: str) -> bool:
         return False
     if payload.get("status") != "complete":
         return False
+    if payload.get("stage") != stage:
+        return False
+    if payload.get("inventory_mode") != "closed_world":
+        return False
+    if payload.get("path_basis") != "stage_relative":
+        return False
     if payload.get("run_id") != context.run_id or payload.get("config_hash") != context.config_hash:
+        return False
+    if payload.get("evidence_scope") != context.manifest.get("evidence_scope"):
+        return False
+    if payload.get("scope_contract_hash") != context.manifest.get("scope_contract_hash"):
+        return False
+    if payload.get("git_commit") != context.manifest.get("git_commit"):
         return False
     if payload.get("source_tree_hash") != context.manifest.get("source_tree_hash"):
         return False
     if payload.get("dataset_hashes") != context.manifest.get("dataset_hashes"):
         return False
+    if payload.get("actual_input_receipts") != context.manifest.get("actual_input_receipts"):
+        return False
+    if payload.get("side_input_hashes") != context.manifest.get("side_input_hashes"):
+        return False
+    if payload.get("scientific_input_hash") != context.manifest.get("scientific_input_hash"):
+        return False
+    started_at = _parsed_aware_timestamp(payload.get("started_at"))
+    ended_at = _parsed_aware_timestamp(payload.get("ended_at"))
+    elapsed_seconds = payload.get("elapsed_seconds")
+    if (
+        started_at is None
+        or ended_at is None
+        or ended_at < started_at
+        or not isinstance(elapsed_seconds, (int, float))
+        or isinstance(elapsed_seconds, bool)
+        or not math.isfinite(float(elapsed_seconds))
+        or float(elapsed_seconds) < 0.0
+    ):
+        return False
     outputs = payload.get("outputs")
     if not isinstance(outputs, list) or not outputs:
         return False
+    stage_dir = (context.run_dir / stage).resolve()
+    seen: set[Path] = set()
     for record in outputs:
         if not isinstance(record, Mapping):
             return False
@@ -144,9 +532,40 @@ def _stage_cache_valid(context: StageContext, stage: str) -> bool:
         digest = record.get("sha256")
         if not isinstance(raw_path, str) or not isinstance(digest, str):
             return False
-        output = PROJECT_ROOT / raw_path
-        if not output.is_file() or sha256_file(output) != digest:
+        if (
+            not raw_path
+            or raw_path.startswith(("/", "\\", "./"))
+            or "\\" in raw_path
+            or any(part in {".", ".."} for part in raw_path.split("/"))
+            or any(part.startswith(".") or part == "__pycache__" for part in raw_path.split("/"))
+            or Path(raw_path).name == "stage_contract.json"
+        ):
             return False
+        output = (stage_dir / raw_path).resolve()
+        try:
+            output.relative_to(stage_dir)
+        except ValueError:
+            return False
+        if output in seen:
+            return False
+        seen.add(output)
+        if (
+            _is_linklike(output)
+            or not output.is_file()
+            or output.stat().st_size <= 0
+            or record.get("size_bytes") != output.stat().st_size
+            or sha256_file(output) != digest
+        ):
+            return False
+    try:
+        actual = {
+            path.resolve()
+            for path in _all_files(stage_dir, exclude_names={"stage_contract.json"})
+        }
+    except ManuscriptBuildError:
+        return False
+    if actual != seen:
+        return False
     return True
 
 
@@ -158,30 +577,80 @@ def _write_stage_metadata(
     started_at: str,
     elapsed_seconds: float,
 ) -> Path:
+    if _parsed_aware_timestamp(started_at) is None:
+        raise ManuscriptBuildError(f"Stage {stage!r} has an invalid timezone-aware start timestamp.")
+    if (
+        not isinstance(elapsed_seconds, (int, float))
+        or isinstance(elapsed_seconds, bool)
+        or not math.isfinite(float(elapsed_seconds))
+        or float(elapsed_seconds) < 0.0
+    ):
+        raise ManuscriptBuildError(f"Stage {stage!r} has an invalid elapsed runtime.")
     metadata_path = _stage_metadata_path(context, stage)
+    stage_dir = metadata_path.parent.resolve()
+    supplied = {
+        path.resolve()
+        for path in outputs
+        if path.is_file() and path.resolve() != metadata_path.resolve()
+    }
+    for path in supplied:
+        try:
+            relative = path.relative_to(stage_dir)
+        except ValueError as exc:
+            raise ManuscriptBuildError(
+                f"Stage {stage!r} declared an output outside its exact stage root: {path}."
+            ) from exc
+        if (
+            relative.name == "stage_contract.json"
+            or any(part.startswith(".") or part == "__pycache__" for part in relative.parts)
+        ):
+            raise ManuscriptBuildError(
+                f"Stage {stage!r} declared a reserved or hidden output: {relative.as_posix()!r}."
+            )
+    actual = {
+        path.resolve()
+        for path in _all_files(stage_dir, exclude_names={"stage_contract.json"})
+    }
+    if supplied != actual:
+        raise ManuscriptBuildError(
+            f"Stage {stage!r} output inventory is not closed-world; "
+            f"unlisted={sorted(str(path) for path in actual - supplied)}, "
+            f"outside_or_missing={sorted(str(path) for path in supplied - actual)}."
+        )
     output_rows = [
         {
-            "path": _portable(path),
+            "path": path.relative_to(stage_dir).as_posix(),
             "sha256": sha256_file(path),
             "size_bytes": path.stat().st_size,
         }
-        for path in outputs
-        if path.is_file() and path.resolve() != metadata_path.resolve()
+        for path in sorted(supplied, key=lambda item: item.relative_to(stage_dir).as_posix())
     ]
     if not output_rows:
         raise ManuscriptBuildError(f"Stage {stage!r} produced no files.")
+    ended_at = utc_now_iso()
+    if (_parsed_aware_timestamp(ended_at) or datetime.min) < (
+        _parsed_aware_timestamp(started_at) or datetime.max
+    ):
+        raise ManuscriptBuildError(f"Stage {stage!r} end timestamp precedes its start timestamp.")
     return _write_json(
         metadata_path,
         {
             "stage": stage,
             "status": "complete",
+            "inventory_mode": "closed_world",
+            "path_basis": "stage_relative",
             "run_id": context.run_id,
             "config_hash": context.config_hash,
+            "evidence_scope": context.manifest.get("evidence_scope"),
+            "scope_contract_hash": context.manifest.get("scope_contract_hash"),
             "git_commit": context.manifest.get("git_commit"),
             "source_tree_hash": context.manifest.get("source_tree_hash"),
             "dataset_hashes": context.manifest.get("dataset_hashes"),
+            "actual_input_receipts": context.manifest.get("actual_input_receipts"),
+            "side_input_hashes": context.manifest.get("side_input_hashes"),
+            "scientific_input_hash": context.manifest.get("scientific_input_hash"),
             "started_at": started_at,
-            "ended_at": utc_now_iso(),
+            "ended_at": ended_at,
             "elapsed_seconds": elapsed_seconds,
             "outputs": output_rows,
         },
@@ -203,36 +672,131 @@ def _paths_from_result(result: Mapping[str, Any], stage_dir: Path) -> list[Path]
     return sorted(paths, key=lambda path: str(path))
 
 
+def _run_shared_folds(context: StageContext) -> Mapping[str, Any]:
+    from src.data.canonical_loader import load_canonical_dataset
+    from src.experiments.shared_folds import generate_shared_folds, write_shared_folds
+
+    loaded = load_canonical_dataset(context.config_path, "inx_primary")
+    _validate_loaded_dataset_receipt(context, "inx_primary", loaded.receipt)
+    target_column = str(context.settings["target"]["column"])
+    identifiers = context.settings["governance_fields"]["identifier_fields"]
+    if not isinstance(identifiers, list) or len(identifiers) != 1:
+        raise ManuscriptBuildError("The shared-fold contract requires exactly one canonical identifier.")
+    cv = context.settings["evaluation"]["cv"]
+    nested = context.settings["model"]["nested_tuning"]
+    seeds = context.settings["seeds"]
+    outer_seed = int(seeds[str(cv["seed"])])
+    inner_seed = int(seeds[str(nested["inner_seed"])])
+    receipt = context.manifest["actual_input_receipts"]["inx_primary"]
+    artifacts = generate_shared_folds(
+        loaded.frame,
+        target_column=target_column,
+        id_column=str(identifiers[0]),
+        run_id=context.run_id,
+        config_hash=context.config_hash,
+        scientific_input_hash=str(context.manifest["scientific_input_hash"]),
+        dataset_key="inx_primary",
+        dataset_sha256=str(receipt["actual_sha256"]),
+        outer_splits=int(cv["n_splits"]),
+        inner_splits=int(nested["inner_splits"]),
+        seed=outer_seed,
+        inner_seed=inner_seed,
+    )
+    return write_shared_folds(artifacts, context.run_dir / "shared_folds")
+
+
+def _run_model_benchmarks(context: StageContext) -> Mapping[str, Any]:
+    from src.experiments.manuscript_model_benchmark import run
+
+    model_grid, model_grid_sha256 = _validated_side_input_path(
+        context,
+        "model_search_space",
+        str(context.settings["model"]["search_space_config"]),
+    )
+    return run(
+        context.config_path,
+        model_grid_path=model_grid,
+        shared_folds_dir=context.run_dir / "shared_folds",
+        output_dir=context.run_dir / "model_benchmarks",
+        run_id=context.run_id,
+        config_hash=context.config_hash,
+        scientific_input_hash=str(context.manifest["scientific_input_hash"]),
+        model_grid_sha256=model_grid_sha256,
+    )
+
+
 def _run_policy(context: StageContext) -> Mapping[str, Any]:
     from src.experiments.manuscript_policy_ablation import run
 
+    shared_folds_dir = _require_compatible_upstream_stage(context, "shared_folds")
+    model_benchmarks_dir = _require_compatible_upstream_stage(context, "model_benchmarks")
     return run(
         context.config_path,
-        output_dir=context.run_dir / "policy",
+        shared_folds_dir=shared_folds_dir,
+        model_benchmarks_dir=model_benchmarks_dir,
+        output_dir=context.run_dir / "policy_ablation",
         run_id=context.run_id,
         config_hash=context.config_hash,
+        scientific_input_hash=str(context.manifest["scientific_input_hash"]),
     )
 
 
 def _run_calibration(context: StageContext) -> Mapping[str, Any]:
     from src.experiments.manuscript_calibration import run
 
+    shared_folds_dir = _require_compatible_upstream_stage(context, "shared_folds")
+    model_benchmarks_dir = _require_compatible_upstream_stage(context, "model_benchmarks")
     return run(
         context.config_path,
-        output_dir=context.run_dir / "calibration",
+        shared_folds_dir=shared_folds_dir,
+        model_benchmarks_dir=model_benchmarks_dir,
+        output_dir=context.run_dir / "sigmoid_calibration",
         run_id=context.run_id,
         config_hash=context.config_hash,
+        scientific_input_hash=str(context.manifest["scientific_input_hash"]),
     )
+
+
+def _require_compatible_upstream_stage(context: StageContext, stage: str) -> Path:
+    """Return a verified current-run stage directory or fail closed.
+
+    Downstream scientific stages must consume only outputs produced under the
+    active run/config/scientific-input contract.  In particular, they must not
+    discover a similarly named historical report directory when the current
+    run's upstream stage is absent or stale.
+    """
+
+    stage_dir = context.run_dir / stage
+    if not stage_dir.is_dir():
+        raise ManuscriptBuildError(
+            f"Required current-run upstream stage directory is missing: {stage_dir}."
+        )
+    contract_path = _stage_metadata_path(context, stage)
+    if not contract_path.is_file():
+        raise ManuscriptBuildError(
+            f"Required current-run upstream stage contract is missing: {contract_path}."
+        )
+    if not _stage_cache_valid(context, stage):
+        raise ManuscriptBuildError(
+            f"Required upstream stage {stage!r} is incompatible with the active "
+            "run/config/scientific-input contract or has missing/tampered outputs."
+        )
+    return stage_dir
 
 
 def _run_shap(context: StageContext) -> Mapping[str, Any]:
     from src.experiments.manuscript_shap_evidence import run
 
+    shared_folds_dir = _require_compatible_upstream_stage(context, "shared_folds")
+    model_benchmarks_dir = _require_compatible_upstream_stage(context, "model_benchmarks")
     return run(
         context.config_path,
-        output_dir=context.run_dir / "shap",
+        shared_folds_dir=shared_folds_dir,
+        model_benchmarks_dir=model_benchmarks_dir,
+        output_dir=context.run_dir / "oof_shap",
         run_id=context.run_id,
         config_hash=context.config_hash,
+        scientific_input_hash=str(context.manifest["scientific_input_hash"]),
     )
 
 
@@ -246,32 +810,58 @@ def _run_counterfactual(context: StageContext) -> Mapping[str, Any]:
         )
     return run(
         context.config_path,
-        output_dir=context.run_dir / "counterfactual",
+        output_dir=context.run_dir / "heuristic_counterfactual",
         run_id=context.run_id,
         config_hash=context.config_hash,
         max_cases=None,
     )
 
 
-def _run_external(context: StageContext) -> Mapping[str, Any]:
+def _run_external_replication(context: StageContext) -> Mapping[str, Any]:
+    from src.experiments.manuscript_hrdataset_replication import run
+
+    return run(
+        context.config_path,
+        output_dir=context.run_dir / "external_replication",
+        run_id=context.run_id,
+        config_hash=context.config_hash,
+        scientific_input_hash=str(context.manifest["scientific_input_hash"]),
+        expected_actual_input_receipts=dict(context.manifest["actual_input_receipts"]),
+        expected_side_input_hashes=dict(context.manifest["side_input_hashes"]),
+        git_commit=str(context.manifest["git_commit"]),
+        source_tree_hash=str(context.manifest["source_tree_hash"]),
+        scope_contract_hash=str(context.manifest["scope_contract_hash"]),
+        expected_git_worktree_dirty=bool(context.manifest["git_worktree_dirty"]),
+    )
+
+
+def _run_external_robustness(context: StageContext) -> Mapping[str, Any]:
     from src.experiments.manuscript_external_evidence import run
 
     return run(
         context.config_path,
-        output_dir=context.run_dir / "external",
+        output_dir=context.run_dir / "external_robustness",
         run_id=context.run_id,
         config_hash=context.config_hash,
+        scope="supplementary",
     )
 
 
 def _run_fairness(context: StageContext) -> Mapping[str, Any]:
     from src.experiments.manuscript_fairness_proxy import run
 
+    shared_folds_dir = _require_compatible_upstream_stage(context, "shared_folds")
+    model_benchmarks_dir = _require_compatible_upstream_stage(context, "model_benchmarks")
+    policy_ablation_dir = _require_compatible_upstream_stage(context, "policy_ablation")
     return run(
         context.config_path,
-        output_dir=context.run_dir / "fairness",
+        shared_folds_dir=shared_folds_dir,
+        model_benchmarks_dir=model_benchmarks_dir,
+        policy_ablation_dir=policy_ablation_dir,
+        output_dir=context.run_dir / "subgroup_proxy",
         run_id=context.run_id,
         config_hash=context.config_hash,
+        scientific_input_hash=str(context.manifest["scientific_input_hash"]),
     )
 
 
@@ -281,161 +871,84 @@ def _run_provenance(context: StageContext) -> Mapping[str, Any]:
     return run(
         context.config_path,
         PROJECT_ROOT / "configs" / "dataset_provenance.yaml",
-        output_dir=context.run_dir / "provenance",
+        output_dir=context.run_dir / "dataset_cards",
         run_id=context.run_id,
         config_hash=context.config_hash,
+        dataset_keys=tuple(
+            str(value) for value in (context.scope_contract or {}).get("dataset_keys", ())
+        ),
     )
-
-
-def _run_llm_preflight(context: StageContext) -> Mapping[str, Any]:
-    from src.agents.manuscript_deterministic_audit import run as run_agent_audit
-    from src.llm.manuscript_case_evidence import run
-
-    outputs = dict(run(
-        context.config_path,
-        output_dir=context.run_dir / "llm",
-        run_id=context.run_id,
-        config_hash=context.config_hash,
-        inx_shap_dir=context.run_dir / "shap",
-        calibration_dir=context.run_dir / "calibration",
-        counterfactual_dir=context.run_dir / "counterfactual",
-        fairness_dir=context.run_dir / "fairness",
-        policy_dir=context.run_dir / "policy",
-        hrdataset_dir=context.run_dir / "external" / "hrdataset_v14",
-        require_complete=True,
-    ))
-    audit_outputs = run_agent_audit(
-        outputs["complete_case_evidence"],
-        output_dir=context.run_dir / "llm" / "agent_audits",
-        run_id=context.run_id,
-        config_hash=context.config_hash,
-    )
-    outputs.update({f"agent_{key}": value for key, value in audit_outputs.items()})
-    return outputs
-
-
-def _run_chatbot(context: StageContext) -> Mapping[str, Any]:
-    from src.chatbot.run_guardrail_eval import run
-
-    outputs = run(
-        "configs/chatbot_guardrail_eval.yaml",
-        output_dir_override=context.run_dir / "chatbot",
-        run_id_override=context.run_id,
-        config_hash=context.config_hash,
-        register_run_override=False,
-    )
-    category = outputs.get("category_summary")
-    if isinstance(category, Path) and category.is_file():
-        expected = context.run_dir / "chatbot" / "category_summary.csv"
-        if category.resolve() != expected.resolve():
-            shutil.copy2(category, expected)
-            outputs = dict(outputs)
-            outputs["readiness_category_summary"] = expected
-    return outputs
-
-
-def _copy_figure_sources(context: StageContext, figure_dir: Path) -> list[Path]:
-    sources = figure_dir / "source_data"
-    sources.mkdir(parents=True, exist_ok=True)
-    mappings = {
-        context.run_dir / "calibration" / "figure_5_reliability_source.csv": sources / "figure_5_reliability_source.csv",
-        context.run_dir / "calibration" / "figure_5_metric_source.csv": sources / "figure_5_metric_source.csv",
-        context.run_dir / "shap" / "global_grouped_shap_importance.csv": sources / "figure_6_global_grouped_shap_source.csv",
-        context.run_dir / "shap" / "representative_cases.csv": sources / "figure_7_representative_case_source.csv",
-        context.run_dir / "shap" / "local_grouped_shap_values.csv": sources / "figure_7_all_local_grouped_shap_source.csv",
-        context.run_dir / "shap" / "shap_oof_predictions.csv": sources / "figure_7_oof_prediction_source.csv",
-    }
-    copied: list[Path] = []
-    for source, destination in mappings.items():
-        if not source.is_file():
-            raise ManuscriptBuildError(f"Required figure source is missing: {source}")
-        shutil.copy2(source, destination)
-        copied.append(destination)
-    return copied
-
-
-def _run_figures(context: StageContext) -> Mapping[str, Any]:
-    from src.governance.manuscript_figures import (
-        FIGURE_STEMS,
-        generate_architecture_figures,
-        validate_all_seven_figures,
-    )
-
-    output = context.run_dir / "figures"
-    output.mkdir(parents=True, exist_ok=True)
-    paths: Dict[str, Path] = dict(
-        generate_architecture_figures(
-            context.config_path,
-            output_dir=output,
-            run_dir=context.run_dir,
-            run_id=context.run_id,
-            config_hash=context.config_hash,
-        )
-    )
-    scientific_sources = {
-        5: context.run_dir / "calibration" / f"{FIGURE_STEMS[5]}",
-        6: context.run_dir / "shap" / f"{FIGURE_STEMS[6]}",
-        7: context.run_dir / "shap" / f"{FIGURE_STEMS[7]}",
-    }
-    for number, source_stem in scientific_sources.items():
-        for suffix in (".png", ".svg"):
-            source = source_stem.with_suffix(suffix)
-            destination = output / f"{FIGURE_STEMS[number]}{suffix}"
-            if not source.is_file() or source.stat().st_size == 0:
-                raise ManuscriptBuildError(f"Scientific Figure {number} is missing: {source}")
-            shutil.copy2(source, destination)
-            paths[f"figure_{number}_{suffix.lstrip('.')}"] = destination
-    for path in _copy_figure_sources(context, output):
-        paths[f"source_{path.stem}"] = path
-    validation = validate_all_seven_figures(output)
-    validation_path = _write_json(
-        output / "figure_package_validation.json",
-        {
-            **validation,
-            "run_id": context.run_id,
-            "config_hash": context.config_hash,
-            "forbidden_features": list(primary_excluded_features(context.config)),
-        },
-    )
-    paths["validation"] = validation_path
-    return paths
 
 
 STAGE_RUNNERS: Mapping[str, Callable[[StageContext], Mapping[str, Any]]] = {
-    "policy": _run_policy,
-    "calibration": _run_calibration,
-    "shap": _run_shap,
-    "counterfactual": _run_counterfactual,
-    "external": _run_external,
-    "fairness": _run_fairness,
-    "provenance": _run_provenance,
-    "llm": _run_llm_preflight,
-    "chatbot": _run_chatbot,
-    "figures": _run_figures,
+    "shared_folds": _run_shared_folds,
+    "model_benchmarks": _run_model_benchmarks,
+    "policy_ablation": _run_policy,
+    "sigmoid_calibration": _run_calibration,
+    "oof_shap": _run_shap,
+    "subgroup_proxy": _run_fairness,
+    "external_replication": _run_external_replication,
+    "heuristic_counterfactual": _run_counterfactual,
+    "external_robustness": _run_external_robustness,
+    "dataset_cards": _run_provenance,
+}
+ATOMIC_DIRECTORY_STAGE_RUNNERS = frozenset({"external_replication"})
+STAGE_ORPHAN_PREFIXES: Mapping[str, tuple[str, ...]] = {
+    "external_replication": (".hrdataset-replication-", "external_replication.__staging__"),
 }
 
 
 def _execute_stage(context: StageContext, stage: str, *, reuse_compatible: bool) -> list[Path]:
     if stage not in STAGE_RUNNERS:
         raise ManuscriptBuildError(f"Unknown manuscript stage: {stage}")
+    stage_dir = _exact_child_path(context.run_dir, stage)
+    orphan_paths = [
+        child
+        for child in context.run_dir.iterdir()
+        if any(child.name.startswith(prefix) for prefix in STAGE_ORPHAN_PREFIXES.get(stage, ()))
+    ]
+    if orphan_paths:
+        raise ManuscriptBuildError(
+            f"Stage {stage!r} has preserved interrupted staging output: "
+            + ", ".join(sorted(path.name for path in orphan_paths))
+        )
     if reuse_compatible and _stage_cache_valid(context, stage):
         metadata_path = _stage_metadata_path(context, stage)
         metadata = json.loads(metadata_path.read_text(encoding="utf-8"))
         return [
-            *(PROJECT_ROOT / record["path"] for record in metadata["outputs"]),
+            *((context.run_dir / stage / record["path"]).resolve() for record in metadata["outputs"]),
             metadata_path,
         ]
-    stage_dir = context.run_dir / stage
     if stage_dir.exists() and any(stage_dir.iterdir()):
         raise ManuscriptBuildError(
             f"Stage directory is non-empty but lacks a compatible cache contract: {stage_dir}. "
             "Use a new run ID or preserve/archive the incompatible directory."
         )
-    stage_dir.mkdir(parents=True, exist_ok=True)
+    if stage_dir.exists():
+        raise ManuscriptBuildError(
+            f"Stage directory exists without a completed contract: {stage}. "
+            "Use a new run ID; an orphan or partial stage is immutable."
+        )
+    if stage not in ATOMIC_DIRECTORY_STAGE_RUNNERS:
+        stage_dir.mkdir(parents=False, exist_ok=False)
     started_at = utc_now_iso()
     started = time.perf_counter()
     result = STAGE_RUNNERS[stage](context)
+    stage_dir = _exact_child_path(context.run_dir, stage)
+    if not stage_dir.is_dir():
+        raise ManuscriptBuildError(f"Stage {stage!r} did not publish its exact output directory.")
     outputs = _paths_from_result(result, stage_dir)
+    metadata_path = _stage_metadata_path(context, stage)
+    if metadata_path.is_file():
+        if not _stage_cache_valid(context, stage):
+            raise ManuscriptBuildError(
+                f"Stage {stage!r} published an incompatible atomic completion contract."
+            )
+        payload = json.loads(metadata_path.read_text(encoding="utf-8"))
+        return [
+            *((context.run_dir / stage / record["path"]).resolve() for record in payload["outputs"]),
+            metadata_path,
+        ]
     metadata = _write_stage_metadata(
         context,
         stage,
@@ -444,6 +957,65 @@ def _execute_stage(context: StageContext, stage: str, *, reuse_compatible: bool)
         elapsed_seconds=time.perf_counter() - started,
     )
     return [*outputs, metadata]
+
+
+def enforce_baseline_reference_gate(context: StageContext) -> Mapping[str, Any]:
+    """Validate and enforce the user-approved stop gate before downstream XAI stages."""
+
+    gate_path = context.run_dir / "model_benchmarks" / "baseline_xgboost_gate.json"
+    fold_path = context.run_dir / "shared_folds" / "fold_contract.json"
+    if not gate_path.is_file() or not fold_path.is_file():
+        raise ManuscriptBuildError(
+            "Baseline reference gate requires both benchmark and shared-fold contracts."
+        )
+    try:
+        gate = json.loads(gate_path.read_text(encoding="utf-8"))
+        fold_contract = json.loads(fold_path.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError) as exc:
+        raise ManuscriptBuildError(f"Cannot read baseline reference gate contract: {exc}") from exc
+    expected_identity = {
+        "run_id": context.run_id,
+        "config_hash": context.config_hash,
+        "scientific_input_hash": context.manifest.get("scientific_input_hash"),
+        "fold_contract_hash": fold_contract.get("fold_contract_hash"),
+    }
+    mismatches = {
+        field: {"expected": expected, "observed": gate.get(field)}
+        for field, expected in expected_identity.items()
+        if gate.get(field) != expected
+    }
+    if mismatches:
+        raise ManuscriptBuildError(
+            "Baseline reference gate identity mismatch: "
+            + json.dumps(mismatches, sort_keys=True, ensure_ascii=True)
+        )
+    expected_resamples = int(context.settings["evaluation"]["bootstrap"]["n_resamples"])
+    if gate.get("n_resamples") != expected_resamples:
+        raise ManuscriptBuildError("Baseline reference gate uses the wrong bootstrap count.")
+    resample_hash = gate.get("resample_hash")
+    if not isinstance(resample_hash, str) or len(resample_hash) != 64 or any(
+        character not in "0123456789abcdef" for character in resample_hash
+    ):
+        raise ManuscriptBuildError("Baseline reference gate has no valid resample hash.")
+    if gate.get("gate_metric") != "macro_f1":
+        raise ManuscriptBuildError("Baseline reference gate metric must be predeclared macro-F1.")
+    if gate.get("trigger_rule") != "point_estimate_gt_zero_and_paired_ci_low_gt_zero":
+        raise ManuscriptBuildError("Baseline reference gate trigger rule drifted.")
+    if not isinstance(gate.get("gate_triggered"), bool):
+        raise ManuscriptBuildError("Baseline reference gate result must be boolean.")
+    comparisons = gate.get("triggered_comparisons")
+    if not isinstance(comparisons, list) or any(not isinstance(value, str) for value in comparisons):
+        raise ManuscriptBuildError("Baseline reference gate comparisons are invalid.")
+    if gate["gate_triggered"] != bool(comparisons):
+        raise ManuscriptBuildError("Baseline gate result and triggered comparisons disagree.")
+    if gate["gate_triggered"]:
+        raise BaselineReferenceDecisionRequired(
+            "A baseline outperformed XGBoost under the predeclared paired OOF bootstrap "
+            f"gate ({gate['gate_metric']}; {', '.join(comparisons)}). Downstream policy, "
+            "calibration and SHAP stages were not started. User must decide whether XGBoost "
+            "remains the XAI reference or the XAI pipeline is regenerated for the better model."
+        )
+    return gate
 
 
 def _artifact_type(path: Path) -> str:
@@ -457,6 +1029,12 @@ def _artifact_type(path: Path) -> str:
     return suffix or "file"
 
 
+def _artifact_stage(relative_path: str) -> str:
+    if relative_path in {"canonical_claim_boundaries.md", "package_status.json"}:
+        return "integration"
+    return relative_path.split("/", 1)[0]
+
+
 def _register_stage_files(
     context: StageContext,
     stage: str,
@@ -468,6 +1046,13 @@ def _register_stage_files(
         if isinstance(record, Mapping)
     }
     for path in sorted(set(file.resolve() for file in files), key=lambda item: str(item)):
+        try:
+            scope_relative = path.relative_to(context.run_dir.resolve()).as_posix()
+        except ValueError as exc:
+            raise ManuscriptBuildError(
+                f"Stage artifact lies outside the {context.evidence_scope!r} run directory: {path}"
+            ) from exc
+        validate_scope_artifact_paths(context.evidence_scope, [scope_relative])
         portable = _portable(path)
         if portable in already:
             continue
@@ -488,20 +1073,45 @@ def build_final_evidence_manifest(
     *,
     run_id: str,
     config_hash: str,
-    exclude_names: Iterable[str] = ("run_manifest.json", "final_evidence_manifest.csv", "final_evidence_manifest.json"),
+    evidence_scope: str,
+    scope_contract_hash: str,
+    git_commit: str,
+    source_tree_hash: str,
+    scientific_input_hash: str,
+    exclude_names: Iterable[str] = (
+        "run_manifest.json",
+        "final_evidence_manifest.csv",
+        "final_evidence_manifest.json",
+        ".run.lock",
+    ),
 ) -> Dict[str, Path]:
     """Create independent CSV/JSON hashes for every final package artifact."""
 
     root = Path(run_dir).resolve()
     rows: list[dict[str, Any]] = []
     excluded = set(exclude_names)
-    for path in _all_files(root, exclude_names=excluded):
+    evidence_files = [
+        path
+        for path in _all_files(root)
+        if path.relative_to(root).as_posix() not in excluded
+    ]
+    relative_paths = [
+        path.relative_to(root).as_posix()
+        for path in evidence_files
+    ]
+    validate_scope_artifact_paths(evidence_scope, relative_paths)
+    for path in evidence_files:
         relative = path.relative_to(root).as_posix()
-        stage = relative.split("/", 1)[0]
+        stage = _artifact_stage(relative)
         rows.append(
             {
                 "run_id": run_id,
                 "config_hash": config_hash,
+                "evidence_scope": evidence_scope,
+                "scope_contract_hash": scope_contract_hash,
+                "git_commit": git_commit,
+                "source_tree_hash": source_tree_hash,
+                "scientific_input_hash": scientific_input_hash,
                 "stage": stage,
                 "path": relative,
                 "file_type": _artifact_type(path),
@@ -512,15 +1122,29 @@ def build_final_evidence_manifest(
     if not rows:
         raise ManuscriptBuildError("Cannot build an empty final evidence manifest.")
     csv_path = root / "final_evidence_manifest.csv"
-    with csv_path.open("w", encoding="utf-8", newline="") as stream:
-        writer = csv.DictWriter(stream, fieldnames=list(rows[0]))
-        writer.writeheader()
-        writer.writerows(rows)
+    descriptor, temporary_name = tempfile.mkstemp(
+        prefix=f".{csv_path.name}.", suffix=".tmp", dir=root, text=True
+    )
+    temporary_csv = Path(temporary_name)
+    try:
+        with os.fdopen(descriptor, "w", encoding="utf-8", newline="") as stream:
+            writer = csv.DictWriter(stream, fieldnames=list(rows[0]))
+            writer.writeheader()
+            writer.writerows(rows)
+        os.replace(temporary_csv, csv_path)
+    finally:
+        if temporary_csv.exists():
+            temporary_csv.unlink()
     json_path = _write_json(
         root / "final_evidence_manifest.json",
         {
             "run_id": run_id,
             "config_hash": config_hash,
+            "evidence_scope": evidence_scope,
+            "scope_contract_hash": scope_contract_hash,
+            "git_commit": git_commit,
+            "source_tree_hash": source_tree_hash,
+            "scientific_input_hash": scientific_input_hash,
             "hash_algorithm": "sha256",
             "n_files": len(rows),
             "files": rows,
@@ -535,23 +1159,54 @@ def validate_final_evidence_manifest(
     run_dir: str | Path,
     expected_run_id: str,
     expected_config_hash: str,
+    expected_evidence_scope: str,
+    expected_scope_contract_hash: str,
+    expected_git_commit: str,
+    expected_source_tree_hash: str,
+    expected_scientific_input_hash: str,
 ) -> dict[str, Any]:
     path = Path(manifest_path)
     root = Path(run_dir).resolve()
-    payload = json.loads(path.read_text(encoding="utf-8"))
+    if not path.is_file():
+        raise ManuscriptBuildError(f"Final evidence manifest is missing: {path}")
+    try:
+        payload = json.loads(path.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError) as exc:
+        raise ManuscriptBuildError(f"Cannot read final evidence manifest: {exc}") from exc
     errors: list[str] = []
     if payload.get("run_id") != expected_run_id:
         errors.append("run_id mismatch")
     if payload.get("config_hash") != expected_config_hash:
         errors.append("config_hash mismatch")
+    if payload.get("evidence_scope") != expected_evidence_scope:
+        errors.append("evidence_scope mismatch")
+    if payload.get("scope_contract_hash") != expected_scope_contract_hash:
+        errors.append("scope_contract_hash mismatch")
+    if payload.get("git_commit") != expected_git_commit:
+        errors.append("git_commit mismatch")
+    if payload.get("source_tree_hash") != expected_source_tree_hash:
+        errors.append("source_tree_hash mismatch")
+    if payload.get("scientific_input_hash") != expected_scientific_input_hash:
+        errors.append("scientific_input_hash mismatch")
+    if payload.get("hash_algorithm") != "sha256":
+        errors.append("hash_algorithm must be sha256")
     records = payload.get("files")
     if not isinstance(records, list) or not records:
         errors.append("files must be a non-empty list")
         records = []
+    if payload.get("n_files") != len(records):
+        errors.append("n_files does not equal the final evidence file count")
     seen: set[str] = set()
     for record in records:
         relative = record.get("path") if isinstance(record, Mapping) else None
-        if not isinstance(relative, str) or not relative:
+        if (
+            not isinstance(relative, str)
+            or not relative
+            or relative != relative.strip()
+            or relative.startswith(("/", "\\", "./"))
+            or "\\" in relative
+            or any(part in {".", ".."} for part in relative.split("/"))
+        ):
             errors.append("manifest record has no path")
             continue
         if relative in seen:
@@ -566,24 +1221,376 @@ def validate_final_evidence_manifest(
         if not target.is_file():
             errors.append(f"missing file: {relative}")
             continue
+        if target.stat().st_size <= 0:
+            errors.append(f"empty or zero-size artifact: {relative}")
         if sha256_file(target) != record.get("sha256"):
             errors.append(f"hash mismatch: {relative}")
         if target.stat().st_size != record.get("size_bytes"):
             errors.append(f"size mismatch: {relative}")
+        if record.get("stage") != _artifact_stage(relative):
+            errors.append(f"stage/path mismatch: {relative}")
+        if record.get("file_type") != _artifact_type(target):
+            errors.append(f"file-type mismatch: {relative}")
         if record.get("run_id") != expected_run_id or record.get("config_hash") != expected_config_hash:
             errors.append(f"identity mismatch: {relative}")
+        if record.get("evidence_scope") != expected_evidence_scope:
+            errors.append(f"scope mismatch: {relative}")
+        if record.get("scope_contract_hash") != expected_scope_contract_hash:
+            errors.append(f"scope-contract mismatch: {relative}")
+        if record.get("git_commit") != expected_git_commit:
+            errors.append(f"git-commit mismatch: {relative}")
+        if record.get("source_tree_hash") != expected_source_tree_hash:
+            errors.append(f"source-tree mismatch: {relative}")
+        if record.get("scientific_input_hash") != expected_scientific_input_hash:
+            errors.append(f"scientific-input mismatch: {relative}")
+    self_files = {
+        "run_manifest.json",
+        "final_evidence_manifest.csv",
+        "final_evidence_manifest.json",
+        ".run.lock",
+    }
+    actual_files = {
+        relative
+        for candidate in _all_files(root)
+        if (relative := candidate.relative_to(root).as_posix()) not in self_files
+    }
+    if actual_files != seen:
+        errors.append(
+            "final evidence file set differs from the closed-world manifest; "
+            f"unmanifested={sorted(actual_files - seen)}, missing={sorted(seen - actual_files)}"
+        )
+    csv_path = root / "final_evidence_manifest.csv"
+    if not csv_path.is_file():
+        errors.append("final evidence CSV is missing")
+    else:
+        try:
+            with csv_path.open("r", encoding="utf-8", newline="") as stream:
+                csv_rows = list(csv.DictReader(stream))
+        except OSError as exc:
+            errors.append(f"cannot read final evidence CSV: {exc}")
+        else:
+            expected_csv_rows = [
+                {key: str(value) for key, value in record.items()}
+                for record in records
+                if isinstance(record, Mapping)
+            ]
+            if csv_rows != expected_csv_rows:
+                errors.append("final evidence CSV/JSON parity check failed")
+    try:
+        validate_scope_artifact_paths(expected_evidence_scope, seen)
+    except ManuscriptBuildError as exc:
+        errors.append(str(exc))
     if errors:
         raise ManuscriptBuildError("Invalid final evidence manifest:\n- " + "\n- ".join(errors))
-    return {"status": "passed", "n_files": len(records)}
+    return {"status": "passed", "n_files": len(records), "paths": sorted(seen)}
+
+
+def _validate_completed_run_package(
+    manifest: Mapping[str, Any],
+    *,
+    manifest_path: Path,
+    run_dir: Path,
+    config_hash: str,
+    evidence_scope: str,
+    allowed_untracked_root: Path | None = None,
+    enforce_configured_layout: bool = True,
+    allowed_lock_token: str | None = None,
+) -> dict[str, Any]:
+    """Strictly verify a complete immutable package before returning or reusing it."""
+
+    _validate_run_lock_for_package_check(
+        run_dir,
+        run_id=str(manifest.get("run_id", "")),
+        evidence_scope=evidence_scope,
+        allowed_lock_token=allowed_lock_token,
+    )
+    _validate_resume_worktree(allowed_untracked_root or run_dir)
+    try:
+        validate_run_manifest(
+            manifest,
+            project_root=PROJECT_ROOT,
+            expected_config_hash=config_hash,
+            expected_evidence_scope=evidence_scope,
+            require_complete=True,
+            verify_source_tree=True,
+        )
+    except RunManifestError as exc:
+        raise ManuscriptBuildError(f"Complete package run manifest is invalid: {exc}") from exc
+    if manifest_path.resolve() != (run_dir / "run_manifest.json").resolve():
+        raise ManuscriptBuildError("Complete package run manifest is outside the exact run root.")
+    if _is_linklike(manifest_path):
+        raise ManuscriptBuildError("Complete package run manifest may not be link-like.")
+    config_path = (PROJECT_ROOT / str(manifest.get("config_path", ""))).resolve()
+    if not config_path.is_file() or _is_linklike(config_path):
+        raise ManuscriptBuildError("Complete package canonical config is missing or link-like.")
+    config = load_manuscript_config(config_path, project_root=PROJECT_ROOT)
+    settings = manuscript_settings(config)
+    scopes = settings.get("evidence_scopes")
+    if not isinstance(scopes, Mapping):
+        raise ManuscriptBuildError("Complete package config has no evidence_scopes mapping.")
+    validate_scope_release_ready(scopes, evidence_scope)
+    if enforce_configured_layout:
+        _, expected_run_dir, expected_manifest_path = _validated_output_layout(
+            settings,
+            run_id=str(manifest["run_id"]),
+            evidence_scope=evidence_scope,
+        )
+        if (
+            expected_run_dir is None
+            or expected_manifest_path is None
+            or run_dir.resolve() != expected_run_dir.resolve()
+            or manifest_path.resolve() != expected_manifest_path.resolve()
+        ):
+            raise ManuscriptBuildError(
+                "Complete package is outside the canonical configured output layout."
+            )
+    required = {
+        "canonical_claim_boundaries.md",
+        "package_status.json",
+        "final_evidence_manifest.csv",
+        "final_evidence_manifest.json",
+        *(f"{stage}/stage_contract.json" for stage in CANONICAL_STAGE_ORDERS[evidence_scope]),
+    }
+    missing = sorted(
+        relative
+        for relative in required
+        if not (run_dir / relative).is_file() or _is_linklike(run_dir / relative)
+    )
+    if missing:
+        raise ManuscriptBuildError(f"Complete package is missing required artifacts: {missing}")
+    commands = manifest.get("commands", [])
+    allowed_command_stages = {"entrypoint", *CANONICAL_STAGE_ORDERS[evidence_scope]}
+    unexpected_command_stages = sorted(
+        {
+            str(record.get("stage"))
+            for record in commands
+            if isinstance(record, Mapping) and record.get("stage") not in allowed_command_stages
+        }
+    )
+    if unexpected_command_stages:
+        raise ManuscriptBuildError(
+            f"Complete package contains noncanonical command stages: {unexpected_command_stages}."
+        )
+    entrypoint_commands = {
+        _portable_entrypoint_command(
+            config_path,
+            evidence_scope=evidence_scope,
+            run_id=str(manifest["run_id"]),
+            reuse_compatible=True,
+        ),
+        _portable_entrypoint_command(
+            config_path,
+            evidence_scope=evidence_scope,
+            run_id=str(manifest["run_id"]),
+            reuse_compatible=False,
+        ),
+    }
+    invalid_commands: list[str] = []
+    for record in commands:
+        if not isinstance(record, Mapping):
+            invalid_commands.append("<malformed>")
+            continue
+        stage = record.get("stage")
+        command = record.get("command")
+        expected = entrypoint_commands if stage == "entrypoint" else {f"internal-stage:{stage}"}
+        if command not in expected:
+            invalid_commands.append(str(stage))
+        if evidence_scope == "core" and re.search(
+            r"(?:^|[^a-z])(llm|chatbot|openai|paid[_-]?api|agent)(?:$|[^a-z])",
+            str(command).casefold(),
+        ):
+            invalid_commands.append(str(stage))
+    if invalid_commands:
+        raise ManuscriptBuildError(
+            f"Complete package contains invalid or prohibited commands: {sorted(invalid_commands)}."
+        )
+    invalid_stage_commands = [
+        stage
+        for stage in CANONICAL_STAGE_ORDERS[evidence_scope]
+        if len(
+            [
+                record
+                for record in commands
+                if isinstance(record, Mapping)
+                and record.get("stage") == stage
+                and record.get("status") == "complete"
+                and record.get("return_code") == 0
+            ]
+        )
+        != 1
+    ]
+    if invalid_stage_commands:
+        raise ManuscriptBuildError(
+            "Complete package must have exactly one successful command per canonical stage: "
+            f"{invalid_stage_commands}"
+        )
+    successful_positions = []
+    for stage in CANONICAL_STAGE_ORDERS[evidence_scope]:
+        successful_positions.append(
+            next(
+                index
+                for index, record in enumerate(commands)
+                if isinstance(record, Mapping)
+                and record.get("stage") == stage
+                and record.get("status") == "complete"
+                and record.get("return_code") == 0
+            )
+        )
+    if successful_positions != sorted(successful_positions):
+        raise ManuscriptBuildError(
+            "Complete package successful stage commands are not in canonical execution order."
+        )
+    context = StageContext(
+        config_path=config_path,
+        config=config,
+        settings=settings,
+        run_dir=run_dir,
+        run_id=str(manifest["run_id"]),
+        config_hash=config_hash,
+        manifest=dict(manifest),
+        evidence_scope=evidence_scope,
+        scope_contract=manifest.get("scope_contract")
+        if isinstance(manifest.get("scope_contract"), Mapping)
+        else {},
+    )
+    invalid_stage_contracts = [
+        stage
+        for stage in CANONICAL_STAGE_ORDERS[evidence_scope]
+        if not _stage_cache_valid(context, stage)
+    ]
+    if invalid_stage_contracts:
+        raise ManuscriptBuildError(
+            f"Complete package has invalid stage contracts: {invalid_stage_contracts}."
+        )
+    _validate_package_status_contract(context)
+    _validate_claim_boundary_contract(context)
+    if evidence_scope == "core" and enforce_configured_layout:
+        _validate_primary_artifacts(context)
+    input_files = _validate_input_snapshot_contract(context, run_dir / "run_inputs")
+    expected_input_contract_path = _portable(run_dir / "run_inputs" / "input_contract.json")
+    if manifest.get("input_contract_snapshot") != expected_input_contract_path:
+        raise ManuscriptBuildError("Complete package points to the wrong run-input contract.")
+    final_result = validate_final_evidence_manifest(
+        run_dir / "final_evidence_manifest.json",
+        run_dir=run_dir,
+        expected_run_id=str(manifest["run_id"]),
+        expected_config_hash=config_hash,
+        expected_evidence_scope=evidence_scope,
+        expected_scope_contract_hash=str(manifest["scope_contract_hash"]),
+        expected_git_commit=str(manifest["git_commit"]),
+        expected_source_tree_hash=str(manifest["source_tree_hash"]),
+        expected_scientific_input_hash=str(manifest["scientific_input_hash"]),
+    )
+    registered: dict[str, Mapping[str, Any]] = {}
+    for record in manifest.get("output_files", []):
+        if not isinstance(record, Mapping) or not isinstance(record.get("path"), str):
+            continue
+        target = (PROJECT_ROOT / str(record["path"])).resolve()
+        try:
+            relative = target.relative_to(run_dir.resolve()).as_posix()
+        except ValueError as exc:
+            raise ManuscriptBuildError(
+                f"Registered artifact lies outside the exact run root: {record.get('path')!r}."
+            ) from exc
+        if relative in registered:
+            raise ManuscriptBuildError(f"Run manifest registers an artifact twice: {relative!r}.")
+        registered[relative] = record
+        expected_stage = (
+            "integration"
+            if relative in {"canonical_claim_boundaries.md", "package_status.json"}
+            else "run_inputs"
+            if relative.startswith("run_inputs/")
+            else relative.split("/", 1)[0]
+        )
+        if relative not in {"final_evidence_manifest.csv", "final_evidence_manifest.json"} and record.get(
+            "stage"
+        ) != expected_stage:
+            raise ManuscriptBuildError(
+                f"Registered artifact has the wrong stage identity: {relative!r}."
+            )
+    final_self = {"final_evidence_manifest.csv", "final_evidence_manifest.json"}
+    if not final_self.issubset(registered):
+        raise ManuscriptBuildError("Both final evidence manifests must be registered artifacts.")
+    for relative in sorted(final_self):
+        record = registered[relative]
+        target = run_dir / relative
+        if record.get("stage") != "final_manifest" or record.get("sha256") != sha256_file(target):
+            raise ManuscriptBuildError(
+                f"Final evidence manifest registration is stale or has the wrong stage: {relative}."
+            )
+    final_paths = set(final_result["paths"])
+    registered_relative = set(registered).difference(final_self)
+    if registered_relative != final_paths:
+        raise ManuscriptBuildError(
+            "Run manifest and final evidence manifest file sets differ; "
+            f"run_only={sorted(registered_relative - final_paths)}, "
+            f"final_only={sorted(final_paths - registered_relative)}."
+        )
+    input_relative = {
+        path.relative_to(run_dir).as_posix()
+        for path in input_files
+    }
+    if not input_relative.issubset(registered_relative):
+        raise ManuscriptBuildError("Run-input closed-world files are not fully registered.")
+    return {"status": "passed", "n_files": final_result["n_files"]}
+
+
+def _validated_sibling_scope_for_start(
+    *,
+    output_root: Path,
+    run_id: str | None,
+    evidence_scope: str,
+    config_hash: str,
+) -> tuple[list[Path], Path | None]:
+    """Validate a completed sibling scope before excluding its bytes from clean start."""
+
+    if run_id is None:
+        return [], None
+    package_dir = output_root / validate_portable_run_id(run_id)
+    if not os.path.lexists(package_dir):
+        return [], package_dir
+    _validate_package_root_inventory(package_dir, require_both_scopes=False)
+    sibling_scope = next(scope for scope in CANONICAL_STAGE_ORDERS if scope != evidence_scope)
+    sibling_dir = package_dir / sibling_scope
+    if not sibling_dir.exists():
+        return [], package_dir
+    sibling_manifest_path = sibling_dir / "run_manifest.json"
+    if not sibling_manifest_path.is_file() or _is_linklike(sibling_manifest_path):
+        raise ManuscriptBuildError(
+            f"Preexisting sibling scope {sibling_scope!r} has no regular run manifest."
+        )
+    try:
+        sibling_manifest = json.loads(sibling_manifest_path.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError) as exc:
+        raise ManuscriptBuildError(f"Cannot read sibling-scope run manifest: {exc}") from exc
+    if sibling_manifest.get("status") != "complete":
+        raise ManuscriptBuildError(
+            f"Preexisting sibling scope {sibling_scope!r} is not complete."
+        )
+    if (
+        sibling_manifest.get("run_id") != run_id
+        or sibling_manifest.get("config_hash") != config_hash
+        or sibling_manifest.get("evidence_scope") != sibling_scope
+    ):
+        raise ManuscriptBuildError("Preexisting sibling scope has an incompatible identity.")
+    _validate_completed_run_package(
+        sibling_manifest,
+        manifest_path=sibling_manifest_path,
+        run_dir=sibling_dir,
+        config_hash=config_hash,
+        evidence_scope=sibling_scope,
+        allowed_untracked_root=package_dir,
+    )
+    return [sibling_dir], package_dir
 
 
 def _validate_primary_artifacts(context: StageContext) -> None:
     targets = [
-        context.run_dir / "shap" / "global_grouped_shap_importance.csv",
-        context.run_dir / "shap" / "local_grouped_shap_values.csv",
-        context.run_dir / "shap" / "fold_feature_rankings.csv",
+        context.run_dir / "oof_shap" / "global_grouped_shap_importance.csv",
+        context.run_dir / "oof_shap" / "local_grouped_shap_values.csv",
+        context.run_dir / "oof_shap" / "fold_feature_rankings.csv",
     ]
-    local_dir = context.run_dir / "shap" / "local_reason_codes"
+    local_dir = context.run_dir / "oof_shap" / "local_reason_codes"
     if local_dir.is_dir():
         targets.extend(path for path in local_dir.rglob("*") if path.is_file())
     for path in targets:
@@ -596,185 +1603,632 @@ def _validate_primary_artifacts(context: StageContext) -> None:
             validate_artifact_forbidden_features(path, context.config, scan_text=True)
 
 
-def _write_claim_report(context: StageContext) -> Path:
-    llm_preflight = json.loads((context.run_dir / "llm" / "preflight_report.json").read_text(encoding="utf-8"))
-    complete = int(llm_preflight.get("cases_complete", llm_preflight.get("n_complete", 0)))
-    requested = int(llm_preflight.get("cases_requested", llm_preflight.get("n_requested", 0)))
-    lines = [
+def _canonical_claim_report_text(context: StageContext) -> str:
+    common = [
         "# Canonical Evidence Claim Boundaries",
         "",
+        f"Evidence scope: `{context.evidence_scope}`  ",
         f"Run ID: `{context.run_id}`  ",
         f"Config hash: `{context.config_hash}`",
         "",
-        "## Supported",
-        "",
-        "- Common-fold, leakage-policy sensitivity for the declared XGBoost contract; the full-feature result is a diagnostic upper bound only.",
-        "- Internal out-of-fold three-class performance, nested calibration, grouped SHAP attribution/stability, and OOF counterfactual scenario evidence for the canonical primary policy.",
-        "- HRDataset_v14 independent external performance-target replication, subject to the recorded mapping and provenance limitations.",
-        "- IBM restricted-target performance robustness and IBM/Employee Turnover related binary-task evidence, reported in separate non-comparable task strata.",
-        "- Support-aware descriptive fairness disparities and department reconstructability as proxy-risk evidence.",
-        f"- Deterministic complete-case evidence readiness for {complete}/{requested} selected LLM-evaluation cases; no canonical paid LLM generation was authorized.",
-        "- Fixed-suite deterministic chatbot guardrail behavior with Wilson intervals; not comprehensive safety validation.",
-        "",
-        "## Unsupported or prohibited",
-        "",
-        "- Autonomous hiring, firing, promotion, ranking, compensation, or other HR decisions.",
-        "- Causal interpretations of SHAP or counterfactuals, or employee prescriptions derived from them.",
-        "- A fairness guarantee from sensitive-feature removal or observed subgroup gaps.",
-        "- Direct employee-performance external validation from attrition, turnover, or restricted-target tasks.",
-        "- Locked INX-model transport to HRDataset_v14 unless explicitly identified as a separate transported-model result.",
-        "- Zero LLM or guardrail failure probability, deployment readiness, or verified dataset licence/source authenticity.",
-        "",
-        "The package is research-grade decision support only and does not authorize autonomous HR use.",
+        "The package is research-grade analysis only and does not authorize autonomous HR use.",
     ]
+    if context.evidence_scope == "core":
+        lines = [
+            *common,
+            "",
+            "## Supported when the referenced stages and uncertainty checks pass",
+            "",
+            "- Paired out-of-fold leakage-policy sensitivity under the declared feature contracts; the full-feature result is a diagnostic upper bound only.",
+            "- Contextual comparison of the primary XGBoost model with the three predeclared predictive baselines on shared folds.",
+            "- Predeclared sigmoid probability calibration evaluated only on outer test folds.",
+            "- Grouped out-of-fold SHAP attribution and descriptive fold stability; attribution is not causality.",
+            "- Support-aware subgroup and proxy-risk diagnostics; sensitive-feature removal is not a fairness guarantee.",
+            "- HRDataset_v14 independent mapped-target performance replication; not locked-model transport.",
+            "",
+            "## Unsupported or prohibited",
+            "",
+            "- Autonomous hiring, firing, promotion, ranking, compensation, or other HR decisions.",
+            "- Human usefulness, trust, usability, deployment readiness, legal compliance or a fairness guarantee.",
+            "- Causal interpretation of model attribution.",
+            "- Verified dataset licence, source authenticity or ethics approval until the recorded manual gates are closed.",
+        ]
+    elif context.evidence_scope == "supplementary":
+        lines = [
+            *common,
+            "",
+            "## Supported when the referenced stages and uncertainty checks pass",
+            "",
+            "- Heuristic model-scenario search success under a declared finite search budget; not causal or prescriptive recourse.",
+            "- Restricted-target and related-task robustness in explicitly non-comparable task strata.",
+            "",
+            "## Unsupported or prohibited",
+            "",
+            "- Employee advice, guaranteed feasibility, causal improvement or autonomous HR decisions.",
+            "- Employee-performance validation inferred from related binary tasks.",
+        ]
+    else:
+        raise ManuscriptBuildError(f"Unknown evidence scope for claim report: {context.evidence_scope!r}")
+    return "\n".join(lines) + "\n"
+
+
+def _write_claim_report(context: StageContext) -> Path:
     path = context.run_dir / "canonical_claim_boundaries.md"
-    path.write_text("\n".join(lines) + "\n", encoding="utf-8")
+    path.write_text(_canonical_claim_report_text(context), encoding="utf-8")
     return path
 
 
-def _validate_llm_preflight(context: StageContext) -> None:
-    path = context.run_dir / "llm" / "preflight_report.json"
-    if not path.is_file():
-        raise ManuscriptBuildError(f"Canonical LLM preflight report is missing: {path}")
-    payload = json.loads(path.read_text(encoding="utf-8"))
-    requested = int(payload.get("cases_requested", payload.get("n_requested", -1)))
-    complete = int(payload.get("cases_complete", payload.get("n_complete", -1)))
-    incomplete = int(payload.get("cases_incomplete", payload.get("n_incomplete", -1)))
-    expected = sum(int(value) for value in context.settings["llm_agent_evaluation"]["scope"].values())
-    if requested != expected or complete != expected or incomplete != 0:
+def _expected_package_status_payload(context: StageContext) -> dict[str, Any]:
+    stage_rows: list[dict[str, Any]] = []
+    stages = tuple(str(value) for value in (context.scope_contract or {}).get("stages", ()))
+    expected_stages = CANONICAL_STAGE_ORDERS[context.evidence_scope]
+    if stages != expected_stages:
         raise ManuscriptBuildError(
-            "Canonical CompleteCaseEvidence is not ready: "
-            f"requested={requested}, complete={complete}, incomplete={incomplete}, expected={expected}."
+            "Evidence-scope stage declaration differs from the canonical ordered contract."
         )
-    if payload.get("real_api_execution_allowed") is not False:
-        raise ManuscriptBuildError(
-            "Canonical build is deterministic-only; preflight must not authorize real API execution."
-        )
-
-
-def _write_package_status(context: StageContext) -> Path:
-    stage_rows = []
-    for stage in STAGE_ORDER:
+    for stage in stages:
         path = _stage_metadata_path(context, stage)
-        payload = json.loads(path.read_text(encoding="utf-8"))
+        if not path.is_file() or _is_linklike(path):
+            raise ManuscriptBuildError(f"Stage receipt is missing or link-like: {stage!r}.")
+        try:
+            payload = json.loads(path.read_text(encoding="utf-8"))
+        except (OSError, json.JSONDecodeError) as exc:
+            raise ManuscriptBuildError(f"Cannot read stage receipt {stage!r}: {exc}") from exc
+        outputs = payload.get("outputs") if isinstance(payload, Mapping) else None
+        elapsed = payload.get("elapsed_seconds") if isinstance(payload, Mapping) else None
+        if (
+            not isinstance(payload, Mapping)
+            or payload.get("stage") != stage
+            or payload.get("status") != "complete"
+            or not isinstance(outputs, list)
+            or not outputs
+            or not isinstance(elapsed, (int, float))
+            or isinstance(elapsed, bool)
+            or not math.isfinite(float(elapsed))
+            or float(elapsed) < 0.0
+        ):
+            raise ManuscriptBuildError(f"Stage receipt has invalid status/runtime/output semantics: {stage!r}.")
         stage_rows.append(
             {
                 "stage": stage,
-                "status": payload["status"],
-                "elapsed_seconds": payload["elapsed_seconds"],
-                "n_outputs": len(payload["outputs"]),
+                "status": "complete",
+                "elapsed_seconds": elapsed,
+                "n_outputs": len(outputs),
             }
         )
+    return {
+        "run_id": context.run_id,
+        "config_hash": context.config_hash,
+        "evidence_scope": context.evidence_scope,
+        "scope_contract_hash": context.manifest.get("scope_contract_hash"),
+        "research_use": "research_grade_decision_support_only",
+        "autonomous_hr_decisions_allowed": False,
+        "paid_api_calls": 0,
+        "stages": stage_rows,
+    }
+
+
+def _write_package_status(context: StageContext) -> Path:
     return _write_json(
         context.run_dir / "package_status.json",
-        {
-            "run_id": context.run_id,
-            "config_hash": context.config_hash,
-            "research_use": "research_grade_decision_support_only",
-            "autonomous_hr_decisions_allowed": False,
-            "paid_api_calls_in_canonical_run": 0,
-            "stages": stage_rows,
-        },
+        _expected_package_status_payload(context),
     )
 
 
-def _write_historical_index(context: StageContext) -> Path:
-    from src.governance.historical_artifact_index import build_historical_artifact_index
+def _validate_package_status_contract(context: StageContext) -> Mapping[str, Any]:
+    path = context.run_dir / "package_status.json"
+    if not path.is_file() or _is_linklike(path):
+        raise ManuscriptBuildError("Package status receipt is missing or link-like.")
+    try:
+        payload = json.loads(path.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError) as exc:
+        raise ManuscriptBuildError(f"Cannot read package status receipt: {exc}") from exc
+    expected = _expected_package_status_payload(context)
+    if payload != expected:
+        raise ManuscriptBuildError(
+            "Package status semantic contract failed: the receipt is not an exact rendering "
+            "of the validated stage contracts."
+        )
+    return payload
 
-    return build_historical_artifact_index(
-        context.run_dir / "historical" / "historical_artifact_index.csv",
-        config_path=context.config_path,
-        canonical_run_id=context.run_id,
+
+def _validate_claim_boundary_contract(context: StageContext) -> None:
+    path = context.run_dir / "canonical_claim_boundaries.md"
+    if not path.is_file() or _is_linklike(path):
+        raise ManuscriptBuildError("Canonical claim-boundary report is missing or link-like.")
+    text = path.read_text(encoding="utf-8")
+    if text != _canonical_claim_report_text(context):
+        raise ManuscriptBuildError(
+            "Canonical claim-boundary report differs from the exact configured scope rendering."
+        )
+
+
+def _validated_relative_posix_path(raw: Any, *, field: str) -> str:
+    if not isinstance(raw, str) or not raw or raw != raw.strip() or "\\" in raw:
+        raise ManuscriptBuildError(f"Invalid {field}: {raw!r}.")
+    candidate = Path(raw)
+    if (
+        candidate.is_absolute()
+        or candidate.drive
+        or raw.startswith("./")
+        or any(part in {"", ".", ".."} for part in raw.split("/"))
+    ):
+        raise ManuscriptBuildError(f"Invalid {field}: {raw!r}.")
+    return raw
+
+
+def _expected_input_snapshot_specs(context: StageContext) -> list[dict[str, str]]:
+    fixed = (
+        ("canonical_config", context.config_path, "canonical_config_snapshot.yaml"),
+        ("requirements_core", PROJECT_ROOT / "requirements.txt", "requirements_snapshot.txt"),
+        (
+            "requirements_development",
+            PROJECT_ROOT / "requirements-dev.txt",
+            "requirements_dev_snapshot.txt",
+        ),
+        ("environment", PROJECT_ROOT / "environment.yml", "environment_snapshot.yml"),
     )
+    specs: list[dict[str, str]] = []
+    for logical_name, source, snapshot_path in fixed:
+        if not source.is_file() or _is_linklike(source):
+            raise ManuscriptBuildError(
+                f"Required run-input source is missing or link-like: {_portable(source)}"
+            )
+        specs.append(
+            {
+                "logical_name": logical_name,
+                "input_kind": "build_environment_or_canonical_config",
+                "source_path": _portable(source),
+                "snapshot_path": snapshot_path,
+            }
+        )
+    side_inputs = context.manifest.get("side_input_hashes")
+    if not isinstance(side_inputs, Mapping) or not side_inputs:
+        raise ManuscriptBuildError("Manifest has no verified scientific side inputs.")
+    for logical_name, record in sorted(side_inputs.items()):
+        if not isinstance(record, Mapping):
+            raise ManuscriptBuildError(f"Invalid side-input record: {logical_name!r}")
+        raw_source = _validated_relative_posix_path(record.get("path"), field="side-input path")
+        source = (PROJECT_ROOT / raw_source).resolve()
+        try:
+            source.relative_to(PROJECT_ROOT.resolve())
+        except ValueError as exc:
+            raise ManuscriptBuildError(f"Scientific side input escapes the repository: {raw_source}") from exc
+        expected_hash = record.get("sha256")
+        expected_size = record.get("size_bytes")
+        if (
+            not source.is_file()
+            or _is_linklike(source)
+            or sha256_file(source) != expected_hash
+            or source.stat().st_size != expected_size
+        ):
+            raise ManuscriptBuildError(f"Scientific side input changed or is missing: {raw_source}")
+        specs.append(
+            {
+                "logical_name": str(logical_name),
+                "input_kind": "scientific_side_input",
+                "source_path": raw_source,
+                "snapshot_path": f"scientific_side_inputs/{raw_source}",
+            }
+        )
+    return specs
+
+
+def _validate_input_snapshot_contract(
+    context: StageContext,
+    output: Path,
+) -> list[Path]:
+    """Validate one exact, closed-world, read-only run-input snapshot."""
+
+    if not output.is_dir() or _is_linklike(output):
+        raise ManuscriptBuildError("Run-input snapshot root is absent or link-like.")
+    contract_path = output / "input_contract.json"
+    if not contract_path.is_file() or _is_linklike(contract_path):
+        raise ManuscriptBuildError("Run-input snapshot has no regular completion contract.")
+    try:
+        payload = json.loads(contract_path.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError) as exc:
+        raise ManuscriptBuildError(f"Cannot read run-input completion contract: {exc}") from exc
+    expected_identity = {
+        "schema_version": 1,
+        "contract_kind": "manuscript_run_inputs",
+        "status": "complete",
+        "inventory_mode": "closed_world",
+        "path_basis": "run_inputs_relative",
+        "run_id": context.run_id,
+        "config_hash": context.config_hash,
+        "evidence_scope": context.manifest.get("evidence_scope"),
+        "scope_contract": context.manifest.get("scope_contract"),
+        "scope_contract_hash": context.manifest.get("scope_contract_hash"),
+        "git_commit": context.manifest.get("git_commit"),
+        "source_tree_hash": context.manifest.get("source_tree_hash"),
+        "dataset_hashes": context.manifest.get("dataset_hashes"),
+        "actual_input_receipts": context.manifest.get("actual_input_receipts"),
+        "side_input_hashes": context.manifest.get("side_input_hashes"),
+        "scientific_input_hash": context.manifest.get("scientific_input_hash"),
+        "code_package_versions": context.manifest.get("code_package_versions"),
+    }
+    mismatches = {
+        key: {"expected": expected, "observed": payload.get(key)}
+        for key, expected in expected_identity.items()
+        if payload.get(key) != expected
+    }
+    if mismatches:
+        raise ManuscriptBuildError(
+            "Run-input snapshot identity is incompatible: "
+            + json.dumps(mismatches, sort_keys=True, ensure_ascii=True)
+        )
+    rows = payload.get("snapshots")
+    if not isinstance(rows, list) or payload.get("n_snapshots") != len(rows):
+        raise ManuscriptBuildError("Run-input snapshot count is invalid.")
+    expected_specs = _expected_input_snapshot_specs(context)
+    expected_by_name = {record["logical_name"]: record for record in expected_specs}
+    if len(expected_by_name) != len(expected_specs):
+        raise ManuscriptBuildError("Expected run-input logical names are not unique.")
+    observed_by_name: dict[str, Mapping[str, Any]] = {}
+    snapshot_paths: set[str] = set()
+    casefold_paths: set[str] = set()
+    validated: list[Path] = []
+    for row in rows:
+        if not isinstance(row, Mapping) or not isinstance(row.get("logical_name"), str):
+            raise ManuscriptBuildError("Run-input snapshot record is malformed.")
+        logical_name = str(row["logical_name"])
+        if logical_name in observed_by_name:
+            raise ManuscriptBuildError(f"Duplicate run-input logical name: {logical_name!r}.")
+        observed_by_name[logical_name] = row
+        expected = expected_by_name.get(logical_name)
+        if expected is None:
+            raise ManuscriptBuildError(f"Unexpected run-input logical name: {logical_name!r}.")
+        for field in ("input_kind", "source_path", "snapshot_path"):
+            if row.get(field) != expected[field]:
+                raise ManuscriptBuildError(
+                    f"Run-input {logical_name!r} has the wrong {field}."
+                )
+        source_path = _validated_relative_posix_path(row.get("source_path"), field="source_path")
+        relative_snapshot = _validated_relative_posix_path(
+            row.get("snapshot_path"), field="snapshot_path"
+        )
+        if relative_snapshot == "input_contract.json":
+            raise ManuscriptBuildError("A snapshot may not replace its completion contract.")
+        if relative_snapshot in snapshot_paths or relative_snapshot.casefold() in casefold_paths:
+            raise ManuscriptBuildError(f"Duplicate run-input snapshot path: {relative_snapshot!r}.")
+        snapshot_paths.add(relative_snapshot)
+        casefold_paths.add(relative_snapshot.casefold())
+        source = (PROJECT_ROOT / source_path).resolve()
+        snapshot = (output / relative_snapshot).resolve()
+        try:
+            source.relative_to(PROJECT_ROOT.resolve())
+            snapshot.relative_to(output.resolve())
+        except ValueError as exc:
+            raise ManuscriptBuildError("Run-input source or snapshot escapes its allowed root.") from exc
+        if _is_linklike(source) or _is_linklike(snapshot):
+            raise ManuscriptBuildError("Run-input source or snapshot is link-like.")
+        if not source.is_file() or not snapshot.is_file():
+            raise ManuscriptBuildError(f"Run-input source or snapshot is missing: {logical_name!r}.")
+        source_hash = sha256_file(source)
+        snapshot_hash = sha256_file(snapshot)
+        source_size = source.stat().st_size
+        snapshot_size = snapshot.stat().st_size
+        if (
+            row.get("source_sha256") != source_hash
+            or row.get("snapshot_sha256") != snapshot_hash
+            or row.get("source_size_bytes") != source_size
+            or row.get("snapshot_size_bytes") != snapshot_size
+            or source_hash != snapshot_hash
+            or source_size != snapshot_size
+        ):
+            raise ManuscriptBuildError(f"Run-input source hash mismatch: {source_path}")
+        validated.append(snapshot)
+    if set(observed_by_name) != set(expected_by_name):
+        raise ManuscriptBuildError("Run-input snapshot set differs from the scoped input contract.")
+
+    actual_files: set[str] = set()
+    actual_directories: set[str] = set()
+    for candidate in output.rglob("*"):
+        relative = candidate.relative_to(output).as_posix()
+        if _is_linklike(candidate):
+            raise ManuscriptBuildError(f"Run-input tree contains a link-like path: {relative!r}.")
+        if candidate.is_file():
+            actual_files.add(relative)
+        elif candidate.is_dir():
+            actual_directories.add(relative)
+        else:
+            raise ManuscriptBuildError(f"Run-input tree contains a non-regular path: {relative!r}.")
+    expected_files = {*snapshot_paths, "input_contract.json"}
+    expected_directories = {
+        parent.as_posix()
+        for relative in snapshot_paths
+        for parent in Path(relative).parents
+        if parent.as_posix() != "."
+    }
+    if actual_files != expected_files or actual_directories != expected_directories:
+        raise ManuscriptBuildError(
+            "Run-input snapshot inventory is not closed-world; "
+            f"extra_files={sorted(actual_files - expected_files)}, "
+            f"missing_files={sorted(expected_files - actual_files)}, "
+            f"extra_directories={sorted(actual_directories - expected_directories)}."
+        )
+    return [*sorted(validated, key=lambda path: path.relative_to(output).as_posix()), contract_path]
 
 
 def _write_input_snapshots(context: StageContext) -> list[Path]:
-    """Freeze human-readable input/config files inside the versioned package."""
+    """Atomically freeze and validate every scoped input/config file."""
 
-    output = context.run_dir / "run_inputs"
-    if output.exists() and any(output.iterdir()):
-        contract_path = output / "input_contract.json"
-        if not contract_path.is_file():
-            raise ManuscriptBuildError(f"Run-input snapshot directory is incompatible: {output}")
-        payload = json.loads(contract_path.read_text(encoding="utf-8"))
-        if (
-            payload.get("run_id") != context.run_id
-            or payload.get("config_hash") != context.config_hash
-            or payload.get("source_tree_hash") != context.manifest.get("source_tree_hash")
-            or payload.get("dataset_hashes") != context.manifest.get("dataset_hashes")
-        ):
-            raise ManuscriptBuildError(f"Run-input snapshot identity is incompatible: {output}")
-        snapshots = payload.get("snapshots", [])
-        for record in snapshots:
-            path = PROJECT_ROOT / str(record.get("snapshot_path", ""))
-            if not path.is_file() or sha256_file(path) != record.get("sha256"):
-                raise ManuscriptBuildError(f"Run-input snapshot hash mismatch: {path}")
-        return _all_files(output)
-    output.mkdir(parents=True, exist_ok=True)
-    sources = {
-        "canonical_config_snapshot.yaml": context.config_path,
-        "dataset_provenance_snapshot.yaml": PROJECT_ROOT / "configs" / "dataset_provenance.yaml",
-        "requirements_snapshot.txt": PROJECT_ROOT / "requirements.txt",
-        "requirements_dev_snapshot.txt": PROJECT_ROOT / "requirements-dev.txt",
-        "environment_snapshot.yml": PROJECT_ROOT / "environment.yml",
-    }
-    copied: list[Path] = []
+    if not context.run_dir.is_dir() or _is_linklike(context.run_dir):
+        raise ManuscriptBuildError("Run root must exist as a regular directory before snapshots.")
+    output = _exact_child_path(context.run_dir, "run_inputs")
+    orphan_staging = sorted(context.run_dir.glob("run_inputs.__staging__.*"))
+    if orphan_staging:
+        raise ManuscriptBuildError(
+            "An interrupted run-input staging directory is present and will not be reused: "
+            + ", ".join(path.name for path in orphan_staging)
+        )
+    if output.exists():
+        validated = _validate_input_snapshot_contract(context, output)
+        context.manifest["input_contract_snapshot"] = _portable(output / "input_contract.json")
+        return validated
+
+    specs = _expected_input_snapshot_specs(context)
+    staging = Path(
+        tempfile.mkdtemp(prefix="run_inputs.__staging__.", dir=context.run_dir)
+    )
     rows: list[dict[str, Any]] = []
-    for destination_name, source in sources.items():
-        if not source.is_file():
-            raise ManuscriptBuildError(f"Required run-input source is missing: {source}")
-        destination = output / destination_name
+    for spec in specs:
+        source = (PROJECT_ROOT / spec["source_path"]).resolve()
+        destination = staging / spec["snapshot_path"]
+        destination.parent.mkdir(parents=True, exist_ok=True)
         shutil.copy2(source, destination)
-        copied.append(destination)
         rows.append(
             {
-                "source_path": _portable(source),
-                "snapshot_path": _portable(destination),
-                "sha256": sha256_file(destination),
-                "size_bytes": destination.stat().st_size,
+                **spec,
+                "source_sha256": sha256_file(source),
+                "source_size_bytes": source.stat().st_size,
+                "snapshot_sha256": sha256_file(destination),
+                "snapshot_size_bytes": destination.stat().st_size,
             }
         )
-    contract = _write_json(
-        output / "input_contract.json",
+    _write_json(
+        staging / "input_contract.json",
         {
+            "schema_version": 1,
+            "contract_kind": "manuscript_run_inputs",
+            "status": "complete",
+            "inventory_mode": "closed_world",
+            "path_basis": "run_inputs_relative",
             "run_id": context.run_id,
             "config_hash": context.config_hash,
+            "evidence_scope": context.manifest.get("evidence_scope"),
+            "scope_contract": context.manifest.get("scope_contract"),
+            "scope_contract_hash": context.manifest.get("scope_contract_hash"),
             "git_commit": context.manifest.get("git_commit"),
             "source_tree_hash": context.manifest.get("source_tree_hash"),
             "dataset_hashes": context.manifest.get("dataset_hashes"),
+            "actual_input_receipts": context.manifest.get("actual_input_receipts"),
+            "side_input_hashes": context.manifest.get("side_input_hashes"),
+            "scientific_input_hash": context.manifest.get("scientific_input_hash"),
             "code_package_versions": context.manifest.get("code_package_versions"),
+            "n_snapshots": len(rows),
             "snapshots": rows,
         },
     )
-    context.manifest["input_contract_snapshot"] = _portable(contract)
-    return [*copied, contract]
+    _validate_input_snapshot_contract(context, staging)
+    os.replace(staging, output)
+    validated = _validate_input_snapshot_contract(context, output)
+    context.manifest["input_contract_snapshot"] = _portable(output / "input_contract.json")
+    return validated
+
+
+def promote_latest_pointer(run_dir: Path, output_root: Path) -> Path:
+    """Atomically promote one verified core+supplementary immutable package.
+
+    Promotion is deliberately separate from scientific execution.  A historical
+    physical ``latest`` package is never renamed, copied, or overwritten by this
+    function; it requires an explicit, inventory-preserving migration first.
+    """
+
+    lexical_root = Path(output_root).absolute()
+    if os.path.lexists(lexical_root) and _is_linklike(lexical_root):
+        raise ManuscriptBuildError("Latest promotion output_root may not be link-like.")
+    root = lexical_root.resolve()
+    lexical_package = Path(run_dir).absolute()
+    if os.path.lexists(lexical_package) and _is_linklike(lexical_package):
+        raise ManuscriptBuildError("Latest promotion package root may not be link-like.")
+    package_dir = lexical_package.resolve()
+    try:
+        relative_package = package_dir.relative_to(root)
+    except ValueError as exc:
+        raise ManuscriptBuildError("Latest promotion run directory escapes output_root.") from exc
+    if len(relative_package.parts) != 1:
+        raise ManuscriptBuildError(
+            "Latest promotion requires the exact '<output.root>/<run_id>' package layout."
+        )
+    run_id = relative_package.parts[0]
+    try:
+        validate_portable_run_id(run_id)
+    except RunManifestError as exc:
+        raise ManuscriptBuildError(str(exc)) from exc
+    if not package_dir.is_dir() or _is_linklike(package_dir):
+        raise ManuscriptBuildError("Latest promotion package root is absent or link-like.")
+    _validate_package_root_inventory(package_dir, require_both_scopes=True)
+
+    scope_payloads: dict[str, dict[str, Any]] = {}
+    common_identity: dict[str, Any] | None = None
+    for evidence_scope in CANONICAL_STAGE_ORDERS:
+        scope_dir = _exact_child_path(package_dir, evidence_scope)
+        run_manifest_path = scope_dir / "run_manifest.json"
+        final_manifest_path = scope_dir / "final_evidence_manifest.json"
+        try:
+            run_manifest = json.loads(run_manifest_path.read_text(encoding="utf-8"))
+        except (OSError, json.JSONDecodeError) as exc:
+            raise ManuscriptBuildError(
+                f"Cannot read complete {evidence_scope} promotion manifest: {exc}"
+            ) from exc
+        if run_manifest.get("status") != "complete":
+            raise ManuscriptBuildError(
+                f"Latest promotion requires a complete {evidence_scope} run manifest."
+            )
+        layout_errors = {
+            field: {"expected": expected, "observed": run_manifest.get(field)}
+            for field, expected in {
+                "run_id": run_id,
+                "evidence_scope": evidence_scope,
+            }.items()
+            if run_manifest.get(field) != expected
+        }
+        if layout_errors:
+            raise ManuscriptBuildError(
+                "Latest promotion manifest identity mismatch: "
+                + json.dumps(layout_errors, sort_keys=True, ensure_ascii=True)
+            )
+        _validate_completed_run_package(
+            run_manifest,
+            manifest_path=run_manifest_path,
+            run_dir=scope_dir,
+            config_hash=str(run_manifest.get("config_hash", "")),
+            evidence_scope=evidence_scope,
+            allowed_untracked_root=package_dir,
+        )
+        observed_common = {
+            "manifest_schema_version": run_manifest.get("manifest_schema_version"),
+            "run_id": run_manifest.get("run_id"),
+            "config_path": run_manifest.get("config_path"),
+            "config_hash": run_manifest.get("config_hash"),
+            "git_commit": run_manifest.get("git_commit"),
+            "source_tree_hash": run_manifest.get("source_tree_hash"),
+            "code_package_versions": run_manifest.get("code_package_versions"),
+            "random_seeds": run_manifest.get("random_seeds"),
+        }
+        if common_identity is None:
+            common_identity = observed_common
+        elif observed_common != common_identity:
+            raise ManuscriptBuildError(
+                "Core and supplementary promotion identities differ: "
+                + json.dumps(
+                    {"expected": common_identity, "observed": observed_common},
+                    sort_keys=True,
+                    ensure_ascii=True,
+                )
+            )
+        scope_payloads[evidence_scope] = {
+            "scientific_input_hash": run_manifest.get("scientific_input_hash"),
+            "scope_contract_hash": run_manifest.get("scope_contract_hash"),
+            "run_manifest": {
+                "path": os.path.relpath(run_manifest_path, root / "latest").replace("\\", "/"),
+                "sha256": sha256_file(run_manifest_path),
+            },
+            "final_evidence_manifest": {
+                "path": os.path.relpath(final_manifest_path, root / "latest").replace("\\", "/"),
+                "sha256": sha256_file(final_manifest_path),
+            },
+        }
+    assert common_identity is not None
+
+    latest = root / "latest"
+    pointer_path = latest / "pointer.json"
+    previous_pointer_hash: str | None = None
+    if os.path.lexists(latest):
+        if _is_linklike(latest) or not latest.is_dir():
+            raise ManuscriptBuildError(
+                "Existing latest is not pointer-only; historical migration is required."
+            )
+        entries = list(latest.iterdir())
+        if (
+            len(entries) != 1
+            or entries[0].name != "pointer.json"
+            or _is_linklike(entries[0])
+            or not entries[0].is_file()
+        ):
+            raise ManuscriptBuildError(
+                "Existing latest contains historical evidence; pointer-only migration is required."
+            )
+        previous_pointer_hash = sha256_file(pointer_path)
+
+    relative_target = os.path.relpath(package_dir, latest).replace("\\", "/")
+    payload = {
+        "schema_version": 1,
+        "pointer_kind": "manuscript_evidence_run",
+        "status": "complete",
+        "run_id": run_id,
+        "config_path": common_identity["config_path"],
+        "config_hash": common_identity["config_hash"],
+        "git_commit": common_identity["git_commit"],
+        "source_tree_hash": common_identity["source_tree_hash"],
+        "code_package_versions": common_identity["code_package_versions"],
+        "random_seeds": common_identity["random_seeds"],
+        "promotion_command": (
+            "python -m src.experiments.build_manuscript_evidence "
+            f"--config {common_identity['config_path']} --promote-run-id {run_id}"
+        ),
+        "relative_target": relative_target,
+        "scopes": scope_payloads,
+        "previous_pointer_sha256": previous_pointer_hash,
+        "promoted_at": utc_now_iso(),
+    }
+    serialized = json.dumps(payload, indent=2, sort_keys=True, ensure_ascii=False) + "\n"
+    if latest.exists():
+        descriptor, temporary_name = tempfile.mkstemp(
+            prefix=".latest-pointer.", suffix=".tmp", dir=root, text=True
+        )
+        temporary = Path(temporary_name)
+        try:
+            with os.fdopen(descriptor, "w", encoding="utf-8", newline="\n") as stream:
+                stream.write(serialized)
+            os.replace(temporary, pointer_path)
+        finally:
+            if temporary.exists():
+                temporary.unlink()
+    else:
+        temporary_latest = Path(tempfile.mkdtemp(prefix=".latest-pointer.", dir=root))
+        try:
+            (temporary_latest / "pointer.json").write_text(
+                serialized,
+                encoding="utf-8",
+                newline="\n",
+            )
+            os.replace(temporary_latest, latest)
+        finally:
+            if temporary_latest.exists():
+                shutil.rmtree(temporary_latest)
+    return pointer_path
 
 
 def _update_latest_pointer(run_dir: Path, output_root: Path) -> Path:
-    latest = output_root / "latest"
-    if latest.exists() or latest.is_symlink():
-        archived = output_root / f"latest_pointer_archive_{utc_now_iso().replace(':', '').replace('+00:00', 'Z')}"
-        latest.rename(archived)
-    try:
-        latest.symlink_to(run_dir.name, target_is_directory=True)
-    except OSError:
-        # Windows hosts often disallow unprivileged symlinks. Mirror the complete
-        # immutable package so relative final-manifest paths remain verifiable;
-        # a pointer record preserves the authoritative versioned target.
-        shutil.copytree(run_dir, latest)
-        _write_json(
-            latest / "run_pointer.json",
-            {"run_id": run_dir.name, "relative_target": f"../{run_dir.name}"},
-        )
-    return latest
+    """Backward-compatible alias for the pointer-only, explicit promotion API."""
+
+    return promote_latest_pointer(run_dir, output_root)
 
 
-def _load_existing_manifest(path: Path, config_hash: str) -> dict[str, Any]:
+def promote_configured_latest(
+    config_path: str | Path,
+    *,
+    run_id: str,
+) -> Path:
+    """Promote one package using only its canonical config-derived output root."""
+
+    resolved_config = Path(config_path)
+    if not resolved_config.is_absolute():
+        resolved_config = (PROJECT_ROOT / resolved_config).resolve()
+    config = load_manuscript_config(resolved_config, project_root=PROJECT_ROOT)
+    settings = manuscript_settings(config)
+    output_root, _, _ = _validated_output_layout(
+        settings,
+        run_id=validate_portable_run_id(run_id),
+        evidence_scope="core",
+    )
+    return promote_latest_pointer(output_root / run_id, output_root)
+
+
+def _load_existing_manifest(
+    path: Path,
+    config_hash: str,
+    evidence_scope: str,
+) -> dict[str, Any]:
     manifest = json.loads(path.read_text(encoding="utf-8"))
     validate_run_manifest(
         manifest,
         project_root=PROJECT_ROOT,
         expected_config_hash=config_hash,
+        expected_evidence_scope=evidence_scope,
         require_complete=manifest.get("status") == "complete",
         verify_source_tree=True,
     )
@@ -783,11 +2237,351 @@ def _load_existing_manifest(path: Path, config_hash: str) -> dict[str, Any]:
     return manifest
 
 
+_RESUME_IDENTITY_FIELDS: tuple[str, ...] = (
+    "manifest_schema_version",
+    "run_id",
+    "git_commit",
+    "source_tree_hash",
+    "config_path",
+    "config_hash",
+    "evidence_scope",
+    "scope_contract",
+    "scope_contract_hash",
+    "actual_input_receipts",
+    "dataset_hashes",
+    "side_input_hashes",
+    "scientific_input_hash",
+    "code_package_versions",
+    "random_seeds",
+)
+
+
+def _validate_resume_worktree(run_dir: Path) -> None:
+    """Allow only exact current-run files when resuming an interrupted build."""
+
+    allowed_root = run_dir.resolve()
+    try:
+        allowed_root.relative_to(PROJECT_ROOT.resolve())
+    except ValueError as exc:
+        raise ManuscriptBuildError("Resume run root must remain inside the repository.") from exc
+    try:
+        tracked_status = subprocess.run(
+            ["git", "status", "--porcelain", "--untracked-files=no"],
+            cwd=PROJECT_ROOT,
+            check=True,
+            capture_output=True,
+            text=True,
+            encoding="utf-8",
+            errors="replace",
+        ).stdout.strip()
+        untracked_output = subprocess.run(
+            ["git", "ls-files", "--others", "--exclude-standard", "-z"],
+            cwd=PROJECT_ROOT,
+            check=True,
+            capture_output=True,
+            text=True,
+            encoding="utf-8",
+            errors="replace",
+        ).stdout
+    except (OSError, subprocess.CalledProcessError) as exc:
+        raise ManuscriptBuildError(f"Cannot validate the resume worktree: {exc}") from exc
+    if tracked_status:
+        raise ManuscriptBuildError("A compatible resume requires an unchanged tracked worktree.")
+    disallowed: list[str] = []
+    for relative in (value for value in untracked_output.split("\0") if value):
+        candidate = (PROJECT_ROOT / relative).resolve()
+        try:
+            candidate.relative_to(allowed_root)
+        except ValueError:
+            disallowed.append(relative.replace("\\", "/"))
+    if disallowed:
+        raise ManuscriptBuildError(
+            "A compatible resume permits untracked files only under the exact current run root; "
+            f"disallowed={sorted(disallowed)}."
+        )
+
+
+def _load_compatible_resume_manifest(
+    manifest_path: Path,
+    *,
+    provisional: Mapping[str, Any],
+    run_dir: Path,
+    config_hash: str,
+    evidence_scope: str,
+    allowed_untracked_root: Path | None = None,
+) -> dict[str, Any]:
+    """Validate an original clean manifest before admitting current-run files."""
+
+    manifest = _load_existing_manifest(manifest_path, config_hash, evidence_scope)
+    clean_status_hash = hashlib.sha256(b"").hexdigest()
+    if (
+        manifest.get("git_worktree_dirty") is not False
+        or manifest.get("git_status_sha256") != clean_status_hash
+    ):
+        raise ManuscriptBuildError(
+            "An interrupted run is resumable only when its original manifest began clean "
+            "and carries the exact empty Git-status hash."
+        )
+    if manifest.get("failure_information") or any(
+        isinstance(record, Mapping) and record.get("status") == "failed"
+        for record in manifest.get("commands", [])
+    ):
+        raise ManuscriptBuildError(
+            "A run with a recorded failed attempt is immutable and cannot be resumed."
+        )
+    differences = {
+        field: {"existing": manifest.get(field), "current": provisional.get(field)}
+        for field in _RESUME_IDENTITY_FIELDS
+        if manifest.get(field) != provisional.get(field)
+    }
+    if differences:
+        raise ManuscriptBuildError(
+            "Interrupted run identity is incompatible with current verified inputs: "
+            + json.dumps(differences, sort_keys=True, ensure_ascii=True)
+        )
+    _validate_resume_worktree(allowed_untracked_root or run_dir)
+    return manifest
+
+
+def _finish_command_record(
+    record: MutableMapping[str, Any],
+    *,
+    status: str,
+    return_code: int | None,
+) -> None:
+    if status not in {"complete", "failed", "interrupted"}:
+        raise ManuscriptBuildError(f"Unsupported terminal command status: {status!r}.")
+    record["status"] = status
+    record["ended_at"] = utc_now_iso()
+    record["return_code"] = return_code
+
+
+def _validate_run_lock_for_package_check(
+    run_dir: Path,
+    *,
+    run_id: str,
+    evidence_scope: str,
+    allowed_lock_token: str | None,
+) -> None:
+    """Reject external validation of a package being written by any process."""
+
+    lock_path = run_dir / ".run.lock"
+    exists = os.path.lexists(lock_path)
+    if allowed_lock_token is None:
+        if exists:
+            raise ManuscriptBuildError(
+                "Complete-package validation is forbidden while a run lock exists."
+            )
+        return
+    if not exists or _is_linklike(lock_path) or not lock_path.is_file():
+        raise ManuscriptBuildError("The in-process complete-package validation lock is absent or invalid.")
+    try:
+        payload = json.loads(lock_path.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError) as exc:
+        raise ManuscriptBuildError(f"Owned run lock is unreadable: {exc}") from exc
+    expected = {
+        "run_id": run_id,
+        "evidence_scope": evidence_scope,
+        "hostname": platform.node(),
+        "pid": os.getpid(),
+        "token": allowed_lock_token,
+    }
+    if any(payload.get(field) != value for field, value in expected.items()):
+        raise ManuscriptBuildError("The in-process complete-package validation lock is not owned.")
+
+
+def _acquire_run_lock(run_dir: Path, *, run_id: str, evidence_scope: str) -> tuple[Path, str, None]:
+    """Acquire one exclusive per-scope lease; stale takeover is deliberately manual."""
+
+    lock_path = run_dir / ".run.lock"
+    if os.path.lexists(lock_path):
+        if _is_linklike(lock_path) or not lock_path.is_file():
+            raise ManuscriptBuildError("Run lock is not a regular file.")
+        try:
+            existing = json.loads(lock_path.read_text(encoding="utf-8"))
+        except (OSError, json.JSONDecodeError) as exc:
+            raise ManuscriptBuildError(f"Existing run lock is unreadable: {exc}") from exc
+        owner_host = existing.get("hostname", "unknown")
+        owner_pid = existing.get("pid", "unknown")
+        raise ManuscriptBuildError(
+            "Run lock already exists; automatic stale-lock takeover is forbidden because it can "
+            f"race another writer (owner_host={owner_host!r}, owner_pid={owner_pid!r}). "
+            "Verify the owner externally and archive/remove the stale lock manually."
+        )
+    token = hashlib.sha256(
+        f"{run_id}|{evidence_scope}|{os.getpid()}|{time.time_ns()}".encode("utf-8")
+    ).hexdigest()
+    payload = {
+        "schema_version": 1,
+        "run_id": run_id,
+        "evidence_scope": evidence_scope,
+        "hostname": platform.node(),
+        "pid": os.getpid(),
+        "token": token,
+        "acquired_at": utc_now_iso(),
+    }
+    try:
+        descriptor = os.open(lock_path, os.O_CREAT | os.O_EXCL | os.O_WRONLY)
+    except FileExistsError as exc:
+        raise ManuscriptBuildError("A concurrent process acquired the run lock.") from exc
+    with os.fdopen(descriptor, "w", encoding="utf-8", newline="\n") as stream:
+        stream.write(json.dumps(payload, sort_keys=True, ensure_ascii=True) + "\n")
+        stream.flush()
+        os.fsync(stream.fileno())
+    return lock_path, token, None
+
+
+def _release_run_lock(lock_path: Path, token: str) -> None:
+    if not lock_path.is_file() or _is_linklike(lock_path):
+        raise ManuscriptBuildError("Owned run lock disappeared or became link-like.")
+    try:
+        payload = json.loads(lock_path.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError) as exc:
+        raise ManuscriptBuildError(f"Owned run lock became unreadable: {exc}") from exc
+    if payload.get("token") != token or payload.get("pid") != os.getpid():
+        raise ManuscriptBuildError("Run lock ownership changed during execution.")
+    lock_path.unlink()
+
+
+def _prepare_resumed_manifest(
+    manifest: MutableMapping[str, Any],
+    *,
+    entrypoint_command: str,
+) -> MutableMapping[str, Any]:
+    """Close abandoned attempts and record the explicit resume invocation."""
+
+    commands = manifest.get("commands")
+    if not isinstance(commands, list):
+        raise ManuscriptBuildError("Interrupted run manifest has no command list.")
+    active_entrypoints = [
+        record
+        for record in commands
+        if isinstance(record, MutableMapping)
+        and record.get("stage") == "entrypoint"
+        and record.get("status") == "started"
+    ]
+    active_stages = [
+        record
+        for record in commands
+        if isinstance(record, MutableMapping)
+        and record.get("stage") != "entrypoint"
+        and record.get("status") == "started"
+    ]
+    if len(active_entrypoints) != 1:
+        raise ManuscriptBuildError(
+            "An interrupted run must contain exactly one active entrypoint before resume."
+        )
+    if len(active_stages) > 1:
+        raise ManuscriptBuildError(
+            "An interrupted run may contain at most one active scientific stage."
+        )
+    if active_stages:
+        stage_name = active_stages[0].get("stage")
+        scope = manifest.get("evidence_scope")
+        if scope not in CANONICAL_STAGE_ORDERS or stage_name not in CANONICAL_STAGE_ORDERS[scope]:
+            raise ManuscriptBuildError(
+                f"Interrupted command names a noncanonical stage: {stage_name!r}."
+            )
+    for record in [*active_entrypoints, *active_stages]:
+        _finish_command_record(record, status="interrupted", return_code=None)
+    record_command(
+        manifest,
+        entrypoint_command,
+        stage="entrypoint",
+        status="started",
+    )
+    manifest["status"] = "running"
+    manifest["end_timestamp"] = None
+    return manifest
+
+
+def _active_entrypoint_record(manifest: MutableMapping[str, Any]) -> MutableMapping[str, Any]:
+    commands = manifest.get("commands")
+    if not isinstance(commands, list):
+        raise ManuscriptBuildError("Run manifest has no command list.")
+    started = [
+        record
+        for record in commands
+        if isinstance(record, MutableMapping)
+        and record.get("stage") == "entrypoint"
+        and record.get("status") == "started"
+    ]
+    if len(started) != 1:
+        raise ManuscriptBuildError(
+            "Run manifest must contain exactly one active entrypoint command."
+        )
+    return started[0]
+
+
+def _fail_latest_entrypoint(manifest: MutableMapping[str, Any]) -> None:
+    commands = manifest.get("commands")
+    if not isinstance(commands, list):
+        return
+    for record in reversed(commands):
+        if isinstance(record, MutableMapping) and record.get("stage") == "entrypoint":
+            _finish_command_record(record, status="failed", return_code=1)
+            return
+
+
+def _select_start_manifest(
+    provisional: dict[str, Any],
+    *,
+    requested_run_id: str | None,
+    reuse_compatible: bool,
+    manifest_path: Path,
+    run_dir: Path,
+    config_hash: str,
+    evidence_scope: str,
+    allowed_untracked_root: Path | None = None,
+) -> tuple[dict[str, Any], bool]:
+    """Choose a new or explicitly resumable manifest without weakening clean start."""
+
+    if os.path.lexists(manifest_path) and _is_linklike(manifest_path):
+        raise ManuscriptBuildError("The exact run manifest may not be a symlink or reparse point.")
+    exists = manifest_path.is_file()
+    if exists:
+        if requested_run_id is None:
+            raise ManuscriptBuildError(
+                "An existing generated run ID cannot be reused implicitly; provide an explicit "
+                "run_id after verifying the interrupted run."
+            )
+        if not reuse_compatible:
+            raise ManuscriptBuildError(
+                "The requested run already exists and compatible reuse is disabled; choose a new run ID."
+            )
+        return (
+            _load_compatible_resume_manifest(
+                manifest_path,
+                provisional=provisional,
+                run_dir=run_dir,
+                config_hash=config_hash,
+                evidence_scope=evidence_scope,
+                allowed_untracked_root=allowed_untracked_root,
+            ),
+            True,
+        )
+    if os.path.lexists(run_dir):
+        if _is_linklike(run_dir):
+            raise ManuscriptBuildError("A new canonical run root may not be link-like.")
+        raise ManuscriptBuildError(
+            "A canonical scope root already exists without its exact run manifest; "
+            "the orphan or partial evidence is immutable and must not be adopted."
+        )
+    if provisional.get("git_worktree_dirty") is not False:
+        raise ManuscriptBuildError(
+            "A canonical manuscript build must start from a clean worktree. "
+            "Only an explicit compatible interrupted run may contain files under its exact "
+            "run root."
+        )
+    return provisional, False
+
+
 def build(
     config_path: str | Path = DEFAULT_CONFIG_PATH,
     *,
     run_id: str | None = None,
     reuse_compatible: bool = True,
+    evidence_scope: str = "core",
 ) -> Dict[str, Path]:
     resolved_config = Path(config_path)
     if not resolved_config.is_absolute():
@@ -795,33 +2589,96 @@ def build(
     config = load_manuscript_config(resolved_config)
     settings = manuscript_settings(config)
     config_hash = canonical_config_hash(config)
-    output_root = (PROJECT_ROOT / str(settings["output"]["root"])).resolve()
-    output_root.mkdir(parents=True, exist_ok=True)
+    scopes = settings.get("evidence_scopes")
+    if not isinstance(scopes, Mapping):
+        raise ManuscriptBuildError("Canonical config has no evidence_scopes mapping.")
+    scope_contract = evidence_scope_contract(config, evidence_scope)
+    validate_scope_release_ready(scopes, evidence_scope)
+    stage_order = CANONICAL_STAGE_ORDERS[evidence_scope]
+    output_root, _, _ = _validated_output_layout(
+        settings,
+        run_id=run_id,
+        evidence_scope=evidence_scope,
+    )
 
-    initial_command = f"{sys.executable} -m src.experiments.build_manuscript_evidence --config {_portable(resolved_config)}"
+    requested_run_id = run_id
+    sibling_roots, package_root = _validated_sibling_scope_for_start(
+        output_root=output_root,
+        run_id=requested_run_id,
+        evidence_scope=evidence_scope,
+        config_hash=config_hash,
+    )
     provisional = create_run_manifest(
         resolved_config,
         project_root=PROJECT_ROOT,
         run_id=run_id,
-        initial_command=initial_command,
+        evidence_scope=evidence_scope,
+        allowed_untracked_roots=sibling_roots,
     )
     run_id = str(provisional["run_id"])
-    run_dir = output_root / run_id
-    run_dir.mkdir(parents=True, exist_ok=True)
-    manifest_path = run_dir / str(settings["output"].get("manifest_filename", "run_manifest.json"))
-    if manifest_path.is_file():
-        manifest = _load_existing_manifest(manifest_path, config_hash)
-        if manifest.get("status") == "complete":
-            return {
-                "run_dir": run_dir,
-                "run_manifest": manifest_path,
-                "final_evidence_manifest": run_dir / "final_evidence_manifest.json",
-                "latest": output_root / "latest",
-            }
-        manifest["end_timestamp"] = None
-    else:
-        manifest = provisional
-        write_run_manifest(manifest, manifest_path, project_root=PROJECT_ROOT)
+    initial_command = _portable_entrypoint_command(
+        resolved_config,
+        evidence_scope=evidence_scope,
+        run_id=run_id,
+        reuse_compatible=reuse_compatible,
+    )
+    output_root, validated_run_dir, validated_manifest_path = _validated_output_layout(
+        settings,
+        run_id=run_id,
+        evidence_scope=evidence_scope,
+    )
+    assert validated_run_dir is not None and validated_manifest_path is not None
+    run_dir = validated_run_dir
+    manifest_path = validated_manifest_path
+    manifest, existing_manifest = _select_start_manifest(
+        provisional,
+        requested_run_id=requested_run_id,
+        reuse_compatible=reuse_compatible,
+        manifest_path=manifest_path,
+        run_dir=run_dir,
+        config_hash=config_hash,
+        evidence_scope=evidence_scope,
+        allowed_untracked_root=package_root if sibling_roots else None,
+    )
+    if existing_manifest and manifest.get("status") == "complete":
+        _validate_completed_run_package(
+            manifest,
+            manifest_path=manifest_path,
+            run_dir=run_dir,
+            config_hash=config_hash,
+            evidence_scope=evidence_scope,
+            allowed_untracked_root=package_root if sibling_roots else None,
+        )
+        return {
+            "run_dir": run_dir,
+            "run_manifest": manifest_path,
+            "final_evidence_manifest": run_dir / "final_evidence_manifest.json",
+        }
+    if not existing_manifest:
+        run_dir.mkdir(parents=True, exist_ok=False)
+    lock_path, lock_token, recovered_lock = _acquire_run_lock(
+        run_dir,
+        run_id=run_id,
+        evidence_scope=evidence_scope,
+    )
+    try:
+        if recovered_lock is not None:
+            manifest.setdefault("run_lock_recoveries", []).append(recovered_lock)
+        if existing_manifest:
+            _prepare_resumed_manifest(manifest, entrypoint_command=initial_command)
+            write_run_manifest(manifest, manifest_path, project_root=PROJECT_ROOT)
+        else:
+            manifest = provisional
+            record_command(
+                manifest,
+                initial_command,
+                stage="entrypoint",
+                status="started",
+            )
+            write_run_manifest(manifest, manifest_path, project_root=PROJECT_ROOT)
+    except Exception:
+        _release_run_lock(lock_path, lock_token)
+        raise
 
     context = StageContext(
         config_path=resolved_config,
@@ -831,13 +2688,16 @@ def build(
         run_id=run_id,
         config_hash=config_hash,
         manifest=manifest,
+        evidence_scope=evidence_scope,
+        scope_contract=scope_contract,
     )
     active_stage = "preflight"
+    active_command: MutableMapping[str, Any] | None = None
     try:
         input_snapshots = _write_input_snapshots(context)
         _register_stage_files(context, "run_inputs", input_snapshots)
         write_run_manifest(manifest, manifest_path, project_root=PROJECT_ROOT)
-        for stage in STAGE_ORDER:
+        for stage in stage_order:
             active_stage = stage
             started = utc_now_iso()
             command_record = record_command(
@@ -847,34 +2707,65 @@ def build(
                 status="started",
                 started_at=started,
             )
+            active_command = command_record
+            write_run_manifest(manifest, manifest_path, project_root=PROJECT_ROOT)
             files = _execute_stage(context, stage, reuse_compatible=reuse_compatible)
             _register_stage_files(context, stage, files)
-            command_record.update(status="complete", ended_at=utc_now_iso(), return_code=0)
+            _finish_command_record(command_record, status="complete", return_code=0)
+            active_command = None
             write_run_manifest(manifest, manifest_path, project_root=PROJECT_ROOT)
+            if stage == "model_benchmarks":
+                enforce_baseline_reference_gate(context)
 
         active_stage = "package_validation"
-        _validate_primary_artifacts(context)
-        _validate_llm_preflight(context)
+        if evidence_scope == "core":
+            _validate_primary_artifacts(context)
         claim_report = _write_claim_report(context)
         package_status = _write_package_status(context)
-        historical_index = _write_historical_index(context)
         _register_stage_files(
             context,
             "integration",
-            [claim_report, package_status, historical_index],
+            [claim_report, package_status],
+        )
+        validate_scope_artifact_paths(
+            evidence_scope,
+            [
+                path.relative_to(run_dir).as_posix()
+                for path in _all_files(run_dir)
+                if path.relative_to(run_dir).as_posix()
+                not in {
+                    str(settings["output"].get("manifest_filename", "run_manifest.json")),
+                    ".run.lock",
+                }
+            ],
         )
         evidence_manifests = build_final_evidence_manifest(
             run_dir,
             run_id=run_id,
             config_hash=config_hash,
+            evidence_scope=evidence_scope,
+            scope_contract_hash=str(manifest["scope_contract_hash"]),
+            git_commit=str(manifest["git_commit"]),
+            source_tree_hash=str(manifest["source_tree_hash"]),
+            scientific_input_hash=str(manifest["scientific_input_hash"]),
         )
         validate_final_evidence_manifest(
             evidence_manifests["json"],
             run_dir=run_dir,
             expected_run_id=run_id,
             expected_config_hash=config_hash,
+            expected_evidence_scope=evidence_scope,
+            expected_scope_contract_hash=str(manifest["scope_contract_hash"]),
+            expected_git_commit=str(manifest["git_commit"]),
+            expected_source_tree_hash=str(manifest["source_tree_hash"]),
+            expected_scientific_input_hash=str(manifest["scientific_input_hash"]),
         )
         _register_stage_files(context, "final_manifest", list(evidence_manifests.values()))
+        _finish_command_record(
+            _active_entrypoint_record(manifest),
+            status="complete",
+            return_code=0,
+        )
         finalize_run_manifest(manifest, status="complete")
         write_run_manifest(
             manifest,
@@ -883,45 +2774,88 @@ def build(
             validate=True,
             require_complete=True,
         )
-        latest = _update_latest_pointer(run_dir, output_root)
+        _validate_completed_run_package(
+            manifest,
+            manifest_path=manifest_path,
+            run_dir=run_dir,
+            config_hash=config_hash,
+            evidence_scope=evidence_scope,
+            allowed_untracked_root=package_root if sibling_roots else None,
+            allowed_lock_token=lock_token,
+        )
         return {
             "run_dir": run_dir,
             "run_manifest": manifest_path,
             "final_evidence_manifest": evidence_manifests["json"],
-            "latest": latest,
         }
     except Exception as exc:
+        if active_command is not None and active_command.get("status") == "started":
+            _finish_command_record(active_command, status="failed", return_code=1)
         record_failure(
             manifest,
             stage=active_stage,
             error_type=type(exc).__name__,
-            message=str(exc),
+            message=_sanitized_failure_message(str(exc)),
         )
         try:
+            _fail_latest_entrypoint(manifest)
             finalize_run_manifest(manifest, status="failed")
             write_run_manifest(manifest, manifest_path, project_root=PROJECT_ROOT, validate=False)
         except Exception:
             pass
         raise
+    finally:
+        _release_run_lock(lock_path, lock_token)
 
 
-def parse_args() -> argparse.Namespace:
+def parse_args(argv: Sequence[str] | None = None) -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Build the canonical manuscript evidence package.")
     parser.add_argument("--config", default=str(DEFAULT_CONFIG_PATH))
     parser.add_argument("--run-id", default=None, help="Explicit identity for a new run or compatible resume.")
+    parser.add_argument(
+        "--promote-run-id",
+        default=None,
+        help="Validate both immutable scopes and atomically update only latest/pointer.json.",
+    )
+    parser.add_argument(
+        "--scope",
+        choices=tuple(CANONICAL_STAGE_ORDERS),
+        default=None,
+        help="Build exactly one immutable evidence scope; default is the core paper scope.",
+    )
     parser.add_argument(
         "--no-reuse-compatible",
         action="store_true",
         help="Reject all existing stage outputs instead of resuming compatible stages.",
     )
-    return parser.parse_args()
+    return parser.parse_args(argv)
+
+
+def main(argv: Sequence[str] | None = None) -> None:
+    arguments = parse_args(argv)
+    if arguments.promote_run_id is not None:
+        if (
+            arguments.run_id is not None
+            or arguments.no_reuse_compatible
+            or arguments.scope is not None
+        ):
+            raise SystemExit(
+                "--promote-run-id cannot be combined with build run/reuse/scope options."
+            )
+        pointer = promote_configured_latest(
+            arguments.config,
+            run_id=arguments.promote_run_id,
+        )
+        print(json.dumps({"latest_pointer": str(pointer)}, indent=2, sort_keys=True))
+    else:
+        result = build(
+            arguments.config,
+            run_id=arguments.run_id,
+            reuse_compatible=not arguments.no_reuse_compatible,
+            evidence_scope=arguments.scope or "core",
+        )
+        print(json.dumps({key: str(value) for key, value in result.items()}, indent=2, sort_keys=True))
 
 
 if __name__ == "__main__":
-    arguments = parse_args()
-    result = build(
-        arguments.config,
-        run_id=arguments.run_id,
-        reuse_compatible=not arguments.no_reuse_compatible,
-    )
-    print(json.dumps({key: str(value) for key, value in result.items()}, indent=2, sort_keys=True))
+    main()

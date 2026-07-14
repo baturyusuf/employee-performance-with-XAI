@@ -1,7 +1,12 @@
 {
+  "policy_source": {
+    "status": "legacy_compatibility_projection",
+    "canonical_source": "configs/manuscript_final.yaml",
+    "same_named_policy_exclusions_must_match": true
+  },
   "feature_sets": {
     "full_feature_upper_bound": {
-      "description": "All non-ID predictors except target. Used only as an upper-bound and leakage warning.",
+      "description": "All non-ID predictors except target. Diagnostic information-rich leakage-risk comparator only; not a guaranteed optimized upper bound or deployable policy.",
       "drop": ["EmpNumber", "PerformanceRating"],
       "deployment_status": "upper_bound_leakage_warning"
     },
@@ -11,29 +16,34 @@
       "deployment_status": "sensitivity_only"
     },
     "no_salary_hike_no_attrition": {
-      "description": "Primary leakage-safe decision-support feature set after researcher-approved exclusion of Age from final candidates.",
-      "drop": ["EmpNumber", "PerformanceRating", "EmpLastSalaryHikePercent", "Attrition", "Age"],
+      "description": "Governed leakage-aware comparison excluding outcome-proximal fields and direct sensitive demographic fields.",
+      "drop": ["EmpNumber", "PerformanceRating", "EmpLastSalaryHikePercent", "Attrition", "Age", "Gender", "MaritalStatus"],
       "deployment_status": "candidate"
     },
     "no_salary_hike_no_attrition_no_department": {
-      "description": "Fairness-aware final-model candidate excluding direct department membership and Age.",
-      "drop": ["EmpNumber", "PerformanceRating", "EmpLastSalaryHikePercent", "Attrition", "EmpDepartment", "Age"],
+      "description": "Canonical leakage-aware XGBoost policy excluding outcome-proximal, direct sensitive demographic, identifier, target, and department fields.",
+      "drop": ["EmpNumber", "PerformanceRating", "EmpLastSalaryHikePercent", "Attrition", "EmpDepartment", "Age", "Gender", "MaritalStatus"],
       "deployment_status": "candidate"
     },
     "no_salary_hike_no_attrition_with_age_audit": {
-      "description": "Audit-only leakage-safe feature set retaining Age to quantify the effect of the researcher-approved Age exclusion policy.",
+      "description": "Legacy audit-only leakage-aware feature set retaining all sensitive demographics; retained under a distinct historical name.",
       "drop": ["EmpNumber", "PerformanceRating", "EmpLastSalaryHikePercent", "Attrition"],
       "deployment_status": "audit_only"
     },
     "no_salary_hike_no_attrition_no_department_with_age_audit": {
-      "description": "Audit-only department-free leakage-safe feature set retaining Age.",
+      "description": "Legacy audit-only department-free leakage-aware feature set retaining all sensitive demographics; retained under a distinct historical name.",
       "drop": ["EmpNumber", "PerformanceRating", "EmpLastSalaryHikePercent", "Attrition", "EmpDepartment"],
       "deployment_status": "audit_only"
     },
     "no_salary_hike_no_attrition_no_department_no_job_role": {
-      "description": "Stricter fairness/proxy sensitivity feature set excluding Age, direct department membership, and job role.",
-      "drop": ["EmpNumber", "PerformanceRating", "EmpLastSalaryHikePercent", "Attrition", "Age", "EmpDepartment", "EmpJobRole"],
+      "description": "Stricter leakage-aware proxy sensitivity policy additionally excluding job role.",
+      "drop": ["EmpNumber", "PerformanceRating", "EmpLastSalaryHikePercent", "Attrition", "Age", "Gender", "MaritalStatus", "EmpDepartment", "EmpJobRole"],
       "deployment_status": "sensitivity_only"
+    },
+    "no_salary_hike_no_attrition_sensitive_retaining_audit": {
+      "description": "Audit-only leakage-aware policy retaining sensitive demographic fields to isolate the governance exclusion contrast.",
+      "drop": ["EmpNumber", "PerformanceRating", "EmpLastSalaryHikePercent", "Attrition"],
+      "deployment_status": "audit_only"
     },
     "no_sensitive_demographic": {
       "description": "Sensitivity set excluding direct demographic attributes, including researcher-approved Age exclusion.",

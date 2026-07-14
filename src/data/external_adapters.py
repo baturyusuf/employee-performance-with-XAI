@@ -34,6 +34,7 @@ class ExternalDatasetConfig:
     optional_attrition_target: Optional[Dict[str, Any]] = None
     date_columns: Optional[List[str]] = None
     derived_features: Optional[Dict[str, Dict[str, Any]]] = None
+    schema_mapping_path: Optional[Path] = None
 
     @property
     def dataset_dir(self) -> Path:
@@ -71,13 +72,37 @@ def available_dataset_names() -> List[str]:
     )
 
 
-def load_external_config(dataset_name: str) -> ExternalDatasetConfig:
-    path = EXTERNAL_DATA_ROOT / dataset_name / "schema_mapping.json"
+def load_external_config(
+    dataset_name: str,
+    *,
+    schema_mapping_path: str | Path | None = None,
+) -> ExternalDatasetConfig:
+    """Load one schema mapping, optionally from an explicitly bound path.
+
+    The default directory convention is retained for legacy and exploratory
+    callers.  Canonical scientific stages must pass ``schema_mapping_path`` so
+    that the mapping is a declared, hashable side input rather than a file
+    discovered by directory layout.
+    """
+
+    path = (
+        Path(schema_mapping_path).expanduser().resolve()
+        if schema_mapping_path is not None
+        else EXTERNAL_DATA_ROOT / dataset_name / "schema_mapping.json"
+    )
     if not path.exists():
         raise FileNotFoundError(f"External schema mapping not found: {path}")
+    if not path.is_file():
+        raise FileNotFoundError(f"External schema mapping is not a file: {path}")
     payload = json.loads(path.read_text(encoding="utf-8"))
+    mapped_dataset_name = str(payload.get("dataset_name", "")).strip()
+    if mapped_dataset_name != dataset_name:
+        raise ValueError(
+            "External schema mapping identity mismatch: "
+            f"requested {dataset_name!r}, mapping declares {mapped_dataset_name!r}."
+        )
     return ExternalDatasetConfig(
-        dataset_name=str(payload["dataset_name"]),
+        dataset_name=mapped_dataset_name,
         display_name=str(payload.get("display_name", payload["dataset_name"])),
         recommended_role=str(payload.get("recommended_role", "")),
         source_url=str(payload.get("source_url", "")),
@@ -92,15 +117,44 @@ def load_external_config(dataset_name: str) -> ExternalDatasetConfig:
         sensitive_audit_only_columns=[str(v) for v in payload.get("sensitive_audit_only_columns", [])],
         proxy_risk_columns=[str(v) for v in payload.get("proxy_risk_columns", [])],
         feature_policy_variants=dict(payload.get("feature_policy_variants", {})),
+        schema_mapping_path=path.resolve(),
     )
 
 
-def load_external_dataset(dataset_name: str, target_kind: str = "primary") -> ExternalDataset:
-    config = load_external_config(dataset_name)
-    if not config.raw_path.exists():
-        raise FileNotFoundError(f"External raw CSV not found: {config.raw_path}")
+def load_external_dataset(
+    dataset_name: str,
+    target_kind: str = "primary",
+    *,
+    raw_frame: pd.DataFrame | None = None,
+    raw_path: str | Path | None = None,
+    schema_mapping_path: str | Path | None = None,
+) -> ExternalDataset:
+    """Adapt an external dataset using explicit inputs when supplied.
 
-    raw = _read_csv_with_best_effort(config.raw_path)
+    ``raw_frame`` is intended for canonical callers that have already verified
+    the exact dataset bytes through :mod:`src.data.canonical_loader`.
+    ``raw_path`` is an explicit path alternative for non-canonical tools.  They
+    are mutually exclusive so a caller cannot claim one source while silently
+    reading another.  Omitting both retains the historical directory convention
+    for legacy callers only.
+    """
+
+    if raw_frame is not None and raw_path is not None:
+        raise ValueError("raw_frame and raw_path are mutually exclusive external inputs.")
+    if raw_frame is not None and not isinstance(raw_frame, pd.DataFrame):
+        raise TypeError("raw_frame must be a pandas DataFrame when supplied.")
+
+    config = load_external_config(dataset_name, schema_mapping_path=schema_mapping_path)
+    if raw_frame is None:
+        source_path = Path(raw_path).expanduser().resolve() if raw_path is not None else config.raw_path
+        if not source_path.exists():
+            raise FileNotFoundError(f"External raw CSV not found: {source_path}")
+        if not source_path.is_file():
+            raise FileNotFoundError(f"External raw CSV is not a file: {source_path}")
+        raw = _read_csv_with_best_effort(source_path)
+    else:
+        # Never mutate a verified loader result in-place while canonicalising it.
+        raw = raw_frame.copy(deep=True)
     raw = _strip_column_names(raw)
     target_spec = _target_spec_for(config, target_kind)
     raw_target = str(target_spec["raw_column"])
@@ -317,18 +371,65 @@ def _strip_string_values(df: pd.DataFrame) -> pd.DataFrame:
 def _add_derived_features(canonical: pd.DataFrame, raw: pd.DataFrame, config: ExternalDatasetConfig) -> None:
     derived = config.derived_features or {}
     for feature_name, spec in derived.items():
+        if not isinstance(spec, dict):
+            raise ValueError(f"Derived feature {feature_name!r} must define a mapping contract.")
         source = spec.get("from")
         reference = spec.get("reference")
-        if not source or source not in raw.columns:
-            continue
+        if not isinstance(source, str) or not source or source not in raw.columns:
+            raise ValueError(
+                f"Derived feature {feature_name!r} source column is missing: {source!r}."
+            )
+        if not isinstance(reference, str) or not reference or reference not in raw.columns:
+            raise ValueError(
+                f"Derived feature {feature_name!r} reference column is missing: {reference!r}."
+            )
         start = pd.to_datetime(raw[source], errors="coerce")
-        if reference and reference in raw.columns:
-            end = pd.to_datetime(raw[reference], errors="coerce")
-            fallback = end.dropna().max()
-            end = end.fillna(fallback)
-        else:
-            end = pd.Series(pd.Timestamp("today").normalize(), index=raw.index)
-        canonical[feature_name] = ((end - start).dt.days / 365.25).round(3)
+        end = pd.to_datetime(raw[reference], errors="coerce")
+        date_policy = spec.get("missing_or_invalid_date_policy")
+        if date_policy != "preserve_missing_and_require_expected_counts":
+            raise ValueError(
+                f"Derived feature {feature_name!r} has no approved missing/invalid date policy: "
+                f"{date_policy!r}."
+            )
+        observed_source_invalid = int(start.isna().sum())
+        observed_reference_invalid = int(end.isna().sum())
+        expected_source_invalid = spec.get("expected_missing_or_invalid_source_count")
+        expected_reference_invalid = spec.get("expected_missing_or_invalid_reference_count")
+        if (
+            isinstance(expected_source_invalid, bool)
+            or not isinstance(expected_source_invalid, int)
+            or observed_source_invalid != expected_source_invalid
+        ):
+            raise ValueError(
+                f"Derived feature {feature_name!r} source-date support drifted: "
+                f"expected={expected_source_invalid!r}, observed={observed_source_invalid}."
+            )
+        if (
+            isinstance(expected_reference_invalid, bool)
+            or not isinstance(expected_reference_invalid, int)
+            or observed_reference_invalid != expected_reference_invalid
+        ):
+            raise ValueError(
+                f"Derived feature {feature_name!r} reference-date support drifted: "
+                f"expected={expected_reference_invalid!r}, observed={observed_reference_invalid}."
+            )
+        duration = ((end - start).dt.days / 365.25).round(3)
+        invalid_policy = spec.get("invalid_duration_policy")
+        if invalid_policy == "set_negative_to_missing":
+            negative = duration < 0
+            expected_count = spec.get("expected_invalid_negative_count")
+            if not isinstance(expected_count, int) or int(negative.sum()) != expected_count:
+                raise ValueError(
+                    f"Derived feature {feature_name!r} negative-duration support drifted: "
+                    f"expected={expected_count!r}, observed={int(negative.sum())}."
+                )
+            duration = duration.mask(negative)
+        elif invalid_policy is not None:
+            raise ValueError(
+                f"Unknown invalid-duration policy for derived feature {feature_name!r}: "
+                f"{invalid_policy!r}."
+            )
+        canonical[feature_name] = duration
 
 
 def _map_target(
