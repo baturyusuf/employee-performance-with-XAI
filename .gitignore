@@ -183,6 +183,8 @@ cython_debug/
 # Valid pre-pointer-validator candidate is preserved locally; its promoted pointer exposed the
 # exact post-promotion worktree-validation defect repaired by the next clean checkpoint.
 /reports/manuscript_final/canonical_v2_20260714T200409Z_0a70d66/
+# Mutable local publication pointer; immutable packages and small receipts are tracked separately.
+/reports/manuscript_final/latest/pointer.json
 
 # User-provided HR data and row-level/fit-derived working data remain local.
 # Dataset cards, schema mappings, README files, and directory placeholders stay tracked.
