@@ -445,4 +445,13 @@ Push/recovery gate: the normal push timed out after 184 seconds with no remote r
 - Final pytest: 730 passed, 2 skipped and 11 subtests in 122.16 seconds, exit 0 (126.145 seconds wall).
 - Final unittest: 177 tests, 1 skipped in 8.178 seconds, exit 0 (11.861 seconds wall).
 - Compileall: exit 0 in 0.104 seconds.
-- Hosted status: no GitHub Actions result exists yet; V2-019 cannot be marked fully resolved until the pushed workflow has a first green hosted run.
+- Hosted status at the initial local checkpoint: pending; superseded by the passed execution receipt below.
+
+### V2-019 hosted execution receipt
+
+- Initial hosted run `29350928894`: failed only at full pytest after every earlier step passed; authenticated job logs showed 22 exact missing-local-input failures for intentionally ignored datasets/workbook.
+- Isolation contract: those real-data integrations skip only when their exact ignored input is absent. The trusted release workflow separately requires all five inputs before any test, preventing a candidate validation from silently skipping them.
+- Affected local real-data focus: 94 passed in 15.31 seconds, exit 0 (18.662 seconds wall).
+- Post-fix local pytest: 730 passed, 2 skipped and 11 subtests in 123.44 seconds, exit 0 (127.411 seconds wall).
+- Post-fix local unittest: 177 tests, 1 skipped in 7.945 seconds, exit 0 (11.733 seconds wall). Compileall: exit 0 in 0.103 seconds.
+- Green hosted run `29351557672` at commit `700adb235e66927df0ea4bf6b78ec811c9ffc1ee`: all steps passed. Focus 35 in 0.67 seconds; pytest 709 passed, 23 explicit skips and 11 subtests in 104.65 seconds; unittest 177 in 6.516 seconds with 10 skips; compileall and the production repository gate passed.
