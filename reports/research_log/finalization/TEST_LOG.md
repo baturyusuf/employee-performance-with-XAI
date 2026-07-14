@@ -1,5 +1,20 @@
 # Persistent Test Log
 
+## Final canonical validation - 2026-07-14
+
+- Focused final implementation tests: 103 passed, exit 0.
+- Complete pytest: 752 passed, 2 skipped, 11 subtests passed, exit 0, 139.36 seconds.
+- Unittest discovery: 179 tests passed, 1 skipped, exit 0, 9.487 seconds.
+- Compileall: exit 0, 0.131 seconds.
+- Core build: exit 0, 1,641.749 seconds.
+- Supplementary build: exit 0, 1,926.755 seconds.
+- Atomic promotion: exit 0, 5.968 seconds.
+- Strict post-promotion validation: exit 0, 5.677 seconds.
+- Independent canonical Unit 2G replay: exit 0, 8.321 seconds; zero model, sigmoid, and grouped-SHAP value drift.
+- Closed-world manifest, forbidden-feature, raw/secret, path portability, README/manuscript, large-file/staging, and offline runtime gates: passed.
+- Final package scan findings: zero machine paths, active `leakage-safe` terms, secrets, raw datasets, and lock/partial/staging directories.
+- Scientific network and paid API calls: zero.
+
 Date: 2026-07-13
 
 - Pytest: 188 passed plus 4 subtests, exit 0, 14.75 seconds

@@ -1,5 +1,13 @@
 # Persistent Decision Log
 
+## 2026-07-14 canonical admission decision
+
+- Admit `canonical_v2_20260714T221501Z_483f96f` as the sole canonical v2 technical evidence package.
+- The package was generated from clean pushed commit `483f96f`, passed strict post-promotion validation, and is referenced only through pointer-only `latest` plus compact receipt `../finalization_v2/15_canonical_evidence_receipt.json`.
+- Reject every earlier stage-validation, failed, pre-migration, pre-portability, or historical v1 candidate as canonical evidence.
+- Freeze scientific code/config and stop further experiments unless a concrete integrity failure is proven.
+- Do not begin manuscript writing in this task. Ethics, provenance/licence, historical-publication strategy, claim approval, manuscript authoring, and release publication remain manual units.
+
 The fixed decisions are recorded in `../finalization_v2/00_scope_and_fixed_decisions.md` and `../finalization_v2/04_decision_log.md`.
 
 Accepted on 2026-07-13:

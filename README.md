@@ -6,11 +6,15 @@ This repository is being finalized as a **leakage-aware XAI audit protocol** for
 
 ## Current v2 status
 
-There is **no current canonical v2 manuscript release**. Finalization is active on `finalization/leakage-aware-v2`; the authoritative live status is [`CURRENT_STATUS.md`](reports/research_log/finalization/CURRENT_STATUS.md).
+The canonical v2 **technical evidence package is complete, strictly validated, and atomically promoted** on `finalization/leakage-aware-v2`. The canonical run is `canonical_v2_20260714T221501Z_483f96f`, generated from clean commit `483f96fdbaab16cb0f32d03d9dbe676a759af44a`. Its config/source-tree hashes are `51415c2c...` and `f1e358e9...`; core/supplementary scientific-input hashes are `06c507be...` and `caffb945...`. The compact [`canonical receipt`](reports/research_log/finalization_v2/15_canonical_evidence_receipt.json) and [`CURRENT_STATUS.md`](reports/research_log/finalization/CURRENT_STATUS.md) are the tracked handoff records.
+
+The local pointer-only `reports/manuscript_final/latest/pointer.json` targets that immutable run. Strict post-promotion validation, independent Unit 2G model/calibrator/SHAP replay, manifest/hash checks, portability/terminology/secret/raw-data scans, and offline receipts all pass. The package contains seven final figures with exact source tables/captions and fourteen final source tables. The full 446.6 MB evidence package remains local/ignored and is not committed to Git.
+
+Technical completion does **not** mean submission approval. Ethics/IRB details, dataset authenticity/licence/citation/redistribution review, the historical-publication strategy, claim approval, manuscript writing, and release/DOI publication remain manual or external blockers. No manuscript file was edited in this finalization task.
 
 The named run `manuscript_final_20260712T181754Z_c664ef152ff3` is **historical v1 evidence**. It was produced from an old commit and dirty worktree, contains incompatible core scope and methods, and must not supply v2 manuscript numbers or claims. Its former tracked `latest` physical duplicate was verified byte-for-byte and migrated under the compact [`migration receipt`](reports/research_log/finalization_v2/14_latest_migration_receipt.json), leaving `latest` reserved for the pointer-only v2 contract. Earlier [`manuscript_remediation`](reports/research_log/manuscript_remediation/) records are historical context, not proof that a v2 issue is resolved.
 
-At this checkpoint:
+Historical chronology below is retained for audit and is superseded wherever it describes canonical execution as pending:
 
 - Unit 2G implementation is recorded by `ae5cf5a`; the verified-real-data stage was generated from clean source commit `17a3dcd`. Commit `e25f403` then accidentally pushed the complete 65.4 MB noncanonical evidence package. Forward cleanup `b7b2ad3` preserves that package locally and removes it from the current Git tip under D5 without rewriting history.
 - V2-021 implementation checkpoint `5a0d926` is synchronized with `origin/finalization/leakage-aware-v2`; hosted CI run `29353799148` passed at that exact commit. Unit 2G, V2-032, dependency, offline-runtime, and CI checkpoints were also sent by normal authenticated pushes. The full noncanonical evidence blobs remain in public history, which is still a publication-hygiene blocker under the no-history-rewrite rule.
@@ -63,9 +67,9 @@ The approved nested benchmark uses **10 outer folds x 5 inner folds**. Macro-F1 
 
 ### Frozen source-table plan
 
-The production builder now generates only current-run, hash-bound source tables. Core contains tables 1-10 plus table 13 (reproducibility and claim boundaries); supplementary contains table 11 (heuristic search success), table 12 (restricted/binary tasks), and its scope-specific table 13. These CSVs are manuscript-support evidence, not formatted manuscript tables. The exact plan and claim boundaries live in [`table_contract.py`](src/governance/table_contract.py); no real table is canonical until the final clean two-scope package passes every manifest and promotion gate.
+The production builder generates only current-run, hash-bound source tables. Core contains tables 1-10 plus table 13 (reproducibility and claim boundaries); supplementary contains table 11 (heuristic search success), table 12 (restricted/binary tasks), and its scope-specific table 13. These CSVs are canonical manuscript-support evidence, not formatted manuscript tables. The exact plan and claim boundaries live in [`table_contract.py`](src/governance/table_contract.py), and the final clean two-scope package passed every manifest and promotion gate.
 
-This is a tested **plan, generator, and validation contract**, not a real generated figure package. The production runner publishes exactly 29 runner-owned files atomically: seven 300-DPI PNGs, seven SVGs without unsafe declarations, seven source CSVs, seven technical captions, and one identity/source-hash manifest. The orchestrator then adds the closed-world stage contract and revalidates every upstream receipt. Canonical Figure 1-7 artifacts remain pending the clean real-data build, and historical/manual v1 figures cannot satisfy this contract.
+The canonical figure package is now real and validated. The production runner published exactly 29 runner-owned files atomically: seven 300-DPI PNGs, seven SVGs without unsafe declarations, seven source CSVs, seven technical captions, and one identity/source-hash manifest. The orchestrator added the closed-world stage contract and revalidated every upstream receipt. Historical/manual v1 figures remain inadmissible.
 
 The primary feature policy is `no_salary_hike_no_attrition_no_department`. It excludes:
 

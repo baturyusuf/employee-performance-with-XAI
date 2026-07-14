@@ -1,8 +1,25 @@
 # Artifact and Claim Map — Baseline
 
-## Status Rule
+## Canonical v2 admission - 2026-07-14
 
-No file under `reports/manuscript_final/latest` is admitted as final v2 evidence. It may be used only as historical diagnostic context until a clean-current-commit v2 build regenerates the result from explicitly bound inputs.
+Canonical run: `canonical_v2_20260714T221501Z_483f96f`.
+
+| Admitted area | Canonical local path | Admission evidence | Claim boundary |
+| --- | --- | --- | --- |
+| Package pointer | `reports/manuscript_final/latest/pointer.json` | Pointer-only inventory; strict post-promotion validation passed | Local canonical technical evidence, not a public release |
+| Core manifest | `reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/final_evidence_manifest.json` | 351 closed-world records; SHA-256 `cfa942c7...` | Frozen core evidence sources only |
+| Supplementary manifest | `reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/supplementary/final_evidence_manifest.json` | 188 closed-world records; SHA-256 `1c236a5a...` | Supplementary heuristic/related-task evidence only |
+| Core tables | `reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_tables/` | Eleven source tables and exact source/hash manifest | Manuscript-support data, not formatted manuscript tables |
+| Supplementary tables | `reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/supplementary/supplementary_tables/` | Three source tables and exact source/hash manifest | No cross-task comparability or external-validation claim |
+| Core figures | `reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_figures/` | Seven PNG/SVG pairs, seven source CSVs, seven captions | SHAP noncausal; fairness descriptive; HR mapped-target replication |
+| HRDataset_v14 | `reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/external_replication/` | Independent 50-model/calibrator/bootstrap/SHAP replay passed | Independently trained mapped-target replication, not locked transport |
+| Claim boundaries | `reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/canonical_claim_boundaries.md`; `reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/supplementary/canonical_claim_boundaries.md` | Both files manifest-bound | Prohibits causal, fairness-proof, deployment, prescriptive, and autonomous-decision claims |
+
+The tracked compact source of truth is `15_canonical_evidence_receipt.json`. The full package is local/ignored and must not be staged. The historical baseline sections below are retained only as audit chronology and do not override this admission.
+
+## Historical Status Rule (superseded)
+
+The following rule applied before canonical promotion and is retained only to explain why historical v1 evidence was rejected.
 
 | Historical area | Current path | Baseline finding | v2 disposition |
 | --- | --- | --- | --- |
@@ -17,9 +34,9 @@ No file under `reports/manuscript_final/latest` is admitted as final v2 evidence
 | Figures 1-7 | `reports/manuscript_final/latest/figures/` | Run-bound but wrong v2 scope for Figures 1-4 | Replace complete core figure set |
 | Manifest | `reports/manuscript_final/latest/run_manifest.json` | Old dirty commit, incomplete entrypoint, wrong actual input, absolute path | Reject and rebuild |
 
-## Claim Freeze
+## Historical Claim Freeze (superseded)
 
-No numeric manuscript claim is frozen. The v2 `manuscript_support/results_source_of_truth.md` and `claim_to_artifact_matrix.csv` must be generated only after the clean release run and approved by the user before manuscript editing.
+Canonical source tables and claim-boundary files are now frozen as technical evidence, but authors must still approve claim wording before manuscript editing.
 
 ## v2 Scope Contract — Unit 2A
 

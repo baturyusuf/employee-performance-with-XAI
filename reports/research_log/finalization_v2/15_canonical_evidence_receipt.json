@@ -1,0 +1,106 @@
+{
+  "artifact_inventory": {
+    "core": {
+      "actual_bytes": 224171937,
+      "actual_files": 354,
+      "closed_world_manifest_files": 351,
+      "final_evidence_manifest_sha256": "cfa942c7af4fe08c2d88b4db580a3aa2a71b9511d70ebf6f233b8824cc4f118d",
+      "run_manifest_sha256": "4fc68fffd090a7d428cc2dcb07a7d83edd39304b0a15fa76429a41ecd96bc198"
+    },
+    "supplementary": {
+      "actual_bytes": 222423549,
+      "actual_files": 191,
+      "closed_world_manifest_files": 188,
+      "final_evidence_manifest_sha256": "1c236a5a4681346c1d35095fa0a39764fd9d633d67e383b768086d2e4ba91f27",
+      "run_manifest_sha256": "936338bb6b001d3fc43c316a040aea9b567e219239ae3258345785beecc8e9b0"
+    }
+  },
+  "claim_boundary": "Canonical technical evidence for a leakage-aware XAI audit protocol. It is not causal evidence, fairness proof, deployment approval, autonomous HR decision support, locked-model transport, ethics approval, or dataset licence/authenticity approval.",
+  "generation": {
+    "config_hash": "51415c2ce68c89d9ce2b042b0a7a811fe3e98180b72460006f9d0465f6bf49b7",
+    "core_scientific_input_hash": "06c507bee525ea1daca43b61249764007d4d8baaa05c9333f23446ea723ce160",
+    "git_commit": "483f96fdbaab16cb0f32d03d9dbe676a759af44a",
+    "run_id": "canonical_v2_20260714T221501Z_483f96f",
+    "source_tree_hash": "f1e358e99914563305428cece1b1595bc76a58643184407ec5b222162d650332",
+    "supplementary_scientific_input_hash": "caffb945d15f990e3a789e9707f7a8a9115be31fecbbd705822994a10cfaf151"
+  },
+  "network_calls": 0,
+  "paid_api_calls": 0,
+  "promotion": {
+    "latest_inventory": [
+      "pointer.json"
+    ],
+    "pointer_sha256": "ecd3990187112891c3f1d3bb41bb7939392576e8df7904cae46baf2106397219",
+    "postpromotion_validation_seconds": 5.677,
+    "relative_target": "../canonical_v2_20260714T221501Z_483f96f",
+    "status": "complete"
+  },
+  "publication_sources": {
+    "claim_boundary_files": 2,
+    "core_source_tables": 11,
+    "figure_captions": 7,
+    "figure_png_files": 7,
+    "figure_source_tables": 7,
+    "figure_svg_files": 7,
+    "supplementary_source_tables": 3
+  },
+  "run_timings_seconds": {
+    "core": 1641.749,
+    "promotion": 5.968,
+    "supplementary": 1926.755
+  },
+  "schema_version": 1,
+  "status": "passed_and_promoted",
+  "tests": {
+    "compileall": {
+      "exit_code": 0,
+      "seconds": 0.131
+    },
+    "focused": {
+      "passed": 103,
+      "seconds": 4.44
+    },
+    "pytest": {
+      "passed": 752,
+      "seconds": 139.36,
+      "skipped": 2,
+      "subtests_passed": 11
+    },
+    "unittest": {
+      "passed": 179,
+      "seconds": 9.487,
+      "skipped": 1
+    }
+  },
+  "unit_2g_replay": {
+    "bootstrap_draws": 5000,
+    "bootstrap_resample_hash": "9b95a1e4a6f87c1abad1b110b8dadec8b48e5258e5362d01ad87d794c612f46e",
+    "canonical_content_sha256": "e6d5bb365c3548e9185f4c24f20737210cde62c758d6e1d1ce3462846f4c0983",
+    "feature_policy_contract_sha256": "e08625831afd057d1102d0fc42e06d56c9cd51a5632d04780aafe880888d78e5",
+    "fold_contract_hash": "e19679afb4f91f2d9e4ba03463829e3507042c3099d6a7ac1ca3b73837309205",
+    "local_grouped_shap_rows": 6531,
+    "mapped_target_support": {
+      "2": 31,
+      "3": 243,
+      "4": 37
+    },
+    "maximum_grouped_shap_value_error": 0.0,
+    "maximum_outer_model_probability_error": 0.0,
+    "maximum_shap_additivity_error": 0.000004468303814064711,
+    "maximum_sigmoid_probability_error": 0.0,
+    "model_set_sha256": "2bf06c3044af28029419b70e6eeb026281de57582f0bb2e1126a2c0909983c81",
+    "outer_models": 50,
+    "raw_dataset_sha256": "cb19996755c93c0a8d6527f59da4701c80aef65eff854906546dce286249813c",
+    "samples": 311,
+    "schema_mapping_sha256": "65c40fecc75235f57209cff6231d7386e4279ebedca9390f53ad2bb67ae63788",
+    "status": "passed"
+  },
+  "validation_scans": {
+    "active_leakage_safe_terms": 0,
+    "lock_partial_or_staging_directories": 0,
+    "machine_absolute_paths": 0,
+    "manuscript_diff": 0,
+    "raw_dataset_files_in_package": 0,
+    "secret_patterns": 0
+  }
+}

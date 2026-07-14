@@ -1,5 +1,11 @@
 # Persistent Command Log
 
+## Final canonical checkpoint - 2026-07-14
+
+Final run `canonical_v2_20260714T221501Z_483f96f` completed core and supplementary with `--no-reuse-compatible`, then passed atomic promotion and strict post-promotion validation. Exact commands, durations, hashes, candidate failures, and acceptance scans are recorded in `../finalization_v2/06_commands_and_tests.md` and `../finalization_v2/15_canonical_evidence_receipt.json`.
+
+Git push authentication worked for implementation checkpoints `3e4ea47`, `cd7b5e7`, and `483f96f`. The final receipt/log checkpoint is the only remaining normal push in this task.
+
 Authoritative detailed baseline commands and results: `../finalization_v2/06_commands_and_tests.md`.
 
 Last exact scientific validation commands:
@@ -13,7 +19,7 @@ $env:AZURE_OPENAI_API_KEY=$null
 .\myenv\Scripts\python.exe -m compileall -q src tests
 ```
 
-No canonical v2 build has been run.
+Historical note: no canonical v2 build had run at this early checkpoint; the final canonical completion section above supersedes this statement.
 
 Unit 1A exact commands and results are recorded in `../finalization_v2/06_commands_and_tests.md`. The real-data preflight used local files only and passed for all five logical tasks. Full pytest now passes 199 tests plus 4 subtests.
 

@@ -1,23 +1,26 @@
 # Next Actions
 
-1. Preserve Unit 2G run `stage_validation_hrdataset_20260713T175045Z_5af0262e83a3`, its ignored 65.4 MB local package, and `10_unit2g_checkpoint_summary.json`. Do not rerun, relabel, edit in place, or promote this noncanonical stage.
-2. Preserve pushed scientific checkpoint `0e3f50c` and push-receipt checkpoint `fa6f4b1`. Authentication is working and local/remote were synchronized at `ea34ed6` before V2-021.
-3. Preserve pushed V2-032 checkpoints `5cd144a` and `5f893ec`. Do not create or admit a figure artifact until the later source-bound production stage.
-4. Preserve pushed V2-012 implementation checkpoint `7226effd30835fc678b0bb21644f45ac0464dff6` and receipt `08bc14e`. Its bounded real-INX diagnostic was temporary implementation evidence only; do not relabel it as a production or canonical artifact.
-5. Preserve the tested V2-013 contract and future paths `supplementary/external_robustness/{ibm_performance,ibm_attrition,employee_turnover}`. The 19.837-second real-IBM run was a reduced noncanonical diagnostic and must not be relabelled or used for numerical claims.
-6. Preserve the passed V2-015 receipt `../finalization_v2/11_inx_workbook_equivalence_receipt.json`, generation commit `8f02e55`, source-tree hash `d2407e99...` and receipt hash `90e75733...`. Do not call the partial seven-field `Data Definitions` sheet a complete or authoritative dictionary.
-7. Preserve V2-014 implementation commit `9342b0c`, the 14 ignored byte-identical local files and the passed compact receipt `../finalization_v2/12_publication_export_receipt.json`. Do not retain the ephemeral ZIP, rewrite history, or describe this narrow technical export as a scientific/release package.
-8. Preserve V2-018 implementation commit `498e8ad`, exact lock SHA-256 `482cbf32...`, clean inventory SHA-256 `a7ac622b...` and passed compact receipt `../finalization_v2/13_dependency_lock_receipt.json`. The temporary environment is removed; do not add excluded optional packages to core/supplementary.
-9. Preserve V2-019 commits `714a1c3`/`700adb2`, green hosted run `29351557672`, and green receipt run `29352015443` at `ea34ed6`. Do not provision or dispatch the trusted self-hosted release validator until a complete exact-commit local candidate and all five ignored real-data inputs exist; it validates only and may not publish or promote.
-10. Preserve V2-021 commit `5a0d926` and green hosted run `29353799148`. Do not admit its synthetic test render or generate figures from historical `latest` or the noncanonical Unit 2G stage; real artifacts must come from one future current-run identity.
-11. Preserve the V2-022 authoritative metric registry and exact atomic table plan: core tables 1-10/13 and supplementary tables 11-13. Do not admit fixture output or manually enter a scientific value.
-12. Preserve the V2-023 execution-readiness freeze and the complete-registry/report-subset repair. Every declared runner/output/contract exists, both scope flags are true, and revocation still fails closed. Policy ablation and calibration must retain their fixed report subsets while validating against the complete task registry.
-13. Preserve failed run `canonical_v2_20260714T175804Z_4d08ca2` as ignored forensic evidence only. It failed before model fit from the class-incompatible Popen guard and may never be resumed, relabelled or promoted.
-14. Preserve failed run `canonical_v2_20260714T180533Z_770c8d0` as ignored forensic evidence only. It completed shared folds and benchmarks but failed before policy fitting from the registry/report-subset mismatch; its benchmark artifacts must not be reused or promoted.
-15. Preserve valid pre-migration candidate `canonical_v2_20260714T182539Z_35b121b` as ignored noncanonical evidence. Both scopes completed and strict validation passed, but its generation commit predates the required historical-`latest` migration, so it may not be promoted or relabelled.
-16. Preserve the tracked named v1 run and migration receipt `../finalization_v2/14_latest_migration_receipt.json`. The redundant physical `latest` alias is removed only after proving 215 common files exact and the sole extra pointer redundant; do not restore the physical alias.
-17. From the migration checkpoint, perform one cache-disabled current-config core and supplementary rebuild under one new shared run ID. Validate all manifests, hashes, tables, figures, portable paths, zero network/API attempts, and V2-029 reporting fields, then atomically promote only `latest/pointer.json`.
-18. Freeze the claim matrix only from that promoted canonical package and obtain author approval before editing `manuscript/mdpi_information/main.md`.
-19. Preserve failed migration-commit run `canonical_v2_20260714T192934Z_0c2868b` and its orphan calibration staging directory as ignored forensic evidence only. It may not be resumed, cache-reused, relabelled or promoted. The next run must start from the pushed atomic-publication repair checkpoint under a new ID.
+The technical evidence build is complete. Do not start another scientific unit or rerun the canonical package without a concrete integrity failure.
 
-Ethics/IRB identity, dataset source/licence/citation authenticity, raw-history sanitation, and later claim-matrix approval remain external/manual blockers. Never force-push, rewrite history, delete preserved raw/evidence files, call paid APIs, invent missing facts, or admit the Unit 2G stage-validation numbers as canonical manuscript claims.
+Next independent unit for a new chat: **manual claim-matrix review and manuscript-authoring handoff**.
+
+Required manual/external actions before journal submission:
+
+1. Obtain and record ethics/IRB institution, unit, application/reference number, and date.
+2. Verify dataset source authenticity, licence, citation, and redistribution permissions.
+3. Decide the separately authorized strategy for historical raw/noncanonical blobs in public Git history.
+4. Review and approve supported/prohibited claims from the canonical source tables and claim-boundary files.
+5. Only after that approval, begin manuscript writing/formatting in a separate task.
+6. Create public release/DOI URLs only when they actually exist; do not invent them.
+
+Canonical handoff inputs:
+
+- `../finalization_v2/15_canonical_evidence_receipt.json`
+- `../../manuscript_final/latest/pointer.json`
+- `../../manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_tables/`
+- `../../manuscript_final/canonical_v2_20260714T221501Z_483f96f/supplementary/supplementary_tables/`
+- `../../manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_figures/`
+- `../../manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/canonical_claim_boundaries.md`
+- `../../manuscript_final/canonical_v2_20260714T221501Z_483f96f/supplementary/canonical_claim_boundaries.md`
+
+The full canonical package is intentionally local/ignored and must not be committed to Git. Use a separately approved Release/Zenodo-sized publication workflow if public packaging is later authorized.

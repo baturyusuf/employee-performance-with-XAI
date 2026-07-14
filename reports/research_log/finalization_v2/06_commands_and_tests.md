@@ -1,5 +1,30 @@
 # Commands and Tests
 
+## Final canonical execution and validation - 2026-07-14
+
+Generation checkpoint: `483f96fdbaab16cb0f32d03d9dbe676a759af44a` on `finalization/leakage-aware-v2`.
+
+```powershell
+myenv\Scripts\python.exe -m src.experiments.build_manuscript_evidence --config configs/manuscript_final.yaml --scope core --run-id canonical_v2_20260714T221501Z_483f96f --no-reuse-compatible
+myenv\Scripts\python.exe -m src.experiments.build_manuscript_evidence --config configs/manuscript_final.yaml --scope supplementary --run-id canonical_v2_20260714T221501Z_483f96f --no-reuse-compatible
+myenv\Scripts\python.exe -m src.experiments.build_manuscript_evidence --config configs/manuscript_final.yaml --promote-run-id canonical_v2_20260714T221501Z_483f96f
+myenv\Scripts\python.exe -m src.experiments.build_manuscript_evidence --config configs/manuscript_final.yaml --validate-run-id canonical_v2_20260714T221501Z_483f96f
+```
+
+Results: core exit 0/1,641.749 seconds; supplementary exit 0/1,926.755 seconds; promotion exit 0/5.968 seconds; strict post-promotion validation exit 0/5.677 seconds.
+
+Final implementation validation:
+
+- focused pytest: 103 passed, exit 0, 4.44 seconds pytest / 7.580 seconds wall;
+- complete pytest: 752 passed, 2 skipped, 11 subtests passed, exit 0, 139.36 seconds pytest / 143.599 seconds wall;
+- unittest: 179 tests, 1 skipped, exit 0, 9.487 seconds unittest / 13.498 seconds wall;
+- compileall: exit 0, 0.131 seconds;
+- canonical Unit 2G replay: exit 0, 8.321 seconds;
+- repository gate: exit 0 at clean generation checkpoint;
+- final package inventory/path/terminology/secret/raw-data/staging/manuscript/offline scans: exit 0, zero findings.
+
+One post-promotion audit rejected an earlier candidate for absolute dataset-card metadata and one active `leakage-safe` taxonomy term. Production metadata was made repository-relative, taxonomy changed to `leakage-aware`, regressions were added, and the final package was rebuilt from the new clean identity. Earlier candidates remain preserved/ignored and inadmissible.
+
 Date: 2026-07-13
 
 ## Git and Repository Baseline
