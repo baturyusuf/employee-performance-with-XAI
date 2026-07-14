@@ -75,6 +75,11 @@ SUBGROUP_CLASS_METRICS = (
 )
 PROXY_METRICS = ("accuracy", "balanced_accuracy", "macro_f1")
 _PROBABILITY_SUM_ATOL = 1e-6
+RAW_OOF_PROBABILITY_METHOD = "raw"
+SHAP_ATTRIBUTION_UNIT = "xgboost_raw_margin_score"
+SHAP_ADDITIVITY_OUTPUT_SPACE = "xgboost_raw_margin"
+SOURCE_OOF_HASH_SCOPE = "exact_consumed_policy_oof_rows"
+SOURCE_OOF_HASH_ALGORITHM = "sha256_canonical_csv_utf8_float17g"
 
 ATTRIBUTION_WARNING = "Grouped SHAP is model attribution for an exact OOF model, not causality."
 TEMPORALITY_WARNING = (
@@ -244,6 +249,75 @@ def outer_fold_assignment_sha256(
     return hashlib.sha256(scoped.to_csv(index=False, lineterminator="\n").encode("utf-8")).hexdigest()
 
 
+def _source_oof_semantic_hash_columns(
+    *,
+    labels: Sequence[int],
+    sample_id_column: str,
+    fold_column: str,
+    policy_column: str,
+) -> list[str]:
+    return [
+        *IDENTITY_FIELDS,
+        policy_column,
+        sample_id_column,
+        fold_column,
+        "y_true",
+        "y_pred",
+        "probability_method",
+        "source_outer_model_sha256",
+        "outer_test_probability_sha256",
+        *(f"prob_class_{int(label)}" for label in labels),
+    ]
+
+
+def source_oof_semantic_sha256(
+    predictions: pd.DataFrame,
+    *,
+    labels: Sequence[int],
+    sample_id_column: str = "sample_index",
+    fold_column: str = "outer_fold",
+    policy_column: str = "policy",
+) -> str:
+    """Hash the exact policy-scoped raw OOF rows consumed by a diagnostic.
+
+    This is a semantic row-set digest, not the byte hash of a published CSV.
+    Callers must publish ``source_oof_hash_scope`` alongside the digest.
+    """
+
+    columns = _source_oof_semantic_hash_columns(
+        labels=labels,
+        sample_id_column=sample_id_column,
+        fold_column=fold_column,
+        policy_column=policy_column,
+    )
+    missing = sorted(set(columns).difference(predictions.columns))
+    if missing:
+        raise HRDatasetDiagnosticsError(
+            f"Source OOF predictions are missing hash-contract columns: {missing}"
+        )
+    scoped = predictions.loc[:, columns].copy()
+    if scoped.empty or scoped.isna().any().any():
+        raise HRDatasetDiagnosticsError("Source OOF hash rows must be non-empty and complete.")
+    if scoped.duplicated([policy_column, sample_id_column]).any():
+        raise HRDatasetDiagnosticsError("Source OOF hash rows must be policy/sample unique.")
+    methods = set(scoped["probability_method"].astype(str))
+    if methods != {RAW_OOF_PROBABILITY_METHOD}:
+        raise HRDatasetDiagnosticsError(
+            f"Subgroup diagnostics require raw OOF probabilities, observed methods={sorted(methods)}."
+        )
+    for column in ("source_outer_model_sha256", "outer_test_probability_sha256"):
+        invalid = ~scoped[column].astype(str).str.fullmatch(r"[0-9a-f]{64}")
+        if invalid.any():
+            raise HRDatasetDiagnosticsError(f"Source OOF column {column} contains an invalid SHA-256.")
+    scoped = scoped.sort_values([policy_column, sample_id_column], kind="stable")
+    payload = scoped.to_csv(
+        index=False,
+        lineterminator="\n",
+        float_format="%.17g",
+    ).encode("utf-8")
+    return hashlib.sha256(payload).hexdigest()
+
+
 def _validate_identity_columns(frame: pd.DataFrame, identity: ReplicationIdentity, name: str) -> None:
     missing = sorted(set(IDENTITY_FIELDS).difference(frame.columns))
     if missing:
@@ -381,6 +455,8 @@ class ShapComputation:
     values: Any
     base_values: np.ndarray
     margins: np.ndarray
+    attribution_unit: str
+    additivity_output_space: str
     axis_source: str | None = None
 
 
@@ -442,6 +518,8 @@ def _default_tree_shap_provider(
         values=canonical_values,
         base_values=np.asarray(explainer.expected_value, dtype=float),
         margins=margins,
+        attribution_unit=SHAP_ATTRIBUTION_UNIT,
+        additivity_output_space=SHAP_ADDITIVITY_OUTPUT_SPACE,
         axis_source=source,
     )
 
@@ -662,6 +740,8 @@ def compute_exact_oof_grouped_shap(
     top_k: int = 10,
     probability_atol: float = 1e-12,
     additivity_atol: float = 1e-4,
+    attribution_unit: str = SHAP_ATTRIBUTION_UNIT,
+    additivity_output_space: str = SHAP_ADDITIVITY_OUTPUT_SPACE,
     shap_provider: ShapProvider | None = None,
 ) -> OOFShapEvidence:
     """Explain each sample only with its exact prediction-producing fold model."""
@@ -674,6 +754,14 @@ def compute_exact_oof_grouped_shap(
         raise HRDatasetDiagnosticsError("Fold model hashes differ from model_set_sha256.")
     if not isinstance(top_k, int) or top_k < 1:
         raise HRDatasetDiagnosticsError("top_k must be a positive integer.")
+    if attribution_unit != SHAP_ATTRIBUTION_UNIT:
+        raise HRDatasetDiagnosticsError(
+            "External grouped SHAP attribution_unit differs from the frozen raw-margin contract."
+        )
+    if additivity_output_space != SHAP_ADDITIVITY_OUTPUT_SPACE:
+        raise HRDatasetDiagnosticsError(
+            "External grouped SHAP additivity_output_space differs from the frozen raw-margin contract."
+        )
     labels = tuple(int(value) for value in labels)
     if len(labels) < 3 or len(set(labels)) != len(labels):
         raise HRDatasetDiagnosticsError("External performance SHAP requires unique multiclass labels.")
@@ -755,6 +843,14 @@ def compute_exact_oof_grouped_shap(
         )
         _validate_forbidden_features(groups, forbidden_features)
         computation = provider(pipeline, transformed, labels)
+        if computation.attribution_unit != attribution_unit:
+            raise HRDatasetDiagnosticsError(
+                f"Fold {outer_fold} SHAP provider attribution unit differs from the configured contract."
+            )
+        if computation.additivity_output_space != additivity_output_space:
+            raise HRDatasetDiagnosticsError(
+                f"Fold {outer_fold} SHAP provider additivity output space differs from the configured contract."
+            )
         if computation.axis_source is None:
             canonical, axis_source = canonicalize_multiclass_shap(
                 computation.values,
@@ -787,6 +883,8 @@ def compute_exact_oof_grouped_shap(
                 "n_raw_features": len(groups),
                 "n_transformed_features": len(transformed_names),
                 "axis_source": axis_source,
+                "attribution_unit": attribution_unit,
+                "additivity_output_space": additivity_output_space,
                 "prediction_replay_max_abs_error": replay_error,
                 "shap_additivity_max_abs_error": additivity_error,
             }
@@ -812,6 +910,8 @@ def compute_exact_oof_grouped_shap(
                             "transformed_lineage_sha256": lineage_hash,
                             "shap_axis_contract": "sample_raw_feature_class",
                             "shap_axis_source": axis_source,
+                            "attribution_unit": attribution_unit,
+                            "additivity_output_space": additivity_output_space,
                             "prediction_replay_max_abs_error": replay_error,
                             "shap_additivity_max_abs_error": additivity_error,
                             "y_true": int(prediction["y_true"]),
@@ -871,6 +971,7 @@ def compute_exact_oof_grouped_shap(
             frame.insert(0, field_name, value)
         frame["task_type"] = PRIMARY_TASK
         frame["policy"] = primary_policy
+        frame["attribution_unit"] = attribution_unit
         frame["attribution_warning"] = ATTRIBUTION_WARNING
         frame["temporality_warning"] = TEMPORALITY_WARNING
 
@@ -961,6 +1062,8 @@ def compute_exact_oof_grouped_shap(
             "fold_receipts": fold_receipts,
             "prediction_replay_atol": probability_atol,
             "shap_additivity_atol": additivity_atol,
+            "attribution_unit": attribution_unit,
+            "additivity_output_space": additivity_output_space,
             "model_refit_in_diagnostic": False,
             "confidence_interval_for_fold_pairs": False,
             "attribution_warning": ATTRIBUTION_WARNING,
@@ -1034,6 +1137,11 @@ def _point_group_metric_rows(
     policy_column: str,
     minimum_group_support: int,
     minimum_metric_denominator: int,
+    probability_method: str,
+    source_oof_semantic_hash: str,
+    source_oof_hash_scope: str,
+    source_oof_hash_algorithm: str,
+    source_oof_hash_columns_json: str,
 ) -> pd.DataFrame:
     audit_by_id = _set_unique_index(audit, sample_id_column, "Subgroup audit rows")
     rows: list[dict[str, Any]] = []
@@ -1056,6 +1164,11 @@ def _point_group_metric_rows(
                     "group_n": group_n,
                     "minimum_group_support_threshold": minimum_group_support,
                     "group_support_eligible": bool(group_n >= minimum_group_support),
+                    "probability_method": probability_method,
+                    "source_oof_semantic_sha256": source_oof_semantic_hash,
+                    "source_oof_hash_scope": source_oof_hash_scope,
+                    "source_oof_hash_algorithm": source_oof_hash_algorithm,
+                    "source_oof_hash_columns_json": source_oof_hash_columns_json,
                     "limitations": SUBGROUP_LIMITATION,
                 }
                 for metric, value in (
@@ -1228,6 +1341,7 @@ def compute_support_aware_subgroup_diagnostics(
     batch_size: int = 200,
     minimum_valid_fraction: float = 0.8,
     wide_interval_threshold: float = 0.25,
+    probability_method: str = RAW_OOF_PROBABILITY_METHOD,
 ) -> SubgroupDiagnosticsEvidence:
     """Compute support-aware external OOF subgroup gaps without fairness claims."""
 
@@ -1241,6 +1355,10 @@ def compute_support_aware_subgroup_diagnostics(
         raise HRDatasetDiagnosticsError("Bootstrap batch/valid-fraction settings are invalid.")
     if not attributes or len({attribute.name for attribute in attributes}) != len(attributes):
         raise HRDatasetDiagnosticsError("Audit attribute specifications must be non-empty and unique.")
+    if probability_method != RAW_OOF_PROBABILITY_METHOD:
+        raise HRDatasetDiagnosticsError(
+            "External subgroup probability_method differs from the frozen raw OOF contract."
+        )
     _validate_identity_columns(oof_predictions, identity, "Subgroup OOF predictions")
     labels = tuple(int(value) for value in labels)
     required = {
@@ -1249,11 +1367,30 @@ def compute_support_aware_subgroup_diagnostics(
         policy_column,
         "y_true",
         "y_pred",
+        "probability_method",
+        "source_outer_model_sha256",
+        "outer_test_probability_sha256",
         *(f"prob_class_{label}" for label in labels),
     }
     missing = sorted(required.difference(oof_predictions.columns))
     if missing:
         raise HRDatasetDiagnosticsError(f"Subgroup OOF predictions are missing columns: {missing}")
+    source_oof_hash = source_oof_semantic_sha256(
+        oof_predictions,
+        labels=labels,
+        sample_id_column=sample_id_column,
+        fold_column=fold_column,
+        policy_column=policy_column,
+    )
+    source_oof_hash_scope = SOURCE_OOF_HASH_SCOPE
+    source_oof_hash_columns_json = _canonical_json(
+        _source_oof_semantic_hash_columns(
+            labels=labels,
+            sample_id_column=sample_id_column,
+            fold_column=fold_column,
+            policy_column=policy_column,
+        )
+    )
     folds = fold_assignments[[sample_id_column, fold_column]].copy()
     if folds.empty or folds[sample_id_column].duplicated().any():
         raise HRDatasetDiagnosticsError("Subgroup fold assignments must be exactly once per sample.")
@@ -1303,6 +1440,11 @@ def compute_support_aware_subgroup_diagnostics(
         policy_column=policy_column,
         minimum_group_support=minimum_group_support,
         minimum_metric_denominator=minimum_metric_denominator,
+        probability_method=probability_method,
+        source_oof_semantic_hash=source_oof_hash,
+        source_oof_hash_scope=source_oof_hash_scope,
+        source_oof_hash_algorithm=SOURCE_OOF_HASH_ALGORITHM,
+        source_oof_hash_columns_json=source_oof_hash_columns_json,
     )
     protocol = BootstrapProtocol(
         n_resamples=n_resamples,
@@ -1347,6 +1489,11 @@ def compute_support_aware_subgroup_diagnostics(
             "bootstrap_method": "paired_stratified_sample_level_percentile",
             "bootstrap_batch_size": batch_size,
             "resample_hash": plan.resample_hash,
+            "probability_method": probability_method,
+            "source_oof_semantic_sha256": source_oof_hash,
+            "source_oof_hash_scope": source_oof_hash_scope,
+            "source_oof_hash_algorithm": SOURCE_OOF_HASH_ALGORITHM,
+            "source_oof_hash_columns_json": source_oof_hash_columns_json,
             "inference_scope": "pointwise_descriptive",
             "multiplicity_adjustment": "none",
             "limitations": SUBGROUP_LIMITATION,
@@ -1482,6 +1629,11 @@ def compute_support_aware_subgroup_diagnostics(
             "seed": seed,
             "batch_size": batch_size,
             "resample_hash": plan.resample_hash,
+            "probability_method": probability_method,
+            "source_oof_semantic_sha256": source_oof_hash,
+            "source_oof_hash_scope": source_oof_hash_scope,
+            "source_oof_hash_algorithm": SOURCE_OOF_HASH_ALGORITHM,
+            "source_oof_hash_columns": json.loads(source_oof_hash_columns_json),
             "stratum_counts": dict(plan.stratum_counts),
             "strata_columns": ["outer_fold", "y_true"],
             "minimum_valid_fraction": minimum_valid_fraction,
@@ -1983,10 +2135,15 @@ __all__ = [
     "PROXY_LIMITATION",
     "ProxyReconstructabilityEvidence",
     "REQUIRED_BOOTSTRAP_RESAMPLES",
+    "RAW_OOF_PROBABILITY_METHOD",
     "RESEARCH_USE_WARNING",
     "ReplicationIdentity",
     "SUBGROUP_LIMITATION",
     "ShapComputation",
+    "SHAP_ADDITIVITY_OUTPUT_SPACE",
+    "SHAP_ATTRIBUTION_UNIT",
+    "SOURCE_OOF_HASH_ALGORITHM",
+    "SOURCE_OOF_HASH_SCOPE",
     "SubgroupDiagnosticsEvidence",
     "TEMPORALITY_WARNING",
     "canonicalize_multiclass_shap",
@@ -1996,4 +2153,5 @@ __all__ = [
     "feature_policy_contract_sha256",
     "model_set_sha256",
     "outer_fold_assignment_sha256",
+    "source_oof_semantic_sha256",
 ]

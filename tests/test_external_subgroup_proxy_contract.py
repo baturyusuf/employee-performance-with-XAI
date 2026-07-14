@@ -10,11 +10,15 @@ from src.experiments.hrdataset_replication_diagnostics import (
     AuditAttributeSpec,
     HRDatasetDiagnosticsError,
     PROXY_LIMITATION,
+    RAW_OOF_PROBABILITY_METHOD,
     REQUIRED_BOOTSTRAP_RESAMPLES,
     SUBGROUP_LIMITATION,
+    SOURCE_OOF_HASH_ALGORITHM,
+    SOURCE_OOF_HASH_SCOPE,
     ReplicationIdentity,
     compute_proxy_reconstructability,
     compute_support_aware_subgroup_diagnostics,
+    source_oof_semantic_sha256,
 )
 
 
@@ -60,6 +64,9 @@ def _subgroup_fixture() -> tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame, Repli
             "policy": "external_primary",
             "y_true": y_true,
             "y_pred": y_pred,
+            "probability_method": RAW_OOF_PROBABILITY_METHOD,
+            "source_outer_model_sha256": "2" * 64,
+            "outer_test_probability_sha256": "3" * 64,
             **{
                 f"prob_class_{label}": probability[:, label_index]
                 for label_index, label in enumerate(LABELS)
@@ -114,6 +121,12 @@ def test_support_aware_subgroup_bootstrap_reports_denominators_valid_counts_and_
     assert set(tpr["metric_denominator_kind"]) == {"actual_class_rows"}
     assert (tpr["metric_denominator"] >= 0).all()
     assert set(groups["limitations"]) == {SUBGROUP_LIMITATION}
+    expected_source_hash = source_oof_semantic_sha256(predictions, labels=LABELS)
+    assert set(groups["probability_method"]) == {RAW_OOF_PROBABILITY_METHOD}
+    assert set(groups["source_oof_semantic_sha256"]) == {expected_source_hash}
+    assert set(groups["source_oof_hash_scope"]) == {SOURCE_OOF_HASH_SCOPE}
+    assert set(groups["source_oof_hash_algorithm"]) == {SOURCE_OOF_HASH_ALGORITHM}
+    assert all(json.loads(value) for value in groups["source_oof_hash_columns_json"])
 
     intervals = evidence.disparity_intervals
     assert not intervals.empty
@@ -129,8 +142,61 @@ def test_support_aware_subgroup_bootstrap_reports_denominators_valid_counts_and_
     assert set(intervals["inference_scope"]) == {"pointwise_descriptive"}
     assert set(intervals["multiplicity_adjustment"]) == {"none"}
     assert intervals["limitations"].str.contains("no .*fairness guarantee", case=False).all()
+    assert set(intervals["probability_method"]) == {RAW_OOF_PROBABILITY_METHOD}
+    assert set(intervals["source_oof_semantic_sha256"]) == {expected_source_hash}
+    assert set(intervals["source_oof_hash_scope"]) == {SOURCE_OOF_HASH_SCOPE}
+    assert set(intervals["source_oof_hash_algorithm"]) == {SOURCE_OOF_HASH_ALGORITHM}
     assert evidence.metadata["n_resamples"] == 5000
     assert evidence.metadata["resample_hash"] == intervals["resample_hash"].iloc[0]
+    assert evidence.metadata["probability_method"] == RAW_OOF_PROBABILITY_METHOD
+    assert evidence.metadata["source_oof_semantic_sha256"] == expected_source_hash
+    assert evidence.metadata["source_oof_hash_scope"] == SOURCE_OOF_HASH_SCOPE
+    assert evidence.metadata["source_oof_hash_algorithm"] == SOURCE_OOF_HASH_ALGORITHM
+    assert "source_outer_model_sha256" in evidence.metadata["source_oof_hash_columns"]
+
+
+@pytest.mark.parametrize("source_state", ["missing", "sigmoid", "mixed"])
+def test_subgroup_diagnostics_reject_nonraw_or_missing_probability_method(source_state: str) -> None:
+    predictions, folds, audit, identity = _subgroup_fixture()
+    if source_state == "missing":
+        predictions = predictions.drop(columns=["probability_method"])
+    elif source_state == "sigmoid":
+        predictions["probability_method"] = "sigmoid"
+    else:
+        predictions.loc[predictions.index[0], "probability_method"] = "sigmoid"
+
+    with pytest.raises(HRDatasetDiagnosticsError, match="missing columns|require raw OOF"):
+        compute_support_aware_subgroup_diagnostics(
+            oof_predictions=predictions,
+            fold_assignments=folds,
+            audit_frame=audit,
+            attributes=[AuditAttributeSpec("GenderAudit", "protected_sensitive")],
+            identity=identity,
+            labels=LABELS,
+            minimum_group_support=15,
+            minimum_metric_denominator=5,
+        )
+
+
+def test_source_oof_digest_changes_with_probability_or_model_receipt() -> None:
+    predictions, _, _, _ = _subgroup_fixture()
+    original = source_oof_semantic_sha256(predictions, labels=LABELS)
+
+    reordered = predictions.sample(frac=1.0, random_state=19).reset_index(drop=True)
+    assert source_oof_semantic_sha256(reordered, labels=LABELS) == original
+
+    probability_changed = predictions.copy()
+    probability_changed.loc[probability_changed.index[0], "prob_class_2"] += 1e-8
+    assert source_oof_semantic_sha256(probability_changed, labels=LABELS) != original
+
+    model_changed = predictions.copy()
+    model_changed.loc[model_changed.index[0], "source_outer_model_sha256"] = "4" * 64
+    assert source_oof_semantic_sha256(model_changed, labels=LABELS) != original
+
+    invalid_receipt = predictions.copy()
+    invalid_receipt.loc[invalid_receipt.index[0], "source_outer_model_sha256"] = "not-a-digest"
+    with pytest.raises(HRDatasetDiagnosticsError, match="invalid SHA-256"):
+        source_oof_semantic_sha256(invalid_receipt, labels=LABELS)
 
 
 def test_subgroup_rows_with_only_one_supported_group_are_not_estimated_or_headlined() -> None:

@@ -77,3 +77,7 @@ Recovery independently verified every byte first, then preserved all 126 local f
 ## RC-11 post-run update - Reporting Identity Was Implicit in Two Summary Families
 
 The real stage validates RC-11's computation and atomic output: all model/calibrator/OOF/SHAP receipts replay and no rerun is required. Review nevertheless found that subgroup tables infer their raw-OOF source through surrounding metadata instead of explicit row fields, and grouped SHAP summaries infer XGBoost raw-margin units through the additivity contract. Both should be direct manuscript-facing metadata. V2-029 tracks these reporting fixes before the canonical package; the already-validated stage is not retrospectively edited.
+
+### V2-029 implementation resolution
+
+The generation contract now rejects missing, mixed or non-raw subgroup probability methods and invalid source model/probability receipts. It hashes the exact policy-scoped OOF rows consumed and serializes a clearly named semantic digest plus its scope, canonical-CSV algorithm and ordered columns; this is not misrepresented as the byte hash of the full raw-OOF artifact. SHAP config, provider output, local/global/class/fold tables, fold receipts, metadata and local reason-code renderings must agree on raw-margin-score attribution units and raw-margin additivity space. Config/provider drift fails closed. Direct and expanded gates pass 56/80 tests; canonical artifact validation remains pending the clean rebuild.

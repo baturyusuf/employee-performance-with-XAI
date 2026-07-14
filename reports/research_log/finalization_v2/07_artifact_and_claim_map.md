@@ -89,7 +89,7 @@ No historical fairness/proxy file is admitted and no new canonical Unit 2F artif
 | `performance_subgroup_bootstrap_metadata.json`; `proxy_bootstrap_metadata.json` | Performance resample equality plus proxy semantic-adapter/strata/batch hashes | Implementation/test contract only |
 | `proxy_label_mapping.json`; `proxy_watchlist_associations.csv`; `manuscript_fairness_proxy_table.csv`; interpretation/metadata | Identity-bound nominal target mapping, config-sourced exploratory associations, support/conditional-inference limitations and portable provenance | Implementation/test contract only |
 
-Current config hash `3c9588c1327ac563a85586835b19b30768860165dc26b61fcf7aafbce3bb1421` rejects all prior benchmark/policy/fairness artifacts. Department reconstructability is explicitly `nominal_multiclass_proxy_diagnostic`, not a restricted performance task. The real-INX 20-fit diagnostic generated no file and is not an authoritative result. Any future manuscript statement must cite the complete clean-run files and must use `support-aware subgroup diagnostics` and `proxy-risk reconstructability`, not a fairness guarantee or causal use claim.
+The Unit 2F checkpoint config hash `3c9588c1327ac563a85586835b19b30768860165dc26b61fcf7aafbce3bb1421` rejects earlier benchmark/policy/fairness artifacts and is itself superseded by later contracts. Department reconstructability is explicitly `nominal_multiclass_proxy_diagnostic`, not a restricted performance task. The real-INX 20-fit diagnostic generated no file and is not an authoritative result. Any future manuscript statement must cite the complete clean-run files and must use `support-aware subgroup diagnostics` and `proxy-risk reconstructability`, not a fairness guarantee or causal use claim.
 
 ## Unit 2G HRDataset External Replication Evidence Contract
 
@@ -101,7 +101,7 @@ Policy A is accepted and implemented. The conservative primary has exactly seven
 
 The department proxy output is predeclared as `not_estimated_insufficient_outer_training_class_support` because a singleton department class is absent from at least one outer-training partition. The claim matrix must list the numerical proxy-reconstructability question as unsupported/insufficient-support; it must not reinterpret the absent estimate as evidence of fairness or low proxy risk.
 
-Post-interruption production-path tests additionally require every external policy's forbidden list to be case-insensitively unique and require SHAP replay through the same canonical probability normalizer as OOF generation. The current config hash is `5af0262e83a3720f8dca0b4d6795bdffc6bb2cefedc901ae0a47f9262d07f305`. The reduced real-data diagnostic is not listed as an artifact because it wrote no file and used an explicit test-only budget.
+Post-interruption production-path tests additionally require every external policy's forbidden list to be case-insensitively unique and require SHAP replay through the same canonical probability normalizer as OOF generation. The Unit 2G stage-generation config hash is `5af0262e83a3720f8dca0b4d6795bdffc6bb2cefedc901ae0a47f9262d07f305`; the V2-029 implementation advances current config to `ac32f7d80695e95adbad458ef31d9f1790b16e1eec306aaba57c5233f304e2f8`. The reduced real-data diagnostic is not listed as an artifact because it wrote no file and used an explicit test-only budget.
 
 ## Complete-Package Trust Contract
 
@@ -126,10 +126,16 @@ The root is intentionally local/ignored under D5. Commit `e25f403` contains an a
 | `candidate_*`; `selected_hyperparameters.csv`; `outer_model_receipts.csv`; `models/` | Eight-candidate nested selection and 50 replayed policy/fold models | Valid stage model evidence; full bundle stays out of Git |
 | `raw_oof_predictions.csv`; `raw_metric_intervals.csv`; `policy_pairwise_differences.csv` | Five-policy OOF estimates and 5,000-draw paired uncertainty | Stage-validation numbers only; not frozen manuscript claims |
 | `calibration_*`; `sigmoid_oof_predictions.csv` | Five-fold cross-fitted sigmoid bound to exact source fold models | Probability-quality benefit may be discussed only with macro-F1/class-4 harm and noncanonical label |
-| `shap/` | Exact-model OOF grouped attribution, class/global/local evidence and descriptive stability | Attribution only; raw-margin unit must be explicit in canonical output |
-| `subgroup_diagnostics/` | Support/denominator-aware descriptive gaps | No fairness, discrimination, causal or legal claim; canonical rows need explicit raw-OOF/source label |
+| `shap/` | Exact-model OOF grouped attribution, class/global/local evidence and descriptive stability | Attribution only; old stage predates the now-tested explicit raw-margin-unit contract |
+| `subgroup_diagnostics/` | Support/denominator-aware descriptive gaps | No fairness, discrimination, causal or legal claim; old stage predates the now-tested raw-OOF semantic-source contract |
 | `proxy_diagnostics/proxy_status.csv` | Insufficient department-class support, zero fitted proxy models | Numerical reconstructability claim unsupported |
 | `cross_dataset_transport/transport_feasibility.json` | Three safe common features below gate five | Locked transport infeasible; independent mapped-target replication only |
 | `stage_validation_input_manifest.json` | Provisional generation input receipt | Not a complete run manifest; current-HEAD validation must reject it |
 
 Supported by the stage: the configured pipeline can produce internally coherent HRDataset independent mapped-target replication evidence from verified local input under the approved protocol. Unsupported: canonical/release completeness, universal or transported validation, fairness, causality, deployment, target semantic equivalence, licence/source authenticity, or frozen manuscript numbers.
+
+## V2-029 future canonical reporting fields
+
+Current-config subgroup outputs must include singleton `probability_method=raw`, identical `source_oof_semantic_sha256`, `source_oof_hash_scope=exact_consumed_policy_oof_rows`, `source_oof_hash_algorithm=sha256_canonical_csv_utf8_float17g`, and the ordered hash-column contract across `group_metrics.csv`, `disparity_intervals.csv` and `subgroup_metadata.json`. The digest binds the exact consumed policy row set and is not the whole-file artifact SHA.
+
+Current-config SHAP numeric tables, fold receipts, metadata and local reason-code JSON/Markdown must explicitly declare `attribution_unit=xgboost_raw_margin_score`; additivity evidence declares `additivity_output_space=xgboost_raw_margin`. These fields support only unit/source interpretation. They do not convert SHAP to probability effects, causality or prescriptions. The old stage lacks the explicit fields and remains stage-validation-only.

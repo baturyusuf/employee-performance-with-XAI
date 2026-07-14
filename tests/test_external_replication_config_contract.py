@@ -163,6 +163,15 @@ def test_primary_feature_governance_keys_and_temporality_are_exact() -> None:
         "derived_at_last_review_timing_unverified_negative_durations_set_missing"
     )
     assert manuscript_settings(_canonical())["external_replication"]["shap"]["stability_top_k"] == 5
+    assert manuscript_settings(_canonical())["external_replication"]["shap"]["attribution_unit"] == (
+        "xgboost_raw_margin_score"
+    )
+    assert manuscript_settings(_canonical())["external_replication"]["shap"][
+        "additivity_output_space"
+    ] == "xgboost_raw_margin"
+    assert manuscript_settings(_canonical())["external_replication"]["subgroup_diagnostics"][
+        "probability_method"
+    ] == "raw"
     warning = governance["model_scenario_only_warning"].casefold()
     assert "attribution only" in warning
     assert "causal" in warning and "actionable" in warning and "employee advice" in warning
@@ -241,6 +250,9 @@ def test_target_mapping_rationale_and_limitation_are_equal_across_all_contracts(
         (("external_replication", "calibration", "primary_method"), "isotonic"),
         (("external_replication", "uncertainty", "n_resamples"), 1000),
         (("external_replication", "shap", "model_refit_in_shap_stage"), True),
+        (("external_replication", "shap", "attribution_unit"), "probability"),
+        (("external_replication", "shap", "additivity_output_space"), "probability"),
+        (("external_replication", "subgroup_diagnostics", "probability_method"), "sigmoid"),
         (
             (
                 "external_replication",

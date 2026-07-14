@@ -351,6 +351,8 @@ def expected_external_replication_contract() -> dict[str, Any]:
         "shap": {
             "scope": "conservative_primary_oof_xgboost_only",
             "model_source": "exact_prediction_producing_external_outer_fold_model",
+            "attribution_unit": "xgboost_raw_margin_score",
+            "additivity_output_space": "xgboost_raw_margin",
             "model_refit_in_shap_stage": False,
             "oof_prediction_replay_required": True,
             "group_one_hot_to_raw_feature_families": True,
@@ -367,6 +369,7 @@ def expected_external_replication_contract() -> dict[str, Any]:
         },
         "subgroup_diagnostics": {
             "prediction_source": "conservative_primary_exact_oof_predictions",
+            "probability_method": "raw",
             "attributes": {
                 "protected_sensitive": {
                     "type": "categorical",

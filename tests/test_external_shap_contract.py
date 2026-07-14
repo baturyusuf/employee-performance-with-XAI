@@ -3,6 +3,8 @@ from __future__ import annotations
 import copy
 import hashlib
 import io
+import json
+from pathlib import Path
 
 import joblib
 import numpy as np
@@ -20,6 +22,8 @@ from src.experiments.hrdataset_replication_diagnostics import (
     FoldModelReference,
     HRDatasetDiagnosticsError,
     ReplicationIdentity,
+    SHAP_ADDITIVITY_OUTPUT_SPACE,
+    SHAP_ATTRIBUTION_UNIT,
     ShapComputation,
     _aligned_probabilities,
     canonicalize_multiclass_shap,
@@ -27,6 +31,7 @@ from src.experiments.hrdataset_replication_diagnostics import (
     feature_policy_contract_sha256,
     model_set_sha256,
 )
+from src.experiments.manuscript_hrdataset_replication import _write_local_reason_codes
 from src.models.canonical_models import aligned_predict_proba
 
 
@@ -162,6 +167,8 @@ def _canonical_provider(
         values=values,
         base_values=np.zeros(len(labels), dtype=float),
         margins=margins,
+        attribution_unit=SHAP_ATTRIBUTION_UNIT,
+        additivity_output_space=SHAP_ADDITIVITY_OUTPUT_SPACE,
         axis_source="synthetic_canonical_sample_feature_class",
     )
 
@@ -281,7 +288,9 @@ def test_canonicalize_multiclass_shap_accepts_known_axes_and_rejects_ambiguity()
         )
 
 
-def test_exact_fold_shap_replays_predictions_groups_axes_and_reports_descriptive_stability() -> None:
+def test_exact_fold_shap_replays_predictions_groups_axes_and_reports_descriptive_stability(
+    tmp_path: Path,
+) -> None:
     fixture = _fixture()
     evidence = compute_exact_oof_grouped_shap(
         features=fixture["features"],
@@ -317,10 +326,20 @@ def test_exact_fold_shap_replays_predictions_groups_axes_and_reports_descriptive
     assert evidence.local_values["temporality_warning"].str.contains("timing").all()
     assert evidence.local_values["model_sha256"].str.len().eq(64).all()
     assert evidence.local_values["transformed_lineage_sha256"].str.len().eq(64).all()
+    assert set(evidence.local_values["attribution_unit"]) == {SHAP_ATTRIBUTION_UNIT}
+    assert set(evidence.local_values["additivity_output_space"]) == {
+        SHAP_ADDITIVITY_OUTPUT_SPACE
+    }
 
     assert len(evidence.global_importance) == 2
     assert len(evidence.class_importance) == 3 * 2
     assert len(evidence.fold_rankings) == 3 * 2
+    for frame in (
+        evidence.global_importance,
+        evidence.class_importance,
+        evidence.fold_rankings,
+    ):
+        assert set(frame["attribution_unit"]) == {SHAP_ATTRIBUTION_UNIT}
     assert len(evidence.stability_pairwise) == 3
     assert set(evidence.stability_summary["confidence_interval_applicable"]) == {False}
     assert set(evidence.stability_pairwise["uncertainty_scope"]) == {
@@ -337,6 +356,24 @@ def test_exact_fold_shap_replays_predictions_groups_axes_and_reports_descriptive
     assert evidence.metadata["model_refit_in_diagnostic"] is False
     assert evidence.metadata["n_samples"] == 18
     assert len(evidence.metadata["fold_receipts"]) == 3
+    assert evidence.metadata["attribution_unit"] == SHAP_ATTRIBUTION_UNIT
+    assert evidence.metadata["additivity_output_space"] == SHAP_ADDITIVITY_OUTPUT_SPACE
+    assert {receipt["attribution_unit"] for receipt in evidence.metadata["fold_receipts"]} == {
+        SHAP_ATTRIBUTION_UNIT
+    }
+    assert {
+        receipt["additivity_output_space"] for receipt in evidence.metadata["fold_receipts"]
+    } == {SHAP_ADDITIVITY_OUTPUT_SPACE}
+
+    reason_paths = _write_local_reason_codes(tmp_path, evidence)
+    json_path = next(path for path in reason_paths if path.suffix == ".json")
+    markdown_path = next(path for path in reason_paths if path.suffix == ".md")
+    payload = json.loads(json_path.read_text(encoding="utf-8"))
+    assert payload["attribution_unit"] == SHAP_ATTRIBUTION_UNIT
+    assert payload["additivity_output_space"] == SHAP_ADDITIVITY_OUTPUT_SPACE
+    markdown = markdown_path.read_text(encoding="utf-8")
+    assert SHAP_ATTRIBUTION_UNIT in markdown
+    assert "Grouped SHAP (XGBoost raw-margin score)" in markdown
 
 
 def test_default_tree_provider_validates_real_xgboost_axes_and_additivity() -> None:
@@ -359,6 +396,7 @@ def test_default_tree_provider_validates_real_xgboost_axes_and_additivity() -> N
     }
     assert evidence.local_values["shap_additivity_max_abs_error"].max() < 1e-6
     assert evidence.local_values["prediction_replay_max_abs_error"].max() <= 1e-12
+    assert set(evidence.local_values["attribution_unit"]) == {SHAP_ATTRIBUTION_UNIT}
 
 
 def test_exact_fold_shap_fails_for_forbidden_raw_feature_or_prediction_drift() -> None:
@@ -427,6 +465,8 @@ def test_exact_fold_shap_fails_closed_on_additivity_error() -> None:
             values=np.zeros((len(transformed), transformed.shape[1], len(labels))),
             base_values=np.zeros(len(labels)),
             margins=np.ones((len(transformed), len(labels))),
+            attribution_unit=SHAP_ATTRIBUTION_UNIT,
+            additivity_output_space=SHAP_ADDITIVITY_OUTPUT_SPACE,
             axis_source="synthetic_canonical_sample_feature_class",
         )
 
@@ -443,3 +483,60 @@ def test_exact_fold_shap_fails_closed_on_additivity_error() -> None:
             labels=LABELS,
             shap_provider=invalid_provider,
         )
+
+
+def test_exact_fold_shap_rejects_provider_or_config_unit_drift() -> None:
+    fixture = _fixture()
+
+    def wrong_unit_provider(
+        pipeline: Pipeline,
+        transformed: np.ndarray,
+        labels: tuple[int, ...],
+    ) -> ShapComputation:
+        result = _canonical_provider(pipeline, transformed, labels)
+        return ShapComputation(
+            values=result.values,
+            base_values=result.base_values,
+            margins=result.margins,
+            attribution_unit="probability",
+            additivity_output_space=result.additivity_output_space,
+            axis_source=result.axis_source,
+        )
+
+    common = {
+        "features": fixture["features"],
+        "fold_assignments": fixture["folds"],
+        "oof_predictions": fixture["predictions"],
+        "fold_models": fixture["references"],
+        "policy_features": fixture["policies"],
+        "primary_policy": PRIMARY_POLICY,
+        "forbidden_features": [],
+        "identity": fixture["identity"],
+        "labels": LABELS,
+    }
+    with pytest.raises(HRDatasetDiagnosticsError, match="provider attribution unit"):
+        compute_exact_oof_grouped_shap(**common, shap_provider=wrong_unit_provider)
+    with pytest.raises(HRDatasetDiagnosticsError, match="attribution_unit"):
+        compute_exact_oof_grouped_shap(
+            **common,
+            attribution_unit="probability",
+            shap_provider=_canonical_provider,
+        )
+
+    def wrong_space_provider(
+        pipeline: Pipeline,
+        transformed: np.ndarray,
+        labels: tuple[int, ...],
+    ) -> ShapComputation:
+        result = _canonical_provider(pipeline, transformed, labels)
+        return ShapComputation(
+            values=result.values,
+            base_values=result.base_values,
+            margins=result.margins,
+            attribution_unit=result.attribution_unit,
+            additivity_output_space="probability",
+            axis_source=result.axis_source,
+        )
+
+    with pytest.raises(HRDatasetDiagnosticsError, match="additivity output space"):
+        compute_exact_oof_grouped_shap(**common, shap_provider=wrong_space_provider)

@@ -606,6 +606,8 @@ def _compute_diagnostics(
         labels=LABELS,
         feature_governance=_governance_mapping(external_settings),
         top_k=int(external_settings["shap"]["stability_top_k"]),
+        attribution_unit=str(external_settings["shap"]["attribution_unit"]),
+        additivity_output_space=str(external_settings["shap"]["additivity_output_space"]),
     )
 
     specs = _audit_attribute_specs(external_settings)
@@ -628,6 +630,7 @@ def _compute_diagnostics(
         confidence_level=float(external_settings["uncertainty"]["confidence_level"]),
         seed=int(external_settings["resolved_seeds"]["bootstrap"]),
         batch_size=200,
+        probability_method=str(subgroup_settings["probability_method"]),
     )
 
     proxy_settings = _require_mapping(
@@ -784,6 +787,8 @@ def _write_local_reason_codes(staging: Path, shap: OOFShapEvidence) -> list[Path
             "y_true": int(case.y_true),
             "y_pred": predicted_class,
             "confidence": float(case.confidence),
+            "attribution_unit": str(shap.metadata["attribution_unit"]),
+            "additivity_output_space": str(shap.metadata["additivity_output_space"]),
             "attribution_warning": ATTRIBUTION_WARNING,
             "temporality_warning": TEMPORALITY_WARNING,
             "research_use_warning": RESEARCH_USE_WARNING,
@@ -802,7 +807,9 @@ def _write_local_reason_codes(staging: Path, shap: OOFShapEvidence) -> list[Path
             "",
             RESEARCH_USE_WARNING,
             "",
-            "| Rank | Feature | Value | Grouped SHAP | Governance | Temporality |",
+            f"Attribution unit: `{shap.metadata['attribution_unit']}`; additivity output space: `{shap.metadata['additivity_output_space']}`.",
+            "",
+            "| Rank | Feature | Value | Grouped SHAP (XGBoost raw-margin score) | Governance | Temporality |",
             "|---:|---|---|---:|---|---|",
         ]
         for row in scoped.itertuples(index=False):

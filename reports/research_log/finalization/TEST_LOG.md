@@ -261,3 +261,15 @@ Checkpoint documentation/hygiene gate: compileall, `pip check`, `git diff --chec
 Final staged review: 141 paths consist exactly of 126 deletion-only entries under the ignored stage-validation root and 15 approved small documentation/log/ignore files. Unstaged and untracked counts are zero. Added-line secret and absolute-home scans are zero; manuscript diff is zero. A post-index-removal rehash again passed all 122 artifact-manifest rows and 124 stage-contract outputs, proving the local evidence bytes were not altered.
 
 Push/recovery gate: the normal push timed out after 184 seconds with no remote response. The exact repository push/remote PID tree had zero listeners/endpoints and was terminated only after a graceful attempt failed; Git Credential Manager was not terminated. A public read-only GitHub ref check confirmed remote SHA `e25f403`, while local cleanup SHA is `b7b2ad3`. Result: push failed/recorded, local checkpoint coherent, no second retry authorized for this checkpoint.
+
+## V2-029 reporting-contract gate - 2026-07-14
+
+- Compileall over the three production modules and three focused test modules: passed.
+- Config/SHAP/subgroup contract suite: 56 passed in 5.84 seconds.
+- Expanded external config/nested/calibration/bootstrap/SHAP/subgroup/stage/manifest suite: 80 passed in 27.18 seconds.
+- Regressions cover missing/sigmoid/mixed subgroup probability sources; config-owned raw method; invalid/mutated source receipts; semantic-hash row-order invariance; published hash scope/algorithm/columns; SHAP provider/config unit and additivity-space drift; explicit unit fields in local/global/class/fold evidence, metadata and fold receipts; and JSON/Markdown reason-code serialization.
+- Canonical config hash: `ac32f7d80695e95adbad458ef31d9f1790b16e1eec306aaba57c5233f304e2f8`; core/supplementary scope hashes remain `af80b8a7...`/`18bbb5cb...`.
+- `git diff --check`: passed. No Unit 2G rerun, scientific artifact mutation, manuscript edit, network or paid API call occurred.
+- Synchronized checkpoint/hygiene rerun: 80 tests passed in 27.11 seconds; 30 issue rows and 21 README links validated; changed-file raw/100-MB/secret/absolute-path/manuscript scans returned zero findings. Independent final review passed 66 relevant tests in 6.01 seconds, diff check passed, and no P0/P1 defect remained.
+- Full checkpoint pytest: 656 passed, 3 skipped and 11 subtests passed in 143.88 seconds. Full unittest: 178 passed, 2 skipped in 10.895 seconds. Both exited 0. Ruff was unavailable in the locked environment; its optional probe exited before linting and did not change dependencies.
+- Final pre-stage gate: `pip check`, compileall, diff/manuscript, issue/README and raw/100-MB/secret/absolute-path/process checks all passed; zero prohibited findings and zero active repository execution were observed.

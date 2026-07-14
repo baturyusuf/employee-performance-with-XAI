@@ -252,3 +252,30 @@ git push origin finalization/leakage-aware-v2
 It produced no output and timed out after 184 seconds. Process inspection recorded the verified repository tree created at 2026-07-14 11:35:29: wrapper PID 27992; `git push` PIDs 18496/36788; `git remote-https` PID 28948; `git-remote-https` PID 41176; no listening TCP/UDP endpoints. Git Credential Manager PIDs 18728/17356 were observed but explicitly left untouched. Graceful `taskkill /PID 18496` returned 1 because force was required; the four verified push/remote PIDs were then individually terminated after the wrapper timeout. Follow-up found zero surviving verified push PIDs/listeners/endpoints while both credential-manager processes remained untouched.
 
 A read-only unauthenticated GitHub ref request returned `e25f403d82082f97e34aa4f8174bfc001fced5d8`, confirming the remote did not move. No force option, credential/security change or additional push retry was used. `b7b2ad3` and this following log synchronization remain local.
+
+## V2-029 external reporting metadata - 2026-07-14
+
+No scientific stage was rerun. Read-only inspection confirmed the Unit 2G package remained local/ignored and no repository model/test process was active. Production changes pin the external SHAP unit in canonical config and its frozen contract; require the SHAP provider to declare matching raw-margin semantics; serialize the unit into numeric tables, receipts, metadata and reason codes; require subgroup diagnostics to consume only receipt-bound raw OOF rows; and publish a deterministic exact-consumed-row semantic digest with its scope, algorithm and columns.
+
+```powershell
+.\myenv\Scripts\python.exe -m compileall -q src/experiments/hrdataset_replication_diagnostics.py src/experiments/manuscript_hrdataset_replication.py src/governance/external_replication_contract.py tests/test_external_shap_contract.py tests/test_external_subgroup_proxy_contract.py tests/test_external_replication_config_contract.py
+.\myenv\Scripts\python.exe -m pytest -q tests/test_external_shap_contract.py tests/test_external_subgroup_proxy_contract.py tests/test_external_replication_config_contract.py
+.\myenv\Scripts\python.exe -m pytest -q tests/test_external_replication_config_contract.py tests/test_external_nested_selection_contract.py tests/test_external_sigmoid_isolation.py tests/test_external_oof_bootstrap_contract.py tests/test_external_shap_contract.py tests/test_external_subgroup_proxy_contract.py tests/test_hrdataset_replication_stage_contract.py tests/test_artifact_run_manifest_consistency.py
+.\myenv\Scripts\python.exe -c "from src.governance.manuscript_contract import canonical_config_hash,evidence_scope_contract_hash,load_manuscript_config; p='configs/manuscript_final.yaml'; c=load_manuscript_config(p); print(canonical_config_hash(c)); print(evidence_scope_contract_hash(c,'core')); print(evidence_scope_contract_hash(c,'supplementary'))"
+git diff --check
+```
+
+Results: compileall exit 0; 56 focused tests passed in 5.84 seconds; expanded 80-test external/manifest gate passed in 27.18 seconds; config hash `ac32f7d80695e95adbad458ef31d9f1790b16e1eec306aaba57c5233f304e2f8`; scope hashes `af80b8a7...` and `18bbb5cb...`; diff check passed. The first bare `python` compile attempt resolved to a broken Windows app-execution alias and exited before Python started; the repository interpreter then passed. No API/network, dataset acquisition, scientific artifact write, historical artifact rewrite or manuscript edit occurred.
+
+The synchronized pre-checkpoint wrapper reran compileall, the expanded suite, config/scope hashes, diff/manuscript checks, issue CSV validation, README-link audit, and changed-file raw/100-MB/secret/absolute-path scans. Exit 0: 80 tests in 27.11 seconds, 30 unique complete issues, 21 valid README links, 20 changed small tracked files, and zero raw, large, secret, absolute-path or manuscript findings. Independent final review found no P0/P1 defect and passed 66 relevant tests plus diff check.
+
+Full checkpoint regression was then run concurrently:
+
+```powershell
+.\myenv\Scripts\python.exe -m pytest -q
+.\myenv\Scripts\python.exe -m unittest discover -s tests -q
+```
+
+Both exited 0. Pytest: 656 passed, 3 skipped and 11 subtests passed in 143.88 seconds. Unittest: 178 passed, 2 skipped in 10.895 seconds. A non-required `python -m ruff check ...` probe exited 1 because Ruff is not installed in the locked environment; no lint result was claimed and no dependency was installed or changed.
+
+Final pre-stage hygiene reran `pip check`, compileall, diff/manuscript checks, issue uniqueness/completeness, README links, changed-file raw/100-MB/secret/absolute-path scans and repository-process enumeration. Exit 0: no broken requirements; 20 small tracked candidates; 30 issues; 21 README links; zero raw, large, secret, absolute-path, manuscript or active-process findings.

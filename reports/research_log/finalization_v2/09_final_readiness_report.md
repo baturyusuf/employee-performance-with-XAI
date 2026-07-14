@@ -8,7 +8,7 @@ This is a live interim assessment, not a final completion declaration. `../final
 
 ## Engineering readiness
 
-**Not ready.** Actual-input/side-input binding, core/supplementary isolation, shared-fold benchmarking, exact-model OOF SHAP, matched policy ablation, cross-fitted sigmoid calibration, support-aware subgroup/proxy contracts, conservative HRDataset replication, and closed-world lock-aware completion/promotion are implemented and tested. Unit 2G now passes closed-world hashes, model/calibrator replay, OOF, bootstrap, SHAP, support and claim-boundary validation; its recovery focus passed 72 tests. The previous full gate remains 648 pytest passes with 3 skips and 11 subtests plus 178 unittest passes with 2 skips. Figures/tables, dependency locking, CI/release workflows, remaining supplementary implementation and final all-stage integration remain open.
+**Not ready.** Actual-input/side-input binding, core/supplementary isolation, shared-fold benchmarking, exact-model OOF SHAP, matched policy ablation, cross-fitted sigmoid calibration, support-aware subgroup/proxy contracts, conservative HRDataset replication, and closed-world lock-aware completion/promotion are implemented and tested. Unit 2G passes closed-world hashes, model/calibrator replay, OOF, bootstrap, SHAP, support and claim-boundary validation. V2-029 additionally pins raw-OOF subgroup source identity and raw-margin SHAP units; its expanded external gate passes 80 tests. The current full gate passes 656 pytest tests with 3 skips and 11 subtests plus 178 unittest tests with 2 skips. Figures/tables, dependency locking, CI/release workflows, remaining supplementary implementation and final all-stage integration remain open.
 
 ## Scientific readiness
 
@@ -28,11 +28,11 @@ This is a live interim assessment, not a final completion declaration. `../final
 
 ## Manuscript-support readiness
 
-**Not ready.** Unit 2G stage findings are logged, but no canonical v2 source-of-truth results, final tables, final figures or claim matrix exists. External subgroup rows need explicit raw-OOF/source identity, and grouped SHAP summaries need explicit raw-margin units before the canonical build. Manuscript editing remains prohibited.
+**Not ready.** Unit 2G stage findings are logged, but no canonical v2 source-of-truth results, final tables, final figures or claim matrix exists. Explicit raw-OOF subgroup source identity and raw-margin SHAP units are implemented and tested, but have not yet been emitted by a canonical rebuild. Manuscript editing remains prohibited.
 
 ## Remaining blockers
 
-See `02_issue_register.csv` and `08_manual_submission_blockers.md`. D1-D5, cross-fitted sigmoid, HRDataset policy A and the Option-A replacement figure plan are accepted. The real HRDataset stage and artifact audit are complete; the tested D5 cleanup remains unpushed due Git authentication timeout. Next are the reporting metadata fix, remaining supplementary science, figure/table generation, dependency/CI contracts, sanitized publication transition and final integration. Ethics and source/licence authenticity remain external manual gates; claim-matrix author approval occurs only after the final package exists.
+See `02_issue_register.csv` and `08_manual_submission_blockers.md`. D1-D5, cross-fitted sigmoid, HRDataset policy A and the Option-A replacement figure plan are accepted. The real HRDataset stage and artifact audit are complete; V2-029 is code/test complete; the tested D5 cleanup remains unpushed due Git authentication timeout. Next are the frozen core figure-plan contract, remaining supplementary science, generator implementation, dependency/CI contracts, sanitized publication transition and final integration. Ethics and source/licence authenticity remain external manual gates; claim-matrix author approval occurs only after the final package exists.
 
 ## Final recommendation
 

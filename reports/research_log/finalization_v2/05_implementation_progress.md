@@ -563,3 +563,15 @@ The atomic stage is valid under its saved identity, but the outer input manifest
 Two non-invalidating reporting defects remain before canonical execution: external subgroup tables must serialize `probability_method=raw` plus source-OOF identity, and global grouped SHAP tables must serialize raw-margin attribution units. They are tracked as V2-029.
 
 Checkpoint `b7b2ad3074ff4b27f358fd3b9394b4ae2b1ad4a2` records the validated Unit 2G stage status and removes the full package from the current publication tip while preserving it locally. Its normal push timed out at Git Credential Manager; the remote ref remains `e25f403`. The tested checkpoint and following log synchronization are therefore local/unpushed. No additional retry, credential change or history operation was attempted.
+
+## V2-029 external reporting metadata implementation - 2026-07-14
+
+The production contract now distinguishes evidence semantics explicitly. Subgroup diagnostics require config-owned `probability_method=raw`, valid source fold-model and outer-test-probability hashes, and publish a deterministic semantic SHA-256 over the exact policy-scoped OOF rows consumed with scope `exact_consumed_policy_oof_rows`, algorithm `sha256_canonical_csv_utf8_float17g`, and ordered hash columns. This is deliberately not labelled as the byte hash of the complete raw-OOF CSV.
+
+External grouped SHAP is config-bound to `xgboost_raw_margin_score` with additivity checked in `xgboost_raw_margin` space. Provider output must declare both fields; drift fails before artifact generation. Local/global/class/fold tables, fold receipts, metadata, JSON reason codes and Markdown labels carry the semantics. Dimensionless stability/case-selection tables do not pretend to contain measured SHAP units. The old Unit 2G stage remains unchanged and noncanonical.
+
+Seven production/config/test files plus README/traceability were changed. Compilation passed; direct config/SHAP/subgroup tests passed 56/56; the expanded external and manifest gate passed 80/80. The new config hash is `ac32f7d80695e95adbad458ef31d9f1790b16e1eec306aaba57c5233f304e2f8`. V2-029 is implementation-complete but remains open at artifact level until the final current-config canonical rebuild emits and validates the fields.
+
+An independent final diff review found no P0/P1 defect and passed 66 relevant tests in 6.01 seconds. The synchronized checkpoint gate reran 80 tests and compile/hygiene checks with zero prohibited findings. No validated Unit 2G artifact was modified.
+
+The full checkpoint gate then passed 656 pytest tests with 3 skips and 11 subtests, plus 178 unittest tests with 2 skips. This supersedes the earlier 648-test repository count for current HEAD. V2-029 still remains pending canonical artifact generation rather than being marked scientifically resolved.

@@ -1372,3 +1372,9 @@ Exit 0: 72 passed in 29.58 seconds. Current-HEAD validation of the provisional i
 `git rm --cached -r -- reports/manuscript_final/stage_validation_hrdataset_20260713T175045Z_5af0262e83a3` exited 0. Verification found all 126 files/65,412,766 bytes preserved locally, zero tracked paths under the run root and the exact path ignored. This is D5 tip cleanup, not scientific deletion or history rewrite.
 
 Commit `b7b2ad3074ff4b27f358fd3b9394b4ae2b1ad4a2` exited 0 after exact staged review. The subsequent normal `git push origin finalization/leakage-aware-v2` timed out after 184 seconds while Git Credential Manager awaited a response. The verified push/remote PID tree was bounded and removed after a graceful close failed; Credential Manager was not terminated. An unauthenticated GitHub ref query confirmed remote SHA `e25f403`. No second retry, force option, credential change, merge, release or history rewrite occurred.
+
+## V2-029 reporting metadata gate - 2026-07-14
+
+Exact commands are recorded in `../finalization/COMMAND_LOG.md`. Repository-interpreter compileall passed; the direct config/SHAP/subgroup suite passed 56 tests in 5.84 seconds; the expanded external/manifest suite passed 80 tests in 27.18 seconds; config hash recomputed to `ac32f7d80695e95adbad458ef31d9f1790b16e1eec306aaba57c5233f304e2f8`; scope hashes remained unchanged; diff check passed. No real-data rerun or scientific artifact write occurred.
+
+Independent review passed 66 relevant tests with no P0/P1 finding. Full pytest then passed 656 tests with 3 skips and 11 subtests in 143.88 seconds; unittest passed 178 with 2 skips in 10.895 seconds. The optional Ruff probe found Ruff absent and made no environment change.
