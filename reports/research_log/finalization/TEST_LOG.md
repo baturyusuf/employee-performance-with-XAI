@@ -318,3 +318,13 @@ Push/recovery gate: the normal push timed out after 184 seconds with no remote r
 - Consolidated manifest/receipt, forbidden-feature, raw/secret, portability, README-link, manuscript-diff, large-file and no-network/no-paid-API hygiene gate: exit 0 in 1.192 seconds; 24 README links and 14 exact checkpoint candidates checked, with zero prohibited findings.
 - Exact staged-diff gate: exit 0 in 0.535 seconds; 14 allowlisted files, zero unstaged/untracked/raw/model/environment/large/secret/absolute/manuscript/full-package findings, and `git diff --cached --check` passed. Scientific checkpoint `0e3f50c91693b0a0f22502c2f006d516178b5d88` was created from that index.
 - Push is externally blocked, not a scientific/test failure. Attempt one timed out after 124 seconds at Credential Manager and its exact Git-only transport chain was stopped; attempt two exited 128 in 1.3 seconds because no noninteractive HTTPS username was available. Remote stayed `eab2b32`; no process or ref ambiguity remains.
+
+## V2-032 figure-collision and package-contract gate - 2026-07-14
+
+- Recovery/base gate: passed from clean synchronized required branch HEAD `fa6f4b1`; no interrupted process, listener, residue or Unit 2G mutation.
+- Final focused gate: `24 passed` in 2.22 seconds, exit 0. It covers exact frozen-plan derivation, current-run identity/source hashes, closed-world stage receipts, PNG/SVG pairs and dimensions, caption/source identity, stale-run rejection, missing/manual/obsolete package rejection, primary-feature exclusion, legacy-generator isolation and atomic OOF-SHAP failure behavior.
+- Development failures retained for audit: 21 passed/3 failed, then 23 passed/1 failed. Failures were limited to test regex expectations and correcting the external-primary forbidden-feature test scope; production checks were not weakened.
+- Complete pytest: `682 passed, 2 skipped, 11 subtests passed` in 99.13 seconds, exit 0.
+- Complete unittest: 176 tests, 1 skipped in 6.587 seconds, exit 0.
+- Compileall: exit 0 in 0.122 seconds.
+- Scientific experiment, figure generation, Unit 2G rerun, API/network use and manuscript modification: zero.

@@ -18,7 +18,7 @@ from src.core.io_utils import ensure_dir
 from src.governance.manuscript_contract import canonical_config_hash, load_manuscript_config
 
 
-FIGURE_STEMS = {
+LEGACY_V1_FIGURE_STEMS = {
     1: "figure_1_governance_architecture",
     2: "figure_2_structured_evidence_flow",
     3: "figure_3_multi_agent_audit",
@@ -121,7 +121,7 @@ def figure_1(
         {"source": "case", "target": "llm", "label": "complete only"},
         {"source": "llm", "target": "audit", "label": "deterministic checks"},
     ]
-    sources = _graph_source(nodes, edges, source_dir, FIGURE_STEMS[1], run_id=run_id, config_hash=config_hash)
+    sources = _graph_source(nodes, edges, source_dir, LEGACY_V1_FIGURE_STEMS[1], run_id=run_id, config_hash=config_hash)
     fig, axis = plt.subplots(figsize=(14, 7.6))
     fig.subplots_adjust(left=0.03, right=0.98, top=0.93, bottom=0.07)
     axis.set_xlim(0, 1)
@@ -142,7 +142,7 @@ def figure_1(
     _arrow(axis, (0.85, 0.31), (0.85, 0.22))
     axis.text(0.5, 0.96, "Figure 1. HR-XAI governance architecture under one run contract", ha="center", fontsize=15, weight="bold")
     axis.text(0.5, 0.015, "Research-grade decision support only — no autonomous HR decisions", ha="center", fontsize=9, color="#8B1E3F")
-    outputs = _save(fig, output_dir, FIGURE_STEMS[1], dpi=dpi, run_id=run_id, config_hash=config_hash)
+    outputs = _save(fig, output_dir, LEGACY_V1_FIGURE_STEMS[1], dpi=dpi, run_id=run_id, config_hash=config_hash)
     return {**outputs, **{f"source_{key}": value for key, value in sources.items()}}
 
 
@@ -176,7 +176,7 @@ def figure_2(
         {"source": "explanation", "target": "checker", "label": "claims + warnings"},
         {"source": "checker", "target": "explanation", "label": "block/flag"},
     ]
-    sources = _graph_source(nodes, edges, source_dir, FIGURE_STEMS[2], run_id=run_id, config_hash=config_hash)
+    sources = _graph_source(nodes, edges, source_dir, LEGACY_V1_FIGURE_STEMS[2], run_id=run_id, config_hash=config_hash)
     fig, axis = plt.subplots(figsize=(14, 7.4))
     fig.subplots_adjust(left=0.03, right=0.98, top=0.93, bottom=0.07)
     axis.set_xlim(0, 1)
@@ -192,7 +192,7 @@ def figure_2(
     _arrow(axis, (0.81, 0.58), (0.81, 0.44))
     axis.text(0.5, 0.96, "Figure 2. Structured SHAP-to-LLM evidence flow", ha="center", fontsize=15, weight="bold")
     axis.text(0.5, 0.015, "Incomplete required evidence blocks real execution; the LLM cannot invent missing scientific evidence.", ha="center", fontsize=9)
-    outputs = _save(fig, output_dir, FIGURE_STEMS[2], dpi=dpi, run_id=run_id, config_hash=config_hash)
+    outputs = _save(fig, output_dir, LEGACY_V1_FIGURE_STEMS[2], dpi=dpi, run_id=run_id, config_hash=config_hash)
     return {**outputs, **{f"source_{key}": value for key, value in sources.items()}}
 
 
@@ -247,7 +247,7 @@ def figure_3(
         fontsize=8.5,
     )
     axis.text(0.5, 0.96, "Figure 3. Deterministic multi-agent governance audit structure", ha="center", fontsize=15, weight="bold")
-    outputs = _save(fig, output_dir, FIGURE_STEMS[3], dpi=dpi, run_id=run_id, config_hash=config_hash)
+    outputs = _save(fig, output_dir, LEGACY_V1_FIGURE_STEMS[3], dpi=dpi, run_id=run_id, config_hash=config_hash)
     return {**outputs, "source_roles": source_path}
 
 
@@ -333,7 +333,7 @@ def figure_4(
         fontsize=9,
         color="#8B1E3F",
     )
-    outputs = _save(fig, output_dir, FIGURE_STEMS[4], dpi=dpi, run_id=run_id, config_hash=config_hash)
+    outputs = _save(fig, output_dir, LEGACY_V1_FIGURE_STEMS[4], dpi=dpi, run_id=run_id, config_hash=config_hash)
     return {**outputs, "source_matrix": source_path}
 
 
@@ -372,22 +372,6 @@ def generate_architecture_figures(
     ):
         outputs.update({f"figure_{number}_{key}": value for key, value in generated.items()})
     return outputs
-
-
-def validate_all_seven_figures(figure_dir: str | Path) -> Dict[str, Any]:
-    root = Path(figure_dir)
-    missing: list[str] = []
-    empty: list[str] = []
-    for number, stem in FIGURE_STEMS.items():
-        for suffix in (".png", ".svg"):
-            path = root / f"{stem}{suffix}"
-            if not path.is_file():
-                missing.append(str(path))
-            elif path.stat().st_size == 0:
-                empty.append(str(path))
-    if missing or empty:
-        raise ManuscriptFigureError(f"Figure package invalid; missing={missing}, empty={empty}")
-    return {"status": "passed", "figure_count": 7, "formats": ["png", "svg"]}
 
 
 def parse_args() -> argparse.Namespace:

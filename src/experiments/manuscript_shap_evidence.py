@@ -8,10 +8,6 @@ import tempfile
 from pathlib import Path
 from typing import Any, Dict, Iterable, Mapping, Sequence
 
-import matplotlib
-
-matplotlib.use("Agg")
-import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 from scipy.stats import spearmanr
@@ -490,77 +486,6 @@ def validate_shap_artifacts(
     }
 
 
-def _figure_6(
-    global_importance: pd.DataFrame,
-    output_dir: Path,
-    *,
-    identity: Mapping[str, str],
-    top_n: int,
-) -> Dict[str, Path]:
-    rows = global_importance.head(top_n).sort_values("mean_abs_grouped_shap")
-    fig, axis = plt.subplots(figsize=(9.2, 6.6), constrained_layout=True)
-    axis.barh(rows["feature"], rows["mean_abs_grouped_shap"], color="#176B87")
-    axis.set_xlabel("Mean absolute grouped SHAP value (OOF)")
-    axis.set_title("Figure 6. Global grouped SHAP attribution for the canonical primary model")
-    axis.grid(axis="x", alpha=0.25)
-    fig.text(0.01, 0.01, "Attribution, not causality. Proxy risk may remain after direct-field exclusion.", fontsize=8)
-    description = "; ".join(f"{field}={identity[field]}" for field in COMMON_IDENTITY_FIELDS)
-    png = output_dir / "figure_6_global_grouped_shap.png"
-    svg = output_dir / "figure_6_global_grouped_shap.svg"
-    fig.savefig(png, dpi=300, metadata={"Description": description})
-    fig.savefig(svg, format="svg", metadata={"Title": "Figure 6 global grouped SHAP", "Description": description})
-    plt.close(fig)
-    return {"png": png, "svg": svg}
-
-
-def _figure_7(
-    representative_cases: pd.DataFrame,
-    local_values: pd.DataFrame,
-    predictions: pd.DataFrame,
-    output_dir: Path,
-    *,
-    identity: Mapping[str, str],
-) -> Dict[str, Path]:
-    preferred = representative_cases[representative_cases["case_type"] == "incorrect_high_confidence"]
-    case = (preferred if not preferred.empty else representative_cases).iloc[0]
-    sample_index = int(case["sample_index"])
-    prediction = predictions.set_index("sample_index").loc[sample_index]
-    predicted_class = int(prediction["y_pred"])
-    rows = local_values[
-        (local_values["sample_index"] == sample_index)
-        & (local_values["class_label"] == predicted_class)
-    ].nlargest(12, "abs_grouped_shap_value").sort_values("grouped_shap_value")
-    colors = ["#C44E52" if value < 0 else "#2A9D8F" for value in rows["grouped_shap_value"]]
-    fig, axis = plt.subplots(figsize=(10.2, 7.0), constrained_layout=True)
-    axis.barh(rows["feature"], rows["grouped_shap_value"], color=colors)
-    axis.axvline(0.0, color="black", linewidth=0.8)
-    axis.set_xlabel(f"Grouped SHAP value for predicted class {predicted_class}")
-    axis.set_title(
-        f"Figure 7. OOF local reason code: {case['case_type']} (case {sample_index}, true {int(prediction['y_true'])}, predicted {predicted_class})"
-    )
-    axis.grid(axis="x", alpha=0.25)
-    fig.text(
-        0.01,
-        0.01,
-        "Model attribution only—not causality or employee advice. Human review required; proxy and calibration limitations remain.",
-        fontsize=8,
-    )
-    description = "; ".join(
-        [
-            *(f"{field}={identity[field]}" for field in COMMON_IDENTITY_FIELDS),
-            f"sample_index={sample_index}",
-            f"outer_fold={int(prediction['outer_fold'])}",
-            f"model_sha256={prediction['model_sha256']}",
-        ]
-    )
-    png = output_dir / "figure_7_local_reason_code.png"
-    svg = output_dir / "figure_7_local_reason_code.svg"
-    fig.savefig(png, dpi=300, metadata={"Description": description})
-    fig.savefig(svg, format="svg", metadata={"Title": "Figure 7 local grouped SHAP reason code", "Description": description})
-    plt.close(fig)
-    return {"png": png, "svg": svg}
-
-
 def run(
     config_path: str | Path,
     *,
@@ -858,27 +783,6 @@ def run(
         write_json(
             paths["validation"],
             {**validation, "reason_code_files_checked": len(reason_code_paths)},
-        )
-        figure_6 = _figure_6(
-            global_importance,
-            staging,
-            identity=identity,
-            top_n=int(protocol.get("global_top_n", 15)),
-        )
-        figure_7 = _figure_7(
-            representative,
-            local_values,
-            predictions,
-            staging,
-            identity=identity,
-        )
-        paths.update(
-            {
-                "figure_6_png": figure_6["png"],
-                "figure_6_svg": figure_6["svg"],
-                "figure_7_png": figure_7["png"],
-                "figure_7_svg": figure_7["svg"],
-            }
         )
         write_json(
             paths["metadata"],

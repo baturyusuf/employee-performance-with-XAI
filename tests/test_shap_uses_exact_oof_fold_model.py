@@ -255,13 +255,15 @@ def test_shap_stage_uses_each_exact_oof_fold_model_without_refit(
 
     failure_output = tmp_path / "failed_oof_shap"
     failure_output.mkdir()
-    original_figure_7 = shap_stage._figure_7
+    original_write_json = shap_stage.write_json
 
-    def fail_after_staged_files(*args, **kwargs):
-        raise RuntimeError("injected late figure failure")
+    def fail_after_staged_files(path, value, *, indent=2):
+        if Path(path).name == "shap_metadata.json":
+            raise RuntimeError("injected late metadata failure")
+        return original_write_json(path, value, indent=indent)
 
-    monkeypatch.setattr(shap_stage, "_figure_7", fail_after_staged_files)
-    with pytest.raises(RuntimeError, match="injected late figure failure"):
+    monkeypatch.setattr(shap_stage, "write_json", fail_after_staged_files)
+    with pytest.raises(RuntimeError, match="injected late metadata failure"):
         shap_stage.run(
             "configs/manuscript_final.yaml",
             shared_folds_dir=tmp_path / "shared_folds",
@@ -273,7 +275,7 @@ def test_shap_stage_uses_each_exact_oof_fold_model_without_refit(
         )
     assert failure_output.is_dir()
     assert not any(failure_output.iterdir())
-    monkeypatch.setattr(shap_stage, "_figure_7", original_figure_7)
+    monkeypatch.setattr(shap_stage, "write_json", original_write_json)
 
     output = tmp_path / "oof_shap"
     output.mkdir()

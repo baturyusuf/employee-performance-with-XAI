@@ -154,7 +154,7 @@ Config hash `eef3539be6470644cc1b3892e1aa6bb8c3186aeb9df0d61ec56635a64e978a44` f
 | 6 | Descriptive grouped OOF SHAP stability | fold rankings, pairwise stability, summary and SHAP metadata | Descriptive plan only; no fold-pair population CI |
 | 7 | HRDataset_v14 independent mapped-target replication | target support, raw/calibrated intervals, calibration/policy differences and external metadata | Replication plan only; no locked transport/direct validation claim |
 
-The figure contract requires `run_id`, `config_hash`, `scientific_input_hash` and `source_tree_hash`, SHA-256 source binding, portable paths, exact ordering and PNG/SVG plus compact source/caption outputs. Both figure and core scopes remain `release_ready:false`. Obsolete numbered SHAP Figure 6/7 previews and the legacy v1 stem validator are tracked under V2-032 and must be retired before generator implementation or canonical execution.
+The figure contract requires `run_id`, `config_hash`, `scientific_input_hash` and `source_tree_hash`, SHA-256 source binding, portable paths, exact ordering and PNG/SVG plus compact source/caption outputs. Both figure and core scopes remain `release_ready:false`. V2-032 has retired numbered SHAP Figure 6/7 generation and the general legacy stem validator. Future admission additionally requires `figure_manifest.json` plus the builder `stage_contract.json`; exactly 29 stage outputs (manifest plus 28 figure/source/caption artifacts); valid nonzero image dimensions; exact upstream closed-world source receipts; scoped primary-feature exclusion; and no historical, `latest`, manual-copy or obsolete-stem path. No real figure currently satisfies or claims this contract.
 
 ## Unit 2G checkpoint validator and source-table contract
 

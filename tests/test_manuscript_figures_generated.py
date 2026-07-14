@@ -7,7 +7,6 @@ from pathlib import Path
 from src.governance.manuscript_figures import (
     ManuscriptFigureError,
     generate_architecture_figures,
-    validate_all_seven_figures,
 )
 
 
@@ -23,19 +22,6 @@ class ManuscriptFiguresGeneratedTests(unittest.TestCase):
                     run_id="test-run",
                 )
             self.assertFalse((root / "figures").exists())
-
-    def test_validator_rejects_incomplete_package(self) -> None:
-        with tempfile.TemporaryDirectory() as directory:
-            with self.assertRaises(ManuscriptFigureError):
-                validate_all_seven_figures(directory)
-
-    def test_latest_canonical_package_has_all_figures_when_present(self) -> None:
-        latest = Path("reports/manuscript_final/latest/core/core_figures")
-        if not latest.exists():
-            self.skipTest("Canonical end-to-end run has not been generated yet.")
-        result = validate_all_seven_figures(latest)
-        self.assertEqual(result["figure_count"], 7)
-
 
 if __name__ == "__main__":
     unittest.main()

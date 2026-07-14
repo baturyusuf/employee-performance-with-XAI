@@ -1390,3 +1390,13 @@ Exact recovery, validator and test commands, timings, failures and exit codes ar
 The successful receipt records zero model fitting, network calls and paid API calls. No HRDataset scientific artifact or manuscript file changed. The stage was reused, not regenerated.
 
 Staged review passed for exactly 14 allowlisted files and commit `0e3f50c91693b0a0f22502c2f006d516178b5d88` was created. Push attempt one timed out after 124 seconds at Credential Manager; attempt two exited 128 in 1.3 seconds with noninteractive HTTPS username unavailable. Exact PID/ref/error evidence is in `../finalization/COMMAND_LOG.md`. Remote remains `eab2b32`; no third attempt is authorized in this chat.
+
+## V2-032 figure package contract gate - 2026-07-14
+
+Exact recovery and implementation commands are recorded in `../finalization/COMMAND_LOG.md`. The final focused command was:
+
+```powershell
+.\myenv\Scripts\python.exe -m pytest tests/test_core_figure_package_contract.py tests/test_core_figure_plan_contract.py tests/test_manuscript_figures_generated.py tests/test_shap_uses_exact_oof_fold_model.py -q
+```
+
+Exit 0: 24 passed in 2.22 seconds. The complete regression command `.\myenv\Scripts\python.exe -m pytest -q` exited 0 with 682 passed, 2 skipped and 11 subtests in 99.13 seconds. Unittest discovery exited 0 with 176 tests/1 skip in 6.587 seconds. Compileall exited 0 in 0.122 seconds. The initial bare `python` command failed before pytest because the Windows Store shim was unavailable; two later development focus failures and their corrections are retained in the primary logs. No scientific output, network call or manuscript file was produced.
