@@ -2,7 +2,7 @@
 
 Assessment date: 2026-07-14
 
-Current state: Units 1A through 2G, V2-029, the V2-021a/V2-032 figure contracts, V2-012 supplementary heuristic search, V2-013 task-bounded supplementary external implementation and V2-015 workbook/CSV equivalence implementation are tested. Unit 2G scientific checkpoint `0e3f50c`, receipt `fa6f4b1`, V2-032 checkpoints `5cd144a`/`5f893ec` and V2-012 checkpoints `7226eff`/`08bc14e` are pushed. The full Unit 2G verified-real-data stage completed from clean source commit `17a3dcd` and passes the reusable independent validator; it remains noncanonical stage evidence. The V2-015 clean compact receipt is pending its implementation checkpoint. No clean complete v2 scientific rebuild exists.
+Current state: Units 1A through 2G, V2-029, the V2-021a/V2-032 figure contracts, V2-012 supplementary heuristic search, V2-013 task-bounded supplementary external implementation and V2-015 workbook/CSV equivalence are tested. Unit 2G scientific checkpoint `0e3f50c`, receipt `fa6f4b1`, V2-032 checkpoints `5cd144a`/`5f893ec`, V2-012 checkpoints `7226eff`/`08bc14e`, and V2-015 implementation/fix checkpoints `e524879`/`8f02e55` are pushed. The V2-015 clean compact receipt passes independently. No clean complete v2 scientific rebuild exists.
 
 This is a live interim assessment, not a final completion declaration. `../finalization/CURRENT_STATUS.md` is the interruption-resilient status source.
 
@@ -20,7 +20,7 @@ This is a live interim assessment, not a final completion declaration. `../final
 
 ## Data/provenance readiness
 
-**Blocked.** Pinned user-provided/acquisition contracts pass for current local inputs. The V2-015 live read-only diagnostic proves exact workbook/CSV normalized content equivalence and binds the seven-block partial codebook, but the clean receipt is not yet generated and semantic/source/licence authenticity still requires manual verification. Raw-data distribution requires the accepted sanitized-publication workflow. The 65.4 MB noncanonical Unit 2G package is preserved locally and removed from the branch tip by forward cleanup `b7b2ad3` under D5; historical blobs remain because rewriting/force-push is prohibited.
+**Blocked.** Pinned user-provided/acquisition contracts pass for current local inputs. The V2-015 clean receipt proves exact workbook/CSV normalized content equivalence and binds the seven-block partial codebook, but semantic/source/licence authenticity still requires manual verification. Raw-data distribution requires the accepted sanitized-publication workflow. The 65.4 MB noncanonical Unit 2G package is preserved locally and removed from the branch tip by forward cleanup `b7b2ad3` under D5; historical blobs remain because rewriting/force-push is prohibited.
 
 ## Ethics readiness
 
@@ -32,7 +32,7 @@ This is a live interim assessment, not a final completion declaration. `../final
 
 ## Remaining blockers
 
-See `02_issue_register.csv` and `08_manual_submission_blockers.md`. D1-D5, cross-fitted sigmoid, HRDataset policy A and the Option-A figure plan are accepted. The real HRDataset stage and reusable audit are complete; V2-029, V2-032, V2-012, V2-013 and V2-015 implementation are complete. The exact next action is the clean V2-015 receipt, followed by V2-014 forward raw-tip sanitation, dependency/CI/no-network contracts, source-bound table/figure generators and final integration. Ethics and source/licence authenticity remain external manual gates; claim-matrix author approval occurs only after the final package exists.
+See `02_issue_register.csv` and `08_manual_submission_blockers.md`. D1-D5, cross-fitted sigmoid, HRDataset policy A and the Option-A figure plan are accepted. The real HRDataset stage/reusable audit and V2-015 receipt are complete; V2-029, V2-032, V2-012 and V2-013 are implementation-complete. The exact next unit is V2-014 forward raw-tip sanitation, followed by dependency/CI/no-network contracts, source-bound table/figure generators and final integration. Ethics and source/licence authenticity remain external manual gates; claim-matrix author approval occurs only after the final package exists.
 
 ## Final recommendation
 

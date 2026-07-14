@@ -386,3 +386,5 @@ Push/recovery gate: the normal push timed out after 184 seconds with no remote r
 - Final post-CLI-fix focus: 25 passed in 2.56 seconds, exit 0 (5.541 seconds wall).
 - Final post-CLI-fix pytest: 698 passed, 2 skipped and 11 subtests in 117.97 seconds, exit 0 (121.926 seconds wall).
 - Final post-CLI-fix unittest: 176 tests, 1 skipped in 7.287 seconds, exit 0 (11.093 seconds wall). Compileall: exit 0 in 0.114 seconds.
+- Clean production receipt: passed in 1.408 seconds from Git commit `8f02e5569f1073b1dd3e0861e29d5f9189d79173` using Excel COM 16.0. `canonical_eligible=true`, `git_worktree_dirty=false`, exact sheet order, zero matrix mismatches, no employee values, zero network/API calls and zero residual temp sibling.
+- Independent receipt validation: passed in 0.216 seconds. Workbook SHA-256 `d7d224e7...`, CSV SHA-256 `b8deac0a...`, normalized content SHA-256 `b5caa2ee...`, source-tree SHA-256 `d2407e99...`, and receipt SHA-256 `90e75733...` are bound. The codebook remains explicitly incomplete at 7/28 columns.

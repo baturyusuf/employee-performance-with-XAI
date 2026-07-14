@@ -204,7 +204,7 @@ All scientific rows bind run/config/scientific-input/source-tree/Git/scope, raw 
 
 ## V2-015 INX workbook/CSV provenance receipt
 
-The planned compact artifact is `11_inx_workbook_equivalence_receipt.json`. It is generated only from a clean implementation commit and contains no employee cell value.
+The admitted compact artifact is `11_inx_workbook_equivalence_receipt.json`, generated from clean commit `8f02e55` with receipt SHA-256 `90e75733d469b8576b884c8e6eb849b017a4398f75becbacf5388c37edd1f2a5`. It contains no employee cell value.
 
 | Receipt evidence | Bound role | Claim boundary |
 | --- | --- | --- |

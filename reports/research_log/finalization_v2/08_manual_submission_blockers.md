@@ -16,7 +16,7 @@ Raw datasets already exist in public history. Removing them from the current tip
 
 ## INX Workbook Semantics and Source Authority - Manual Review Required
 
-Executable workbook/CSV byte, structure and normalized-cell equivalence is implemented and regression-tested; a clean compact receipt is pending the implementation checkpoint. The live Excel 16 diagnostic found zero mismatches and the same normalized matrix hash. The `Data Definitions` sheet is now hash-bound through an explicit column alias, but it covers only seven of 28 data columns. Engineering equivalence does not verify that this partial codebook is authoritative, and it does not resolve upstream authenticity, licence, citation or retrieval-date review.
+Executable workbook/CSV byte, structure and normalized-cell equivalence is implemented, regression-tested and independently validated by the compact clean-commit receipt. Excel 16 found zero mismatches and the same normalized matrix hash. The `Data Definitions` sheet is hash-bound through an explicit column alias, but it covers only seven of 28 data columns. Engineering equivalence does not verify that this partial codebook is authoritative, and it does not resolve upstream authenticity, licence, citation or retrieval-date review.
 
 ## Claim Matrix — Pending
 
