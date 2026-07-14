@@ -439,6 +439,20 @@ def run(
     project_root: str | Path = PROJECT_ROOT,
     dataset_keys: Iterable[str] | None = None,
 ) -> Dict[str, Path]:
+    root = Path(project_root).resolve()
+
+    def repository_relative(path: str | Path, *, field: str) -> str:
+        candidate = Path(path)
+        if not candidate.is_absolute():
+            candidate = root / candidate
+        resolved = candidate.resolve()
+        try:
+            return resolved.relative_to(root).as_posix()
+        except ValueError as exc:
+            raise DatasetCardValidationError(
+                f"{field} must remain inside the repository for portable metadata."
+            ) from exc
+
     manuscript_raw = load_config(manuscript_config_path)
     manuscript = _root_mapping(manuscript_raw, "manuscript_final")
     config_hash = config_hash or canonical_config_hash(manuscript_raw)
@@ -493,7 +507,7 @@ def run(
     for card in cards:
         path = cards_dir / f"{card['dataset_id']}.md"
         path.write_text(_card_markdown(card), encoding="utf-8")
-        markdown_paths.append(str(path))
+        markdown_paths.append(path.relative_to(output).as_posix())
     outputs["validation_report"].write_text(
         json.dumps(
             {
@@ -523,8 +537,14 @@ def run(
                 "provenance_config_hash": cards[0]["provenance_config_hash"],
                 "dataset_keys": [card["dataset_id"] for card in cards],
                 "generated_at": datetime.now(timezone.utc).isoformat(),
-                "manuscript_config": str(manuscript_config_path),
-                "provenance_config": str(provenance_config_path),
+                "manuscript_config": repository_relative(
+                    manuscript_config_path,
+                    field="manuscript_config_path",
+                ),
+                "provenance_config": repository_relative(
+                    provenance_config_path,
+                    field="provenance_config_path",
+                ),
                 "physical_source_count": len({card["physical_source_id"] for card in cards}),
                 "logical_dataset_role_count": len(cards),
                 "markdown_cards": markdown_paths,

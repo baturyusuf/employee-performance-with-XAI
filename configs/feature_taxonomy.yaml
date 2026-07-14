@@ -268,7 +268,7 @@
       "control_type": "forbidden",
       "sensitive_or_proxy": "possible_proxy",
       "allowed_for_final_model": false,
-      "notes": "Risky unless prediction time is explicitly before attrition is known; excluded from primary leakage-safe feature set."
+      "notes": "Risky unless prediction time is explicitly before attrition is known; excluded from primary leakage-aware feature set."
     },
     {
       "feature_name": "PerformanceRating",

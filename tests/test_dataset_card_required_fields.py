@@ -77,6 +77,20 @@ class DatasetCardRequiredFieldsTests(unittest.TestCase):
             report = json.loads(outputs["validation_report"].read_text(encoding="utf-8"))
             self.assertEqual(report["status"], "passed")
             self.assertFalse(report["manual_source_or_licence_authenticity_decisions_made"])
+            metadata = json.loads(outputs["metadata"].read_text(encoding="utf-8"))
+            self.assertEqual(metadata["manuscript_config"], "configs/manuscript_final.yaml")
+            self.assertEqual(metadata["provenance_config"], "configs/dataset_provenance.yaml")
+            self.assertEqual(
+                metadata["markdown_cards"],
+                [
+                    "cards/inx_primary.md",
+                    "cards/hrdataset_v14.md",
+                    "cards/ibm_hr_analytics.md",
+                    "cards/ibm_hr_analytics_attrition.md",
+                    "cards/employee_turnover.md",
+                ],
+            )
+            self.assertNotIn(str(ROOT), json.dumps(metadata, sort_keys=True))
 
     def test_generator_respects_exact_scope_dataset_keys(self) -> None:
         with tempfile.TemporaryDirectory() as temporary_directory:
