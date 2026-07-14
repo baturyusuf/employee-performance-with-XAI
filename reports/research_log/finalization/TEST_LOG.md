@@ -530,3 +530,20 @@ Push/recovery gate: the normal push timed out after 184 seconds with no remote r
 - Historical alias comparison: 215 common files exact; zero missing named-run files; zero content drift; one alias-only 139-byte pointer; zero reparse points.
 - Preserved named v1 run: 215 tracked files, 166,264,643 bytes, inventory SHA-256 `ea0237497fd9bf38057e6303c0ed3c60b5a4fc12be512847e86aed19dc427db9` after alias removal.
 - Promotion status: intentionally pending. The valid candidate predates the required migration commit and strict Git identity prohibits relabelling it.
+
+## Atomic-directory publication repair - 2026-07-14
+
+- Failed run `canonical_v2_20260714T192934Z_0c2868b`: exit 1 in 1,066.336 seconds; calibration staging rename WinError 5 followed by cleanup WinError 32; manifest failed; 93 files/105,400,103 bytes plus staging preserved.
+- Initial atomic/stage focus: exit 1; 145 passed, 1 skipped, 2 stale literal-`os.replace` assertion failures.
+- Corrected atomic/stage focus: exit 0; 147 passed, 1 skipped; 19.22 seconds pytest / 22.625 seconds wall.
+- Complete pytest one: exit 1; 750 passed, 2 skipped, 11 subtests passed; one stale minimum tracked-file-count assertion after verified alias migration.
+- Corrected inventory assertion: direct test exit 0; requires no physical `latest` and exactly 215 named v1 files.
+- Final complete pytest: exit 0; 751 passed, 2 skipped, 11 subtests passed; 135.02 seconds pytest / 139.048 seconds wall.
+- Final unittest: exit 0; 179 tests, 1 skipped; 7.683 seconds unittest / 11.742 seconds wall.
+- Final compileall: exit 0; 0.124 seconds.
+- Config hash: `51415c2ce68c89d9ce2b042b0a7a811fe3e98180b72460006f9d0465f6bf49b7`.
+- Pre-checkpoint source-tree hash: `e5527c99d36bf230c79fb49b89a1a2619961aab3ea10718d042ee19361877ad7`.
+- Post-review cleanup-preservation focus: exit 0; 148 passed, 1 skipped; 19.37 seconds pytest / 22.846 seconds wall.
+- Final post-review pytest: exit 0; 752 passed, 2 skipped, 11 subtests passed; 134.51 seconds pytest / 138.459 seconds wall.
+- Final post-review unittest: exit 0; 179 tests, 1 skipped; 7.670 seconds unittest / 11.659 seconds wall.
+- Final post-review compileall: exit 0; 0.124 seconds.

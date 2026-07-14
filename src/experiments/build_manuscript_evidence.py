@@ -26,6 +26,7 @@ from datetime import datetime
 from pathlib import Path
 from typing import Any, Callable, Dict, Iterable, Mapping, MutableMapping, Sequence
 
+from src.core.atomic_publish import atomic_replace_directory
 from src.governance.manuscript_contract import (
     ACTUAL_INPUT_IDENTITY_FIELDS,
     DEFAULT_CONFIG_PATH,
@@ -2199,7 +2200,7 @@ def _write_input_snapshots(context: StageContext) -> list[Path]:
         },
     )
     _validate_input_snapshot_contract(context, staging)
-    os.replace(staging, output)
+    atomic_replace_directory(staging, output)
     validated = _validate_input_snapshot_contract(context, output)
     context.manifest["input_contract_snapshot"] = _portable(output / "input_contract.json")
     return validated

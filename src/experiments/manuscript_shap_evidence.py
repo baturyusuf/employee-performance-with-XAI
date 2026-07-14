@@ -12,6 +12,7 @@ import numpy as np
 import pandas as pd
 from scipy.stats import spearmanr
 
+from src.core.atomic_publish import atomic_replace_directory, cleanup_temporary_directory
 from src.core.io_utils import ensure_dir, write_json
 from src.data.canonical_loader import load_canonical_dataset
 from src.experiments.benchmark_artifact_contract import (
@@ -830,10 +831,10 @@ def run(
             # immediately before atomic publication; never delete a populated
             # or incompatible scientific directory.
             output.rmdir()
-        staging.replace(output)
-        temporary.cleanup()
-    except Exception:
-        temporary.cleanup()
+        atomic_replace_directory(staging, output)
+        cleanup_temporary_directory(temporary)
+    except Exception as error:
+        cleanup_temporary_directory(temporary, primary_error=error)
         raise
     return {key: output / relative for key, relative in relative_paths.items()}
 

@@ -119,7 +119,9 @@ def _runner_counter(monkeypatch: pytest.MonkeyPatch) -> dict[str, int]:
 def test_hr_stage_writes_completion_contract_before_atomic_replace() -> None:
     source = inspect.getsource(hr_stage.run)
     assert "_write_atomic_stage_contract" in source
-    assert source.index("_write_atomic_stage_contract") < source.index("os.replace")
+    assert source.index("_write_atomic_stage_contract") < source.index(
+        "atomic_replace_directory"
+    )
 
 
 def test_resume_reuses_atomically_published_stage_without_runner(

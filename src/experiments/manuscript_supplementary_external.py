@@ -22,7 +22,6 @@ import hashlib
 import io
 import json
 import math
-import os
 import tempfile
 import warnings
 from dataclasses import dataclass
@@ -37,6 +36,7 @@ import pandas as pd
 from sklearn.exceptions import ConvergenceWarning
 from threadpoolctl import threadpool_limits
 
+from src.core.atomic_publish import atomic_replace_directory
 from src.data.canonical_loader import CanonicalDataset, load_canonical_dataset
 from src.data.external_adapters import (
     ExternalDataset,
@@ -1695,7 +1695,7 @@ def run(
         }
         if set(inventory["path"].astype(str)) != expected_inventory:
             raise SupplementaryExternalError("Stage closed-world inventory is incomplete.")
-        os.replace(staging, output)
+        atomic_replace_directory(staging, output)
     except Exception:
         # Preserve a failed staging directory for forensic recovery.  The builder
         # refuses to reuse or overwrite it.

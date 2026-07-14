@@ -34,6 +34,7 @@ from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import OneHotEncoder, StandardScaler
 from threadpoolctl import threadpool_limits
 
+from src.core.atomic_publish import atomic_replace_directory, cleanup_temporary_directory
 from src.data.canonical_loader import load_canonical_dataset
 from src.experiments.benchmark_artifact_contract import (
     BenchmarkArtifactContractError,
@@ -2766,10 +2767,10 @@ def run(
         relative_paths = {name: path.relative_to(staging) for name, path in paths.items()}
         if output.exists():
             output.rmdir()
-        staging.replace(output)
-        temporary.cleanup()
-    except Exception:
-        temporary.cleanup()
+        atomic_replace_directory(staging, output)
+        cleanup_temporary_directory(temporary)
+    except Exception as error:
+        cleanup_temporary_directory(temporary, primary_error=error)
         raise
     return {name: output / relative for name, relative in relative_paths.items()}
 

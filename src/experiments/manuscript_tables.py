@@ -4,13 +4,13 @@ from __future__ import annotations
 
 import json
 import math
-import os
 import uuid
 from pathlib import Path, PurePosixPath
 from typing import Any, Mapping, Sequence
 
 import pandas as pd
 
+from src.core.atomic_publish import atomic_replace_directory
 from src.governance.manuscript_contract import canonical_config_hash, manuscript_settings, sha256_file
 from src.governance.table_contract import (
     TABLE_IDENTITY_FIELDS,
@@ -568,7 +568,7 @@ def run(
             scope=scope,
             **identity,
         )
-        os.replace(staging, output)
+        atomic_replace_directory(staging, output)
     except Exception:
         raise
     return {

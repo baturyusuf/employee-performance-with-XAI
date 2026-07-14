@@ -125,5 +125,5 @@ def test_stage_source_declares_atomic_publication_and_relative_metadata() -> Non
     source = inspect.getsource(fairness_proxy)
 
     assert "TemporaryDirectory" in source
-    assert ".replace(output)" in source or "os.replace" in source
+    assert "atomic_replace_directory" in source
     assert "relative_to(staging)" in source

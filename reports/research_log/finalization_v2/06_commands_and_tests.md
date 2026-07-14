@@ -1539,3 +1539,11 @@ Interpreter diagnostics did not execute tests: the Windows Store shim could not 
 `--validate-run-id canonical_v2_20260714T182539Z_35b121b` exited 0 in 5.673 seconds and returned `status=valid`, core/supplementary scientific inputs `34a5e692...`/`e2b41f9f...`, run-manifest hashes `b207d7c4...`/`83a209dd...`, and final-manifest hashes `c68d8fe3...`/`4720a149...`.
 
 Read-only historical comparison reported 216 physical-alias files/166,264,782 bytes versus 215 named-run files/166,264,643 bytes. Common paths were exact; `run_pointer.json` was the sole alias-only file and named the preserved run. Containment/reparse/tracked-preservation checks passed. `git rm -r -- reports/manuscript_final/latest` then removed only the redundant tracked alias; the 215-file named run remains intact. Receipt `14_latest_migration_receipt.json` records inventory `ea023749...`.
+
+## Atomic publication failure and bounded retry - 2026-07-14
+
+`myenv/Scripts/python.exe -m src.experiments.build_manuscript_evidence --config configs/manuscript_final.yaml --scope core --run-id canonical_v2_20260714T192934Z_0c2868b --no-reuse-compatible` exited 1 in 1,066.336 seconds. The traceback recorded WinError 5 on the calibration staging rename and WinError 32 on cleanup of `calibration_training_oof_predictions.csv`. The failed output is immutable, ignored and not resumed.
+
+The corrected focused command over atomic publication and affected builder/stage contracts passed 147/one skip in 19.22 seconds (22.625 wall). The first full run passed 750/two skips/11 subtests and failed one stale 1,900-file threshold. After changing that assertion to the actual migration contract, the exact test passed in 0.27 seconds (3.451 wall). Final full pytest passed 751/two skips/11 subtests in 135.02 seconds (139.048 wall); unittest passed 179/one skip in 7.683 seconds (11.742 wall); compileall passed in 0.124 seconds.
+
+Post-review cleanup-preservation focus passed 148/one skip in 19.37 seconds (22.846 wall). Final post-review pytest passed 752/two skips/11 subtests in 134.51 seconds (138.459 wall); unittest passed 179/one skip in 7.670 seconds (11.659 wall); compileall passed in 0.124 seconds.

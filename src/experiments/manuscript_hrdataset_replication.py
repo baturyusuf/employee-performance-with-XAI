@@ -13,7 +13,6 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
-import os
 import re
 import subprocess
 import tempfile
@@ -24,6 +23,7 @@ from typing import Any, Iterable, Mapping, Sequence
 import numpy as np
 import pandas as pd
 
+from src.core.atomic_publish import atomic_replace_directory
 from src.data.canonical_loader import CanonicalDataset, load_canonical_dataset
 from src.data.external_adapters import (
     ExternalDataset,
@@ -1504,7 +1504,7 @@ def run(
         _validate_portability_and_scope(staging)
         if output.exists():
             output.rmdir()
-        os.replace(staging, output)
+        atomic_replace_directory(staging, output)
 
     return {
         "output": output,

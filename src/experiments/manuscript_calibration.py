@@ -34,6 +34,7 @@ import pandas as pd
 from sklearn.linear_model import LogisticRegression
 from threadpoolctl import threadpool_limits
 
+from src.core.atomic_publish import atomic_replace_directory, cleanup_temporary_directory
 from src.core.io_utils import write_json
 from src.data.canonical_loader import load_canonical_dataset
 from src.experiments.benchmark_artifact_contract import (
@@ -2131,10 +2132,10 @@ def run(
         relative_paths = {key: path.relative_to(staging) for key, path in paths.items()}
         if output.exists():
             output.rmdir()
-        staging.replace(output)
-        temporary.cleanup()
-    except Exception:
-        temporary.cleanup()
+        atomic_replace_directory(staging, output)
+        cleanup_temporary_directory(temporary)
+    except Exception as error:
+        cleanup_temporary_directory(temporary, primary_error=error)
         raise
     return {key: output / relative for key, relative in relative_paths.items()}
 

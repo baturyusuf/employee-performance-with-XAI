@@ -184,3 +184,11 @@ This is an implementation/provenance resolution of the already approved same-OOF
 - Forward migration removes only the redundant alias, records a compact inventory receipt and reserves `latest` for the atomic pointer-only contract.
 - Git history is not rewritten. The named v1 run remains historical/non-admitted.
 - A validated package generated before this migration cannot be relabelled after HEAD changes; strict promotion requires a fresh exact-commit package.
+
+## V2-033 Bounded Atomic-Publication Retry Consequence - 2026-07-14
+
+- Retry is limited to the final directory rename and Windows WinError 5/32/33 only.
+- The staging directory must remain valid and the immutable destination absent on every attempt.
+- Forty total attempts with 0.25-second spacing bound the retry window to 9.75 seconds; exhaustion fails.
+- Cleanup follows the same narrow retry rule and attaches failure to the primary exception instead of replacing it.
+- Scientific computation, validation, identities and artifact bytes are unchanged.

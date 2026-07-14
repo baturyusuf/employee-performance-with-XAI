@@ -10,7 +10,6 @@ from __future__ import annotations
 
 import json
 import math
-import os
 import re
 import struct
 import tempfile
@@ -25,6 +24,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 
+from src.core.atomic_publish import atomic_replace_directory
 from src.governance.core_figure_contract import (
     CORE_FIGURE_IDENTITY_FIELDS,
     CORE_FIGURE_KEYS,
@@ -912,7 +912,7 @@ def run(
         files = [path for path in staging.rglob("*") if path.is_file()]
         _require(len(files) == 29, f"Core-figure stage must contain exactly 29 runner-owned artifacts, found {len(files)}.")
         _require(not output.exists(), "Core-figure output appeared during generation; refusing to overwrite it.")
-        os.replace(staging, output)
+        atomic_replace_directory(staging, output)
     except Exception:
         # Preserve failed staging output for forensic recovery.  The builder
         # refuses to run while a matching orphan directory remains.

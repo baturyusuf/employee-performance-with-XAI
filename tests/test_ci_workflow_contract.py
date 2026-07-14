@@ -100,7 +100,14 @@ def test_actual_tracked_inventory_and_readme_pass_static_gates() -> None:
     readme = gate._validate_readme_links(ROOT)
     issues = gate._validate_issue_register(ROOT)
 
-    assert inventory["tracked_file_count"] >= 1900
+    assert inventory["tracked_file_count"] >= 1700
+    assert not any(path.startswith("reports/manuscript_final/latest/") for path in paths)
+    assert sum(
+        path.startswith(
+            "reports/manuscript_final/manuscript_final_20260712T181754Z_c664ef152ff3/"
+        )
+        for path in paths
+    ) == 215
     assert inventory["raw_data_paths"] == []
     assert inventory["environment_paths"] == []
     assert inventory["large_paths"] == []

@@ -741,3 +741,11 @@ The first repaired cache-disabled build completed every core and supplementary s
 Pointer promotion correctly refused to overwrite the tracked historical physical `latest`. Exact inventory established that its 215 scientific files are byte-identical to the already tracked named v1 run; its only extra file is the pointer naming that run. The redundant alias is removed after a contained-path, no-reparse and preserved-byte audit. A compact receipt records both inventory hashes and the preservation statement.
 
 The migration changes only tracked historical report aliases, not the scientific source-tree hash or config. Nevertheless, the promotion contract requires exact generation commit equality, so the valid pre-migration package remains noncanonical. A new cache-disabled build from the migration checkpoint is required before atomic pointer promotion.
+
+## V2-033 bounded atomic-directory publication - 2026-07-14
+
+The first migration-commit build completed calibration computation but an external Windows handle prevented the final staging-directory rename. The stage's immediate TemporaryDirectory cleanup hit the same locked CSV and replaced the primary exception, reducing diagnosability. The failed run remains immutable and ignored.
+
+A shared core utility now owns every atomic directory rename. It retries only explicit Windows access-denied/sharing/lock errors within a 9.75-second maximum window, requires staging to remain a real directory and destination to remain absent, and raises all other errors immediately. TemporaryDirectory-based stages use a companion cleanup path that retries the same narrow errors and attaches an exhausted cleanup failure to the original exception.
+
+Every core and supplementary directory publisher is routed through the helper. Staged review extended primary-exception preservation to non-permission cleanup failures. Post-review focus passes 148/one skip; final pytest passes 752/two skips/11 subtests; unittest passes 179/one skip; compileall passes. The source-tree hash becomes `e5527c99...`; config remains `51415c2c...`. One new exact-fix-commit build is required for execution acceptance.
