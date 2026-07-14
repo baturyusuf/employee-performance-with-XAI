@@ -75,7 +75,7 @@
   ],
   "feature_policy_variants": {
     "department_including": {
-      "description": "Leakage-safe robustness candidate retaining department and job role.",
+      "description": "Leakage-aware robustness audit retaining department and job role.",
       "exclude_columns": []
     },
     "department_free": {

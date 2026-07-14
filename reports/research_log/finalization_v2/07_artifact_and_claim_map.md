@@ -181,3 +181,23 @@ The production output root is the current-run supplementary stage `heuristic_cou
 | `heuristic_search_artifact_inventory.json`; builder `stage_contract.json` | Closed-world path/size/SHA-256 evidence | Artifact integrity only |
 
 No output may be described as causal recourse, employee advice, an actionable recommendation, intervention validity, real-world feasibility or deployment evidence. Canonical claim status remains pending the clean compatible supplementary build and final manifest validation.
+
+## V2-013 future task-bounded supplementary external artifacts
+
+The production output root is the future current-run supplementary stage `external_robustness/`. The only executed V2-013 evidence was a temporary one-candidate/20-draw real-IBM diagnostic with `canonical_eligible=false`; it was removed and is not a publication source.
+
+| Future artifact | Bound role | Permitted claim boundary |
+| --- | --- | --- |
+| `task_strata_index.csv`; `metric_applicability.csv` | Exact task roles, denominators, positive classes, applicable metrics and literal `N/A` semantics | Scope/applicability only; no cross-task score comparison |
+| `ibm_restricted_target_performance_robustness.csv` | Long-form IBM 3/4 policy/metric OOF intervals | Restricted-target robustness only; not direct three-class validation |
+| `ibm_attrition_task_transfer.csv` | Long-form IBM attrition policy/metric OOF intervals | Related attrition-task evidence only; not performance validation |
+| `employee_turnover_task_transfer.csv` | Long-form Turnover policy/metric OOF intervals | Related turnover-task evidence only; not performance validation |
+| `<task>/target_mapping.csv`; `target_support.csv` | Observed mapped-target support and exact denominator | Dataset-specific mapping/support; no target-equivalence claim |
+| `<task>/outer_fold_assignments.csv`; `inner_fold_assignments.csv`; `fold_contract.json` | Exact deterministic 10 outer x 5 inner isolation | Reproducibility only |
+| `<task>/candidate_fit_receipts.csv`; `candidate_search_results.csv`; `selected_hyperparameters.csv` | Primary-policy macro-F1 selection with balanced-accuracy tie-break | Within-task model selection only; no ordinal tie-break or cross-task ranking |
+| `<task>/outer_model_receipts.csv`; `models/` | Persisted same-fold selected-policy models with model/fit/path hashes and zero-error replay | Exact evaluated-model provenance; no transport model |
+| `<task>/oof_predictions.csv`; `fold_metrics.csv`; `fold_descriptive_summary.csv` | Exactly-once raw OOF evidence and descriptive fold variability | Task-specific raw performance; fold summaries are not population intervals |
+| `<task>/metric_intervals.csv`; `paired_policy_differences.csv`; `bootstrap_metadata.json` | Paired 5,000-draw sample-level OOF intervals and within-task policy contrasts | Conditional within-task uncertainty only |
+| `<task>/artifact_manifest.csv`; `stage_artifact_manifest.csv`; builder `stage_contract.json` | Runner/task/package envelope integrity | Artifact integrity only |
+
+All scientific rows bind run/config/scientific-input/source-tree/Git/scope, raw and parsed content, schema, policy, fold, model-set and source-artifact identities at the applicable aggregation level. No artifact supports direct primary-task external validation, locked-model transport, transportability, causal, fairness, deployment or autonomous-HR claims.

@@ -33,3 +33,7 @@ Commit `e25f403` pushed 126 Unit 2G stage-validation files totaling 65,412,766 b
 ## Supplementary Heuristic Search - Canonical Execution Pending
 
 V2-012 is implementation-complete, but no complete real-data supplementary stage or compatible package manifest exists. The bounded real-INX diagnostic was temporary and is not a publication artifact. Any later evidence must retain the exact heuristic counterfactual-search success terminology and may not be interpreted as causal recourse, employee advice, intervention evidence, practical actionability or proof of real-world feasibility. This is an engineering/release blocker, not an ethics or participant-actionability finding.
+
+## Supplementary External Tasks - Canonical Execution Pending
+
+V2-013 is implementation-complete, but all three task strata have not yet run under one clean final supplementary identity. The real-IBM diagnostic used one candidate and 20 bootstrap draws, was explicitly `canonical_eligible=false`, and was deleted. It proves execution/model-replay/inventory behavior only. Future production evidence must keep IBM 3/4 PerformanceRating, IBM attrition and Employee Turnover in separate strata with task-valid metrics and may not be called direct primary-task validation, locked transport or transportability. Dataset source/licence/citation status remains manual-review-required independently of the engineering contract.

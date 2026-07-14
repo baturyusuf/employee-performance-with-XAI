@@ -838,14 +838,20 @@ def _run_external_replication(context: StageContext) -> Mapping[str, Any]:
 
 
 def _run_external_robustness(context: StageContext) -> Mapping[str, Any]:
-    from src.experiments.manuscript_external_evidence import run
+    from src.experiments.manuscript_supplementary_external import run
 
     return run(
         context.config_path,
         output_dir=context.run_dir / "external_robustness",
         run_id=context.run_id,
         config_hash=context.config_hash,
-        scope="supplementary",
+        scientific_input_hash=str(context.manifest["scientific_input_hash"]),
+        source_tree_hash=str(context.manifest["source_tree_hash"]),
+        git_commit=str(context.manifest["git_commit"]),
+        scope_contract_hash=str(context.manifest["scope_contract_hash"]),
+        expected_actual_input_receipts=dict(context.manifest["actual_input_receipts"]),
+        expected_side_input_hashes=dict(context.manifest["side_input_hashes"]),
+        expected_git_worktree_dirty=bool(context.manifest["git_worktree_dirty"]),
     )
 
 
@@ -894,9 +900,10 @@ STAGE_RUNNERS: Mapping[str, Callable[[StageContext], Mapping[str, Any]]] = {
     "external_robustness": _run_external_robustness,
     "dataset_cards": _run_provenance,
 }
-ATOMIC_DIRECTORY_STAGE_RUNNERS = frozenset({"external_replication"})
+ATOMIC_DIRECTORY_STAGE_RUNNERS = frozenset({"external_replication", "external_robustness"})
 STAGE_ORPHAN_PREFIXES: Mapping[str, tuple[str, ...]] = {
     "external_replication": (".hrdataset-replication-", "external_replication.__staging__"),
+    "external_robustness": ("external_robustness.__staging__.",),
 }
 
 

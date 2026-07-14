@@ -639,3 +639,13 @@ Final focused coverage passed 37 tests; the wider config/scope selection passed 
 Exact staged review passed for 23 small allowlisted files and checkpoint `7226effd30835fc678b0bb21644f45ac0464dff6` records the V2-012 production contract, tests, README and traceability. No raw dataset, persisted model, scientific output or manuscript file is included.
 
 Documentation receipt `08bc14e` and the implementation checkpoint were pushed normally to the required branch in one attempt. V2-012 is closed at implementation/checkpoint level and remains open only for future canonical supplementary execution. V2-013 is the next active unit.
+
+## V2-013 task-bounded supplementary external evidence - 2026-07-14
+
+The production `external_robustness` builder stage now imports only `manuscript_supplementary_external.py`; the mixed predecessor is explicitly historical/non-admitted. The config freezes exact tasks, conservative primary/audit policies, 10 outer x 5 inner folds, eight XGBoost candidates, primary-policy-only macro-F1 selection, balanced-accuracy tie-break, same-fold candidate reuse, raw-probability scope, paired 5,000-draw uncertainty, literal `N/A` applicability and false validation/comparability/transport flags.
+
+The runner binds actual loader receipts and model-grid/acquisition/schema inputs to config/scientific/source/Git/scope identity. Parsed-cell content, schema mapping, exact policy and fold hashes are carried through the evidence. Every outer policy model is serialized, persisted, SHA-256 bound and replayed; every OOF row resolves to its model/fit/candidate/path. Candidate fits, selections, fold metrics, descriptive summaries, task intervals and policy differences retain their applicable lineage. Atomic task/stage closed-world inventories contain only portable paths.
+
+The source outputs are deliberately separate: `ibm_restricted_target_performance_robustness.csv`, `ibm_attrition_task_transfer.csv` and `employee_turnover_task_transfer.csv`. The cross-task index contains denominators and claim boundaries but no combined score. A real-IBM reduced diagnostic passed all ten outer/five inner folds with 1,470 rows, 4,410 OOF rows, 30 models and zero replay error, then was removed. Final focused tests passed 53; expanded integration passed 196 with one skip; full pytest passed 690 with two skips and 11 subtests. Config hash is `cba48e107d3f95cc6412b7ff4f743ae50b78d04edd65258e3fbdda7759f12ced`.
+
+V2-013 is implementation-complete and canonical-artifact-open. No production supplementary output or numerical claim exists. The next bounded executable unit is V2-015 workbook/CSV equivalence; V2-014 forward raw-tip sanitation follows without deleting local source files or rewriting history.

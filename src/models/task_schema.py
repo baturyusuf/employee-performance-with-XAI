@@ -81,11 +81,17 @@ TASK_SCHEMAS: Mapping[str, TaskSchema] = {
     RESTRICTED_TARGET_PERFORMANCE_ROBUSTNESS: TaskSchema(
         name=RESTRICTED_TARGET_PERFORMANCE_ROBUSTNESS,
         comparison_group="restricted_target_performance_robustness",
-        applicable_metrics=_COMMON_METRICS | _COMMON_CALIBRATION_METRICS,
+        applicable_metrics=(
+            _COMMON_METRICS
+            | _COMMON_CALIBRATION_METRICS
+            | {"binary_brier", "roc_auc", "average_precision"}
+        ),
         ordinal_metrics_comparable=False,
         applicability_note=(
-            "Ordinal distance, adjacency, and severe-error metrics are N/A because the observed "
-            "3/4-only target is restricted and is not comparable with the primary 2/3/4 task."
+            "The observed 3/4-only target is evaluated as a restricted binary robustness task "
+            "with class 4 as the predeclared positive class. Binary probability and ranking "
+            "metrics apply, but ordinal distance, adjacency, severe-error, and multiclass Brier "
+            "metrics are N/A because this task is not comparable with the primary 2/3/4 task."
         ),
     ),
     NOMINAL_MULTICLASS_PROXY_DIAGNOSTIC: TaskSchema(

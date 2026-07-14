@@ -137,3 +137,12 @@ This is an implementation/provenance resolution of the already approved same-OOF
 - Search-success proportions use Wilson 95% intervals. Successful-scenario probability gain, normalized input-space cost and sparsity use 5,000-draw percentile bootstrap conditional on search success; failures remain explicit denominators rather than being silently dropped from the success estimand.
 - Models, prototypes, domains and scales are outer-training-only; all eligible cases are exact OOF. No output may be interpreted as causal recourse, employee advice, intervention evidence, practical actionability or proof of real-world feasibility.
 - These are implementation/reporting consequences of the already accepted supplementary boundary. No new core protocol choice or numerical manuscript claim is introduced.
+
+## V2-013 Task-Bounded Supplementary External Consequence - 2026-07-14
+
+- Retain exactly three supplementary strata: IBM restricted 3/4 PerformanceRating robustness, IBM attrition task transfer, and Employee Turnover task transfer. Never aggregate their scores or compare them directly with the primary 2/3/4 task.
+- The strict proxy-reduced policy is primary for both IBM tasks; `without_last_evaluation` is primary for Turnover. Other admitted policies are audit sensitivities and reuse the primary policy's same-fold selected XGBoost candidate.
+- All tasks require exact 10 outer x 5 inner folds without silent reduction. Macro-F1 remains the selection metric; balanced accuracy is the nonordinal task-valid tie-break. QWK and all other ordinal metrics are inapplicable here and are represented as `N/A`, not zero.
+- Restricted PerformanceRating uses class 4 as the predeclared positive class, so binary Brier, ROC AUC and average precision are applicable. This does not make the 3/4 target equivalent to the main three-class target.
+- Each task has its own paired 5,000-draw sample-level OOF bootstrap, persisted exact outer models and closed-world artifact inventory. Raw probabilities are reported; no supplementary calibration claim is introduced.
+- No retained task is direct employee-performance external validation, locked-model transport or evidence of transportability. No new core numerical claim is introduced.

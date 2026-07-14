@@ -441,6 +441,103 @@
         "core_output_contains_no_counterfactual_llm_chatbot_or_related_task_artifact": true
       }
     },
+    "supplementary_external_evidence": {
+      "scope": "supplementary_task_bounded_robustness_only",
+      "publication_role": "supplementary_only",
+      "direct_external_validation_of_primary_allowed": false,
+      "locked_model_transport_performed": false,
+      "transport_claim_allowed": false,
+      "cross_task_comparison_allowed": false,
+      "tasks": {
+        "ibm_performance": {
+          "canonical_dataset_key": "ibm_hr_analytics",
+          "task_type": "restricted_target_performance_robustness",
+          "publication_stratum": "ibm_restricted_target_performance_robustness",
+          "primary_policy": "department_job_role_free",
+          "audit_policies": ["department_free", "department_including"],
+          "positive_label": 4,
+          "claim_boundary": "Supplementary restricted 3/4-target robustness only; not direct three-class employee-performance external validation and not transport."
+        },
+        "ibm_attrition": {
+          "canonical_dataset_key": "ibm_hr_analytics_attrition",
+          "task_type": "binary_attrition_transfer",
+          "publication_stratum": "ibm_attrition_related_task_transfer",
+          "primary_policy": "department_job_role_free",
+          "audit_policies": ["department_free", "department_including"],
+          "positive_label": 1,
+          "claim_boundary": "Supplementary related attrition-task transfer only; not employee-performance validation and not transport."
+        },
+        "employee_turnover": {
+          "canonical_dataset_key": "employee_turnover",
+          "task_type": "binary_turnover_transfer",
+          "publication_stratum": "employee_turnover_related_task_transfer",
+          "primary_policy": "without_last_evaluation",
+          "audit_policies": ["with_last_evaluation"],
+          "positive_label": 1,
+          "claim_boundary": "Supplementary related turnover-task transfer only; not employee-performance validation and not transport."
+        }
+      },
+      "model_protocol": {
+        "model": "xgboost",
+        "search_space_source": "provenance.scientific_side_inputs.model_search_space",
+        "candidate_count": 8,
+        "selection_scope": "primary_policy_inside_each_outer_training_partition",
+        "policy_parameter_reuse": "reuse_primary_policy_selected_candidate_for_same_outer_fold",
+        "selection_primary_metric": "macro_f1",
+        "selection_tie_break_metric": "balanced_accuracy",
+        "ordinal_tie_break_metrics_allowed": false,
+        "primary_practical_tie_tolerance": 0.001,
+        "final_tie_break": "lowest_candidate_index",
+        "outer_test_used_for_selection": false,
+        "candidate_failure_policy": "fail_entire_stage",
+        "estimator_threads": 1
+      },
+      "cv": {
+        "outer_strategy": "StratifiedKFold",
+        "outer_splits": 10,
+        "outer_shuffle": true,
+        "outer_seed_source": "seeds.external_replication",
+        "inner_strategy": "StratifiedKFold",
+        "inner_splits": 5,
+        "inner_shuffle": true,
+        "inner_seed_source": "seeds.inner_cv",
+        "same_outer_folds_across_policies": true,
+        "silent_fold_reduction_allowed": false,
+        "fold_assignments_persisted_and_hashed": true
+      },
+      "uncertainty": {
+        "method": "paired_stratified_percentile_bootstrap",
+        "n_resamples": 5000,
+        "confidence_level": 0.95,
+        "quantile_method": "linear",
+        "seed_source": "seeds.bootstrap",
+        "stratify_by": ["outer_fold", "y_true"],
+        "same_resamples_across_policies_within_task": true,
+        "fold_summaries": "descriptive_only_no_population_confidence_interval",
+        "conditional_inference_note": "Intervals condition on the observed task-specific sample and fixed nested model-training protocol; they do not establish cross-dataset transportability."
+      },
+      "probability_protocol": {
+        "probability_source": "raw_exact_outer_fold_model",
+        "calibration_claim": "none_for_supplementary_task_strata",
+        "normalization_required": true,
+        "finite_values_required": true
+      },
+      "metrics": {
+        "restricted_target_performance_robustness": ["accuracy", "balanced_accuracy", "macro_f1", "roc_auc", "average_precision", "nll_log_loss", "binary_brier", "ece_confidence"],
+        "binary_attrition_transfer": ["accuracy", "balanced_accuracy", "macro_f1", "roc_auc", "average_precision", "nll_log_loss", "binary_brier", "ece_confidence"],
+        "binary_turnover_transfer": ["accuracy", "balanced_accuracy", "macro_f1", "roc_auc", "average_precision", "nll_log_loss", "binary_brier", "ece_confidence"]
+      },
+      "outputs": {
+        "separate_task_strata_required": true,
+        "combined_cross_task_score_table_allowed": false,
+        "explicit_metric_applicability_required": true,
+        "inapplicable_metrics_representation": "N/A",
+        "exact_model_replay_required": true,
+        "persist_outer_models": true,
+        "closed_world_manifest_required": true,
+        "atomic_publication_required": true
+      }
+    },
     "target": {
       "primary_dataset": "inx_primary",
       "column": "PerformanceRating",
@@ -744,8 +841,8 @@
           "cross_task_comparability": "Comparable only with datasets having a verified three-class 2/3/4 performance mapping."
         },
         "restricted_target_performance_robustness": {
-          "applicable": ["accuracy", "balanced_accuracy", "macro_f1", "nll_log_loss", "ece_confidence"],
-          "not_applicable": ["quadratic_weighted_kappa", "ordinal_mae", "severe_error_rate", "multiclass_brier"],
+          "applicable": ["accuracy", "balanced_accuracy", "macro_f1", "roc_auc", "average_precision", "nll_log_loss", "binary_brier", "ece_confidence"],
+          "not_applicable": ["quadratic_weighted_kappa", "ordinal_mae", "adjacent_accuracy", "severe_error_rate", "multiclass_brier"],
           "cross_task_comparability": "Robustness-only; do not present as equivalent to the primary three-class task."
         },
         "nominal_multiclass_proxy_diagnostic": {
@@ -755,12 +852,12 @@
         },
         "binary_attrition_transfer": {
           "applicable": ["accuracy", "balanced_accuracy", "macro_f1", "roc_auc", "average_precision", "nll_log_loss", "binary_brier", "ece_confidence"],
-          "not_applicable": ["quadratic_weighted_kappa", "ordinal_mae", "severe_error_rate", "multiclass_brier"],
+          "not_applicable": ["quadratic_weighted_kappa", "ordinal_mae", "adjacent_accuracy", "severe_error_rate", "multiclass_brier"],
           "cross_task_comparability": "Related-task evidence only; ordinal metrics are N/A and must not be encoded as zero."
         },
         "binary_turnover_transfer": {
           "applicable": ["accuracy", "balanced_accuracy", "macro_f1", "roc_auc", "average_precision", "nll_log_loss", "binary_brier", "ece_confidence"],
-          "not_applicable": ["quadratic_weighted_kappa", "ordinal_mae", "severe_error_rate", "multiclass_brier"],
+          "not_applicable": ["quadratic_weighted_kappa", "ordinal_mae", "adjacent_accuracy", "severe_error_rate", "multiclass_brier"],
           "cross_task_comparability": "Related-task evidence only; ordinal metrics are N/A and must not be encoded as zero."
         }
       }

@@ -59,6 +59,9 @@ def test_restricted_target_metrics_are_not_presented_as_three_class_ordinal_metr
     assert metrics["macro_f1"] is not None
     assert metrics["nll_log_loss"] is not None
     assert metrics["ece_confidence"] is not None
+    assert metrics["binary_brier"] is not None
+    assert metrics["roc_auc"] is not None
+    assert metrics["average_precision"] is not None
     assert metrics["multiclass_brier"] is None
     for metric in ORDINAL_METRICS:
         assert metrics[metric] is None

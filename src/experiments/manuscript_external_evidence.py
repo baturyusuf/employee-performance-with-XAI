@@ -1,10 +1,10 @@
-"""Canonical, versioned external evidence for the manuscript package.
+"""Historical compatibility external evidence; not admitted to the v2 package.
 
-This stage intentionally does not call the legacy external-report writer.  The
-legacy writer owns historical paths and also produces unrelated XAI/LLM
-artifacts.  Here every write is rooted below the caller-supplied output
-directory and every table is bound to one manuscript ``run_id`` and semantic
-``config_hash``.
+The v2 production runners are ``manuscript_hrdataset_replication`` for core
+HRDataset_v14 evidence and ``manuscript_supplementary_external`` for the three
+task-bounded supplementary strata.  This module remains only so historical
+reports and compatibility tests can be inspected without rewriting old paths.
+Its outputs are always noncanonical and must never enter a current package.
 
 The four task/dataset roles are deliberately kept separate:
 
@@ -967,6 +967,13 @@ def _run_dataset_task(
                 "run_id": run_id,
                 "config_hash": config_hash,
                 "status": "completed",
+                "canonical_eligible": False,
+                "historical_compatibility_only": True,
+                "superseded_production_runner": (
+                    "src.experiments.manuscript_hrdataset_replication"
+                    if spec.key == "hrdataset_v14"
+                    else "src.experiments.manuscript_supplementary_external"
+                ),
                 "dataset_key": spec.key,
                 "dataset_name": spec.dataset_name,
                 "target_kind": spec.target_kind,
@@ -1146,7 +1153,7 @@ def _interpretation_markdown(
 ) -> str:
     specs_for_scope(scope)
     lines = [
-        "# Canonical External Evidence Interpretation",
+        "# Historical External Evidence Interpretation (not admitted to v2)",
         "",
         f"Run ID: `{run_id}`  ",
         f"Config hash: `{config_hash}`  ",
@@ -1350,6 +1357,12 @@ def run(
                 "run_id": run_id,
                 "config_hash": config_hash,
                 "status": "completed",
+                "canonical_eligible": False,
+                "historical_compatibility_only": True,
+                "superseded_production_runners": [
+                    "src.experiments.manuscript_hrdataset_replication",
+                    "src.experiments.manuscript_supplementary_external",
+                ],
                 "started_and_completed_by": "manuscript_external_evidence",
                 "completed_at": _utc_now(),
                 "package_scope": scope,
@@ -1374,7 +1387,9 @@ def run(
 
 
 def parse_args() -> argparse.Namespace:
-    parser = argparse.ArgumentParser(description="Build canonical versioned external evidence.")
+    parser = argparse.ArgumentParser(
+        description="Build historical compatibility external evidence (never canonical v2)."
+    )
     parser.add_argument("--config", default=str(DEFAULT_CONFIG))
     parser.add_argument("--scope", required=True, choices=tuple(EXTERNAL_SCOPE_TASK_KEYS))
     parser.add_argument("--output-dir", required=True)

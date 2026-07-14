@@ -1429,3 +1429,17 @@ The consolidated pre-stage gate exited 0 in 0.818 seconds: 23 small candidates; 
 The staged diff review found that `source_model_fit_receipt_sha256` bound the deterministic fit contract but not the actual fitted state. Because the final dossier requires model identity, the stage now hashes each actual in-memory serialized pipeline, publishes `source_outer_model_sha256` on OOF/case rows and `model_set_sha256` across summaries/protocol/inventory, and validates the row/fold mapping before write completion.
 
 Post-fix commands repeated the focused suite, bounded real-INX diagnostic, complete pytest, unittest and compileall. Focus passed 37 in 1.90 seconds (5.395 wall). The diagnostic passed in 3.946 seconds with one actual fold-model hash, one model-set hash, 48 case rows, four OOF rows and 11 verified inventory records, then removed its uniquely validated temporary directory. Complete pytest passed 687 with 2 skips/11 subtests in 118.36 seconds (122.461 wall). Unittest passed 176 with 1 skip in 7.389 seconds (11.319 wall); compileall passed in 0.114 seconds. This is the final V2-012 regression cycle.
+
+## V2-013 task-bounded supplementary external evidence - 2026-07-14
+
+The local no-download preflight loaded `ibm_hr_analytics`, `ibm_hr_analytics_attrition` and `employee_turnover` through the canonical loader and explicit schema adapters. It confirmed raw SHA-256 `a5c31e38bd7fafc9bc333884eb181b06b41b8e5e488e8f7ccb27199fb3be7659` for both logical IBM tasks, `2510e274a90547f34c7b0db5a4ab70282c2710eb54252f14921bf980b81a928c` for Turnover, complete mappings, unique IDs and class supports 1244/226, 1233/237 and 11428/3571.
+
+Final focused command selected the new stage, shared task schema, historical compatibility gates and builder scientific-input binding: exit 0, 53 passed in 10.42 seconds. Expanded integration over all external tests plus atomic/resume/manifest/side-input contracts: exit 0, 196 passed and 1 skipped in 32.93 seconds.
+
+The bounded actual-XGBoost diagnostic invoked the production runner with `SupplementaryExternalTestOnlyOverrides(candidate_indices=(0,), bootstrap_resamples=20, task_keys=('ibm_performance',))`. It retained exact 10x5 folds and full real-IBM coverage, completed in 19.837 seconds, wrote 4,410 OOF rows and 30 replayed models with maximum probability error zero, validated 53 inventory rows, set `canonical_eligible=false`, and exited its temporary context with no retained output.
+
+The sole complete regression `myenv\Scripts\python.exe -m pytest -q` exited 0 in 121.8 wall seconds: 690 passed, 2 skipped and 11 subtests in 117.72 seconds. API-key variables were cleared for scientific/test processes. Config hash is `cba48e107d3f95cc6412b7ff4f743ae50b78d04edd65258e3fbdda7759f12ced`. No paid API, network acquisition, production artifact, manuscript write or Unit 2G mutation occurred.
+
+Post-regression unittest discovery exited 0 with 176 tests/one skip in 7.370 seconds (11.312 wall); compileall exited 0 in 0.112 seconds; `pip check` exited 0 in 0.631 seconds with no broken requirements.
+
+The first staged review covered 22 exact files, 2,196 insertions/29 deletions and a 119,380-byte maximum. Config/protocol, issue CSV, README links, secret, raw/model/environment, large-file, portability, manuscript-diff, active `leakage-safe`, and network/paid-API-import gates passed. No raw dataset, model artifact, diagnostic output, credential, environment file or manuscript file is staged.

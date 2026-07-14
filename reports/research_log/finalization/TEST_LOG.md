@@ -351,3 +351,17 @@ Push/recovery gate: the normal push timed out after 184 seconds with no remote r
 - Final post-fix unittest: 176 tests, 1 skipped in 7.389 seconds, exit 0 (11.319 seconds wall time). Compileall: exit 0 in 0.114 seconds.
 - Exact staged-diff gate: exit 0 in 0.617 seconds; 23 allowlisted files, 1,896 insertions/707 deletions, maximum 118,791 bytes, zero unstaged/untracked/raw/model/environment/10-MB/secret/absolute/manuscript/network/legacy findings, 32 valid issues, 24 README links and 26 model-identity references. Checkpoint `7226effd30835fc678b0bb21644f45ac0464dff6` was created.
 - V2-012 receipt/push gate: five-file documentation review passed; receipt `08bc14e` created; normal authenticated push succeeded in one attempt and origin now contains the checkpoint/receipt chain.
+
+## V2-013 supplementary external gate - 2026-07-14
+
+- Real-data preflight: passed for all three retained tasks with exact local receipt hashes, complete target mappings, unique mapped identifiers and minimum class support above ten.
+- Protocol/claim gate: passed. Three separate non-comparable strata; no direct primary validation, locked transport or transportability claim; ordinal metrics use literal `N/A`; restricted class 4 is the explicit positive class for binary ranking/probability metrics.
+- Nested/OOF/model gate: passed. Exact 10x5 folds, primary-policy-only macro-F1 selection, balanced-accuracy tie-break, same-fold candidate reuse, complete OOF coverage, actual serialized model hashes/paths and zero-error replay.
+- Uncertainty gate: passed. Fold summaries are descriptive only and production intervals use 5,000 paired sample-level OOF bootstrap draws separately within each task.
+- Atomic/inventory gate: passed. Runner-owned files publish through contained sibling staging; task/stage manifests are closed-world and portable; builder adds its separately declared `stage_contract.json` envelope.
+- Final focused suite: 53 passed in 10.42 seconds. Expanded integration: 196 passed, 1 skipped in 32.93 seconds.
+- Bounded real-IBM diagnostic: exit 0 in 19.837 seconds; 1,470 samples, 4,410 OOF rows, 30 models, zero replay error, 53 inventory records; explicitly noncanonical/reduced and automatically removed.
+- Complete pytest: 690 passed, 2 skipped and 11 subtests in 117.72 seconds, exit 0 (121.8 seconds wall time).
+- Unittest: 176 tests, 1 skipped in 7.370 seconds, exit 0 (11.312 seconds wall time). Compileall: exit 0 in 0.112 seconds. Pip dependency check: exit 0 in 0.631 seconds with no broken requirements.
+- Staged-diff/hygiene gate: 22 exact allowlisted files; 2,196 insertions/29 deletions; maximum 119,380 bytes; 32 unique issues; 24 README links/18 unique targets; zero staged raw/model/environment/large files, secret/absolute/manuscript/active-legacy/network findings. Existing tracked raw-history blockers remain documented and were not added by V2-013.
+- No production artifact, network/API call, manuscript edit or Unit 2G mutation occurred.
