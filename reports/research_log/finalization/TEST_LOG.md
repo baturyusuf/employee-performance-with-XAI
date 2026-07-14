@@ -432,3 +432,17 @@ Push/recovery gate: the normal push timed out after 184 seconds with no remote r
 - Final pytest: 725 passed, 2 skipped and 11 subtests in 122.38 seconds, exit 0 (126.377 seconds wall).
 - Unittest: 176 tests, 1 skipped in 7.563 seconds, exit 0 (11.357 seconds wall). Compileall: exit 0 in 0.115 seconds.
 - Real release-blocked core entrypoint: expected `ManuscriptBuildError`, exit 0 diagnostic in 0.139 seconds; credential environment restored and no run created.
+
+## V2-019 CI/release-candidate gate - 2026-07-14
+
+- Workflow contract: both YAML files parse; read-only `contents` permission, credential-free checkout, CPython 3.14, exact development install, dependency/`pip check`, six cleared API credential variables, offline-runtime focus, pytest, unittest, compileall, manuscript diff and production repository gate are present.
+- Manual release contract: exact run ID/40-character commit/`VALIDATE_ONLY` inputs; labelled trusted Windows self-hosted runner; ignored local scientific inputs preserved; read-only two-scope validation; no artifact upload, promotion, push, release, Zenodo or build command.
+- Dependency environment: disposable CPython 3.14 install exit 0 in 86.8 seconds; 22 declared direct packages, 96 exact pins; `pip check` passed.
+- Final focused gate: 35 passed in 1.42 seconds, exit 0 (4.570 seconds wall).
+- Complete-cycle failure 1: broad config-loading cascade because PyYAML resolved JSON exponent scalars as strings. A lexical config change proved the diagnosis but did not cover JSON-dumped fixtures.
+- Root fix: `load_config` parses JSON-compatible content with `json.loads` before YAML fallback; a dedicated numeric-exponent regression was added and original canonical config bytes were restored.
+- Failure-focused verification: 122 passed in 12.01 seconds, exit 0 (15.217 seconds wall).
+- Final pytest: 730 passed, 2 skipped and 11 subtests in 122.16 seconds, exit 0 (126.145 seconds wall).
+- Final unittest: 177 tests, 1 skipped in 8.178 seconds, exit 0 (11.861 seconds wall).
+- Compileall: exit 0 in 0.104 seconds.
+- Hosted status: no GitHub Actions result exists yet; V2-019 cannot be marked fully resolved until the pushed workflow has a first green hosted run.

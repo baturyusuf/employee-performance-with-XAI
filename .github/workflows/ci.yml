@@ -1,0 +1,82 @@
+name: Publication technical CI
+
+on:
+  push:
+    branches:
+      - finalization/leakage-aware-v2
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: technical-ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    env:
+      ANTHROPIC_API_KEY: ""
+      AZURE_OPENAI_API_KEY: ""
+      COHERE_API_KEY: ""
+      GOOGLE_API_KEY: ""
+      MISTRAL_API_KEY: ""
+      OPENAI_API_KEY: ""
+      PYTHONHASHSEED: "0"
+    steps:
+      - name: Check out exact revision without credentials
+        uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Set up locked Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.14"
+          cache: pip
+          cache-dependency-path: |
+            requirements-dev.txt
+            requirements-supplementary.txt
+            requirements-legacy-optional.txt
+            requirements-core.txt
+            constraints/py314-lock.txt
+
+      - name: Install exact development environment
+        run: python -m pip install --requirement requirements-dev.txt
+
+      - name: Validate dependency contract and environment
+        run: |
+          python -m src.governance.dependency_contract --profile development --validate-only
+          python -m pip check
+
+      - name: Reject manuscript-file changes
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha || github.event.before }}
+        run: |
+          if [ -n "$BASE_SHA" ] && [ "$BASE_SHA" != "0000000000000000000000000000000000000000" ]; then
+            git diff --exit-code "$BASE_SHA...HEAD" -- manuscript '*.docx' '*.pdf' '*.tex'
+          fi
+
+      - name: Run focused offline and CI contract tests
+        run: >-
+          python -m pytest -q
+          tests/test_core_build_makes_no_network_or_api_calls.py
+          tests/test_ci_workflow_contract.py
+          tests/test_dependency_contract.py
+          tests/test_latest_pointer_contract.py
+
+      - name: Run complete pytest regression
+        run: python -m pytest -q
+
+      - name: Run unittest compatibility regression
+        run: python -m unittest discover -s tests -p "test_*.py"
+
+      - name: Compile all production Python
+        run: python -m compileall -q src
+
+      - name: Enforce repository publication gates
+        run: python -m src.governance.ci_repository_gate

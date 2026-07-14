@@ -1,6 +1,8 @@
 from __future__ import annotations
 
 import unittest
+from pathlib import Path
+from tempfile import TemporaryDirectory
 
 from src.utils.config_loader import load_config, load_feature_sets_config, load_feature_taxonomy_config
 
@@ -21,6 +23,16 @@ class ConfigLoadingTests(unittest.TestCase):
         names = [row["feature_name"] for row in config["feature_taxonomy"]]
         self.assertEqual(len(names), len(set(names)))
         self.assertIn("EmpLastSalaryHikePercent", names)
+
+    def test_json_numeric_exponents_remain_numbers_when_pyyaml_is_installed(self) -> None:
+        with TemporaryDirectory() as temporary_directory:
+            path = Path(temporary_directory) / "numeric.yaml"
+            path.write_text('{"tolerance": 1e-12}\n', encoding="utf-8")
+
+            config = load_config(path)
+
+        self.assertEqual(config, {"tolerance": 1e-12})
+        self.assertIsInstance(config["tolerance"], float)
 
 
 if __name__ == "__main__":

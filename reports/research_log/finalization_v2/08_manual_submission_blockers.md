@@ -37,3 +37,7 @@ V2-012 is implementation-complete, but no complete real-data supplementary stage
 ## Supplementary External Tasks - Canonical Execution Pending
 
 V2-013 is implementation-complete, but all three task strata have not yet run under one clean final supplementary identity. The real-IBM diagnostic used one candidate and 20 bootstrap draws, was explicitly `canonical_eligible=false`, and was deleted. It proves execution/model-replay/inventory behavior only. Future production evidence must keep IBM 3/4 PerformanceRating, IBM attrition and Employee Turnover in separate strata with task-valid metrics and may not be called direct primary-task validation, locked transport or transportability. Dataset source/licence/citation status remains manual-review-required independently of the engineering contract.
+
+## CI Execution and Trusted Release Validator - Engineering Pending
+
+V2-019 workflow syntax, contracts and local locked-environment regressions pass, but the first hosted GitHub Actions run cannot exist until the checkpoint is pushed. The manual release validator additionally requires a user-operated Windows self-hosted runner with the custom `publication-release` label and locally available ignored scientific inputs. It must not be provisioned or dispatched until an exact-commit complete candidate exists. These are engineering/release gates, not ethics approval, source/licence verification or scientific evidence.

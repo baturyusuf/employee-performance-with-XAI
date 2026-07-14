@@ -240,8 +240,11 @@ def test_scientific_build_does_not_publish_or_mutate_latest() -> None:
     calls = _called_function_names(builder.build)
     assert "_update_latest_pointer" not in calls
     assert "promote_latest_pointer" not in calls
-    assert "_validate_completed_run_package" in _called_function_names(
+    assert "_validated_release_candidate" in _called_function_names(
         builder.promote_latest_pointer
+    )
+    assert "_validate_completed_run_package" in _called_function_names(
+        builder._validated_release_candidate
     )
 
 
@@ -454,6 +457,15 @@ def test_promotion_runs_the_production_strict_validator_for_both_scopes(
         core_manifest["commands"][1],
     )
     core_manifest_path.write_text(json.dumps(core_manifest) + "\n", encoding="utf-8")
+    calls.clear()
+    receipt = builder.validate_release_candidate(output_root / RUN_ID, output_root)
+
+    assert calls == ["core", "supplementary"]
+    assert receipt["status"] == "valid"
+    assert receipt["run_id"] == RUN_ID
+    assert receipt["relative_target"] == RUN_ID
+    assert not (output_root / "latest").exists()
+
     calls.clear()
     pointer = builder.promote_latest_pointer(output_root / RUN_ID, output_root)
 

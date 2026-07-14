@@ -247,3 +247,7 @@ No package-install log, local machine path, credential or dataset value enters t
 ## V2-020 runtime policy in canonical package status
 
 No standalone scientific artifact is admitted by this implementation unit. Every future complete core/supplementary `package_status.json` must include `network_calls=0`, `paid_api_calls=0` and the exact runtime policy payload: zero attempts/successes, the blocked socket surface, cleared credential keys and exact local Git allowlist. Because any attempted operation poisons completion, this policy can appear only after an attempt-free run. It does not cover package installation and remains unproven for the final release until the real complete package exists.
+
+## V2-019 CI and release-validation contracts
+
+No scientific result, table, figure or release artifact is created by V2-019. `.github/workflows/ci.yml`, `.github/workflows/validate-release-candidate.yml` and `src/governance/ci_repository_gate.py` are executable engineering contracts only. Hosted CI may install the locked dependency graph and run tests, but scientific build execution remains offline and API-credential-free. The trusted self-hosted workflow validates an already complete local two-scope package and prints a read-only validation receipt to the job log; it cannot promote `latest`, upload evidence or publish a release. A future workflow log is reproducibility evidence, not manuscript evidence or a canonical package.

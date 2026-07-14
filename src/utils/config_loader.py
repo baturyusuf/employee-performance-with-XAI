@@ -35,7 +35,8 @@ def load_config(name_or_path: str | Path) -> Dict[str, Any]:
 
     Config files are valid YAML. They are intentionally written as JSON-compatible
     YAML so the repository has no hard dependency on PyYAML for phase-1 tests.
-    If PyYAML is installed, it is used first; otherwise JSON parsing is used.
+    JSON is parsed first so JSON numeric syntax has identical semantics whether or
+    not PyYAML is installed; non-JSON YAML uses PyYAML as the explicit fallback.
     """
     path = resolve_config_path(name_or_path)
 
@@ -46,13 +47,18 @@ def load_config(name_or_path: str | Path) -> Dict[str, Any]:
 
     data: Any
     try:
-        import yaml  # type: ignore
-
-        data = yaml.safe_load(text)
-    except ModuleNotFoundError:
         data = json.loads(text)
-    except Exception as exc:
-        raise ConfigError(f"Failed to parse config {path}: {exc}") from exc
+    except json.JSONDecodeError as json_error:
+        try:
+            import yaml  # type: ignore
+
+            data = yaml.safe_load(text)
+        except ModuleNotFoundError as exc:
+            raise ConfigError(
+                f"Config is not JSON-compatible and PyYAML is unavailable: {path}: {json_error}"
+            ) from exc
+        except Exception as exc:
+            raise ConfigError(f"Failed to parse config {path}: {exc}") from exc
 
     if not isinstance(data, dict):
         raise ConfigError(f"Config must contain a mapping/object: {path}")

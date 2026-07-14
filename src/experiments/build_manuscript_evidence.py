@@ -2072,13 +2072,11 @@ def _write_input_snapshots(context: StageContext) -> list[Path]:
     return validated
 
 
-def promote_latest_pointer(run_dir: Path, output_root: Path) -> Path:
-    """Atomically promote one verified core+supplementary immutable package.
-
-    Promotion is deliberately separate from scientific execution.  A historical
-    physical ``latest`` package is never renamed, copied, or overwritten by this
-    function; it requires an explicit, inventory-preserving migration first.
-    """
+def _validated_release_candidate(
+    run_dir: Path,
+    output_root: Path,
+) -> tuple[Path, Path, str, dict[str, Any], dict[str, dict[str, Any]]]:
+    """Validate one complete immutable package without changing publication state."""
 
     lexical_root = Path(output_root).absolute()
     if os.path.lexists(lexical_root) and _is_linklike(lexical_root):
@@ -2176,6 +2174,44 @@ def promote_latest_pointer(run_dir: Path, output_root: Path) -> Path:
             },
         }
     assert common_identity is not None
+    return root, package_dir, run_id, common_identity, scope_payloads
+
+
+def validate_release_candidate(run_dir: Path, output_root: Path) -> dict[str, Any]:
+    """Return a read-only receipt for one valid core+supplementary package."""
+
+    root, package_dir, run_id, common_identity, scope_payloads = _validated_release_candidate(
+        run_dir,
+        output_root,
+    )
+    return {
+        "schema_version": 1,
+        "validation_kind": "manuscript_evidence_release_candidate",
+        "status": "valid",
+        "run_id": run_id,
+        "relative_target": package_dir.relative_to(root).as_posix(),
+        "config_path": common_identity["config_path"],
+        "config_hash": common_identity["config_hash"],
+        "git_commit": common_identity["git_commit"],
+        "source_tree_hash": common_identity["source_tree_hash"],
+        "code_package_versions": common_identity["code_package_versions"],
+        "random_seeds": common_identity["random_seeds"],
+        "scopes": scope_payloads,
+    }
+
+
+def promote_latest_pointer(run_dir: Path, output_root: Path) -> Path:
+    """Atomically promote one verified core+supplementary immutable package.
+
+    Promotion is deliberately separate from scientific execution.  A historical
+    physical ``latest`` package is never renamed, copied, or overwritten by this
+    function; it requires an explicit, inventory-preserving migration first.
+    """
+
+    root, package_dir, run_id, common_identity, scope_payloads = _validated_release_candidate(
+        run_dir,
+        output_root,
+    )
 
     latest = root / "latest"
     pointer_path = latest / "pointer.json"
@@ -2270,6 +2306,26 @@ def promote_configured_latest(
         evidence_scope="core",
     )
     return promote_latest_pointer(output_root / run_id, output_root)
+
+
+def validate_configured_release_candidate(
+    config_path: str | Path,
+    *,
+    run_id: str,
+) -> dict[str, Any]:
+    """Validate the configured immutable package without updating ``latest``."""
+
+    resolved_config = Path(config_path)
+    if not resolved_config.is_absolute():
+        resolved_config = (PROJECT_ROOT / resolved_config).resolve()
+    config = load_manuscript_config(resolved_config, project_root=PROJECT_ROOT)
+    settings = manuscript_settings(config)
+    output_root, _, _ = _validated_output_layout(
+        settings,
+        run_id=validate_portable_run_id(run_id),
+        evidence_scope="core",
+    )
+    return validate_release_candidate(output_root / run_id, output_root)
 
 
 def _load_existing_manifest(
@@ -2890,6 +2946,11 @@ def parse_args(argv: Sequence[str] | None = None) -> argparse.Namespace:
         help="Validate both immutable scopes and atomically update only latest/pointer.json.",
     )
     parser.add_argument(
+        "--validate-run-id",
+        default=None,
+        help="Read-only validation of both immutable scopes; never update latest.",
+    )
+    parser.add_argument(
         "--scope",
         choices=tuple(CANONICAL_STAGE_ORDERS),
         default=None,
@@ -2905,6 +2966,8 @@ def parse_args(argv: Sequence[str] | None = None) -> argparse.Namespace:
 
 def main(argv: Sequence[str] | None = None) -> None:
     arguments = parse_args(argv)
+    if arguments.promote_run_id is not None and arguments.validate_run_id is not None:
+        raise SystemExit("Promotion and read-only validation are mutually exclusive.")
     if arguments.promote_run_id is not None:
         if (
             arguments.run_id is not None
@@ -2919,6 +2982,20 @@ def main(argv: Sequence[str] | None = None) -> None:
             run_id=arguments.promote_run_id,
         )
         print(json.dumps({"latest_pointer": str(pointer)}, indent=2, sort_keys=True))
+    elif arguments.validate_run_id is not None:
+        if (
+            arguments.run_id is not None
+            or arguments.no_reuse_compatible
+            or arguments.scope is not None
+        ):
+            raise SystemExit(
+                "--validate-run-id cannot be combined with build run/reuse/scope options."
+            )
+        receipt = validate_configured_release_candidate(
+            arguments.config,
+            run_id=arguments.validate_run_id,
+        )
+        print(json.dumps(receipt, indent=2, sort_keys=True))
     else:
         result = build(
             arguments.config,
