@@ -29,3 +29,7 @@ The configured nominal department proxy target contains a singleton class. Under
 ## Noncanonical Evidence in Git History - Publication Hygiene Blocker
 
 Commit `e25f403` pushed 126 Unit 2G stage-validation files totaling 65,412,766 bytes, including persisted models and row-level derivative evidence, contrary to D5. Forward cleanup `b7b2ad3` removes the directory from the branch tip and preserves the validated package locally. The small Unit 2G checkpoint `0e3f50c` and push receipt `fa6f4b1` were subsequently pushed normally; authentication is no longer a blocker. Because force-push and history rewriting are prohibited, the large blobs remain retrievable from repository history. A later sanitized-publication/history strategy requires explicit authorization; until then this remains a publication-hygiene and repository-size blocker, especially while dataset source/licence authenticity is unverified.
+
+## Supplementary Heuristic Search - Canonical Execution Pending
+
+V2-012 is implementation-complete, but no complete real-data supplementary stage or compatible package manifest exists. The bounded real-INX diagnostic was temporary and is not a publication artifact. Any later evidence must retain the exact heuristic counterfactual-search success terminology and may not be interpreted as causal recourse, employee advice, intervention evidence, practical actionability or proof of real-world feasibility. This is an engineering/release blocker, not an ethics or participant-actionability finding.

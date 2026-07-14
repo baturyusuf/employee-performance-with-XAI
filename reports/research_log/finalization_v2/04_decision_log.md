@@ -128,3 +128,12 @@ This is an implementation/provenance resolution of the already approved same-OOF
 - Figure inputs must be portable paths to declared upstream core-stage outputs from the same future run. Historical `latest`, LLM/chatbot/agent/G-XAIR/counterfactual/actionability artifacts and local reason-code figures are excluded.
 - V2-021a freezes metadata only. `core_figures` remains release-blocking and without a production runner until the source-bound generator, manifest and closed-world validations are implemented and exercised on canonical evidence.
 - No new scientific decision is introduced; this enforces the already accepted core scope and conservative publication boundary.
+
+## V2-012 Supplementary Heuristic-Search Consequence - 2026-07-14
+
+- Counterfactual evidence remains supplementary-only and uses the exact term `heuristic counterfactual-search success`.
+- Four taxonomy-labelled feature scopes are reported independently. A control-type label describes the tested model-input set; it does not prove that an employee can or should change the feature.
+- Restricted 50x2, primary 100x3 and expanded 250x3 budgets are derived from one shared 750-candidate maximum pool per OOF case/scope. Candidate inclusion and success monotonicity are asserted only within a scope; no cross-scope monotonic claim is permitted.
+- Search-success proportions use Wilson 95% intervals. Successful-scenario probability gain, normalized input-space cost and sparsity use 5,000-draw percentile bootstrap conditional on search success; failures remain explicit denominators rather than being silently dropped from the success estimand.
+- Models, prototypes, domains and scales are outer-training-only; all eligible cases are exact OOF. No output may be interpreted as causal recourse, employee advice, intervention evidence, practical actionability or proof of real-world feasibility.
+- These are implementation/reporting consequences of the already accepted supplementary boundary. No new core protocol choice or numerical manuscript claim is introduced.

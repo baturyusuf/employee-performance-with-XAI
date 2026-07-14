@@ -833,32 +833,44 @@
       ]
     },
     "counterfactuals": {
+      "publication_role": "supplementary_heuristic_search_only",
+      "terminology": "heuristic_counterfactual_search_success",
       "model_evaluation_scope": "out_of_fold_only",
       "prototype_scope": "outer_training_partition_only",
+      "domain_scope": "outer_training_partition_only",
+      "scaling_scope": "outer_training_partition_only",
       "evaluation_population": "all_eligible_oof_cases",
       "sample_size": null,
-      "material_compute_tradeoff_requires_user_decision": true,
       "eligibility": "predicted_class_below_highest_target_class",
       "stratify_descriptively_by": ["predicted_class", "true_class", "correctness", "confidence"],
-      "max_features_changed": 3,
-      "top_k_per_case": 5,
       "domain_source": "training_partition_and_feature_taxonomy",
       "immutable_and_history_constraints_required": true,
       "cost_scaling": "training_partition_robust_range_for_numeric_and_unit_cost_for_categorical",
-      "intervention_modes": {
-        "employee_only": ["employee_controllable"],
-        "employee_manager": ["employee_controllable", "manager_controllable"],
-        "organization_allowed": ["employee_controllable", "manager_controllable", "organisation_controllable"],
-        "diagnostic_full_default": ["employee_controllable", "manager_controllable", "organisation_controllable"],
-        "no_salary": ["employee_controllable", "manager_controllable", "organisation_controllable"]
+      "candidate_feature_scopes": {
+        "employee_control_tagged": ["employee_controllable"],
+        "employee_manager_control_tagged": ["employee_controllable", "manager_controllable"],
+        "employee_manager_organisation_control_tagged": ["employee_controllable", "manager_controllable", "organisation_controllable"],
+        "diagnostic_including_immutable_history": ["employee_controllable", "manager_controllable", "organisation_controllable", "immutable"]
       },
-      "no_salary_excluded_features": ["EmpLastSalaryHikePercent"],
+      "cross_scope_comparison": "report_each_scope_independently_no_candidate_inclusion_or_monotonicity_claim",
+      "primary_budget_id": "primary",
+      "search_budgets": [
+        {"budget_id": "restricted", "role": "sensitivity", "max_prototypes": 50, "max_features_changed": 2},
+        {"budget_id": "primary", "role": "primary", "max_prototypes": 100, "max_features_changed": 3},
+        {"budget_id": "expanded", "role": "sensitivity", "max_prototypes": 250, "max_features_changed": 3}
+      ],
+      "budget_candidate_inclusion": "nested_within_each_feature_scope_by_shared_maximum_pool_filtering",
+      "maximum_candidate_pool_per_scope_case": 750,
+      "selected_scenarios_per_scope_budget_case": 1,
       "uncertainty": {
-        "methods": ["wilson_binomial", "bootstrap"],
+        "search_success_rate": "wilson_95_ci",
+        "successful_scenario_numeric_summaries": "case_percentile_bootstrap_conditional_on_search_success",
+        "n_resamples_source": "evaluation.bootstrap.n_resamples",
         "confidence_level": 0.95,
-        "seed": "counterfactual"
+        "seed": "counterfactual",
+        "quantile_method": "linear"
       },
-      "warning": "Counterfactuals are model scenarios, not causal findings or employee prescriptions."
+      "warning": "Heuristic model-input search only; not causal recourse, employee advice, intervention evidence, or proof of feasibility outside the evaluated model input space."
     },
     "output": {
       "root": "reports/manuscript_final",

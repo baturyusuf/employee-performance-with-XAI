@@ -47,7 +47,7 @@ def test_manuscript_stages_use_explicit_canonical_loader() -> None:
         "manuscript_policy_ablation.py",
         "manuscript_calibration.py",
         "manuscript_shap_evidence.py",
-        "manuscript_counterfactual_actionability.py",
+        "manuscript_counterfactual_search.py",
         "manuscript_fairness_proxy.py",
     ]
     for filename in stage_files:

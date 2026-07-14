@@ -5,10 +5,10 @@ import unittest
 
 import pandas as pd
 
-from src.experiments import manuscript_counterfactual_actionability as counterfactual_module
-from src.experiments.manuscript_counterfactual_actionability import (
+from src.experiments import manuscript_counterfactual_search as counterfactual_module
+from src.experiments.manuscript_counterfactual_search import (
     build_candidates,
-    intervention_features,
+    candidate_scope_features,
     respects_relational_constraints,
     training_scales,
 )
@@ -72,12 +72,21 @@ class CounterfactualProtocolIsOOFTests(unittest.TestCase):
             "Organisation": {"control_type": "organisation_controllable"},
             "History": {"control_type": "immutable"},
         }
-        modes = {
-            "employee_only": ["employee_controllable"],
-            "diagnostic_full_default": ["employee_controllable", "manager_controllable", "organisation_controllable"],
+        scopes = {
+            "employee_control_tagged": ["employee_controllable"],
+            "diagnostic_including_immutable_history": [
+                "employee_controllable",
+                "manager_controllable",
+                "organisation_controllable",
+                "immutable",
+            ],
         }
-        employee = intervention_features("employee_only", taxonomy, modes, taxonomy)
-        diagnostic = intervention_features("diagnostic_full_default", taxonomy, modes, taxonomy)
+        employee = candidate_scope_features(
+            "employee_control_tagged", taxonomy, scopes, taxonomy
+        )
+        diagnostic = candidate_scope_features(
+            "diagnostic_including_immutable_history", taxonomy, scopes, taxonomy
+        )
         self.assertEqual(employee, ["Employee"])
         self.assertIn("History", diagnostic)
 

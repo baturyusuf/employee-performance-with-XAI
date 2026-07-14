@@ -473,6 +473,130 @@ def repository_feature_policy_projection(
     return policies
 
 
+def expected_counterfactual_search_contract() -> dict[str, Any]:
+    """Return the frozen supplementary heuristic-search protocol."""
+
+    return {
+        "publication_role": "supplementary_heuristic_search_only",
+        "terminology": "heuristic_counterfactual_search_success",
+        "model_evaluation_scope": "out_of_fold_only",
+        "prototype_scope": "outer_training_partition_only",
+        "domain_scope": "outer_training_partition_only",
+        "scaling_scope": "outer_training_partition_only",
+        "evaluation_population": "all_eligible_oof_cases",
+        "sample_size": None,
+        "eligibility": "predicted_class_below_highest_target_class",
+        "stratify_descriptively_by": [
+            "predicted_class",
+            "true_class",
+            "correctness",
+            "confidence",
+        ],
+        "domain_source": "training_partition_and_feature_taxonomy",
+        "immutable_and_history_constraints_required": True,
+        "cost_scaling": (
+            "training_partition_robust_range_for_numeric_and_unit_cost_for_categorical"
+        ),
+        "candidate_feature_scopes": {
+            "employee_control_tagged": ["employee_controllable"],
+            "employee_manager_control_tagged": [
+                "employee_controllable",
+                "manager_controllable",
+            ],
+            "employee_manager_organisation_control_tagged": [
+                "employee_controllable",
+                "manager_controllable",
+                "organisation_controllable",
+            ],
+            "diagnostic_including_immutable_history": [
+                "employee_controllable",
+                "manager_controllable",
+                "organisation_controllable",
+                "immutable",
+            ],
+        },
+        "cross_scope_comparison": (
+            "report_each_scope_independently_no_candidate_inclusion_or_monotonicity_claim"
+        ),
+        "primary_budget_id": "primary",
+        "search_budgets": [
+            {
+                "budget_id": "restricted",
+                "role": "sensitivity",
+                "max_prototypes": 50,
+                "max_features_changed": 2,
+            },
+            {
+                "budget_id": "primary",
+                "role": "primary",
+                "max_prototypes": 100,
+                "max_features_changed": 3,
+            },
+            {
+                "budget_id": "expanded",
+                "role": "sensitivity",
+                "max_prototypes": 250,
+                "max_features_changed": 3,
+            },
+        ],
+        "budget_candidate_inclusion": (
+            "nested_within_each_feature_scope_by_shared_maximum_pool_filtering"
+        ),
+        "maximum_candidate_pool_per_scope_case": 750,
+        "selected_scenarios_per_scope_budget_case": 1,
+        "uncertainty": {
+            "search_success_rate": "wilson_95_ci",
+            "successful_scenario_numeric_summaries": (
+                "case_percentile_bootstrap_conditional_on_search_success"
+            ),
+            "n_resamples_source": "evaluation.bootstrap.n_resamples",
+            "confidence_level": 0.95,
+            "seed": "counterfactual",
+            "quantile_method": "linear",
+        },
+        "warning": (
+            "Heuristic model-input search only; not causal recourse, employee advice, "
+            "intervention evidence, or proof of feasibility outside the evaluated model "
+            "input space."
+        ),
+    }
+
+
+def validate_counterfactual_search_contract(settings: Mapping[str, Any]) -> None:
+    """Reject drift in the supplementary-only nonprescriptive search protocol."""
+
+    observed = _require_mapping(settings, "counterfactuals", "manuscript_final")
+    expected = expected_counterfactual_search_contract()
+    if dict(observed) != expected:
+        raise ManuscriptConfigError(
+            "counterfactuals differs from the frozen supplementary heuristic-search contract."
+        )
+
+    scopes = observed["candidate_feature_scopes"]
+    normalized = [tuple(value) for value in scopes.values()]
+    if len(normalized) != len(set(normalized)):
+        raise ManuscriptConfigError(
+            "counterfactual candidate feature scopes must have distinct control-type sets."
+        )
+    budgets = observed["search_budgets"]
+    bounds = [
+        (int(row["max_prototypes"]), int(row["max_features_changed"]))
+        for row in budgets
+    ]
+    if any(
+        later[0] < earlier[0] or later[1] < earlier[1]
+        for earlier, later in zip(bounds, bounds[1:])
+    ):
+        raise ManuscriptConfigError(
+            "counterfactual search budgets must be nested in declared order."
+        )
+    maximum = max(prototypes * features for prototypes, features in bounds)
+    if observed["maximum_candidate_pool_per_scope_case"] != maximum:
+        raise ManuscriptConfigError(
+            "counterfactual maximum candidate pool does not match the expanded budget."
+        )
+
+
 def validate_manuscript_config(config: Mapping[str, Any]) -> None:
     """Validate required sections and cross-section scientific invariants."""
 
@@ -505,6 +629,8 @@ def validate_manuscript_config(config: Mapping[str, Any]) -> None:
         raise ManuscriptConfigError(f"Canonical config is missing sections: {missing_sections}")
     for section in required_sections:
         _require_mapping(settings, section, "manuscript_final")
+
+    validate_counterfactual_search_contract(settings)
 
     seeds = _require_mapping(settings, "seeds", "manuscript_final")
     if not seeds or any(
@@ -2401,6 +2527,7 @@ __all__ = [
     "declared_side_input_hashes",
     "evidence_scope_contract",
     "evidence_scope_contract_hash",
+    "expected_counterfactual_search_contract",
     "feature_policy_definitions",
     "finalize_run_manifest",
     "forbidden_feature_mentions",
@@ -2418,6 +2545,7 @@ __all__ = [
     "scientific_input_hash",
     "source_tree_hash",
     "validate_artifact_forbidden_features",
+    "validate_counterfactual_search_contract",
     "validate_manuscript_config",
     "validate_policy_consistency",
     "validate_portable_run_id",

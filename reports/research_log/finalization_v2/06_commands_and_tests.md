@@ -1400,3 +1400,32 @@ Exact recovery and implementation commands are recorded in `../finalization/COMM
 ```
 
 Exit 0: 24 passed in 2.22 seconds. The complete regression command `.\myenv\Scripts\python.exe -m pytest -q` exited 0 with 682 passed, 2 skipped and 11 subtests in 99.13 seconds. Unittest discovery exited 0 with 176 tests/1 skip in 6.587 seconds. Compileall exited 0 in 0.122 seconds. The initial bare `python` command failed before pytest because the Windows Store shim was unavailable; two later development focus failures and their corrections are retained in the primary logs. No scientific output, network call or manuscript file was produced.
+
+## V2-012 supplementary heuristic-search implementation - 2026-07-14
+
+The final production path is `src/experiments/manuscript_counterfactual_search.py`; the builder imports it and passes run/config/scientific-input/source-tree identity. The old `manuscript_counterfactual_actionability.py` path is removed. Config validation requires exact supplementary role/terminology, outer-training ownership, complete eligible OOF coverage, four distinct taxonomy scopes, three nested budgets, shared maximum pool, declared uncertainty and a nonprescriptive warning.
+
+Representative test commands were:
+
+```powershell
+.\myenv\Scripts\python.exe -m pytest -q tests/test_counterfactual_denominators_reported.py tests/test_counterfactual_protocol_is_oof.py tests/test_counterfactual_is_supplementary_and_nonprescriptive.py tests/test_no_implicit_interim_fallback.py tests/test_core_scope_contract.py tests/test_core_build_contains_no_llm_or_chatbot_stage.py tests/test_external_scope_contract.py
+$files = @(rg -l 'counterfactuals|heuristic_counterfactual|manuscript_counterfactual' tests -g '*.py'); .\myenv\Scripts\python.exe -m pytest -q @files
+.\myenv\Scripts\python.exe -m src.experiments.manuscript_counterfactual_search --config configs/manuscript_final.yaml --output-dir <unique-temporary-directory> --run-id v2012-diagnostic --scientific-input-hash <diagnostic-digest> --source-tree-hash <diagnostic-digest> --max-cases 2
+.\myenv\Scripts\python.exe -m pytest -q
+.\myenv\Scripts\python.exe -m unittest discover -s tests -p 'test_*.py' -q
+.\myenv\Scripts\python.exe -m compileall -q src tests
+```
+
+Development focus one exited 1 in 4.384 wall seconds with 35 passed/1 failed because the fixture required restricted-budget success, which is not guaranteed. After the assertion fix, 36 passed in 0.92 seconds; after the production-path fixture was added, 37 passed in 1.65 seconds. The broader 54-test config/scope selection passed in 1.07 seconds.
+
+The first bounded real-INX diagnostic failed before output because the new full-run ten-fold receipt assertion was also applied to `--max-cases 2`. The full-run assertion remains exact; bounded diagnostic validation now requires each actually evaluated fold. The corrected diagnostic exited 0 in 3.818 seconds, verified 12 output files and 11 inventory hashes/sizes, then deleted only its uniquely identified temporary directory. It fitted one diagnostic fold and is not retained scientific evidence.
+
+An initial full post-implementation gate passed 687 with 2 skips/11 subtests in 99.65 seconds, unittest passed 176 with 1 skip in 6.649 seconds, and compileall passed. Review then renamed the bootstrap estimand to the exact `case_percentile_bootstrap_conditional_on_search_success`; post-change focus passed 11 in 0.32 seconds. The final full pytest exited 0 with 687 passed, 2 skipped and 11 subtests in 100.87 seconds (104.753 wall). Final unittest exited 0 with 176/1 skip in 7.188 seconds (11.015 wall); compileall exited 0 in 0.110 seconds. Config hash is `ff4afa35c0f48ecf052be78af2074a2498bfd5af3697e0f8d863de0cb8952b59`.
+
+No production evidence, manuscript file, network/API result or canonical claim was created. V2-012 is implementation-complete and awaits the future clean supplementary build.
+
+The consolidated pre-stage gate exited 0 in 0.818 seconds: 23 small candidates; 32 unique complete issue rows; 24 README local-link occurrences across 18 unique tracked targets; and zero staged, raw/model/environment, 10-MB, reparse, secret-like, machine-absolute-path, manuscript-diff, active `leakage-safe`, network/API-import or legacy normative-term findings.
+
+The staged diff review found that `source_model_fit_receipt_sha256` bound the deterministic fit contract but not the actual fitted state. Because the final dossier requires model identity, the stage now hashes each actual in-memory serialized pipeline, publishes `source_outer_model_sha256` on OOF/case rows and `model_set_sha256` across summaries/protocol/inventory, and validates the row/fold mapping before write completion.
+
+Post-fix commands repeated the focused suite, bounded real-INX diagnostic, complete pytest, unittest and compileall. Focus passed 37 in 1.90 seconds (5.395 wall). The diagnostic passed in 3.946 seconds with one actual fold-model hash, one model-set hash, 48 case rows, four OOF rows and 11 verified inventory records, then removed its uniquely validated temporary directory. Complete pytest passed 687 with 2 skips/11 subtests in 118.36 seconds (122.461 wall). Unittest passed 176 with 1 skip in 7.389 seconds (11.319 wall); compileall passed in 0.114 seconds. This is the final V2-012 regression cycle.

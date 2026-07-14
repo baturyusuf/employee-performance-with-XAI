@@ -329,3 +329,23 @@ Push/recovery gate: the normal push timed out after 184 seconds with no remote r
 - Compileall: exit 0 in 0.122 seconds.
 - Scientific experiment, figure generation, Unit 2G rerun, API/network use and manuscript modification: zero.
 - Exact 18-file staged hygiene/diff gate: passed; checkpoint `5cd144a757a1a88271e01dd46a738c59a22aef43` created.
+
+## V2-012 supplementary heuristic-search gate - 2026-07-14
+
+- Scope/terminology contract: passed. The stage is supplementary-only and output terminology is limited to heuristic counterfactual-search success with explicit causal/employee-advice/intervention/feasibility prohibitions.
+- OOF/training isolation: passed. Models, prototypes, domains and scales use the outer-training partition; case predictions are exact OOF; full execution requires ten fold receipts and complete eligible coverage.
+- Budget/scope contract: passed. Four taxonomy-labelled scopes are distinct; restricted 50x2, primary 100x3 and expanded 250x3 budgets filter one shared 750-candidate pool per case/scope; within-scope inclusion is validated and cross-scope monotonicity is prohibited.
+- Output/statistical contract: passed. Denominators, failures, candidates, gain, cost and sparsity are explicit; search-success uses Wilson 95% intervals; successful-case numeric summaries use 5,000-draw percentile bootstrap with the conditional estimand named directly.
+- Development failures retained: 35 passed/1 failed because a test over-required restricted-budget success; then a bounded real-INX diagnostic failed before output because diagnostic receipt cardinality incorrectly required all ten folds. The test and diagnostic-only cardinality were corrected without weakening full production checks.
+- Bounded real-INX diagnostic: exit 0 in 3.818 seconds; two eligible cases, one evaluated fold, 48 case rows, four primary summaries, 12 sensitivity rows, 11 verified inventory entries and the complete 12-file schema. Temporary output was safely removed and is not publication evidence.
+- Final focused gate after the last scientific wording change: 11 passed in 0.32 seconds, exit 0.
+- Complete pytest: 687 passed, 2 skipped and 11 subtests in 100.87 seconds, exit 0 (104.753 seconds wall time).
+- Complete unittest: 176 tests, 1 skipped in 7.188 seconds, exit 0 (11.015 seconds wall time).
+- Compileall: exit 0 in 0.110 seconds. Canonical config validation/hash: exit 0, `ff4afa35c0f48ecf052be78af2074a2498bfd5af3697e0f8d863de0cb8952b59`.
+- Pre-stage hygiene: exit 0 in 0.818 seconds; 23 candidates, 32 complete unique issues and 24 README links/18 unique tracked targets; zero staged, raw/model/environment, 10-MB, reparse, secret, absolute-path, manuscript, active terminology, network/API-import or legacy normative-term findings.
+- Production supplementary artifact, manuscript modification, Unit 2G mutation, network call and paid API call: zero.
+- Staged-review provenance finding: corrected. Each OOF/search row now resolves to the actual serialized fold-model SHA-256; summaries/protocol/inventory resolve to the ordered model-set SHA-256. This was a production identity fix, not a relaxed test.
+- Post-fix focus: 37 passed in 1.90 seconds, exit 0 (5.395 seconds wall time).
+- Post-fix bounded real-INX diagnostic: exit 0 in 3.946 seconds; one actual fold-model hash, one model-set hash, 48 case rows, four OOF rows and 11 inventory entries all mapped/hashed correctly; temporary output removed.
+- Final post-fix pytest: 687 passed, 2 skipped and 11 subtests in 118.36 seconds, exit 0 (122.461 seconds wall time).
+- Final post-fix unittest: 176 tests, 1 skipped in 7.389 seconds, exit 0 (11.319 seconds wall time). Compileall: exit 0 in 0.114 seconds.

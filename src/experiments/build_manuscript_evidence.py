@@ -801,7 +801,7 @@ def _run_shap(context: StageContext) -> Mapping[str, Any]:
 
 
 def _run_counterfactual(context: StageContext) -> Mapping[str, Any]:
-    from src.experiments.manuscript_counterfactual_actionability import run
+    from src.experiments.manuscript_counterfactual_search import run
 
     protocol = context.settings["counterfactuals"]
     if protocol.get("evaluation_population") != "all_eligible_oof_cases" or protocol.get("sample_size") is not None:
@@ -813,6 +813,8 @@ def _run_counterfactual(context: StageContext) -> Mapping[str, Any]:
         output_dir=context.run_dir / "heuristic_counterfactual",
         run_id=context.run_id,
         config_hash=context.config_hash,
+        scientific_input_hash=str(context.manifest["scientific_input_hash"]),
+        source_tree_hash=str(context.manifest["source_tree_hash"]),
         max_cases=None,
     )
 
