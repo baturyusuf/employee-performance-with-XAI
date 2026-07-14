@@ -13,11 +13,12 @@ The existing [`reports/manuscript_final/latest/`](reports/manuscript_final/lates
 At this checkpoint:
 
 - Unit 2G implementation is recorded by `ae5cf5a`; the verified-real-data stage was generated from clean source commit `17a3dcd`. Commit `e25f403` then accidentally pushed the complete 65.4 MB noncanonical evidence package. The current checkpoint preserves that package locally and removes it from the Git tip under D5 without rewriting history.
-- The forward-cleanup checkpoint is local commit `b7b2ad3`; V2-029 reporting semantics are checkpointed at `9c60353` with log sync `1639e18`. A normal non-force push with terminal/credential interactivity disabled failed immediately because no HTTPS username was available. No credential setting was changed. A public `ls-remote` check confirms the remote branch remains at `e25f403`; the tested local chain is four commits ahead and unpushed.
+- The forward-cleanup checkpoint is local commit `b7b2ad3`; V2-029 reporting semantics are checkpointed at `9c60353`, and the frozen core figure-plan contract is checkpointed at `6da8273`. A normal non-force push with terminal/credential interactivity disabled previously failed because no HTTPS username was available. No credential setting was changed. A public `ls-remote` check confirmed the remote branch at `e25f403`; the tested local chain remains unpushed unless the live status records a later successful push.
 - Actual dataset and side-input binding, scoped core/supplementary orchestration, shared 10-fold assignments, the four-model benchmark contract, paired OOF bootstrap, warning-clean model preprocessing, exact prediction-model-to-OOF-SHAP binding, shared-fold leakage-policy ablation, cross-fitted sigmoid calibration, support-aware subgroup/proxy diagnostics, and conservative HRDataset_v14 replication now have implementation/test checkpoints.
-- These downstream stages are implemented but have **not** yet been regenerated together as one canonical scientific package. Final benchmark, policy, calibration, SHAP, subgroup/proxy, and external numbers still require one clean current-commit run. Replacement figures/tables, dependency locking, CI, sanitized publication packaging, and the complete rebuild remain unfinished.
+- These downstream stages are implemented but have **not** yet been regenerated together as one canonical scientific package. Final benchmark, policy, calibration, SHAP, subgroup/proxy, and external numbers still require one clean current-commit run. The replacement seven-figure plan is now frozen as a fail-closed source contract, but its production generator, source-identity manifest, tables, dependency lock, CI, sanitized publication package, and complete rebuild remain unfinished.
 - Unit 2G uses 10 outer x 5 inner nested XGBoost, cross-fitted sigmoid, 5,000 paired/bootstrap draws, exact-model OOF grouped SHAP, support-aware diagnostics, and atomic provenance-bound output. Its full stage-validation artifact passed independent hash/model/calibrator/OOF/SHAP review plus a 72-test recovery suite. This validates the stage only: its outer input manifest is provisional, no complete package manifest exists, and no numerical v2 manuscript claim is frozen.
-- The post-Unit-2G reporting contract now requires subgroup tables/metadata to identify `probability_method=raw` and hash the exact policy-scoped OOF rows consumed. SHAP tables, fold receipts, local reason codes and metadata must declare XGBoost raw-margin-score units. The 80-test external contract gate and full 656-test repository gate pass under current config hash `ac32f7d8...`; the older validated stage was not rewritten or promoted and does not contain these new fields.
+- The post-Unit-2G reporting contract now requires subgroup tables/metadata to identify `probability_method=raw` and hash the exact policy-scoped OOF rows consumed. SHAP tables, fold receipts, local reason codes and metadata must declare XGBoost raw-margin-score units. After the figure-plan contract, the full repository gate passes 671 tests with 3 skips and 11 subtests under config hash `eef3539b...`; the older validated stage was not rewritten or promoted and does not contain these new fields.
+- The approved core figure plan is exact and source-bound: study design, leakage-policy trade-off, four-model comparison, predeclared sigmoid calibration, global grouped OOF SHAP, descriptive SHAP stability, and HRDataset_v14 mapped-target replication. The current SHAP stage's legacy numbered Figure 6/7 previews and the v1 figure validator remain explicit P1 integration blockers; they cannot enter a canonical package and must be retired when the v2 generator is implemented.
 - The core and supplementary entry points exist but deliberately fail closed because both scopes have `release_ready: false` in [`configs/manuscript_final.yaml`](configs/manuscript_final.yaml). No full current-commit canonical build or verified release manifest exists yet.
 - Global core-build network denial and its CI assertion are not implemented yet (V2-020). Individual offline stages are not a substitute for that final no-network release gate.
 - The manuscript has not been edited. A claim matrix must be technically frozen and approved before manuscript changes.
@@ -38,6 +39,20 @@ The v2 core paper scope is:
 8. Run-bound tables, figures, claim matrix, and evidence manifest.
 
 The approved nested benchmark uses **10 outer folds x 5 inner folds**. Macro-F1 is the sole primary inner-selection and baseline-gate metric. QWK is secondary and is used only as the predeclared tie-breaker inside the inclusive `0.001` macro-F1 tie pool. Detailed XAI remains attached to XGBoost unless a baseline has a positive baseline-minus-XGBoost macro-F1 estimate and a paired OOF bootstrap 95% CI lower bound above zero.
+
+### Frozen core figure plan
+
+[`configs/manuscript_final.yaml`](configs/manuscript_final.yaml) now binds the future core figures to exact portable, current-run upstream sources and claim boundaries:
+
+1. Study design and leakage-aware XAI audit pipeline.
+2. Feature-policy and leakage-risk ablation trade-off.
+3. Primary XGBoost versus the three predeclared baselines.
+4. Predeclared cross-fitted sigmoid calibration.
+5. Global grouped out-of-fold SHAP attribution.
+6. Descriptive grouped out-of-fold SHAP stability.
+7. HRDataset_v14 independent mapped-target replication.
+
+This is a tested **plan contract**, not a generated figure package. `core_figures` remains the final release-blocking stage, no v2 figure runner or canonical Figure 1-7 artifacts exist, and historical v1 figures cannot satisfy the contract.
 
 The primary feature policy is `no_salary_hike_no_attrition_no_department`. It excludes:
 

@@ -81,3 +81,13 @@ The real stage validates RC-11's computation and atomic output: all model/calibr
 ### V2-029 implementation resolution
 
 The generation contract now rejects missing, mixed or non-raw subgroup probability methods and invalid source model/probability receipts. It hashes the exact policy-scoped OOF rows consumed and serializes a clearly named semantic digest plus its scope, canonical-CSV algorithm and ordered columns; this is not misrepresented as the byte hash of the full raw-OOF artifact. SHAP config, provider output, local/global/class/fold tables, fold receipts, metadata and local reason-code renderings must agree on raw-margin-score attribution units and raw-margin additivity space. Config/provider drift fails closed. Direct and expanded gates pass 56/80 tests; canonical artifact validation remains pending the clean rebuild.
+
+## RC-14 - Core Figure Metadata Retained the Superseded v1 Scientific Scope
+
+The core scope was narrowed to a leakage-aware audit, but `configs/manuscript_final.yaml` still names the earlier governance architecture, SHAP-to-LLM flow, multi-agent audit, G-XAIR dashboard and local reason-code figure set. The legacy generator is isolated, yet general config validation merely requires a figures mapping. A later implementation could therefore reproduce excluded topics, silently renumber existing SHAP/calibration previews or bind historical `latest` files without violating the canonical config contract.
+
+V2-021a will freeze the exact approved seven-figure order, portable current-run upstream source paths, output stems and claim boundaries. It will reject prohibited core topics, absolute/traversal/wrong-stage/duplicate sources and stage-order drift. This unit deliberately does not add a generator, produce figures or set `release_ready=true`; those remain separate implementation and real-build acceptance gates.
+
+### RC-14 plan-contract resolution and remaining integration defect
+
+The exact plan is now config- and validator-bound with run/config/scientific-input/source-tree identity fields. Focused, expanded and full regression gates pass after temporary manifest fixtures were corrected to retain the canonical final figure stage; production validation was not weakened. Independent review found no P0 in the plan contract, but confirmed that the OOF-SHAP stage still publishes obsolete numbered Figure 6/7 previews and the legacy figure validator still encodes v1 stems. V2-032 keeps that collision open, so RC-14 cannot be resolved until the production generator/manifest excludes those names and a real canonical figure package validates.

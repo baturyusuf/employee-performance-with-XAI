@@ -880,19 +880,126 @@
       "external_replication": 42
     },
     "figures": {
+      "plan_version": "leakage_aware_core_figures_v2",
+      "scope": "core",
+      "release_ready": false,
+      "blocking_reason": "Production core-figure generation, source-identity manifests, and canonical figure artifacts are not yet implemented and validated.",
       "publication_dpi": 300,
-      "raster_format": "png",
-      "vector_format": "svg",
+      "output_formats": ["png", "svg"],
       "font_family": "DejaVu Sans",
-      "metadata_fields": ["run_id", "config_hash"],
+      "identity_fields": ["run_id", "config_hash", "scientific_input_hash", "source_tree_hash"],
+      "source_hash_algorithm": "sha256",
+      "source_data_subdirectory": "source_data",
+      "caption_subdirectory": "captions",
       "definitions": {
-        "figure_1": "overall_hr_xai_governance_architecture",
-        "figure_2": "structured_shap_to_llm_evidence_flow",
-        "figure_3": "multi_agent_governance_audit_structure",
-        "figure_4": "gxair_component_readiness_dashboard",
-        "figure_5": "calibration_and_ordinal_error_summary",
-        "figure_6": "global_grouped_shap_attribution",
-        "figure_7": "local_grouped_shap_reason_code_case"
+        "figure_1": {
+          "number": 1,
+          "figure_id": "study_design_and_leakage_aware_xai_pipeline",
+          "output_stem": "figure_1_study_design_leakage_aware_pipeline",
+          "title": "Study design and leakage-aware XAI audit pipeline",
+          "figure_type": "directed_protocol_diagram",
+          "sources": [
+            {"stage": "run_inputs", "path": "run_inputs/canonical_config_snapshot.yaml"},
+            {"stage": "run_inputs", "path": "run_inputs/input_contract.json"},
+            {"stage": "shared_folds", "path": "shared_folds/fold_contract.json"}
+          ],
+          "source_data_filename": "figure_1_study_design_leakage_aware_pipeline_source.csv",
+          "caption_filename": "figure_1_study_design_leakage_aware_pipeline_caption.md",
+          "claim_boundary": "Protocol architecture only; not deployment readiness or autonomous HR decision support."
+        },
+        "figure_2": {
+          "number": 2,
+          "figure_id": "feature_policy_leakage_ablation_tradeoff",
+          "output_stem": "figure_2_feature_policy_tradeoff",
+          "title": "Feature-policy and leakage-risk ablation trade-off",
+          "figure_type": "paired_policy_tradeoff",
+          "sources": [
+            {"stage": "policy_ablation", "path": "policy_ablation/figure_leakage_policy_tradeoff_source.csv"}
+          ],
+          "source_data_filename": "figure_2_feature_policy_tradeoff_source.csv",
+          "caption_filename": "figure_2_feature_policy_tradeoff_caption.md",
+          "claim_boundary": "The full-feature system is a diagnostic information-rich comparator; policy differences are leakage-risk sensitivity, not causal effects."
+        },
+        "figure_3": {
+          "number": 3,
+          "figure_id": "primary_xgboost_vs_three_baselines",
+          "output_stem": "figure_3_xgboost_vs_baselines",
+          "title": "Primary XGBoost versus three predeclared baselines",
+          "figure_type": "model_comparison_interval_plot",
+          "sources": [
+            {"stage": "model_benchmarks", "path": "model_benchmarks/model_summary.csv"},
+            {"stage": "model_benchmarks", "path": "model_benchmarks/paired_model_differences.csv"},
+            {"stage": "model_benchmarks", "path": "model_benchmarks/baseline_xgboost_gate.json"}
+          ],
+          "source_data_filename": "figure_3_xgboost_vs_baselines_source.csv",
+          "caption_filename": "figure_3_xgboost_vs_baselines_caption.md",
+          "claim_boundary": "Shared-fold predeclared OOF benchmark context only; not a universal model leaderboard."
+        },
+        "figure_4": {
+          "number": 4,
+          "figure_id": "predeclared_cross_fitted_sigmoid_calibration",
+          "output_stem": "figure_4_cross_fitted_sigmoid_calibration",
+          "title": "Predeclared cross-fitted sigmoid calibration",
+          "figure_type": "reliability_and_metric_panel",
+          "sources": [
+            {"stage": "sigmoid_calibration", "path": "sigmoid_calibration/calibration_bins.csv"},
+            {"stage": "sigmoid_calibration", "path": "sigmoid_calibration/calibration_method_comparison.csv"},
+            {"stage": "sigmoid_calibration", "path": "sigmoid_calibration/calibration_metric_intervals.csv"},
+            {"stage": "sigmoid_calibration", "path": "sigmoid_calibration/calibration_paired_differences.csv"},
+            {"stage": "sigmoid_calibration", "path": "sigmoid_calibration/calibration_figure_source.json"}
+          ],
+          "source_data_filename": "figure_4_cross_fitted_sigmoid_calibration_source.csv",
+          "caption_filename": "figure_4_cross_fitted_sigmoid_calibration_caption.md",
+          "claim_boundary": "Sigmoid is predeclared for probability calibration; probability quality and argmax predictive performance are reported separately."
+        },
+        "figure_5": {
+          "number": 5,
+          "figure_id": "global_grouped_oof_shap",
+          "output_stem": "figure_5_global_grouped_oof_shap",
+          "title": "Global grouped out-of-fold SHAP attribution",
+          "figure_type": "horizontal_grouped_shap_bar",
+          "sources": [
+            {"stage": "oof_shap", "path": "oof_shap/global_grouped_shap_importance.csv"},
+            {"stage": "oof_shap", "path": "oof_shap/shap_metadata.json"}
+          ],
+          "source_data_filename": "figure_5_global_grouped_oof_shap_source.csv",
+          "caption_filename": "figure_5_global_grouped_oof_shap_caption.md",
+          "claim_boundary": "Grouped OOF SHAP is model attribution in the declared output space, not causality or employee prescription."
+        },
+        "figure_6": {
+          "number": 6,
+          "figure_id": "grouped_oof_shap_stability",
+          "output_stem": "figure_6_oof_shap_stability",
+          "title": "Grouped out-of-fold SHAP stability across outer folds",
+          "figure_type": "descriptive_stability_panel",
+          "sources": [
+            {"stage": "oof_shap", "path": "oof_shap/fold_feature_rankings.csv"},
+            {"stage": "oof_shap", "path": "oof_shap/shap_stability_pairwise.csv"},
+            {"stage": "oof_shap", "path": "oof_shap/shap_stability_summary.csv"},
+            {"stage": "oof_shap", "path": "oof_shap/shap_metadata.json"}
+          ],
+          "source_data_filename": "figure_6_oof_shap_stability_source.csv",
+          "caption_filename": "figure_6_oof_shap_stability_caption.md",
+          "claim_boundary": "Fold-pair stability is descriptive because fold pairs are dependent; no population confidence interval is claimed."
+        },
+        "figure_7": {
+          "number": 7,
+          "figure_id": "hrdataset_v14_mapped_target_replication_summary",
+          "output_stem": "figure_7_hrdataset_v14_mapped_target_replication",
+          "title": "HRDataset_v14 independent mapped-target replication",
+          "figure_type": "mapped_target_replication_summary",
+          "sources": [
+            {"stage": "external_replication", "path": "external_replication/target_support.csv"},
+            {"stage": "external_replication", "path": "external_replication/raw_metric_intervals.csv"},
+            {"stage": "external_replication", "path": "external_replication/calibration_metric_intervals.csv"},
+            {"stage": "external_replication", "path": "external_replication/calibration_paired_differences.csv"},
+            {"stage": "external_replication", "path": "external_replication/policy_pairwise_differences.csv"},
+            {"stage": "external_replication", "path": "external_replication/external_replication_metadata.json"}
+          ],
+          "source_data_filename": "figure_7_hrdataset_v14_mapped_target_replication_source.csv",
+          "caption_filename": "figure_7_hrdataset_v14_mapped_target_replication_caption.md",
+          "claim_boundary": "Independent mapped-target replication only; not locked model transport, universal external validation, fairness, causality, or deployment evidence."
+        }
       }
     },
     "provenance": {

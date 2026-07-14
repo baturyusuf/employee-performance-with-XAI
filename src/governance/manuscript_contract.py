@@ -20,6 +20,10 @@ from importlib import metadata
 from pathlib import Path
 from typing import Any, Iterable, Mapping, MutableMapping, Sequence
 
+from src.governance.core_figure_contract import (
+    CoreFigureContractError,
+    validate_core_figure_plan,
+)
 from src.governance.external_replication_contract import (
     ExternalReplicationContractError,
     validate_external_replication_settings,
@@ -976,8 +980,25 @@ def validate_manuscript_config(config: Mapping[str, Any]) -> None:
             "output.latest_pointer must be the pointer-only '<output.root>/latest' path."
         )
 
-    for scope_name in EXPECTED_EVIDENCE_SCOPE_DATASETS:
-        evidence_scope_contract(config, scope_name)
+    scope_contracts = {
+        scope_name: evidence_scope_contract(config, scope_name)
+        for scope_name in EXPECTED_EVIDENCE_SCOPE_DATASETS
+    }
+    raw_scopes = _require_mapping(settings, "evidence_scopes", "manuscript_final")
+    raw_core_scope = _require_mapping(
+        raw_scopes,
+        "core",
+        "manuscript_final.evidence_scopes",
+    )
+    try:
+        validate_core_figure_plan(
+            _require_mapping(settings, "figures", "manuscript_final"),
+            core_stages=scope_contracts["core"]["stages"],
+            core_scope_release_ready=raw_core_scope.get("release_ready"),
+            core_scope_blocking_reason=raw_core_scope.get("blocking_reason"),
+        )
+    except CoreFigureContractError as exc:
+        raise ManuscriptConfigError(str(exc)) from exc
 
 
 def load_manuscript_config(

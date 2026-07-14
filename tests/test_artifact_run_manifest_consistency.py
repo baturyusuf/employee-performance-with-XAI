@@ -83,8 +83,13 @@ class ArtifactRunManifestConsistencyTests(unittest.TestCase):
             destination = (root / reference).resolve()
             destination.parent.mkdir(parents=True, exist_ok=True)
             shutil.copyfile(source, destination)
+        canonical_core_stages = list(
+            config["manuscript_final"]["evidence_scopes"]["core"]["stages"]
+        )
         config["manuscript_final"]["evidence_scopes"]["core"]["stages"] = [
-            "fixture_core"
+            *canonical_core_stages[:-1],
+            "fixture_core",
+            canonical_core_stages[-1],
         ]
         config["manuscript_final"]["evidence_scopes"]["supplementary"]["stages"] = [
             "fixture_supplementary"

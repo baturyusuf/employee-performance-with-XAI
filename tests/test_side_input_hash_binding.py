@@ -138,6 +138,8 @@ def _project_fixture(tmp_path: Path) -> tuple[Path, Path, Path, dict[str, str]]:
     settings["provenance"]["data_acquisition_manifest"] = "configs/data_acquisition.yaml"
     settings["provenance"]["scientific_side_inputs"] = side_paths
     settings["provenance"]["dataset_cards_config"] = side_paths["dataset_provenance"]
+    canonical_core_scope = settings["evidence_scopes"]["core"]
+    canonical_core_stages = list(canonical_core_scope["stages"])
     settings["evidence_scopes"] = {
         "core": {
             "dataset_keys": ["inx_primary", "hrdataset_v14"],
@@ -148,7 +150,13 @@ def _project_fixture(tmp_path: Path) -> tuple[Path, Path, Path, dict[str, str]]:
                 "model_search_space",
                 "external_hrdataset_v14_schema_mapping",
             ],
-            "stages": ["core_fixture"],
+            "stages": [
+                *canonical_core_stages[:-1],
+                "core_fixture",
+                canonical_core_stages[-1],
+            ],
+            "release_ready": False,
+            "blocking_reason": canonical_core_scope["blocking_reason"],
         },
         "supplementary": {
             "dataset_keys": [

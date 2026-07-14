@@ -275,3 +275,29 @@ Push/recovery gate: the normal push timed out after 184 seconds with no remote r
 - Final pre-stage gate: `pip check`, compileall, diff/manuscript, issue/README and raw/100-MB/secret/absolute-path/process checks all passed; zero prohibited findings and zero active repository execution were observed.
 - Staged checkpoint review passed for exactly 20 files with zero unstaged/untracked, raw-data, manuscript, 100-MB, secret or absolute-path findings. Tested implementation commit: `9c603534268e7ba953cc1a05b23225b4fde488f5`.
 - Documentation-only log-sync review passed for 9 files and produced `1639e182f877839995799319b434e1c356d131c1`. The subsequent push was not a test failure: it exited 1 because noninteractive HTTPS credentials were unavailable. Public remote verification remained `e25f403`; no orphan process or ref movement occurred.
+
+## Post-Unit-2G read-only recovery gate - 2026-07-14
+
+- Branch/worktree gate: passed at `8ce39e7939f00ee3269ca7ceaf829740cfc8130b`; branch exact, index/worktree clean, five commits ahead of remote.
+- Process/endpoint gate: passed. Zero Python/pytest/model process and zero repository/run TCP listener or UDP endpoint; no process terminated. Ambiguous generic IDE Git metadata processes were not treated as repository experiments.
+- Residue gate: passed. Zero stage/repository `.lock`, `.partial`, `.tmp`, `.incomplete` or staging path.
+- Unit 2G stage contract: 124/124 output hashes and sizes passed.
+- Unit 2G artifact manifest: 122/122 JSON/CSV rows agreed and passed; zero missing/unlisted/duplicate/unsafe path.
+- Structural evidence gate: 50 models, 400 candidate fits, 1,555 raw OOF rows, 311 sigmoid rows, 50 calibration fits, 2,799 calibration-training rows, ten model/calibrator links, 6,531 local SHAP rows, 45 stability pairs, six cases, 391 subgroup metric rows and 85 disparity rows present.
+- Package boundary: passed as a negative gate. The enclosing manifest remains `status=running` with no final package manifest/promotion, so the stage is valid atomic evidence but not canonical.
+- Production rerun, model refit, API/network call, artifact write and manuscript edit: zero.
+
+## V2-021a core figure-plan contract gate - 2026-07-14
+
+- Initial compile and focused figure/core/legacy-isolation gate: 36 passed, 1 skipped.
+- Expanded config/scope/manifest/figure gate after the first fixture repair: 114 passed, 2 skipped.
+- Independent review: 25 passed, 1 skipped; no P0 in the V2-021a diff and all source filenames matched production writers.
+- First full pytest: 662 passed, 3 skipped and 11 subtests, 9 failures. Every failure came from one temporary side-input config that removed the newly required canonical `core_figures` graph; no scientific code or artifact failed.
+- Post-repair fixture/manifest/figure focus: 58 passed.
+- Final full pytest: 671 passed, 3 skipped and 11 subtests in 111.10 seconds, exit 0.
+- Final unittest: 178 passed, 2 skipped in 8.012 seconds, exit 0.
+- Compileall and `pip check`: exit 0; no broken requirements.
+- Open P1s: retire old numbered SHAP Figure 6/7 previews and replace the legacy v1 stem validator before any canonical core-figure build.
+- Figure/artifact generation, scientific stage execution, API/network acquisition, Unit 2G rerun and manuscript edit: zero.
+- Final post-documentation focus: 66 passed in 9.84 seconds; diff and manuscript no-change checks passed.
+- Tested implementation checkpoint: `6da8273b458fd249d47d9bb5c75ebe9ff364617f` (`feat(figures): freeze leakage-aware core plan`).

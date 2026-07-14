@@ -97,7 +97,7 @@ No file in historical `latest/external` or `reports/external_validation` is admi
 
 The only permitted main-paper role is `independent mapped-target replication` or `independent external performance-target replication`. It is not locked INX transport, universal/direct validation, a fairness guarantee, a causal explanation, an employee prescription or autonomous HR evidence. Existing numerical results remain unsupported until this package is regenerated under one clean final identity.
 
-Policy A is accepted and implemented. The conservative primary has exactly seven features; proxy-rich and temporality-restricted alternatives are audit-only. Two invalid date-derived tenure values are explicitly recorded as missing. The implementation and identity chain are independently reviewed, but no real Unit 2G package exists yet, so every declared output remains implementation-only.
+Policy A is accepted and implemented. The conservative primary has exactly seven features; proxy-rich and temporality-restricted alternatives are audit-only. Two invalid date-derived tenure values are explicitly recorded as missing. The independently validated local Unit 2G stage below proves the production stage can emit these outputs, but it is tied to an older config/commit and lacks a finalized package manifest. Therefore no declared output is a canonical manuscript source.
 
 The department proxy output is predeclared as `not_estimated_insufficient_outer_training_class_support` because a singleton department class is absent from at least one outer-training partition. The claim matrix must list the numerical proxy-reconstructability question as unsupported/insufficient-support; it must not reinterpret the absent estimate as evidence of fairness or low proxy risk.
 
@@ -139,3 +139,19 @@ Supported by the stage: the configured pipeline can produce internally coherent 
 Current-config subgroup outputs must include singleton `probability_method=raw`, identical `source_oof_semantic_sha256`, `source_oof_hash_scope=exact_consumed_policy_oof_rows`, `source_oof_hash_algorithm=sha256_canonical_csv_utf8_float17g`, and the ordered hash-column contract across `group_metrics.csv`, `disparity_intervals.csv` and `subgroup_metadata.json`. The digest binds the exact consumed policy row set and is not the whole-file artifact SHA.
 
 Current-config SHAP numeric tables, fold receipts, metadata and local reason-code JSON/Markdown must explicitly declare `attribution_unit=xgboost_raw_margin_score`; additivity evidence declares `additivity_output_space=xgboost_raw_margin`. These fields support only unit/source interpretation. They do not convert SHAP to probability effects, causality or prescriptions. The old stage lacks the explicit fields and remains stage-validation-only.
+
+## V2-021a frozen core figure-plan contract
+
+Config hash `eef3539be6470644cc1b3892e1aa6bb8c3186aeb9df0d61ec56635a64e978a44` freezes seven future core figure identities. The source declarations below are contracts only; no PNG, SVG, source-data CSV, caption or figure manifest is admitted yet.
+
+| Figure | Frozen subject | Required current-run upstream sources | Current claim status |
+| --- | --- | --- | --- |
+| 1 | Study design and leakage-aware XAI audit pipeline | `run_inputs/canonical_config_snapshot.yaml`; `run_inputs/input_contract.json`; `shared_folds/fold_contract.json` | Plan contract only |
+| 2 | Feature-policy/leakage-risk trade-off | `policy_ablation/figure_leakage_policy_tradeoff_source.csv` | Plan contract only |
+| 3 | XGBoost versus three predeclared baselines | `model_benchmarks/model_summary.csv`; paired differences; superiority gate | Plan contract only |
+| 4 | Predeclared cross-fitted sigmoid calibration | calibration bins, method comparison, intervals, paired differences and figure-source receipt | Plan contract only |
+| 5 | Global grouped OOF SHAP | global grouped importance and SHAP metadata | Attribution plan only; noncausal |
+| 6 | Descriptive grouped OOF SHAP stability | fold rankings, pairwise stability, summary and SHAP metadata | Descriptive plan only; no fold-pair population CI |
+| 7 | HRDataset_v14 independent mapped-target replication | target support, raw/calibrated intervals, calibration/policy differences and external metadata | Replication plan only; no locked transport/direct validation claim |
+
+The figure contract requires `run_id`, `config_hash`, `scientific_input_hash` and `source_tree_hash`, SHA-256 source binding, portable paths, exact ordering and PNG/SVG plus compact source/caption outputs. Both figure and core scopes remain `release_ready:false`. Obsolete numbered SHAP Figure 6/7 previews and the legacy v1 stem validator are tracked under V2-032 and must be retired before generator implementation or canonical execution.

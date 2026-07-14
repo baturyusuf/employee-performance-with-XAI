@@ -121,3 +121,10 @@ This is an implementation/provenance resolution of the already approved same-OOF
 - The validated stage exposed two explicit metadata improvements for its future canonical regeneration: subgroup evidence must name raw OOF/source identity, and SHAP summaries must name raw-margin attribution units. Neither changes the validated numerical computation.
 - The full noncanonical package was accidentally pushed in `e25f403`. D5 is restored at the current tip through a normal index-only forward removal while every local file is preserved. History is not rewritten; historical blob retention remains documented.
 - V2-029 makes subgroup `probability_method=raw` a config-owned contract and records a semantic exact-consumed-row SHA-256 with explicit scope, algorithm and columns; it is not a whole-file artifact hash. SHAP attribution units are fixed to `xgboost_raw_margin_score` with `xgboost_raw_margin` additivity space across provider and serialized evidence. This is reporting/provenance hardening only: the old stage is not edited or rerun and no numerical protocol changes.
+
+## V2-021a Figure-Plan Contract Consequence - 2026-07-14
+
+- The previously accepted Option-A figure subjects and order are now treated as an exact core configuration contract, not a suggestion to the later plotting code.
+- Figure inputs must be portable paths to declared upstream core-stage outputs from the same future run. Historical `latest`, LLM/chatbot/agent/G-XAIR/counterfactual/actionability artifacts and local reason-code figures are excluded.
+- V2-021a freezes metadata only. `core_figures` remains release-blocking and without a production runner until the source-bound generator, manifest and closed-world validations are implemented and exercised on canonical evidence.
+- No new scientific decision is introduced; this enforces the already accepted core scope and conservative publication boundary.

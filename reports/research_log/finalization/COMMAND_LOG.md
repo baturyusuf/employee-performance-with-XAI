@@ -297,3 +297,29 @@ git push origin finalization/leakage-aware-v2
 ```
 
 Exit 1 after 2 seconds: `fatal: Cannot prompt because user interactivity has been disabled` and `fatal: could not read Username for 'https://github.com': terminal prompts disabled`. No credential/security configuration was changed and no process remained. A public noninteractive `git ls-remote` returned remote SHA `e25f403d82082f97e34aa4f8174bfc001fced5d8`; local HEAD remained `1639e18`, ahead four. The failure is authentication-bound, so no retry was made.
+
+## Post-Unit-2G interruption recovery and V2-021a audit - 2026-07-14
+
+Required handoff files, all Unit 2G root-cause/decision/acceptance records, current Git state, stage contents and process/endpoint state were read before modification. Git was clean on `finalization/leakage-aware-v2` at `8ce39e7939f00ee3269ca7ceaf829740cfc8130b`, five commits ahead of remote. `git diff` and `git diff --cached` were empty.
+
+Read-only process commands used `Get-CimInstance Win32_Process`, `Get-NetTCPConnection -State Listen`, `Get-NetUDPEndpoint` and PID/command-line filtering. No Python, pytest or model process was active; no listener belonged to the repository/run. Generic IDE Git metadata processes had no repository/run path in their arguments and ambiguous ownership, so none was terminated. No lock, partial, temporary, incomplete or staging path was found. The stage root still contains 126 files including its enclosing provisional manifest, totalling 65,412,766 bytes.
+
+A separate read-only closed-world validator rehashed the Unit 2G atomic stage without running or refitting it. The external stage has 125 files/65,404,420 bytes; 124/124 stage-contract outputs and 122/122 artifact-manifest rows match path, size and SHA-256. CSV/JSON manifests agree; zero missing, extra, duplicate, unsafe or residual paths were found. Structural counts remain 50 models/receipts, 400 candidate fits, 1,555 raw OOF rows, 311 sigmoid OOF rows, 50 calibration fits, 2,799 calibration-training OOF rows, ten calibrator relationships, 6,531 local grouped-SHAP rows, 45 stability pairs, six representative cases, 391 subgroup metric rows and 85 disparity rows. The enclosing input manifest remains intentionally provisional, so no canonical completion or promotion is inferred.
+
+The V2-021a read-only audit then inspected canonical figure config, core scope/stage order, legacy generator, current stage output names and figure tests. It confirmed that the config still names the obsolete v1 LLM/agent/G-XAIR/local-reason-code set, config validation checks only that `figures` is a mapping, and no v2 `core_figures` runner exists. Historical `latest` figures remain inadmissible. No file, model, API, network acquisition, scientific artifact or manuscript content was changed by these audits.
+
+## V2-021a implementation and regression - 2026-07-14
+
+The implementation added an exact core-figure plan/validator, wired it into canonical config validation, replaced the seven obsolete config definitions and added fail-closed tests. No figure runner or output was created and both release flags remain false.
+
+Initial compile/focus command passed 36 tests with one historical skip. An expanded 114-test config/scope/manifest/figure command first exposed 18 temporary manifest fixtures that replaced the core graph with a single synthetic stage. The shared fixture was corrected to retain the canonical upstream graph and final `core_figures` stage while inserting its synthetic stage; 49 direct tests then passed and the expanded suite passed 114 with two skips. The validator was not weakened.
+
+The first full pytest run then reached 662 passes but exposed nine analogous side-input fixture failures. That fixture was corrected to preserve the canonical figure graph and explicit non-release-ready core status. The combined fixture/figure focus passed 58. The second full pytest exited 0 with 671 passed, 3 skipped and 11 subtests in 111.10 seconds. Unittest exited 0 with 178 tests and 2 skips in 8.012 seconds; compileall and `pip check` passed.
+
+Independent read-only review ran 25 tests with one skip, confirmed every declared source filename against production writers and found no P0. It recorded two P1 canonical-build blockers: `manuscript_shap_evidence.py` still publishes obsolete numbered Figure 6/7 previews, and the legacy `validate_all_seven_figures` still encodes v1 stems. These are explicitly open; V2-021a freezes metadata only.
+
+One read-only PowerShell `rg` command used literal Windows wildcard path arguments and exited 1 before the corrected `-g '*.py'` search; another inspection command had an unmatched quote and exited before execution. Neither changed code, data or artifacts. No paid API, network acquisition, scientific stage, model fit, manuscript edit or Unit 2G rerun occurred.
+
+After README, issue and artifact/claim-map synchronization, the final focused config/figure/fixture gate passed 66 tests in 9.84 seconds. Config validation reproduced `eef3539b...`; 32 unique complete issue rows and all 21 README link occurrences (16 unique targets) validated. Diff/manuscript checks and changed-file scans found zero raw data, file at or above 100 MB, secret-like value, machine-home path or deprecated terminology addition across 16 small checkpoint candidates.
+
+Explicit index review covered exactly 16 allowlisted small files and found zero unstaged/untracked, raw, manuscript, 100-MB, secret, machine-home-path or deprecated-terminology candidates. The first staged `diff --check` found only one extra blank line at EOF in each new Python file; both were removed and the rerun passed. Commit command `git commit -m "feat(figures): freeze leakage-aware core plan"` exited 0 and created `6da8273b458fd249d47d9bb5c75ebe9ff364617f` (815 insertions, 32 deletions). No scientific output or dataset entered the commit.
