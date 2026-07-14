@@ -328,3 +328,4 @@ Push/recovery gate: the normal push timed out after 184 seconds with no remote r
 - Complete unittest: 176 tests, 1 skipped in 6.587 seconds, exit 0.
 - Compileall: exit 0 in 0.122 seconds.
 - Scientific experiment, figure generation, Unit 2G rerun, API/network use and manuscript modification: zero.
+- Exact 18-file staged hygiene/diff gate: passed; checkpoint `5cd144a757a1a88271e01dd46a738c59a22aef43` created.
