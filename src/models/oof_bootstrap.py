@@ -19,67 +19,16 @@ import numpy as np
 import pandas as pd
 
 from src.models.evaluate import classification_metrics
-from src.models.task_schema import get_task_schema
+from src.models.task_schema import (
+    METRIC_DEFINITIONS,
+    MetricDefinition,
+    get_task_schema,
+    metric_definition as _task_metric_definition,
+)
 
 
 class OOFBootstrapError(RuntimeError):
     """Raised when OOF inputs or bootstrap results violate the contract."""
-
-
-@dataclass(frozen=True)
-class MetricDefinition:
-    name: str
-    better_direction: Literal["higher", "lower"]
-    lower_bound: float
-    upper_bound: float
-    requires_probabilities: bool = False
-
-
-_UNIT_HIGHER = {
-    "accuracy",
-    "balanced_accuracy",
-    "macro_f1",
-    "weighted_f1",
-    "macro_precision",
-    "weighted_precision",
-    "macro_recall",
-    "weighted_recall",
-    "adjacent_accuracy",
-}
-
-METRIC_DEFINITIONS: Mapping[str, MetricDefinition] = MappingProxyType(
-    {
-        **{
-            name: MetricDefinition(name, "higher", 0.0, 1.0)
-            for name in sorted(_UNIT_HIGHER)
-        },
-        "quadratic_weighted_kappa": MetricDefinition(
-            "quadratic_weighted_kappa", "higher", -1.0, 1.0
-        ),
-        "ordinal_mae": MetricDefinition("ordinal_mae", "lower", 0.0, 2.0),
-        "severe_error_rate": MetricDefinition("severe_error_rate", "lower", 0.0, 1.0),
-        "nll_log_loss": MetricDefinition(
-            "nll_log_loss", "lower", 0.0, math.inf, requires_probabilities=True
-        ),
-        # The repository definition is mean(sum((p_k-y_k)^2)); it is not
-        # divided by the number of classes and therefore has range [0, 2].
-        "multiclass_brier": MetricDefinition(
-            "multiclass_brier", "lower", 0.0, 2.0, requires_probabilities=True
-        ),
-        "binary_brier": MetricDefinition(
-            "binary_brier", "lower", 0.0, 1.0, requires_probabilities=True
-        ),
-        "ece_confidence": MetricDefinition(
-            "ece_confidence", "lower", 0.0, 1.0, requires_probabilities=True
-        ),
-        "roc_auc": MetricDefinition(
-            "roc_auc", "higher", 0.0, 1.0, requires_probabilities=True
-        ),
-        "average_precision": MetricDefinition(
-            "average_precision", "higher", 0.0, 1.0, requires_probabilities=True
-        ),
-    }
-)
 
 
 @dataclass(frozen=True)
@@ -142,8 +91,8 @@ class BootstrapResult:
 
 def metric_definition(metric: str) -> MetricDefinition:
     try:
-        return METRIC_DEFINITIONS[metric]
-    except KeyError as exc:
+        return _task_metric_definition(metric)
+    except ValueError as exc:
         raise OOFBootstrapError(
             f"Metric {metric!r} has no uncertainty direction/domain contract; "
             f"allowed={sorted(METRIC_DEFINITIONS)}."

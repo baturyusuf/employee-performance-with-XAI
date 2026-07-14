@@ -1505,3 +1505,13 @@ Read-only schema comparison against the production writers then found that canon
 Complete pytest cycle one reported 732 passes, two skips/11 subtests and one failure in 131.27 seconds (135.211 wall). The failure was the promotion-order fixture's generic placeholder `core_figures` receipt reaching the new specialized validator. Production was not weakened: that fixture now isolates the specialized step, which is independently exercised by the rendered-package test. The exact failing test passed in 0.35 seconds. The allowed post-fix complete cycle passed 733 with two skips/11 subtests in 128.34 seconds (132.292 wall). Unittest passed 177 with one skip in 7.334 seconds (11.190 wall); compileall passed in 0.121 seconds.
 
 Canonical config/source validation exited 0 in 0.177 seconds and produced config `a866bd6f9851fffce9af4238459d05fc1c6540f9e11d3668698a11c23811107d` and source tree `fcae16c902fc759be087a9c42c451799bdc97fc49b6c396eb54260086a1e5987`. No real scientific stage, Unit 2G rerun, API/network scientific call, manuscript edit, retained figure artifact, promotion or release occurred.
+
+## V2-022 metric registry and source-table stages - 2026-07-14
+
+The locked development environment was created under the OS temporary root. Its first wrapper timeout occurred after venv creation and left no live process; the same exact environment then completed the constrained install in 82.9 seconds and passed `pip check`.
+
+The first focus returned 43 passed, two failed and three errors in 12.74 seconds. All five nonpasses were the same missing `MappingProxyType` import after centralizing metric definitions. After that production fix, the unchanged focus passed 48 in 17.75 seconds. The first complete pytest passed 738/2 skips/11 subtests in 134.66 seconds.
+
+Staged review found that count-only receipt validation did not reject duplicate source paths or bind row source hashes to receipts. The corrected validator and negative test passed a 30-test focus in 17.26 seconds. Final complete pytest passed 739/2 skips/11 subtests in 132.92 seconds; unittest passed 177/one skip in 7.964 seconds; compileall passed in 0.117 seconds.
+
+Config validation exited 0 with config `1bcd1386736a6eb0838ebfc0976682343ac80de684cd7065b5487dfa673060ef`, source tree `fba949d2088c166ee2afb3df906236d3ef3a31be13a3f85bc60636655063bcf2`, and metric registry `98ae57b622a56983192975c5bff94374ed51322f13c76af633c3c96ceb198cdd`. The pre-commit repository gate rejected only the expected dirty-worktree state and is scheduled for the clean checkpoint. No real table output was retained.

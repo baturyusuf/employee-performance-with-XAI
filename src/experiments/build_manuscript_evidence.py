@@ -571,7 +571,7 @@ def _stage_cache_valid(context: StageContext, stage: str) -> bool:
         return False
     if actual != seen:
         return False
-    if stage == "core_figures":
+    if stage in {"core_tables", "supplementary_tables", "core_figures"}:
         try:
             _validate_stage_specific_output(context, stage)
         except ManuscriptBuildError:
@@ -582,6 +582,26 @@ def _stage_cache_valid(context: StageContext, stage: str) -> bool:
 def _validate_stage_specific_output(context: StageContext, stage: str) -> Mapping[str, Any]:
     """Apply a fail-closed package contract beyond the generic stage receipt."""
 
+    if stage in {"core_tables", "supplementary_tables"}:
+        from src.experiments.manuscript_tables import (
+            ManuscriptTableError,
+            validate_table_package,
+        )
+
+        scope = "core" if stage == "core_tables" else "supplementary"
+        try:
+            return validate_table_package(
+                context.run_dir / stage,
+                run_root=context.run_dir,
+                config=context.config,
+                scope=scope,
+                run_id=context.run_id,
+                config_hash=context.config_hash,
+                scientific_input_hash=str(context.manifest["scientific_input_hash"]),
+                source_tree_hash=str(context.manifest["source_tree_hash"]),
+            )
+        except ManuscriptTableError as exc:
+            raise ManuscriptBuildError(str(exc)) from exc
     if stage != "core_figures":
         return {"status": "not_applicable", "stage": stage}
     from src.governance.core_figure_package import (
@@ -951,6 +971,40 @@ def _run_core_figures(context: StageContext) -> Mapping[str, Any]:
     )
 
 
+def _run_tables(context: StageContext, *, scope: str) -> Mapping[str, Any]:
+    from src.experiments.manuscript_tables import run
+    from src.governance.table_contract import expected_table_plan
+
+    stage = "core_tables" if scope == "core" else "supplementary_tables"
+    for upstream in sorted(
+        {
+            str(source).split("/", 1)[0]
+            for definition in expected_table_plan(scope).values()
+            for source in definition["sources"]
+            if not str(source).startswith("run_inputs/")
+        }
+    ):
+        _require_compatible_upstream_stage(context, upstream)
+    return run(
+        context.config_path,
+        run_root=context.run_dir,
+        output_dir=context.run_dir / stage,
+        scope=scope,
+        run_id=context.run_id,
+        config_hash=context.config_hash,
+        scientific_input_hash=str(context.manifest["scientific_input_hash"]),
+        source_tree_hash=str(context.manifest["source_tree_hash"]),
+    )
+
+
+def _run_core_tables(context: StageContext) -> Mapping[str, Any]:
+    return _run_tables(context, scope="core")
+
+
+def _run_supplementary_tables(context: StageContext) -> Mapping[str, Any]:
+    return _run_tables(context, scope="supplementary")
+
+
 STAGE_RUNNERS: Mapping[str, Callable[[StageContext], Mapping[str, Any]]] = {
     "shared_folds": _run_shared_folds,
     "model_benchmarks": _run_model_benchmarks,
@@ -962,14 +1016,24 @@ STAGE_RUNNERS: Mapping[str, Callable[[StageContext], Mapping[str, Any]]] = {
     "heuristic_counterfactual": _run_counterfactual,
     "external_robustness": _run_external_robustness,
     "dataset_cards": _run_provenance,
+    "core_tables": _run_core_tables,
+    "supplementary_tables": _run_supplementary_tables,
     "core_figures": _run_core_figures,
 }
 ATOMIC_DIRECTORY_STAGE_RUNNERS = frozenset(
-    {"external_replication", "external_robustness", "core_figures"}
+    {
+        "external_replication",
+        "external_robustness",
+        "core_tables",
+        "supplementary_tables",
+        "core_figures",
+    }
 )
 STAGE_ORPHAN_PREFIXES: Mapping[str, tuple[str, ...]] = {
     "external_replication": (".hrdataset-replication-", "external_replication.__staging__"),
     "external_robustness": ("external_robustness.__staging__.",),
+    "core_tables": ("core_tables.__staging__.",),
+    "supplementary_tables": ("supplementary_tables.__staging__.",),
     "core_figures": ("core_figures.__staging__.",),
 }
 

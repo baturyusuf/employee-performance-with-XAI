@@ -471,3 +471,19 @@ Push/recovery gate: the normal push timed out after 184 seconds with no remote r
 - Config/source contract: exit 0 in 0.177 seconds; config `a866bd6f...`, source tree `fcae16c9...`.
 - Retained scientific/figure artifact, real-data refit, Unit 2G rerun, network/API scientific call and manuscript modification: zero.
 - Consolidated manifest/config, forbidden-feature, raw/secret, portability, README-link, manuscript-diff, large-file/staging and no-network-import gate: exit 0 in 1.143 seconds; 16 candidates, 32 issues, 29 local links/23 unique targets, maximum 127,236 bytes and zero findings.
+## V2-022 authoritative metric and table contracts - 2026-07-14
+
+- Targeted compileall before testing: pass.
+- Initial focused pytest: exit 1; 43 passed, 2 failed, 3 errors; 12.74 seconds pytest / 18.635 seconds wall. Root cause: one removed `MappingProxyType` import still required by existing aligned-OOF output.
+- Corrected focused pytest: exit 0; 48 passed; 17.75 seconds pytest / 20.906 seconds wall.
+- Initial complete pytest before staged review: exit 0; 738 passed, 2 skipped, 11 subtests passed; 134.66 seconds pytest / 138.527 seconds wall.
+- Post-review table-validator focus: exit 0; 30 passed; 17.26 seconds pytest / 20.446 seconds wall.
+- Final post-review complete pytest: exit 0; 739 passed, 2 skipped, 11 subtests passed; 132.92 seconds pytest / 136.855 seconds wall.
+- Final unittest discovery: exit 0; 177 tests, 1 skipped; 7.964 seconds unittest / 11.710 seconds wall.
+- Final compileall over `src` and `tests`: exit 0; 0.117 seconds.
+- Locked environment: CPython 3.14 exact development constraints; `pip check` clean.
+- Config hash: `1bcd1386736a6eb0838ebfc0976682343ac80de684cd7065b5487dfa673060ef`.
+- Source-tree hash: `fba949d2088c166ee2afb3df906236d3ef3a31be13a3f85bc60636655063bcf2`.
+- Metric-schema hash: `98ae57b622a56983192975c5bff94374ed51322f13c76af633c3c96ceb198cdd`.
+- Pre-commit `ci_repository_gate`: expected exit 1 at the clean-worktree precondition; repeat required after the checkpoint commit.
+- No manuscript edit, real-data fit, production table/figure artifact, API call, promotion or release occurred.

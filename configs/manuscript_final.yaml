@@ -836,27 +836,27 @@
       },
       "metric_applicability": {
         "ordinal_multiclass_performance": {
-          "applicable": ["accuracy", "balanced_accuracy", "macro_f1", "quadratic_weighted_kappa", "ordinal_mae", "severe_error_rate", "nll_log_loss", "multiclass_brier", "ece_confidence"],
-          "not_applicable": [],
+          "applicable": ["accuracy", "balanced_accuracy", "macro_f1", "weighted_f1", "macro_precision", "weighted_precision", "macro_recall", "weighted_recall", "quadratic_weighted_kappa", "ordinal_mae", "adjacent_accuracy", "severe_error_rate", "nll_log_loss", "multiclass_brier", "ece_confidence"],
+          "not_applicable": ["binary_brier", "roc_auc", "average_precision"],
           "cross_task_comparability": "Comparable only with datasets having a verified three-class 2/3/4 performance mapping."
         },
         "restricted_target_performance_robustness": {
-          "applicable": ["accuracy", "balanced_accuracy", "macro_f1", "roc_auc", "average_precision", "nll_log_loss", "binary_brier", "ece_confidence"],
+          "applicable": ["accuracy", "balanced_accuracy", "macro_f1", "weighted_f1", "macro_precision", "weighted_precision", "macro_recall", "weighted_recall", "roc_auc", "average_precision", "nll_log_loss", "binary_brier", "ece_confidence"],
           "not_applicable": ["quadratic_weighted_kappa", "ordinal_mae", "adjacent_accuracy", "severe_error_rate", "multiclass_brier"],
           "cross_task_comparability": "Robustness-only; do not present as equivalent to the primary three-class task."
         },
         "nominal_multiclass_proxy_diagnostic": {
-          "applicable": ["accuracy", "balanced_accuracy", "macro_f1"],
-          "not_applicable": ["quadratic_weighted_kappa", "ordinal_mae", "severe_error_rate"],
+          "applicable": ["accuracy", "balanced_accuracy", "macro_f1", "weighted_f1", "macro_precision", "weighted_precision", "macro_recall", "weighted_recall", "nll_log_loss", "multiclass_brier", "ece_confidence"],
+          "not_applicable": ["quadratic_weighted_kappa", "ordinal_mae", "adjacent_accuracy", "severe_error_rate", "binary_brier", "roc_auc", "average_precision"],
           "cross_task_comparability": "Proxy-risk reconstructability only; never present as employee-performance validation, fairness proof, discrimination evidence, or a causal finding."
         },
         "binary_attrition_transfer": {
-          "applicable": ["accuracy", "balanced_accuracy", "macro_f1", "roc_auc", "average_precision", "nll_log_loss", "binary_brier", "ece_confidence"],
+          "applicable": ["accuracy", "balanced_accuracy", "macro_f1", "weighted_f1", "macro_precision", "weighted_precision", "macro_recall", "weighted_recall", "roc_auc", "average_precision", "nll_log_loss", "binary_brier", "ece_confidence"],
           "not_applicable": ["quadratic_weighted_kappa", "ordinal_mae", "adjacent_accuracy", "severe_error_rate", "multiclass_brier"],
           "cross_task_comparability": "Related-task evidence only; ordinal metrics are N/A and must not be encoded as zero."
         },
         "binary_turnover_transfer": {
-          "applicable": ["accuracy", "balanced_accuracy", "macro_f1", "roc_auc", "average_precision", "nll_log_loss", "binary_brier", "ece_confidence"],
+          "applicable": ["accuracy", "balanced_accuracy", "macro_f1", "weighted_f1", "macro_precision", "weighted_precision", "macro_recall", "weighted_recall", "roc_auc", "average_precision", "nll_log_loss", "binary_brier", "ece_confidence"],
           "not_applicable": ["quadratic_weighted_kappa", "ordinal_mae", "adjacent_accuracy", "severe_error_rate", "multiclass_brier"],
           "cross_task_comparability": "Related-task evidence only; ordinal metrics are N/A and must not be encoded as zero."
         }
@@ -987,6 +987,26 @@
       "counterfactual": 42,
       "fairness": 42,
       "external_replication": 42
+    },
+    "tables": {
+      "plan_version": "v2.0.0",
+      "contract_source": "src.governance.table_contract.EXPECTED_TABLE_PLANS",
+      "release_ready": true,
+      "blocking_reason": "Production source-table generation and closed-world validation are implemented; canonical artifacts remain pending the final clean real-data builds.",
+      "identity_fields": ["run_id", "config_hash", "scientific_input_hash", "source_tree_hash"],
+      "source_hash_algorithm": "sha256",
+      "scopes": {
+        "core": {
+          "definition_keys": ["dataset_roles_target_mappings_support", "exact_primary_feature_policy", "four_model_nested_benchmark", "leakage_policy_sensitivity", "cross_fitted_sigmoid_calibration", "global_grouped_oof_shap", "oof_shap_stability", "support_aware_subgroup_diagnostics", "department_proxy_reconstructability", "hrdataset_v14_mapped_target_replication", "reproducibility_and_claim_boundaries"],
+          "table_numbers": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 13],
+          "filenames": ["table_01_dataset_roles_target_mappings_support.csv", "table_02_exact_primary_feature_policy.csv", "table_03_four_model_nested_benchmark.csv", "table_04_leakage_policy_sensitivity.csv", "table_05_cross_fitted_sigmoid_calibration.csv", "table_06_global_grouped_oof_shap.csv", "table_07_oof_shap_stability.csv", "table_08_support_aware_subgroup_diagnostics.csv", "table_09_department_proxy_reconstructability.csv", "table_10_hrdataset_v14_mapped_target_replication.csv", "table_13_reproducibility_and_claim_boundaries.csv"]
+        },
+        "supplementary": {
+          "definition_keys": ["heuristic_counterfactual_search_success", "restricted_and_binary_task_evidence", "supplementary_reproducibility_and_claim_boundaries"],
+          "table_numbers": [11, 12, 13],
+          "filenames": ["table_11_heuristic_counterfactual_search_success.csv", "table_12_restricted_and_binary_task_evidence.csv", "table_13_supplementary_reproducibility_and_claim_boundaries.csv"]
+        }
+      }
     },
     "figures": {
       "plan_version": "leakage_aware_core_figures_v2",

@@ -44,4 +44,4 @@ V2-019 hosted run `29351557672` passes. The manual release validator still requi
 
 ## Core Tables and Figures - Canonical Execution Pending
 
-The source-bound seven-figure generator and closed-world validator are implemented and tested, but the only rendered package was a temporary synthetic unit-test fixture. No real Figure 1-7 artifact or core table is canonical. V2-022 metric-schema/core-table implementation and one clean complete real-data build remain required before any result/table/figure map or claim matrix can be frozen. Historical v1 figures and the noncanonical Unit 2G stage are inadmissible sources.
+The source-bound seven-figure generator, authoritative metric registry, 14 scope-specific source tables, and closed-world validators are implemented and tested, but only temporary synthetic fixtures exercised them. No real Figure 1-7 artifact or source table is canonical. One clean complete real-data two-scope build remains required before any result/table/figure map or claim matrix can be frozen. Historical v1 figures, fixture outputs, diagnostics and the noncanonical Unit 2G stage are inadmissible sources.

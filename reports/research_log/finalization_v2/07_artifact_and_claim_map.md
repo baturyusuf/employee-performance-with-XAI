@@ -272,3 +272,20 @@ The future exact runner-owned inventory is 29 files:
 The orchestrator adds `core_figures/stage_contract.json`, yielding 30 stage files. `core_figure_package.py` requires exact source hashes/sizes, run/config/scientific-input/source-tree identity, portable containment, valid image dimensions, caption identity, primary/HR external forbidden-feature absence and a closed-world inventory.
 
 Allowed claim role: technical visualization of already validated current-run source tables under each frozen claim boundary. Prohibited: using the synthetic test package, historical v1 images, the noncanonical Unit 2G stage, manual values, causal/fairness/actionability/deployment claims, or calling any image canonical before the future real package validator passes. No V2-021 scientific artifact currently exists.
+
+## V2-022 metric registry and future source-table inventory
+
+No V2-022 scientific artifact currently exists. The production runner will create 11 core CSVs plus `core_tables/table_manifest.json`, and three supplementary CSVs plus `supplementary_tables/table_manifest.json`; the builder adds one `stage_contract.json` per scope. The exact plan is code-frozen and projected into the canonical config.
+
+| Future table | Exact role | Claim boundary |
+| --- | --- | --- |
+| Core 1-2 | Dataset roles/mappings/support and exact primary feature policy | Identity/governance only; no source authenticity, licence, target equivalence or causal policy effect |
+| Core 3-5 | Four-model benchmark, leakage-policy sensitivity and cross-fitted sigmoid calibration | Within-dataset conditional OOF evidence only; no deployment or autonomous-threshold claim |
+| Core 6-7 | Global grouped OOF SHAP and descriptive stability | Model attribution/stability only; no causality, fairness, advice or population CI for dependent fold pairs |
+| Core 8-9 | Support-aware subgroup and department-proxy diagnostics | Descriptive proxy/subgroup evidence only; no discrimination, fairness proof or causal finding |
+| Core 10 | HRDataset_v14 mapped-target replication | Independent replication only; no locked transport, target equivalence or deployment validation |
+| Supplementary 11 | Heuristic counterfactual-search success | Search-success evidence only; no recourse, feasibility, prescription or intervention claim |
+| Supplementary 12 | Restricted IBM performance plus separate attrition/turnover task evidence | Within-task robustness/transfer only; no cross-task aggregation or primary-task validation |
+| Scope table 13 | Metric registry, reproducibility and claim boundaries | Contract/provenance only; no new scientific estimate or release-readiness claim |
+
+Every row must carry run/config/scientific-input/source-tree and metric-schema hashes; dataset/model/evaluation/denominator/uncertainty resolution; and the exact source path/hash. A fixture-generated CSV, manually entered value, historical artifact, diagnostic run or Unit 2G stage output cannot be admitted as canonical.

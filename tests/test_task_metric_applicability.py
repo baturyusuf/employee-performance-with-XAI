@@ -11,8 +11,12 @@ from src.models.task_schema import (
     ORDINAL_METRICS,
     ORDINAL_MULTICLASS_PERFORMANCE,
     RESTRICTED_TARGET_PERFORMANCE_ROBUSTNESS,
+    KNOWN_METRICS,
+    METRIC_DEFINITIONS,
     canonical_task_type,
     get_task_schema,
+    metric_schema_hash,
+    metric_schema_records,
 )
 
 
@@ -103,3 +107,39 @@ def test_three_class_ordinal_task_retains_ordinal_and_multiclass_probability_met
 def test_unknown_task_type_fails_fast() -> None:
     with pytest.raises(ValueError, match="Unknown task type"):
         get_task_schema("generic_classification")
+
+
+def test_metric_registry_is_complete_machine_readable_and_deterministic() -> None:
+    records = metric_schema_records()
+    task_names = {
+        ORDINAL_MULTICLASS_PERFORMANCE,
+        RESTRICTED_TARGET_PERFORMANCE_ROBUSTNESS,
+        NOMINAL_MULTICLASS_PROXY_DIAGNOSTIC,
+        BINARY_ATTRITION_TRANSFER,
+        BINARY_TURNOVER_TRANSFER,
+    }
+
+    assert set(METRIC_DEFINITIONS) == KNOWN_METRICS
+    assert len(records) == len(task_names) * len(KNOWN_METRICS)
+    assert {(row["task_type"], row["metric"]) for row in records} == {
+        (task, metric) for task in task_names for metric in KNOWN_METRICS
+    }
+    assert len(metric_schema_hash()) == 64
+    assert metric_schema_hash() == metric_schema_hash()
+    macro = next(
+        row
+        for row in records
+        if row["task_type"] == ORDINAL_MULTICLASS_PERFORMANCE and row["metric"] == "macro_f1"
+    )
+    assert macro["selection_role"] == "primary"
+    assert macro["aggregation"] == "all_exactly_once_out_of_fold_samples"
+    assert macro["uncertainty_resamples"] == 5000
+    assert macro["better_direction"] == "higher"
+    severe_binary = next(
+        row
+        for row in records
+        if row["task_type"] == BINARY_ATTRITION_TRANSFER
+        and row["metric"] == "severe_error_rate"
+    )
+    assert severe_binary["applicable"] is False
+    assert severe_binary["not_applicable_reason"]

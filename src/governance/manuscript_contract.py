@@ -29,6 +29,11 @@ from src.governance.external_replication_contract import (
     validate_external_replication_settings,
     validate_external_replication_side_inputs,
 )
+from src.governance.table_contract import (
+    TableContractError,
+    validate_table_plan_declaration,
+)
+from src.models.task_schema import validate_metric_applicability_projection
 from src.utils.config_loader import PROJECT_ROOT, load_config
 
 
@@ -1064,17 +1069,15 @@ def validate_manuscript_config(config: Mapping[str, Any]) -> None:
         "metric_applicability",
         "manuscript_final.evaluation",
     )
-    for task in (
-        "binary_attrition_transfer",
-        "binary_turnover_transfer",
-        "nominal_multiclass_proxy_diagnostic",
-    ):
-        task_rules = _require_mapping(metric_rules, task, "metric_applicability")
-        not_applicable = set(
-            _string_list(task_rules.get("not_applicable"), f"metric_applicability.{task}.not_applicable")
-        )
-        if "severe_error_rate" not in not_applicable:
-            raise ManuscriptConfigError(f"severe_error_rate must be N/A for {task}.")
+    try:
+        validate_metric_applicability_projection(metric_rules)
+    except ValueError as exc:
+        raise ManuscriptConfigError(str(exc)) from exc
+
+    try:
+        validate_table_plan_declaration(settings.get("tables"))
+    except TableContractError as exc:
+        raise ManuscriptConfigError(str(exc)) from exc
 
     output = _require_mapping(settings, "output", "manuscript_final")
     raw_output_root = output.get("root")

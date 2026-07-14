@@ -485,3 +485,16 @@ Focused chronology: 38 passed/one failed because Matplotlib SVG contained a proh
 Config/source validation produced `a866bd6f9851fffce9af4238459d05fc1c6540f9e11d3668698a11c23811107d` and `fcae16c902fc759be087a9c42c451799bdc97fc49b6c396eb54260086a1e5987`. Unit 2G, the historical packages and the manuscript were unchanged. No network/API scientific call, promotion, release or retained figure output occurred.
 
 The consolidated pre-stage hygiene gate exited 0 in 1.143 seconds. It checked 16 candidate paths, 32 complete unique issues, 29 README local-link occurrences/23 unique targets, zero manuscript diff and a 127,236-byte maximum candidate. Raw/model/environment/large/link/secret/machine-path/network-import/forbidden-external-feature/staging-orphan findings were all zero.
+## V2-022 metric registry and source-table implementation - 2026-07-14
+
+The task began from synchronized commit `5a0d926`. GitHub's public Actions API confirmed hosted run `29353799148` completed successfully at that exact SHA. No scientific stage was rerun.
+
+The first disposable CPython 3.14 environment wrapper timed out after creating its exact task-owned venv and left no child process. Inspection confirmed the environment path and no owner; installation resumed in the same environment. `pip install -r requirements-dev.txt -c constraints/py314-lock.txt` completed in 82.9 seconds and `pip check` reported no broken requirements.
+
+The first focused command covered the new table generator, metric applicability/definitions, OOF bootstrap domains, external bootstrap, scope and promotion contracts. It reported 43 passes, two failures and three setup errors in 12.74 seconds (18.635 wall). Every failure had one cause: `MappingProxyType` was still used for aligned OOF systems after its import moved with the registry. The import was restored. The exact repeated focus passed 48 in 17.75 seconds (20.906 wall).
+
+Complete `pytest -q` initially passed 738 with two skips and 11 subtests in 134.66 seconds (138.527 wall). `python -m unittest discover -s tests -p 'test_*.py'` passed 177 with one skip in 8.174 seconds (12.000 wall). `compileall -q src tests` passed in 0.121 seconds.
+
+The production repository gate was invoked before commit and failed only its intentional clean-worktree precondition, listing the V2-022 edits. It did not report a scientific, schema, raw-data, secret, portability or test defect. The gate must be repeated at the clean checkpoint. No manuscript file, real scientific artifact, raw data, paid API or scientific network operation was created or changed.
+
+Staged review identified that receipt-count validation did not require unique source paths or bind each emitted row's source hash back to its receipt. The validator now enforces exact unique receipt coverage, exact table/contract columns and non-empty provenance, and a negative test tampers a duplicated receipt. Post-review focus passed 30 in 17.26 seconds (20.446 wall); the required final complete suite passed 739/2 skips/11 subtests in 132.92 seconds (136.855 wall); unittest passed 177/one skip in 7.964 seconds (11.710 wall); compileall passed in 0.117 seconds. Final config/source/metric hashes are `1bcd1386...`, `fba949d2...`, and `98ae57b6...`.
