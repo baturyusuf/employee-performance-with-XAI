@@ -12,6 +12,7 @@
 10. Preserve V2-021 commit `5a0d926` and green hosted run `29353799148`. Do not admit its synthetic test render or generate figures from historical `latest` or the noncanonical Unit 2G stage; real artifacts must come from one future current-run identity.
 11. Preserve the V2-022 authoritative metric registry and exact atomic table plan: core tables 1-10/13 and supplementary tables 11-13. Do not admit fixture output or manually enter a scientific value.
 12. Preserve the V2-023 execution-readiness freeze: every declared runner/output/contract exists, both scope flags are true, and revocation still fails closed. After the clean checkpoint, perform one cache-disabled current-config two-scope rebuild from real inputs under one run ID and validate all manifests, hashes, tables, figures, portable paths, and V2-029 reporting fields.
-13. Freeze the claim matrix only from that future canonical package and obtain author approval before editing `manuscript/mdpi_information/main.md`.
+13. Preserve failed run `canonical_v2_20260714T175804Z_4d08ca2` as ignored forensic evidence only. It failed before model fit from the class-incompatible Popen guard and may never be resumed, relabelled or promoted. After the runtime-fix checkpoint, use a new run ID for both scopes.
+14. Freeze the claim matrix only from that future canonical package and obtain author approval before editing `manuscript/mdpi_information/main.md`.
 
 Ethics/IRB identity, dataset source/licence/citation authenticity, raw-history sanitation, and later claim-matrix approval remain external/manual blockers. Never force-push, rewrite history, delete preserved raw/evidence files, call paid APIs, invent missing facts, or admit the Unit 2G stage-validation numbers as canonical manuscript claims.

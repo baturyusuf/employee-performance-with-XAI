@@ -497,3 +497,13 @@ Push/recovery gate: the normal push timed out after 184 seconds with no remote r
 - Final compileall: exit 0; 0.117 seconds.
 - The nine initial failures were a stale test fixture with `release_ready=false`; no production contract was weakened.
 - No scientific build or artifact execution occurred.
+## Offline-runtime clean-build defect - 2026-07-14
+
+- Clean core attempt `canonical_v2_20260714T175804Z_4d08ca2`: exit 1 in 1.239 seconds at shared-fold import; zero model fits; failed receipt preserved.
+- First fix focus: exit 1; 50 passed/1 test-design failure; the test deliberately poisoned the boundary and incorrectly expected clean exit.
+- Corrected offline/scope/manifest focus: exit 0; 51 passed; 4.15 seconds pytest / 7.208 seconds wall.
+- Final complete pytest: exit 0; 743 passed, 2 skipped, 11 subtests passed; 134.15 seconds pytest / 137.961 seconds wall.
+- Final unittest: exit 0; 177 tests, 1 skipped; 8.087 seconds unittest / 11.967 seconds wall.
+- Final compileall: exit 0; 0.114 seconds.
+- Fresh-process sklearn import under the active offline boundary: passed.
+- Source-tree hash before checkpoint: `868a69aac143fe852a5738dd5a720be5f217243dfcd410d69c4954ca617ca8f7`.

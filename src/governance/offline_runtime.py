@@ -88,6 +88,9 @@ class OfflineRuntimeState:
 _ACTIVE_STATE: contextvars.ContextVar[OfflineRuntimeState | None] = contextvars.ContextVar(
     "employee_performance_xai_offline_runtime_state", default=None
 )
+_PROCESS_STATE: OfflineRuntimeState | None = None
+_PROCESS_STATE_LOCK = threading.RLock()
+_ORIGINAL_POPEN = subprocess.Popen
 
 
 def policy_receipt() -> dict[str, Any]:
@@ -138,6 +141,34 @@ def _command_executable(command: Any, explicit_executable: Any) -> str:
     return Path(os.fspath(raw)).name.casefold()
 
 
+def _validate_subprocess_request(
+    state: OfflineRuntimeState,
+    popenargs: Sequence[Any],
+    kwargs: Mapping[str, Any],
+) -> None:
+    command = kwargs.get("args", popenargs[0] if popenargs else None)
+    if kwargs.get("shell"):
+        state.block("subprocess.shell")
+    executable = _command_executable(command, kwargs.get("executable"))
+    if executable not in ALLOWED_SUBPROCESS_EXECUTABLES:
+        state.block(f"subprocess.executable:{executable}")
+    command_parts = list(command) if isinstance(command, (list, tuple)) else []
+    git_subcommand = str(command_parts[1]).casefold() if len(command_parts) > 1 else "<missing>"
+    if git_subcommand not in ALLOWED_GIT_SUBCOMMANDS:
+        state.block(f"subprocess.git_subcommand:{git_subcommand}")
+
+
+class _GuardedPopen(_ORIGINAL_POPEN):
+    """Class-compatible Popen guard safe for stdlib and library subclasses."""
+
+    def __init__(self, *popenargs: Any, **kwargs: Any) -> None:
+        with _PROCESS_STATE_LOCK:
+            state = _PROCESS_STATE
+        if state is not None:
+            _validate_subprocess_request(state, popenargs, kwargs)
+        super().__init__(*popenargs, **kwargs)
+
+
 @contextmanager
 def enforce_offline_runtime() -> Iterable[OfflineRuntimeState]:
     """Deny network/API activity process-wide for one scientific execution.
@@ -152,6 +183,8 @@ def enforce_offline_runtime() -> Iterable[OfflineRuntimeState]:
         yield existing
         existing.assert_clean()
         return
+
+    global _PROCESS_STATE
 
     state = OfflineRuntimeState()
     token = _ACTIVE_STATE.set(state)
@@ -180,22 +213,12 @@ def enforce_offline_runtime() -> Iterable[OfflineRuntimeState]:
     ):
         patch(socket, attribute, blocked(f"socket.{attribute}"))
 
-    original_popen = subprocess.Popen
-
-    def guarded_popen(*popenargs: Any, **kwargs: Any):
-        command = kwargs.get("args", popenargs[0] if popenargs else None)
-        if kwargs.get("shell"):
-            state.block("subprocess.shell")
-        executable = _command_executable(command, kwargs.get("executable"))
-        if executable not in ALLOWED_SUBPROCESS_EXECUTABLES:
-            state.block(f"subprocess.executable:{executable}")
-        command_parts = list(command) if isinstance(command, (list, tuple)) else []
-        git_subcommand = str(command_parts[1]).casefold() if len(command_parts) > 1 else "<missing>"
-        if git_subcommand not in ALLOWED_GIT_SUBCOMMANDS:
-            state.block(f"subprocess.git_subcommand:{git_subcommand}")
-        return original_popen(*popenargs, **kwargs)
-
-    patch(subprocess, "Popen", guarded_popen)
+    with _PROCESS_STATE_LOCK:
+        if _PROCESS_STATE is not None:
+            _ACTIVE_STATE.reset(token)
+            raise OfflineRuntimeError("Another process-wide offline runtime boundary is active.")
+        _PROCESS_STATE = state
+    patch(subprocess, "Popen", _GuardedPopen)
 
     missing = object()
     saved_environment: dict[str, object | str] = {}
@@ -212,6 +235,8 @@ def enforce_offline_runtime() -> Iterable[OfflineRuntimeState]:
     finally:
         for owner, attribute, original in reversed(originals):
             setattr(owner, attribute, original)
+        with _PROCESS_STATE_LOCK:
+            _PROCESS_STATE = None
         for key, value in saved_environment.items():
             if value is missing:
                 os.environ.pop(key, None)

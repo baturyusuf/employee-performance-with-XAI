@@ -720,3 +720,8 @@ After one import regression was fixed, focused tests passed 48. Staged review th
 The final graph audit found no missing stage runner or specialized output validator. Both evidence scopes and the implemented core-figure plan now declare technical execution readiness. Their notes explicitly retain canonical execution, validation and promotion as pending, so the flag is permission to run rather than evidence that a release exists. Negative tests prove either scope fails closed if readiness is revoked.
 
 Focus passes 114. The first complete run found nine stale side-input fixture failures tied to the superseded incomplete scope; correcting the fixture produced 31 affected passes and the final full suite passes 741 with two skips/11 subtests. Unittest passes 177/one skip and compileall passes. The final clean build remains the only route to resolving execution-pending issues; no manuscript or real evidence artifact changed.
+## Offline-runtime late-import repair - 2026-07-14
+
+The first clean core execution failed before model fitting because the process-wide boundary replaced `subprocess.Popen` with a function and Python 3.14's late asyncio import subclasses Popen. The failed 16-file/141,235-byte run remains immutable and noncanonical.
+
+`offline_runtime.py` now installs a class-compatible Popen subclass backed by one process-wide active state. It retains exact child-command denial, works across worker threads, supports late stdlib/library subclass creation and becomes inert after the boundary. A fresh-process sklearn import directly freezes the failed path. Final focus passes 51; pytest passes 743/2 skips/11 subtests; unittest 177/one skip and compileall pass. A new clean commit/run identity is required; the failed attempt cannot be resumed.

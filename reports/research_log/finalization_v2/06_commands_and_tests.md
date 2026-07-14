@@ -1518,3 +1518,8 @@ Config validation exited 0 with config `1bcd1386736a6eb0838ebfc0976682343ac80de6
 ## V2-023 execution-readiness scope freeze - 2026-07-14
 
 Runner inventory reported `core []` and `supplementary []` for missing stage implementations. The focused readiness set passed 114 in 5.50 seconds. Complete pytest then returned nine failures after 732 passes; all traced to one side-input fixture that set the old core release flag false. The corrected affected set passed 31 in 2.62 seconds. Final pytest passed 741/2 skips/11 subtests in 132.28 seconds; unittest passed 177/one skip in 7.937 seconds; compileall passed in 0.117 seconds. Pre-commit config/source hashes are `51415c2c...` and `2aee9de9...`.
+## Clean-build offline-runtime defect - 2026-07-14
+
+`python -m src.experiments.build_manuscript_evidence --scope core --run-id canonical_v2_20260714T175804Z_4d08ca2 --no-reuse-compatible` exited 1 in 1.239 seconds before model fit. Exact cause: late `asyncio.windows_utils.Popen(subprocess.Popen)` received the boundary's function replacement. The failed package contains 16 files/141,235 bytes and remains `status=failed`.
+
+After implementing a process-state-backed class-compatible guard, the first focus reported 50 passes/one test-design failure; the corrected focus passed 51 in 4.15 seconds. Final pytest passed 743/2 skips/11 subtests in 134.15 seconds; unittest passed 177/one skip in 8.087 seconds; compileall passed in 0.114 seconds. A fresh-process sklearn import under the boundary passes. No scientific value was generated.

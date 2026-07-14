@@ -100,6 +100,42 @@ def test_local_git_subprocess_is_the_only_admitted_child_command() -> None:
     assert completed.stdout.startswith("git version ")
 
 
+def test_popen_remains_subclassable_and_subclass_is_not_poisoned_after_boundary() -> None:
+    with enforce_offline_runtime():
+        class DeferredPopen(subprocess.Popen):
+            pass
+
+        assert issubclass(DeferredPopen, subprocess.Popen)
+
+    completed = DeferredPopen(
+        [sys.executable, "-c", "raise SystemExit(0)"],
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+        text=True,
+    )
+    stdout, stderr = completed.communicate(timeout=30)
+    assert completed.returncode == 0
+    assert stdout == ""
+    assert stderr == ""
+
+
+def test_fresh_process_can_import_sklearn_inside_offline_boundary() -> None:
+    script = (
+        "from src.governance.offline_runtime import enforce_offline_runtime\n"
+        "with enforce_offline_runtime():\n"
+        "    from sklearn.model_selection import StratifiedKFold\n"
+        "assert StratifiedKFold.__name__ == 'StratifiedKFold'\n"
+    )
+    completed = subprocess.run(
+        [sys.executable, "-c", script],
+        cwd=Path(__file__).resolve().parents[1],
+        capture_output=True,
+        text=True,
+        timeout=60,
+    )
+    assert completed.returncode == 0, completed.stderr
+
+
 def test_remote_git_subcommand_is_denied_before_execution() -> None:
     with pytest.raises(OfflineRuntimeError, match="git_subcommand:fetch"):
         with enforce_offline_runtime():

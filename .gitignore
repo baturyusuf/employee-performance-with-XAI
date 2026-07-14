@@ -172,6 +172,8 @@ cython_debug/
 # Noncanonical real-data stage-validation evidence is preserved locally under D5.
 # Small publication summaries may be committed separately after the canonical freeze.
 /reports/manuscript_final/stage_validation_hrdataset_20260713T175045Z_5af0262e83a3/
+# Failed first canonical-build attempt is preserved locally for forensic recovery.
+/reports/manuscript_final/canonical_v2_20260714T175804Z_4d08ca2/
 
 # User-provided HR data and row-level/fit-derived working data remain local.
 # Dataset cards, schema mappings, README files, and directory placeholders stay tracked.
