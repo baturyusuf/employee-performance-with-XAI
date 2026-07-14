@@ -745,9 +745,9 @@ def run(
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Validate INX workbook/CSV provenance equivalence.")
-    parser.add_argument("--acquisition-config", default=str(DEFAULT_ACQUISITION_CONFIG))
-    parser.add_argument("--provenance-config", default=str(DEFAULT_PROVENANCE_CONFIG))
-    parser.add_argument("--output", default=str(DEFAULT_OUTPUT))
+    parser.add_argument("--acquisition-config", default=DEFAULT_ACQUISITION_CONFIG.as_posix())
+    parser.add_argument("--provenance-config", default=DEFAULT_PROVENANCE_CONFIG.as_posix())
+    parser.add_argument("--output", default=DEFAULT_OUTPUT.as_posix())
     parser.add_argument("--engine", choices=("auto", "xlrd", "excel_com_windows"), default="auto")
     return parser.parse_args()
 

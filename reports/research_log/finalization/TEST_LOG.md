@@ -382,3 +382,7 @@ Push/recovery gate: the normal push timed out after 184 seconds with no remote r
 - Final post-review pytest: 697 passed, 2 skipped and 11 subtests in 117.32 seconds, exit 0 (121.237 seconds wall).
 - Final post-review unittest: 176 tests, 1 skipped in 7.196 seconds, exit 0 (11.059 seconds wall). Compileall: exit 0 in 0.122 seconds.
 - Clean production receipt: intentionally pending the pushed implementation commit; no diagnostic receipt is admitted.
+- First production CLI attempt: failed safely before Excel/output because argparse emitted a Windows-backslash default path; no partial receipt exists. The new CLI-default regression test passes.
+- Final post-CLI-fix focus: 25 passed in 2.56 seconds, exit 0 (5.541 seconds wall).
+- Final post-CLI-fix pytest: 698 passed, 2 skipped and 11 subtests in 117.97 seconds, exit 0 (121.926 seconds wall).
+- Final post-CLI-fix unittest: 176 tests, 1 skipped in 7.287 seconds, exit 0 (11.093 seconds wall). Compileall: exit 0 in 0.114 seconds.

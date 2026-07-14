@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import sys
 from pathlib import Path
 
 import pytest
@@ -126,6 +127,15 @@ def test_numeric_normalization_preserves_identifier_like_leading_zero_text() -> 
     assert normalize_cell("0012") == "0012"
     assert normalize_cell("  staff  ") == "staff"
     assert normalize_cell(None) == ""
+
+
+def test_cli_defaults_are_portable_on_windows(monkeypatch: pytest.MonkeyPatch) -> None:
+    monkeypatch.setattr(sys, "argv", ["inx-workbook-equivalence"])
+    arguments = workbook_equivalence.parse_args()
+    assert arguments.acquisition_config == "configs/data_acquisition.yaml"
+    assert arguments.provenance_config == "configs/dataset_provenance.yaml"
+    assert arguments.output == OUTPUT.as_posix()
+    assert "\\" not in arguments.output
 
 
 def test_matrix_mismatch_receipt_exposes_coordinates_but_not_values() -> None:
