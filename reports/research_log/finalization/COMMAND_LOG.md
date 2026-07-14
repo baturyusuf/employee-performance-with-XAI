@@ -287,3 +287,13 @@ git commit -m "feat(external): bind reporting semantics to OOF evidence"
 ```
 
 Checkpoint: `9c603534268e7ba953cc1a05b23225b4fde488f5` (444 insertions, 23 deletions across 20 small files). The branch became three commits ahead of remote; no artifact, raw dataset or manuscript file entered the commit.
+
+Commit-hash synchronization `1639e182f877839995799319b434e1c356d131c1` (`docs(log): record V2-029 checkpoint`) followed after a 9-file documentation-only review. The clean branch was then four commits ahead. Normal non-force push command used only process-local noninteractive environment flags:
+
+```powershell
+$env:GIT_TERMINAL_PROMPT='0'
+$env:GCM_INTERACTIVE='Never'
+git push origin finalization/leakage-aware-v2
+```
+
+Exit 1 after 2 seconds: `fatal: Cannot prompt because user interactivity has been disabled` and `fatal: could not read Username for 'https://github.com': terminal prompts disabled`. No credential/security configuration was changed and no process remained. A public noninteractive `git ls-remote` returned remote SHA `e25f403d82082f97e34aa4f8174bfc001fced5d8`; local HEAD remained `1639e18`, ahead four. The failure is authentication-bound, so no retry was made.

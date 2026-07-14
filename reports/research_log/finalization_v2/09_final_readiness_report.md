@@ -20,7 +20,7 @@ This is a live interim assessment, not a final completion declaration. `../final
 
 ## Data/provenance readiness
 
-**Blocked.** Pinned user-provided/acquisition contracts pass for current local inputs, but raw-data distribution and source/licence authenticity still require the accepted sanitized-publication workflow and manual verification. The 65.4 MB noncanonical Unit 2G package is preserved locally and removed from local tip `b7b2ad3` under D5. Its normal push timed out, so the remote tip still points to `e25f403`; that commit also remains in history because rewriting/force-push is prohibited. No ambiguous licence/source judgement has been invented.
+**Blocked.** Pinned user-provided/acquisition contracts pass for current local inputs, but raw-data distribution and source/licence authenticity still require the accepted sanitized-publication workflow and manual verification. The 65.4 MB noncanonical Unit 2G package is preserved locally and removed by local cleanup `b7b2ad3` under D5; tested work extends through `1639e18`. The latest normal push failed because noninteractive HTTPS credentials were unavailable, so the remote tip still points to `e25f403`; that commit also remains in history because rewriting/force-push is prohibited. No ambiguous licence/source judgement has been invented.
 
 ## Ethics readiness
 
