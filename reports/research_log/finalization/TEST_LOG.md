@@ -593,3 +593,6 @@ Push/recovery gate: the normal push timed out after 184 seconds with no remote r
 - README audit: exit 0; 43 local links resolved. `git diff --check`: exit 0 with informational Windows LF-to-CRLF warnings only.
 - Tracking regression: compact assets unignored; complete canonical root, raw data, model, OOF, and local-SHAP representatives ignored.
 - Manuscript, DOCX, PDF, LaTeX, scientific configuration, scientific source, canonical artifacts, fits, OOF, bootstrap, calibration, and SHAP recomputation: zero changes/executions.
+- Staged-byte audit: exit 0; all 109 Git index blobs matched the asset-manifest SHA-256 inventory, zero unexpected paths, 545 local canonical files preserved, and `git diff --cached --check` passed.
+- Clean post-commit repository gate at `902d4041fce94139ba58cb7c982f9a62b8427611`: exit 0 in 0.760 seconds; 1,849 tracked files, 33 issues, 43 README links, zero raw/environment/large/secret/machine-path findings.
+- Normal push: exit 0 in 7.229 seconds; remote advanced `7bb2317..902d404`; authentication succeeded.

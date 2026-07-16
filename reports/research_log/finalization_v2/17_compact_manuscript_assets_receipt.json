@@ -26,9 +26,11 @@
   },
   "export_timestamp": "2026-07-16T13:45:21+00:00",
   "git_publication": {
-    "asset_checkpoint_commit": "pending",
+    "asset_checkpoint_commit": "902d4041fce94139ba58cb7c982f9a62b8427611",
     "branch": "finalization/leakage-aware-v2",
-    "push_status": "pending"
+    "push_output": "7bb2317..902d404 finalization/leakage-aware-v2 -> finalization/leakage-aware-v2",
+    "push_status": "succeeded",
+    "remote": "origin"
   },
   "manifest_path": "manuscript/mdpi_information/assets/manifests/manuscript_asset_manifest.json",
   "schema_version": 1,
@@ -45,7 +47,7 @@
       "physical_files": 191
     }
   },
-  "status": "validated_pending_git_publication",
+  "status": "validated_and_pushed",
   "tests": {
     "compileall": "passed",
     "focused": "17 passed, 1 skipped",

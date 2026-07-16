@@ -21,6 +21,7 @@ Date: 2026-07-16
 - Local source-parity validation checked 308 declared source bindings across 108 manifest records after independently revalidating all 545 canonical files. No scientific stage was rerun.
 - The complete canonical root is again ignored as one unit. Its formerly tracked 50-file aggregate subset was removed from the current index with all 545 local files preserved; receipt 16 is retained as historical publication chronology.
 - Raw/interim data, employee-level OOF/local-SHAP outputs, models, calibrator internals, bootstrap arrays, and training-partition records remain ignored and are not authorized for Git publication.
+- Asset checkpoint `902d4041fce94139ba58cb7c982f9a62b8427611` passed the clean repository gate and was pushed normally to `origin/finalization/leakage-aware-v2`; GitHub authentication succeeded.
 
 ## Acceptance evidence
 
@@ -58,6 +59,7 @@ The original stage-validation run `stage_validation_hrdataset_20260713T175045Z_5
 - Compileall over `src`, `tests`, and `tools`: exit 0 in 0.312 seconds.
 - Compact-package validation: 109 files/10,338,351 bytes, seven main and three supplementary PNG/SVG pairs, eight main tables, manifest SHA-256 `fbe7355b...`; exit 0.
 - Candidate hygiene and README-link gates: 43 valid local links; maximum asset 2,195,799 bytes; zero raw/model/row-level extension, staging, secret, machine-path, forbidden-primary-SHAP, active `leakage-safe`, scientific-source-diff, or manuscript-diff findings.
+- Post-commit repository gate: exit 0 in 0.760 seconds; 1,849 tracked files, 33 issue rows, 43 README links, and zero raw/environment/large/secret/machine-path findings.
 
 ## Remaining blockers
 
