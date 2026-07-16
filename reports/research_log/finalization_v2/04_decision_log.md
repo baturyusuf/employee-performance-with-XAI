@@ -192,3 +192,10 @@ This is an implementation/provenance resolution of the already approved same-OOF
 - Forty total attempts with 0.25-second spacing bound the retry window to 9.75 seconds; exhaustion fails.
 - Cleanup follows the same narrow retry rule and attaches failure to the primary exception instead of replacing it.
 - Scientific computation, validation, identities and artifact bytes are unchanged.
+## Compact manuscript-support publication - 2026-07-16
+
+The full canonical package remains local and ignored. The current Git tip tracks only `manuscript/mdpi_information/assets/`, a deterministic 109-file compact export from `canonical_v2_20260714T221501Z_483f96f`. This supersedes the prior 50-file aggregate tracking decision at the current tip without deleting local canonical bytes or rewriting history. Receipt 16 remains historical chronology.
+
+The export does not alter scientific code, config, folds, fits, probabilities, bootstrap samples, SHAP values, or canonical artifacts. Manuscript Figures 1-7 map to canonical figures 1, 3, 2, 4, 5, 6, 7; Figure 1 is a presentation-only protocol rendering and the other main figures preserve canonical bytes. Complete source hashes, result rows, rounding, denominators, claim boundaries, and insertion paths are part of the tracked package.
+
+The journal manuscript remains author-owned and unchanged. Ethics/licence/citation/redistribution, claim approval, manuscript insertion, and public Release/DOI work remain manual blockers.

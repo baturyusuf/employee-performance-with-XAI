@@ -1,0 +1,1 @@
+Class-specific grouped OOF SHAP summary. Visual encodings include labels, markers, hatching, or explicit missing-cell symbols. Exact-fold grouped SHAP in raw-margin space; model attribution is not causality.

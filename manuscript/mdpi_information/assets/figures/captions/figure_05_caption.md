@@ -1,0 +1,11 @@
+# Figure 5 caption
+
+Technical evidence caption for Figure 5: Global grouped out-of-fold SHAP attribution.
+
+Claim boundary: Grouped OOF SHAP is model attribution in the declared output space, not causality or employee prescription.
+
+run_id=canonical_v2_20260714T221501Z_483f96f; config_hash=51415c2ce68c89d9ce2b042b0a7a811fe3e98180b72460006f9d0465f6bf49b7; scientific_input_hash=06c507bee525ea1daca43b61249764007d4d8baaa05c9333f23446ea723ce160; source_tree_hash=f1e358e99914563305428cece1b1595bc76a58643184407ec5b222162d650332
+
+Sources: oof_shap/global_grouped_shap_importance.csv; oof_shap/shap_metadata.json
+
+**Manuscript boundary.** Grouped OOF SHAP values are model attributions in raw-margin space from the same persisted outer-fold model that produced each prediction; they are not causal effects.

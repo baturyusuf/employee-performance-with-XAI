@@ -1,0 +1,8 @@
+# Core datasets, targets, support, and analytical roles
+
+Observed support and analytical role only; source authenticity, licence, and target equivalence remain manual boundaries.
+
+| dataset | canonical_name | analytical_role | task_type | target | target_definition | observed_support | n_rows | allowed_interpretation | licence_status |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| inx_primary | INX Future Inc Employee Performance | primary_development_and_internal_oof_evaluation | ordinal_multiclass_performance | PerformanceRating | {"2": 2, "3": 3, "4": 4} | [{"mapped_value": 2, "raw_count": 194, "raw_value": "2"}, {"mapped_value": 3, "raw_count": 874, "raw_value": "3"}, {"mapped_value": 4, "raw_count": 132, "raw_value": "4"}] | 1200 | Internal out-of-fold employee-performance evidence; not independent external validation. | manual_review_required |
+| hrdataset_v14 | HRDataset_v14 / Human Resources Data Set | independent_external_performance_target_replication | ordinal_multiclass_performance | PerformanceScore | {"Exceeds": 4, "Exceptional": 4, "Fully Meets": 3, "Needs Improvement": 2, "PIP": 2} | [{"mapped_value": 4, "raw_count": 37, "raw_value": "Exceeds"}, {"mapped_value": 3, "raw_count": 243, "raw_value": "Fully Meets"}, {"mapped_value": 2, "raw_count": 18, "raw_value": "Needs Improvement"}, {"mapped_value": 2, "raw_count": 13, "raw_value": "PIP"}] | 311 | Independent external performance-target replication; not locked-model transport unless a separate transported-model result is generated. | manual_review_required |

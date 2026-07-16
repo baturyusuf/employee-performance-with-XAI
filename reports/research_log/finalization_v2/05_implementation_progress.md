@@ -761,3 +761,11 @@ The first migration-commit build completed calibration computation but an extern
 A shared core utility now owns every atomic directory rename. It retries only explicit Windows access-denied/sharing/lock errors within a 9.75-second maximum window, requires staging to remain a real directory and destination to remain absent, and raises all other errors immediately. TemporaryDirectory-based stages use a companion cleanup path that retries the same narrow errors and attaches an exhausted cleanup failure to the original exception.
 
 Every core and supplementary directory publisher is routed through the helper. Staged review extended primary-exception preservation to non-permission cleanup failures. Post-review focus passes 148/one skip; final pytest passes 752/two skips/11 subtests; unittest passes 179/one skip; compileall passes. The source-tree hash becomes `e5527c99...`; config remains `51415c2c...`. One new exact-fix-commit build is required for execution acceptance.
+
+## Compact manuscript-support export - 2026-07-16
+
+The immutable canonical package was reused without scientific execution. A repository-external-to-scientific-tree utility now independently checks the receipt, pointer, run/config/source/scientific identities, both closed-world manifests, 539 declared artifact records, all 545 physical files, sizes/hashes, and the unchanged frozen source tree before export.
+
+Atomic export produced 109 files/10,338,351 bytes under `manuscript/mdpi_information/assets/`: seven main and three supplementary figures in PNG/SVG, ten captions and alt texts, eight main and three supplementary tables in CSV/Markdown/source-map form, exact compact source tables, figure source data, 221 evidence-ledger rows, exact-results JSON, insertion/source maps, claim handoff, and a closed-world asset manifest. Local source-parity validation passed 308 declared bindings over 108 manifest records. Figure 1 was presentation-rendered from frozen protocol/claim contracts; the remaining main figures are canonical copies.
+
+The full canonical root is restored to one ignore rule. Its 50 formerly tracked aggregate files were removed from the current index with all 545 local files preserved. Regression coverage asserts the compact directory remains trackable while canonical, raw-data, model, OOF, and local-SHAP paths remain ignored.

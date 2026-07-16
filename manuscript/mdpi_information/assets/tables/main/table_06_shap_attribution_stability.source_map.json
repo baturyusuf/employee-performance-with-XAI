@@ -1,0 +1,28 @@
+{
+  "canonical_sources": [
+    {
+      "path": "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_tables/table_06_global_grouped_oof_shap.csv",
+      "sha256": "5d5fcf96dc20e672db876b0b2ddd5969910d3e44736200282d95ce6ecb11801b"
+    },
+    {
+      "path": "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_tables/table_07_oof_shap_stability.csv",
+      "sha256": "2a0928c9f68b106143334a5f975216ffbc4e2b5227b77f1869e8fc9b6eb4d2d3"
+    },
+    {
+      "path": "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/oof_shap/fold_feature_rankings.csv",
+      "sha256": "56ef319560996e2888116e74883adf2e18ecb8e27606ff375a0a0e2fe1efa8e9"
+    }
+  ],
+  "config_hash": "51415c2ce68c89d9ce2b042b0a7a811fe3e98180b72460006f9d0465f6bf49b7",
+  "manuscript_table": 6,
+  "output_csv": "manuscript/mdpi_information/assets/tables/main/table_06_shap_attribution_stability.csv",
+  "output_sha256": "53ba8dea8d3f121c7723ba138fa33be6dc9b3c71aeabe24f6a8222141f69af15",
+  "rounding_rule": "decimal ROUND_HALF_EVEN to 4 places; integer denominators unrounded",
+  "row_count": 23,
+  "run_id": "canonical_v2_20260714T221501Z_483f96f",
+  "schema_version": 1,
+  "scientific_input_hash": "06c507bee525ea1daca43b61249764007d4d8baaa05c9333f23446ea723ce160",
+  "source_tree_hash": "f1e358e99914563305428cece1b1595bc76a58643184407ec5b222162d650332",
+  "title": "Grouped SHAP attribution and stability",
+  "validation_status": "source_rows_and_display_values_verified"
+}

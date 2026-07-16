@@ -1,0 +1,1 @@
+Interval plot comparing XGBoost with logistic regression, random forest, and LightGBM on shared out-of-fold benchmark metrics, with paired uncertainty and gate context.

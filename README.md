@@ -16,76 +16,66 @@ The canonical technical evidence package is complete and validated on `finalizat
 | Source-tree SHA-256 | `f1e358e99914563305428cece1b1595bc76a58643184407ec5b222162d650332` |
 | Core scientific-input SHA-256 | `06c507bee525ea1daca43b61249764007d4d8baaa05c9333f23446ea723ce160` |
 | Supplementary scientific-input SHA-256 | `caffb945d15f990e3a789e9707f7a8a9115be31fecbbd705822994a10cfaf151` |
-| Validation | 752 pytest passes, 2 skips, 11 subtests; 179 unittest passes, 1 skip |
+| Canonical acceptance | 752 pytest passes, 2 skips, 11 subtests; 179 unittest passes, 1 skip |
 | Scientific network/API use | zero attempted network operations; zero paid API calls |
 
-The compact machine-readable receipt is [`15_canonical_evidence_receipt.json`](reports/research_log/finalization_v2/15_canonical_evidence_receipt.json). The current status, decisions, commands, tests, issues, and manual blockers are maintained under [`reports/research_log/finalization/`](reports/research_log/finalization/) and [`reports/research_log/finalization_v2/`](reports/research_log/finalization_v2/).
+The authoritative compact receipt is [`15_canonical_evidence_receipt.json`](reports/research_log/finalization_v2/15_canonical_evidence_receipt.json). Current status, decisions, commands, tests, issues, and blockers are maintained under [`reports/research_log/finalization/`](reports/research_log/finalization/) and [`reports/research_log/finalization_v2/`](reports/research_log/finalization_v2/).
 
-## GitHub-accessible publication assets
+## Tracked manuscript-support assets
 
-The remote branch now includes the complete aggregate publication-support subset from the frozen canonical run:
+GitHub contains a deterministic, source-mapped export at [`manuscript/mdpi_information/assets/`](manuscript/mdpi_information/assets/). It was generated from the validated canonical run without refitting models or recomputing scientific evidence. The compact package contains 109 files and 10,338,351 bytes; its closed-world manifest SHA-256 is `fbe7355b956df01ad9817f27b42dc13c0f3e0e33e7f0e5c42a2477beb9d001e1`.
 
-- all seven final figures in PNG and SVG;
-- all seven figure-source CSV files;
-- all seven technical captions;
-- the figure manifest and stage contract;
-- all eleven core source tables and all three supplementary source tables;
-- both table manifests and stage contracts;
-- core and supplementary supported/prohibited claim-boundary files.
+The package includes:
 
-This is a 50-file, 6,337,343-byte immutable subset. Its reproducible canonical-JSON inventory SHA-256 is `645f5295c36f2d1e0a3b7809e67d805f1bb16b906121ca91e032bc1d36e2d228`. It contains aggregate manuscript-support evidence rather than raw datasets, employee identifiers, row-level OOF/SHAP records, fitted models, caches, or secrets. The exact inventory algorithm and component hashes are recorded in [`16_github_publication_assets_receipt.json`](reports/research_log/finalization_v2/16_github_publication_assets_receipt.json).
+- all seven main figures and three supplementary figures in 300-DPI PNG and safe, editable SVG;
+- captions and alt text for every figure;
+- eight manuscript-ready main tables plus three supplementary tables in CSV and Markdown;
+- exact canonical source-table copies and figure-source CSV files;
+- full-precision values, four-decimal display values, denominators, intervals, uncertainty methods, and row-level source references for table records;
+- figure, table, result, and claim-boundary source maps;
+- a complete evidence ledger, exact-results JSON, insertion guide, and closed-world checksum manifest.
 
-### Final figures
+Start with the [asset guide](manuscript/mdpi_information/assets/README.md), [figure/table insertion guide](manuscript/mdpi_information/assets/handoff/figure_table_insertion_guide.md), [claim-boundary handoff](manuscript/mdpi_information/assets/handoff/claim_boundary_handoff.md), or [package manifest](manuscript/mdpi_information/assets/manifests/manuscript_asset_manifest.json).
 
-| Figure | Subject | PNG | SVG | Source data | Caption |
-| --- | --- | --- | --- | --- | --- |
-| 1 | Study design and leakage-aware pipeline | [PNG](reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_figures/figure_1_study_design_leakage_aware_pipeline.png) | [SVG](reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_figures/figure_1_study_design_leakage_aware_pipeline.svg) | [CSV](reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_figures/source_data/figure_1_study_design_leakage_aware_pipeline_source.csv) | [caption](reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_figures/captions/figure_1_study_design_leakage_aware_pipeline_caption.md) |
-| 2 | Feature-policy trade-off | [PNG](reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_figures/figure_2_feature_policy_tradeoff.png) | [SVG](reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_figures/figure_2_feature_policy_tradeoff.svg) | [CSV](reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_figures/source_data/figure_2_feature_policy_tradeoff_source.csv) | [caption](reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_figures/captions/figure_2_feature_policy_tradeoff_caption.md) |
-| 3 | XGBoost versus baselines | [PNG](reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_figures/figure_3_xgboost_vs_baselines.png) | [SVG](reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_figures/figure_3_xgboost_vs_baselines.svg) | [CSV](reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_figures/source_data/figure_3_xgboost_vs_baselines_source.csv) | [caption](reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_figures/captions/figure_3_xgboost_vs_baselines_caption.md) |
-| 4 | Cross-fitted sigmoid calibration | [PNG](reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_figures/figure_4_cross_fitted_sigmoid_calibration.png) | [SVG](reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_figures/figure_4_cross_fitted_sigmoid_calibration.svg) | [CSV](reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_figures/source_data/figure_4_cross_fitted_sigmoid_calibration_source.csv) | [caption](reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_figures/captions/figure_4_cross_fitted_sigmoid_calibration_caption.md) |
-| 5 | Global grouped OOF SHAP | [PNG](reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_figures/figure_5_global_grouped_oof_shap.png) | [SVG](reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_figures/figure_5_global_grouped_oof_shap.svg) | [CSV](reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_figures/source_data/figure_5_global_grouped_oof_shap_source.csv) | [caption](reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_figures/captions/figure_5_global_grouped_oof_shap_caption.md) |
-| 6 | OOF SHAP stability | [PNG](reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_figures/figure_6_oof_shap_stability.png) | [SVG](reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_figures/figure_6_oof_shap_stability.svg) | [CSV](reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_figures/source_data/figure_6_oof_shap_stability_source.csv) | [caption](reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_figures/captions/figure_6_oof_shap_stability_caption.md) |
-| 7 | HRDataset_v14 mapped-target replication | [PNG](reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_figures/figure_7_hrdataset_v14_mapped_target_replication.png) | [SVG](reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_figures/figure_7_hrdataset_v14_mapped_target_replication.svg) | [CSV](reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_figures/source_data/figure_7_hrdataset_v14_mapped_target_replication_source.csv) | [caption](reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_figures/captions/figure_7_hrdataset_v14_mapped_target_replication_caption.md) |
+### Main figures
 
-Figure integrity: [`figure_manifest.json`](reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_figures/figure_manifest.json) and [`stage_contract.json`](reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_figures/stage_contract.json).
+| Figure | Subject | PNG | SVG |
+| --- | --- | --- | --- |
+| 1 | Leakage-aware audit rationale and technical protocol | [PNG](manuscript/mdpi_information/assets/figures/main/figure_01_audit_protocol.png) | [SVG](manuscript/mdpi_information/assets/figures/main/figure_01_audit_protocol.svg) |
+| 2 | Four-model nested benchmark | [PNG](manuscript/mdpi_information/assets/figures/main/figure_02_model_benchmark.png) | [SVG](manuscript/mdpi_information/assets/figures/main/figure_02_model_benchmark.svg) |
+| 3 | Feature-policy sensitivity | [PNG](manuscript/mdpi_information/assets/figures/main/figure_03_feature_policy_sensitivity.png) | [SVG](manuscript/mdpi_information/assets/figures/main/figure_03_feature_policy_sensitivity.svg) |
+| 4 | Cross-fitted sigmoid calibration | [PNG](manuscript/mdpi_information/assets/figures/main/figure_04_calibration.png) | [SVG](manuscript/mdpi_information/assets/figures/main/figure_04_calibration.svg) |
+| 5 | Exact-fold OOF grouped SHAP | [PNG](manuscript/mdpi_information/assets/figures/main/figure_05_global_grouped_shap.png) | [SVG](manuscript/mdpi_information/assets/figures/main/figure_05_global_grouped_shap.svg) |
+| 6 | OOF SHAP stability | [PNG](manuscript/mdpi_information/assets/figures/main/figure_06_shap_stability.png) | [SVG](manuscript/mdpi_information/assets/figures/main/figure_06_shap_stability.svg) |
+| 7 | HRDataset_v14 mapped-target replication | [PNG](manuscript/mdpi_information/assets/figures/main/figure_07_hrdataset_replication.png) | [SVG](manuscript/mdpi_information/assets/figures/main/figure_07_hrdataset_replication.svg) |
 
-### Final source tables
+The manuscript sequence intentionally maps canonical benchmark Figure 3 to manuscript Figure 2 and canonical feature-policy Figure 2 to manuscript Figure 3. [`figure_number_mapping.csv`](manuscript/mdpi_information/assets/manifests/figure_number_mapping.csv) records the exact mapping and hashes. Figure 1 is a post-canonical presentation rendering of the frozen audit protocol; the remaining main figures are byte-for-byte canonical copies.
 
-The CSV files contain exact canonical numerical cells and row-level provenance fields for the **table records**, not employee-level observations. Tables 3–8—the values specifically needed for model comparison, policy sensitivity, calibration, SHAP, stability, and subgroup diagnostics—are directly accessible below.
+### Main tables
 
-| Table | Scope and subject | Source CSV |
+| Table | Subject | Manuscript-ready CSV |
 | --- | --- | --- |
-| 1 | Dataset roles, mappings, and support | [table 1](reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_tables/table_01_dataset_roles_target_mappings_support.csv) |
-| 2 | Exact primary feature policy | [table 2](reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_tables/table_02_exact_primary_feature_policy.csv) |
-| 3 | Four-model nested benchmark | [table 3](reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_tables/table_03_four_model_nested_benchmark.csv) |
-| 4 | Leakage-policy sensitivity | [table 4](reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_tables/table_04_leakage_policy_sensitivity.csv) |
-| 5 | Cross-fitted sigmoid calibration | [table 5](reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_tables/table_05_cross_fitted_sigmoid_calibration.csv) |
-| 6 | Global grouped OOF SHAP | [table 6](reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_tables/table_06_global_grouped_oof_shap.csv) |
-| 7 | OOF SHAP stability | [table 7](reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_tables/table_07_oof_shap_stability.csv) |
-| 8 | Support-aware subgroup diagnostics | [table 8](reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_tables/table_08_support_aware_subgroup_diagnostics.csv) |
-| 9 | Department proxy reconstructability | [table 9](reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_tables/table_09_department_proxy_reconstructability.csv) |
-| 10 | HRDataset_v14 mapped-target replication | [table 10](reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_tables/table_10_hrdataset_v14_mapped_target_replication.csv) |
-| 11 | Supplementary heuristic-search success | [table 11](reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/supplementary/supplementary_tables/table_11_heuristic_counterfactual_search_success.csv) |
-| 12 | Supplementary restricted/binary task evidence | [table 12](reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/supplementary/supplementary_tables/table_12_restricted_and_binary_task_evidence.csv) |
-| 13 (core) | Reproducibility and claim boundaries | [core table 13](reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_tables/table_13_reproducibility_and_claim_boundaries.csv) |
-| 13 (supplementary) | Supplementary reproducibility and claim boundaries | [supplementary table 13](reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/supplementary/supplementary_tables/table_13_supplementary_reproducibility_and_claim_boundaries.csv) |
+| 1 | Datasets, targets, support, and analytical roles | [CSV](manuscript/mdpi_information/assets/tables/main/table_01_datasets.csv) |
+| 2 | Prespecified feature-governance policies | [CSV](manuscript/mdpi_information/assets/tables/main/table_02_feature_governance.csv) |
+| 3 | Ten-by-five nested OOF four-model benchmark | [CSV](manuscript/mdpi_information/assets/tables/main/table_03_nested_benchmark.csv) |
+| 4 | Matched-fold feature-policy sensitivity | [CSV](manuscript/mdpi_information/assets/tables/main/table_04_feature_policy_sensitivity.csv) |
+| 5 | Raw and cross-fitted sigmoid probability metrics | [CSV](manuscript/mdpi_information/assets/tables/main/table_05_calibration.csv) |
+| 6 | Grouped SHAP attribution and stability | [CSV](manuscript/mdpi_information/assets/tables/main/table_06_shap_attribution_stability.csv) |
+| 7 | Support-aware subgroup and proxy diagnostics | [CSV](manuscript/mdpi_information/assets/tables/main/table_07_subgroup_proxy_diagnostics.csv) |
+| 8 | HRDataset_v14 mapped-target replication | [CSV](manuscript/mdpi_information/assets/tables/main/table_08_hrdataset_replication.csv) |
 
-Table integrity: [core table manifest](reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_tables/table_manifest.json), [core stage contract](reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_tables/stage_contract.json), [supplementary table manifest](reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/supplementary/supplementary_tables/table_manifest.json), and [supplementary stage contract](reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/supplementary/supplementary_tables/stage_contract.json).
-
-Claim boundaries: [core](reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/canonical_claim_boundaries.md) and [supplementary](reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/supplementary/canonical_claim_boundaries.md).
+The exact numerical handoff is [`manuscript_exact_results.json`](manuscript/mdpi_information/assets/handoff/manuscript_exact_results.json); the 221-row traceability ledger is [`manuscript_evidence_ledger.csv`](manuscript/mdpi_information/assets/handoff/manuscript_evidence_ledger.csv). These are aggregate result records, not employee-level observations.
 
 ## What remains local
 
-The complete canonical evidence package contains 545 files and approximately 446.6 MB. The remote Git subset deliberately excludes:
+The complete canonical evidence package contains 545 files and approximately 446.6 MB. It remains Git-ignored at `reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/`. The tracked compact export deliberately excludes:
 
-- raw or interim datasets;
+- raw or interim datasets and employee identifiers;
 - employee-level OOF predictions and local SHAP rows;
-- fitted model binaries and calibrator internals;
-- bootstrap index arrays;
-- candidate-fit, inner-fold, and training-partition records;
-- caches, temporary directories, and environment files.
+- fitted models, calibrator internals, bootstrap indices, and training partitions;
+- caches, temporary directories, environments, and secrets.
 
-Those materials remain hash-bound in the compact receipt and local closed-world manifests. They belong in a separately authorized GitHub Release or Zenodo package after licence, redistribution, ethics, and historical-publication decisions. Git is used here for the aggregate manuscript-support assets needed by reviewers and authoring agents.
+Those local materials remain bound by the canonical receipt and closed-world manifests. Publication through a separate GitHub Release or repository archive requires explicit licence, redistribution, ethics, and historical-publication decisions. The compact Git package is sufficient for manuscript figures, tables, numerical cells, and scientific source tracing.
 
 ## Frozen scientific protocol
 
@@ -103,7 +93,7 @@ Those materials remain hash-bound in the compact receipt and local closed-world 
 - LLM, chatbot, and agent evaluations: excluded from the core scientific paper.
 - Human evaluation: none.
 
-The primary INX policy excludes `Age`, `Gender`, `MaritalStatus`, `EmpDepartment`, `EmpLastSalaryHikePercent`, `Attrition`, `EmpNumber`, and the target `PerformanceRating`. The conservative HRDataset_v14 primary policy additionally excludes department/position/status/marriage/diversity aliases, identifiers, sensitive fields, raw dates, Salary, State, Zip, and RecruitmentSource.
+The primary INX policy excludes `Age`, `Gender`, `MaritalStatus`, `EmpDepartment`, `EmpLastSalaryHikePercent`, `Attrition`, `EmpNumber`, and the target `PerformanceRating`. The conservative HRDataset_v14 primary policy excludes department, position, employment-status, marriage, diversity-job-fair and identifier fields; raw hire dates; `Salary`; `State`; `Zip`; and `RecruitmentSource`.
 
 SHAP values are noncausal raw-margin attributions. Sensitive-field removal does not prove fairness or eliminate proxy risk. HRDataset_v14 is an independently trained mapped-target replication, not locked INX-model transport. IBM and Employee Turnover results are supplementary task-transfer/robustness evidence and are not directly comparable with the primary task.
 
@@ -138,16 +128,23 @@ Canonical build entry points:
 .\myenv\Scripts\python.exe -m src.experiments.build_manuscript_evidence --config configs/manuscript_final.yaml --validate-run-id <same-run-id>
 ```
 
+The compact export requires the verified local canonical root and publishes atomically:
+
+```powershell
+.\myenv\Scripts\python.exe -m tools.canonical_manuscript_asset_export
+.\myenv\Scripts\python.exe -m tools.canonical_manuscript_asset_export --validate-only
+```
+
 Routine repository validation:
 
 ```powershell
 .\myenv\Scripts\python.exe -m pytest -q
 .\myenv\Scripts\python.exe -m unittest discover -s tests -q
-.\myenv\Scripts\python.exe -m compileall -q src tests
+.\myenv\Scripts\python.exe -m compileall -q src tests tools
 .\myenv\Scripts\python.exe -m src.governance.ci_repository_gate --project-root .
 ```
 
-Scientific execution is deny-all-network and deny-paid-API. The GitHub Actions workflow in [`.github/workflows/ci.yml`](.github/workflows/ci.yml) checks dependencies, tests, compilation, manuscript immutability, secrets, raw-data exposure, path portability, large files, issue-register integrity, and README links on pushes and pull requests.
+Scientific execution is deny-all-network and deny-paid-API. [`.github/workflows/ci.yml`](.github/workflows/ci.yml) checks dependencies, tests, compilation, manuscript immutability, secrets, raw-data exposure, path portability, large files, issue-register integrity, and README links on pushes and pull requests.
 
 ## Reviewer and agent resumption order
 
@@ -161,21 +158,23 @@ Read [`AGENTS.md`](AGENTS.md), then:
 6. [`02_issue_register.csv`](reports/research_log/finalization_v2/02_issue_register.csv)
 7. current branch, HEAD, `git status`, and `git diff`
 
-Historical v1 runs, failed candidates, stage-validation packages, and early trials are retained only as audit chronology. They are not canonical evidence and must not replace the paths listed in this README.
+Historical v1 runs, failed candidates, stage-validation packages, and early trials are audit chronology only. They must not replace the canonical identity or compact asset package documented above.
 
 ## Repository map
 
 ```text
-configs/                           Frozen scope, acquisition, model, metric, and policy contracts
-data/                              Local inputs and tracked schema/provenance metadata
-src/experiments/                   Core and supplementary scientific stages
-src/explainability/                Grouped-SHAP lineage and explainability code
-src/governance/                    Run, provenance, claim, manifest, and publication contracts
-reports/manuscript_final/          Canonical aggregate publication assets plus ignored full evidence
-reports/research_log/finalization/ Current interruption-safe status and logs
+configs/                              Frozen scope, acquisition, model, metric, and policy contracts
+data/                                 Local inputs and tracked schema/provenance metadata
+src/experiments/                      Core and supplementary scientific stages
+src/explainability/                   Grouped-SHAP lineage and explainability code
+src/governance/                       Run, provenance, claim, manifest, and publication contracts
+tools/                                Deterministic compact manuscript-asset export
+manuscript/mdpi_information/assets/  Tracked figures, tables, source maps, and handoff evidence
+reports/manuscript_final/             Ignored complete canonical and historical evidence packages
+reports/research_log/finalization/    Current interruption-safe status and logs
 reports/research_log/finalization_v2/ Detailed audit, receipts, issues, and readiness records
-tests/                             Unit, contract, integration, and publication-gate tests
-manuscript/                        Author-owned manuscript; not modified by technical finalization
+tests/                                Unit, contract, integration, and publication-gate tests
+manuscript/                           Author-owned manuscript files; technical finalization does not edit them
 ```
 
-The governing rule is simple: every reported claim must trace to verified real input, the frozen protocol, correct uncertainty and claim boundaries, and artifacts from one clean run/config/commit identity.
+Every reported claim must trace to verified real input, the frozen protocol, correct uncertainty and claim boundaries, and artifacts from one clean run/config/commit identity.

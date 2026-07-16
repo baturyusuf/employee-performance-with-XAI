@@ -1,0 +1,14 @@
+{
+  "config_hash": "51415c2ce68c89d9ce2b042b0a7a811fe3e98180b72460006f9d0465f6bf49b7",
+  "output_csv": "manuscript/mdpi_information/assets/tables/supplementary/table_s12_task_bounded_robustness.csv",
+  "rounding_rule": "decimal ROUND_HALF_EVEN to 4 places; integer denominators unrounded",
+  "row_count": 67,
+  "run_id": "canonical_v2_20260714T221501Z_483f96f",
+  "schema_version": 1,
+  "scientific_input_hash": "caffb945d15f990e3a789e9707f7a8a9115be31fecbbd705822994a10cfaf151",
+  "source_path": "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/supplementary/supplementary_tables/table_12_restricted_and_binary_task_evidence.csv",
+  "source_sha256": "666e6b4f77e3815d52762d61f3858659274cecf772564d678e404c79d2571552",
+  "source_tree_hash": "f1e358e99914563305428cece1b1595bc76a58643184407ec5b222162d650332",
+  "supplementary_table": "S2",
+  "validation_status": "verified"
+}

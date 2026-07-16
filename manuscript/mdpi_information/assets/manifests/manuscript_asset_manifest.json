@@ -1,0 +1,2488 @@
+{
+  "config_hash": "51415c2ce68c89d9ce2b042b0a7a811fe3e98180b72460006f9d0465f6bf49b7",
+  "core_scientific_input_hash": "06c507bee525ea1daca43b61249764007d4d8baaa05c9333f23446ea723ce160",
+  "export_timestamp": "2026-07-16T13:45:21+00:00",
+  "file_count_excluding_manifest": 108,
+  "files": [
+    {
+      "config_hash": "51415c2ce68c89d9ce2b042b0a7a811fe3e98180b72460006f9d0465f6bf49b7",
+      "copy_or_render_status": "deterministic_export",
+      "export_timestamp": "2026-07-16T13:45:21+00:00",
+      "path": "manuscript/mdpi_information/assets/README.md",
+      "run_id": "canonical_v2_20260714T221501Z_483f96f",
+      "scientific_input_hash": "06c507bee525ea1daca43b61249764007d4d8baaa05c9333f23446ea723ce160",
+      "sha256": "c0d933c84c997b1efb84825e4637f0aeec379b223818dc6315e52c261762a9a9",
+      "size_bytes": 3990,
+      "source_paths": [
+        "reports/research_log/finalization_v2/15_canonical_evidence_receipt.json"
+      ],
+      "source_sha256_values": [
+        "bd09523276dcbc54d036f8c9eb0c71ba62f8b0f913c495695a2259296101827c"
+      ],
+      "source_tree_hash": "f1e358e99914563305428cece1b1595bc76a58643184407ec5b222162d650332",
+      "type": "md",
+      "validation_outcome": "passed"
+    },
+    {
+      "config_hash": "51415c2ce68c89d9ce2b042b0a7a811fe3e98180b72460006f9d0465f6bf49b7",
+      "copy_or_render_status": "deterministic_export",
+      "export_timestamp": "2026-07-16T13:45:21+00:00",
+      "path": "manuscript/mdpi_information/assets/figures/alt_text/figure_01_alt_text.txt",
+      "run_id": "canonical_v2_20260714T221501Z_483f96f",
+      "scientific_input_hash": "06c507bee525ea1daca43b61249764007d4d8baaa05c9333f23446ea723ce160",
+      "sha256": "90b85e2493276793ccf338ba974d9203f1db65878eb90cfe2286973f27d461e1",
+      "size_bytes": 322,
+      "source_paths": [
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_figures/figure_1_study_design_leakage_aware_pipeline.png",
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_figures/figure_1_study_design_leakage_aware_pipeline.svg",
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_figures/source_data/figure_1_study_design_leakage_aware_pipeline_source.csv",
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_figures/captions/figure_1_study_design_leakage_aware_pipeline_caption.md",
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_figures/figure_manifest.json"
+      ],
+      "source_sha256_values": [
+        "5f6078006d46dca4707feccb9241e57961f26a14627d8b14f0f08336a7f8de95",
+        "45f04f8be9ea700cc066dcdbe668aeea52ebd867066ebcb63c769ad78bfe0019",
+        "4e6b5ee9a89c9402f80236187a2ebc0eaf67eda50c2f6eff31c0b154c16bf27a",
+        "d44dffb3bb4c7e5c69b543aaf93e50c24ba4e51469e350455251ebb6dddf6eb1",
+        "df54982f73dcf5d7160fec46092818b9dfa3918c150d8175c407b59d8a5b9ef2"
+      ],
+      "source_tree_hash": "f1e358e99914563305428cece1b1595bc76a58643184407ec5b222162d650332",
+      "type": "txt",
+      "validation_outcome": "passed"
+    },
+    {
+      "config_hash": "51415c2ce68c89d9ce2b042b0a7a811fe3e98180b72460006f9d0465f6bf49b7",
+      "copy_or_render_status": "deterministic_export",
+      "export_timestamp": "2026-07-16T13:45:21+00:00",
+      "path": "manuscript/mdpi_information/assets/figures/alt_text/figure_02_alt_text.txt",
+      "run_id": "canonical_v2_20260714T221501Z_483f96f",
+      "scientific_input_hash": "06c507bee525ea1daca43b61249764007d4d8baaa05c9333f23446ea723ce160",
+      "sha256": "3294f5d656130e7520fdc22d14418513ace113d811f4d4941e784fd6068d3c29",
+      "size_bytes": 169,
+      "source_paths": [
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_figures/figure_3_xgboost_vs_baselines.png",
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_figures/figure_3_xgboost_vs_baselines.svg",
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_figures/source_data/figure_3_xgboost_vs_baselines_source.csv",
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_figures/captions/figure_3_xgboost_vs_baselines_caption.md",
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_figures/figure_manifest.json"
+      ],
+      "source_sha256_values": [
+        "2268d29fe2bc03632ca63f2185eed98d7e140f2cd506c645e6217ad042d262a1",
+        "87c214a63e04398509940ef0752805d767db4944e790d455a484b024b76bb48b",
+        "5425b4f1aaa877f8bb43d7c6573c1afa6a9b4131731f995a9cbd5ab59e903e42",
+        "5b98aeb884f2fc6b05cd5fe9e179a833c85ffe047b927a7211b4adf0689e4f12",
+        "df54982f73dcf5d7160fec46092818b9dfa3918c150d8175c407b59d8a5b9ef2"
+      ],
+      "source_tree_hash": "f1e358e99914563305428cece1b1595bc76a58643184407ec5b222162d650332",
+      "type": "txt",
+      "validation_outcome": "passed"
+    },
+    {
+      "config_hash": "51415c2ce68c89d9ce2b042b0a7a811fe3e98180b72460006f9d0465f6bf49b7",
+      "copy_or_render_status": "deterministic_export",
+      "export_timestamp": "2026-07-16T13:45:21+00:00",
+      "path": "manuscript/mdpi_information/assets/figures/alt_text/figure_03_alt_text.txt",
+      "run_id": "canonical_v2_20260714T221501Z_483f96f",
+      "scientific_input_hash": "06c507bee525ea1daca43b61249764007d4d8baaa05c9333f23446ea723ce160",
+      "sha256": "a3aa96133a359e466ad19751c12e8192d95d58301049d46cf4b94f2d0f5fe251",
+      "size_bytes": 175,
+      "source_paths": [
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_figures/figure_2_feature_policy_tradeoff.png",
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_figures/figure_2_feature_policy_tradeoff.svg",
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_figures/source_data/figure_2_feature_policy_tradeoff_source.csv",
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_figures/captions/figure_2_feature_policy_tradeoff_caption.md",
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_figures/figure_manifest.json"
+      ],
+      "source_sha256_values": [
+        "b1161e7ad6aa4ab5d586a0094bd9d879b78852293ffd97c62cce6d7460285573",
+        "899936270b25e1095ec98981dee156e081951b469a433242ac2c989e56ff67b4",
+        "be94f9876b850c5d8bcde3b46d57ed4e08776076f8ee802c2eb52e5ecb282763",
+        "b1cccab4b03285952765304b9d7fa0f14b361ed46f271f7f83ec1a4fd0fdf0a5",
+        "df54982f73dcf5d7160fec46092818b9dfa3918c150d8175c407b59d8a5b9ef2"
+      ],
+      "source_tree_hash": "f1e358e99914563305428cece1b1595bc76a58643184407ec5b222162d650332",
+      "type": "txt",
+      "validation_outcome": "passed"
+    },
+    {
+      "config_hash": "51415c2ce68c89d9ce2b042b0a7a811fe3e98180b72460006f9d0465f6bf49b7",
+      "copy_or_render_status": "deterministic_export",
+      "export_timestamp": "2026-07-16T13:45:21+00:00",
+      "path": "manuscript/mdpi_information/assets/figures/alt_text/figure_04_alt_text.txt",
+      "run_id": "canonical_v2_20260714T221501Z_483f96f",
+      "scientific_input_hash": "06c507bee525ea1daca43b61249764007d4d8baaa05c9333f23446ea723ce160",
+      "sha256": "d4449929a74da58ae352118b430e710d0d7c5b9b9f72fc06a4e8ced53d2d12da",
+      "size_bytes": 142,
+      "source_paths": [
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_figures/figure_4_cross_fitted_sigmoid_calibration.png",
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_figures/figure_4_cross_fitted_sigmoid_calibration.svg",
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_figures/source_data/figure_4_cross_fitted_sigmoid_calibration_source.csv",
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_figures/captions/figure_4_cross_fitted_sigmoid_calibration_caption.md",
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_figures/figure_manifest.json"
+      ],
+      "source_sha256_values": [
+        "f4adcf7e05787c41610e6fea111545fa8ea5bfcfa326e5d0eda603efcd3cd724",
+        "03ec07c697f3af47c9a93c20955a0d18081afcd59c54d1f9a482a515835e0f8c",
+        "603fdb0aa8d4114039120775e65029dfbcad460f385d305fb2a4675ca6e98add",
+        "aeee9a2ab61e059b8d1ac51ed68db6cfd2634a4cf201cc6b4e7fc8676a98d9d9",
+        "df54982f73dcf5d7160fec46092818b9dfa3918c150d8175c407b59d8a5b9ef2"
+      ],
+      "source_tree_hash": "f1e358e99914563305428cece1b1595bc76a58643184407ec5b222162d650332",
+      "type": "txt",
+      "validation_outcome": "passed"
+    },
+    {
+      "config_hash": "51415c2ce68c89d9ce2b042b0a7a811fe3e98180b72460006f9d0465f6bf49b7",
+      "copy_or_render_status": "deterministic_export",
+      "export_timestamp": "2026-07-16T13:45:21+00:00",
+      "path": "manuscript/mdpi_information/assets/figures/alt_text/figure_05_alt_text.txt",
+      "run_id": "canonical_v2_20260714T221501Z_483f96f",
+      "scientific_input_hash": "06c507bee525ea1daca43b61249764007d4d8baaa05c9333f23446ea723ce160",
+      "sha256": "fb150ec829cec1f5e26f36bfee5d202ced932fbd248d211cae444ced0b46c2c0",
+      "size_bytes": 136,
+      "source_paths": [
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_figures/figure_5_global_grouped_oof_shap.png",
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_figures/figure_5_global_grouped_oof_shap.svg",
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_figures/source_data/figure_5_global_grouped_oof_shap_source.csv",
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_figures/captions/figure_5_global_grouped_oof_shap_caption.md",
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_figures/figure_manifest.json"
+      ],
+      "source_sha256_values": [
+        "f383e206b54776375b9e3495838291d3ad65dd2dd06b21b97959b79ae8825a07",
+        "d80aee740e524afd56a2fc8ea9717d5f0ceb49c81e7270c6af6a96d44446e933",
+        "0f65eaa469a642edc9821325822123871213bece43214130991c79fcf2e43e95",
+        "efa6b545ff055d272d38d692e7465e8c746a12335c79f3c9b5f2e47a01819a0c",
+        "df54982f73dcf5d7160fec46092818b9dfa3918c150d8175c407b59d8a5b9ef2"
+      ],
+      "source_tree_hash": "f1e358e99914563305428cece1b1595bc76a58643184407ec5b222162d650332",
+      "type": "txt",
+      "validation_outcome": "passed"
+    },
+    {
+      "config_hash": "51415c2ce68c89d9ce2b042b0a7a811fe3e98180b72460006f9d0465f6bf49b7",
+      "copy_or_render_status": "deterministic_export",
+      "export_timestamp": "2026-07-16T13:45:21+00:00",
+      "path": "manuscript/mdpi_information/assets/figures/alt_text/figure_06_alt_text.txt",
+      "run_id": "canonical_v2_20260714T221501Z_483f96f",
+      "scientific_input_hash": "06c507bee525ea1daca43b61249764007d4d8baaa05c9333f23446ea723ce160",
+      "sha256": "08922d80e0809ec0713f4427d06e207870df9f4d76d35d46eb49cd0022301406",
+      "size_bytes": 138,
+      "source_paths": [
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_figures/figure_6_oof_shap_stability.png",
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_figures/figure_6_oof_shap_stability.svg",
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_figures/source_data/figure_6_oof_shap_stability_source.csv",
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_figures/captions/figure_6_oof_shap_stability_caption.md",
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_figures/figure_manifest.json"
+      ],
+      "source_sha256_values": [
+        "bc6b41acb78f9f3d450e8081cc312a02ea9c411c913b64022e9fd221158bb90b",
+        "a3fed5a75ceec18c99e6143042cf49134e05c83ba98d04c7f2cf5cf0e1e64002",
+        "d220ed6ee53ba31c7c3fb624b7a3ff31d882b96f8da1f9b0ead38a9053f1696d",
+        "3fbec58a6fbeca8d0435ad8973c71dfa8130321c07753b1863b2bd3c7876c903",
+        "df54982f73dcf5d7160fec46092818b9dfa3918c150d8175c407b59d8a5b9ef2"
+      ],
+      "source_tree_hash": "f1e358e99914563305428cece1b1595bc76a58643184407ec5b222162d650332",
+      "type": "txt",
+      "validation_outcome": "passed"
+    },
+    {
+      "config_hash": "51415c2ce68c89d9ce2b042b0a7a811fe3e98180b72460006f9d0465f6bf49b7",
+      "copy_or_render_status": "deterministic_export",
+      "export_timestamp": "2026-07-16T13:45:21+00:00",
+      "path": "manuscript/mdpi_information/assets/figures/alt_text/figure_07_alt_text.txt",
+      "run_id": "canonical_v2_20260714T221501Z_483f96f",
+      "scientific_input_hash": "06c507bee525ea1daca43b61249764007d4d8baaa05c9333f23446ea723ce160",
+      "sha256": "49f66e89e2950b6fb2c463388eacfff6fc65c7d17b005e0740efa7601672c83b",
+      "size_bytes": 161,
+      "source_paths": [
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_figures/figure_7_hrdataset_v14_mapped_target_replication.png",
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_figures/figure_7_hrdataset_v14_mapped_target_replication.svg",
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_figures/source_data/figure_7_hrdataset_v14_mapped_target_replication_source.csv",
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_figures/captions/figure_7_hrdataset_v14_mapped_target_replication_caption.md",
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_figures/figure_manifest.json"
+      ],
+      "source_sha256_values": [
+        "9f88c25d44130af7675f14ecb5a3b2d4bc48fa37f593754dc9064bf43f90d2f8",
+        "fe934eb95a682bc413dfc5ff5f0e182add303d5630def6002fc7b7b7e1225405",
+        "06d2d3b4b44f9c070a3f54774239b9a0d5b4161a90d214fb6e84ff5aa1d5d764",
+        "9ea1fba5f2b1da696f460d3be909b28452bcf402941c3a4eb88465967f607793",
+        "df54982f73dcf5d7160fec46092818b9dfa3918c150d8175c407b59d8a5b9ef2"
+      ],
+      "source_tree_hash": "f1e358e99914563305428cece1b1595bc76a58643184407ec5b222162d650332",
+      "type": "txt",
+      "validation_outcome": "passed"
+    },
+    {
+      "config_hash": "51415c2ce68c89d9ce2b042b0a7a811fe3e98180b72460006f9d0465f6bf49b7",
+      "copy_or_render_status": "deterministic_export",
+      "export_timestamp": "2026-07-16T13:45:21+00:00",
+      "path": "manuscript/mdpi_information/assets/figures/alt_text/figure_s1_alt_text.txt",
+      "run_id": "canonical_v2_20260714T221501Z_483f96f",
+      "scientific_input_hash": "caffb945d15f990e3a789e9707f7a8a9115be31fecbbd705822994a10cfaf151",
+      "sha256": "0a84d313b3fbced12d44ca39d5891774fd4bd9d15b3d336e55346c54d0f3ace7",
+      "size_bytes": 255,
+      "source_paths": [
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_tables/table_08_support_aware_subgroup_diagnostics.csv"
+      ],
+      "source_sha256_values": [
+        "fd705d230c9e121a355a883268ce266d4bf426b3b6e81b703b7d8abdd9399612"
+      ],
+      "source_tree_hash": "f1e358e99914563305428cece1b1595bc76a58643184407ec5b222162d650332",
+      "type": "txt",
+      "validation_outcome": "passed"
+    },
+    {
+      "config_hash": "51415c2ce68c89d9ce2b042b0a7a811fe3e98180b72460006f9d0465f6bf49b7",
+      "copy_or_render_status": "deterministic_export",
+      "export_timestamp": "2026-07-16T13:45:21+00:00",
+      "path": "manuscript/mdpi_information/assets/figures/alt_text/figure_s2_alt_text.txt",
+      "run_id": "canonical_v2_20260714T221501Z_483f96f",
+      "scientific_input_hash": "caffb945d15f990e3a789e9707f7a8a9115be31fecbbd705822994a10cfaf151",
+      "sha256": "e6c4d2bb65217acaab75749d5c2ec85c538950581230cd9035df975c04d0c857",
+      "size_bytes": 208,
+      "source_paths": [
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/oof_shap/class_2_grouped_shap_importance.csv",
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/oof_shap/class_3_grouped_shap_importance.csv",
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/oof_shap/class_4_grouped_shap_importance.csv"
+      ],
+      "source_sha256_values": [
+        "a728a0c787c940b03c9d52be6fa0c109a9f20c3ca8d6a8a99c69f8e42afda683",
+        "a7c865323a4f08ffc9d4dce5f43f682f44c69866edaf669a7867e4854e07bf18",
+        "0ad1def5723d1aba63762889b8b449835ff712e6a136abcb81d0a73170505d1a"
+      ],
+      "source_tree_hash": "f1e358e99914563305428cece1b1595bc76a58643184407ec5b222162d650332",
+      "type": "txt",
+      "validation_outcome": "passed"
+    },
+    {
+      "config_hash": "51415c2ce68c89d9ce2b042b0a7a811fe3e98180b72460006f9d0465f6bf49b7",
+      "copy_or_render_status": "deterministic_export",
+      "export_timestamp": "2026-07-16T13:45:21+00:00",
+      "path": "manuscript/mdpi_information/assets/figures/alt_text/figure_s3_alt_text.txt",
+      "run_id": "canonical_v2_20260714T221501Z_483f96f",
+      "scientific_input_hash": "caffb945d15f990e3a789e9707f7a8a9115be31fecbbd705822994a10cfaf151",
+      "sha256": "4857f577b4d671421a4888ce928672db4f7544dfde6edf975173a315743cdde9",
+      "size_bytes": 264,
+      "source_paths": [
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/supplementary/heuristic_counterfactual/heuristic_search_budget_sensitivity.csv"
+      ],
+      "source_sha256_values": [
+        "4bf87931e1a7463b5dad530bd7c22e4fd93ff355303ca391540f18de4f44aaa6"
+      ],
+      "source_tree_hash": "f1e358e99914563305428cece1b1595bc76a58643184407ec5b222162d650332",
+      "type": "txt",
+      "validation_outcome": "passed"
+    },
+    {
+      "config_hash": "51415c2ce68c89d9ce2b042b0a7a811fe3e98180b72460006f9d0465f6bf49b7",
+      "copy_or_render_status": "deterministic_export",
+      "export_timestamp": "2026-07-16T13:45:21+00:00",
+      "path": "manuscript/mdpi_information/assets/figures/captions/figure_01_caption.md",
+      "run_id": "canonical_v2_20260714T221501Z_483f96f",
+      "scientific_input_hash": "06c507bee525ea1daca43b61249764007d4d8baaa05c9333f23446ea723ce160",
+      "sha256": "30b9a1165c48f4695852a32371c424de51c64b9aff054f7b881dfe8d9556c30c",
+      "size_bytes": 881,
+      "source_paths": [
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_figures/figure_1_study_design_leakage_aware_pipeline.png",
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_figures/figure_1_study_design_leakage_aware_pipeline.svg",
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_figures/source_data/figure_1_study_design_leakage_aware_pipeline_source.csv",
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_figures/captions/figure_1_study_design_leakage_aware_pipeline_caption.md",
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_figures/figure_manifest.json"
+      ],
+      "source_sha256_values": [
+        "5f6078006d46dca4707feccb9241e57961f26a14627d8b14f0f08336a7f8de95",
+        "45f04f8be9ea700cc066dcdbe668aeea52ebd867066ebcb63c769ad78bfe0019",
+        "4e6b5ee9a89c9402f80236187a2ebc0eaf67eda50c2f6eff31c0b154c16bf27a",
+        "d44dffb3bb4c7e5c69b543aaf93e50c24ba4e51469e350455251ebb6dddf6eb1",
+        "df54982f73dcf5d7160fec46092818b9dfa3918c150d8175c407b59d8a5b9ef2"
+      ],
+      "source_tree_hash": "f1e358e99914563305428cece1b1595bc76a58643184407ec5b222162d650332",
+      "type": "md",
+      "validation_outcome": "passed"
+    },
+    {
+      "config_hash": "51415c2ce68c89d9ce2b042b0a7a811fe3e98180b72460006f9d0465f6bf49b7",
+      "copy_or_render_status": "deterministic_export",
+      "export_timestamp": "2026-07-16T13:45:21+00:00",
+      "path": "manuscript/mdpi_information/assets/figures/captions/figure_02_caption.md",
+      "run_id": "canonical_v2_20260714T221501Z_483f96f",
+      "scientific_input_hash": "06c507bee525ea1daca43b61249764007d4d8baaa05c9333f23446ea723ce160",
+      "sha256": "f53754811470128371edd238825da61801d70f8a7557d981a52449a5ec56e443",
+      "size_bytes": 878,
+      "source_paths": [
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_figures/figure_3_xgboost_vs_baselines.png",
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_figures/figure_3_xgboost_vs_baselines.svg",
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_figures/source_data/figure_3_xgboost_vs_baselines_source.csv",
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_figures/captions/figure_3_xgboost_vs_baselines_caption.md",
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_figures/figure_manifest.json"
+      ],
+      "source_sha256_values": [
+        "2268d29fe2bc03632ca63f2185eed98d7e140f2cd506c645e6217ad042d262a1",
+        "87c214a63e04398509940ef0752805d767db4944e790d455a484b024b76bb48b",
+        "5425b4f1aaa877f8bb43d7c6573c1afa6a9b4131731f995a9cbd5ab59e903e42",
+        "5b98aeb884f2fc6b05cd5fe9e179a833c85ffe047b927a7211b4adf0689e4f12",
+        "df54982f73dcf5d7160fec46092818b9dfa3918c150d8175c407b59d8a5b9ef2"
+      ],
+      "source_tree_hash": "f1e358e99914563305428cece1b1595bc76a58643184407ec5b222162d650332",
+      "type": "md",
+      "validation_outcome": "passed"
+    },
+    {
+      "config_hash": "51415c2ce68c89d9ce2b042b0a7a811fe3e98180b72460006f9d0465f6bf49b7",
+      "copy_or_render_status": "deterministic_export",
+      "export_timestamp": "2026-07-16T13:45:21+00:00",
+      "path": "manuscript/mdpi_information/assets/figures/captions/figure_03_caption.md",
+      "run_id": "canonical_v2_20260714T221501Z_483f96f",
+      "scientific_input_hash": "06c507bee525ea1daca43b61249764007d4d8baaa05c9333f23446ea723ce160",
+      "sha256": "49b0dbd6fd3bdeff68ec59b9aa34e387b495e86c60cd5b6a37a5a1e462eee70b",
+      "size_bytes": 797,
+      "source_paths": [
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_figures/figure_2_feature_policy_tradeoff.png",
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_figures/figure_2_feature_policy_tradeoff.svg",
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_figures/source_data/figure_2_feature_policy_tradeoff_source.csv",
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_figures/captions/figure_2_feature_policy_tradeoff_caption.md",
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_figures/figure_manifest.json"
+      ],
+      "source_sha256_values": [
+        "b1161e7ad6aa4ab5d586a0094bd9d879b78852293ffd97c62cce6d7460285573",
+        "899936270b25e1095ec98981dee156e081951b469a433242ac2c989e56ff67b4",
+        "be94f9876b850c5d8bcde3b46d57ed4e08776076f8ee802c2eb52e5ecb282763",
+        "b1cccab4b03285952765304b9d7fa0f14b361ed46f271f7f83ec1a4fd0fdf0a5",
+        "df54982f73dcf5d7160fec46092818b9dfa3918c150d8175c407b59d8a5b9ef2"
+      ],
+      "source_tree_hash": "f1e358e99914563305428cece1b1595bc76a58643184407ec5b222162d650332",
+      "type": "md",
+      "validation_outcome": "passed"
+    },
+    {
+      "config_hash": "51415c2ce68c89d9ce2b042b0a7a811fe3e98180b72460006f9d0465f6bf49b7",
+      "copy_or_render_status": "deterministic_export",
+      "export_timestamp": "2026-07-16T13:45:21+00:00",
+      "path": "manuscript/mdpi_information/assets/figures/captions/figure_04_caption.md",
+      "run_id": "canonical_v2_20260714T221501Z_483f96f",
+      "scientific_input_hash": "06c507bee525ea1daca43b61249764007d4d8baaa05c9333f23446ea723ce160",
+      "sha256": "bbb4231070587c820a95877fadbe0229c131705e6a2f1757551f8b23902b9ca7",
+      "size_bytes": 992,
+      "source_paths": [
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_figures/figure_4_cross_fitted_sigmoid_calibration.png",
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_figures/figure_4_cross_fitted_sigmoid_calibration.svg",
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_figures/source_data/figure_4_cross_fitted_sigmoid_calibration_source.csv",
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_figures/captions/figure_4_cross_fitted_sigmoid_calibration_caption.md",
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_figures/figure_manifest.json"
+      ],
+      "source_sha256_values": [
+        "f4adcf7e05787c41610e6fea111545fa8ea5bfcfa326e5d0eda603efcd3cd724",
+        "03ec07c697f3af47c9a93c20955a0d18081afcd59c54d1f9a482a515835e0f8c",
+        "603fdb0aa8d4114039120775e65029dfbcad460f385d305fb2a4675ca6e98add",
+        "aeee9a2ab61e059b8d1ac51ed68db6cfd2634a4cf201cc6b4e7fc8676a98d9d9",
+        "df54982f73dcf5d7160fec46092818b9dfa3918c150d8175c407b59d8a5b9ef2"
+      ],
+      "source_tree_hash": "f1e358e99914563305428cece1b1595bc76a58643184407ec5b222162d650332",
+      "type": "md",
+      "validation_outcome": "passed"
+    },
+    {
+      "config_hash": "51415c2ce68c89d9ce2b042b0a7a811fe3e98180b72460006f9d0465f6bf49b7",
+      "copy_or_render_status": "deterministic_export",
+      "export_timestamp": "2026-07-16T13:45:21+00:00",
+      "path": "manuscript/mdpi_information/assets/figures/captions/figure_05_caption.md",
+      "run_id": "canonical_v2_20260714T221501Z_483f96f",
+      "scientific_input_hash": "06c507bee525ea1daca43b61249764007d4d8baaa05c9333f23446ea723ce160",
+      "sha256": "ed46aa6931f39c8ffcebb4b02c72cf369e6eed0ed8055e035ac962e5a445ca5a",
+      "size_bytes": 803,
+      "source_paths": [
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_figures/figure_5_global_grouped_oof_shap.png",
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_figures/figure_5_global_grouped_oof_shap.svg",
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_figures/source_data/figure_5_global_grouped_oof_shap_source.csv",
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_figures/captions/figure_5_global_grouped_oof_shap_caption.md",
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_figures/figure_manifest.json"
+      ],
+      "source_sha256_values": [
+        "f383e206b54776375b9e3495838291d3ad65dd2dd06b21b97959b79ae8825a07",
+        "d80aee740e524afd56a2fc8ea9717d5f0ceb49c81e7270c6af6a96d44446e933",
+        "0f65eaa469a642edc9821325822123871213bece43214130991c79fcf2e43e95",
+        "efa6b545ff055d272d38d692e7465e8c746a12335c79f3c9b5f2e47a01819a0c",
+        "df54982f73dcf5d7160fec46092818b9dfa3918c150d8175c407b59d8a5b9ef2"
+      ],
+      "source_tree_hash": "f1e358e99914563305428cece1b1595bc76a58643184407ec5b222162d650332",
+      "type": "md",
+      "validation_outcome": "passed"
+    },
+    {
+      "config_hash": "51415c2ce68c89d9ce2b042b0a7a811fe3e98180b72460006f9d0465f6bf49b7",
+      "copy_or_render_status": "deterministic_export",
+      "export_timestamp": "2026-07-16T13:45:21+00:00",
+      "path": "manuscript/mdpi_information/assets/figures/captions/figure_06_caption.md",
+      "run_id": "canonical_v2_20260714T221501Z_483f96f",
+      "scientific_input_hash": "06c507bee525ea1daca43b61249764007d4d8baaa05c9333f23446ea723ce160",
+      "sha256": "98b6fde185906bd41e190c1e65137ca234c84c5362ade15b52185f7af75e073e",
+      "size_bytes": 833,
+      "source_paths": [
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_figures/figure_6_oof_shap_stability.png",
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_figures/figure_6_oof_shap_stability.svg",
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_figures/source_data/figure_6_oof_shap_stability_source.csv",
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_figures/captions/figure_6_oof_shap_stability_caption.md",
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_figures/figure_manifest.json"
+      ],
+      "source_sha256_values": [
+        "bc6b41acb78f9f3d450e8081cc312a02ea9c411c913b64022e9fd221158bb90b",
+        "a3fed5a75ceec18c99e6143042cf49134e05c83ba98d04c7f2cf5cf0e1e64002",
+        "d220ed6ee53ba31c7c3fb624b7a3ff31d882b96f8da1f9b0ead38a9053f1696d",
+        "3fbec58a6fbeca8d0435ad8973c71dfa8130321c07753b1863b2bd3c7876c903",
+        "df54982f73dcf5d7160fec46092818b9dfa3918c150d8175c407b59d8a5b9ef2"
+      ],
+      "source_tree_hash": "f1e358e99914563305428cece1b1595bc76a58643184407ec5b222162d650332",
+      "type": "md",
+      "validation_outcome": "passed"
+    },
+    {
+      "config_hash": "51415c2ce68c89d9ce2b042b0a7a811fe3e98180b72460006f9d0465f6bf49b7",
+      "copy_or_render_status": "deterministic_export",
+      "export_timestamp": "2026-07-16T13:45:21+00:00",
+      "path": "manuscript/mdpi_information/assets/figures/captions/figure_07_caption.md",
+      "run_id": "canonical_v2_20260714T221501Z_483f96f",
+      "scientific_input_hash": "06c507bee525ea1daca43b61249764007d4d8baaa05c9333f23446ea723ce160",
+      "sha256": "6f5389144d49dc66c2706a2f4f28f5fd3bacb9114b8a407f82a69321d93862ac",
+      "size_bytes": 1071,
+      "source_paths": [
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_figures/figure_7_hrdataset_v14_mapped_target_replication.png",
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_figures/figure_7_hrdataset_v14_mapped_target_replication.svg",
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_figures/source_data/figure_7_hrdataset_v14_mapped_target_replication_source.csv",
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_figures/captions/figure_7_hrdataset_v14_mapped_target_replication_caption.md",
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_figures/figure_manifest.json"
+      ],
+      "source_sha256_values": [
+        "9f88c25d44130af7675f14ecb5a3b2d4bc48fa37f593754dc9064bf43f90d2f8",
+        "fe934eb95a682bc413dfc5ff5f0e182add303d5630def6002fc7b7b7e1225405",
+        "06d2d3b4b44f9c070a3f54774239b9a0d5b4161a90d214fb6e84ff5aa1d5d764",
+        "9ea1fba5f2b1da696f460d3be909b28452bcf402941c3a4eb88465967f607793",
+        "df54982f73dcf5d7160fec46092818b9dfa3918c150d8175c407b59d8a5b9ef2"
+      ],
+      "source_tree_hash": "f1e358e99914563305428cece1b1595bc76a58643184407ec5b222162d650332",
+      "type": "md",
+      "validation_outcome": "passed"
+    },
+    {
+      "config_hash": "51415c2ce68c89d9ce2b042b0a7a811fe3e98180b72460006f9d0465f6bf49b7",
+      "copy_or_render_status": "deterministic_export",
+      "export_timestamp": "2026-07-16T13:45:21+00:00",
+      "path": "manuscript/mdpi_information/assets/figures/captions/figure_s1_caption.md",
+      "run_id": "canonical_v2_20260714T221501Z_483f96f",
+      "scientific_input_hash": "caffb945d15f990e3a789e9707f7a8a9115be31fecbbd705822994a10cfaf151",
+      "sha256": "9c34724881558b583999f9b348b9db4f697ce73549585bb4764ad97b8af60df0",
+      "size_bytes": 190,
+      "source_paths": [
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_tables/table_08_support_aware_subgroup_diagnostics.csv"
+      ],
+      "source_sha256_values": [
+        "fd705d230c9e121a355a883268ce266d4bf426b3b6e81b703b7d8abdd9399612"
+      ],
+      "source_tree_hash": "f1e358e99914563305428cece1b1595bc76a58643184407ec5b222162d650332",
+      "type": "md",
+      "validation_outcome": "passed"
+    },
+    {
+      "config_hash": "51415c2ce68c89d9ce2b042b0a7a811fe3e98180b72460006f9d0465f6bf49b7",
+      "copy_or_render_status": "deterministic_export",
+      "export_timestamp": "2026-07-16T13:45:21+00:00",
+      "path": "manuscript/mdpi_information/assets/figures/captions/figure_s2_caption.md",
+      "run_id": "canonical_v2_20260714T221501Z_483f96f",
+      "scientific_input_hash": "caffb945d15f990e3a789e9707f7a8a9115be31fecbbd705822994a10cfaf151",
+      "sha256": "92d96f63550d1a303be7cb3b6e90e66e88d24296beb078a14b0a841919e926fd",
+      "size_bytes": 143,
+      "source_paths": [
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/oof_shap/class_2_grouped_shap_importance.csv",
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/oof_shap/class_3_grouped_shap_importance.csv",
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/oof_shap/class_4_grouped_shap_importance.csv"
+      ],
+      "source_sha256_values": [
+        "a728a0c787c940b03c9d52be6fa0c109a9f20c3ca8d6a8a99c69f8e42afda683",
+        "a7c865323a4f08ffc9d4dce5f43f682f44c69866edaf669a7867e4854e07bf18",
+        "0ad1def5723d1aba63762889b8b449835ff712e6a136abcb81d0a73170505d1a"
+      ],
+      "source_tree_hash": "f1e358e99914563305428cece1b1595bc76a58643184407ec5b222162d650332",
+      "type": "md",
+      "validation_outcome": "passed"
+    },
+    {
+      "config_hash": "51415c2ce68c89d9ce2b042b0a7a811fe3e98180b72460006f9d0465f6bf49b7",
+      "copy_or_render_status": "deterministic_export",
+      "export_timestamp": "2026-07-16T13:45:21+00:00",
+      "path": "manuscript/mdpi_information/assets/figures/captions/figure_s3_caption.md",
+      "run_id": "canonical_v2_20260714T221501Z_483f96f",
+      "scientific_input_hash": "caffb945d15f990e3a789e9707f7a8a9115be31fecbbd705822994a10cfaf151",
+      "sha256": "eea0c81803761b0db4d6fcc33b22e50edad4d9e7c38cba3c9819837f0af64268",
+      "size_bytes": 199,
+      "source_paths": [
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/supplementary/heuristic_counterfactual/heuristic_search_budget_sensitivity.csv"
+      ],
+      "source_sha256_values": [
+        "4bf87931e1a7463b5dad530bd7c22e4fd93ff355303ca391540f18de4f44aaa6"
+      ],
+      "source_tree_hash": "f1e358e99914563305428cece1b1595bc76a58643184407ec5b222162d650332",
+      "type": "md",
+      "validation_outcome": "passed"
+    },
+    {
+      "config_hash": "51415c2ce68c89d9ce2b042b0a7a811fe3e98180b72460006f9d0465f6bf49b7",
+      "copy_or_render_status": "deterministic_export",
+      "export_timestamp": "2026-07-16T13:45:21+00:00",
+      "path": "manuscript/mdpi_information/assets/figures/main/figure_01_audit_protocol.png",
+      "run_id": "canonical_v2_20260714T221501Z_483f96f",
+      "scientific_input_hash": "06c507bee525ea1daca43b61249764007d4d8baaa05c9333f23446ea723ce160",
+      "sha256": "00c09d2ed1c673ee0a1b1a7747af7d6bdf4825da0b4b5196f0a16ee681e32bd6",
+      "size_bytes": 438510,
+      "source_paths": [
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_figures/figure_1_study_design_leakage_aware_pipeline.png",
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_figures/figure_1_study_design_leakage_aware_pipeline.svg",
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_figures/source_data/figure_1_study_design_leakage_aware_pipeline_source.csv",
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_figures/captions/figure_1_study_design_leakage_aware_pipeline_caption.md",
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_figures/figure_manifest.json"
+      ],
+      "source_sha256_values": [
+        "5f6078006d46dca4707feccb9241e57961f26a14627d8b14f0f08336a7f8de95",
+        "45f04f8be9ea700cc066dcdbe668aeea52ebd867066ebcb63c769ad78bfe0019",
+        "4e6b5ee9a89c9402f80236187a2ebc0eaf67eda50c2f6eff31c0b154c16bf27a",
+        "d44dffb3bb4c7e5c69b543aaf93e50c24ba4e51469e350455251ebb6dddf6eb1",
+        "df54982f73dcf5d7160fec46092818b9dfa3918c150d8175c407b59d8a5b9ef2"
+      ],
+      "source_tree_hash": "f1e358e99914563305428cece1b1595bc76a58643184407ec5b222162d650332",
+      "type": "png",
+      "validation_outcome": "passed"
+    },
+    {
+      "config_hash": "51415c2ce68c89d9ce2b042b0a7a811fe3e98180b72460006f9d0465f6bf49b7",
+      "copy_or_render_status": "deterministic_export",
+      "export_timestamp": "2026-07-16T13:45:21+00:00",
+      "path": "manuscript/mdpi_information/assets/figures/main/figure_01_audit_protocol.svg",
+      "run_id": "canonical_v2_20260714T221501Z_483f96f",
+      "scientific_input_hash": "06c507bee525ea1daca43b61249764007d4d8baaa05c9333f23446ea723ce160",
+      "sha256": "a20edebd095048c36af8dd258cfbb3344b053db4cf91d7453387a1bc9ffece70",
+      "size_bytes": 137143,
+      "source_paths": [
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_figures/figure_1_study_design_leakage_aware_pipeline.png",
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_figures/figure_1_study_design_leakage_aware_pipeline.svg",
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_figures/source_data/figure_1_study_design_leakage_aware_pipeline_source.csv",
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_figures/captions/figure_1_study_design_leakage_aware_pipeline_caption.md",
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_figures/figure_manifest.json"
+      ],
+      "source_sha256_values": [
+        "5f6078006d46dca4707feccb9241e57961f26a14627d8b14f0f08336a7f8de95",
+        "45f04f8be9ea700cc066dcdbe668aeea52ebd867066ebcb63c769ad78bfe0019",
+        "4e6b5ee9a89c9402f80236187a2ebc0eaf67eda50c2f6eff31c0b154c16bf27a",
+        "d44dffb3bb4c7e5c69b543aaf93e50c24ba4e51469e350455251ebb6dddf6eb1",
+        "df54982f73dcf5d7160fec46092818b9dfa3918c150d8175c407b59d8a5b9ef2"
+      ],
+      "source_tree_hash": "f1e358e99914563305428cece1b1595bc76a58643184407ec5b222162d650332",
+      "type": "svg",
+      "validation_outcome": "passed"
+    },
+    {
+      "config_hash": "51415c2ce68c89d9ce2b042b0a7a811fe3e98180b72460006f9d0465f6bf49b7",
+      "copy_or_render_status": "deterministic_export",
+      "export_timestamp": "2026-07-16T13:45:21+00:00",
+      "path": "manuscript/mdpi_information/assets/figures/main/figure_02_model_benchmark.png",
+      "run_id": "canonical_v2_20260714T221501Z_483f96f",
+      "scientific_input_hash": "06c507bee525ea1daca43b61249764007d4d8baaa05c9333f23446ea723ce160",
+      "sha256": "2268d29fe2bc03632ca63f2185eed98d7e140f2cd506c645e6217ad042d262a1",
+      "size_bytes": 122503,
+      "source_paths": [
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_figures/figure_3_xgboost_vs_baselines.png",
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_figures/figure_3_xgboost_vs_baselines.svg",
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_figures/source_data/figure_3_xgboost_vs_baselines_source.csv",
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_figures/captions/figure_3_xgboost_vs_baselines_caption.md",
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_figures/figure_manifest.json"
+      ],
+      "source_sha256_values": [
+        "2268d29fe2bc03632ca63f2185eed98d7e140f2cd506c645e6217ad042d262a1",
+        "87c214a63e04398509940ef0752805d767db4944e790d455a484b024b76bb48b",
+        "5425b4f1aaa877f8bb43d7c6573c1afa6a9b4131731f995a9cbd5ab59e903e42",
+        "5b98aeb884f2fc6b05cd5fe9e179a833c85ffe047b927a7211b4adf0689e4f12",
+        "df54982f73dcf5d7160fec46092818b9dfa3918c150d8175c407b59d8a5b9ef2"
+      ],
+      "source_tree_hash": "f1e358e99914563305428cece1b1595bc76a58643184407ec5b222162d650332",
+      "type": "png",
+      "validation_outcome": "passed"
+    },
+    {
+      "config_hash": "51415c2ce68c89d9ce2b042b0a7a811fe3e98180b72460006f9d0465f6bf49b7",
+      "copy_or_render_status": "deterministic_export",
+      "export_timestamp": "2026-07-16T13:45:21+00:00",
+      "path": "manuscript/mdpi_information/assets/figures/main/figure_02_model_benchmark.svg",
+      "run_id": "canonical_v2_20260714T221501Z_483f96f",
+      "scientific_input_hash": "06c507bee525ea1daca43b61249764007d4d8baaa05c9333f23446ea723ce160",
+      "sha256": "87c214a63e04398509940ef0752805d767db4944e790d455a484b024b76bb48b",
+      "size_bytes": 69719,
+      "source_paths": [
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_figures/figure_3_xgboost_vs_baselines.png",
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_figures/figure_3_xgboost_vs_baselines.svg",
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_figures/source_data/figure_3_xgboost_vs_baselines_source.csv",
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_figures/captions/figure_3_xgboost_vs_baselines_caption.md",
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_figures/figure_manifest.json"
+      ],
+      "source_sha256_values": [
+        "2268d29fe2bc03632ca63f2185eed98d7e140f2cd506c645e6217ad042d262a1",
+        "87c214a63e04398509940ef0752805d767db4944e790d455a484b024b76bb48b",
+        "5425b4f1aaa877f8bb43d7c6573c1afa6a9b4131731f995a9cbd5ab59e903e42",
+        "5b98aeb884f2fc6b05cd5fe9e179a833c85ffe047b927a7211b4adf0689e4f12",
+        "df54982f73dcf5d7160fec46092818b9dfa3918c150d8175c407b59d8a5b9ef2"
+      ],
+      "source_tree_hash": "f1e358e99914563305428cece1b1595bc76a58643184407ec5b222162d650332",
+      "type": "svg",
+      "validation_outcome": "passed"
+    },
+    {
+      "config_hash": "51415c2ce68c89d9ce2b042b0a7a811fe3e98180b72460006f9d0465f6bf49b7",
+      "copy_or_render_status": "deterministic_export",
+      "export_timestamp": "2026-07-16T13:45:21+00:00",
+      "path": "manuscript/mdpi_information/assets/figures/main/figure_03_feature_policy_sensitivity.png",
+      "run_id": "canonical_v2_20260714T221501Z_483f96f",
+      "scientific_input_hash": "06c507bee525ea1daca43b61249764007d4d8baaa05c9333f23446ea723ce160",
+      "sha256": "b1161e7ad6aa4ab5d586a0094bd9d879b78852293ffd97c62cce6d7460285573",
+      "size_bytes": 240944,
+      "source_paths": [
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_figures/figure_2_feature_policy_tradeoff.png",
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_figures/figure_2_feature_policy_tradeoff.svg",
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_figures/source_data/figure_2_feature_policy_tradeoff_source.csv",
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_figures/captions/figure_2_feature_policy_tradeoff_caption.md",
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_figures/figure_manifest.json"
+      ],
+      "source_sha256_values": [
+        "b1161e7ad6aa4ab5d586a0094bd9d879b78852293ffd97c62cce6d7460285573",
+        "899936270b25e1095ec98981dee156e081951b469a433242ac2c989e56ff67b4",
+        "be94f9876b850c5d8bcde3b46d57ed4e08776076f8ee802c2eb52e5ecb282763",
+        "b1cccab4b03285952765304b9d7fa0f14b361ed46f271f7f83ec1a4fd0fdf0a5",
+        "df54982f73dcf5d7160fec46092818b9dfa3918c150d8175c407b59d8a5b9ef2"
+      ],
+      "source_tree_hash": "f1e358e99914563305428cece1b1595bc76a58643184407ec5b222162d650332",
+      "type": "png",
+      "validation_outcome": "passed"
+    },
+    {
+      "config_hash": "51415c2ce68c89d9ce2b042b0a7a811fe3e98180b72460006f9d0465f6bf49b7",
+      "copy_or_render_status": "deterministic_export",
+      "export_timestamp": "2026-07-16T13:45:21+00:00",
+      "path": "manuscript/mdpi_information/assets/figures/main/figure_03_feature_policy_sensitivity.svg",
+      "run_id": "canonical_v2_20260714T221501Z_483f96f",
+      "scientific_input_hash": "06c507bee525ea1daca43b61249764007d4d8baaa05c9333f23446ea723ce160",
+      "sha256": "899936270b25e1095ec98981dee156e081951b469a433242ac2c989e56ff67b4",
+      "size_bytes": 97012,
+      "source_paths": [
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_figures/figure_2_feature_policy_tradeoff.png",
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_figures/figure_2_feature_policy_tradeoff.svg",
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_figures/source_data/figure_2_feature_policy_tradeoff_source.csv",
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_figures/captions/figure_2_feature_policy_tradeoff_caption.md",
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_figures/figure_manifest.json"
+      ],
+      "source_sha256_values": [
+        "b1161e7ad6aa4ab5d586a0094bd9d879b78852293ffd97c62cce6d7460285573",
+        "899936270b25e1095ec98981dee156e081951b469a433242ac2c989e56ff67b4",
+        "be94f9876b850c5d8bcde3b46d57ed4e08776076f8ee802c2eb52e5ecb282763",
+        "b1cccab4b03285952765304b9d7fa0f14b361ed46f271f7f83ec1a4fd0fdf0a5",
+        "df54982f73dcf5d7160fec46092818b9dfa3918c150d8175c407b59d8a5b9ef2"
+      ],
+      "source_tree_hash": "f1e358e99914563305428cece1b1595bc76a58643184407ec5b222162d650332",
+      "type": "svg",
+      "validation_outcome": "passed"
+    },
+    {
+      "config_hash": "51415c2ce68c89d9ce2b042b0a7a811fe3e98180b72460006f9d0465f6bf49b7",
+      "copy_or_render_status": "deterministic_export",
+      "export_timestamp": "2026-07-16T13:45:21+00:00",
+      "path": "manuscript/mdpi_information/assets/figures/main/figure_04_calibration.png",
+      "run_id": "canonical_v2_20260714T221501Z_483f96f",
+      "scientific_input_hash": "06c507bee525ea1daca43b61249764007d4d8baaa05c9333f23446ea723ce160",
+      "sha256": "f4adcf7e05787c41610e6fea111545fa8ea5bfcfa326e5d0eda603efcd3cd724",
+      "size_bytes": 330218,
+      "source_paths": [
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_figures/figure_4_cross_fitted_sigmoid_calibration.png",
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_figures/figure_4_cross_fitted_sigmoid_calibration.svg",
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_figures/source_data/figure_4_cross_fitted_sigmoid_calibration_source.csv",
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_figures/captions/figure_4_cross_fitted_sigmoid_calibration_caption.md",
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_figures/figure_manifest.json"
+      ],
+      "source_sha256_values": [
+        "f4adcf7e05787c41610e6fea111545fa8ea5bfcfa326e5d0eda603efcd3cd724",
+        "03ec07c697f3af47c9a93c20955a0d18081afcd59c54d1f9a482a515835e0f8c",
+        "603fdb0aa8d4114039120775e65029dfbcad460f385d305fb2a4675ca6e98add",
+        "aeee9a2ab61e059b8d1ac51ed68db6cfd2634a4cf201cc6b4e7fc8676a98d9d9",
+        "df54982f73dcf5d7160fec46092818b9dfa3918c150d8175c407b59d8a5b9ef2"
+      ],
+      "source_tree_hash": "f1e358e99914563305428cece1b1595bc76a58643184407ec5b222162d650332",
+      "type": "png",
+      "validation_outcome": "passed"
+    },
+    {
+      "config_hash": "51415c2ce68c89d9ce2b042b0a7a811fe3e98180b72460006f9d0465f6bf49b7",
+      "copy_or_render_status": "deterministic_export",
+      "export_timestamp": "2026-07-16T13:45:21+00:00",
+      "path": "manuscript/mdpi_information/assets/figures/main/figure_04_calibration.svg",
+      "run_id": "canonical_v2_20260714T221501Z_483f96f",
+      "scientific_input_hash": "06c507bee525ea1daca43b61249764007d4d8baaa05c9333f23446ea723ce160",
+      "sha256": "03ec07c697f3af47c9a93c20955a0d18081afcd59c54d1f9a482a515835e0f8c",
+      "size_bytes": 78135,
+      "source_paths": [
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_figures/figure_4_cross_fitted_sigmoid_calibration.png",
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_figures/figure_4_cross_fitted_sigmoid_calibration.svg",
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_figures/source_data/figure_4_cross_fitted_sigmoid_calibration_source.csv",
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_figures/captions/figure_4_cross_fitted_sigmoid_calibration_caption.md",
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_figures/figure_manifest.json"
+      ],
+      "source_sha256_values": [
+        "f4adcf7e05787c41610e6fea111545fa8ea5bfcfa326e5d0eda603efcd3cd724",
+        "03ec07c697f3af47c9a93c20955a0d18081afcd59c54d1f9a482a515835e0f8c",
+        "603fdb0aa8d4114039120775e65029dfbcad460f385d305fb2a4675ca6e98add",
+        "aeee9a2ab61e059b8d1ac51ed68db6cfd2634a4cf201cc6b4e7fc8676a98d9d9",
+        "df54982f73dcf5d7160fec46092818b9dfa3918c150d8175c407b59d8a5b9ef2"
+      ],
+      "source_tree_hash": "f1e358e99914563305428cece1b1595bc76a58643184407ec5b222162d650332",
+      "type": "svg",
+      "validation_outcome": "passed"
+    },
+    {
+      "config_hash": "51415c2ce68c89d9ce2b042b0a7a811fe3e98180b72460006f9d0465f6bf49b7",
+      "copy_or_render_status": "deterministic_export",
+      "export_timestamp": "2026-07-16T13:45:21+00:00",
+      "path": "manuscript/mdpi_information/assets/figures/main/figure_05_global_grouped_shap.png",
+      "run_id": "canonical_v2_20260714T221501Z_483f96f",
+      "scientific_input_hash": "06c507bee525ea1daca43b61249764007d4d8baaa05c9333f23446ea723ce160",
+      "sha256": "f383e206b54776375b9e3495838291d3ad65dd2dd06b21b97959b79ae8825a07",
+      "size_bytes": 208602,
+      "source_paths": [
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_figures/figure_5_global_grouped_oof_shap.png",
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_figures/figure_5_global_grouped_oof_shap.svg",
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_figures/source_data/figure_5_global_grouped_oof_shap_source.csv",
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_figures/captions/figure_5_global_grouped_oof_shap_caption.md",
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_figures/figure_manifest.json"
+      ],
+      "source_sha256_values": [
+        "f383e206b54776375b9e3495838291d3ad65dd2dd06b21b97959b79ae8825a07",
+        "d80aee740e524afd56a2fc8ea9717d5f0ceb49c81e7270c6af6a96d44446e933",
+        "0f65eaa469a642edc9821325822123871213bece43214130991c79fcf2e43e95",
+        "efa6b545ff055d272d38d692e7465e8c746a12335c79f3c9b5f2e47a01819a0c",
+        "df54982f73dcf5d7160fec46092818b9dfa3918c150d8175c407b59d8a5b9ef2"
+      ],
+      "source_tree_hash": "f1e358e99914563305428cece1b1595bc76a58643184407ec5b222162d650332",
+      "type": "png",
+      "validation_outcome": "passed"
+    },
+    {
+      "config_hash": "51415c2ce68c89d9ce2b042b0a7a811fe3e98180b72460006f9d0465f6bf49b7",
+      "copy_or_render_status": "deterministic_export",
+      "export_timestamp": "2026-07-16T13:45:21+00:00",
+      "path": "manuscript/mdpi_information/assets/figures/main/figure_05_global_grouped_shap.svg",
+      "run_id": "canonical_v2_20260714T221501Z_483f96f",
+      "scientific_input_hash": "06c507bee525ea1daca43b61249764007d4d8baaa05c9333f23446ea723ce160",
+      "sha256": "d80aee740e524afd56a2fc8ea9717d5f0ceb49c81e7270c6af6a96d44446e933",
+      "size_bytes": 75520,
+      "source_paths": [
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_figures/figure_5_global_grouped_oof_shap.png",
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_figures/figure_5_global_grouped_oof_shap.svg",
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_figures/source_data/figure_5_global_grouped_oof_shap_source.csv",
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_figures/captions/figure_5_global_grouped_oof_shap_caption.md",
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_figures/figure_manifest.json"
+      ],
+      "source_sha256_values": [
+        "f383e206b54776375b9e3495838291d3ad65dd2dd06b21b97959b79ae8825a07",
+        "d80aee740e524afd56a2fc8ea9717d5f0ceb49c81e7270c6af6a96d44446e933",
+        "0f65eaa469a642edc9821325822123871213bece43214130991c79fcf2e43e95",
+        "efa6b545ff055d272d38d692e7465e8c746a12335c79f3c9b5f2e47a01819a0c",
+        "df54982f73dcf5d7160fec46092818b9dfa3918c150d8175c407b59d8a5b9ef2"
+      ],
+      "source_tree_hash": "f1e358e99914563305428cece1b1595bc76a58643184407ec5b222162d650332",
+      "type": "svg",
+      "validation_outcome": "passed"
+    },
+    {
+      "config_hash": "51415c2ce68c89d9ce2b042b0a7a811fe3e98180b72460006f9d0465f6bf49b7",
+      "copy_or_render_status": "deterministic_export",
+      "export_timestamp": "2026-07-16T13:45:21+00:00",
+      "path": "manuscript/mdpi_information/assets/figures/main/figure_06_shap_stability.png",
+      "run_id": "canonical_v2_20260714T221501Z_483f96f",
+      "scientific_input_hash": "06c507bee525ea1daca43b61249764007d4d8baaa05c9333f23446ea723ce160",
+      "sha256": "bc6b41acb78f9f3d450e8081cc312a02ea9c411c913b64022e9fd221158bb90b",
+      "size_bytes": 295267,
+      "source_paths": [
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_figures/figure_6_oof_shap_stability.png",
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_figures/figure_6_oof_shap_stability.svg",
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_figures/source_data/figure_6_oof_shap_stability_source.csv",
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_figures/captions/figure_6_oof_shap_stability_caption.md",
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_figures/figure_manifest.json"
+      ],
+      "source_sha256_values": [
+        "bc6b41acb78f9f3d450e8081cc312a02ea9c411c913b64022e9fd221158bb90b",
+        "a3fed5a75ceec18c99e6143042cf49134e05c83ba98d04c7f2cf5cf0e1e64002",
+        "d220ed6ee53ba31c7c3fb624b7a3ff31d882b96f8da1f9b0ead38a9053f1696d",
+        "3fbec58a6fbeca8d0435ad8973c71dfa8130321c07753b1863b2bd3c7876c903",
+        "df54982f73dcf5d7160fec46092818b9dfa3918c150d8175c407b59d8a5b9ef2"
+      ],
+      "source_tree_hash": "f1e358e99914563305428cece1b1595bc76a58643184407ec5b222162d650332",
+      "type": "png",
+      "validation_outcome": "passed"
+    },
+    {
+      "config_hash": "51415c2ce68c89d9ce2b042b0a7a811fe3e98180b72460006f9d0465f6bf49b7",
+      "copy_or_render_status": "deterministic_export",
+      "export_timestamp": "2026-07-16T13:45:21+00:00",
+      "path": "manuscript/mdpi_information/assets/figures/main/figure_06_shap_stability.svg",
+      "run_id": "canonical_v2_20260714T221501Z_483f96f",
+      "scientific_input_hash": "06c507bee525ea1daca43b61249764007d4d8baaa05c9333f23446ea723ce160",
+      "sha256": "a3fed5a75ceec18c99e6143042cf49134e05c83ba98d04c7f2cf5cf0e1e64002",
+      "size_bytes": 106594,
+      "source_paths": [
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_figures/figure_6_oof_shap_stability.png",
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_figures/figure_6_oof_shap_stability.svg",
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_figures/source_data/figure_6_oof_shap_stability_source.csv",
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_figures/captions/figure_6_oof_shap_stability_caption.md",
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_figures/figure_manifest.json"
+      ],
+      "source_sha256_values": [
+        "bc6b41acb78f9f3d450e8081cc312a02ea9c411c913b64022e9fd221158bb90b",
+        "a3fed5a75ceec18c99e6143042cf49134e05c83ba98d04c7f2cf5cf0e1e64002",
+        "d220ed6ee53ba31c7c3fb624b7a3ff31d882b96f8da1f9b0ead38a9053f1696d",
+        "3fbec58a6fbeca8d0435ad8973c71dfa8130321c07753b1863b2bd3c7876c903",
+        "df54982f73dcf5d7160fec46092818b9dfa3918c150d8175c407b59d8a5b9ef2"
+      ],
+      "source_tree_hash": "f1e358e99914563305428cece1b1595bc76a58643184407ec5b222162d650332",
+      "type": "svg",
+      "validation_outcome": "passed"
+    },
+    {
+      "config_hash": "51415c2ce68c89d9ce2b042b0a7a811fe3e98180b72460006f9d0465f6bf49b7",
+      "copy_or_render_status": "deterministic_export",
+      "export_timestamp": "2026-07-16T13:45:21+00:00",
+      "path": "manuscript/mdpi_information/assets/figures/main/figure_07_hrdataset_replication.png",
+      "run_id": "canonical_v2_20260714T221501Z_483f96f",
+      "scientific_input_hash": "06c507bee525ea1daca43b61249764007d4d8baaa05c9333f23446ea723ce160",
+      "sha256": "9f88c25d44130af7675f14ecb5a3b2d4bc48fa37f593754dc9064bf43f90d2f8",
+      "size_bytes": 196245,
+      "source_paths": [
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_figures/figure_7_hrdataset_v14_mapped_target_replication.png",
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_figures/figure_7_hrdataset_v14_mapped_target_replication.svg",
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_figures/source_data/figure_7_hrdataset_v14_mapped_target_replication_source.csv",
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_figures/captions/figure_7_hrdataset_v14_mapped_target_replication_caption.md",
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_figures/figure_manifest.json"
+      ],
+      "source_sha256_values": [
+        "9f88c25d44130af7675f14ecb5a3b2d4bc48fa37f593754dc9064bf43f90d2f8",
+        "fe934eb95a682bc413dfc5ff5f0e182add303d5630def6002fc7b7b7e1225405",
+        "06d2d3b4b44f9c070a3f54774239b9a0d5b4161a90d214fb6e84ff5aa1d5d764",
+        "9ea1fba5f2b1da696f460d3be909b28452bcf402941c3a4eb88465967f607793",
+        "df54982f73dcf5d7160fec46092818b9dfa3918c150d8175c407b59d8a5b9ef2"
+      ],
+      "source_tree_hash": "f1e358e99914563305428cece1b1595bc76a58643184407ec5b222162d650332",
+      "type": "png",
+      "validation_outcome": "passed"
+    },
+    {
+      "config_hash": "51415c2ce68c89d9ce2b042b0a7a811fe3e98180b72460006f9d0465f6bf49b7",
+      "copy_or_render_status": "deterministic_export",
+      "export_timestamp": "2026-07-16T13:45:21+00:00",
+      "path": "manuscript/mdpi_information/assets/figures/main/figure_07_hrdataset_replication.svg",
+      "run_id": "canonical_v2_20260714T221501Z_483f96f",
+      "scientific_input_hash": "06c507bee525ea1daca43b61249764007d4d8baaa05c9333f23446ea723ce160",
+      "sha256": "fe934eb95a682bc413dfc5ff5f0e182add303d5630def6002fc7b7b7e1225405",
+      "size_bytes": 84659,
+      "source_paths": [
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_figures/figure_7_hrdataset_v14_mapped_target_replication.png",
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_figures/figure_7_hrdataset_v14_mapped_target_replication.svg",
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_figures/source_data/figure_7_hrdataset_v14_mapped_target_replication_source.csv",
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_figures/captions/figure_7_hrdataset_v14_mapped_target_replication_caption.md",
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_figures/figure_manifest.json"
+      ],
+      "source_sha256_values": [
+        "9f88c25d44130af7675f14ecb5a3b2d4bc48fa37f593754dc9064bf43f90d2f8",
+        "fe934eb95a682bc413dfc5ff5f0e182add303d5630def6002fc7b7b7e1225405",
+        "06d2d3b4b44f9c070a3f54774239b9a0d5b4161a90d214fb6e84ff5aa1d5d764",
+        "9ea1fba5f2b1da696f460d3be909b28452bcf402941c3a4eb88465967f607793",
+        "df54982f73dcf5d7160fec46092818b9dfa3918c150d8175c407b59d8a5b9ef2"
+      ],
+      "source_tree_hash": "f1e358e99914563305428cece1b1595bc76a58643184407ec5b222162d650332",
+      "type": "svg",
+      "validation_outcome": "passed"
+    },
+    {
+      "config_hash": "51415c2ce68c89d9ce2b042b0a7a811fe3e98180b72460006f9d0465f6bf49b7",
+      "copy_or_render_status": "deterministic_export",
+      "export_timestamp": "2026-07-16T13:45:21+00:00",
+      "path": "manuscript/mdpi_information/assets/figures/supplementary/figure_s1_subgroup_heatmap.png",
+      "run_id": "canonical_v2_20260714T221501Z_483f96f",
+      "scientific_input_hash": "caffb945d15f990e3a789e9707f7a8a9115be31fecbbd705822994a10cfaf151",
+      "sha256": "89add2a3a0288d099a260d7f8818cb217ac588cebd2eb326697e9ce422e65361",
+      "size_bytes": 1122852,
+      "source_paths": [
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_tables/table_08_support_aware_subgroup_diagnostics.csv"
+      ],
+      "source_sha256_values": [
+        "fd705d230c9e121a355a883268ce266d4bf426b3b6e81b703b7d8abdd9399612"
+      ],
+      "source_tree_hash": "f1e358e99914563305428cece1b1595bc76a58643184407ec5b222162d650332",
+      "type": "png",
+      "validation_outcome": "passed"
+    },
+    {
+      "config_hash": "51415c2ce68c89d9ce2b042b0a7a811fe3e98180b72460006f9d0465f6bf49b7",
+      "copy_or_render_status": "deterministic_export",
+      "export_timestamp": "2026-07-16T13:45:21+00:00",
+      "path": "manuscript/mdpi_information/assets/figures/supplementary/figure_s1_subgroup_heatmap.svg",
+      "run_id": "canonical_v2_20260714T221501Z_483f96f",
+      "scientific_input_hash": "caffb945d15f990e3a789e9707f7a8a9115be31fecbbd705822994a10cfaf151",
+      "sha256": "0259dcf7250a439304ec8b7e3560c47b1e9b79ee410a6a34be76b28171fdd22f",
+      "size_bytes": 470267,
+      "source_paths": [
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_tables/table_08_support_aware_subgroup_diagnostics.csv"
+      ],
+      "source_sha256_values": [
+        "fd705d230c9e121a355a883268ce266d4bf426b3b6e81b703b7d8abdd9399612"
+      ],
+      "source_tree_hash": "f1e358e99914563305428cece1b1595bc76a58643184407ec5b222162d650332",
+      "type": "svg",
+      "validation_outcome": "passed"
+    },
+    {
+      "config_hash": "51415c2ce68c89d9ce2b042b0a7a811fe3e98180b72460006f9d0465f6bf49b7",
+      "copy_or_render_status": "deterministic_export",
+      "export_timestamp": "2026-07-16T13:45:21+00:00",
+      "path": "manuscript/mdpi_information/assets/figures/supplementary/figure_s2_class_grouped_shap.png",
+      "run_id": "canonical_v2_20260714T221501Z_483f96f",
+      "scientific_input_hash": "caffb945d15f990e3a789e9707f7a8a9115be31fecbbd705822994a10cfaf151",
+      "sha256": "2477910d8411d0e8341f6660c20a34fd25879747aa66e3f283c26eb83dc22ccf",
+      "size_bytes": 225418,
+      "source_paths": [
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/oof_shap/class_2_grouped_shap_importance.csv",
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/oof_shap/class_3_grouped_shap_importance.csv",
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/oof_shap/class_4_grouped_shap_importance.csv"
+      ],
+      "source_sha256_values": [
+        "a728a0c787c940b03c9d52be6fa0c109a9f20c3ca8d6a8a99c69f8e42afda683",
+        "a7c865323a4f08ffc9d4dce5f43f682f44c69866edaf669a7867e4854e07bf18",
+        "0ad1def5723d1aba63762889b8b449835ff712e6a136abcb81d0a73170505d1a"
+      ],
+      "source_tree_hash": "f1e358e99914563305428cece1b1595bc76a58643184407ec5b222162d650332",
+      "type": "png",
+      "validation_outcome": "passed"
+    },
+    {
+      "config_hash": "51415c2ce68c89d9ce2b042b0a7a811fe3e98180b72460006f9d0465f6bf49b7",
+      "copy_or_render_status": "deterministic_export",
+      "export_timestamp": "2026-07-16T13:45:21+00:00",
+      "path": "manuscript/mdpi_information/assets/figures/supplementary/figure_s2_class_grouped_shap.svg",
+      "run_id": "canonical_v2_20260714T221501Z_483f96f",
+      "scientific_input_hash": "caffb945d15f990e3a789e9707f7a8a9115be31fecbbd705822994a10cfaf151",
+      "sha256": "d34952a86d781ea3ccbf3a44a591eadea4034553b9715cb41fea9f3887528af3",
+      "size_bytes": 221921,
+      "source_paths": [
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/oof_shap/class_2_grouped_shap_importance.csv",
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/oof_shap/class_3_grouped_shap_importance.csv",
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/oof_shap/class_4_grouped_shap_importance.csv"
+      ],
+      "source_sha256_values": [
+        "a728a0c787c940b03c9d52be6fa0c109a9f20c3ca8d6a8a99c69f8e42afda683",
+        "a7c865323a4f08ffc9d4dce5f43f682f44c69866edaf669a7867e4854e07bf18",
+        "0ad1def5723d1aba63762889b8b449835ff712e6a136abcb81d0a73170505d1a"
+      ],
+      "source_tree_hash": "f1e358e99914563305428cece1b1595bc76a58643184407ec5b222162d650332",
+      "type": "svg",
+      "validation_outcome": "passed"
+    },
+    {
+      "config_hash": "51415c2ce68c89d9ce2b042b0a7a811fe3e98180b72460006f9d0465f6bf49b7",
+      "copy_or_render_status": "deterministic_export",
+      "export_timestamp": "2026-07-16T13:45:21+00:00",
+      "path": "manuscript/mdpi_information/assets/figures/supplementary/figure_s3_heuristic_budget_sensitivity.png",
+      "run_id": "canonical_v2_20260714T221501Z_483f96f",
+      "scientific_input_hash": "caffb945d15f990e3a789e9707f7a8a9115be31fecbbd705822994a10cfaf151",
+      "sha256": "40fb1b8b1640b689ea00ae4eeea11d74878daef40c34a371872ff2de4dbaff41",
+      "size_bytes": 221888,
+      "source_paths": [
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/supplementary/heuristic_counterfactual/heuristic_search_budget_sensitivity.csv"
+      ],
+      "source_sha256_values": [
+        "4bf87931e1a7463b5dad530bd7c22e4fd93ff355303ca391540f18de4f44aaa6"
+      ],
+      "source_tree_hash": "f1e358e99914563305428cece1b1595bc76a58643184407ec5b222162d650332",
+      "type": "png",
+      "validation_outcome": "passed"
+    },
+    {
+      "config_hash": "51415c2ce68c89d9ce2b042b0a7a811fe3e98180b72460006f9d0465f6bf49b7",
+      "copy_or_render_status": "deterministic_export",
+      "export_timestamp": "2026-07-16T13:45:21+00:00",
+      "path": "manuscript/mdpi_information/assets/figures/supplementary/figure_s3_heuristic_budget_sensitivity.svg",
+      "run_id": "canonical_v2_20260714T221501Z_483f96f",
+      "scientific_input_hash": "caffb945d15f990e3a789e9707f7a8a9115be31fecbbd705822994a10cfaf151",
+      "sha256": "b176d5c405251c7b269a0fdc6853528b056745a2aa773c8c2e2d0f7e76419e8e",
+      "size_bytes": 58292,
+      "source_paths": [
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/supplementary/heuristic_counterfactual/heuristic_search_budget_sensitivity.csv"
+      ],
+      "source_sha256_values": [
+        "4bf87931e1a7463b5dad530bd7c22e4fd93ff355303ca391540f18de4f44aaa6"
+      ],
+      "source_tree_hash": "f1e358e99914563305428cece1b1595bc76a58643184407ec5b222162d650332",
+      "type": "svg",
+      "validation_outcome": "passed"
+    },
+    {
+      "config_hash": "51415c2ce68c89d9ce2b042b0a7a811fe3e98180b72460006f9d0465f6bf49b7",
+      "copy_or_render_status": "deterministic_export",
+      "export_timestamp": "2026-07-16T13:45:21+00:00",
+      "path": "manuscript/mdpi_information/assets/handoff/claim_boundary_handoff.md",
+      "run_id": "canonical_v2_20260714T221501Z_483f96f",
+      "scientific_input_hash": "06c507bee525ea1daca43b61249764007d4d8baaa05c9333f23446ea723ce160",
+      "sha256": "6037438f8f7a532a5fe4c3e580fec7d871fa4dd6425e9ac58520769070749a0e",
+      "size_bytes": 1319,
+      "source_paths": [
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/canonical_claim_boundaries.md",
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/supplementary/canonical_claim_boundaries.md"
+      ],
+      "source_sha256_values": [
+        "92b8a28ee7e15e83b1f0ddd33930e7c244971412f84268aa42e67eb9ddc763e8",
+        "fe8af5d327d3764e97ee49fcbf4791bf24c68339a03292eacbd103f2f9566f3c"
+      ],
+      "source_tree_hash": "f1e358e99914563305428cece1b1595bc76a58643184407ec5b222162d650332",
+      "type": "md",
+      "validation_outcome": "passed"
+    },
+    {
+      "config_hash": "51415c2ce68c89d9ce2b042b0a7a811fe3e98180b72460006f9d0465f6bf49b7",
+      "copy_or_render_status": "deterministic_export",
+      "export_timestamp": "2026-07-16T13:45:21+00:00",
+      "path": "manuscript/mdpi_information/assets/handoff/figure_source_map.csv",
+      "run_id": "canonical_v2_20260714T221501Z_483f96f",
+      "scientific_input_hash": "caffb945d15f990e3a789e9707f7a8a9115be31fecbbd705822994a10cfaf151",
+      "sha256": "540c39775213d00c36036df6474cf7595c21026870c96c8986656be3b296b166",
+      "size_bytes": 11544,
+      "source_paths": [
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_figures/figure_manifest.json"
+      ],
+      "source_sha256_values": [
+        "df54982f73dcf5d7160fec46092818b9dfa3918c150d8175c407b59d8a5b9ef2"
+      ],
+      "source_tree_hash": "f1e358e99914563305428cece1b1595bc76a58643184407ec5b222162d650332",
+      "type": "csv",
+      "validation_outcome": "passed"
+    },
+    {
+      "config_hash": "51415c2ce68c89d9ce2b042b0a7a811fe3e98180b72460006f9d0465f6bf49b7",
+      "copy_or_render_status": "deterministic_export",
+      "export_timestamp": "2026-07-16T13:45:21+00:00",
+      "path": "manuscript/mdpi_information/assets/handoff/figure_table_insertion_guide.md",
+      "run_id": "canonical_v2_20260714T221501Z_483f96f",
+      "scientific_input_hash": "06c507bee525ea1daca43b61249764007d4d8baaa05c9333f23446ea723ce160",
+      "sha256": "9a536c37a9911e525bcc7f52072feb44b7f838b9ead89b50045872dcca064732",
+      "size_bytes": 6670,
+      "source_paths": [
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/canonical_claim_boundaries.md",
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/supplementary/canonical_claim_boundaries.md"
+      ],
+      "source_sha256_values": [
+        "92b8a28ee7e15e83b1f0ddd33930e7c244971412f84268aa42e67eb9ddc763e8",
+        "fe8af5d327d3764e97ee49fcbf4791bf24c68339a03292eacbd103f2f9566f3c"
+      ],
+      "source_tree_hash": "f1e358e99914563305428cece1b1595bc76a58643184407ec5b222162d650332",
+      "type": "md",
+      "validation_outcome": "passed"
+    },
+    {
+      "config_hash": "51415c2ce68c89d9ce2b042b0a7a811fe3e98180b72460006f9d0465f6bf49b7",
+      "copy_or_render_status": "deterministic_export",
+      "export_timestamp": "2026-07-16T13:45:21+00:00",
+      "path": "manuscript/mdpi_information/assets/handoff/manuscript_evidence_ledger.csv",
+      "run_id": "canonical_v2_20260714T221501Z_483f96f",
+      "scientific_input_hash": "06c507bee525ea1daca43b61249764007d4d8baaa05c9333f23446ea723ce160",
+      "sha256": "fb83342af502b475708572f2babe80ed1c339f4e4eb0a9eb8d05eeb5fa05ee65",
+      "size_bytes": 199093,
+      "source_paths": [
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_tables/table_03_four_model_nested_benchmark.csv",
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_tables/table_04_leakage_policy_sensitivity.csv",
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_tables/table_05_cross_fitted_sigmoid_calibration.csv",
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_tables/table_06_global_grouped_oof_shap.csv",
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_tables/table_07_oof_shap_stability.csv",
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_tables/table_08_support_aware_subgroup_diagnostics.csv",
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_tables/table_09_department_proxy_reconstructability.csv",
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_tables/table_10_hrdataset_v14_mapped_target_replication.csv"
+      ],
+      "source_sha256_values": [
+        "45c0aa5c793cd6066235fead2370d23fa88eb161694cabfb93fbe9ae5a1730ce",
+        "afd5284c5183c049a5e34607c6c2942838c7dbfe197f0cc3b4d63fba60a8ec7e",
+        "b5c1f908383ec5de7db523b161b487e5cde37a70605a8698db899304d7d2c563",
+        "5d5fcf96dc20e672db876b0b2ddd5969910d3e44736200282d95ce6ecb11801b",
+        "2a0928c9f68b106143334a5f975216ffbc4e2b5227b77f1869e8fc9b6eb4d2d3",
+        "fd705d230c9e121a355a883268ce266d4bf426b3b6e81b703b7d8abdd9399612",
+        "b295016a1e4bb6acf8eb023bef9d496ca212fb77d64671ef0b38e6b04125290b",
+        "7c3755f5afebd82e2415f38c5e15b70be791359141a33d6a8cdbab73d9f4875b"
+      ],
+      "source_tree_hash": "f1e358e99914563305428cece1b1595bc76a58643184407ec5b222162d650332",
+      "type": "csv",
+      "validation_outcome": "passed"
+    },
+    {
+      "config_hash": "51415c2ce68c89d9ce2b042b0a7a811fe3e98180b72460006f9d0465f6bf49b7",
+      "copy_or_render_status": "deterministic_export",
+      "export_timestamp": "2026-07-16T13:45:21+00:00",
+      "path": "manuscript/mdpi_information/assets/handoff/manuscript_exact_results.json",
+      "run_id": "canonical_v2_20260714T221501Z_483f96f",
+      "scientific_input_hash": "06c507bee525ea1daca43b61249764007d4d8baaa05c9333f23446ea723ce160",
+      "sha256": "57da22c403f20300082aa82160eb3a24de32f74dfbaf7256748181a697cd4052",
+      "size_bytes": 151383,
+      "source_paths": [
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_tables/table_03_four_model_nested_benchmark.csv",
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_tables/table_04_leakage_policy_sensitivity.csv",
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_tables/table_05_cross_fitted_sigmoid_calibration.csv",
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_tables/table_06_global_grouped_oof_shap.csv",
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_tables/table_07_oof_shap_stability.csv",
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_tables/table_08_support_aware_subgroup_diagnostics.csv",
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_tables/table_09_department_proxy_reconstructability.csv",
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_tables/table_10_hrdataset_v14_mapped_target_replication.csv"
+      ],
+      "source_sha256_values": [
+        "45c0aa5c793cd6066235fead2370d23fa88eb161694cabfb93fbe9ae5a1730ce",
+        "afd5284c5183c049a5e34607c6c2942838c7dbfe197f0cc3b4d63fba60a8ec7e",
+        "b5c1f908383ec5de7db523b161b487e5cde37a70605a8698db899304d7d2c563",
+        "5d5fcf96dc20e672db876b0b2ddd5969910d3e44736200282d95ce6ecb11801b",
+        "2a0928c9f68b106143334a5f975216ffbc4e2b5227b77f1869e8fc9b6eb4d2d3",
+        "fd705d230c9e121a355a883268ce266d4bf426b3b6e81b703b7d8abdd9399612",
+        "b295016a1e4bb6acf8eb023bef9d496ca212fb77d64671ef0b38e6b04125290b",
+        "7c3755f5afebd82e2415f38c5e15b70be791359141a33d6a8cdbab73d9f4875b"
+      ],
+      "source_tree_hash": "f1e358e99914563305428cece1b1595bc76a58643184407ec5b222162d650332",
+      "type": "json",
+      "validation_outcome": "passed"
+    },
+    {
+      "config_hash": "51415c2ce68c89d9ce2b042b0a7a811fe3e98180b72460006f9d0465f6bf49b7",
+      "copy_or_render_status": "deterministic_export",
+      "export_timestamp": "2026-07-16T13:45:21+00:00",
+      "path": "manuscript/mdpi_information/assets/handoff/result_source_map.csv",
+      "run_id": "canonical_v2_20260714T221501Z_483f96f",
+      "scientific_input_hash": "06c507bee525ea1daca43b61249764007d4d8baaa05c9333f23446ea723ce160",
+      "sha256": "fb83342af502b475708572f2babe80ed1c339f4e4eb0a9eb8d05eeb5fa05ee65",
+      "size_bytes": 199093,
+      "source_paths": [
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_tables/table_03_four_model_nested_benchmark.csv",
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_tables/table_04_leakage_policy_sensitivity.csv",
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_tables/table_05_cross_fitted_sigmoid_calibration.csv",
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_tables/table_06_global_grouped_oof_shap.csv",
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_tables/table_07_oof_shap_stability.csv",
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_tables/table_08_support_aware_subgroup_diagnostics.csv",
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_tables/table_09_department_proxy_reconstructability.csv",
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_tables/table_10_hrdataset_v14_mapped_target_replication.csv"
+      ],
+      "source_sha256_values": [
+        "45c0aa5c793cd6066235fead2370d23fa88eb161694cabfb93fbe9ae5a1730ce",
+        "afd5284c5183c049a5e34607c6c2942838c7dbfe197f0cc3b4d63fba60a8ec7e",
+        "b5c1f908383ec5de7db523b161b487e5cde37a70605a8698db899304d7d2c563",
+        "5d5fcf96dc20e672db876b0b2ddd5969910d3e44736200282d95ce6ecb11801b",
+        "2a0928c9f68b106143334a5f975216ffbc4e2b5227b77f1869e8fc9b6eb4d2d3",
+        "fd705d230c9e121a355a883268ce266d4bf426b3b6e81b703b7d8abdd9399612",
+        "b295016a1e4bb6acf8eb023bef9d496ca212fb77d64671ef0b38e6b04125290b",
+        "7c3755f5afebd82e2415f38c5e15b70be791359141a33d6a8cdbab73d9f4875b"
+      ],
+      "source_tree_hash": "f1e358e99914563305428cece1b1595bc76a58643184407ec5b222162d650332",
+      "type": "csv",
+      "validation_outcome": "passed"
+    },
+    {
+      "config_hash": "51415c2ce68c89d9ce2b042b0a7a811fe3e98180b72460006f9d0465f6bf49b7",
+      "copy_or_render_status": "deterministic_export",
+      "export_timestamp": "2026-07-16T13:45:21+00:00",
+      "path": "manuscript/mdpi_information/assets/handoff/table_source_map.csv",
+      "run_id": "canonical_v2_20260714T221501Z_483f96f",
+      "scientific_input_hash": "06c507bee525ea1daca43b61249764007d4d8baaa05c9333f23446ea723ce160",
+      "sha256": "a8b65c146807401b9b348f8b6b51643f396d0694b99513ae65d787e4c51dcdca",
+      "size_bytes": 7358,
+      "source_paths": [
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_tables/table_01_dataset_roles_target_mappings_support.csv",
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_tables/table_02_exact_primary_feature_policy.csv",
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_tables/table_03_four_model_nested_benchmark.csv",
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_tables/table_04_leakage_policy_sensitivity.csv",
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_tables/table_02_exact_primary_feature_policy.csv",
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_tables/table_05_cross_fitted_sigmoid_calibration.csv",
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_tables/table_06_global_grouped_oof_shap.csv",
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_tables/table_07_oof_shap_stability.csv",
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/oof_shap/fold_feature_rankings.csv",
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_tables/table_08_support_aware_subgroup_diagnostics.csv",
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_tables/table_09_department_proxy_reconstructability.csv",
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_tables/table_10_hrdataset_v14_mapped_target_replication.csv",
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/external_replication/feature_policy_features.csv"
+      ],
+      "source_sha256_values": [
+        "a2e4b76e5890b1e80f5492e5a5168d7131624bb5ff08b3178283821fa52e6951",
+        "2f49a5897e6a0243f8d0e61ba894d946963e8c17688a53ab4cc5f72b50181778",
+        "45c0aa5c793cd6066235fead2370d23fa88eb161694cabfb93fbe9ae5a1730ce",
+        "afd5284c5183c049a5e34607c6c2942838c7dbfe197f0cc3b4d63fba60a8ec7e",
+        "2f49a5897e6a0243f8d0e61ba894d946963e8c17688a53ab4cc5f72b50181778",
+        "b5c1f908383ec5de7db523b161b487e5cde37a70605a8698db899304d7d2c563",
+        "5d5fcf96dc20e672db876b0b2ddd5969910d3e44736200282d95ce6ecb11801b",
+        "2a0928c9f68b106143334a5f975216ffbc4e2b5227b77f1869e8fc9b6eb4d2d3",
+        "56ef319560996e2888116e74883adf2e18ecb8e27606ff375a0a0e2fe1efa8e9",
+        "fd705d230c9e121a355a883268ce266d4bf426b3b6e81b703b7d8abdd9399612",
+        "b295016a1e4bb6acf8eb023bef9d496ca212fb77d64671ef0b38e6b04125290b",
+        "7c3755f5afebd82e2415f38c5e15b70be791359141a33d6a8cdbab73d9f4875b",
+        "a27365e55ceee7e3a15de7501a2b64e0fe80e44203e5afb5576d16cb8337f579"
+      ],
+      "source_tree_hash": "f1e358e99914563305428cece1b1595bc76a58643184407ec5b222162d650332",
+      "type": "csv",
+      "validation_outcome": "passed"
+    },
+    {
+      "config_hash": "51415c2ce68c89d9ce2b042b0a7a811fe3e98180b72460006f9d0465f6bf49b7",
+      "copy_or_render_status": "deterministic_export",
+      "export_timestamp": "2026-07-16T13:45:21+00:00",
+      "path": "manuscript/mdpi_information/assets/manifests/export_validation.json",
+      "run_id": "canonical_v2_20260714T221501Z_483f96f",
+      "scientific_input_hash": "06c507bee525ea1daca43b61249764007d4d8baaa05c9333f23446ea723ce160",
+      "sha256": "e34060d7abd806eab79fd0f5bff2150210049b8351992e74c72c7e374efe119c",
+      "size_bytes": 602,
+      "source_paths": [
+        "reports/research_log/finalization_v2/15_canonical_evidence_receipt.json"
+      ],
+      "source_sha256_values": [
+        "bd09523276dcbc54d036f8c9eb0c71ba62f8b0f913c495695a2259296101827c"
+      ],
+      "source_tree_hash": "f1e358e99914563305428cece1b1595bc76a58643184407ec5b222162d650332",
+      "type": "json",
+      "validation_outcome": "passed"
+    },
+    {
+      "config_hash": "51415c2ce68c89d9ce2b042b0a7a811fe3e98180b72460006f9d0465f6bf49b7",
+      "copy_or_render_status": "deterministic_export",
+      "export_timestamp": "2026-07-16T13:45:21+00:00",
+      "path": "manuscript/mdpi_information/assets/manifests/figure_number_mapping.csv",
+      "run_id": "canonical_v2_20260714T221501Z_483f96f",
+      "scientific_input_hash": "06c507bee525ea1daca43b61249764007d4d8baaa05c9333f23446ea723ce160",
+      "sha256": "540c39775213d00c36036df6474cf7595c21026870c96c8986656be3b296b166",
+      "size_bytes": 11544,
+      "source_paths": [
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_figures/figure_manifest.json"
+      ],
+      "source_sha256_values": [
+        "df54982f73dcf5d7160fec46092818b9dfa3918c150d8175c407b59d8a5b9ef2"
+      ],
+      "source_tree_hash": "f1e358e99914563305428cece1b1595bc76a58643184407ec5b222162d650332",
+      "type": "csv",
+      "validation_outcome": "passed"
+    },
+    {
+      "config_hash": "51415c2ce68c89d9ce2b042b0a7a811fe3e98180b72460006f9d0465f6bf49b7",
+      "copy_or_render_status": "deterministic_export",
+      "export_timestamp": "2026-07-16T13:45:21+00:00",
+      "path": "manuscript/mdpi_information/assets/source_data/figures/figure_01_audit_protocol_source.csv",
+      "run_id": "canonical_v2_20260714T221501Z_483f96f",
+      "scientific_input_hash": "06c507bee525ea1daca43b61249764007d4d8baaa05c9333f23446ea723ce160",
+      "sha256": "d86da10ef17f32c82179149ddc9a9af2d7b0a59f65cf5e51d0e3970e2af4509c",
+      "size_bytes": 4985,
+      "source_paths": [
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_figures/figure_1_study_design_leakage_aware_pipeline.png",
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_figures/figure_1_study_design_leakage_aware_pipeline.svg",
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_figures/source_data/figure_1_study_design_leakage_aware_pipeline_source.csv",
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_figures/captions/figure_1_study_design_leakage_aware_pipeline_caption.md",
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_figures/figure_manifest.json"
+      ],
+      "source_sha256_values": [
+        "5f6078006d46dca4707feccb9241e57961f26a14627d8b14f0f08336a7f8de95",
+        "45f04f8be9ea700cc066dcdbe668aeea52ebd867066ebcb63c769ad78bfe0019",
+        "4e6b5ee9a89c9402f80236187a2ebc0eaf67eda50c2f6eff31c0b154c16bf27a",
+        "d44dffb3bb4c7e5c69b543aaf93e50c24ba4e51469e350455251ebb6dddf6eb1",
+        "df54982f73dcf5d7160fec46092818b9dfa3918c150d8175c407b59d8a5b9ef2"
+      ],
+      "source_tree_hash": "f1e358e99914563305428cece1b1595bc76a58643184407ec5b222162d650332",
+      "type": "csv",
+      "validation_outcome": "passed"
+    },
+    {
+      "config_hash": "51415c2ce68c89d9ce2b042b0a7a811fe3e98180b72460006f9d0465f6bf49b7",
+      "copy_or_render_status": "deterministic_export",
+      "export_timestamp": "2026-07-16T13:45:21+00:00",
+      "path": "manuscript/mdpi_information/assets/source_data/figures/figure_02_model_benchmark_source.csv",
+      "run_id": "canonical_v2_20260714T221501Z_483f96f",
+      "scientific_input_hash": "06c507bee525ea1daca43b61249764007d4d8baaa05c9333f23446ea723ce160",
+      "sha256": "5425b4f1aaa877f8bb43d7c6573c1afa6a9b4131731f995a9cbd5ab59e903e42",
+      "size_bytes": 28029,
+      "source_paths": [
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_figures/figure_3_xgboost_vs_baselines.png",
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_figures/figure_3_xgboost_vs_baselines.svg",
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_figures/source_data/figure_3_xgboost_vs_baselines_source.csv",
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_figures/captions/figure_3_xgboost_vs_baselines_caption.md",
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_figures/figure_manifest.json"
+      ],
+      "source_sha256_values": [
+        "2268d29fe2bc03632ca63f2185eed98d7e140f2cd506c645e6217ad042d262a1",
+        "87c214a63e04398509940ef0752805d767db4944e790d455a484b024b76bb48b",
+        "5425b4f1aaa877f8bb43d7c6573c1afa6a9b4131731f995a9cbd5ab59e903e42",
+        "5b98aeb884f2fc6b05cd5fe9e179a833c85ffe047b927a7211b4adf0689e4f12",
+        "df54982f73dcf5d7160fec46092818b9dfa3918c150d8175c407b59d8a5b9ef2"
+      ],
+      "source_tree_hash": "f1e358e99914563305428cece1b1595bc76a58643184407ec5b222162d650332",
+      "type": "csv",
+      "validation_outcome": "passed"
+    },
+    {
+      "config_hash": "51415c2ce68c89d9ce2b042b0a7a811fe3e98180b72460006f9d0465f6bf49b7",
+      "copy_or_render_status": "deterministic_export",
+      "export_timestamp": "2026-07-16T13:45:21+00:00",
+      "path": "manuscript/mdpi_information/assets/source_data/figures/figure_03_feature_policy_sensitivity_source.csv",
+      "run_id": "canonical_v2_20260714T221501Z_483f96f",
+      "scientific_input_hash": "06c507bee525ea1daca43b61249764007d4d8baaa05c9333f23446ea723ce160",
+      "sha256": "be94f9876b850c5d8bcde3b46d57ed4e08776076f8ee802c2eb52e5ecb282763",
+      "size_bytes": 4700,
+      "source_paths": [
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_figures/figure_2_feature_policy_tradeoff.png",
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_figures/figure_2_feature_policy_tradeoff.svg",
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_figures/source_data/figure_2_feature_policy_tradeoff_source.csv",
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_figures/captions/figure_2_feature_policy_tradeoff_caption.md",
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_figures/figure_manifest.json"
+      ],
+      "source_sha256_values": [
+        "b1161e7ad6aa4ab5d586a0094bd9d879b78852293ffd97c62cce6d7460285573",
+        "899936270b25e1095ec98981dee156e081951b469a433242ac2c989e56ff67b4",
+        "be94f9876b850c5d8bcde3b46d57ed4e08776076f8ee802c2eb52e5ecb282763",
+        "b1cccab4b03285952765304b9d7fa0f14b361ed46f271f7f83ec1a4fd0fdf0a5",
+        "df54982f73dcf5d7160fec46092818b9dfa3918c150d8175c407b59d8a5b9ef2"
+      ],
+      "source_tree_hash": "f1e358e99914563305428cece1b1595bc76a58643184407ec5b222162d650332",
+      "type": "csv",
+      "validation_outcome": "passed"
+    },
+    {
+      "config_hash": "51415c2ce68c89d9ce2b042b0a7a811fe3e98180b72460006f9d0465f6bf49b7",
+      "copy_or_render_status": "deterministic_export",
+      "export_timestamp": "2026-07-16T13:45:21+00:00",
+      "path": "manuscript/mdpi_information/assets/source_data/figures/figure_04_calibration_source.csv",
+      "run_id": "canonical_v2_20260714T221501Z_483f96f",
+      "scientific_input_hash": "06c507bee525ea1daca43b61249764007d4d8baaa05c9333f23446ea723ce160",
+      "sha256": "603fdb0aa8d4114039120775e65029dfbcad460f385d305fb2a4675ca6e98add",
+      "size_bytes": 82163,
+      "source_paths": [
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_figures/figure_4_cross_fitted_sigmoid_calibration.png",
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_figures/figure_4_cross_fitted_sigmoid_calibration.svg",
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_figures/source_data/figure_4_cross_fitted_sigmoid_calibration_source.csv",
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_figures/captions/figure_4_cross_fitted_sigmoid_calibration_caption.md",
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_figures/figure_manifest.json"
+      ],
+      "source_sha256_values": [
+        "f4adcf7e05787c41610e6fea111545fa8ea5bfcfa326e5d0eda603efcd3cd724",
+        "03ec07c697f3af47c9a93c20955a0d18081afcd59c54d1f9a482a515835e0f8c",
+        "603fdb0aa8d4114039120775e65029dfbcad460f385d305fb2a4675ca6e98add",
+        "aeee9a2ab61e059b8d1ac51ed68db6cfd2634a4cf201cc6b4e7fc8676a98d9d9",
+        "df54982f73dcf5d7160fec46092818b9dfa3918c150d8175c407b59d8a5b9ef2"
+      ],
+      "source_tree_hash": "f1e358e99914563305428cece1b1595bc76a58643184407ec5b222162d650332",
+      "type": "csv",
+      "validation_outcome": "passed"
+    },
+    {
+      "config_hash": "51415c2ce68c89d9ce2b042b0a7a811fe3e98180b72460006f9d0465f6bf49b7",
+      "copy_or_render_status": "deterministic_export",
+      "export_timestamp": "2026-07-16T13:45:21+00:00",
+      "path": "manuscript/mdpi_information/assets/source_data/figures/figure_05_global_grouped_shap_source.csv",
+      "run_id": "canonical_v2_20260714T221501Z_483f96f",
+      "scientific_input_hash": "06c507bee525ea1daca43b61249764007d4d8baaa05c9333f23446ea723ce160",
+      "sha256": "0f65eaa469a642edc9821325822123871213bece43214130991c79fcf2e43e95",
+      "size_bytes": 13818,
+      "source_paths": [
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_figures/figure_5_global_grouped_oof_shap.png",
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_figures/figure_5_global_grouped_oof_shap.svg",
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_figures/source_data/figure_5_global_grouped_oof_shap_source.csv",
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_figures/captions/figure_5_global_grouped_oof_shap_caption.md",
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_figures/figure_manifest.json"
+      ],
+      "source_sha256_values": [
+        "f383e206b54776375b9e3495838291d3ad65dd2dd06b21b97959b79ae8825a07",
+        "d80aee740e524afd56a2fc8ea9717d5f0ceb49c81e7270c6af6a96d44446e933",
+        "0f65eaa469a642edc9821325822123871213bece43214130991c79fcf2e43e95",
+        "efa6b545ff055d272d38d692e7465e8c746a12335c79f3c9b5f2e47a01819a0c",
+        "df54982f73dcf5d7160fec46092818b9dfa3918c150d8175c407b59d8a5b9ef2"
+      ],
+      "source_tree_hash": "f1e358e99914563305428cece1b1595bc76a58643184407ec5b222162d650332",
+      "type": "csv",
+      "validation_outcome": "passed"
+    },
+    {
+      "config_hash": "51415c2ce68c89d9ce2b042b0a7a811fe3e98180b72460006f9d0465f6bf49b7",
+      "copy_or_render_status": "deterministic_export",
+      "export_timestamp": "2026-07-16T13:45:21+00:00",
+      "path": "manuscript/mdpi_information/assets/source_data/figures/figure_06_shap_stability_source.csv",
+      "run_id": "canonical_v2_20260714T221501Z_483f96f",
+      "scientific_input_hash": "06c507bee525ea1daca43b61249764007d4d8baaa05c9333f23446ea723ce160",
+      "sha256": "d220ed6ee53ba31c7c3fb624b7a3ff31d882b96f8da1f9b0ead38a9053f1696d",
+      "size_bytes": 213634,
+      "source_paths": [
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_figures/figure_6_oof_shap_stability.png",
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_figures/figure_6_oof_shap_stability.svg",
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_figures/source_data/figure_6_oof_shap_stability_source.csv",
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_figures/captions/figure_6_oof_shap_stability_caption.md",
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_figures/figure_manifest.json"
+      ],
+      "source_sha256_values": [
+        "bc6b41acb78f9f3d450e8081cc312a02ea9c411c913b64022e9fd221158bb90b",
+        "a3fed5a75ceec18c99e6143042cf49134e05c83ba98d04c7f2cf5cf0e1e64002",
+        "d220ed6ee53ba31c7c3fb624b7a3ff31d882b96f8da1f9b0ead38a9053f1696d",
+        "3fbec58a6fbeca8d0435ad8973c71dfa8130321c07753b1863b2bd3c7876c903",
+        "df54982f73dcf5d7160fec46092818b9dfa3918c150d8175c407b59d8a5b9ef2"
+      ],
+      "source_tree_hash": "f1e358e99914563305428cece1b1595bc76a58643184407ec5b222162d650332",
+      "type": "csv",
+      "validation_outcome": "passed"
+    },
+    {
+      "config_hash": "51415c2ce68c89d9ce2b042b0a7a811fe3e98180b72460006f9d0465f6bf49b7",
+      "copy_or_render_status": "deterministic_export",
+      "export_timestamp": "2026-07-16T13:45:21+00:00",
+      "path": "manuscript/mdpi_information/assets/source_data/figures/figure_07_hrdataset_replication_source.csv",
+      "run_id": "canonical_v2_20260714T221501Z_483f96f",
+      "scientific_input_hash": "06c507bee525ea1daca43b61249764007d4d8baaa05c9333f23446ea723ce160",
+      "sha256": "06d2d3b4b44f9c070a3f54774239b9a0d5b4161a90d214fb6e84ff5aa1d5d764",
+      "size_bytes": 117367,
+      "source_paths": [
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_figures/figure_7_hrdataset_v14_mapped_target_replication.png",
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_figures/figure_7_hrdataset_v14_mapped_target_replication.svg",
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_figures/source_data/figure_7_hrdataset_v14_mapped_target_replication_source.csv",
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_figures/captions/figure_7_hrdataset_v14_mapped_target_replication_caption.md",
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_figures/figure_manifest.json"
+      ],
+      "source_sha256_values": [
+        "9f88c25d44130af7675f14ecb5a3b2d4bc48fa37f593754dc9064bf43f90d2f8",
+        "fe934eb95a682bc413dfc5ff5f0e182add303d5630def6002fc7b7b7e1225405",
+        "06d2d3b4b44f9c070a3f54774239b9a0d5b4161a90d214fb6e84ff5aa1d5d764",
+        "9ea1fba5f2b1da696f460d3be909b28452bcf402941c3a4eb88465967f607793",
+        "df54982f73dcf5d7160fec46092818b9dfa3918c150d8175c407b59d8a5b9ef2"
+      ],
+      "source_tree_hash": "f1e358e99914563305428cece1b1595bc76a58643184407ec5b222162d650332",
+      "type": "csv",
+      "validation_outcome": "passed"
+    },
+    {
+      "config_hash": "51415c2ce68c89d9ce2b042b0a7a811fe3e98180b72460006f9d0465f6bf49b7",
+      "copy_or_render_status": "deterministic_export",
+      "export_timestamp": "2026-07-16T13:45:21+00:00",
+      "path": "manuscript/mdpi_information/assets/source_data/figures/figure_s1_subgroup_heatmap_source.csv",
+      "run_id": "canonical_v2_20260714T221501Z_483f96f",
+      "scientific_input_hash": "caffb945d15f990e3a789e9707f7a8a9115be31fecbbd705822994a10cfaf151",
+      "sha256": "9075c865b1aa10a298b397b4168eb3b93b405c6bdb62638ef416dcc1934d1f4a",
+      "size_bytes": 622962,
+      "source_paths": [
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_tables/table_08_support_aware_subgroup_diagnostics.csv"
+      ],
+      "source_sha256_values": [
+        "fd705d230c9e121a355a883268ce266d4bf426b3b6e81b703b7d8abdd9399612"
+      ],
+      "source_tree_hash": "f1e358e99914563305428cece1b1595bc76a58643184407ec5b222162d650332",
+      "type": "csv",
+      "validation_outcome": "passed"
+    },
+    {
+      "config_hash": "51415c2ce68c89d9ce2b042b0a7a811fe3e98180b72460006f9d0465f6bf49b7",
+      "copy_or_render_status": "deterministic_export",
+      "export_timestamp": "2026-07-16T13:45:21+00:00",
+      "path": "manuscript/mdpi_information/assets/source_data/figures/figure_s2_class_grouped_shap_source.csv",
+      "run_id": "canonical_v2_20260714T221501Z_483f96f",
+      "scientific_input_hash": "caffb945d15f990e3a789e9707f7a8a9115be31fecbbd705822994a10cfaf151",
+      "sha256": "9eefe05f51a245263e2ccef5bacab12c3a1c62a53579c3c1091b54aa404c8b54",
+      "size_bytes": 31293,
+      "source_paths": [
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/oof_shap/class_2_grouped_shap_importance.csv",
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/oof_shap/class_3_grouped_shap_importance.csv",
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/oof_shap/class_4_grouped_shap_importance.csv"
+      ],
+      "source_sha256_values": [
+        "a728a0c787c940b03c9d52be6fa0c109a9f20c3ca8d6a8a99c69f8e42afda683",
+        "a7c865323a4f08ffc9d4dce5f43f682f44c69866edaf669a7867e4854e07bf18",
+        "0ad1def5723d1aba63762889b8b449835ff712e6a136abcb81d0a73170505d1a"
+      ],
+      "source_tree_hash": "f1e358e99914563305428cece1b1595bc76a58643184407ec5b222162d650332",
+      "type": "csv",
+      "validation_outcome": "passed"
+    },
+    {
+      "config_hash": "51415c2ce68c89d9ce2b042b0a7a811fe3e98180b72460006f9d0465f6bf49b7",
+      "copy_or_render_status": "deterministic_export",
+      "export_timestamp": "2026-07-16T13:45:21+00:00",
+      "path": "manuscript/mdpi_information/assets/source_data/figures/figure_s3_heuristic_budget_sensitivity_source.csv",
+      "run_id": "canonical_v2_20260714T221501Z_483f96f",
+      "scientific_input_hash": "caffb945d15f990e3a789e9707f7a8a9115be31fecbbd705822994a10cfaf151",
+      "sha256": "0206fcc525fb478e251e21159ccb4c0ef6835bd942ce70d644cc63e9d81923f7",
+      "size_bytes": 11252,
+      "source_paths": [
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/supplementary/heuristic_counterfactual/heuristic_search_budget_sensitivity.csv"
+      ],
+      "source_sha256_values": [
+        "4bf87931e1a7463b5dad530bd7c22e4fd93ff355303ca391540f18de4f44aaa6"
+      ],
+      "source_tree_hash": "f1e358e99914563305428cece1b1595bc76a58643184407ec5b222162d650332",
+      "type": "csv",
+      "validation_outcome": "passed"
+    },
+    {
+      "config_hash": "51415c2ce68c89d9ce2b042b0a7a811fe3e98180b72460006f9d0465f6bf49b7",
+      "copy_or_render_status": "deterministic_export",
+      "export_timestamp": "2026-07-16T13:45:21+00:00",
+      "path": "manuscript/mdpi_information/assets/source_data/tables/core_table_01_dataset_roles_target_mappings_support.csv",
+      "run_id": "canonical_v2_20260714T221501Z_483f96f",
+      "scientific_input_hash": "06c507bee525ea1daca43b61249764007d4d8baaa05c9333f23446ea723ce160",
+      "sha256": "a2e4b76e5890b1e80f5492e5a5168d7131624bb5ff08b3178283821fa52e6951",
+      "size_bytes": 12598,
+      "source_paths": [
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_tables/table_01_dataset_roles_target_mappings_support.csv"
+      ],
+      "source_sha256_values": [
+        "a2e4b76e5890b1e80f5492e5a5168d7131624bb5ff08b3178283821fa52e6951"
+      ],
+      "source_tree_hash": "f1e358e99914563305428cece1b1595bc76a58643184407ec5b222162d650332",
+      "type": "csv",
+      "validation_outcome": "passed"
+    },
+    {
+      "config_hash": "51415c2ce68c89d9ce2b042b0a7a811fe3e98180b72460006f9d0465f6bf49b7",
+      "copy_or_render_status": "deterministic_export",
+      "export_timestamp": "2026-07-16T13:45:21+00:00",
+      "path": "manuscript/mdpi_information/assets/source_data/tables/core_table_02_exact_primary_feature_policy.csv",
+      "run_id": "canonical_v2_20260714T221501Z_483f96f",
+      "scientific_input_hash": "06c507bee525ea1daca43b61249764007d4d8baaa05c9333f23446ea723ce160",
+      "sha256": "2f49a5897e6a0243f8d0e61ba894d946963e8c17688a53ab4cc5f72b50181778",
+      "size_bytes": 10297,
+      "source_paths": [
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_tables/table_02_exact_primary_feature_policy.csv"
+      ],
+      "source_sha256_values": [
+        "2f49a5897e6a0243f8d0e61ba894d946963e8c17688a53ab4cc5f72b50181778"
+      ],
+      "source_tree_hash": "f1e358e99914563305428cece1b1595bc76a58643184407ec5b222162d650332",
+      "type": "csv",
+      "validation_outcome": "passed"
+    },
+    {
+      "config_hash": "51415c2ce68c89d9ce2b042b0a7a811fe3e98180b72460006f9d0465f6bf49b7",
+      "copy_or_render_status": "deterministic_export",
+      "export_timestamp": "2026-07-16T13:45:21+00:00",
+      "path": "manuscript/mdpi_information/assets/source_data/tables/core_table_03_four_model_nested_benchmark.csv",
+      "run_id": "canonical_v2_20260714T221501Z_483f96f",
+      "scientific_input_hash": "06c507bee525ea1daca43b61249764007d4d8baaa05c9333f23446ea723ce160",
+      "sha256": "45c0aa5c793cd6066235fead2370d23fa88eb161694cabfb93fbe9ae5a1730ce",
+      "size_bytes": 113708,
+      "source_paths": [
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_tables/table_03_four_model_nested_benchmark.csv"
+      ],
+      "source_sha256_values": [
+        "45c0aa5c793cd6066235fead2370d23fa88eb161694cabfb93fbe9ae5a1730ce"
+      ],
+      "source_tree_hash": "f1e358e99914563305428cece1b1595bc76a58643184407ec5b222162d650332",
+      "type": "csv",
+      "validation_outcome": "passed"
+    },
+    {
+      "config_hash": "51415c2ce68c89d9ce2b042b0a7a811fe3e98180b72460006f9d0465f6bf49b7",
+      "copy_or_render_status": "deterministic_export",
+      "export_timestamp": "2026-07-16T13:45:21+00:00",
+      "path": "manuscript/mdpi_information/assets/source_data/tables/core_table_04_leakage_policy_sensitivity.csv",
+      "run_id": "canonical_v2_20260714T221501Z_483f96f",
+      "scientific_input_hash": "06c507bee525ea1daca43b61249764007d4d8baaa05c9333f23446ea723ce160",
+      "sha256": "afd5284c5183c049a5e34607c6c2942838c7dbfe197f0cc3b4d63fba60a8ec7e",
+      "size_bytes": 294367,
+      "source_paths": [
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_tables/table_04_leakage_policy_sensitivity.csv"
+      ],
+      "source_sha256_values": [
+        "afd5284c5183c049a5e34607c6c2942838c7dbfe197f0cc3b4d63fba60a8ec7e"
+      ],
+      "source_tree_hash": "f1e358e99914563305428cece1b1595bc76a58643184407ec5b222162d650332",
+      "type": "csv",
+      "validation_outcome": "passed"
+    },
+    {
+      "config_hash": "51415c2ce68c89d9ce2b042b0a7a811fe3e98180b72460006f9d0465f6bf49b7",
+      "copy_or_render_status": "deterministic_export",
+      "export_timestamp": "2026-07-16T13:45:21+00:00",
+      "path": "manuscript/mdpi_information/assets/source_data/tables/core_table_05_cross_fitted_sigmoid_calibration.csv",
+      "run_id": "canonical_v2_20260714T221501Z_483f96f",
+      "scientific_input_hash": "06c507bee525ea1daca43b61249764007d4d8baaa05c9333f23446ea723ce160",
+      "sha256": "b5c1f908383ec5de7db523b161b487e5cde37a70605a8698db899304d7d2c563",
+      "size_bytes": 45294,
+      "source_paths": [
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_tables/table_05_cross_fitted_sigmoid_calibration.csv"
+      ],
+      "source_sha256_values": [
+        "b5c1f908383ec5de7db523b161b487e5cde37a70605a8698db899304d7d2c563"
+      ],
+      "source_tree_hash": "f1e358e99914563305428cece1b1595bc76a58643184407ec5b222162d650332",
+      "type": "csv",
+      "validation_outcome": "passed"
+    },
+    {
+      "config_hash": "51415c2ce68c89d9ce2b042b0a7a811fe3e98180b72460006f9d0465f6bf49b7",
+      "copy_or_render_status": "deterministic_export",
+      "export_timestamp": "2026-07-16T13:45:21+00:00",
+      "path": "manuscript/mdpi_information/assets/source_data/tables/core_table_06_global_grouped_oof_shap.csv",
+      "run_id": "canonical_v2_20260714T221501Z_483f96f",
+      "scientific_input_hash": "06c507bee525ea1daca43b61249764007d4d8baaa05c9333f23446ea723ce160",
+      "sha256": "5d5fcf96dc20e672db876b0b2ddd5969910d3e44736200282d95ce6ecb11801b",
+      "size_bytes": 21444,
+      "source_paths": [
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_tables/table_06_global_grouped_oof_shap.csv"
+      ],
+      "source_sha256_values": [
+        "5d5fcf96dc20e672db876b0b2ddd5969910d3e44736200282d95ce6ecb11801b"
+      ],
+      "source_tree_hash": "f1e358e99914563305428cece1b1595bc76a58643184407ec5b222162d650332",
+      "type": "csv",
+      "validation_outcome": "passed"
+    },
+    {
+      "config_hash": "51415c2ce68c89d9ce2b042b0a7a811fe3e98180b72460006f9d0465f6bf49b7",
+      "copy_or_render_status": "deterministic_export",
+      "export_timestamp": "2026-07-16T13:45:21+00:00",
+      "path": "manuscript/mdpi_information/assets/source_data/tables/core_table_07_oof_shap_stability.csv",
+      "run_id": "canonical_v2_20260714T221501Z_483f96f",
+      "scientific_input_hash": "06c507bee525ea1daca43b61249764007d4d8baaa05c9333f23446ea723ce160",
+      "sha256": "2a0928c9f68b106143334a5f975216ffbc4e2b5227b77f1869e8fc9b6eb4d2d3",
+      "size_bytes": 145430,
+      "source_paths": [
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_tables/table_07_oof_shap_stability.csv"
+      ],
+      "source_sha256_values": [
+        "2a0928c9f68b106143334a5f975216ffbc4e2b5227b77f1869e8fc9b6eb4d2d3"
+      ],
+      "source_tree_hash": "f1e358e99914563305428cece1b1595bc76a58643184407ec5b222162d650332",
+      "type": "csv",
+      "validation_outcome": "passed"
+    },
+    {
+      "config_hash": "51415c2ce68c89d9ce2b042b0a7a811fe3e98180b72460006f9d0465f6bf49b7",
+      "copy_or_render_status": "deterministic_export",
+      "export_timestamp": "2026-07-16T13:45:21+00:00",
+      "path": "manuscript/mdpi_information/assets/source_data/tables/core_table_08_support_aware_subgroup_diagnostics.csv",
+      "run_id": "canonical_v2_20260714T221501Z_483f96f",
+      "scientific_input_hash": "06c507bee525ea1daca43b61249764007d4d8baaa05c9333f23446ea723ce160",
+      "sha256": "fd705d230c9e121a355a883268ce266d4bf426b3b6e81b703b7d8abdd9399612",
+      "size_bytes": 2195799,
+      "source_paths": [
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_tables/table_08_support_aware_subgroup_diagnostics.csv"
+      ],
+      "source_sha256_values": [
+        "fd705d230c9e121a355a883268ce266d4bf426b3b6e81b703b7d8abdd9399612"
+      ],
+      "source_tree_hash": "f1e358e99914563305428cece1b1595bc76a58643184407ec5b222162d650332",
+      "type": "csv",
+      "validation_outcome": "passed"
+    },
+    {
+      "config_hash": "51415c2ce68c89d9ce2b042b0a7a811fe3e98180b72460006f9d0465f6bf49b7",
+      "copy_or_render_status": "deterministic_export",
+      "export_timestamp": "2026-07-16T13:45:21+00:00",
+      "path": "manuscript/mdpi_information/assets/source_data/tables/core_table_09_department_proxy_reconstructability.csv",
+      "run_id": "canonical_v2_20260714T221501Z_483f96f",
+      "scientific_input_hash": "06c507bee525ea1daca43b61249764007d4d8baaa05c9333f23446ea723ce160",
+      "sha256": "b295016a1e4bb6acf8eb023bef9d496ca212fb77d64671ef0b38e6b04125290b",
+      "size_bytes": 39445,
+      "source_paths": [
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_tables/table_09_department_proxy_reconstructability.csv"
+      ],
+      "source_sha256_values": [
+        "b295016a1e4bb6acf8eb023bef9d496ca212fb77d64671ef0b38e6b04125290b"
+      ],
+      "source_tree_hash": "f1e358e99914563305428cece1b1595bc76a58643184407ec5b222162d650332",
+      "type": "csv",
+      "validation_outcome": "passed"
+    },
+    {
+      "config_hash": "51415c2ce68c89d9ce2b042b0a7a811fe3e98180b72460006f9d0465f6bf49b7",
+      "copy_or_render_status": "deterministic_export",
+      "export_timestamp": "2026-07-16T13:45:21+00:00",
+      "path": "manuscript/mdpi_information/assets/source_data/tables/core_table_10_hrdataset_v14_mapped_target_replication.csv",
+      "run_id": "canonical_v2_20260714T221501Z_483f96f",
+      "scientific_input_hash": "06c507bee525ea1daca43b61249764007d4d8baaa05c9333f23446ea723ce160",
+      "sha256": "7c3755f5afebd82e2415f38c5e15b70be791359141a33d6a8cdbab73d9f4875b",
+      "size_bytes": 179685,
+      "source_paths": [
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_tables/table_10_hrdataset_v14_mapped_target_replication.csv"
+      ],
+      "source_sha256_values": [
+        "7c3755f5afebd82e2415f38c5e15b70be791359141a33d6a8cdbab73d9f4875b"
+      ],
+      "source_tree_hash": "f1e358e99914563305428cece1b1595bc76a58643184407ec5b222162d650332",
+      "type": "csv",
+      "validation_outcome": "passed"
+    },
+    {
+      "config_hash": "51415c2ce68c89d9ce2b042b0a7a811fe3e98180b72460006f9d0465f6bf49b7",
+      "copy_or_render_status": "deterministic_export",
+      "export_timestamp": "2026-07-16T13:45:21+00:00",
+      "path": "manuscript/mdpi_information/assets/source_data/tables/core_table_13_reproducibility_and_claim_boundaries.csv",
+      "run_id": "canonical_v2_20260714T221501Z_483f96f",
+      "scientific_input_hash": "06c507bee525ea1daca43b61249764007d4d8baaa05c9333f23446ea723ce160",
+      "sha256": "52184e4f9c950ce8b85ab1ff78a7dda9d5740f9eb2ffc546e0bb0b7df4f281ff",
+      "size_bytes": 49564,
+      "source_paths": [
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_tables/table_13_reproducibility_and_claim_boundaries.csv"
+      ],
+      "source_sha256_values": [
+        "52184e4f9c950ce8b85ab1ff78a7dda9d5740f9eb2ffc546e0bb0b7df4f281ff"
+      ],
+      "source_tree_hash": "f1e358e99914563305428cece1b1595bc76a58643184407ec5b222162d650332",
+      "type": "csv",
+      "validation_outcome": "passed"
+    },
+    {
+      "config_hash": "51415c2ce68c89d9ce2b042b0a7a811fe3e98180b72460006f9d0465f6bf49b7",
+      "copy_or_render_status": "deterministic_export",
+      "export_timestamp": "2026-07-16T13:45:21+00:00",
+      "path": "manuscript/mdpi_information/assets/source_data/tables/supplementary_table_11_heuristic_counterfactual_search_success.csv",
+      "run_id": "canonical_v2_20260714T221501Z_483f96f",
+      "scientific_input_hash": "06c507bee525ea1daca43b61249764007d4d8baaa05c9333f23446ea723ce160",
+      "sha256": "838fdbfe1ccb79b0ec66bc0da0ad8c25fe0258b004abc4892fec12c06460239e",
+      "size_bytes": 112639,
+      "source_paths": [
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/supplementary/supplementary_tables/table_11_heuristic_counterfactual_search_success.csv"
+      ],
+      "source_sha256_values": [
+        "838fdbfe1ccb79b0ec66bc0da0ad8c25fe0258b004abc4892fec12c06460239e"
+      ],
+      "source_tree_hash": "f1e358e99914563305428cece1b1595bc76a58643184407ec5b222162d650332",
+      "type": "csv",
+      "validation_outcome": "passed"
+    },
+    {
+      "config_hash": "51415c2ce68c89d9ce2b042b0a7a811fe3e98180b72460006f9d0465f6bf49b7",
+      "copy_or_render_status": "deterministic_export",
+      "export_timestamp": "2026-07-16T13:45:21+00:00",
+      "path": "manuscript/mdpi_information/assets/source_data/tables/supplementary_table_12_restricted_and_binary_task_evidence.csv",
+      "run_id": "canonical_v2_20260714T221501Z_483f96f",
+      "scientific_input_hash": "06c507bee525ea1daca43b61249764007d4d8baaa05c9333f23446ea723ce160",
+      "sha256": "666e6b4f77e3815d52762d61f3858659274cecf772564d678e404c79d2571552",
+      "size_bytes": 201648,
+      "source_paths": [
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/supplementary/supplementary_tables/table_12_restricted_and_binary_task_evidence.csv"
+      ],
+      "source_sha256_values": [
+        "666e6b4f77e3815d52762d61f3858659274cecf772564d678e404c79d2571552"
+      ],
+      "source_tree_hash": "f1e358e99914563305428cece1b1595bc76a58643184407ec5b222162d650332",
+      "type": "csv",
+      "validation_outcome": "passed"
+    },
+    {
+      "config_hash": "51415c2ce68c89d9ce2b042b0a7a811fe3e98180b72460006f9d0465f6bf49b7",
+      "copy_or_render_status": "deterministic_export",
+      "export_timestamp": "2026-07-16T13:45:21+00:00",
+      "path": "manuscript/mdpi_information/assets/source_data/tables/supplementary_table_13_supplementary_reproducibility_and_claim_boundaries.csv",
+      "run_id": "canonical_v2_20260714T221501Z_483f96f",
+      "scientific_input_hash": "06c507bee525ea1daca43b61249764007d4d8baaa05c9333f23446ea723ce160",
+      "sha256": "9456b2afd8a1d485ff7b41881fe7514ca90907c052179d22e393cf7e2137461a",
+      "size_bytes": 68280,
+      "source_paths": [
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/supplementary/supplementary_tables/table_13_supplementary_reproducibility_and_claim_boundaries.csv"
+      ],
+      "source_sha256_values": [
+        "9456b2afd8a1d485ff7b41881fe7514ca90907c052179d22e393cf7e2137461a"
+      ],
+      "source_tree_hash": "f1e358e99914563305428cece1b1595bc76a58643184407ec5b222162d650332",
+      "type": "csv",
+      "validation_outcome": "passed"
+    },
+    {
+      "config_hash": "51415c2ce68c89d9ce2b042b0a7a811fe3e98180b72460006f9d0465f6bf49b7",
+      "copy_or_render_status": "deterministic_export",
+      "export_timestamp": "2026-07-16T13:45:21+00:00",
+      "path": "manuscript/mdpi_information/assets/tables/main/table_01_datasets.csv",
+      "run_id": "canonical_v2_20260714T221501Z_483f96f",
+      "scientific_input_hash": "06c507bee525ea1daca43b61249764007d4d8baaa05c9333f23446ea723ce160",
+      "sha256": "1a593a9fb7466934c87014c3259519cbf3734834eed0a80921664a56210a2909",
+      "size_bytes": 1339,
+      "source_paths": [
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_tables/table_01_dataset_roles_target_mappings_support.csv"
+      ],
+      "source_sha256_values": [
+        "a2e4b76e5890b1e80f5492e5a5168d7131624bb5ff08b3178283821fa52e6951"
+      ],
+      "source_tree_hash": "f1e358e99914563305428cece1b1595bc76a58643184407ec5b222162d650332",
+      "type": "csv",
+      "validation_outcome": "passed"
+    },
+    {
+      "config_hash": "51415c2ce68c89d9ce2b042b0a7a811fe3e98180b72460006f9d0465f6bf49b7",
+      "copy_or_render_status": "deterministic_export",
+      "export_timestamp": "2026-07-16T13:45:21+00:00",
+      "path": "manuscript/mdpi_information/assets/tables/main/table_01_datasets.md",
+      "run_id": "canonical_v2_20260714T221501Z_483f96f",
+      "scientific_input_hash": "06c507bee525ea1daca43b61249764007d4d8baaa05c9333f23446ea723ce160",
+      "sha256": "113f6625e62cb8a8aa3d61b6b4ce3e80384477196ad8c7dca11495a2643f774a",
+      "size_bytes": 1567,
+      "source_paths": [
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_tables/table_01_dataset_roles_target_mappings_support.csv"
+      ],
+      "source_sha256_values": [
+        "a2e4b76e5890b1e80f5492e5a5168d7131624bb5ff08b3178283821fa52e6951"
+      ],
+      "source_tree_hash": "f1e358e99914563305428cece1b1595bc76a58643184407ec5b222162d650332",
+      "type": "md",
+      "validation_outcome": "passed"
+    },
+    {
+      "config_hash": "51415c2ce68c89d9ce2b042b0a7a811fe3e98180b72460006f9d0465f6bf49b7",
+      "copy_or_render_status": "deterministic_export",
+      "export_timestamp": "2026-07-16T13:45:21+00:00",
+      "path": "manuscript/mdpi_information/assets/tables/main/table_01_datasets.source_map.json",
+      "run_id": "canonical_v2_20260714T221501Z_483f96f",
+      "scientific_input_hash": "06c507bee525ea1daca43b61249764007d4d8baaa05c9333f23446ea723ce160",
+      "sha256": "0298aa69197db36b0a2f9420747617685c0002d54b8162c32b4bde60b937df62",
+      "size_bytes": 1084,
+      "source_paths": [
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_tables/table_01_dataset_roles_target_mappings_support.csv"
+      ],
+      "source_sha256_values": [
+        "a2e4b76e5890b1e80f5492e5a5168d7131624bb5ff08b3178283821fa52e6951"
+      ],
+      "source_tree_hash": "f1e358e99914563305428cece1b1595bc76a58643184407ec5b222162d650332",
+      "type": "json",
+      "validation_outcome": "passed"
+    },
+    {
+      "config_hash": "51415c2ce68c89d9ce2b042b0a7a811fe3e98180b72460006f9d0465f6bf49b7",
+      "copy_or_render_status": "deterministic_export",
+      "export_timestamp": "2026-07-16T13:45:21+00:00",
+      "path": "manuscript/mdpi_information/assets/tables/main/table_02_feature_governance.csv",
+      "run_id": "canonical_v2_20260714T221501Z_483f96f",
+      "scientific_input_hash": "06c507bee525ea1daca43b61249764007d4d8baaa05c9333f23446ea723ce160",
+      "sha256": "33c0d83ecfa9e07a8e04b08bb87e30195e8e4b8b1d1e2294f121b7944dabfdca",
+      "size_bytes": 4169,
+      "source_paths": [
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_tables/table_02_exact_primary_feature_policy.csv"
+      ],
+      "source_sha256_values": [
+        "2f49a5897e6a0243f8d0e61ba894d946963e8c17688a53ab4cc5f72b50181778"
+      ],
+      "source_tree_hash": "f1e358e99914563305428cece1b1595bc76a58643184407ec5b222162d650332",
+      "type": "csv",
+      "validation_outcome": "passed"
+    },
+    {
+      "config_hash": "51415c2ce68c89d9ce2b042b0a7a811fe3e98180b72460006f9d0465f6bf49b7",
+      "copy_or_render_status": "deterministic_export",
+      "export_timestamp": "2026-07-16T13:45:21+00:00",
+      "path": "manuscript/mdpi_information/assets/tables/main/table_02_feature_governance.md",
+      "run_id": "canonical_v2_20260714T221501Z_483f96f",
+      "scientific_input_hash": "06c507bee525ea1daca43b61249764007d4d8baaa05c9333f23446ea723ce160",
+      "sha256": "c475daf9f88f8649006bfecc1ea02e82ccaf7dbc64ded063ae71f106e123b553",
+      "size_bytes": 4471,
+      "source_paths": [
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_tables/table_02_exact_primary_feature_policy.csv"
+      ],
+      "source_sha256_values": [
+        "2f49a5897e6a0243f8d0e61ba894d946963e8c17688a53ab4cc5f72b50181778"
+      ],
+      "source_tree_hash": "f1e358e99914563305428cece1b1595bc76a58643184407ec5b222162d650332",
+      "type": "md",
+      "validation_outcome": "passed"
+    },
+    {
+      "config_hash": "51415c2ce68c89d9ce2b042b0a7a811fe3e98180b72460006f9d0465f6bf49b7",
+      "copy_or_render_status": "deterministic_export",
+      "export_timestamp": "2026-07-16T13:45:21+00:00",
+      "path": "manuscript/mdpi_information/assets/tables/main/table_02_feature_governance.source_map.json",
+      "run_id": "canonical_v2_20260714T221501Z_483f96f",
+      "scientific_input_hash": "06c507bee525ea1daca43b61249764007d4d8baaa05c9333f23446ea723ce160",
+      "sha256": "9548f5e0b23e0521e76936ca4dc5d5abbea5d31d803b60fb9ecc84594a854c26",
+      "size_bytes": 1072,
+      "source_paths": [
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_tables/table_02_exact_primary_feature_policy.csv"
+      ],
+      "source_sha256_values": [
+        "2f49a5897e6a0243f8d0e61ba894d946963e8c17688a53ab4cc5f72b50181778"
+      ],
+      "source_tree_hash": "f1e358e99914563305428cece1b1595bc76a58643184407ec5b222162d650332",
+      "type": "json",
+      "validation_outcome": "passed"
+    },
+    {
+      "config_hash": "51415c2ce68c89d9ce2b042b0a7a811fe3e98180b72460006f9d0465f6bf49b7",
+      "copy_or_render_status": "deterministic_export",
+      "export_timestamp": "2026-07-16T13:45:21+00:00",
+      "path": "manuscript/mdpi_information/assets/tables/main/table_03_nested_benchmark.csv",
+      "run_id": "canonical_v2_20260714T221501Z_483f96f",
+      "scientific_input_hash": "06c507bee525ea1daca43b61249764007d4d8baaa05c9333f23446ea723ce160",
+      "sha256": "ed192b9439a81fe3cef9a16fa18839a8ecaf5667be98ecb69833ceb2d01b99e9",
+      "size_bytes": 2967,
+      "source_paths": [
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_tables/table_03_four_model_nested_benchmark.csv"
+      ],
+      "source_sha256_values": [
+        "45c0aa5c793cd6066235fead2370d23fa88eb161694cabfb93fbe9ae5a1730ce"
+      ],
+      "source_tree_hash": "f1e358e99914563305428cece1b1595bc76a58643184407ec5b222162d650332",
+      "type": "csv",
+      "validation_outcome": "passed"
+    },
+    {
+      "config_hash": "51415c2ce68c89d9ce2b042b0a7a811fe3e98180b72460006f9d0465f6bf49b7",
+      "copy_or_render_status": "deterministic_export",
+      "export_timestamp": "2026-07-16T13:45:21+00:00",
+      "path": "manuscript/mdpi_information/assets/tables/main/table_03_nested_benchmark.md",
+      "run_id": "canonical_v2_20260714T221501Z_483f96f",
+      "scientific_input_hash": "06c507bee525ea1daca43b61249764007d4d8baaa05c9333f23446ea723ce160",
+      "sha256": "2df4b119039da13be03416c586696849cc67305162f895d4e2420bf5ec3430db",
+      "size_bytes": 1140,
+      "source_paths": [
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_tables/table_03_four_model_nested_benchmark.csv"
+      ],
+      "source_sha256_values": [
+        "45c0aa5c793cd6066235fead2370d23fa88eb161694cabfb93fbe9ae5a1730ce"
+      ],
+      "source_tree_hash": "f1e358e99914563305428cece1b1595bc76a58643184407ec5b222162d650332",
+      "type": "md",
+      "validation_outcome": "passed"
+    },
+    {
+      "config_hash": "51415c2ce68c89d9ce2b042b0a7a811fe3e98180b72460006f9d0465f6bf49b7",
+      "copy_or_render_status": "deterministic_export",
+      "export_timestamp": "2026-07-16T13:45:21+00:00",
+      "path": "manuscript/mdpi_information/assets/tables/main/table_03_nested_benchmark.source_map.json",
+      "run_id": "canonical_v2_20260714T221501Z_483f96f",
+      "scientific_input_hash": "06c507bee525ea1daca43b61249764007d4d8baaa05c9333f23446ea723ce160",
+      "sha256": "865e2b0b9932c2f9a702f091237cb6a22bc12f283afaab11da6ffb6c211790a4",
+      "size_bytes": 1072,
+      "source_paths": [
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_tables/table_03_four_model_nested_benchmark.csv"
+      ],
+      "source_sha256_values": [
+        "45c0aa5c793cd6066235fead2370d23fa88eb161694cabfb93fbe9ae5a1730ce"
+      ],
+      "source_tree_hash": "f1e358e99914563305428cece1b1595bc76a58643184407ec5b222162d650332",
+      "type": "json",
+      "validation_outcome": "passed"
+    },
+    {
+      "config_hash": "51415c2ce68c89d9ce2b042b0a7a811fe3e98180b72460006f9d0465f6bf49b7",
+      "copy_or_render_status": "deterministic_export",
+      "export_timestamp": "2026-07-16T13:45:21+00:00",
+      "path": "manuscript/mdpi_information/assets/tables/main/table_04_feature_policy_sensitivity.csv",
+      "run_id": "canonical_v2_20260714T221501Z_483f96f",
+      "scientific_input_hash": "06c507bee525ea1daca43b61249764007d4d8baaa05c9333f23446ea723ce160",
+      "sha256": "e73313377a0cd6171adc6240e46d12b52764e52a7fc3280e8f0e8b5cf26032f9",
+      "size_bytes": 5229,
+      "source_paths": [
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_tables/table_04_leakage_policy_sensitivity.csv",
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_tables/table_02_exact_primary_feature_policy.csv"
+      ],
+      "source_sha256_values": [
+        "afd5284c5183c049a5e34607c6c2942838c7dbfe197f0cc3b4d63fba60a8ec7e",
+        "2f49a5897e6a0243f8d0e61ba894d946963e8c17688a53ab4cc5f72b50181778"
+      ],
+      "source_tree_hash": "f1e358e99914563305428cece1b1595bc76a58643184407ec5b222162d650332",
+      "type": "csv",
+      "validation_outcome": "passed"
+    },
+    {
+      "config_hash": "51415c2ce68c89d9ce2b042b0a7a811fe3e98180b72460006f9d0465f6bf49b7",
+      "copy_or_render_status": "deterministic_export",
+      "export_timestamp": "2026-07-16T13:45:21+00:00",
+      "path": "manuscript/mdpi_information/assets/tables/main/table_04_feature_policy_sensitivity.md",
+      "run_id": "canonical_v2_20260714T221501Z_483f96f",
+      "scientific_input_hash": "06c507bee525ea1daca43b61249764007d4d8baaa05c9333f23446ea723ce160",
+      "sha256": "59134dd19086a438cfb81cbda67e3ecd318e00b6c7c75c4d185adbf3a3000cd5",
+      "size_bytes": 1830,
+      "source_paths": [
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_tables/table_04_leakage_policy_sensitivity.csv",
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_tables/table_02_exact_primary_feature_policy.csv"
+      ],
+      "source_sha256_values": [
+        "afd5284c5183c049a5e34607c6c2942838c7dbfe197f0cc3b4d63fba60a8ec7e",
+        "2f49a5897e6a0243f8d0e61ba894d946963e8c17688a53ab4cc5f72b50181778"
+      ],
+      "source_tree_hash": "f1e358e99914563305428cece1b1595bc76a58643184407ec5b222162d650332",
+      "type": "md",
+      "validation_outcome": "passed"
+    },
+    {
+      "config_hash": "51415c2ce68c89d9ce2b042b0a7a811fe3e98180b72460006f9d0465f6bf49b7",
+      "copy_or_render_status": "deterministic_export",
+      "export_timestamp": "2026-07-16T13:45:21+00:00",
+      "path": "manuscript/mdpi_information/assets/tables/main/table_04_feature_policy_sensitivity.source_map.json",
+      "run_id": "canonical_v2_20260714T221501Z_483f96f",
+      "scientific_input_hash": "06c507bee525ea1daca43b61249764007d4d8baaa05c9333f23446ea723ce160",
+      "sha256": "a259399dd26244ffc27ebf9fa3cad27a75526266ef4f3f2d51dba2938d04c781",
+      "size_bytes": 1316,
+      "source_paths": [
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_tables/table_04_leakage_policy_sensitivity.csv",
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_tables/table_02_exact_primary_feature_policy.csv"
+      ],
+      "source_sha256_values": [
+        "afd5284c5183c049a5e34607c6c2942838c7dbfe197f0cc3b4d63fba60a8ec7e",
+        "2f49a5897e6a0243f8d0e61ba894d946963e8c17688a53ab4cc5f72b50181778"
+      ],
+      "source_tree_hash": "f1e358e99914563305428cece1b1595bc76a58643184407ec5b222162d650332",
+      "type": "json",
+      "validation_outcome": "passed"
+    },
+    {
+      "config_hash": "51415c2ce68c89d9ce2b042b0a7a811fe3e98180b72460006f9d0465f6bf49b7",
+      "copy_or_render_status": "deterministic_export",
+      "export_timestamp": "2026-07-16T13:45:21+00:00",
+      "path": "manuscript/mdpi_information/assets/tables/main/table_05_calibration.csv",
+      "run_id": "canonical_v2_20260714T221501Z_483f96f",
+      "scientific_input_hash": "06c507bee525ea1daca43b61249764007d4d8baaa05c9333f23446ea723ce160",
+      "sha256": "3eee29b744548c6ec718a99a133dd9f2ee76bc3850f235bb12649c87b410c6c3",
+      "size_bytes": 2030,
+      "source_paths": [
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_tables/table_05_cross_fitted_sigmoid_calibration.csv"
+      ],
+      "source_sha256_values": [
+        "b5c1f908383ec5de7db523b161b487e5cde37a70605a8698db899304d7d2c563"
+      ],
+      "source_tree_hash": "f1e358e99914563305428cece1b1595bc76a58643184407ec5b222162d650332",
+      "type": "csv",
+      "validation_outcome": "passed"
+    },
+    {
+      "config_hash": "51415c2ce68c89d9ce2b042b0a7a811fe3e98180b72460006f9d0465f6bf49b7",
+      "copy_or_render_status": "deterministic_export",
+      "export_timestamp": "2026-07-16T13:45:21+00:00",
+      "path": "manuscript/mdpi_information/assets/tables/main/table_05_calibration.md",
+      "run_id": "canonical_v2_20260714T221501Z_483f96f",
+      "scientific_input_hash": "06c507bee525ea1daca43b61249764007d4d8baaa05c9333f23446ea723ce160",
+      "sha256": "c0a568c041e8c6393467a1ab30940169b13cfd6667281015a1e404695e293cfe",
+      "size_bytes": 933,
+      "source_paths": [
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_tables/table_05_cross_fitted_sigmoid_calibration.csv"
+      ],
+      "source_sha256_values": [
+        "b5c1f908383ec5de7db523b161b487e5cde37a70605a8698db899304d7d2c563"
+      ],
+      "source_tree_hash": "f1e358e99914563305428cece1b1595bc76a58643184407ec5b222162d650332",
+      "type": "md",
+      "validation_outcome": "passed"
+    },
+    {
+      "config_hash": "51415c2ce68c89d9ce2b042b0a7a811fe3e98180b72460006f9d0465f6bf49b7",
+      "copy_or_render_status": "deterministic_export",
+      "export_timestamp": "2026-07-16T13:45:21+00:00",
+      "path": "manuscript/mdpi_information/assets/tables/main/table_05_calibration.source_map.json",
+      "run_id": "canonical_v2_20260714T221501Z_483f96f",
+      "scientific_input_hash": "06c507bee525ea1daca43b61249764007d4d8baaa05c9333f23446ea723ce160",
+      "sha256": "1da0ed2648dffb331b1d43e84d7e97b0573e053b860fd522d0df76be0d226b2f",
+      "size_bytes": 1077,
+      "source_paths": [
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_tables/table_05_cross_fitted_sigmoid_calibration.csv"
+      ],
+      "source_sha256_values": [
+        "b5c1f908383ec5de7db523b161b487e5cde37a70605a8698db899304d7d2c563"
+      ],
+      "source_tree_hash": "f1e358e99914563305428cece1b1595bc76a58643184407ec5b222162d650332",
+      "type": "json",
+      "validation_outcome": "passed"
+    },
+    {
+      "config_hash": "51415c2ce68c89d9ce2b042b0a7a811fe3e98180b72460006f9d0465f6bf49b7",
+      "copy_or_render_status": "deterministic_export",
+      "export_timestamp": "2026-07-16T13:45:21+00:00",
+      "path": "manuscript/mdpi_information/assets/tables/main/table_06_shap_attribution_stability.csv",
+      "run_id": "canonical_v2_20260714T221501Z_483f96f",
+      "scientific_input_hash": "06c507bee525ea1daca43b61249764007d4d8baaa05c9333f23446ea723ce160",
+      "sha256": "53ba8dea8d3f121c7723ba138fa33be6dc9b3c71aeabe24f6a8222141f69af15",
+      "size_bytes": 6472,
+      "source_paths": [
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_tables/table_06_global_grouped_oof_shap.csv",
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_tables/table_07_oof_shap_stability.csv",
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/oof_shap/fold_feature_rankings.csv"
+      ],
+      "source_sha256_values": [
+        "5d5fcf96dc20e672db876b0b2ddd5969910d3e44736200282d95ce6ecb11801b",
+        "2a0928c9f68b106143334a5f975216ffbc4e2b5227b77f1869e8fc9b6eb4d2d3",
+        "56ef319560996e2888116e74883adf2e18ecb8e27606ff375a0a0e2fe1efa8e9"
+      ],
+      "source_tree_hash": "f1e358e99914563305428cece1b1595bc76a58643184407ec5b222162d650332",
+      "type": "csv",
+      "validation_outcome": "passed"
+    },
+    {
+      "config_hash": "51415c2ce68c89d9ce2b042b0a7a811fe3e98180b72460006f9d0465f6bf49b7",
+      "copy_or_render_status": "deterministic_export",
+      "export_timestamp": "2026-07-16T13:45:21+00:00",
+      "path": "manuscript/mdpi_information/assets/tables/main/table_06_shap_attribution_stability.md",
+      "run_id": "canonical_v2_20260714T221501Z_483f96f",
+      "scientific_input_hash": "06c507bee525ea1daca43b61249764007d4d8baaa05c9333f23446ea723ce160",
+      "sha256": "f8d29aa951afba4ec0c72c01943bce446c9ce37e6d2b63c48507e81bd205187d",
+      "size_bytes": 4400,
+      "source_paths": [
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_tables/table_06_global_grouped_oof_shap.csv",
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_tables/table_07_oof_shap_stability.csv",
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/oof_shap/fold_feature_rankings.csv"
+      ],
+      "source_sha256_values": [
+        "5d5fcf96dc20e672db876b0b2ddd5969910d3e44736200282d95ce6ecb11801b",
+        "2a0928c9f68b106143334a5f975216ffbc4e2b5227b77f1869e8fc9b6eb4d2d3",
+        "56ef319560996e2888116e74883adf2e18ecb8e27606ff375a0a0e2fe1efa8e9"
+      ],
+      "source_tree_hash": "f1e358e99914563305428cece1b1595bc76a58643184407ec5b222162d650332",
+      "type": "md",
+      "validation_outcome": "passed"
+    },
+    {
+      "config_hash": "51415c2ce68c89d9ce2b042b0a7a811fe3e98180b72460006f9d0465f6bf49b7",
+      "copy_or_render_status": "deterministic_export",
+      "export_timestamp": "2026-07-16T13:45:21+00:00",
+      "path": "manuscript/mdpi_information/assets/tables/main/table_06_shap_attribution_stability.source_map.json",
+      "run_id": "canonical_v2_20260714T221501Z_483f96f",
+      "scientific_input_hash": "06c507bee525ea1daca43b61249764007d4d8baaa05c9333f23446ea723ce160",
+      "sha256": "6a30ba61ceacbf37c5f099750e484ae61334d59293618be8cd83d0a0e8bb729c",
+      "size_bytes": 1523,
+      "source_paths": [
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_tables/table_06_global_grouped_oof_shap.csv",
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_tables/table_07_oof_shap_stability.csv",
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/oof_shap/fold_feature_rankings.csv"
+      ],
+      "source_sha256_values": [
+        "5d5fcf96dc20e672db876b0b2ddd5969910d3e44736200282d95ce6ecb11801b",
+        "2a0928c9f68b106143334a5f975216ffbc4e2b5227b77f1869e8fc9b6eb4d2d3",
+        "56ef319560996e2888116e74883adf2e18ecb8e27606ff375a0a0e2fe1efa8e9"
+      ],
+      "source_tree_hash": "f1e358e99914563305428cece1b1595bc76a58643184407ec5b222162d650332",
+      "type": "json",
+      "validation_outcome": "passed"
+    },
+    {
+      "config_hash": "51415c2ce68c89d9ce2b042b0a7a811fe3e98180b72460006f9d0465f6bf49b7",
+      "copy_or_render_status": "deterministic_export",
+      "export_timestamp": "2026-07-16T13:45:21+00:00",
+      "path": "manuscript/mdpi_information/assets/tables/main/table_07_subgroup_proxy_diagnostics.csv",
+      "run_id": "canonical_v2_20260714T221501Z_483f96f",
+      "scientific_input_hash": "06c507bee525ea1daca43b61249764007d4d8baaa05c9333f23446ea723ce160",
+      "sha256": "9f3eff3841cc25702eeb9a71c2e9a0fb17e8be84645e285e18f8138ba236cfbc",
+      "size_bytes": 33375,
+      "source_paths": [
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_tables/table_08_support_aware_subgroup_diagnostics.csv",
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_tables/table_09_department_proxy_reconstructability.csv"
+      ],
+      "source_sha256_values": [
+        "fd705d230c9e121a355a883268ce266d4bf426b3b6e81b703b7d8abdd9399612",
+        "b295016a1e4bb6acf8eb023bef9d496ca212fb77d64671ef0b38e6b04125290b"
+      ],
+      "source_tree_hash": "f1e358e99914563305428cece1b1595bc76a58643184407ec5b222162d650332",
+      "type": "csv",
+      "validation_outcome": "passed"
+    },
+    {
+      "config_hash": "51415c2ce68c89d9ce2b042b0a7a811fe3e98180b72460006f9d0465f6bf49b7",
+      "copy_or_render_status": "deterministic_export",
+      "export_timestamp": "2026-07-16T13:45:21+00:00",
+      "path": "manuscript/mdpi_information/assets/tables/main/table_07_subgroup_proxy_diagnostics.md",
+      "run_id": "canonical_v2_20260714T221501Z_483f96f",
+      "scientific_input_hash": "06c507bee525ea1daca43b61249764007d4d8baaa05c9333f23446ea723ce160",
+      "sha256": "fdfd27bd745b0e069b30fbf8c238a3607a209076cdbe33b434e056a6bda96eaa",
+      "size_bytes": 26192,
+      "source_paths": [
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_tables/table_08_support_aware_subgroup_diagnostics.csv",
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_tables/table_09_department_proxy_reconstructability.csv"
+      ],
+      "source_sha256_values": [
+        "fd705d230c9e121a355a883268ce266d4bf426b3b6e81b703b7d8abdd9399612",
+        "b295016a1e4bb6acf8eb023bef9d496ca212fb77d64671ef0b38e6b04125290b"
+      ],
+      "source_tree_hash": "f1e358e99914563305428cece1b1595bc76a58643184407ec5b222162d650332",
+      "type": "md",
+      "validation_outcome": "passed"
+    },
+    {
+      "config_hash": "51415c2ce68c89d9ce2b042b0a7a811fe3e98180b72460006f9d0465f6bf49b7",
+      "copy_or_render_status": "deterministic_export",
+      "export_timestamp": "2026-07-16T13:45:21+00:00",
+      "path": "manuscript/mdpi_information/assets/tables/main/table_07_subgroup_proxy_diagnostics.source_map.json",
+      "run_id": "canonical_v2_20260714T221501Z_483f96f",
+      "scientific_input_hash": "06c507bee525ea1daca43b61249764007d4d8baaa05c9333f23446ea723ce160",
+      "sha256": "1ec187bbaef812a78ecf717033087989d5293ed944354ca55c390908ee74a2c9",
+      "size_bytes": 1323,
+      "source_paths": [
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_tables/table_08_support_aware_subgroup_diagnostics.csv",
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_tables/table_09_department_proxy_reconstructability.csv"
+      ],
+      "source_sha256_values": [
+        "fd705d230c9e121a355a883268ce266d4bf426b3b6e81b703b7d8abdd9399612",
+        "b295016a1e4bb6acf8eb023bef9d496ca212fb77d64671ef0b38e6b04125290b"
+      ],
+      "source_tree_hash": "f1e358e99914563305428cece1b1595bc76a58643184407ec5b222162d650332",
+      "type": "json",
+      "validation_outcome": "passed"
+    },
+    {
+      "config_hash": "51415c2ce68c89d9ce2b042b0a7a811fe3e98180b72460006f9d0465f6bf49b7",
+      "copy_or_render_status": "deterministic_export",
+      "export_timestamp": "2026-07-16T13:45:21+00:00",
+      "path": "manuscript/mdpi_information/assets/tables/main/table_08_hrdataset_replication.csv",
+      "run_id": "canonical_v2_20260714T221501Z_483f96f",
+      "scientific_input_hash": "06c507bee525ea1daca43b61249764007d4d8baaa05c9333f23446ea723ce160",
+      "sha256": "720fdbb0a56f29567aefd0794ad29db356b83043934f72a5c8f9dfc099e9a88f",
+      "size_bytes": 5785,
+      "source_paths": [
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_tables/table_10_hrdataset_v14_mapped_target_replication.csv",
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/external_replication/feature_policy_features.csv"
+      ],
+      "source_sha256_values": [
+        "7c3755f5afebd82e2415f38c5e15b70be791359141a33d6a8cdbab73d9f4875b",
+        "a27365e55ceee7e3a15de7501a2b64e0fe80e44203e5afb5576d16cb8337f579"
+      ],
+      "source_tree_hash": "f1e358e99914563305428cece1b1595bc76a58643184407ec5b222162d650332",
+      "type": "csv",
+      "validation_outcome": "passed"
+    },
+    {
+      "config_hash": "51415c2ce68c89d9ce2b042b0a7a811fe3e98180b72460006f9d0465f6bf49b7",
+      "copy_or_render_status": "deterministic_export",
+      "export_timestamp": "2026-07-16T13:45:21+00:00",
+      "path": "manuscript/mdpi_information/assets/tables/main/table_08_hrdataset_replication.md",
+      "run_id": "canonical_v2_20260714T221501Z_483f96f",
+      "scientific_input_hash": "06c507bee525ea1daca43b61249764007d4d8baaa05c9333f23446ea723ce160",
+      "sha256": "ff2b7a1dc072b015535f2f6f3507baa0a208c57ef9dc4182d6ab82fd2ca52c61",
+      "size_bytes": 1863,
+      "source_paths": [
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_tables/table_10_hrdataset_v14_mapped_target_replication.csv",
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/external_replication/feature_policy_features.csv"
+      ],
+      "source_sha256_values": [
+        "7c3755f5afebd82e2415f38c5e15b70be791359141a33d6a8cdbab73d9f4875b",
+        "a27365e55ceee7e3a15de7501a2b64e0fe80e44203e5afb5576d16cb8337f579"
+      ],
+      "source_tree_hash": "f1e358e99914563305428cece1b1595bc76a58643184407ec5b222162d650332",
+      "type": "md",
+      "validation_outcome": "passed"
+    },
+    {
+      "config_hash": "51415c2ce68c89d9ce2b042b0a7a811fe3e98180b72460006f9d0465f6bf49b7",
+      "copy_or_render_status": "deterministic_export",
+      "export_timestamp": "2026-07-16T13:45:21+00:00",
+      "path": "manuscript/mdpi_information/assets/tables/main/table_08_hrdataset_replication.source_map.json",
+      "run_id": "canonical_v2_20260714T221501Z_483f96f",
+      "scientific_input_hash": "06c507bee525ea1daca43b61249764007d4d8baaa05c9333f23446ea723ce160",
+      "sha256": "e03a41d9b5e7e4972423dc0ba0e1a80e42ae0be7349cdbdfad5d312c27ae597b",
+      "size_bytes": 1319,
+      "source_paths": [
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_tables/table_10_hrdataset_v14_mapped_target_replication.csv",
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/external_replication/feature_policy_features.csv"
+      ],
+      "source_sha256_values": [
+        "7c3755f5afebd82e2415f38c5e15b70be791359141a33d6a8cdbab73d9f4875b",
+        "a27365e55ceee7e3a15de7501a2b64e0fe80e44203e5afb5576d16cb8337f579"
+      ],
+      "source_tree_hash": "f1e358e99914563305428cece1b1595bc76a58643184407ec5b222162d650332",
+      "type": "json",
+      "validation_outcome": "passed"
+    },
+    {
+      "config_hash": "51415c2ce68c89d9ce2b042b0a7a811fe3e98180b72460006f9d0465f6bf49b7",
+      "copy_or_render_status": "deterministic_export",
+      "export_timestamp": "2026-07-16T13:45:21+00:00",
+      "path": "manuscript/mdpi_information/assets/tables/previews/README.md",
+      "run_id": "canonical_v2_20260714T221501Z_483f96f",
+      "scientific_input_hash": "06c507bee525ea1daca43b61249764007d4d8baaa05c9333f23446ea723ce160",
+      "sha256": "a3f983580c3212db5ca3875ef8c7f32bf48afd6f8674a09ad1553ce35231da30",
+      "size_bytes": 94,
+      "source_paths": [
+        "reports/research_log/finalization_v2/15_canonical_evidence_receipt.json"
+      ],
+      "source_sha256_values": [
+        "bd09523276dcbc54d036f8c9eb0c71ba62f8b0f913c495695a2259296101827c"
+      ],
+      "source_tree_hash": "f1e358e99914563305428cece1b1595bc76a58643184407ec5b222162d650332",
+      "type": "md",
+      "validation_outcome": "passed"
+    },
+    {
+      "config_hash": "51415c2ce68c89d9ce2b042b0a7a811fe3e98180b72460006f9d0465f6bf49b7",
+      "copy_or_render_status": "deterministic_export",
+      "export_timestamp": "2026-07-16T13:45:21+00:00",
+      "path": "manuscript/mdpi_information/assets/tables/supplementary/table_s11_heuristic_search_success.csv",
+      "run_id": "canonical_v2_20260714T221501Z_483f96f",
+      "scientific_input_hash": "caffb945d15f990e3a789e9707f7a8a9115be31fecbbd705822994a10cfaf151",
+      "sha256": "4c44c123b4515353b2b87162381944155dd669815ab27bacd5c4dfc121664ea1",
+      "size_bytes": 2554,
+      "source_paths": [
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/supplementary/supplementary_tables/table_11_heuristic_counterfactual_search_success.csv"
+      ],
+      "source_sha256_values": [
+        "838fdbfe1ccb79b0ec66bc0da0ad8c25fe0258b004abc4892fec12c06460239e"
+      ],
+      "source_tree_hash": "f1e358e99914563305428cece1b1595bc76a58643184407ec5b222162d650332",
+      "type": "csv",
+      "validation_outcome": "passed"
+    },
+    {
+      "config_hash": "51415c2ce68c89d9ce2b042b0a7a811fe3e98180b72460006f9d0465f6bf49b7",
+      "copy_or_render_status": "deterministic_export",
+      "export_timestamp": "2026-07-16T13:45:21+00:00",
+      "path": "manuscript/mdpi_information/assets/tables/supplementary/table_s11_heuristic_search_success.md",
+      "run_id": "canonical_v2_20260714T221501Z_483f96f",
+      "scientific_input_hash": "caffb945d15f990e3a789e9707f7a8a9115be31fecbbd705822994a10cfaf151",
+      "sha256": "937706868d1fe63ce18abf7c2944d24173622910b2942698b061b6de9e06abbc",
+      "size_bytes": 3014,
+      "source_paths": [
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/supplementary/supplementary_tables/table_11_heuristic_counterfactual_search_success.csv"
+      ],
+      "source_sha256_values": [
+        "838fdbfe1ccb79b0ec66bc0da0ad8c25fe0258b004abc4892fec12c06460239e"
+      ],
+      "source_tree_hash": "f1e358e99914563305428cece1b1595bc76a58643184407ec5b222162d650332",
+      "type": "md",
+      "validation_outcome": "passed"
+    },
+    {
+      "config_hash": "51415c2ce68c89d9ce2b042b0a7a811fe3e98180b72460006f9d0465f6bf49b7",
+      "copy_or_render_status": "deterministic_export",
+      "export_timestamp": "2026-07-16T13:45:21+00:00",
+      "path": "manuscript/mdpi_information/assets/tables/supplementary/table_s11_heuristic_search_success.source_map.json",
+      "run_id": "canonical_v2_20260714T221501Z_483f96f",
+      "scientific_input_hash": "caffb945d15f990e3a789e9707f7a8a9115be31fecbbd705822994a10cfaf151",
+      "sha256": "965b6c7ca5e024935216634831ca7b777998900a7fb608614377f3686f8ea066",
+      "size_bytes": 910,
+      "source_paths": [
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/supplementary/supplementary_tables/table_11_heuristic_counterfactual_search_success.csv"
+      ],
+      "source_sha256_values": [
+        "838fdbfe1ccb79b0ec66bc0da0ad8c25fe0258b004abc4892fec12c06460239e"
+      ],
+      "source_tree_hash": "f1e358e99914563305428cece1b1595bc76a58643184407ec5b222162d650332",
+      "type": "json",
+      "validation_outcome": "passed"
+    },
+    {
+      "config_hash": "51415c2ce68c89d9ce2b042b0a7a811fe3e98180b72460006f9d0465f6bf49b7",
+      "copy_or_render_status": "deterministic_export",
+      "export_timestamp": "2026-07-16T13:45:21+00:00",
+      "path": "manuscript/mdpi_information/assets/tables/supplementary/table_s12_task_bounded_robustness.csv",
+      "run_id": "canonical_v2_20260714T221501Z_483f96f",
+      "scientific_input_hash": "caffb945d15f990e3a789e9707f7a8a9115be31fecbbd705822994a10cfaf151",
+      "sha256": "3dcd0ca75320ee2fcbac4015ebd019c742dfaf04f376c9b7142b521dcaf3d2ea",
+      "size_bytes": 17148,
+      "source_paths": [
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/supplementary/supplementary_tables/table_12_restricted_and_binary_task_evidence.csv"
+      ],
+      "source_sha256_values": [
+        "666e6b4f77e3815d52762d61f3858659274cecf772564d678e404c79d2571552"
+      ],
+      "source_tree_hash": "f1e358e99914563305428cece1b1595bc76a58643184407ec5b222162d650332",
+      "type": "csv",
+      "validation_outcome": "passed"
+    },
+    {
+      "config_hash": "51415c2ce68c89d9ce2b042b0a7a811fe3e98180b72460006f9d0465f6bf49b7",
+      "copy_or_render_status": "deterministic_export",
+      "export_timestamp": "2026-07-16T13:45:21+00:00",
+      "path": "manuscript/mdpi_information/assets/tables/supplementary/table_s12_task_bounded_robustness.md",
+      "run_id": "canonical_v2_20260714T221501Z_483f96f",
+      "scientific_input_hash": "caffb945d15f990e3a789e9707f7a8a9115be31fecbbd705822994a10cfaf151",
+      "sha256": "84b1f985dec374d41a804db5a54ddcb069cdeea8437a0b4a9055fda50f2be3da",
+      "size_bytes": 18526,
+      "source_paths": [
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/supplementary/supplementary_tables/table_12_restricted_and_binary_task_evidence.csv"
+      ],
+      "source_sha256_values": [
+        "666e6b4f77e3815d52762d61f3858659274cecf772564d678e404c79d2571552"
+      ],
+      "source_tree_hash": "f1e358e99914563305428cece1b1595bc76a58643184407ec5b222162d650332",
+      "type": "md",
+      "validation_outcome": "passed"
+    },
+    {
+      "config_hash": "51415c2ce68c89d9ce2b042b0a7a811fe3e98180b72460006f9d0465f6bf49b7",
+      "copy_or_render_status": "deterministic_export",
+      "export_timestamp": "2026-07-16T13:45:21+00:00",
+      "path": "manuscript/mdpi_information/assets/tables/supplementary/table_s12_task_bounded_robustness.source_map.json",
+      "run_id": "canonical_v2_20260714T221501Z_483f96f",
+      "scientific_input_hash": "caffb945d15f990e3a789e9707f7a8a9115be31fecbbd705822994a10cfaf151",
+      "sha256": "edb6a29ca06c3ff4ef941665d1ee4ef7ad02ad2fffd946a4dba841ba22d94ebd",
+      "size_bytes": 905,
+      "source_paths": [
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/supplementary/supplementary_tables/table_12_restricted_and_binary_task_evidence.csv"
+      ],
+      "source_sha256_values": [
+        "666e6b4f77e3815d52762d61f3858659274cecf772564d678e404c79d2571552"
+      ],
+      "source_tree_hash": "f1e358e99914563305428cece1b1595bc76a58643184407ec5b222162d650332",
+      "type": "json",
+      "validation_outcome": "passed"
+    },
+    {
+      "config_hash": "51415c2ce68c89d9ce2b042b0a7a811fe3e98180b72460006f9d0465f6bf49b7",
+      "copy_or_render_status": "deterministic_export",
+      "export_timestamp": "2026-07-16T13:45:21+00:00",
+      "path": "manuscript/mdpi_information/assets/tables/supplementary/table_s13_claim_boundaries.csv",
+      "run_id": "canonical_v2_20260714T221501Z_483f96f",
+      "scientific_input_hash": "caffb945d15f990e3a789e9707f7a8a9115be31fecbbd705822994a10cfaf151",
+      "sha256": "7a3290d52f6c5e2364c865247cfa475a18a4df15bbded6c56ae940670d351106",
+      "size_bytes": 530,
+      "source_paths": [
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/supplementary/supplementary_tables/table_13_supplementary_reproducibility_and_claim_boundaries.csv"
+      ],
+      "source_sha256_values": [
+        "9456b2afd8a1d485ff7b41881fe7514ca90907c052179d22e393cf7e2137461a"
+      ],
+      "source_tree_hash": "f1e358e99914563305428cece1b1595bc76a58643184407ec5b222162d650332",
+      "type": "csv",
+      "validation_outcome": "passed"
+    },
+    {
+      "config_hash": "51415c2ce68c89d9ce2b042b0a7a811fe3e98180b72460006f9d0465f6bf49b7",
+      "copy_or_render_status": "deterministic_export",
+      "export_timestamp": "2026-07-16T13:45:21+00:00",
+      "path": "manuscript/mdpi_information/assets/tables/supplementary/table_s13_claim_boundaries.md",
+      "run_id": "canonical_v2_20260714T221501Z_483f96f",
+      "scientific_input_hash": "caffb945d15f990e3a789e9707f7a8a9115be31fecbbd705822994a10cfaf151",
+      "sha256": "ad4384695166783cce0ce72c4b5d9533e5a33dc55641db81a6315d2ece1cccbd",
+      "size_bytes": 724,
+      "source_paths": [
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/supplementary/supplementary_tables/table_13_supplementary_reproducibility_and_claim_boundaries.csv"
+      ],
+      "source_sha256_values": [
+        "9456b2afd8a1d485ff7b41881fe7514ca90907c052179d22e393cf7e2137461a"
+      ],
+      "source_tree_hash": "f1e358e99914563305428cece1b1595bc76a58643184407ec5b222162d650332",
+      "type": "md",
+      "validation_outcome": "passed"
+    },
+    {
+      "config_hash": "51415c2ce68c89d9ce2b042b0a7a811fe3e98180b72460006f9d0465f6bf49b7",
+      "copy_or_render_status": "deterministic_export",
+      "export_timestamp": "2026-07-16T13:45:21+00:00",
+      "path": "manuscript/mdpi_information/assets/tables/supplementary/table_s13_claim_boundaries.source_map.json",
+      "run_id": "canonical_v2_20260714T221501Z_483f96f",
+      "scientific_input_hash": "caffb945d15f990e3a789e9707f7a8a9115be31fecbbd705822994a10cfaf151",
+      "sha256": "fd81ab98039f8cfc14834be2fd0d3bc105a05f711b2ff813d040a404ab818a82",
+      "size_bytes": 912,
+      "source_paths": [
+        "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/supplementary/supplementary_tables/table_13_supplementary_reproducibility_and_claim_boundaries.csv"
+      ],
+      "source_sha256_values": [
+        "9456b2afd8a1d485ff7b41881fe7514ca90907c052179d22e393cf7e2137461a"
+      ],
+      "source_tree_hash": "f1e358e99914563305428cece1b1595bc76a58643184407ec5b222162d650332",
+      "type": "json",
+      "validation_outcome": "passed"
+    }
+  ],
+  "generation_commit": "483f96fdbaab16cb0f32d03d9dbe676a759af44a",
+  "manifest_kind": "compact_manuscript_support_assets",
+  "rounding_rule": "decimal ROUND_HALF_EVEN to 4 places; integer denominators unrounded",
+  "run_id": "canonical_v2_20260714T221501Z_483f96f",
+  "schema_version": 1,
+  "self_inventory_rule": "The manifest cannot contain its own cryptographic hash; every other exported file is inventoried.",
+  "source_tree_hash": "f1e358e99914563305428cece1b1595bc76a58643184407ec5b222162d650332",
+  "source_validation": {
+    "run_id": "canonical_v2_20260714T221501Z_483f96f",
+    "scopes": {
+      "core": {
+        "manifest_records": 351,
+        "physical_bytes": 224171937,
+        "physical_files": 354,
+        "scientific_input_hash": "06c507bee525ea1daca43b61249764007d4d8baaa05c9333f23446ea723ce160"
+      },
+      "supplementary": {
+        "manifest_records": 188,
+        "physical_bytes": 222423549,
+        "physical_files": 191,
+        "scientific_input_hash": "caffb945d15f990e3a789e9707f7a8a9115be31fecbbd705822994a10cfaf151"
+      }
+    },
+    "status": "passed"
+  },
+  "status": "passed",
+  "supplementary_scientific_input_hash": "caffb945d15f990e3a789e9707f7a8a9115be31fecbbd705822994a10cfaf151",
+  "total_bytes_excluding_manifest": 10182328
+}

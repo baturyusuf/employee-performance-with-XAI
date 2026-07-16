@@ -1,0 +1,1 @@
+Calibration figure showing raw and cross-fitted sigmoid reliability and probability-quality metrics, separately from classification outcomes.

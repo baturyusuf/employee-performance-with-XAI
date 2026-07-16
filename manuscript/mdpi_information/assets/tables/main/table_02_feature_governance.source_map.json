@@ -1,0 +1,20 @@
+{
+  "canonical_sources": [
+    {
+      "path": "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_tables/table_02_exact_primary_feature_policy.csv",
+      "sha256": "2f49a5897e6a0243f8d0e61ba894d946963e8c17688a53ab4cc5f72b50181778"
+    }
+  ],
+  "config_hash": "51415c2ce68c89d9ce2b042b0a7a811fe3e98180b72460006f9d0465f6bf49b7",
+  "manuscript_table": 2,
+  "output_csv": "manuscript/mdpi_information/assets/tables/main/table_02_feature_governance.csv",
+  "output_sha256": "33c0d83ecfa9e07a8e04b08bb87e30195e8e4b8b1d1e2294f121b7944dabfdca",
+  "rounding_rule": "decimal ROUND_HALF_EVEN to 4 places; integer denominators unrounded",
+  "row_count": 6,
+  "run_id": "canonical_v2_20260714T221501Z_483f96f",
+  "schema_version": 1,
+  "scientific_input_hash": "06c507bee525ea1daca43b61249764007d4d8baaa05c9333f23446ea723ce160",
+  "source_tree_hash": "f1e358e99914563305428cece1b1595bc76a58643184407ec5b222162d650332",
+  "title": "Prespecified feature-governance policies",
+  "validation_status": "source_rows_and_display_values_verified"
+}

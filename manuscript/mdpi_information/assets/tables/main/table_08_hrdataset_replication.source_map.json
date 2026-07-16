@@ -1,0 +1,24 @@
+{
+  "canonical_sources": [
+    {
+      "path": "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_tables/table_10_hrdataset_v14_mapped_target_replication.csv",
+      "sha256": "7c3755f5afebd82e2415f38c5e15b70be791359141a33d6a8cdbab73d9f4875b"
+    },
+    {
+      "path": "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/external_replication/feature_policy_features.csv",
+      "sha256": "a27365e55ceee7e3a15de7501a2b64e0fe80e44203e5afb5576d16cb8337f579"
+    }
+  ],
+  "config_hash": "51415c2ce68c89d9ce2b042b0a7a811fe3e98180b72460006f9d0465f6bf49b7",
+  "manuscript_table": 8,
+  "output_csv": "manuscript/mdpi_information/assets/tables/main/table_08_hrdataset_replication.csv",
+  "output_sha256": "720fdbb0a56f29567aefd0794ad29db356b83043934f72a5c8f9dfc099e9a88f",
+  "rounding_rule": "decimal ROUND_HALF_EVEN to 4 places; integer denominators unrounded",
+  "row_count": 5,
+  "run_id": "canonical_v2_20260714T221501Z_483f96f",
+  "schema_version": 1,
+  "scientific_input_hash": "06c507bee525ea1daca43b61249764007d4d8baaa05c9333f23446ea723ce160",
+  "source_tree_hash": "f1e358e99914563305428cece1b1595bc76a58643184407ec5b222162d650332",
+  "title": "HRDataset_v14 mapped-target replication",
+  "validation_status": "source_rows_and_display_values_verified"
+}

@@ -576,3 +576,20 @@ Push/recovery gate: the normal push timed out after 184 seconds with no remote r
 - Final post-review pytest: exit 0; 752 passed, 2 skipped, 11 subtests passed; 134.51 seconds pytest / 138.459 seconds wall.
 - Final post-review unittest: exit 0; 179 tests, 1 skipped; 7.670 seconds unittest / 11.659 seconds wall.
 - Final post-review compileall: exit 0; 0.124 seconds.
+
+## Compact manuscript-support asset export - 2026-07-16
+
+- Direct canonical closed-world/source identity validation: exit 0; 1.643 seconds; 539 manifest records, 545 physical files, 446,595,486 physical bytes, exact pointer/receipt/config/source/scientific identities.
+- Existing current-HEAD strict CLI: expected fail-closed generation-commit mismatch after documentation-only HEAD advancement; no scientific rerun or canonical mutation.
+- Final export: exit 0; 7.343 seconds; atomic publication under `manuscript/mdpi_information/assets/`.
+- Publication validator: exit 0; 109 files, 10,338,351 bytes, seven main and three supplementary PNG/SVG pairs, eight main tables, manifest SHA-256 `fbe7355b956df01ad9817f27b42dc13c0f3e0e33e7f0e5c42a2477beb9d001e1`.
+- Export/source parity: exit 0; 308 bindings across 108 manifest-declared files; 1.845 seconds.
+- Initial focus: exit 1; 15 passed, 1 skipped, 2 test-schema failures; 3.72 seconds pytest/6.9 seconds wall. Production package remained valid.
+- Corrected focus: exit 0; 17 passed, 1 skipped; 4.15 seconds pytest/7.357 seconds wall.
+- Complete pytest: exit 0; 758 passed, 2 skipped, 11 subtests passed; 129.91 seconds pytest/133.988 seconds wall.
+- Unittest discovery: exit 0; 179 tests, 1 skipped; 8.214 seconds unittest/12.246 seconds wall.
+- Compileall over `src`, `tests`, and `tools`: exit 0; 0.312 seconds.
+- Candidate hygiene: exit 0; 109 assets/10,338,351 bytes; maximum file 2,195,799 bytes; no figure at or above 10 MiB; zero forbidden binary/row-level extensions, staging/temp files, machine paths, secrets, active `leakage-safe` terms, forbidden primary SHAP features, manuscript changes, or committed/worktree scientific-source changes.
+- README audit: exit 0; 43 local links resolved. `git diff --check`: exit 0 with informational Windows LF-to-CRLF warnings only.
+- Tracking regression: compact assets unignored; complete canonical root, raw data, model, OOF, and local-SHAP representatives ignored.
+- Manuscript, DOCX, PDF, LaTeX, scientific configuration, scientific source, canonical artifacts, fits, OOF, bootstrap, calibration, and SHAP recomputation: zero changes/executions.

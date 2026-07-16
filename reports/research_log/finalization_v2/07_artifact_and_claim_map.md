@@ -321,3 +321,15 @@ The later package `reports/manuscript_final/canonical_v2_20260714T182539Z_35b121
 Historical alias migration is recorded in `14_latest_migration_receipt.json`. The 215-file named v1 run remains tracked and byte-identical to every common former `latest` file; the sole removed-only alias file was a 139-byte pointer naming that same run. The migrated `latest` path is reserved exclusively for one atomic `pointer.json` referencing a strictly validated v2 run.
 
 `reports/manuscript_final/canonical_v2_20260714T192934Z_0c2868b/` is a failed, ignored migration-commit run. It stopped during calibration directory publication after scientific computation; 93 files/105,400,103 bytes and the locked staging directory are forensic evidence only. It is not a complete scope, release candidate, canonical package, cache source or manuscript-support source.
+
+## Tracked compact manuscript package - 2026-07-16
+
+The remote authoring/reviewer entry point is `manuscript/mdpi_information/assets/README.md`, not the ignored canonical root. The compact package is bound to canonical run `canonical_v2_20260714T221501Z_483f96f`, generation commit `483f96fdbaab16cb0f32d03d9dbe676a759af44a`, config `51415c2c...`, source tree `f1e358e9...`, core scientific input `06c507be...`, and supplementary scientific input `caffb945...`.
+
+- Main figure insertion: `figures/main/figure_01_audit_protocol` through `figure_07_hrdataset_replication`, each PNG/SVG with caption, alt text, source data, and numbering/source map.
+- Main table insertion: `tables/main/table_01_datasets` through `table_08_hrdataset_replication`, each CSV/Markdown/source-map JSON.
+- Supplement: three PNG/SVG figures and three manuscript-ready source tables.
+- Numerical/claim handoff: `handoff/manuscript_exact_results.json`, `handoff/manuscript_evidence_ledger.csv`, `handoff/figure_table_insertion_guide.md`, and `handoff/claim_boundary_handoff.md`.
+- Closed-world integrity: `manifests/manuscript_asset_manifest.json`, 108 declared files plus the manifest itself, SHA-256 `fbe7355b956df01ad9817f27b42dc13c0f3e0e33e7f0e5c42a2477beb9d001e1`.
+
+All claims retain the canonical boundaries: SHAP is noncausal raw-margin attribution; subgroup/proxy results are support-aware descriptive diagnostics; counterfactual evidence is heuristic search-success only; HRDataset_v14 is independently trained mapped-target replication rather than locked-model transport or target equivalence. Manuscript prose and author approval remain outside this technical package.

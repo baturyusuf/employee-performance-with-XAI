@@ -1,0 +1,20 @@
+{
+  "canonical_sources": [
+    {
+      "path": "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_tables/table_05_cross_fitted_sigmoid_calibration.csv",
+      "sha256": "b5c1f908383ec5de7db523b161b487e5cde37a70605a8698db899304d7d2c563"
+    }
+  ],
+  "config_hash": "51415c2ce68c89d9ce2b042b0a7a811fe3e98180b72460006f9d0465f6bf49b7",
+  "manuscript_table": 5,
+  "output_csv": "manuscript/mdpi_information/assets/tables/main/table_05_calibration.csv",
+  "output_sha256": "3eee29b744548c6ec718a99a133dd9f2ee76bc3850f235bb12649c87b410c6c3",
+  "rounding_rule": "decimal ROUND_HALF_EVEN to 4 places; integer denominators unrounded",
+  "row_count": 2,
+  "run_id": "canonical_v2_20260714T221501Z_483f96f",
+  "schema_version": 1,
+  "scientific_input_hash": "06c507bee525ea1daca43b61249764007d4d8baaa05c9333f23446ea723ce160",
+  "source_tree_hash": "f1e358e99914563305428cece1b1595bc76a58643184407ec5b222162d650332",
+  "title": "Raw and cross-fitted sigmoid probability metrics",
+  "validation_status": "source_rows_and_display_values_verified"
+}

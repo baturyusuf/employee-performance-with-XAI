@@ -17,10 +17,11 @@ Canonical handoff inputs:
 
 - `../finalization_v2/15_canonical_evidence_receipt.json`
 - `../../manuscript_final/latest/pointer.json`
-- `../../manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_tables/`
-- `../../manuscript_final/canonical_v2_20260714T221501Z_483f96f/supplementary/supplementary_tables/`
-- `../../manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_figures/`
-- `../../manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/canonical_claim_boundaries.md`
-- `../../manuscript_final/canonical_v2_20260714T221501Z_483f96f/supplementary/canonical_claim_boundaries.md`
+- `../../../manuscript/mdpi_information/assets/README.md`
+- `../../../manuscript/mdpi_information/assets/handoff/figure_table_insertion_guide.md`
+- `../../../manuscript/mdpi_information/assets/handoff/manuscript_exact_results.json`
+- `../../../manuscript/mdpi_information/assets/handoff/manuscript_evidence_ledger.csv`
+- `../../../manuscript/mdpi_information/assets/handoff/claim_boundary_handoff.md`
+- `../../../manuscript/mdpi_information/assets/manifests/manuscript_asset_manifest.json`
 
-The complete aggregate publication-support subset (Figures 1-7, Tables 1-13, source CSVs, captions, manifests, and claim boundaries) is tracked in Git and linked from README. The remaining full-package internals are intentionally local/ignored. Use a separately approved Release/Zenodo-sized workflow if publication of those internals is later authorized.
+The compact publication-support export is tracked in Git and linked from README. The complete 545-file canonical package is intentionally local/ignored and is not replaced by this export. Use a separately approved Release/Zenodo-sized workflow only if publication of those internals is later authorized.

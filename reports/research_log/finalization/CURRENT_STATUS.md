@@ -15,11 +15,12 @@ Date: 2026-07-16
 
 ## GitHub publication assets
 
-- The complete aggregate manuscript-support subset is now admitted for tracking on the required branch: all Figures 1-7 as PNG/SVG, all figure source CSVs and captions, Tables 1-13 across core/supplementary scopes, their manifests/stage contracts, and both claim-boundary files.
-- The subset contains 50 files/6,337,343 bytes; maximum file size is 2,195,799 bytes; reproducible canonical-JSON inventory SHA-256 is `645f5295c36f2d1e0a3b7809e67d805f1bb16b906121ca91e032bc1d36e2d228`.
-- Publication receipt: `../finalization_v2/16_github_publication_assets_receipt.json`.
+- The tracked manuscript-support package is `../../../manuscript/mdpi_information/assets/`: 109 files/10,338,351 bytes with closed-world manifest SHA-256 `fbe7355b956df01ad9817f27b42dc13c0f3e0e33e7f0e5c42a2477beb9d001e1`.
+- It contains seven main and three supplementary figures as PNG/SVG, captions/alt text, eight main and three supplementary manuscript-ready tables, exact compact source data, 221 evidence-ledger rows, insertion maps, claim boundaries, and source hashes.
+- Canonical-to-manuscript numbering is explicit: manuscript Figures 1-7 map to canonical Figures 1, 3, 2, 4, 5, 6, 7. Figure 1 is a presentation-only rendering of frozen protocol/claim contracts; the other main figures are byte-for-byte copies.
+- Local source-parity validation checked 308 declared source bindings across 108 manifest records after independently revalidating all 545 canonical files. No scientific stage was rerun.
+- The complete canonical root is again ignored as one unit. Its formerly tracked 50-file aggregate subset was removed from the current index with all 545 local files preserved; receipt 16 is retained as historical publication chronology.
 - Raw/interim data, employee-level OOF/local-SHAP outputs, models, calibrator internals, bootstrap arrays, and training-partition records remain ignored and are not authorized for Git publication.
-- The full closed-world package remains a Release/Zenodo-sized local package; tracking the aggregate subset does not change any canonical artifact byte or scientific identity.
 
 ## Acceptance evidence
 
@@ -51,11 +52,12 @@ The original stage-validation run `stage_validation_hrdataset_20260713T175045Z_5
 
 ## Test state
 
-- Focused final cycle: 103 passed.
-- Complete pytest: 752 passed, 2 skipped, 11 subtests passed in 139.36 seconds.
-- Unittest: 179 tests passed, 1 skipped in 9.487 seconds.
-- Compileall: exit 0 in 0.131 seconds.
-- Repository CI gate passed at clean generation commit with 1,734 tracked files, 33 issue rows, 30 README links, and zero raw/environment/large/secret/machine-path findings.
+- Compact-export focus: 17 passed, 1 skipped in 4.15 seconds (7.357 seconds wall).
+- Complete pytest: 758 passed, 2 skipped, 11 subtests passed in 129.91 seconds (133.988 seconds wall).
+- Unittest: 179 tests passed, 1 skipped in 8.214 seconds (12.246 seconds wall).
+- Compileall over `src`, `tests`, and `tools`: exit 0 in 0.312 seconds.
+- Compact-package validation: 109 files/10,338,351 bytes, seven main and three supplementary PNG/SVG pairs, eight main tables, manifest SHA-256 `fbe7355b...`; exit 0.
+- Candidate hygiene and README-link gates: 43 valid local links; maximum asset 2,195,799 bytes; zero raw/model/row-level extension, staging, secret, machine-path, forbidden-primary-SHAP, active `leakage-safe`, scientific-source-diff, or manuscript-diff findings.
 
 ## Remaining blockers
 

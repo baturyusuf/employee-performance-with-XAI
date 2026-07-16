@@ -1,0 +1,9 @@
+# Supplementary Table S3
+
+Canonical supplementary evidence; task and claim boundaries remain explicit.
+
+| source_record_type | task_type | metric | applicable | not_applicable_reason | claim_boundary |
+| --- | --- | --- | --- | --- | --- |
+| claim_boundary |  |  |  |  | Supplementary heuristic search-success evidence only; not causal recourse, feasibility, advice, recommendation, or deployment evidence. |
+| claim_boundary |  |  |  |  | Task-bounded robustness or related-task transfer only; no cross-task aggregation, primary-task validation, transportability, or deployment claim. |
+| claim_boundary |  |  |  |  | Contract and provenance table only; it supplies no new scientific estimate or release-readiness claim. |

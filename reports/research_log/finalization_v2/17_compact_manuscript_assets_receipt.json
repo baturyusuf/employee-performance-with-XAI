@@ -1,0 +1,55 @@
+{
+  "asset_inventory": {
+    "file_count_including_manifest": 109,
+    "largest_file_bytes": 2195799,
+    "main_figures": {
+      "png": 7,
+      "svg": 7
+    },
+    "main_tables": 8,
+    "manifest_sha256": "fbe7355b956df01ad9817f27b42dc13c0f3e0e33e7f0e5c42a2477beb9d001e1",
+    "supplementary_figures": {
+      "png": 3,
+      "svg": 3
+    },
+    "supplementary_tables": 3,
+    "total_bytes_including_manifest": 10338351
+  },
+  "asset_root": "manuscript/mdpi_information/assets",
+  "canonical_identity": {
+    "config_hash": "51415c2ce68c89d9ce2b042b0a7a811fe3e98180b72460006f9d0465f6bf49b7",
+    "core_scientific_input_hash": "06c507bee525ea1daca43b61249764007d4d8baaa05c9333f23446ea723ce160",
+    "generation_commit": "483f96fdbaab16cb0f32d03d9dbe676a759af44a",
+    "run_id": "canonical_v2_20260714T221501Z_483f96f",
+    "source_tree_hash": "f1e358e99914563305428cece1b1595bc76a58643184407ec5b222162d650332",
+    "supplementary_scientific_input_hash": "caffb945d15f990e3a789e9707f7a8a9115be31fecbbd705822994a10cfaf151"
+  },
+  "export_timestamp": "2026-07-16T13:45:21+00:00",
+  "git_publication": {
+    "asset_checkpoint_commit": "pending",
+    "branch": "finalization/leakage-aware-v2",
+    "push_status": "pending"
+  },
+  "manifest_path": "manuscript/mdpi_information/assets/manifests/manuscript_asset_manifest.json",
+  "schema_version": 1,
+  "source_validation": {
+    "core": {
+      "manifest_records": 351,
+      "physical_bytes": 224171937,
+      "physical_files": 354
+    },
+    "source_bindings_checked": 308,
+    "supplementary": {
+      "manifest_records": 188,
+      "physical_bytes": 222423549,
+      "physical_files": 191
+    }
+  },
+  "status": "validated_pending_git_publication",
+  "tests": {
+    "compileall": "passed",
+    "focused": "17 passed, 1 skipped",
+    "full_pytest": "758 passed, 2 skipped, 11 subtests passed",
+    "unittest": "179 passed, 1 skipped"
+  }
+}

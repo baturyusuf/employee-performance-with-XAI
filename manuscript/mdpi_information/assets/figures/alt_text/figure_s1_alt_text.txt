@@ -1,0 +1,1 @@
+Full support-aware subgroup diagnostic heatmap. Visual encodings include labels, markers, hatching, or explicit missing-cell symbols. Support-aware descriptive gaps only; blank cells are not zero and no fairness or discrimination conclusion is supported.

@@ -188,19 +188,10 @@ cython_debug/
 # Rejected canonical candidate is preserved locally; package scans found absolute metadata paths
 # and one active leakage-safe taxonomy term after otherwise successful promotion validation.
 /reports/manuscript_final/canonical_v2_20260714T210838Z_cd7b5e7/
-# The validated canonical package remains local by default.  The frozen, aggregate
-# publication-support subset is intentionally tracked so remote reviewers can read
-# every final table, figure, source CSV, caption, manifest and claim boundary.
-/reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/*
-!/reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/
-!/reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/supplementary/
-/reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/*
-!/reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_figures/
-!/reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_tables/
-!/reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/canonical_claim_boundaries.md
-/reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/supplementary/*
-!/reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/supplementary/supplementary_tables/
-!/reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/supplementary/canonical_claim_boundaries.md
+# The complete validated canonical evidence package remains local and ignored.
+# Its compact, source-mapped manuscript-support export is tracked separately at
+# manuscript/mdpi_information/assets/.
+/reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/
 
 # User-provided HR data and row-level/fit-derived working data remain local.
 # Dataset cards, schema mappings, README files, and directory placeholders stay tracked.

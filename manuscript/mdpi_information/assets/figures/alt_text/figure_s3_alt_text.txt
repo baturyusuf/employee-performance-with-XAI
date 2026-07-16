@@ -1,0 +1,1 @@
+Heuristic counterfactual-search budget sensitivity. Visual encodings include labels, markers, hatching, or explicit missing-cell symbols. Heuristic search-success sensitivity only; not causal recourse, feasibility, actionability, advice, or intervention evidence.

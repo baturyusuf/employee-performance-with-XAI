@@ -1,0 +1,24 @@
+{
+  "canonical_sources": [
+    {
+      "path": "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_tables/table_08_support_aware_subgroup_diagnostics.csv",
+      "sha256": "fd705d230c9e121a355a883268ce266d4bf426b3b6e81b703b7d8abdd9399612"
+    },
+    {
+      "path": "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_tables/table_09_department_proxy_reconstructability.csv",
+      "sha256": "b295016a1e4bb6acf8eb023bef9d496ca212fb77d64671ef0b38e6b04125290b"
+    }
+  ],
+  "config_hash": "51415c2ce68c89d9ce2b042b0a7a811fe3e98180b72460006f9d0465f6bf49b7",
+  "manuscript_table": 7,
+  "output_csv": "manuscript/mdpi_information/assets/tables/main/table_07_subgroup_proxy_diagnostics.csv",
+  "output_sha256": "9f3eff3841cc25702eeb9a71c2e9a0fb17e8be84645e285e18f8138ba236cfbc",
+  "rounding_rule": "decimal ROUND_HALF_EVEN to 4 places; integer denominators unrounded",
+  "row_count": 98,
+  "run_id": "canonical_v2_20260714T221501Z_483f96f",
+  "schema_version": 1,
+  "scientific_input_hash": "06c507bee525ea1daca43b61249764007d4d8baaa05c9333f23446ea723ce160",
+  "source_tree_hash": "f1e358e99914563305428cece1b1595bc76a58643184407ec5b222162d650332",
+  "title": "Subgroup and proxy diagnostics",
+  "validation_status": "source_rows_and_display_values_verified"
+}

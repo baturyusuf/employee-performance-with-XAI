@@ -1,0 +1,16 @@
+{
+  "checks": [
+    "canonical_closed_world_source_hashes",
+    "figure_dimensions_and_svg_safety",
+    "copy_hash_parity",
+    "table_source_rows_and_display_rounding",
+    "figure_and_table_numbering",
+    "claim_boundaries"
+  ],
+  "config_hash": "51415c2ce68c89d9ce2b042b0a7a811fe3e98180b72460006f9d0465f6bf49b7",
+  "generation_commit": "483f96fdbaab16cb0f32d03d9dbe676a759af44a",
+  "run_id": "canonical_v2_20260714T221501Z_483f96f",
+  "schema_version": 1,
+  "source_tree_hash": "f1e358e99914563305428cece1b1595bc76a58643184407ec5b222162d650332",
+  "status": "passed_pre_manifest"
+}
