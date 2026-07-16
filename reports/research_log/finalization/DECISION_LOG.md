@@ -1,5 +1,12 @@
 # Persistent Decision Log
 
+## 2026-07-16 aggregate publication-assets decision
+
+- The user explicitly authorized GitHub publication of the final tables and figures so remote authoring/review agents can access the canonical numerical cells and data-derived graphics.
+- Track the complete aggregate manuscript-support subset unchanged: Figures 1-7 as PNG/SVG, seven source CSVs, seven captions, eleven core tables, three supplementary tables, stage/asset manifests, and both claim-boundary files.
+- Keep raw/interim data, employee-level OOF/local-SHAP records, fitted models/calibrators, bootstrap arrays, candidate/training-partition records, caches, and temporary outputs ignored. These are not required to resolve the remote manuscript-evidence gap and remain subject to licence, privacy, history, and Release/Zenodo decisions.
+- This is a publication-access change only. It does not rerun science, change canonical bytes, alter the frozen protocol, authorize manuscript claims, publish a release, or resolve ethics/licence blockers.
+
 ## 2026-07-14 canonical admission decision
 
 - Admit `canonical_v2_20260714T221501Z_483f96f` as the sole canonical v2 technical evidence package.

@@ -1,0 +1,78 @@
+{
+  "canonical_run_id": "canonical_v2_20260714T221501Z_483f96f",
+  "claim_boundaries": {
+    "file_count": 2,
+    "inventory_sha256": "375a0125dde2f55cea508290c002b814ef471abc7da78966fa22bb3ebbf9eefa",
+    "size_bytes": 2174
+  },
+  "combined_inventory": {
+    "file_count": 50,
+    "inventory_sha256": "645f5295c36f2d1e0a3b7809e67d805f1bb16b906121ca91e032bc1d36e2d228",
+    "maximum_file_size_bytes": 2195799,
+    "size_bytes": 6337343
+  },
+  "core_figures": {
+    "file_count": 30,
+    "figure_count": 7,
+    "figure_manifest_sha256": "df54982f73dcf5d7160fec46092818b9dfa3918c150d8175c407b59d8a5b9ef2",
+    "inventory_sha256": "f92b9d05d2d2220d48615fc854c897e3bf6f1af43567630dec34b6e08fd9fa73",
+    "size_bytes": 2783489,
+    "stage_contract_sha256": "1a56bf26c97cf0b4787887ae046415ba3e869b4597e637bf6cf33b8054e9d6d4"
+  },
+  "core_tables": {
+    "file_count": 13,
+    "inventory_sha256": "716687aceb20520acb8e24cdd48a2413be548b4400c3aa12fba8147c97d2a024",
+    "size_bytes": 3148249,
+    "source_table_count": 11,
+    "stage_contract_sha256": "7a85acb631d7b7b39c3c3c6ae0c08817c1383312ae433a72da6a894000bee249",
+    "table_manifest_sha256": "36c3e82a60e8ee3750f7980e98d64dab19843c6f81bb8bf8fa3b94247d975e76"
+  },
+  "excluded_from_git": [
+    "raw_and_interim_datasets",
+    "employee_level_oof_predictions",
+    "employee_level_local_shap_values",
+    "fitted_models_and_calibrators",
+    "bootstrap_index_arrays",
+    "candidate_fit_and_training_partition_records",
+    "caches_environments_locks_and_temporary_outputs"
+  ],
+  "generation_commit": "483f96fdbaab16cb0f32d03d9dbe676a759af44a",
+  "inventory_algorithm": {
+    "digest": "SHA-256",
+    "path_basis": "repository-relative POSIX",
+    "record_fields": [
+      "path",
+      "sha256",
+      "size_bytes"
+    ],
+    "serialization": "UTF-8 JSON array; records sorted by path; object keys sorted; separators ',' and ':'; ensure_ascii=true; allow_nan=false; no trailing newline"
+  },
+  "publication_members": {
+    "directories": [
+      "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_figures",
+      "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/core_tables",
+      "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/supplementary/supplementary_tables"
+    ],
+    "files": [
+      "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/canonical_claim_boundaries.md",
+      "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/supplementary/canonical_claim_boundaries.md"
+    ]
+  },
+  "publication_policy": "Track the complete aggregate manuscript-support subset in Git; retain the full closed-world evidence package for a separately authorized Release or Zenodo workflow.",
+  "schema_version": 1,
+  "status": "validated_for_git_publication",
+  "supplementary_tables": {
+    "file_count": 5,
+    "inventory_sha256": "d6cb46f5dbee365519262ab752f5e40ac41a7131830c8dfa9a6a53d4b0e3333f",
+    "size_bytes": 403431,
+    "source_table_count": 3,
+    "stage_contract_sha256": "c0e4dcf3632c0fab39a295a7debb18d47ff0a89a666497f0f7b8962984911407",
+    "table_manifest_sha256": "75b77102874b5d6920861e4eadab1375fc6743d61ab1c123274c51de3d4c6c28"
+  },
+  "validation": {
+    "machine_absolute_path_findings": 0,
+    "raw_dataset_files": 0,
+    "secret_pattern_findings": 0,
+    "sensitive_or_employee_identifier_headers": 0
+  }
+}

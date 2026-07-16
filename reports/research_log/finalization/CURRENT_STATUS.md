@@ -1,6 +1,6 @@
 # Current Status
 
-Date: 2026-07-14
+Date: 2026-07-16
 
 - Branch: `finalization/leakage-aware-v2`.
 - Canonical technical evidence: complete, strictly validated, and atomically promoted.
@@ -12,6 +12,14 @@ Date: 2026-07-14
 - Supplementary scientific-input hash: `caffb945d15f990e3a789e9707f7a8a9115be31fecbbd705822994a10cfaf151`.
 - Publication pointer: `reports/manuscript_final/latest/pointer.json`, the sole file under `latest`, SHA-256 `ecd3990187112891c3f1d3bb41bb7939392576e8df7904cae46baf2106397219`.
 - Compact canonical receipt: `../finalization_v2/15_canonical_evidence_receipt.json`.
+
+## GitHub publication assets
+
+- The complete aggregate manuscript-support subset is now admitted for tracking on the required branch: all Figures 1-7 as PNG/SVG, all figure source CSVs and captions, Tables 1-13 across core/supplementary scopes, their manifests/stage contracts, and both claim-boundary files.
+- The subset contains 50 files/6,337,343 bytes; maximum file size is 2,195,799 bytes; reproducible canonical-JSON inventory SHA-256 is `645f5295c36f2d1e0a3b7809e67d805f1bb16b906121ca91e032bc1d36e2d228`.
+- Publication receipt: `../finalization_v2/16_github_publication_assets_receipt.json`.
+- Raw/interim data, employee-level OOF/local-SHAP outputs, models, calibrator internals, bootstrap arrays, and training-partition records remain ignored and are not authorized for Git publication.
+- The full closed-world package remains a Release/Zenodo-sized local package; tracking the aggregate subset does not change any canonical artifact byte or scientific identity.
 
 ## Acceptance evidence
 

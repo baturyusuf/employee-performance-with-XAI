@@ -15,7 +15,7 @@ Canonical run: `canonical_v2_20260714T221501Z_483f96f`.
 | HRDataset_v14 | `reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/external_replication/` | Independent 50-model/calibrator/bootstrap/SHAP replay passed | Independently trained mapped-target replication, not locked transport |
 | Claim boundaries | `reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/canonical_claim_boundaries.md`; `reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/supplementary/canonical_claim_boundaries.md` | Both files manifest-bound | Prohibits causal, fairness-proof, deployment, prescriptive, and autonomous-decision claims |
 
-The tracked compact source of truth is `15_canonical_evidence_receipt.json`. The full package is local/ignored and must not be staged. The historical baseline sections below are retained only as audit chronology and do not override this admission.
+The tracked compact source of truth is `15_canonical_evidence_receipt.json`. The 50-file aggregate figure/table/caption/manifest/claim subset is tracked under receipt `16_github_publication_assets_receipt.json`; the remaining full-package internals stay local/ignored and must not be staged. The historical baseline sections below are retained only as audit chronology and do not override this admission.
 
 ## Historical Status Rule (superseded)
 

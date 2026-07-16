@@ -1,5 +1,19 @@
 # Persistent Test Log
 
+## GitHub publication-assets validation - 2026-07-16
+
+- Aggregate publication subset: 50 files, 6,337,343 bytes, maximum file 2,195,799 bytes.
+- Reproducible repository-relative canonical-JSON inventory SHA-256: `645f5295c36f2d1e0a3b7809e67d805f1bb16b906121ca91e032bc1d36e2d228`.
+- Sensitive/employee-identifier table and figure-source header findings: zero.
+- Raw dataset, secret-pattern, machine-absolute-path, lock/partial/staging, and forbidden full-package candidate findings: zero.
+- Canonical asset bytes were not modified; directory inventories match the frozen figure/table manifests and stage contracts.
+- Production validation of the real canonical figure/core-table/supplementary-table directories: exit 0 in 2.770 seconds; seven figures, eleven core tables, three supplementary tables, complete stage contracts, and closed-world inventories passed.
+- Focused publication/manifest/CI-contract pytest: exit 0; 22 passed, 1 skipped in 8.37 seconds (14.335 seconds wall).
+- README audit: 64 local links, zero missing targets, and zero linked files outside the Git index.
+- Staged allowlist: 61 files total, including exactly 50 admitted canonical assets; zero unstaged files, unexpected canonical paths, forbidden full-package paths, raw data, employee-identifier headers, secrets, machine-absolute paths, or manuscript changes.
+- Canonical SVG and generated claim-boundary bytes retain generator-owned trailing spaces so their frozen manifest hashes remain unchanged; the editable/noncanonical staged subset passes `git diff --check` when those immutable generated files are excluded.
+- The clean-worktree repository gate and hosted CI are post-commit checks; their outcomes belong to the checkpoint handoff because they cannot precede the commit they validate.
+
 ## Final canonical validation - 2026-07-14
 
 - Focused final implementation tests: 103 passed, exit 0.

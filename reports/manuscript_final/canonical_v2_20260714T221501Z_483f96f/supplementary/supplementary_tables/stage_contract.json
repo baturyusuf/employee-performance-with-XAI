@@ -1,0 +1,341 @@
+{
+  "actual_input_receipts": {
+    "employee_turnover": {
+      "acquisition_manifest_path": "configs/data_acquisition.yaml",
+      "acquisition_manifest_sha256": "a5e820a7213967e494bc9238f104e478c5a65c0840d654397cc3063314262d97",
+      "acquisition_method": "existing_local_file",
+      "actual_path": "data/external/employee_turnover/raw.csv",
+      "actual_sha256": "2510e274a90547f34c7b0db5a4ab70282c2710eb54252f14921bf980b81a928c",
+      "automatic_download_allowed": false,
+      "column_count": 10,
+      "dataset_key": "employee_turnover",
+      "licence_verification_status": "manual_review_required",
+      "physical_dataset_id": "employee_turnover",
+      "row_count": 14999,
+      "schema_columns": [
+        "satisfaction_level",
+        "last_evaluation",
+        "number_project",
+        "average_montly_hours",
+        "time_spend_company",
+        "Work_accident",
+        "left",
+        "promotion_last_5years",
+        "sales",
+        "salary"
+      ],
+      "schema_status": "valid",
+      "size_bytes": 566778,
+      "source_authenticity_status": "public_mirror_recorded_upstream_authenticity_unverified",
+      "target_column": "left",
+      "target_distribution": {
+        "0": 11428,
+        "1": 3571
+      }
+    },
+    "ibm_hr_analytics": {
+      "acquisition_manifest_path": "configs/data_acquisition.yaml",
+      "acquisition_manifest_sha256": "a5e820a7213967e494bc9238f104e478c5a65c0840d654397cc3063314262d97",
+      "acquisition_method": "existing_local_file",
+      "actual_path": "data/external/ibm_hr_analytics/raw.csv",
+      "actual_sha256": "a5c31e38bd7fafc9bc333884eb181b06b41b8e5e488e8f7ccb27199fb3be7659",
+      "automatic_download_allowed": false,
+      "column_count": 35,
+      "dataset_key": "ibm_hr_analytics",
+      "licence_verification_status": "manual_review_required",
+      "physical_dataset_id": "ibm_hr_analytics",
+      "row_count": 1470,
+      "schema_columns": [
+        "Age",
+        "Attrition",
+        "BusinessTravel",
+        "DailyRate",
+        "Department",
+        "DistanceFromHome",
+        "Education",
+        "EducationField",
+        "EmployeeCount",
+        "EmployeeNumber",
+        "EnvironmentSatisfaction",
+        "Gender",
+        "HourlyRate",
+        "JobInvolvement",
+        "JobLevel",
+        "JobRole",
+        "JobSatisfaction",
+        "MaritalStatus",
+        "MonthlyIncome",
+        "MonthlyRate",
+        "NumCompaniesWorked",
+        "Over18",
+        "OverTime",
+        "PercentSalaryHike",
+        "PerformanceRating",
+        "RelationshipSatisfaction",
+        "StandardHours",
+        "StockOptionLevel",
+        "TotalWorkingYears",
+        "TrainingTimesLastYear",
+        "WorkLifeBalance",
+        "YearsAtCompany",
+        "YearsInCurrentRole",
+        "YearsSinceLastPromotion",
+        "YearsWithCurrManager"
+      ],
+      "schema_status": "valid",
+      "size_bytes": 227977,
+      "source_authenticity_status": "public_mirror_recorded_upstream_authenticity_unverified",
+      "target_column": "PerformanceRating",
+      "target_distribution": {
+        "3": 1244,
+        "4": 226
+      }
+    },
+    "ibm_hr_analytics_attrition": {
+      "acquisition_manifest_path": "configs/data_acquisition.yaml",
+      "acquisition_manifest_sha256": "a5e820a7213967e494bc9238f104e478c5a65c0840d654397cc3063314262d97",
+      "acquisition_method": "existing_local_file",
+      "actual_path": "data/external/ibm_hr_analytics/raw.csv",
+      "actual_sha256": "a5c31e38bd7fafc9bc333884eb181b06b41b8e5e488e8f7ccb27199fb3be7659",
+      "automatic_download_allowed": false,
+      "column_count": 35,
+      "dataset_key": "ibm_hr_analytics_attrition",
+      "licence_verification_status": "manual_review_required",
+      "physical_dataset_id": "ibm_hr_analytics",
+      "row_count": 1470,
+      "schema_columns": [
+        "Age",
+        "Attrition",
+        "BusinessTravel",
+        "DailyRate",
+        "Department",
+        "DistanceFromHome",
+        "Education",
+        "EducationField",
+        "EmployeeCount",
+        "EmployeeNumber",
+        "EnvironmentSatisfaction",
+        "Gender",
+        "HourlyRate",
+        "JobInvolvement",
+        "JobLevel",
+        "JobRole",
+        "JobSatisfaction",
+        "MaritalStatus",
+        "MonthlyIncome",
+        "MonthlyRate",
+        "NumCompaniesWorked",
+        "Over18",
+        "OverTime",
+        "PercentSalaryHike",
+        "PerformanceRating",
+        "RelationshipSatisfaction",
+        "StandardHours",
+        "StockOptionLevel",
+        "TotalWorkingYears",
+        "TrainingTimesLastYear",
+        "WorkLifeBalance",
+        "YearsAtCompany",
+        "YearsInCurrentRole",
+        "YearsSinceLastPromotion",
+        "YearsWithCurrManager"
+      ],
+      "schema_status": "valid",
+      "size_bytes": 227977,
+      "source_authenticity_status": "public_mirror_recorded_upstream_authenticity_unverified",
+      "target_column": "Attrition",
+      "target_distribution": {
+        "No": 1233,
+        "Yes": 237
+      }
+    },
+    "inx_primary": {
+      "acquisition_manifest_path": "configs/data_acquisition.yaml",
+      "acquisition_manifest_sha256": "a5e820a7213967e494bc9238f104e478c5a65c0840d654397cc3063314262d97",
+      "acquisition_method": "existing_local_file",
+      "actual_path": "data/raw/inx_employee_performance.csv",
+      "actual_sha256": "b8deac0a615b97076622ae540f4cfd0d3c3f1e7acb83ba3ff6560470a9ccf60a",
+      "automatic_download_allowed": false,
+      "column_count": 28,
+      "dataset_key": "inx_primary",
+      "licence_verification_status": "manual_review_required",
+      "physical_dataset_id": "inx_employee_performance",
+      "row_count": 1200,
+      "schema_columns": [
+        "EmpNumber",
+        "Age",
+        "Gender",
+        "EducationBackground",
+        "MaritalStatus",
+        "EmpDepartment",
+        "EmpJobRole",
+        "BusinessTravelFrequency",
+        "DistanceFromHome",
+        "EmpEducationLevel",
+        "EmpEnvironmentSatisfaction",
+        "EmpHourlyRate",
+        "EmpJobInvolvement",
+        "EmpJobLevel",
+        "EmpJobSatisfaction",
+        "NumCompaniesWorked",
+        "OverTime",
+        "EmpLastSalaryHikePercent",
+        "EmpRelationshipSatisfaction",
+        "TotalWorkExperienceInYears",
+        "TrainingTimesLastYear",
+        "EmpWorkLifeBalance",
+        "ExperienceYearsAtThisCompany",
+        "ExperienceYearsInCurrentRole",
+        "YearsSinceLastPromotion",
+        "YearsWithCurrManager",
+        "Attrition",
+        "PerformanceRating"
+      ],
+      "schema_status": "valid",
+      "size_bytes": 152715,
+      "source_authenticity_status": "repository_local_copy_upstream_source_unverified",
+      "target_column": "PerformanceRating",
+      "target_distribution": {
+        "2": 194,
+        "3": 874,
+        "4": 132
+      }
+    }
+  },
+  "config_hash": "51415c2ce68c89d9ce2b042b0a7a811fe3e98180b72460006f9d0465f6bf49b7",
+  "dataset_hashes": {
+    "employee_turnover": {
+      "column_count": 10,
+      "path": "data/external/employee_turnover/raw.csv",
+      "role": "related_task_transfer",
+      "row_count": 14999,
+      "schema_status": "valid",
+      "sha256": "2510e274a90547f34c7b0db5a4ab70282c2710eb54252f14921bf980b81a928c",
+      "size_bytes": 566778,
+      "target_column": "left",
+      "target_distribution": {
+        "0": 11428,
+        "1": 3571
+      },
+      "task_type": "binary_turnover_transfer"
+    },
+    "ibm_hr_analytics": {
+      "column_count": 35,
+      "path": "data/external/ibm_hr_analytics/raw.csv",
+      "role": "restricted_target_performance_robustness",
+      "row_count": 1470,
+      "schema_status": "valid",
+      "sha256": "a5c31e38bd7fafc9bc333884eb181b06b41b8e5e488e8f7ccb27199fb3be7659",
+      "size_bytes": 227977,
+      "target_column": "PerformanceRating",
+      "target_distribution": {
+        "3": 1244,
+        "4": 226
+      },
+      "task_type": "restricted_target_performance_robustness"
+    },
+    "ibm_hr_analytics_attrition": {
+      "column_count": 35,
+      "path": "data/external/ibm_hr_analytics/raw.csv",
+      "role": "related_task_transfer",
+      "row_count": 1470,
+      "schema_status": "valid",
+      "sha256": "a5c31e38bd7fafc9bc333884eb181b06b41b8e5e488e8f7ccb27199fb3be7659",
+      "size_bytes": 227977,
+      "target_column": "Attrition",
+      "target_distribution": {
+        "No": 1233,
+        "Yes": 237
+      },
+      "task_type": "binary_attrition_transfer"
+    },
+    "inx_primary": {
+      "column_count": 28,
+      "path": "data/raw/inx_employee_performance.csv",
+      "role": "primary_development_and_internal_oof_evaluation",
+      "row_count": 1200,
+      "schema_status": "valid",
+      "sha256": "b8deac0a615b97076622ae540f4cfd0d3c3f1e7acb83ba3ff6560470a9ccf60a",
+      "size_bytes": 152715,
+      "target_column": "PerformanceRating",
+      "target_distribution": {
+        "2": 194,
+        "3": 874,
+        "4": 132
+      },
+      "task_type": "ordinal_multiclass_performance"
+    }
+  },
+  "elapsed_seconds": 0.6484329999948386,
+  "ended_at": "2026-07-14T23:14:44+00:00",
+  "evidence_scope": "supplementary",
+  "git_commit": "483f96fdbaab16cb0f32d03d9dbe676a759af44a",
+  "inventory_mode": "closed_world",
+  "outputs": [
+    {
+      "path": "table_11_heuristic_counterfactual_search_success.csv",
+      "sha256": "838fdbfe1ccb79b0ec66bc0da0ad8c25fe0258b004abc4892fec12c06460239e",
+      "size_bytes": 112639
+    },
+    {
+      "path": "table_12_restricted_and_binary_task_evidence.csv",
+      "sha256": "666e6b4f77e3815d52762d61f3858659274cecf772564d678e404c79d2571552",
+      "size_bytes": 201648
+    },
+    {
+      "path": "table_13_supplementary_reproducibility_and_claim_boundaries.csv",
+      "sha256": "9456b2afd8a1d485ff7b41881fe7514ca90907c052179d22e393cf7e2137461a",
+      "size_bytes": 68280
+    },
+    {
+      "path": "table_manifest.json",
+      "sha256": "75b77102874b5d6920861e4eadab1375fc6743d61ab1c123274c51de3d4c6c28",
+      "size_bytes": 9026
+    }
+  ],
+  "path_basis": "stage_relative",
+  "run_id": "canonical_v2_20260714T221501Z_483f96f",
+  "scientific_input_hash": "caffb945d15f990e3a789e9707f7a8a9115be31fecbbd705822994a10cfaf151",
+  "scope_contract_hash": "18bbb5cb3dae267eac18f3cc60082e5023843b01bd565f8912555fc9c83aa329",
+  "side_input_hashes": {
+    "data_acquisition_contract": {
+      "path": "configs/data_acquisition.yaml",
+      "sha256": "a5e820a7213967e494bc9238f104e478c5a65c0840d654397cc3063314262d97",
+      "size_bytes": 10071
+    },
+    "dataset_provenance": {
+      "path": "configs/dataset_provenance.yaml",
+      "sha256": "1375d50ad595eaa8fe0f62effe49eaa3d105e71ad6399e07b69e26acf5be8eb0",
+      "size_bytes": 8271
+    },
+    "external_employee_turnover_schema_mapping": {
+      "path": "data/external/employee_turnover/schema_mapping.json",
+      "sha256": "ef49bf69d6ea9461adb10268da09f14f9cc24d457c0183ddd703c26140842d82",
+      "size_bytes": 1635
+    },
+    "external_ibm_hr_analytics_schema_mapping": {
+      "path": "data/external/ibm_hr_analytics/schema_mapping.json",
+      "sha256": "c74f0f7b119d1023eba0a3519b2c66223ff9407e6eb15f064ff15bb13f0024a9",
+      "size_bytes": 3095
+    },
+    "feature_policy_projection": {
+      "path": "configs/feature_sets.yaml",
+      "sha256": "4b270ad6f0b07e2d51ce2d3d3b38f193ad5e15925420e0a9293a361c805d8fc3",
+      "size_bytes": 3730
+    },
+    "feature_taxonomy": {
+      "path": "configs/feature_taxonomy.yaml",
+      "sha256": "20a9190e76b263732593e3274a1fe8b966d9f04df9e2cebff1a583093ab3fbb7",
+      "size_bytes": 10633
+    },
+    "model_search_space": {
+      "path": "configs/model_grid.yaml",
+      "sha256": "d8fb0584d7106f8941ca8e1b0e0a9c58e13f39519c6c75b383ff333d92d41617",
+      "size_bytes": 4526
+    }
+  },
+  "source_tree_hash": "f1e358e99914563305428cece1b1595bc76a58643184407ec5b222162d650332",
+  "stage": "supplementary_tables",
+  "started_at": "2026-07-14T23:14:44+00:00",
+  "status": "complete"
+}

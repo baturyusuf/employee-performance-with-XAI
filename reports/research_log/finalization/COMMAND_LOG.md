@@ -1,5 +1,11 @@
 # Persistent Command Log
 
+## GitHub publication-assets checkpoint - 2026-07-16
+
+Read-only inventory identified a 50-file/6,337,343-byte aggregate publication subset in the canonical run. It includes all final figure/table assets and claim boundaries while excluding row-level/model/full-package internals. The maximum file is 2,195,799 bytes. Header, raw-data, secret, path-portability, and GitHub-size preflights passed. `.gitignore` was narrowed to expose only these exact canonical directories/files, and README was rewritten to link every figure, source CSV, caption, and table directly.
+
+The three production package validators exited 0 in 2.770 seconds. The focused figure/table/manifest/CI-contract pytest command passed 22 tests with one skip in 8.37 seconds (14.335 seconds wall). The final staged audit found 61 allowlisted files/6,612,984 bytes: exactly 50 canonical publication assets plus 11 documentation/traceability files, no unstaged change, no manuscript change, and zero raw/model/OOF/employee-identifier/secret/machine-path candidates. All 64 README local links resolve to indexed files. Canonical inventory receipts use a documented repository-relative canonical-JSON algorithm rather than an undocumented one-off digest.
+
 ## Final canonical checkpoint - 2026-07-14
 
 Final run `canonical_v2_20260714T221501Z_483f96f` completed core and supplementary with `--no-reuse-compatible`, then passed atomic promotion and strict post-promotion validation. Exact commands, durations, hashes, candidate failures, and acceptance scans are recorded in `../finalization_v2/06_commands_and_tests.md` and `../finalization_v2/15_canonical_evidence_receipt.json`.

@@ -23,4 +23,4 @@ Canonical handoff inputs:
 - `../../manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/canonical_claim_boundaries.md`
 - `../../manuscript_final/canonical_v2_20260714T221501Z_483f96f/supplementary/canonical_claim_boundaries.md`
 
-The full canonical package is intentionally local/ignored and must not be committed to Git. Use a separately approved Release/Zenodo-sized publication workflow if public packaging is later authorized.
+The complete aggregate publication-support subset (Figures 1-7, Tables 1-13, source CSVs, captions, manifests, and claim boundaries) is tracked in Git and linked from README. The remaining full-package internals are intentionally local/ignored. Use a separately approved Release/Zenodo-sized workflow if publication of those internals is later authorized.

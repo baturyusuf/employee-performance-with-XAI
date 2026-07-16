@@ -38,4 +38,4 @@ Authors must review the canonical source tables, figures, and supported/prohibit
 
 Status: **not created**.
 
-The full canonical package is local/ignored and intentionally not committed. A separately approved Release/Zenodo-sized publication workflow must verify redistribution rights, checksums, access controls, and final URLs. No release URL or DOI is claimed.
+The aggregate canonical publication-support subset is committed so reviewers can access every final table and figure. The remaining full-package internals are local/ignored. A separately approved Release/Zenodo-sized workflow must verify redistribution rights, checksums, access controls, and final URLs before those internals are published. No release URL or DOI is claimed.
