@@ -11,3 +11,4 @@
 # Compact v3 evidence is also hash-bound byte-for-byte. Preserve source-run
 # line endings so the tracked package remains identical to its manifest.
 /reports/research_log/major_revision_v3/phase1b_ordinal_benchmark/** -text whitespace=-trailing-space
+/reports/research_log/major_revision_v3/phase1c_repeated_nested_cv/** -text whitespace=-trailing-space

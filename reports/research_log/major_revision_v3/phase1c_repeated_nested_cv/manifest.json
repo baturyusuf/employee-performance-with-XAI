@@ -1,0 +1,49 @@
+{
+  "file_count_excluding_manifest": 8,
+  "files": [
+    {
+      "path": "model_rank_summary.csv",
+      "sha256": "dfd3c314b88ee8bb9113d11189ad8c1ae1e9538f9fa385f526dd261ae2eedfe1",
+      "size_bytes": 1927
+    },
+    {
+      "path": "ordering_stability.csv",
+      "sha256": "5b36d6eb639441408a5997a60aaddb5cfc3a9b8986b4e3a1be6b6eaf50c4ca22",
+      "size_bytes": 985
+    },
+    {
+      "path": "provenance_receipt.json",
+      "sha256": "34851893bb019aa9958d2e4ab33318e28f7253da0e4dcba30ddbb277b3e6b9b4",
+      "size_bytes": 3884
+    },
+    {
+      "path": "rank_by_repetition.csv",
+      "sha256": "53723baa4d8d9615f4a92228bbdc53aed0d615c69de366b6002c0667e600157b",
+      "size_bytes": 8450
+    },
+    {
+      "path": "README.md",
+      "sha256": "3631b3508bcbbfa181b6503bd6ff7ff76ca9d9eb57f315ecd0200794047647c6",
+      "size_bytes": 3528
+    },
+    {
+      "path": "repetition_metrics.csv",
+      "sha256": "2128042c4d5f39c4d2c02f00398bf0c8aa5789d28a71dc54d13d1607afdd837b",
+      "size_bytes": 226185
+    },
+    {
+      "path": "selected_candidate_frequency.csv",
+      "sha256": "f1b52d4d881fd2e4e391fd49bccae015ec2741aea9222687f864c929718cf7d7",
+      "size_bytes": 2194
+    },
+    {
+      "path": "variability_summary.csv",
+      "sha256": "f50bbd1bb89e479ccdeb3e15538ea5f4a5c2eeabad6ef3d6d40d5439384c2acf",
+      "size_bytes": 6493
+    }
+  ],
+  "manifest_kind": "closed_world_phase1c_repeated_nested_cv_compact_evidence",
+  "schema_version": 1,
+  "source_run_id": "phase1c_v3_20260903T215015Z_78649c4",
+  "status": "passed"
+}

@@ -135,3 +135,11 @@ V2-033 atomic-publication consequence on 2026-07-14: transient Windows antivirus
 - Refit all four nominal, two ordinal, and three naive systems in every repetition. Canonical-v2 OOF reuse is prohibited for this training/fold-variability estimand. The six tuned families retain their exact candidate registries and training-only macro-F1/QWK selection rule.
 - Report mean, sample SD, median, minimum, and maximum for macro-F1, balanced accuracy, QWK, and ordinal MAE. Treat the range as descriptive repetition variation, not a confidence interval. Report six-model rank/winner/pairwise-Spearman stability and prohibit a universal-winner claim.
 - Keep fold assignments, employee-level OOF rows, and fitted models local and ignored. Only a separately validated compact aggregate/rank/provenance export may enter Git.
+
+## Major-revision v3 repeated nested-CV result decision — 2026-09-04
+
+- Admit `phase1c_v3_20260903T215015Z_78649c4` as complete Phase 1C evidence after independent byte, generation-source, fold-reconstruction, selection-lineage, OOF, metric, variability, rank, stability, and tuning-frequency validation. It remains a phase result rather than an integrated canonical-v3 release.
+- Publish only the nine-file compact package under `reports/research_log/major_revision_v3/phase1c_repeated_nested_cv/`. Keep the 12-file complete local run, 54,000 employee-level OOF rows, fold contracts, fold metrics, candidate-search rows, and selected fold records ignored.
+- Report the classification ordering as variable: LightGBM wins macro-F1 in 3/5 repetitions and XGBoost in 2/5; cumulative-threshold XGBoost wins balanced accuracy in 4/5 and LightGBM in 1/5. Do not convert mean or winner frequency into a universal-best claim.
+- Report Random Forest's 5/5 QWK and ordinal-MAE wins as stability within these five prespecified repetitions only. Do not generalize this to prospective, causal, fairness, deployment, or all-metric superiority.
+- Treat sample SD and minimum–maximum values as descriptive repetition variability, never as sample-level uncertainty or confidence intervals. Retain the weaker proportional-odds result and every adverse or unstable result.

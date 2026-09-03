@@ -2,7 +2,7 @@
 
 Date: 2026-09-03
 Branch: `finalization/leakage-aware-v2`
-Status: active implementation contract; Phase 0 and INX Phase 1A complete; Phase 1B evidence published; Phase 1C implementation/preflight validated
+Status: active implementation contract; Phase 0 and INX Phase 1A complete; Phase 1B and Phase 1C evidence published; Phase 1D next
 
 ## Purpose
 
@@ -20,7 +20,9 @@ The intended scientific conclusion is conditional rather than promotional: emplo
 - An independent validator rehashed all nine local outputs, bound the generation-time implementation blobs and immutable v2 sources, verified 10,800 combined OOF rows, and recomputed every aggregate, per-class, and confusion result. The publication-safe compact package is `phase1b_ordinal_benchmark/`; employee-level rows remain ignored locally.
 - Phase 1B has no universal winner: cumulative-threshold XGBoost leads macro-F1/balanced accuracy, Random Forest leads QWK/ordinal MAE, LightGBM leads RPS/Brier, and nominal XGBoost leads log loss. The next implementation unit is Phase 1C repeated nested-CV training-variability sensitivity.
 - The Phase 1B compact evidence/independent-validator checkpoint was pushed at `10d88dc95f322ef620d8f5bbad9a1af8ec73dd77`.
-- Phase 1C now has a frozen 5×5×5 contract, an offline clean-commit runner that refits all nine systems, variability/rank-stability summaries, and a passing fit-free real-data preflight. The 5-repetition choice is fixed before result inspection because the design requires 5,725 estimator-fit calls versus 11,450 for ten repetitions. A real one-fold in-memory diagnostic completed all nine systems/229 fits in about 52 seconds with zero persistence/network/API use. Complete execution remains pending its implementation checkpoint.
+- Phase 1C implementation was pushed at `f71077e98a464ce93351f82dc8d53b7659364096`; the Git-identity validation repair was pushed at `78649c426e69fb5270f9d027b11ba6ba87d71a41`. Complete run `phase1c_v3_20260903T215015Z_78649c4` refitted all nine systems across five prespecified 5×5 repetitions, produced 54,000 exactly-once OOF rows, and recorded zero network/API activity.
+- Independent validation reconstructed all five outer and inner fold systems from the persisted contracts and OOF evidence, rebound all generation inputs and six implementation blobs to the exact commit, and recomputed fold, repetition, variability, rank, stability, and tuning-frequency outputs. The safe aggregate package is `phase1c_repeated_nested_cv/`; local row-level evidence remains ignored.
+- Phase 1C finds metric-specific stability rather than a universal winner: LightGBM/XGBoost split macro-F1 wins 3/2, cumulative-threshold XGBoost wins balanced accuracy 4/5, and Random Forest wins QWK and ordinal MAE 5/5. Phase 1D independently retuned policy estimands are next.
 
 ## Non-negotiable controls
 

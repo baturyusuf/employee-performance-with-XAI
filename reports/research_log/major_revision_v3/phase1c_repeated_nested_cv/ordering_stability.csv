@@ -1,0 +1,5 @@
+metric,direction,repetition_count,model_count,repetition_pair_count,unique_winner_count,winner_models_json,modal_winner_models_json,modal_winner_frequency,mean_pairwise_rank_spearman,minimum_pairwise_rank_spearman,maximum_pairwise_rank_spearman,interpretation
+balanced_accuracy,higher,5,6,10,2,"[""cumulative_threshold_xgboost"",""lightgbm""]","[""cumulative_threshold_xgboost""]",0.8,0.8971428571428574,0.6571428571428573,1.0,descriptive_five_repetition_ordering_stability
+macro_f1,higher,5,6,10,2,"[""lightgbm"",""xgboost""]","[""lightgbm""]",0.6,0.9257142857142858,0.8285714285714287,1.0,descriptive_five_repetition_ordering_stability
+ordinal_mae,lower,5,6,10,1,"[""random_forest""]","[""random_forest""]",1.0,0.9257142857142859,0.8285714285714287,1.0,descriptive_five_repetition_ordering_stability
+quadratic_weighted_kappa,higher,5,6,10,1,"[""random_forest""]","[""random_forest""]",1.0,0.9428571428571428,0.8857142857142858,1.0,descriptive_five_repetition_ordering_stability

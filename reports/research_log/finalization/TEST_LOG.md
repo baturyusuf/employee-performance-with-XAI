@@ -656,3 +656,18 @@ Push/recovery gate: the normal push timed out after 184 seconds with no remote r
 - Final unittest discovery: exit 0; 179 tests, 1 skipped in 10.136 seconds. README validation resolved all 49 local links; final compileall and `git diff --check` exited 0.
 - First complete-run attempt: expected-safe failure before any fit/artifact because the Git digest helper incorrectly expected SHA-256 length. No run directory was created.
 - Git-identity compatibility fix focus: exit 0; 17 passed in 10.26 seconds. The new regression distinguishes 40-character Git identities from 64-character scientific hashes; compile passed, and an offline-boundary diagnostic reached the correct dirty-worktree gate.
+
+## Major-revision v3 repeated nested-CV result and compact-package validation — 2026-09-04
+
+- Independent run-validator focus: exit 0; 2 passed in 8.13 seconds. The complete local run passed; closed-world unexpected-file rejection passed.
+- Initial run-validator/compact-export focus before tracked publication: exit 0; 3 passed, 4 expected absent-package skips in 17.24 seconds. Deterministic temporary export passed.
+- Initial compact export: exit 0; nine files/255,171 bytes; manifest SHA-256 `49f6f52ba8726aeca008810c6aa1e84cf7e5f0bad8b7cd6df7582a74e9f4b1c1`.
+- Post-publication validator/export focus: exit 0; 7 passed in 16.61 seconds. Closed-world safety, compact recomputation, byte-preserving Git attributes, deterministic re-export, and tamper rejection passed.
+- First complete pytest after a validator receipt-label clarification: exit 1; 839 passed, 2 skipped, and 11 subtests passed in 176.24 seconds. The only failure was expected byte-determinism drift because the already generated provenance receipt retained the former field label; no scientific result or validator invariant failed.
+- Final regenerated compact export from the unchanged validated source: exit 0; nine files/255,182 bytes; manifest SHA-256 `ce930c634e6108e6a9859df6eaac628bacde98cd7b71563ad0a067dc1849638b`.
+- Regenerated run-validator/compact-export focus: exit 0; 7 passed in 16.52 seconds.
+- Final complete pytest: exit 0; 840 passed, 2 skipped, and 11 subtests passed in 174.61 seconds.
+- Final unittest discovery: exit 0; 179 tests passed, 1 skipped in 11.063 seconds. Compileall over `src` and `tests` exited 0.
+- Compact-package validation: exit 0; nine files/255,182 bytes with all aggregate grids recomputed and manifest SHA-256 `ce930c634e6108e6a9859df6eaac628bacde98cd7b71563ad0a067dc1849638b`.
+- Root README link audit resolved all 50 local links. `git diff --check` exited 0 with informational Windows line-ending warnings only.
+- Staged package audit: exit 0; all eight manifest records matched Git-index SHA-256 and size exactly; package attribute returned `text: unset`; zero prohibited row/fold-level source filenames were staged.
