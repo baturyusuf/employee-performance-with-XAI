@@ -1,5 +1,15 @@
 # Current Status
 
+## Major-revision v3 extension — 2026-09-03
+
+- The user supplied a broader 42-part reviewer-remediation brief and requested periodic tested GitHub pushes.
+- The canonical v2 package remains immutable and valid for its frozen protocol. It is not being overwritten or relabelled.
+- A scope reconciliation found that v2 does not close the broader brief: 13 numbered sections are addressed, 13 partial, 11 missing, and 6 approval/final-authoring pending.
+- The active additive work plan is `../major_revision_v3/PLAN.md`; the requirement-level evidence/gap audit is `../major_revision_v3/REQUIREMENT_COVERAGE_AUDIT.md`.
+- The current Markdown and LaTeX manuscript remain historical v1 and have not been edited. Claim-matrix approval is still required before manuscript authoring.
+- The next scientific unit is a v3-only information-contract and ordinal/naive benchmark extension. Any new result must use a new `canonical_v3_*` identity and preserve all v2 evidence.
+- Planning validation passed: compact canonical asset validation, 10 focused publication/CI tests, 45 README links, 43 exact requirement rows, status-count reconciliation, and `git diff --check`.
+
 Date: 2026-07-16
 
 - Branch: `finalization/leakage-aware-v2`.

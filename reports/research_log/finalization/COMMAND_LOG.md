@@ -1,5 +1,23 @@
 # Persistent Command Log
 
+## Major-revision v3 planning checkpoint - 2026-09-03
+
+The required handoff files, complete 42-part reviewer brief, current Git state, recent history, canonical compact handoff, v2 scope decisions, source/test inventory, and stale v1 manuscript headings/claims were inspected read-only. The branch began clean and synchronized at `050cfa7f53cb2a55d2b5eff1ef99490d01202d14`.
+
+Repository-wide searches found no admissible ordinal-logistic/cumulative-threshold model, repeated nested-CV sensitivity, independent policy retuning, model-level SHAP deletion/perturbation faithfulness experiment, RPS, naive baselines, HR target-mapping/CV sensitivity, or canonical data-quality output. They confirmed that v2 contains exact-fold grouped SHAP, matched fixed-schedule policy sensitivity, cross-fitted sigmoid calibration, descriptive subgroup/proxy diagnostics, and independently trained mapped-target HR replication.
+
+Created `../major_revision_v3/PLAN.md` and `../major_revision_v3/REQUIREMENT_COVERAGE_AUDIT.md`, then linked both from `../../../README.md`. No scientific code/config/artifact, dataset, model, manuscript, or canonical v2 byte was modified.
+
+Validation commands used the repository interpreter with paid-API credential variables cleared:
+
+```powershell
+.\myenv\Scripts\python.exe -m tools.canonical_manuscript_asset_export --validate-only
+.\myenv\Scripts\python.exe -m pytest -q tests/test_ci_workflow_contract.py tests/test_canonical_manuscript_asset_export.py
+git diff --check
+```
+
+Additional read-only PowerShell assertions checked all README links and the exact 0–42 coverage/status counts. Results are recorded in `TEST_LOG.md`.
+
 ## GitHub publication-assets checkpoint - 2026-07-16
 
 Read-only inventory identified a 50-file/6,337,343-byte aggregate publication subset in the canonical run. It includes all final figure/table assets and claim boundaries while excluding row-level/model/full-package internals. The maximum file is 2,195,799 bytes. Header, raw-data, secret, path-portability, and GitHub-size preflights passed. `.gitignore` was narrowed to expose only these exact canonical directories/files, and README was rewritten to link every figure, source CSV, caption, and table directly.

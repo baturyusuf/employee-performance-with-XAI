@@ -1,5 +1,14 @@
 # Persistent Decision Log
 
+## 2026-09-03 broader major-revision extension
+
+- The user supplied an explicit 42-part reviewer-remediation brief and requested periodic GitHub pushes.
+- The v2 freeze remains binding for v2 bytes, identities, and claims; it does not imply that the newly supplied broader brief is complete.
+- Missing work will be additive under a new v3 evidence identity. Existing `canonical_v2_20260714T221501Z_483f96f` artifacts must not be overwritten, relabelled, or silently mixed with v3 results.
+- The brief explicitly authorizes the requested ordinal, repeated-CV, independent-retuning, SHAP-faithfulness, replication-sensitivity, naive-baseline, per-class, and data-quality investigations. Exact v3 protocol choices must be prespecified in the v3 plan/config before real-data execution.
+- Manuscript Markdown/LaTeX remains protected by the existing claim-approval gate. Planning, contract implementation, experiments, compact reports, and claim-matrix preparation may proceed; manuscript authoring waits for the final v3 claim matrix and user approval.
+- Tested, reviewable checkpoints should be committed and pushed periodically. Force-push, history rewriting, merge, release publication, DOI publication, raw-data publication, and paid API calls remain prohibited without separate authorization.
+
 ## 2026-07-16 aggregate publication-assets decision
 
 - The user explicitly authorized GitHub publication of the final tables and figures so remote authoring/review agents can access the canonical numerical cells and data-derived graphics.

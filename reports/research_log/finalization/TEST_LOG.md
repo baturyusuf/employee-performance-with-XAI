@@ -1,5 +1,14 @@
 # Persistent Test Log
 
+## Major-revision v3 planning validation - 2026-09-03
+
+- Canonical compact asset validation: passed; 109 files/10,338,351 bytes, seven main and three supplementary PNG/SVG pairs, eight main tables, manifest SHA-256 `fbe7355b956df01ad9817f27b42dc13c0f3e0e33e7f0e5c42a2477beb9d001e1`.
+- Focused publication/CI tests: 10 passed in 1.35 seconds.
+- README link audit: 45 unique local links, zero missing.
+- Requirement audit: exact numbered rows 0–42; addressed 13, partial 13, missing 11, pending 6.
+- `git diff --check`: passed with only the informational Windows LF-to-CRLF warning for `README.md`.
+- Scientific execution, model fitting, calibration, bootstrap, SHAP recomputation, API/network use, manuscript edits, canonical artifact mutation, and dataset writes: zero.
+
 ## GitHub publication-assets validation - 2026-07-16
 
 - Aggregate publication subset: 50 files, 6,337,343 bytes, maximum file 2,195,799 bytes.

@@ -21,6 +21,10 @@ The canonical technical evidence package is complete and validated on `finalizat
 
 The authoritative compact receipt is [`15_canonical_evidence_receipt.json`](reports/research_log/finalization_v2/15_canonical_evidence_receipt.json). Current status, decisions, commands, tests, issues, and blockers are maintained under [`reports/research_log/finalization/`](reports/research_log/finalization/) and [`reports/research_log/finalization_v2/`](reports/research_log/finalization_v2/).
 
+### Major-revision v3 extension
+
+The canonical v2 package remains immutable, but a broader reviewer-remediation brief requires additional ordinal, repeated-CV, policy-retuning, SHAP-faithfulness, replication-sensitivity, and data-quality evidence. The additive v3 work is defined in the [`major revision v3 plan`](reports/research_log/major_revision_v3/PLAN.md) and the [`requirement coverage audit`](reports/research_log/major_revision_v3/REQUIREMENT_COVERAGE_AUDIT.md). These planning records do not alter or supersede any canonical v2 result.
+
 ## Tracked manuscript-support assets
 
 GitHub contains a deterministic, source-mapped export at [`manuscript/mdpi_information/assets/`](manuscript/mdpi_information/assets/). It was generated from the validated canonical run without refitting models or recomputing scientific evidence. The compact package contains 109 files and 10,338,351 bytes; its closed-world manifest SHA-256 is `fbe7355b956df01ad9817f27b42dc13c0f3e0e33e7f0e5c42a2477beb9d001e1`.
