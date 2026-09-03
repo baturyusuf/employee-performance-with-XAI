@@ -654,3 +654,5 @@ Push/recovery gate: the normal push timed out after 184 seconds with no remote r
 - Real-data one-fold diagnostic: exit 0 in approximately 52 seconds; 229 estimator-fit calls; nine models; 44 candidate, nine fold, 2,160 OOF, and 144 repetition-metric rows; explicit inadmissible status, no persistence, zero network/API attempts.
 - Final complete pytest: exit 0; 832 passed, 2 skipped, and 11 subtests passed in 160.69 seconds.
 - Final unittest discovery: exit 0; 179 tests, 1 skipped in 10.136 seconds. README validation resolved all 49 local links; final compileall and `git diff --check` exited 0.
+- First complete-run attempt: expected-safe failure before any fit/artifact because the Git digest helper incorrectly expected SHA-256 length. No run directory was created.
+- Git-identity compatibility fix focus: exit 0; 17 passed in 10.26 seconds. The new regression distinguishes 40-character Git identities from 64-character scientific hashes; compile passed, and an offline-boundary diagnostic reached the correct dirty-worktree gate.

@@ -23,6 +23,15 @@ def _contract() -> dict:
     return json.loads(Path("configs/repeated_nested_cv_v3.json").read_text(encoding="utf-8"))
 
 
+def test_git_and_scientific_digest_lengths_are_distinct() -> None:
+    from src.experiments.repeated_nested_cv_v3 import _valid_digest
+
+    assert _valid_digest("a" * 40, length=40)
+    assert not _valid_digest("a" * 40)
+    assert _valid_digest("b" * 64)
+    assert not _valid_digest("g" * 64)
+
+
 class _FastClassifier:
     def __init__(self, model_index: int) -> None:
         self.model_index = model_index

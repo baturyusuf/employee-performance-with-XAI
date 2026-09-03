@@ -135,8 +135,10 @@ def _canonical_json_sha256(payload: Mapping[str, Any]) -> str:
     return hashlib.sha256(encoded).hexdigest()
 
 
-def _valid_digest(value: str) -> bool:
-    return len(value) == 64 and all(character in "0123456789abcdef" for character in value)
+def _valid_digest(value: str, *, length: int = 64) -> bool:
+    return len(value) == length and all(
+        character in "0123456789abcdef" for character in value
+    )
 
 
 def _clean_git_identity() -> dict[str, str]:
@@ -164,7 +166,10 @@ def _clean_git_identity() -> dict[str, str]:
         ).stdout.strip()
     except (OSError, subprocess.CalledProcessError) as exc:
         raise RepeatedNestedCVError(f"Could not establish Git identity: {exc}") from exc
-    _require(_valid_digest(head), "Git HEAD must be a full lowercase commit digest.")
+    _require(
+        _valid_digest(head, length=40),
+        "Git HEAD must be a full lowercase commit digest.",
+    )
     _require(
         not status,
         "Scientific execution requires a clean worktree; "
