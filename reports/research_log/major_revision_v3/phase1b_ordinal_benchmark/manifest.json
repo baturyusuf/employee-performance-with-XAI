@@ -1,0 +1,49 @@
+{
+  "file_count_excluding_manifest": 8,
+  "files": [
+    {
+      "path": "aggregate_metrics.csv",
+      "sha256": "b7dcd0fa01f40c6d11450bb4afd32b1e768f7b301ca804674d8ae589f5a58edf",
+      "size_bytes": 9461
+    },
+    {
+      "path": "candidate_search_summary.csv",
+      "sha256": "750d38022fa3dd361fd946bf8177d4e6c5ff430be223d137187d6c1c0e1318ed",
+      "size_bytes": 3261
+    },
+    {
+      "path": "confusion_matrix.csv",
+      "sha256": "667cfa6605c5d2e3490e87801b0906940dd320595125727fda8f2c7ccbb53e0c",
+      "size_bytes": 3204
+    },
+    {
+      "path": "extension_fold_metrics.csv",
+      "sha256": "bb7ff59f53350840a4059ed4770e25ca6ac0274d03400ee0c80fe024efb9c9e0",
+      "size_bytes": 25692
+    },
+    {
+      "path": "per_class_metrics.csv",
+      "sha256": "d58ca07066b74a5648a2f0bea9c26594e607942320913d1c29ff24e46f72fea8",
+      "size_bytes": 2379
+    },
+    {
+      "path": "provenance_receipt.json",
+      "sha256": "132ee7d9eacb313cac46b96ec1ec49008091f0c0f4138a24a588672e75ecc30e",
+      "size_bytes": 3160
+    },
+    {
+      "path": "README.md",
+      "sha256": "f6ca7b8e8a48addaf6541595e0038d54eab8fb655c54d18c7b734844e74fb64c",
+      "size_bytes": 3476
+    },
+    {
+      "path": "selected_hyperparameters_by_fold.csv",
+      "sha256": "a85fba71c4562392f0d9246e23f6b047624aeda4c00d3151a3178c68ef845fc7",
+      "size_bytes": 19476
+    }
+  ],
+  "manifest_kind": "closed_world_phase1b_ordinal_benchmark_compact_evidence",
+  "schema_version": 1,
+  "source_run_id": "phase1b_v3_20260903T130912Z_dc5cb8b",
+  "status": "passed"
+}

@@ -2,7 +2,7 @@
 
 Date: 2026-09-03
 Branch: `finalization/leakage-aware-v2`
-Status: active implementation contract; Phase 0 complete, Phase 1A INX contract implemented
+Status: active implementation contract; Phase 0 and INX Phase 1A complete; Phase 1B executed and independently validated
 
 ## Purpose
 
@@ -16,8 +16,9 @@ The intended scientific conclusion is conditional rather than promotional: emplo
 - The INX portion of Phase 1A is implemented in `configs/feature_availability_v3.json`, validated by `src/governance/feature_availability_contract.py`, and rendered in `FEATURE_AVAILABILITY_GOVERNANCE_CONTRACT.md`.
 - The contract covers all 28 acquisition-schema fields and freezes six nested policies with retained-feature counts P0=26, P1=24, P2=21, P3=20, P4=13, and P5=6.
 - The scenario remains a conceptual cross-sectional estimand: zero feature timestamps are verified, P4 is only a prospective-plausibility sensitivity, and no policy is described as eliminating all leakage.
-- The next implementation unit is Phase 1B: two ordinal-aware models, three naive baselines, RPS, two-level reversal, per-class metrics, and confusion outputs. No real-data v3 experiment has yet been run.
-- Phase 1B implementation and fit-free real-data preflight are now complete. A single-fold real-data diagnostic passed under `diagnostic_incomplete_never_canonical`; the full clean-commit execution remains pending. The protocol is documented in `ORDINAL_BENCHMARK_PROTOCOL.md`.
+- Phase 1B implementation was committed and pushed at `dc5cb8b96b096bb2efc6c242403b7e51f870a01b`; the complete exact-commit run `phase1b_v3_20260903T130912Z_dc5cb8b` then produced exactly-once OOF evidence for nine systems on the common 10×5 fold contract.
+- An independent validator rehashed all nine local outputs, bound the generation-time implementation blobs and immutable v2 sources, verified 10,800 combined OOF rows, and recomputed every aggregate, per-class, and confusion result. The publication-safe compact package is `phase1b_ordinal_benchmark/`; employee-level rows remain ignored locally.
+- Phase 1B has no universal winner: cumulative-threshold XGBoost leads macro-F1/balanced accuracy, Random Forest leads QWK/ordinal MAE, LightGBM leads RPS/Brier, and nominal XGBoost leads log loss. The next implementation unit is Phase 1C repeated nested-CV training-variability sensitivity.
 
 ## Non-negotiable controls
 

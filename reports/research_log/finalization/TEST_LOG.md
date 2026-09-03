@@ -630,3 +630,16 @@ Push/recovery gate: the normal push timed out after 184 seconds with no remote r
 - Corrected publication-export plus ordinal focus: exit 0; 45 passed in 3.24 seconds. The revised guard permits added v3-named files only and still rejects modification/deletion of frozen v2 scientific source.
 - Final complete pytest after the guard correction: exit 0; 809 passed, 2 skipped, 11 subtests passed in 119.88 seconds.
 - Final compileall over `src` and `tests`, ordinal-contract validation, real-data fit-free preflight, 47-link README validation, and unstaged `git diff --check`: exit 0. Ordinal benchmark contract SHA-256: `39bcc62580515888783120a00ed807c0ede0f4c46f587f50897aced4c7999b02`.
+
+## Major-revision v3 ordinal result and compact-package validation — 2026-09-03
+
+- Full run: exit 0 from clean commit `dc5cb8b96b096bb2efc6c242403b7e51f870a01b`; nine closed-world files; 10,800 combined OOF rows; 1,200 exactly-once OOF rows per model; zero network/paid-API calls.
+- Independent run validator: exit 0; nine output hashes exact; generation config and three principal implementation Git blobs exact; four canonical-v2 artifact hashes exact; nominal OOF reuse, extension combination, fold/target lineage, probability simplexes, argmax predictions, outer-test isolation, and recomputed aggregate/per-class/confusion tables passed.
+- Initial validator/export tests before compact generation: 3 passed, 3 skipped in 1.18 seconds. Skips were the expected absent-package conditions.
+- Compact export: exit 0; nine files/71,654 bytes; 144 aggregate, 27 per-class, 81 confusion, 50 fold-metric, 50 selection, and 14 candidate-summary rows; manifest SHA-256 `b97b558d8c373958d79847b4e8d568ca6f670e5438859df56213799601f3d389`.
+- Combined ordinal/run-validator/compact-export focus after publication: exit 0; 45 passed in 4.53 seconds. Deterministic byte-for-byte re-export, no employee-level columns/artifacts, and tamper rejection passed.
+- Pre-attribute complete pytest: exit 0; 815 passed, 2 skipped, and 11 subtests passed in 123.73 seconds.
+- Final unittest discovery: exit 0; 179 tests, 1 skipped in 8.262 seconds. Compileall over `src` and `tests` exited 0.
+- README local-link validation: exit 0; all 48 local links resolved. `git diff --check` exited 0 with informational Windows line-ending warnings only.
+- Initial staged-manifest audit: correctly failed with five CSV hash mismatches caused by automatic CRLF normalization. After the package-scoped `-text` rule and index-only rebuild, all eight manifested staged blobs matched exactly and staged `git diff --check` exited 0. The updated compact/run-validator focus passed 7 tests in 1.10 seconds.
+- Final complete pytest after the byte-preservation regression: exit 0; 816 passed, 2 skipped, and 11 subtests passed in 124.12 seconds.

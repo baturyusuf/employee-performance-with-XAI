@@ -119,3 +119,11 @@ V2-033 atomic-publication consequence on 2026-07-14: transient Windows antivirus
 - Report normalized RPS and rename the manuscript-facing extreme error to `two_level_reversal_rate`, defined by an absolute declared-class-position error of at least two. Preserve the legacy v2 field only as historical evidence, not as the v3 display name.
 - Keep XGBoost as the prespecified XAI reference because of exact-fold TreeSHAP continuity, not because of predictive superiority. Report metric-specific rankings and prohibit a universal-best-model claim.
 - Require a clean Git worktree, exact commit, complete source-tree hash, bound dataset/config/fold/OOF hashes, and unchanged pre/post execution identities before atomically publishing any full result. Local row-level OOF outputs remain ignored and unpublishable.
+
+## Major-revision v3 ordinal-result publication decision — 2026-09-03
+
+- Admit `phase1b_v3_20260903T130912Z_dc5cb8b` as complete Phase 1B evidence after independent closed-world rehashing, exact generation-blob/source binding, OOF-lineage checks, and numerical recomputation. It is a phase result, not an integrated `canonical_v3_*` release.
+- Publish only the nine-file compact package under `reports/research_log/major_revision_v3/phase1b_ordinal_benchmark/`. Keep employee-level OOF rows and the complete local run Git-ignored; do not publish fitted models or raw data.
+- Report rankings per metric. Cumulative-threshold XGBoost may be described as leading macro-F1/balanced accuracy, Random Forest as leading QWK/ordinal MAE, LightGBM as leading RPS/Brier, and nominal XGBoost as leading log loss. A universal-best-model claim is prohibited.
+- Preserve adverse/null evidence: proportional-odds logistic is weaker than the nominal comparators, cumulative-threshold XGBoost has poor raw log loss despite its classification ranking, and naive middle-class prediction can obtain zero two-level reversals without useful class discrimination.
+- Do not attach significance or training-variability language to the 0.0044 macro-F1 contrast between cumulative-threshold and nominal XGBoost until the separately prespecified repeated-CV sensitivity is complete.

@@ -5,12 +5,13 @@
 The broader reviewer brief is now the active extension. Preserve the complete v2 package, but do not infer that its narrower protocol closes the new brief.
 
 1. Completed and pushed: validated v3 planning/coverage checkpoint (`618a3936e040db119eee3d43f6887d3ed4f447ea`).
-2. Implemented for INX and awaiting its own tested Git checkpoint: prediction-time scenario, complete 28-field availability contract, and exact P0–P5 semantic policy map. HR-specific semantics remain in Phase 3A.
-3. Implemented and awaiting clean checkpoint: two ordinal-aware models, three naive baselines, RPS, per-class metrics, confusion outputs, and a hash-bound runner using the exact canonical-v2 folds and nominal OOF evidence.
-4. Commit/push Phase 1B implementation, then run the complete local nine-system benchmark from that exact clean commit. Validate and export only compact non-row-level evidence.
-5. Add repeated nested-CV and independently retuned policy estimands after the primary ordinal benchmark evidence is accepted by its automated gates.
-6. Continue with the SHAP, calibration, subgroup/proxy, HR sensitivity, data-quality, literature, provenance, and deliverable phases in `../major_revision_v3/PLAN.md`.
-7. Freeze and request approval for the final v3 claim matrix before editing `manuscript/mdpi_information/main.md` or `main.tex`.
+2. Completed and pushed: INX prediction-time scenario, complete 28-field availability contract, and exact P0–P5 semantic policy map (`a60a2f3b5c3f17398b80e3b2b3e2ebaf04787378`). HR-specific semantics remain in Phase 3A.
+3. Completed and pushed: Phase 1B ordinal/naive benchmark implementation (`dc5cb8b96b096bb2efc6c242403b7e51f870a01b`).
+4. Completed and awaiting this evidence checkpoint: exact-commit nine-system run, independent recomputation validator, and compact non-row-level result package. The local row-level source remains ignored.
+5. Implement deterministic repeated 5×5 outer/inner nested-CV training-variability sensitivity, validate repetition completeness and ordering stability, then checkpoint compact evidence.
+6. Add independently retuned feature-policy estimands after the repeated-CV evidence passes its automated gates.
+7. Continue with the SHAP, calibration, subgroup/proxy, HR sensitivity, data-quality, literature, provenance, and deliverable phases in `../major_revision_v3/PLAN.md`.
+8. Freeze and request approval for the final v3 claim matrix before editing `manuscript/mdpi_information/main.md` or `main.tex`.
 
 Current planning evidence: `../major_revision_v3/REQUIREMENT_COVERAGE_AUDIT.md`.
 

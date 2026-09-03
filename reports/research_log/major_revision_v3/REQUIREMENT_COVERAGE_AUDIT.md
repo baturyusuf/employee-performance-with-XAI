@@ -11,6 +11,8 @@ The v2 package is internally validated for its frozen protocol, but it does **no
 
 The classifications below are the frozen pre-v3 baseline and therefore are not silently rewritten as implementation proceeds. Requirement 1 and the primary-dataset portion of Requirement 2 now have an implemented INX contract covering all 28 acquisition-schema fields, eight distinct risk types, and six exactly validated nested policy maps. The generated report is `FEATURE_AVAILABILITY_GOVERNANCE_CONTRACT.md`; its source contract SHA-256 is `6dd5fdde534e379cceacfaa01e865d1551310fb632b691f5b937ef39394e93cf`. HR-specific mapping remains assigned to Phase 3A, so the broader cross-dataset work is not declared complete.
 
+Requirements 3, 18, 19, and 20 now have additive Phase 1B implementation and complete real-data evidence without changing their frozen baseline classifications below. The governed nine-system package adds two genuinely ordinal models, majority/stratified/ordinal-median baselines, normalized RPS, per-class metrics, complete confusion grids, and the explicit `two_level_reversal_rate` name. The result is independently recomputed and published at `phase1b_ordinal_benchmark/`; it retains weak proportional-odds performance and metric-dependent model rankings rather than promoting a universal winner. Repeated-CV uncertainty remains open under Requirement 5.
+
 Status meanings:
 
 - `addressed`: executable or canonical evidence and claim boundaries materially satisfy the requirement.

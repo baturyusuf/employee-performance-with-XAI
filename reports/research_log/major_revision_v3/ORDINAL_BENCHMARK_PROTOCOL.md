@@ -2,7 +2,7 @@
 
 Date: 2026-09-03
 
-Status: implementation validated; full clean-commit execution pending
+Status: complete exact-commit execution independently validated; compact aggregate evidence published
 
 ## Evidence composition
 
@@ -41,4 +41,12 @@ Employee-level OOF rows remain under the ignored local `reports/major_revision_v
 
 The real-data fit-free preflight passed with dataset SHA-256 `b8deac0a615b97076622ae540f4cfd0d3c3f1e7acb83ba3ff6560470a9ccf60a`, 1,200 samples, target support 194/874/132, 20 P3 features, fold-contract hash `c1300316fe5baec24e789c06aec35dd4f283fa4843b71c7aab1edbf4818f8e91`, and 4,800 aligned v2 nominal OOF rows.
 
-A one-outer-fold real-data diagnostic completed in 9.743 seconds with 14 candidate rows, five system fold rows, and 600 held-out prediction rows. Its explicit status is `diagnostic_incomplete_never_canonical`; it was not persisted and its candidate choices are not scientific results. The complete run remains pending until this implementation is committed and the repository is clean.
+A one-outer-fold real-data diagnostic completed in 9.743 seconds with 14 candidate rows, five system fold rows, and 600 held-out prediction rows. Its explicit status is `diagnostic_incomplete_never_canonical`; it was not persisted and its candidate choices are not scientific results.
+
+## Completed Phase 1B result
+
+The complete run `phase1b_v3_20260903T130912Z_dc5cb8b` was generated from clean commit `dc5cb8b96b096bb2efc6c242403b7e51f870a01b`. Its scientific-input SHA-256 is `09e39f0920369ecfbc5be28d731833c7695e2618de47825ffa4529362dfc0b2a`; the benchmark-contract SHA-256 is `39bcc62580515888783120a00ed807c0ede0f4c46f587f50897aced4c7999b02`. The local closed-world run contains nine files, 10,800 combined exactly-once OOF rows, 6,000 newly fitted extension rows, 140 candidate-selection rows, 144 aggregate metric rows, 27 per-class rows, and 81 confusion cells. Scientific execution made zero network and zero paid-API calls.
+
+Independent post-run validation rehashed every output, resolved the configuration and three principal implementation modules from the generation commit, revalidated the four immutable v2 source artifacts, checked fold/target/probability lineage, and recomputed aggregate, per-class, and confusion outputs from OOF rows. The tracked [`compact evidence package`](phase1b_ordinal_benchmark/README.md) contains only aggregate/fold-level results and provenance; employee-level OOF rows and fitted models remain excluded.
+
+The result is metric-dependent. Cumulative-threshold XGBoost has the highest macro-F1 (0.6255) and balanced accuracy (0.6745), but improves macro-F1 over nominal XGBoost by only 0.0044 and has much worse log loss (1.3053). Random Forest has the highest QWK (0.6317) and lowest ordinal MAE (0.1583), LightGBM has the lowest RPS (0.0804) and Brier score (0.3173), and nominal XGBoost has the lowest log loss (0.5515). Proportional-odds logistic is weaker than the nominal models. No interval/significance conclusion or universal-best-model claim is attached to these contrasts.

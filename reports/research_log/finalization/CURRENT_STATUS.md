@@ -7,7 +7,7 @@
 - A scope reconciliation found that v2 does not close the broader brief: 13 numbered sections are addressed, 13 partial, 11 missing, and 6 approval/final-authoring pending.
 - The active additive work plan is `../major_revision_v3/PLAN.md`; the requirement-level evidence/gap audit is `../major_revision_v3/REQUIREMENT_COVERAGE_AUDIT.md`.
 - The current Markdown and LaTeX manuscript remain historical v1 and have not been edited. Claim-matrix approval is still required before manuscript authoring.
-- The next scientific unit is a v3-only information-contract and ordinal/naive benchmark extension. Any new result must use a new `canonical_v3_*` identity and preserve all v2 evidence.
+- The v3-only information contract is implemented and the ordinal/naive benchmark extension is complete. Any eventual integrated canonical result must use a new `canonical_v3_*` identity and preserve all v2 evidence.
 - Planning validation passed: compact canonical asset validation, 10 focused publication/CI tests, 45 README links, 43 exact requirement rows, status-count reconciliation, and `git diff --check`.
 - Planning checkpoint `618a3936e040db119eee3d43f6887d3ed4f447ea` was pushed normally to `origin/finalization/leakage-aware-v2`.
 - The INX Phase 1A contract is now implemented: all 28 pinned acquisition fields, eight separate risk types, six exactly nested P0–P5 policies, and a fail-closed Markdown generator. Retained counts are 26/24/21/20/13/6.
@@ -15,9 +15,10 @@
 - The scenario explicitly remains timestamp-unverified and conceptual; zero features are asserted timestamp-verified, P4 is not prospective deployment evidence, and no policy is called leakage-free.
 - Phase 1A final focus passed 44 tests plus 7 subtests; all 46 README local links resolved. No model fit, real-data experiment, API/network call, canonical-v2 mutation, or manuscript edit occurred.
 - Phase 1A checkpoint `a60a2f3b5c3f17398b80e3b2b3e2ebaf04787378` was pushed; local/remote divergence was 0/0.
-- Phase 1B code now implements two ordinal models, three training-only naive baselines, normalized RPS, the renamed two-level reversal rate, per-class metrics, complete confusion grids, exact v2 fold/OOF reuse, and clean-Git/source-hash atomic-run gates.
-- Phase 1B focused/regression validation passed 65 tests. The fit-free real-data preflight verified 1,200 samples, 20 P3 features, 10×5 folds, and 4,800 canonical-v2 nominal OOF rows with exact source hashes.
-- One real outer-fold diagnostic completed in 9.743 seconds and was explicitly labelled `diagnostic_incomplete_never_canonical`; no diagnostic artifact was persisted. Full exact-commit execution is the next action.
+- Phase 1B code implements two ordinal models, three training-only naive baselines, normalized RPS, the renamed two-level reversal rate, per-class metrics, complete confusion grids, exact v2 fold/OOF reuse, and clean-Git/source-hash atomic-run gates. Its implementation checkpoint `dc5cb8b96b096bb2efc6c242403b7e51f870a01b` is pushed.
+- Complete run `phase1b_v3_20260903T130912Z_dc5cb8b` contains nine closed-world files and exactly 1,200 OOF predictions per system. Independent validation rehashed the run, bound generation-time Git blobs and immutable v2 sources, checked 10,800 combined OOF rows, and recomputed all 144 aggregate, 27 per-class, and 81 confusion records.
+- Results are metric-specific: cumulative-threshold XGBoost leads macro-F1/balanced accuracy, Random Forest leads QWK/ordinal MAE, LightGBM leads RPS/Brier, and nominal XGBoost leads log loss. Proportional-odds logistic underperforms the nominal models; cumulative-threshold XGBoost's log loss is materially adverse. No universal winner or significance claim is authorized.
+- The tracked compact Phase 1B package has nine files/71,654 bytes and excludes employee-level OOF rows, raw data, and fitted models. Phase 1C repeated nested-CV sensitivity is the next scientific unit.
 - Final complete pre-checkpoint regression passed 809 tests, 2 skips, and 11 subtests in 119.88 seconds. The one stale additive-source guard found by the first full run was corrected without weakening frozen-v2 modification/deletion protection.
 
 Date: 2026-07-16
