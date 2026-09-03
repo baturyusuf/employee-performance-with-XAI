@@ -1,0 +1,184 @@
+{
+  "schema_version": 1,
+  "contract_id": "repeated_nested_cv_v3",
+  "dataset_key": "inx_primary",
+  "task_type": "ordinal_multiclass_performance",
+  "target": "PerformanceRating",
+  "ordered_labels": [2, 3, 4],
+  "purpose": "training_and_fold_variability_sensitivity_not_sample_level_uncertainty",
+  "source_contracts": {
+    "canonical_loader_config": {
+      "path": "configs/manuscript_final.yaml",
+      "sha256": "f8a6354ab67757c5d92c93cef2fe03ab88f4b16b10ce470f2db97ed4d0407779"
+    },
+    "acquisition_manifest": {
+      "path": "configs/data_acquisition.yaml",
+      "sha256": "a5e820a7213967e494bc9238f104e478c5a65c0840d654397cc3063314262d97"
+    },
+    "feature_availability": {
+      "path": "configs/feature_availability_v3.json",
+      "sha256": "6dd5fdde534e379cceacfaa01e865d1551310fb632b691f5b937ef39394e93cf",
+      "semantic_sha256": "1773f42a1b33c8e51c91955f9ab28c1b67dc32fdfeb381e9f52dab6bcf571755"
+    },
+    "nominal_model_grid": {
+      "path": "configs/model_grid.yaml",
+      "sha256": "d8fb0584d7106f8941ca8e1b0e0a9c58e13f39519c6c75b383ff333d92d41617"
+    },
+    "ordinal_benchmark": {
+      "path": "configs/ordinal_benchmark_v3.json",
+      "sha256": "39bcc62580515888783120a00ed807c0ede0f4c46f587f50897aced4c7999b02"
+    },
+    "phase1b_aggregate_reference": {
+      "path": "reports/research_log/major_revision_v3/phase1b_ordinal_benchmark/aggregate_metrics.csv",
+      "sha256": "b7dcd0fa01f40c6d11450bb4afd32b1e768f7b301ca804674d8ae589f5a58edf",
+      "use": "descriptive_reference_only_never_selection_or_seed_choice"
+    }
+  },
+  "information_policy": {
+    "policy_id": "P3",
+    "retained_feature_count": 20,
+    "timing_status": "timestamp_unverified_cross_sectional",
+    "prospective_validity_claim_allowed": false
+  },
+  "design": {
+    "repetitions": 5,
+    "outer_strategy": "StratifiedKFold",
+    "outer_splits": 5,
+    "outer_shuffle": true,
+    "inner_strategy": "StratifiedKFold",
+    "inner_splits": 5,
+    "inner_shuffle": true,
+    "same_exact_folds_across_models_within_repetition": true,
+    "different_fold_assignment_required_across_repetitions": true,
+    "every_sample_exactly_once_per_model_per_repetition": true,
+    "outer_test_usage": "evaluation_only_never_tuning_selection_preprocessing_calibration_or_seed_choice",
+    "seed_schedule": [
+      {"repetition": 1, "outer_seed": 1042, "inner_seed": 1043, "model_seed": 1044},
+      {"repetition": 2, "outer_seed": 2042, "inner_seed": 2043, "model_seed": 2044},
+      {"repetition": 3, "outer_seed": 3042, "inner_seed": 3043, "model_seed": 3044},
+      {"repetition": 4, "outer_seed": 4042, "inner_seed": 4043, "model_seed": 4044},
+      {"repetition": 5, "outer_seed": 5042, "inner_seed": 5043, "model_seed": 5044}
+    ]
+  },
+  "computational_scope": {
+    "requested_preference": "10_repetitions_if_proportionate_otherwise_5",
+    "selected_repetitions": 5,
+    "decision_basis": "prespecified_bounded_cost_before_result_inspection",
+    "tuned_model_count": 6,
+    "naive_baseline_count": 3,
+    "outer_partition_count": 25,
+    "inner_validation_partition_count_per_candidate": 125,
+    "estimator_fit_calls_per_outer_partition": 229,
+    "planned_estimator_fit_calls": 5725,
+    "ten_repetition_estimator_fit_calls": 11450,
+    "escalation_rule": "do_not_escalate_after_inspecting_results; a separate future 10-repetition run requires a new prespecified contract"
+  },
+  "model_registry": {
+    "nominal_models": [
+      "logistic_regression",
+      "random_forest",
+      "lightgbm",
+      "xgboost"
+    ],
+    "ordinal_models": [
+      "proportional_odds_logistic",
+      "cumulative_threshold_xgboost"
+    ],
+    "naive_baselines": [
+      "majority_baseline",
+      "stratified_baseline",
+      "ordinal_median_baseline"
+    ],
+    "all_models_refitted_in_every_repetition": true,
+    "canonical_v2_oof_reuse_allowed": false
+  },
+  "preprocessing": {
+    "factory": "src.models.canonical_models.build_common_preprocessor",
+    "fit_scope": "current_inner_or_outer_training_partition_only",
+    "numeric": ["median_imputation", "standard_scaling"],
+    "categorical": ["most_frequent_imputation", "one_hot_unknown_ignore_dense"],
+    "outer_test_used_for_fit": false
+  },
+  "selection": {
+    "scope": "independently_within_each_model_repetition_and_outer_training_partition",
+    "primary_metric": "macro_f1",
+    "tie_break_metric": "quadratic_weighted_kappa",
+    "primary_tie_tolerance": 0.001,
+    "candidate_definitions": "exact_source_contract_registries",
+    "baselines_enter_hyperparameter_selection": false,
+    "outer_test_used": false,
+    "seed_or_repetition_selected_from_results": false
+  },
+  "evaluation": {
+    "all_per_repetition_metrics": [
+      "accuracy",
+      "balanced_accuracy",
+      "macro_f1",
+      "weighted_f1",
+      "macro_precision",
+      "weighted_precision",
+      "macro_recall",
+      "weighted_recall",
+      "quadratic_weighted_kappa",
+      "ordinal_mae",
+      "adjacent_accuracy",
+      "two_level_reversal_rate",
+      "nll_log_loss",
+      "multiclass_brier",
+      "ece_confidence",
+      "ranked_probability_score"
+    ],
+    "priority_variability_metrics": [
+      "macro_f1",
+      "balanced_accuracy",
+      "quadratic_weighted_kappa",
+      "ordinal_mae"
+    ],
+    "variability_summary_statistics": [
+      "mean",
+      "sample_sd",
+      "median",
+      "minimum",
+      "maximum"
+    ],
+    "interval_interpretation": "empirical_repetition_range_not_confidence_interval",
+    "model_ordering_scope": "six_tuned_models_only",
+    "model_ordering_outputs": [
+      "rank_by_repetition",
+      "winner_frequency",
+      "mean_rank",
+      "sample_sd_rank",
+      "pairwise_rank_spearman"
+    ],
+    "metric_directions": {
+      "macro_f1": "higher",
+      "balanced_accuracy": "higher",
+      "quadratic_weighted_kappa": "higher",
+      "ordinal_mae": "lower"
+    },
+    "universal_best_model_claim_allowed": false
+  },
+  "publication": {
+    "local_output_root": "reports/major_revision_v3_runs",
+    "publish_employee_level_oof_rows": false,
+    "publish_fold_assignments": false,
+    "publish_fitted_models": false,
+    "compact_outputs": [
+      "repetition_metrics",
+      "variability_summary",
+      "rank_by_repetition",
+      "model_rank_summary",
+      "ordering_stability",
+      "selected_candidate_frequency",
+      "provenance_receipt"
+    ],
+    "prohibited_claims": [
+      "sample_level_confidence_interval_from_five_repetitions",
+      "robust_to_training_variability_without_stable_ordering_evidence",
+      "universally_best_model",
+      "leakage_free",
+      "prospectively_validated",
+      "deployment_ready_hr_decision_system"
+    ]
+  }
+}

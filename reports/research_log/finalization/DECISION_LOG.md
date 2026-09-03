@@ -127,3 +127,11 @@ V2-033 atomic-publication consequence on 2026-07-14: transient Windows antivirus
 - Report rankings per metric. Cumulative-threshold XGBoost may be described as leading macro-F1/balanced accuracy, Random Forest as leading QWK/ordinal MAE, LightGBM as leading RPS/Brier, and nominal XGBoost as leading log loss. A universal-best-model claim is prohibited.
 - Preserve adverse/null evidence: proportional-odds logistic is weaker than the nominal comparators, cumulative-threshold XGBoost has poor raw log loss despite its classification ranking, and naive middle-class prediction can obtain zero two-level reversals without useful class discrimination.
 - Do not attach significance or training-variability language to the 0.0044 macro-F1 contrast between cumulative-threshold and nominal XGBoost until the separately prespecified repeated-CV sensitivity is complete.
+
+## Major-revision v3 repeated nested-CV decision — 2026-09-04
+
+- Select the reviewer-authorized bounded design of five repetitions × five outer folds × five inner folds before inspecting repeated-CV results. The all-nine-system design requires 5,725 estimator-fit calls; ten repetitions would require 11,450. A future escalation cannot be chosen from these results and requires a new prespecified contract.
+- Freeze exact outer/inner/model seed triples as 1042/1043/1044 through 5042/5043/5044. All models share folds within a repetition, all semantic outer assignments must differ across repetitions, and no seed or repetition may be discarded or selected by performance.
+- Refit all four nominal, two ordinal, and three naive systems in every repetition. Canonical-v2 OOF reuse is prohibited for this training/fold-variability estimand. The six tuned families retain their exact candidate registries and training-only macro-F1/QWK selection rule.
+- Report mean, sample SD, median, minimum, and maximum for macro-F1, balanced accuracy, QWK, and ordinal MAE. Treat the range as descriptive repetition variation, not a confidence interval. Report six-model rank/winner/pairwise-Spearman stability and prohibit a universal-winner claim.
+- Keep fold assignments, employee-level OOF rows, and fitted models local and ignored. Only a separately validated compact aggregate/rank/provenance export may enter Git.

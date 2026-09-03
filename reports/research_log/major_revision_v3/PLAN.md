@@ -2,7 +2,7 @@
 
 Date: 2026-09-03
 Branch: `finalization/leakage-aware-v2`
-Status: active implementation contract; Phase 0 and INX Phase 1A complete; Phase 1B executed and independently validated
+Status: active implementation contract; Phase 0 and INX Phase 1A complete; Phase 1B evidence published; Phase 1C implementation/preflight validated
 
 ## Purpose
 
@@ -19,6 +19,8 @@ The intended scientific conclusion is conditional rather than promotional: emplo
 - Phase 1B implementation was committed and pushed at `dc5cb8b96b096bb2efc6c242403b7e51f870a01b`; the complete exact-commit run `phase1b_v3_20260903T130912Z_dc5cb8b` then produced exactly-once OOF evidence for nine systems on the common 10×5 fold contract.
 - An independent validator rehashed all nine local outputs, bound the generation-time implementation blobs and immutable v2 sources, verified 10,800 combined OOF rows, and recomputed every aggregate, per-class, and confusion result. The publication-safe compact package is `phase1b_ordinal_benchmark/`; employee-level rows remain ignored locally.
 - Phase 1B has no universal winner: cumulative-threshold XGBoost leads macro-F1/balanced accuracy, Random Forest leads QWK/ordinal MAE, LightGBM leads RPS/Brier, and nominal XGBoost leads log loss. The next implementation unit is Phase 1C repeated nested-CV training-variability sensitivity.
+- The Phase 1B compact evidence/independent-validator checkpoint was pushed at `10d88dc95f322ef620d8f5bbad9a1af8ec73dd77`.
+- Phase 1C now has a frozen 5×5×5 contract, an offline clean-commit runner that refits all nine systems, variability/rank-stability summaries, and a passing fit-free real-data preflight. The 5-repetition choice is fixed before result inspection because the design requires 5,725 estimator-fit calls versus 11,450 for ten repetitions. A real one-fold in-memory diagnostic completed all nine systems/229 fits in about 52 seconds with zero persistence/network/API use. Complete execution remains pending its implementation checkpoint.
 
 ## Non-negotiable controls
 

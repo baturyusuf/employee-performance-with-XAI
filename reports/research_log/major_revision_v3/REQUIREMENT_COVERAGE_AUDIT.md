@@ -13,6 +13,8 @@ The classifications below are the frozen pre-v3 baseline and therefore are not s
 
 Requirements 3, 18, 19, and 20 now have additive Phase 1B implementation and complete real-data evidence without changing their frozen baseline classifications below. The governed nine-system package adds two genuinely ordinal models, majority/stratified/ordinal-median baselines, normalized RPS, per-class metrics, complete confusion grids, and the explicit `two_level_reversal_rate` name. The result is independently recomputed and published at `phase1b_ordinal_benchmark/`; it retains weak proportional-odds performance and metric-dependent model rankings rather than promoting a universal winner. Repeated-CV uncertainty remains open under Requirement 5.
 
+Requirement 5 now has a prespecified and tested Phase 1C implementation, while its frozen baseline classification and scientific-evidence status remain unchanged until the complete clean-commit run is validated. The contract chooses the permitted 5×5×5 sensitivity before result inspection, fixes five distinct seed triples, refits all nine systems rather than reusing v2 OOF rows, reports the requested mean/SD/median/range, and quantifies six-model ordering stability. Fit-free preflight generated five distinct real-data outer assignments with zero model/API/network calls.
+
 Status meanings:
 
 - `addressed`: executable or canonical evidence and claim boundaries materially satisfy the requirement.

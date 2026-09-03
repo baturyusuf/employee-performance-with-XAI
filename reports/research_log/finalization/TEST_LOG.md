@@ -643,3 +643,14 @@ Push/recovery gate: the normal push timed out after 184 seconds with no remote r
 - README local-link validation: exit 0; all 48 local links resolved. `git diff --check` exited 0 with informational Windows line-ending warnings only.
 - Initial staged-manifest audit: correctly failed with five CSV hash mismatches caused by automatic CRLF normalization. After the package-scoped `-text` rule and index-only rebuild, all eight manifested staged blobs matched exactly and staged `git diff --check` exited 0. The updated compact/run-validator focus passed 7 tests in 1.10 seconds.
 - Final complete pytest after the byte-preservation regression: exit 0; 816 passed, 2 skipped, and 11 subtests passed in 124.12 seconds.
+
+## Major-revision v3 repeated nested-CV implementation — 2026-09-04
+
+- Contract CLI/validation: exit 0; SHA-256 `5681e521cfbaff5963494212fcc047116056fd7d66393346df0463aef7553af9`; 5 repetitions, 5×5 folds, 25 outer partitions, 30 nominal/14 ordinal candidates, 5,725 planned fits, zero actual fits/network/API calls.
+- One initial test command named a nonexistent feature-contract test path and collected zero tests; the corrected contract focus passed 25 tests in 0.93 seconds.
+- Repeated-runner/contract focus: 16 passed in 10.43 seconds; after candidate-index hardening and diagnostic entrypoint, 16 passed in 10.12 seconds.
+- Related repeated/ordinal/fold regression: 69 passed in 18.48 seconds. Compileall over `src` and `tests` passed. Optional Ruff lint was unavailable in the locked environment (`No module named ruff`); no dependency was installed or network call made.
+- Fit-free real-data preflight: exit 0; 1,200 samples, 20 P3 features, five valid and semantically distinct 5×5 fold assignments, zero fits/network/API calls.
+- Real-data one-fold diagnostic: exit 0 in approximately 52 seconds; 229 estimator-fit calls; nine models; 44 candidate, nine fold, 2,160 OOF, and 144 repetition-metric rows; explicit inadmissible status, no persistence, zero network/API attempts.
+- Final complete pytest: exit 0; 832 passed, 2 skipped, and 11 subtests passed in 160.69 seconds.
+- Final unittest discovery: exit 0; 179 tests, 1 skipped in 10.136 seconds. README validation resolved all 49 local links; final compileall and `git diff --check` exited 0.

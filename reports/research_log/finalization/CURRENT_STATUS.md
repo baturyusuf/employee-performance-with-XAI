@@ -1,6 +1,6 @@
 # Current Status
 
-## Major-revision v3 extension — 2026-09-03
+## Major-revision v3 extension — 2026-09-04
 
 - The user supplied a broader 42-part reviewer-remediation brief and requested periodic tested GitHub pushes.
 - The canonical v2 package remains immutable and valid for its frozen protocol. It is not being overwritten or relabelled.
@@ -19,6 +19,8 @@
 - Complete run `phase1b_v3_20260903T130912Z_dc5cb8b` contains nine closed-world files and exactly 1,200 OOF predictions per system. Independent validation rehashed the run, bound generation-time Git blobs and immutable v2 sources, checked 10,800 combined OOF rows, and recomputed all 144 aggregate, 27 per-class, and 81 confusion records.
 - Results are metric-specific: cumulative-threshold XGBoost leads macro-F1/balanced accuracy, Random Forest leads QWK/ordinal MAE, LightGBM leads RPS/Brier, and nominal XGBoost leads log loss. Proportional-odds logistic underperforms the nominal models; cumulative-threshold XGBoost's log loss is materially adverse. No universal winner or significance claim is authorized.
 - The tracked compact Phase 1B package has nine files/71,654 bytes and excludes employee-level OOF rows, raw data, and fitted models. Phase 1C repeated nested-CV sensitivity is the next scientific unit.
+- Phase 1B evidence checkpoint `10d88dc95f322ef620d8f5bbad9a1af8ec73dd77` passed the clean repository gate and is synchronized with GitHub.
+- Phase 1C implementation freezes five repetitions × five outer × five inner folds with seeds 1042–5044, refits all nine systems in every repetition, and plans 5,725 estimator-fit calls. Its synthetic full-design tests and real-data fit-free preflight pass; the five real-data outer assignments are distinct. A one-fold/229-fit real-data diagnostic passed in about 52 seconds, persisted nothing, and recorded zero network/API attempts. Full execution is pending a clean implementation checkpoint.
 - Final complete pre-checkpoint regression passed 809 tests, 2 skips, and 11 subtests in 119.88 seconds. The one stale additive-source guard found by the first full run was corrected without weakening frozen-v2 modification/deletion protection.
 
 Date: 2026-07-16
