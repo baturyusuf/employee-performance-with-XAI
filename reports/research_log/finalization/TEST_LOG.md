@@ -615,3 +615,18 @@ Push/recovery gate: the normal push timed out after 184 seconds with no remote r
 - Contract source SHA-256: `6dd5fdde534e379cceacfaa01e865d1551310fb632b691f5b937ef39394e93cf`; semantic SHA-256: `1773f42a1b33c8e51c91955f9ab28c1b67dc32fdfeb381e9f52dab6bcf571755`; generated Markdown SHA-256: `0f19e17db84e17f0a5e3aad179efb8323a37d5b63b9b032e119deadd159a7201`.
 - Targeted compileall: exit 0. `git diff --check`: exit 0.
 - Model fits, real-data v3 execution, paid API/network calls, manuscript edits, and canonical-v2 mutations: zero.
+
+## Major-revision v3 ordinal benchmark implementation — 2026-09-03
+
+- Initial ordinal model/evaluation focus: exit 1 with 17 passes and two test-expectation failures; production code did not fail. Corrected focus: exit 0; 19 passed in 0.23 seconds.
+- Protocol/model/evaluation focus: exit 0; 32 passed in 0.41 seconds. Validated contract receipt: two ordinal models, candidate counts 6/8, three baselines, four bound nominal comparators, 16 aggregate metrics, model-fit count zero.
+- First runner-integrated focus: exit 0; 38 passed with six warning-only single-label synthetic cases in 28.65 seconds. Test fixtures and mocked fit boundaries were corrected to remove warnings and excess runtime.
+- Final related regression focus including canonical model/metric/shared-fold tests: exit 0; 65 passed in 3.80 seconds.
+- Real-data preflight: exit 0 in 3.536 seconds; dataset SHA-256 `b8deac0a...`, 1,200 samples, support 194/874/132, 20 P3 features, fold-contract hash `c1300316...`, 10×5 folds, 4,800 v2 nominal OOF rows, exact four-artifact hashes, zero fits/network/API calls.
+- Real-data single-fold diagnostic: exit 0 in 9.743 seconds; explicit `diagnostic_incomplete_never_canonical`; 14 candidate rows, five model/baseline fold rows, 600 held-out rows; no persisted artifact.
+- Targeted compileall and `git diff --check`: exit 0.
+- Full clean-commit 10-fold run: pending until this implementation checkpoint is committed.
+- Initial complete pytest: exit 1; 808 passed, 2 skipped, 11 subtests passed, one stale additive-v3 source-tree assertion failed; 131.28 seconds. No production/scientific test failed.
+- Corrected publication-export plus ordinal focus: exit 0; 45 passed in 3.24 seconds. The revised guard permits added v3-named files only and still rejects modification/deletion of frozen v2 scientific source.
+- Final complete pytest after the guard correction: exit 0; 809 passed, 2 skipped, 11 subtests passed in 119.88 seconds.
+- Final compileall over `src` and `tests`, ordinal-contract validation, real-data fit-free preflight, 47-link README validation, and unstaged `git diff --check`: exit 0. Ordinal benchmark contract SHA-256: `39bcc62580515888783120a00ed807c0ede0f4c46f587f50897aced4c7999b02`.

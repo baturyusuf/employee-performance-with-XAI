@@ -17,6 +17,7 @@ The intended scientific conclusion is conditional rather than promotional: emplo
 - The contract covers all 28 acquisition-schema fields and freezes six nested policies with retained-feature counts P0=26, P1=24, P2=21, P3=20, P4=13, and P5=6.
 - The scenario remains a conceptual cross-sectional estimand: zero feature timestamps are verified, P4 is only a prospective-plausibility sensitivity, and no policy is described as eliminating all leakage.
 - The next implementation unit is Phase 1B: two ordinal-aware models, three naive baselines, RPS, two-level reversal, per-class metrics, and confusion outputs. No real-data v3 experiment has yet been run.
+- Phase 1B implementation and fit-free real-data preflight are now complete. A single-fold real-data diagnostic passed under `diagnostic_incomplete_never_canonical`; the full clean-commit execution remains pending. The protocol is documented in `ORDINAL_BENCHMARK_PROTOCOL.md`.
 
 ## Non-negotiable controls
 

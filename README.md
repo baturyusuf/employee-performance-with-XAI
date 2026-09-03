@@ -23,7 +23,7 @@ The authoritative compact receipt is [`15_canonical_evidence_receipt.json`](repo
 
 ### Major-revision v3 extension
 
-The canonical v2 package remains immutable, but a broader reviewer-remediation brief requires additional ordinal, repeated-CV, policy-retuning, SHAP-faithfulness, replication-sensitivity, and data-quality evidence. The additive v3 work is defined in the [`major revision v3 plan`](reports/research_log/major_revision_v3/PLAN.md) and the [`requirement coverage audit`](reports/research_log/major_revision_v3/REQUIREMENT_COVERAGE_AUDIT.md). Its first implemented control is the validated [`feature-availability and governance contract`](reports/research_log/major_revision_v3/FEATURE_AVAILABILITY_GOVERNANCE_CONTRACT.md). These records do not alter or supersede any canonical v2 result.
+The canonical v2 package remains immutable, but a broader reviewer-remediation brief requires additional ordinal, repeated-CV, policy-retuning, SHAP-faithfulness, replication-sensitivity, and data-quality evidence. The additive v3 work is defined in the [`major revision v3 plan`](reports/research_log/major_revision_v3/PLAN.md) and the [`requirement coverage audit`](reports/research_log/major_revision_v3/REQUIREMENT_COVERAGE_AUDIT.md). Implemented controls include the validated [`feature-availability and governance contract`](reports/research_log/major_revision_v3/FEATURE_AVAILABILITY_GOVERNANCE_CONTRACT.md) and the [`ordinal benchmark protocol`](reports/research_log/major_revision_v3/ORDINAL_BENCHMARK_PROTOCOL.md). These records do not alter or supersede any canonical v2 result.
 
 ## Tracked manuscript-support assets
 

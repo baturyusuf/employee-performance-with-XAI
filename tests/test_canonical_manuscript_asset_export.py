@@ -91,10 +91,10 @@ def test_manuscript_figure_numbering_is_explicit_and_gap_free() -> None:
     ]
 
 
-def test_export_does_not_change_frozen_scientific_source_tree() -> None:
+def test_additive_v3_work_does_not_modify_frozen_v2_scientific_sources() -> None:
     result = _git(
         "diff",
-        "--name-only",
+        "--name-status",
         f"{GENERATION_COMMIT}..HEAD",
         "--",
         "src",
@@ -105,7 +105,17 @@ def test_export_does_not_change_frozen_scientific_source_tree() -> None:
     )
 
     assert result.returncode == 0, result.stderr
-    assert result.stdout.strip() == ""
+    changes = [line.split("\t", maxsplit=1) for line in result.stdout.splitlines()]
+    assert changes
+    phase_1a_exception = {
+        "configs/feature_availability_v3.json",
+        "src/governance/feature_availability_contract.py",
+    }
+    assert all(status == "A" for status, _ in changes)
+    assert all(
+        path in phase_1a_exception or "_v3." in Path(path).name
+        for _, path in changes
+    )
 
 
 def test_tracking_policy_keeps_full_evidence_and_sensitive_outputs_ignored() -> None:

@@ -109,3 +109,13 @@ V2-033 atomic-publication consequence on 2026-07-14: transient Windows antivirus
 - Freeze six cumulative information policies. P0 removes only identifier/target; P1 additionally removes temporal/outcome-proximal risks; P2 additionally removes direct sensitive fields; P3 additionally removes Department for v2 primary continuity; P4 additionally removes all declared timing-uncertain fields; P5 additionally removes declared organisational proxies.
 - Call P4 `STRICT_PROSPECTIVE` only as a prospective-plausibility sensitivity and P5 `STRICT_PROXY` only as a declared-proxy sensitivity. Neither proves leakage elimination, absence of residual proxies, fairness, or deployment readiness.
 - Preserve the complete v2 config/artifacts. The v3 contract is an additive scientific side input; new experiment output must receive a new `canonical_v3_*` identity.
+
+## Major-revision v3 ordinal-benchmark decision — 2026-09-03
+
+- Reuse the four exact canonical-v2 nominal OOF prediction sets without refitting or relabelling them. Fit the new ordinal models and naive baselines on the exact same hash-bound 10×5 fold assignments and the same P3 feature set; this preserves an apples-to-apples comparison while keeping v2 immutable.
+- Add two genuinely ordinal models: a proportional-odds cumulative-logit estimator with ordered thresholds, and a nonlinear cumulative-threshold XGBoost estimator with rowwise non-increasing PAVA correction before class-probability differencing.
+- Add majority, seeded stratified-random, and lower ordinal-median baselines. They learn class statistics from each outer-training partition only and never enter hyperparameter selection.
+- Use macro-F1 as the inner selection metric and QWK as the deterministic tie-break inside the frozen 0.001 macro-F1 tolerance. Outer-test data remain evaluation-only.
+- Report normalized RPS and rename the manuscript-facing extreme error to `two_level_reversal_rate`, defined by an absolute declared-class-position error of at least two. Preserve the legacy v2 field only as historical evidence, not as the v3 display name.
+- Keep XGBoost as the prespecified XAI reference because of exact-fold TreeSHAP continuity, not because of predictive superiority. Report metric-specific rankings and prohibit a universal-best-model claim.
+- Require a clean Git worktree, exact commit, complete source-tree hash, bound dataset/config/fold/OOF hashes, and unchanged pre/post execution identities before atomically publishing any full result. Local row-level OOF outputs remain ignored and unpublishable.

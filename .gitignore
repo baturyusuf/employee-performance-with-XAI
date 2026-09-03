@@ -192,6 +192,9 @@ cython_debug/
 # Its compact, source-mapped manuscript-support export is tracked separately at
 # manuscript/mdpi_information/assets/.
 /reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/
+# Local v3 scientific runs include employee-level OOF rows and fitted-stage internals.
+# Only separately governed compact aggregate exports may be admitted to Git.
+/reports/major_revision_v3_runs/
 
 # User-provided HR data and row-level/fit-derived working data remain local.
 # Dataset cards, schema mappings, README files, and directory placeholders stay tracked.

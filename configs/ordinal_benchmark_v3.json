@@ -1,0 +1,197 @@
+{
+  "schema_version": 1,
+  "contract_id": "ordinal_benchmark_v3",
+  "dataset_key": "inx_primary",
+  "task_type": "ordinal_multiclass_performance",
+  "target": "PerformanceRating",
+  "ordered_labels": [2, 3, 4],
+  "data_source": {
+    "canonical_loader_config_path": "configs/manuscript_final.yaml",
+    "canonical_loader_config_sha256": "f8a6354ab67757c5d92c93cef2fe03ab88f4b16b10ce470f2db97ed4d0407779",
+    "acquisition_manifest_path": "configs/data_acquisition.yaml",
+    "acquisition_manifest_sha256": "a5e820a7213967e494bc9238f104e478c5a65c0840d654397cc3063314262d97",
+    "automatic_download_allowed": false
+  },
+  "information_contract": {
+    "path": "configs/feature_availability_v3.json",
+    "sha256": "6dd5fdde534e379cceacfaa01e865d1551310fb632b691f5b937ef39394e93cf",
+    "semantic_sha256": "1773f42a1b33c8e51c91955f9ab28c1b67dc32fdfeb381e9f52dab6bcf571755",
+    "primary_policy_id": "P3",
+    "retained_feature_count": 20
+  },
+  "preprocessing": {
+    "factory": "src.models.canonical_models.build_common_preprocessor",
+    "fit_scope": "current_inner_or_outer_training_partition_only",
+    "numeric": ["median_imputation", "standard_scaling"],
+    "categorical": ["most_frequent_imputation", "one_hot_unknown_ignore_dense"],
+    "outer_test_used_for_fit": false
+  },
+  "shared_nested_cv": {
+    "outer_strategy": "StratifiedKFold",
+    "outer_splits": 10,
+    "outer_shuffle": true,
+    "outer_seed": 42,
+    "inner_strategy": "StratifiedKFold",
+    "inner_splits": 5,
+    "inner_shuffle": true,
+    "inner_seed": 43,
+    "model_seed": 44,
+    "same_exact_outer_folds_across_all_models_and_baselines": true,
+    "outer_test_usage": "evaluation_only_never_tuning_selection_preprocessing_or_calibration",
+    "oof_coverage": "every_sample_exactly_once_per_model"
+  },
+  "canonical_v2_comparison_source": {
+    "run_id": "canonical_v2_20260714T221501Z_483f96f",
+    "generation_commit": "483f96fdbaab16cb0f32d03d9dbe676a759af44a",
+    "fold_contract": {
+      "path": "core/shared_folds/fold_contract.json",
+      "sha256": "364b0fc0443dbe1d7eceeb82e383802aa4b1b91f268f09703aa8a9a3a7f41d28"
+    },
+    "outer_assignments": {
+      "path": "core/shared_folds/fold_assignments.csv",
+      "sha256": "6b22a827cdba12dff40162f784291399614fb2a9e9ffe1ac889545767129204f"
+    },
+    "inner_assignments": {
+      "path": "core/shared_folds/inner_fold_assignments.csv",
+      "sha256": "35c1afc7d2c8debb9ce54a4be3ac06d9830a2946c41fd756d3532a0f54d32e89"
+    },
+    "nominal_oof_predictions": {
+      "path": "core/model_benchmarks/oof_predictions.csv",
+      "sha256": "9b769838b0a55feda162fec949ad17c9dc78141077cd6840598081fb77089104"
+    },
+    "reuse_boundary": "reuse_validated_v2_nominal_oof_evidence_without_refit_or_relabelling_and_fit_new_models_on_the_exact_same_persisted_folds"
+  },
+  "selection": {
+    "scope": "within_each_candidate_model_and_outer_training_partition_only",
+    "primary_metric": "macro_f1",
+    "tie_break_metric": "quadratic_weighted_kappa",
+    "primary_tie_tolerance": 0.001,
+    "baselines_enter_hyperparameter_selection": false,
+    "outer_test_used": false,
+    "reporting_rule": "report_metric_specific_rankings_and_do_not_name_a_universal_best_model"
+  },
+  "nominal_model_registry": {
+    "path": "configs/model_grid.yaml",
+    "sha256": "d8fb0584d7106f8941ca8e1b0e0a9c58e13f39519c6c75b383ff333d92d41617",
+    "reuse_mode": "reuse_exact_candidate_definitions_but_refit_inside_v3_shared_folds",
+    "models": [
+      "logistic_regression",
+      "random_forest",
+      "lightgbm",
+      "xgboost"
+    ]
+  },
+  "ordinal_models": {
+    "proportional_odds_logistic": {
+      "display_name": "Proportional-Odds Ordinal Logistic Regression",
+      "family": "cumulative_link_linear",
+      "estimator": "src.models.ordinal_models_v3.ProportionalOddsClassifier",
+      "fixed_params": {
+        "max_iter": 500,
+        "tol": 1e-8,
+        "min_threshold_gap": 1e-6,
+        "probability_floor": 1e-12
+      },
+      "candidates": [
+        {"C": 0.1, "class_weight": null},
+        {"C": 0.1, "class_weight": "balanced"},
+        {"C": 1.0, "class_weight": null},
+        {"C": 1.0, "class_weight": "balanced"},
+        {"C": 10.0, "class_weight": null},
+        {"C": 10.0, "class_weight": "balanced"}
+      ]
+    },
+    "cumulative_threshold_xgboost": {
+      "display_name": "Cumulative-Threshold XGBoost",
+      "family": "nonlinear_cumulative_threshold",
+      "estimator": "src.models.ordinal_models_v3.CumulativeThresholdXGBClassifier",
+      "fixed_params": {
+        "n_estimators": 200,
+        "learning_rate": 0.05,
+        "subsample": 0.9,
+        "colsample_bytree": 0.9,
+        "reg_lambda": 1.0,
+        "tree_method": "hist",
+        "n_jobs": 1,
+        "verbosity": 0
+      },
+      "candidates": [
+        {"max_depth": 2, "min_child_weight": 1.0, "class_weight": null},
+        {"max_depth": 2, "min_child_weight": 1.0, "class_weight": "balanced"},
+        {"max_depth": 2, "min_child_weight": 5.0, "class_weight": null},
+        {"max_depth": 2, "min_child_weight": 5.0, "class_weight": "balanced"},
+        {"max_depth": 3, "min_child_weight": 1.0, "class_weight": null},
+        {"max_depth": 3, "min_child_weight": 1.0, "class_weight": "balanced"},
+        {"max_depth": 3, "min_child_weight": 5.0, "class_weight": null},
+        {"max_depth": 3, "min_child_weight": 5.0, "class_weight": "balanced"}
+      ],
+      "cumulative_probability_rule": "fit_P_y_greater_than_each_training_label_threshold",
+      "crossing_probability_rule": "rowwise_nonincreasing_pava_before_class_probability_differencing"
+    }
+  },
+  "naive_baselines": [
+    {
+      "name": "majority_baseline",
+      "strategy": "majority",
+      "probability_rule": "one_hot_training_majority_class",
+      "fit_scope": "current_outer_training_labels_only"
+    },
+    {
+      "name": "stratified_baseline",
+      "strategy": "stratified",
+      "probability_rule": "deterministic_seeded_one_hot_draws_from_training_class_prevalence",
+      "fit_scope": "current_outer_training_labels_only"
+    },
+    {
+      "name": "ordinal_median_baseline",
+      "strategy": "ordinal_median",
+      "probability_rule": "one_hot_lowest_class_reaching_half_training_support",
+      "fit_scope": "current_outer_training_labels_only"
+    }
+  ],
+  "evaluation": {
+    "aggregate_metrics": [
+      "accuracy",
+      "balanced_accuracy",
+      "macro_f1",
+      "weighted_f1",
+      "macro_precision",
+      "weighted_precision",
+      "macro_recall",
+      "weighted_recall",
+      "quadratic_weighted_kappa",
+      "ordinal_mae",
+      "adjacent_accuracy",
+      "two_level_reversal_rate",
+      "nll_log_loss",
+      "multiclass_brier",
+      "ece_confidence",
+      "ranked_probability_score"
+    ],
+    "ranked_probability_score_definition": "mean_over_samples_and_K_minus_1_thresholds_of_squared_cumulative_error",
+    "ranked_probability_score_normalized_domain": [0.0, 1.0],
+    "two_level_reversal_definition": "absolute_declared_class_position_error_greater_than_or_equal_to_two",
+    "legacy_severe_error_display_name_allowed": false,
+    "per_class_fields": ["class_label", "precision", "recall", "f1", "support"],
+    "confusion_matrix_contract": "complete_ordered_true_by_predicted_grid_for_each_dataset_and_model",
+    "probability_source": "raw_exact_outer_fold_model_before_any_separate_calibration_analysis"
+  },
+  "xai_reference": {
+    "model_name": "xgboost",
+    "selection_basis": "prespecified_tree_shap_exact_fold_continuity_not_predictive_superiority",
+    "independent_of_predictive_ranking": true,
+    "change_rule": "only_a_predeclared_technical_infeasibility_can_change_the_reference_not_outer_test_performance"
+  },
+  "publication": {
+    "persist_compact_aggregate_per_class_confusion_and_fold_receipts": true,
+    "publish_employee_level_oof_rows": false,
+    "publish_fitted_models": false,
+    "prohibited_claims": [
+      "universally_best_model",
+      "leakage_free",
+      "prospectively_validated",
+      "causal_employee_performance_driver",
+      "deployment_ready_hr_decision_system"
+    ]
+  }
+}

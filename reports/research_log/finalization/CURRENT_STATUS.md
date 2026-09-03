@@ -14,6 +14,11 @@
 - Contract SHA-256 is `6dd5fdde534e379cceacfaa01e865d1551310fb632b691f5b937ef39394e93cf`; semantic SHA-256 is `1773f42a1b33c8e51c91955f9ab28c1b67dc32fdfeb381e9f52dab6bcf571755`.
 - The scenario explicitly remains timestamp-unverified and conceptual; zero features are asserted timestamp-verified, P4 is not prospective deployment evidence, and no policy is called leakage-free.
 - Phase 1A final focus passed 44 tests plus 7 subtests; all 46 README local links resolved. No model fit, real-data experiment, API/network call, canonical-v2 mutation, or manuscript edit occurred.
+- Phase 1A checkpoint `a60a2f3b5c3f17398b80e3b2b3e2ebaf04787378` was pushed; local/remote divergence was 0/0.
+- Phase 1B code now implements two ordinal models, three training-only naive baselines, normalized RPS, the renamed two-level reversal rate, per-class metrics, complete confusion grids, exact v2 fold/OOF reuse, and clean-Git/source-hash atomic-run gates.
+- Phase 1B focused/regression validation passed 65 tests. The fit-free real-data preflight verified 1,200 samples, 20 P3 features, 10×5 folds, and 4,800 canonical-v2 nominal OOF rows with exact source hashes.
+- One real outer-fold diagnostic completed in 9.743 seconds and was explicitly labelled `diagnostic_incomplete_never_canonical`; no diagnostic artifact was persisted. Full exact-commit execution is the next action.
+- Final complete pre-checkpoint regression passed 809 tests, 2 skips, and 11 subtests in 119.88 seconds. The one stale additive-source guard found by the first full run was corrected without weakening frozen-v2 modification/deletion protection.
 
 Date: 2026-07-16
 
