@@ -605,3 +605,13 @@ Push/recovery gate: the normal push timed out after 184 seconds with no remote r
 - Staged-byte audit: exit 0; all 109 Git index blobs matched the asset-manifest SHA-256 inventory, zero unexpected paths, 545 local canonical files preserved, and `git diff --cached --check` passed.
 - Clean post-commit repository gate at `902d4041fce94139ba58cb7c982f9a62b8427611`: exit 0 in 0.760 seconds; 1,849 tracked files, 33 issues, 43 README links, zero raw/environment/large/secret/machine-path findings.
 - Normal push: exit 0 in 7.229 seconds; remote advanced `7bb2317..902d404`; authentication succeeded.
+
+## Major-revision v3 INX information contract — 2026-09-03
+
+- Initial contract focus: exit 0; 11 passed in 0.20 seconds.
+- Generated contract receipt: exit 0; 28 exact schema fields; eight represented risk types; six policies; retained counts P0=26, P1=24, P2=21, P3=20, P4=13, P5=6; timestamp-verified feature count zero.
+- Intermediate post-review focus including acquisition, taxonomy, feature-set, canonical-policy, and config regressions: exit 0; 40 passed and 7 subtests passed in 0.48 seconds.
+- Final focus adding CI-workflow regression: exit 0; 44 passed and 7 subtests passed in 0.82 seconds. README validation resolved all 46 local links.
+- Contract source SHA-256: `6dd5fdde534e379cceacfaa01e865d1551310fb632b691f5b937ef39394e93cf`; semantic SHA-256: `1773f42a1b33c8e51c91955f9ab28c1b67dc32fdfeb381e9f52dab6bcf571755`; generated Markdown SHA-256: `0f19e17db84e17f0a5e3aad179efb8323a37d5b63b9b032e119deadd159a7201`.
+- Targeted compileall: exit 0. `git diff --check`: exit 0.
+- Model fits, real-data v3 execution, paid API/network calls, manuscript edits, and canonical-v2 mutations: zero.

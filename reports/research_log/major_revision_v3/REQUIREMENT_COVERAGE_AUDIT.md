@@ -7,6 +7,10 @@ Compared against: canonical v2 run `canonical_v2_20260714T221501Z_483f96f`, trac
 
 The v2 package is internally validated for its frozen protocol, but it does **not** close the complete current reviewer brief. Of the 43 numbered sections (0–42), this audit classifies 13 as addressed, 13 as partial, 11 as missing, and 6 as approval/final-authoring pending. Consequently, v2 must remain immutable while missing work is added under a new v3 evidence identity. The current manuscript must not be revised from v1 until the v3 claim matrix is frozen and approved.
 
+## Post-audit implementation update — 2026-09-03
+
+The classifications below are the frozen pre-v3 baseline and therefore are not silently rewritten as implementation proceeds. Requirement 1 and the primary-dataset portion of Requirement 2 now have an implemented INX contract covering all 28 acquisition-schema fields, eight distinct risk types, and six exactly validated nested policy maps. The generated report is `FEATURE_AVAILABILITY_GOVERNANCE_CONTRACT.md`; its source contract SHA-256 is `6dd5fdde534e379cceacfaa01e865d1551310fb632b691f5b937ef39394e93cf`. HR-specific mapping remains assigned to Phase 3A, so the broader cross-dataset work is not declared complete.
+
 Status meanings:
 
 - `addressed`: executable or canonical evidence and claim boundaries materially satisfy the requirement.

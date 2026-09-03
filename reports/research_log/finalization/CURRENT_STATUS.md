@@ -9,6 +9,11 @@
 - The current Markdown and LaTeX manuscript remain historical v1 and have not been edited. Claim-matrix approval is still required before manuscript authoring.
 - The next scientific unit is a v3-only information-contract and ordinal/naive benchmark extension. Any new result must use a new `canonical_v3_*` identity and preserve all v2 evidence.
 - Planning validation passed: compact canonical asset validation, 10 focused publication/CI tests, 45 README links, 43 exact requirement rows, status-count reconciliation, and `git diff --check`.
+- Planning checkpoint `618a3936e040db119eee3d43f6887d3ed4f447ea` was pushed normally to `origin/finalization/leakage-aware-v2`.
+- The INX Phase 1A contract is now implemented: all 28 pinned acquisition fields, eight separate risk types, six exactly nested P0–P5 policies, and a fail-closed Markdown generator. Retained counts are 26/24/21/20/13/6.
+- Contract SHA-256 is `6dd5fdde534e379cceacfaa01e865d1551310fb632b691f5b937ef39394e93cf`; semantic SHA-256 is `1773f42a1b33c8e51c91955f9ab28c1b67dc32fdfeb381e9f52dab6bcf571755`.
+- The scenario explicitly remains timestamp-unverified and conceptual; zero features are asserted timestamp-verified, P4 is not prospective deployment evidence, and no policy is called leakage-free.
+- Phase 1A final focus passed 44 tests plus 7 subtests; all 46 README local links resolved. No model fit, real-data experiment, API/network call, canonical-v2 mutation, or manuscript edit occurred.
 
 Date: 2026-07-16
 

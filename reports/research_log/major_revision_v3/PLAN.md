@@ -2,13 +2,21 @@
 
 Date: 2026-09-03
 Branch: `finalization/leakage-aware-v2`
-Status: active planning contract
+Status: active implementation contract; Phase 0 complete, Phase 1A INX contract implemented
 
 ## Purpose
 
 Extend, rather than overwrite, the immutable v2 evidence package so the repository can address the complete 42-part reviewer-remediation brief. The accepted v2 run remains historical evidence under `canonical_v2_20260714T221501Z_483f96f`; every new scientific result must be generated under a new `canonical_v3_*` identity.
 
 The intended scientific conclusion is conditional rather than promotional: employee-performance prediction evidence depends on the information contract, uncertain feature timing, ordinal criteria, organisational proxy structure, calibration, explanation reliability, and the reproducibility protocol.
+
+## Implementation state — 2026-09-03
+
+- Phase 0 was committed and pushed at `618a3936e040db119eee3d43f6887d3ed4f447ea`.
+- The INX portion of Phase 1A is implemented in `configs/feature_availability_v3.json`, validated by `src/governance/feature_availability_contract.py`, and rendered in `FEATURE_AVAILABILITY_GOVERNANCE_CONTRACT.md`.
+- The contract covers all 28 acquisition-schema fields and freezes six nested policies with retained-feature counts P0=26, P1=24, P2=21, P3=20, P4=13, and P5=6.
+- The scenario remains a conceptual cross-sectional estimand: zero feature timestamps are verified, P4 is only a prospective-plausibility sensitivity, and no policy is described as eliminating all leakage.
+- The next implementation unit is Phase 1B: two ordinal-aware models, three naive baselines, RPS, two-level reversal, per-class metrics, and confusion outputs. No real-data v3 experiment has yet been run.
 
 ## Non-negotiable controls
 

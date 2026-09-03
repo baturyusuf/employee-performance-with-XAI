@@ -101,3 +101,11 @@ V2-033 atomic-publication consequence on 2026-07-14: transient Windows antivirus
 - Reuse `canonical_v2_20260714T221501Z_483f96f` without any scientific rerun. The export utility is outside the frozen scientific source tree and may only verify, copy, or presentation-render already frozen contracts/data.
 - Map manuscript Figures 1-7 to canonical Figures 1, 3, 2, 4, 5, 6, 7. Figure 1 is a clearly labelled post-canonical presentation rendering because the canonical version did not fully express both conceptual rationale and training/test flow; it adds no scientific value.
 - Do not edit the journal manuscript in this task. Manual insertion, claim-matrix approval, ethics/licence decisions, and release/DOI publication remain external.
+
+## Major-revision v3 information-contract decision — 2026-09-03
+
+- Treat the prediction point as a conceptual pre-evaluation-completion estimand only. The cross-sectional INX source contains no observed feature or decision timestamps, so prospective availability is not empirically verified.
+- Use eight mutually explicit risk labels: identifier, target-direct leakage, temporal leakage, outcome-proximal, timing-uncertain, sensitive attribute, organisational proxy, and ordinary predictor. Sensitive-feature removal is governance control, not leakage removal; proxy removal is a separate sensitivity.
+- Freeze six cumulative information policies. P0 removes only identifier/target; P1 additionally removes temporal/outcome-proximal risks; P2 additionally removes direct sensitive fields; P3 additionally removes Department for v2 primary continuity; P4 additionally removes all declared timing-uncertain fields; P5 additionally removes declared organisational proxies.
+- Call P4 `STRICT_PROSPECTIVE` only as a prospective-plausibility sensitivity and P5 `STRICT_PROXY` only as a declared-proxy sensitivity. Neither proves leakage elimination, absence of residual proxies, fairness, or deployment readiness.
+- Preserve the complete v2 config/artifacts. The v3 contract is an additive scientific side input; new experiment output must receive a new `canonical_v3_*` identity.

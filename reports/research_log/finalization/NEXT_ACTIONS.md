@@ -4,9 +4,9 @@
 
 The broader reviewer brief is now the active extension. Preserve the complete v2 package, but do not infer that its narrower protocol closes the new brief.
 
-1. Commit and push the validated v3 planning/coverage checkpoint.
-2. Freeze a v3 prediction-time scenario, complete feature-availability contract, and P0–P5 semantic policy map without modifying v2 config or artifacts.
-3. Add two ordinal-aware models, three naive baselines, RPS, per-class metrics, and confusion outputs under shared leakage-isolated folds.
+1. Completed and pushed: validated v3 planning/coverage checkpoint (`618a3936e040db119eee3d43f6887d3ed4f447ea`).
+2. Implemented for INX and awaiting its own tested Git checkpoint: prediction-time scenario, complete 28-field availability contract, and exact P0–P5 semantic policy map. HR-specific semantics remain in Phase 3A.
+3. Active next unit: add two ordinal-aware models, three naive baselines, RPS, per-class metrics, and confusion outputs under shared leakage-isolated folds.
 4. Add repeated nested-CV and independently retuned policy estimands, then execute only after the v3 contracts and tests pass.
 5. Continue with the SHAP, calibration, subgroup/proxy, HR sensitivity, data-quality, literature, provenance, and deliverable phases in `../major_revision_v3/PLAN.md`.
 6. Freeze and request approval for the final v3 claim matrix before editing `manuscript/mdpi_information/main.md` or `main.tex`.
