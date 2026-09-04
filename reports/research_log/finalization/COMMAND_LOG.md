@@ -644,3 +644,11 @@ Results remain metric-specific. XGBoost has mean macro-F1 0.6288 (SD 0.0099), wh
 After regeneration, the seven-test run-validator/export focus and the complete 840-test regression passed. Unittest discovery, compileall, compact validation, the 50-link root README audit, and `git diff --check` also passed. No manuscript source, canonical-v2 artifact, raw data, or paid/external service was changed or invoked.
 
 Exact staged-byte review found all eight manifest-declared package files identical to their Git index blobs, confirmed the package-level `text: unset` attribute, and found only the nine allowed compact files in the tracked package. No OOF, fold-contract, fold-metric, candidate-search, or fold-selection source file entered the index.
+
+## Major-revision v3 policy-retuning implementation — 2026-09-04
+
+Added the hash-bound Phase 1D policy-retuning contract, fail-closed validator, two-estimand experiment runner, and focused tests. The runner binds immutable v2 sources, exact P0–P5 feature lists, the persisted 10×5 fold system, and the eight-candidate XGBoost registry; it enforces clean/unchanged Git identity, offline execution, exactly-once OOF coverage, P3 replay, and atomic local output.
+
+The first focused run exposed only a NumPy scalar-versus-sequence type check in prediction-row construction. After accepting NumPy integer fold ids, a second focused run exposed that the exactly-once invariant was hard-coded to the real 1,200-row dataset instead of the supplied source-frame size; the invariant was generalized without weakening the real-data requirement. The next real diagnostic exposed a subset-only headline loop over all six policies; headline construction now follows the validated supplied policy subset. A regression checks the one-policy summarization path and correct 81/9 synthetic train/test counts.
+
+Fit-free real-data preflight validated all source hashes, the target and feature contracts, 10×5 folds, eight candidates, 4,800 exact reusable fixed OOF rows, and the planned 2,480 new estimator fits. A P3/outer-fold-1 in-memory diagnostic completed eight inner candidate records, one selection, and 120 fixed plus 120 retuned predictions, while exact P3 replay checks passed. It persisted no evidence and remained explicitly inadmissible as a scientific result.

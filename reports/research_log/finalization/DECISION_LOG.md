@@ -143,3 +143,11 @@ V2-033 atomic-publication consequence on 2026-07-14: transient Windows antivirus
 - Report the classification ordering as variable: LightGBM wins macro-F1 in 3/5 repetitions and XGBoost in 2/5; cumulative-threshold XGBoost wins balanced accuracy in 4/5 and LightGBM in 1/5. Do not convert mean or winner frequency into a universal-best claim.
 - Report Random Forest's 5/5 QWK and ordinal-MAE wins as stability within these five prespecified repetitions only. Do not generalize this to prospective, causal, fairness, deployment, or all-metric superiority.
 - Treat sample SD and minimum–maximum values as descriptive repetition variability, never as sample-level uncertainty or confidence intervals. Retain the weaker proportional-odds result and every adverse or unstable result.
+
+## Major-revision v3 policy-retuning decision — 2026-09-04
+
+- Freeze two separate estimands. The fixed primary-schedule estimand changes feature access while reusing the P3 fold-specific XGBoost candidate schedule; the independently retuned estimand repeats training-only candidate selection within every policy and outer fold. Neither difference is causal.
+- Use the exact Phase 1A P0–P5 feature sets and exact canonical-v2 10×5 fold assignments. Reuse fixed OOF rows for P0–P3 only after exact feature-set verification; newly fit P4/P5 under the primary schedule. Preserve nonmatching historical v2 policies unchanged but exclude them from the six-policy v3 table.
+- Restrict the model to the prespecified eight-candidate XGBoost registry, use inner macro-F1 with QWK tie-breaking inside 0.001, and prohibit outer-test participation in preprocessing, tuning, candidate selection, or policy choice. Retuned P3 must exactly replay the canonical primary schedule, labels, and probabilities.
+- Report all 16 metrics for both estimands and headline macro-F1, QWK, balanced accuracy, and ordinal MAE. Publish both raw `retuned - fixed` differences and direction-aligned improvements without significance or universal-best-policy language.
+- Keep OOF, folds, candidate-search rows, and fitted models local and ignored. A later compact export may contain aggregate metrics, comparisons, candidate frequencies, and provenance only after independent validation.

@@ -671,3 +671,15 @@ Push/recovery gate: the normal push timed out after 184 seconds with no remote r
 - Compact-package validation: exit 0; nine files/255,182 bytes with all aggregate grids recomputed and manifest SHA-256 `ce930c634e6108e6a9859df6eaac628bacde98cd7b71563ad0a067dc1849638b`.
 - Root README link audit resolved all 50 local links. `git diff --check` exited 0 with informational Windows line-ending warnings only.
 - Staged package audit: exit 0; all eight manifest records matched Git-index SHA-256 and size exactly; package attribute returned `text: unset`; zero prohibited row/fold-level source filenames were staged.
+
+## Major-revision v3 policy-retuning implementation — 2026-09-04
+
+- Initial contract/runner focus: 12 passed, 1 failed. The sole failure was a NumPy `int64` outer-fold scalar treated as an iterable in prediction-row construction.
+- Second focus after scalar repair: 12 passed, 1 failed. The sole failure was a synthetic exactly-once test revealing a hard-coded 1,200-row invariant; expected coverage now derives from the bound source frame.
+- Third focus: 13 passed in 7.42 seconds.
+- Fit-free real-data preflight: exit 0; contract SHA-256 `d10c6f6c5e3a61e3895220f4d43a8d682e4d98c83b165f6694b20570ae950d22`; 1,200 samples; target support 194/874/132; policy counts 26/24/21/20/13/6; exact 10×5 folds; eight candidates; 4,800 reusable OOF rows; 2,480 planned fits; zero actual fits/network/API calls.
+- First P3/fold-1 diagnostic: exit 1 after all planned diagnostic fits because subset headline construction incorrectly iterated over absent P0–P2/P4–P5 rows. No artifact was persisted and no scientific result was admitted.
+- Corrected P3/fold-1 diagnostic: exit 0; eight candidate-search rows, one selected-hyperparameter row, 120 fixed and 120 retuned OOF rows; exact P3 replay passed; status `diagnostic_incomplete_never_canonical`; zero network/API attempts.
+- Final focused contract/runner regression after adding the subset-path guard: 13 passed in 7.78 seconds. Compileall over `src` and `tests` and `git diff --check` exited 0.
+- Complete pytest: exit 0; 853 passed, 2 skipped, and 11 subtests passed in 181.37 seconds.
+- Unittest discovery: exit 0; 179 tests passed, 1 skipped in 10.367 seconds. The repository/README static gate passed and resolved the new protocol link.

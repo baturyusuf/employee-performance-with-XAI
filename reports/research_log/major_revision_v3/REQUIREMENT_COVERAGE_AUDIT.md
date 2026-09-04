@@ -15,6 +15,8 @@ Requirements 3, 18, 19, and 20 now have additive Phase 1B implementation and com
 
 Requirement 5 now has complete Phase 1C evidence, while its frozen pre-v3 baseline classification below is retained for audit history. The clean-commit run uses the permitted prespecified 5×5×5 sensitivity, five distinct seed triples, and fresh fits for all nine systems rather than v2 OOF reuse. Independent validation reconstructed all fold systems, verified 54,000 exactly-once OOF rows, and recomputed mean/SD/median/range plus six-model ordering stability. The compact non-row-level package is `phase1c_repeated_nested_cv/`. It records varying classification winners but stable Random Forest wins for QWK and ordinal MAE, so no universal winner or confidence-interval claim is authorized.
 
+Requirement 6 now has a completed Phase 1D implementation contract, while its frozen pre-v3 baseline classification below is retained for audit history. `POLICY_RETUNING_PROTOCOL.md` separates the canonical fixed-schedule feature-access sensitivity from independently retuned within-policy performance across P0–P5, uses identical persisted 10×5 assignments, and prohibits outer-test selection. Fit-free preflight and a non-persisted P3/fold-1 exact replay diagnostic passed. Complete scientific execution, independent result recomputation, and compact evidence publication remain pending.
+
 Status meanings:
 
 - `addressed`: executable or canonical evidence and claim boundaries materially satisfy the requirement.

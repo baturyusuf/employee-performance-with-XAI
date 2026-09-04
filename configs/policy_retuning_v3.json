@@ -1,0 +1,243 @@
+{
+  "schema_version": 1,
+  "contract_id": "policy_retuning_v3",
+  "dataset_key": "inx_primary",
+  "task_type": "ordinal_multiclass_performance",
+  "target": "PerformanceRating",
+  "ordered_labels": [2, 3, 4],
+  "purpose": "separate_matched_feature_access_sensitivity_from_independently_retuned_policy_performance",
+  "source_contracts": {
+    "canonical_loader_config": {
+      "path": "configs/manuscript_final.yaml",
+      "sha256": "f8a6354ab67757c5d92c93cef2fe03ab88f4b16b10ce470f2db97ed4d0407779"
+    },
+    "acquisition_manifest": {
+      "path": "configs/data_acquisition.yaml",
+      "sha256": "a5e820a7213967e494bc9238f104e478c5a65c0840d654397cc3063314262d97"
+    },
+    "feature_availability": {
+      "path": "configs/feature_availability_v3.json",
+      "sha256": "6dd5fdde534e379cceacfaa01e865d1551310fb632b691f5b937ef39394e93cf",
+      "semantic_sha256": "1773f42a1b33c8e51c91955f9ab28c1b67dc32fdfeb381e9f52dab6bcf571755"
+    },
+    "xgboost_candidate_registry": {
+      "path": "configs/model_grid.yaml",
+      "sha256": "d8fb0584d7106f8941ca8e1b0e0a9c58e13f39519c6c75b383ff333d92d41617"
+    },
+    "canonical_v2_receipt": {
+      "path": "reports/research_log/finalization_v2/15_canonical_evidence_receipt.json",
+      "sha256": "bd09523276dcbc54d036f8c9eb0c71ba62f8b0f913c495695a2259296101827c"
+    },
+    "canonical_v2_fold_contract": {
+      "path": "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/shared_folds/fold_contract.json",
+      "sha256": "364b0fc0443dbe1d7eceeb82e383802aa4b1b91f268f09703aa8a9a3a7f41d28"
+    },
+    "canonical_v2_outer_assignments": {
+      "path": "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/shared_folds/fold_assignments.csv",
+      "sha256": "6b22a827cdba12dff40162f784291399614fb2a9e9ffe1ac889545767129204f"
+    },
+    "canonical_v2_inner_assignments": {
+      "path": "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/shared_folds/inner_fold_assignments.csv",
+      "sha256": "35c1afc7d2c8debb9ce54a4be3ac06d9830a2946c41fd756d3532a0f54d32e89"
+    },
+    "canonical_v2_selected_hyperparameters": {
+      "path": "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/model_benchmarks/selected_hyperparameters.csv",
+      "sha256": "5ee6b2c3b43453aa3f54bbc79fa58fdf6f6aa4eae35d02174232cb25f51615f1"
+    },
+    "canonical_v2_benchmark_oof": {
+      "path": "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/model_benchmarks/oof_predictions.csv",
+      "sha256": "9b769838b0a55feda162fec949ad17c9dc78141077cd6840598081fb77089104"
+    },
+    "canonical_v2_fixed_policy_oof": {
+      "path": "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/policy_ablation/oof_predictions.csv",
+      "sha256": "299e1b8688b565daee71180e6197862788f027277d77957d7d523722e68a6a4d"
+    },
+    "canonical_v2_policy_feature_contract": {
+      "path": "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/policy_ablation/policy_feature_contract.csv",
+      "sha256": "998cd252539ca546943957bbb9e1c7fde7a87e39fb2efb23a27520b16da97f09"
+    }
+  },
+  "information_contract": {
+    "policy_ids": ["P0", "P1", "P2", "P3", "P4", "P5"],
+    "policy_names": [
+      "INFORMATION_RICH_DIAGNOSTIC",
+      "LEAKAGE_CONTROLLED",
+      "GOVERNANCE_CONTROLLED",
+      "PRIMARY_LEAKAGE_AWARE",
+      "STRICT_PROSPECTIVE",
+      "STRICT_PROXY"
+    ],
+    "retained_feature_counts": [26, 24, 21, 20, 13, 6],
+    "primary_policy_id": "P3",
+    "timing_status": "timestamp_unverified_cross_sectional",
+    "strict_prospective_is_sensitivity_not_validation": true,
+    "leakage_free_claim_allowed": false,
+    "prospective_validity_claim_allowed": false
+  },
+  "fixed_evidence_crosswalk": [
+    {
+      "policy_id": "P0",
+      "source_policy": "full_feature_upper_bound",
+      "source_status": "exact_feature_set_reuse"
+    },
+    {
+      "policy_id": "P1",
+      "source_policy": "no_salary_hike_no_attrition_sensitive_retaining_audit",
+      "source_status": "exact_feature_set_reuse"
+    },
+    {
+      "policy_id": "P2",
+      "source_policy": "no_salary_hike_no_attrition",
+      "source_status": "exact_feature_set_reuse"
+    },
+    {
+      "policy_id": "P3",
+      "source_policy": "no_salary_hike_no_attrition_no_department",
+      "source_status": "exact_feature_set_reuse_and_primary_benchmark_replay"
+    },
+    {
+      "policy_id": "P4",
+      "source_policy": null,
+      "source_status": "new_fixed_schedule_fit_required"
+    },
+    {
+      "policy_id": "P5",
+      "source_policy": null,
+      "source_status": "new_fixed_schedule_fit_required"
+    }
+  ],
+  "historical_policy_boundary": {
+    "preserve_unmodified_v2_policies": [
+      "no_salary_hike",
+      "no_salary_hike_no_attrition_no_department_no_job_role"
+    ],
+    "phase1d_exclusion_reason": "not_exact_members_of_the_v3_P0_to_P5_information_contract",
+    "suppression_or_deletion_allowed": false
+  },
+  "design": {
+    "outer_strategy": "canonical_v2_persisted_StratifiedKFold",
+    "outer_splits": 10,
+    "inner_strategy": "canonical_v2_persisted_StratifiedKFold",
+    "inner_splits": 5,
+    "same_exact_outer_and_inner_assignments_for_both_estimands": true,
+    "every_sample_exactly_once_per_policy_per_estimand": true,
+    "outer_test_usage": "evaluation_only_never_tuning_selection_preprocessing_or_policy_choice",
+    "seed_or_policy_selected_from_results": false
+  },
+  "model": {
+    "model_name": "xgboost",
+    "candidate_count": 8,
+    "fixed_parameters_and_candidates": "exact_configs_model_grid_yaml_xgboost_registry",
+    "preprocessing_factory": "src.models.canonical_models.build_common_preprocessor",
+    "preprocessing_fit_scope": "current_inner_or_outer_training_partition_only",
+    "selection_primary_metric": "macro_f1",
+    "selection_tie_break_metric": "quadratic_weighted_kappa",
+    "primary_tie_tolerance": 0.001,
+    "estimator_threads": 1,
+    "early_stopping": false
+  },
+  "fixed_hyperparameter_estimand": {
+    "estimand_id": "fixed_primary_schedule_feature_access_sensitivity",
+    "question": "How do held-out predictions change when feature access changes while the primary-policy fold-specific candidate schedule is held fixed?",
+    "fold_specific_schedule_source": "canonical_v2_selected_hyperparameters_xgboost",
+    "P0_to_P3_evidence_source": "canonical_v2_fixed_policy_oof_exact_feature_set_reuse",
+    "P4_to_P5_evidence_source": "new_outer_train_refit_with_primary_selected_candidate",
+    "primary_P3_exact_benchmark_replay_required": true,
+    "independent_policy_tuning": false,
+    "feature_access_effect_is_causal_claim": false
+  },
+  "independently_retuned_estimand": {
+    "estimand_id": "independently_retuned_policy_performance",
+    "question": "What held-out performance is achieved within the fixed candidate registry when each policy is tuned independently on its own outer-training data?",
+    "every_policy_enters_inner_selection": true,
+    "selection_scope": "independently_within_each_policy_and_outer_training_partition",
+    "outer_test_used_for_selection": false,
+    "primary_P3_exact_benchmark_replay_required": true,
+    "best_achievable_claim_scope": "within_prespecified_model_family_candidate_grid_and_folds_only",
+    "policy_or_model_retuning_effect_is_causal_claim": false
+  },
+  "computational_scope": {
+    "retuned_inner_candidate_fit_calls": 2400,
+    "retuned_outer_refit_calls": 60,
+    "new_fixed_schedule_outer_refit_calls": 20,
+    "planned_new_estimator_fit_calls": 2480,
+    "reused_fixed_oof_policy_count": 4,
+    "new_fixed_oof_policy_count": 2,
+    "retuned_policy_count": 6
+  },
+  "evaluation": {
+    "aggregate_metrics": [
+      "accuracy",
+      "balanced_accuracy",
+      "macro_f1",
+      "weighted_f1",
+      "macro_precision",
+      "weighted_precision",
+      "macro_recall",
+      "weighted_recall",
+      "quadratic_weighted_kappa",
+      "ordinal_mae",
+      "adjacent_accuracy",
+      "two_level_reversal_rate",
+      "nll_log_loss",
+      "multiclass_brier",
+      "ece_confidence",
+      "ranked_probability_score"
+    ],
+    "headline_comparison_metrics": [
+      "macro_f1",
+      "quadratic_weighted_kappa",
+      "balanced_accuracy",
+      "ordinal_mae"
+    ],
+    "raw_difference_definition": "retuned_minus_fixed",
+    "direction_aligned_improvement": {
+      "higher_is_better_metrics": [
+        "accuracy",
+        "balanced_accuracy",
+        "macro_f1",
+        "weighted_f1",
+        "macro_precision",
+        "weighted_precision",
+        "macro_recall",
+        "weighted_recall",
+        "quadratic_weighted_kappa",
+        "adjacent_accuracy"
+      ],
+      "lower_is_better_metrics": [
+        "ordinal_mae",
+        "two_level_reversal_rate",
+        "nll_log_loss",
+        "multiclass_brier",
+        "ece_confidence",
+        "ranked_probability_score"
+      ]
+    },
+    "inferential_claim_from_point_difference_allowed": false,
+    "universal_best_policy_claim_allowed": false
+  },
+  "publication": {
+    "local_output_root": "reports/major_revision_v3_runs",
+    "publish_employee_level_oof_rows": false,
+    "publish_fold_assignments": false,
+    "publish_candidate_search_rows": false,
+    "publish_fitted_models": false,
+    "compact_outputs": [
+      "aggregate_metrics",
+      "metric_comparison",
+      "headline_policy_comparison",
+      "selected_candidate_frequency",
+      "provenance_receipt"
+    ],
+    "prohibited_claims": [
+      "fixed_schedule_as_independently_optimized_policy_performance",
+      "retuned_difference_as_pure_feature_access_effect",
+      "retuned_difference_as_causal_model_retuning_effect",
+      "best_achievable_outside_prespecified_candidate_grid",
+      "universally_best_policy",
+      "leakage_free",
+      "prospectively_validated",
+      "deployment_ready_hr_decision_system"
+    ]
+  }
+}

@@ -25,6 +25,9 @@
 - Phase 1C is metric-specific: LightGBM/XGBoost split macro-F1 wins 3/2; cumulative-threshold XGBoost wins balanced accuracy 4/5; Random Forest wins QWK and ordinal MAE 5/5. The ranges are descriptive, not confidence intervals, and no universal winner is authorized. Phase 1D independent policy retuning is next.
 - Final Phase 1C evidence regression passed 840 tests, 2 skips, and 11 subtests; unittest passed 179 tests with 1 skip; compile, compact validation, 50-link README audit, and `git diff --check` passed.
 - Final complete pre-checkpoint regression passed 809 tests, 2 skips, and 11 subtests in 119.88 seconds. The one stale additive-source guard found by the first full run was corrected without weakening frozen-v2 modification/deletion protection.
+- Phase 1D policy-retuning implementation is complete and awaiting a clean-commit full execution. Its hash-bound contract separates fixed primary-schedule feature-access sensitivity from independently retuned within-policy performance for all six P0–P5 policies on the exact canonical-v2 10×5 folds.
+- Fixed P0–P3 OOF evidence is reused only through exact feature-set mappings; P4/P5 receive new fixed-schedule fits, and all six policies are independently retuned. Historical nonmatching v2 policy rows remain preserved but outside the v3 P0–P5 comparison.
+- Fit-free real-data preflight verified 1,200 samples, target support 194/874/132, policy feature counts 26/24/21/20/13/6, eight XGBoost candidates, 4,800 reusable fixed OOF rows, and 2,480 planned new fits. A non-persisted P3/fold-1 diagnostic exactly replayed the primary candidate schedule, labels, and probabilities. Both recorded zero network/API activity.
 
 Date: 2026-07-16
 

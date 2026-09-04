@@ -29,6 +29,8 @@ The completed Phase 1B comparison is published as a governed [`compact ordinal-b
 
 The [`repeated nested-CV protocol`](reports/research_log/major_revision_v3/REPEATED_NESTED_CV_PROTOCOL.md) and governed [`compact Phase 1C evidence package`](reports/research_log/major_revision_v3/phase1c_repeated_nested_cv/README.md) report training/fold variability across five prespecified 5×5 repetitions with all nine systems refitted. Macro-F1 winners alternate between LightGBM and XGBoost, cumulative-threshold XGBoost wins balanced accuracy in four repetitions, and Random Forest wins QWK and ordinal MAE in all five. These metric-specific results do not establish a universally best model and do not alter or supersede any canonical v2 result.
 
+The Phase 1D [`fixed-schedule and independently retuned policy protocol`](reports/research_log/major_revision_v3/POLICY_RETUNING_PROTOCOL.md) now freezes two separately labelled estimands across P0–P5. Its implementation and real-data diagnostic are complete; the clean-commit full run and independent compact-evidence validation remain pending.
+
 ## Tracked manuscript-support assets
 
 GitHub contains a deterministic, source-mapped export at [`manuscript/mdpi_information/assets/`](manuscript/mdpi_information/assets/). It was generated from the validated canonical run without refitting models or recomputing scientific evidence. The compact package contains 109 files and 10,338,351 bytes; its closed-world manifest SHA-256 is `fbe7355b956df01ad9817f27b42dc13c0f3e0e33e7f0e5c42a2477beb9d001e1`.

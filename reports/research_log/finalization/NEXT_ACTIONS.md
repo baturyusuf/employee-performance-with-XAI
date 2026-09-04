@@ -8,10 +8,11 @@ The broader reviewer brief is now the active extension. Preserve the complete v2
 2. Completed and pushed: INX prediction-time scenario, complete 28-field availability contract, and exact P0–P5 semantic policy map (`a60a2f3b5c3f17398b80e3b2b3e2ebaf04787378`). HR-specific semantics remain in Phase 3A.
 3. Completed and pushed: Phase 1B ordinal/naive benchmark implementation (`dc5cb8b96b096bb2efc6c242403b7e51f870a01b`).
 4. Completed and pushed: exact-commit nine-system run, independent recomputation validator, and compact non-row-level result package (`10d88dc95f322ef620d8f5bbad9a1af8ec73dd77`). The local row-level source remains ignored.
-5. Completed: Phase 1C deterministic 5×5×5 repeated nested CV, all-nine-system refitting, independent full-run recomputation, and compact non-row-level variability/rank evidence. Push the current evidence checkpoint; the complete row-level run remains local and ignored.
-6. Next: freeze and implement independently retuned feature-policy estimands while retaining the existing matched fixed-hyperparameter analysis as a separately labelled estimand.
-7. Continue with the SHAP, calibration, subgroup/proxy, HR sensitivity, data-quality, literature, provenance, and deliverable phases in `../major_revision_v3/PLAN.md`.
-8. Freeze and request approval for the final v3 claim matrix before editing `manuscript/mdpi_information/main.md` or `main.tex`.
+5. Completed and pushed: Phase 1C deterministic 5×5×5 repeated nested CV, all-nine-system refitting, independent full-run recomputation, and compact non-row-level variability/rank evidence (`2553e9b9798908adf67f7cea15a0977fa8f48df2`). The complete row-level run remains local and ignored.
+6. Completed implementation: freeze the fixed-schedule and independently retuned P0–P5 estimands, exact historical crosswalk, outer-test isolation, 2,480-fit computational scope, runner, focused tests, preflight, and one non-persisted exact-replay diagnostic.
+7. Next: checkpoint the Phase 1D implementation, run the complete clean-commit experiment, independently recompute it, and publish only a governed compact non-row-level evidence package.
+8. Continue with the SHAP, calibration, subgroup/proxy, HR sensitivity, data-quality, literature, provenance, and deliverable phases in `../major_revision_v3/PLAN.md`.
+9. Freeze and request approval for the final v3 claim matrix before editing `manuscript/mdpi_information/main.md` or `main.tex`.
 
 Current planning evidence: `../major_revision_v3/REQUIREMENT_COVERAGE_AUDIT.md`.
 
