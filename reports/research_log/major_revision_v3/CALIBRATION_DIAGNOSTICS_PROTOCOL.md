@@ -2,7 +2,7 @@
 
 Date: 2026-09-04
 
-Status: design and implementation validated; clean exact-commit execution pending
+Status: design, implementation, clean exact-commit execution, and independent full-run validation complete; compact publication pending
 
 ## Preserved source calibration
 
@@ -38,4 +38,8 @@ The observed canonical evidence already shows why the boundary matters: sigmoid 
 
 ## Implementation validation
 
-The fail-closed contract validator binds all nine canonical calibration sources and their identities before calculation. The runner then recomputes the three legacy probability metrics, requires exact replay of the existing 60-row classwise reliability grid, produces 120 explicit top-label/classwise/cumulative bin rows, and checks that normalized RPS equals the mean of the two cumulative binary Brier scores. Atomic publication requires a clean, unchanged Git identity and an offline runtime receipt. Focused tests and the complete 898-test repository regression passed; no model or probability calibrator was refitted. Scientific output remains pending until the implementation is committed, pushed, and executed from that clean commit.
+The fail-closed contract validator binds all nine canonical calibration sources and their identities before calculation. The runner then recomputes the three legacy probability metrics, requires exact replay of the existing 60-row classwise reliability grid, produces 120 explicit top-label/classwise/cumulative bin rows, and checks that normalized RPS equals the mean of the two cumulative binary Brier scores. Atomic publication requires a clean, unchanged Git identity and an offline runtime receipt. Focused tests and the complete 898-test repository regression passed; no model or probability calibrator was refitted.
+
+Clean-commit run `phase2b_v3_20260904T120838Z_21d1aec` produced the exact 11-file local package from pushed commit `21d1aecb6e61511e95aee498ab81c54fe6e5a6ab`. An independent validator rebound the generation Git blobs and all canonical sources, verified output hashes and offline runtime, independently recomputed every metric/regression/bin/contrast row, and checked both PNG/SVG figure contracts. It passed with 120 reliability bins, including 24 explicit empty bins. Compact aggregate publication remains pending; the complete run stays local and ignored.
+
+The validated raw/sigmoid values are 0.5515/0.4556 for log loss, 0.3426/0.2634 for multiclass Brier, 0.0375/0.0419 for top-label ECE, 0.1070/0.0249 for macro classwise ECE, 0.0779/0.0184 for mean cumulative ECE, and 0.0860/0.0669 for normalized RPS. Thus the predeclared sigmoid method improves five point estimates but worsens top-label ECE; only the three legacy contrasts retain their existing paired bootstrap intervals.

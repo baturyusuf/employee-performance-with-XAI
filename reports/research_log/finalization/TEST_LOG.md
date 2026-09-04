@@ -730,3 +730,11 @@ Push/recovery gate: the normal push timed out after 184 seconds with no remote r
 - Related calibration/ordinal focus: 33 passed. Compileall and `git diff --check` exited 0.
 - Complete pytest: exit 0; 898 passed, 2 skipped, and 11 subtests passed in 323.18 seconds.
 - Scientific result status: not yet executed from a clean implementation commit; no Phase 2B result package is admitted by these tests.
+
+## Major-revision v3 calibration result validation — 2026-09-04
+
+- Clean post-implementation repository gate: exit 0; commit `21d1aecb6e61511e95aee498ab81c54fe6e5a6ab`; 1,938 tracked files; 55 README links; zero raw/environment/large/secret/machine-path findings; local/remote divergence 0/0.
+- Complete run: exit 0; 11 closed-world files; 2,400 source OOF rows; 120 reliability bins; ten descriptive regression fits; zero new performance-model/calibrator fits and zero network/paid-API calls.
+- Independent run-validator CLI: exit 0; generation Git blobs, nine canonical sources, output hashes, offline receipt, all table recomputations, empty bins, mixed directions, and PNG/SVG structure passed. Twenty-four empty bins were retained; maximum regression-information condition number was 68.5971.
+- Validator/compact-export focus before tracked publication: 5 passed and 3 expected absent-package skips in 4.06 seconds. Two temporary compact packages were byte-identical; unexpected/tampered source and compact files were rejected.
+- Compileall over `src` and `tests` and `git diff --check` exited 0.

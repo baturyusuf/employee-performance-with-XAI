@@ -21,6 +21,8 @@ Requirements 8–10 now have complete Phase 2A implementation and real-data evid
 
 Requirement 12 now has complete Phase 2B design and implementation, while its frozen pre-v3 baseline classification below remains audit history. `CALIBRATION_DIAGNOSTICS_PROTOCOL.md` and the hash-bound contract explicitly document the canonical one-vs-rest Platt fits, row renormalization, probability simplex, equal-width bin boundaries, empty bins, and distinct top-label/classwise/cumulative ECE definitions. The fit-free runner reuses the exact 2,400 raw/sigmoid OOF rows, adds classwise and cumulative reliability, normalized RPS/cumulative Brier, and descriptive pooled-OOF calibration intercept/slope. It preserves the adverse top-label ECE point change and prohibits test-selected methods or an “all metrics improved” claim. Exact-commit result execution and independent validation remain pending, so the requirement is not yet declared evidence-complete.
 
+The exact-commit Phase 2B run is now independently validated. All aggregate results were recomputed directly from the canonical OOF probabilities, the 120-bin grid and ten descriptive regression fits were verified, and figure/inventory/source/Git/offline receipts passed. Compact publication and its byte-preservation checks remain before Requirement 12 is declared publication-complete.
+
 Status meanings:
 
 - `addressed`: executable or canonical evidence and claim boundaries materially satisfy the requirement.

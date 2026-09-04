@@ -39,6 +39,10 @@
 - Phase 2B design and implementation are validated. The new contract binds the exact canonical raw and cross-fitted sigmoid OOF probabilities and makes the one-vs-rest Platt, renormalization/simplex, ten-bin boundary/empty-bin, and top-label/classwise/cumulative ECE definitions explicit.
 - The fit-free Phase 2B runner adds normalized RPS/cumulative Brier, classwise and cumulative reliability diagrams, and descriptive pooled-OOF calibration intercept/slope without fitting a performance model or probability calibrator. It retains the adverse sigmoid top-label ECE point change and forbids method selection or an all-metrics-improved claim.
 - Phase 2B focused validation passed 16 tests; complete repository regression passed 898 tests, 2 skips, and 11 subtests. Clean implementation checkpoint/push and exact-commit diagnostic execution are next; the manuscript remains untouched.
+- Phase 2B implementation checkpoint `21d1aecb6e61511e95aee498ab81c54fe6e5a6ab` is pushed and synchronized 0/0. Its clean repository gate passed with 1,938 tracked files, 55 README links, and zero publication-hygiene findings.
+- Clean run `phase2b_v3_20260904T120838Z_21d1aec` atomically produced 11 local files, 120 explicit reliability bins, and ten descriptive calibration regressions with zero new performance-model/calibrator fits and zero network/paid-API calls. Scientific-input SHA-256 is `97797e436e816623d8652772a5089d226f304b59a30ffcdee110c33e413eec86`.
+- Independent validation rebound all generation blobs and canonical sources and recomputed every table. Raw/sigmoid values are 0.5515/0.4556 log loss, 0.3426/0.2634 Brier, 0.0375/0.0419 top-label ECE, 0.1070/0.0249 macro classwise ECE, 0.0779/0.0184 cumulative ECE, and 0.0860/0.0669 RPS. Twenty-four empty bins are retained.
+- The reliability figures passed visual and structural inspection. The compact aggregate exporter is implemented and deterministic; validation/export checkpoint and tracked compact publication are next. The complete local run remains ignored and the manuscript remains untouched.
 
 Date: 2026-07-16
 

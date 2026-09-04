@@ -13,9 +13,10 @@ The broader reviewer brief is now the active extension. Preserve the complete v2
 7. Completed and pushed: clean-commit Phase 1D run, independent source/selection/OOF/metric validation, and governed compact non-row-level package (`54ef16c50976aae2f839f6b33db7b078650ca88e`). The complete row-level run remains local and ignored.
 8. Completed and pushed: Phase 2A raw-margin grouped-SHAP aggregation contract, five-seed and five-resample ranking stability, training-reference deletion faithfulness against 20 random baselines, runner, preflight, diagnostics, and generation-path repair (`6e52de76f7e486985cbc2b32a53b2554c1c6f6c1`).
 9. Completed and pushed: Phase 2A 100-fit clean-commit run, independent validation/recomputation, and governed eight-file non-row-level package (`c4e25e42fccb6402ca14eef5b1ccd232ca47fc6d`). The complete SHAP/perturbation rows remain local and ignored.
-10. In progress: Phase 2B hash-bound calibration design, source validator, fit-free diagnostics runner, classwise/cumulative reliability figures, RPS/cumulative Brier, intercept/slope diagnostics, and 16 focused tests are complete. Commit/push the implementation, then execute from the clean exact commit and independently validate/publish a compact aggregate package.
-11. Next after Phase 2B: subgroup/proxy, HR sensitivity, data-quality, literature, provenance, and deliverable phases in `../major_revision_v3/PLAN.md`.
-12. Freeze and request approval for the final v3 claim matrix before editing `manuscript/mdpi_information/main.md` or `main.tex`.
+10. Completed and pushed: Phase 2B hash-bound calibration design, source validator, fit-free diagnostics runner, classwise/cumulative reliability figures, RPS/cumulative Brier, intercept/slope diagnostics, and complete regression (`21d1aecb6e61511e95aee498ab81c54fe6e5a6ab`).
+11. In progress: clean-commit Phase 2B run `phase2b_v3_20260904T120838Z_21d1aec` and independent full recomputation passed. Commit/push the validator/export checkpoint, then publish and verify the governed compact aggregate package; keep the complete local run ignored.
+12. Next after Phase 2B: subgroup/proxy, HR sensitivity, data-quality, literature, provenance, and deliverable phases in `../major_revision_v3/PLAN.md`.
+13. Freeze and request approval for the final v3 claim matrix before editing `manuscript/mdpi_information/main.md` or `main.tex`.
 
 Current planning evidence: `../major_revision_v3/REQUIREMENT_COVERAGE_AUDIT.md`.
 
