@@ -1,0 +1,38 @@
+{
+  "file_count_excluding_manifest": 6,
+  "files": [
+    {
+      "path": "aggregate_metrics.csv",
+      "sha256": "9ebbd72115f070d4de127530d908c91b6b2f40c90deda019a817e7212570bced",
+      "size_bytes": 66599
+    },
+    {
+      "path": "headline_policy_comparison.csv",
+      "sha256": "3ea78efa8b710759c1db2fa53e782b0144951ac927f3c86f0e18871b3c3e95e4",
+      "size_bytes": 2431
+    },
+    {
+      "path": "metric_comparison.csv",
+      "sha256": "162210e07f212e1738a0ec62112da604c4e49975adb33992ca6d3b01b2db2694",
+      "size_bytes": 11790
+    },
+    {
+      "path": "provenance_receipt.json",
+      "sha256": "05dd5f7ad97de1573461f8ac9553bda920b664edbeb9f7b0953a32f8b4bfc4e8",
+      "size_bytes": 4526
+    },
+    {
+      "path": "README.md",
+      "sha256": "6454f8eae651fee2b40d9b9e5834d623cbb69e6e381749446bbf079036ca41a1",
+      "size_bytes": 3596
+    },
+    {
+      "path": "selected_candidate_frequency.csv",
+      "sha256": "9b3e891f8abadcc52d958e939bf6d72c28d2ed5f468e9da1d24439e2755ea4fc",
+      "size_bytes": 2446
+    }
+  ],
+  "package_kind": "phase1d_policy_retuning_compact_evidence",
+  "schema_version": 1,
+  "source_run_id": "phase1d_v3_20260904T063324Z_823c848"
+}

@@ -12,3 +12,4 @@
 # line endings so the tracked package remains identical to its manifest.
 /reports/research_log/major_revision_v3/phase1b_ordinal_benchmark/** -text whitespace=-trailing-space
 /reports/research_log/major_revision_v3/phase1c_repeated_nested_cv/** -text whitespace=-trailing-space
+/reports/research_log/major_revision_v3/phase1d_policy_retuning/** -text whitespace=-trailing-space

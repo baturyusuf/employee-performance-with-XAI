@@ -9,10 +9,11 @@ The broader reviewer brief is now the active extension. Preserve the complete v2
 3. Completed and pushed: Phase 1B ordinal/naive benchmark implementation (`dc5cb8b96b096bb2efc6c242403b7e51f870a01b`).
 4. Completed and pushed: exact-commit nine-system run, independent recomputation validator, and compact non-row-level result package (`10d88dc95f322ef620d8f5bbad9a1af8ec73dd77`). The local row-level source remains ignored.
 5. Completed and pushed: Phase 1C deterministic 5×5×5 repeated nested CV, all-nine-system refitting, independent full-run recomputation, and compact non-row-level variability/rank evidence (`2553e9b9798908adf67f7cea15a0977fa8f48df2`). The complete row-level run remains local and ignored.
-6. Completed implementation: freeze the fixed-schedule and independently retuned P0–P5 estimands, exact historical crosswalk, outer-test isolation, 2,480-fit computational scope, runner, focused tests, preflight, and one non-persisted exact-replay diagnostic.
-7. Next: checkpoint the Phase 1D implementation, run the complete clean-commit experiment, independently recompute it, and publish only a governed compact non-row-level evidence package.
-8. Continue with the SHAP, calibration, subgroup/proxy, HR sensitivity, data-quality, literature, provenance, and deliverable phases in `../major_revision_v3/PLAN.md`.
-9. Freeze and request approval for the final v3 claim matrix before editing `manuscript/mdpi_information/main.md` or `main.tex`.
+6. Completed and pushed: fixed-schedule and independently retuned P0–P5 estimands, exact historical crosswalk, outer-test isolation, 2,480-fit scope, runner, focused tests, preflight, and exact-replay diagnostic (`823c84866b461266c75f3224527f679a86ab670e`).
+7. Completed: clean-commit Phase 1D run, independent source/selection/OOF/metric validation, and governed compact non-row-level package. Push the evidence checkpoint; the complete row-level run remains local and ignored.
+8. Next: implement Phase 2A SHAP seed/resampling stability and model-level deletion faithfulness under exact model/fold lineage.
+9. Continue with calibration, subgroup/proxy, HR sensitivity, data-quality, literature, provenance, and deliverable phases in `../major_revision_v3/PLAN.md`.
+10. Freeze and request approval for the final v3 claim matrix before editing `manuscript/mdpi_information/main.md` or `main.tex`.
 
 Current planning evidence: `../major_revision_v3/REQUIREMENT_COVERAGE_AUDIT.md`.
 

@@ -683,3 +683,15 @@ Push/recovery gate: the normal push timed out after 184 seconds with no remote r
 - Final focused contract/runner regression after adding the subset-path guard: 13 passed in 7.78 seconds. Compileall over `src` and `tests` and `git diff --check` exited 0.
 - Complete pytest: exit 0; 853 passed, 2 skipped, and 11 subtests passed in 181.37 seconds.
 - Unittest discovery: exit 0; 179 tests passed, 1 skipped in 10.367 seconds. The repository/README static gate passed and resolved the new protocol link.
+
+## Major-revision v3 policy-retuning result and compact-package validation — 2026-09-04
+
+- Full run: exit 0 from clean commit `823c84866b461266c75f3224527f679a86ab670e`; 12 closed-world files; 14,400 combined exactly-once OOF rows; 2,480 planned/executed estimator fits; zero network/paid-API calls.
+- Independent validator CLI: exit 0; exact output/source/implementation hashes, policy/fold/target lineage, P0–P3 reuse, 60 candidate selections, OOF probability invariants, zero-error P3 replay, and recomputed 120 fold/192 aggregate/96 comparison results passed.
+- Initial validator/export focus before tracked publication: 4 passed, 2 expected absent-package skips in 32.41 seconds. Two independently generated temporary exports were byte-identical; deliberate README tampering was rejected.
+- Compact export and validation: exit 0; seven files/92,567 bytes; 192 aggregate, 96 comparison, six headline, and 21 candidate-frequency rows; manifest SHA-256 `57f00a27f7de87f2f931fef1b29f7435e5869f77b14f065d98b7dbd19d2c1303`; zero employee/fold/candidate rows.
+- Post-publication validator/export focus: 6 passed in 37.50 seconds. Explicit compact validation exited 0 with the same manifest and row counts.
+- Final combined Phase 1D focus, including byte-preservation: 20 passed in 43.61 seconds. Compileall over `src` and `tests` and `git diff --check` exited 0.
+- Complete pytest: exit 0; 860 passed, 2 skipped, and 11 subtests passed in 202.80 seconds.
+- Unittest discovery: exit 0; 179 tests passed, 1 skipped in 9.364 seconds. The repository/README static gate passed.
+- Staged compact-package audit: exit 0; all six manifest-declared files matched Git-index SHA-256 and byte size exactly; package attribute returned `text: unset`; staged repository/README and attribute tests both passed.

@@ -2,7 +2,7 @@
 
 Date: 2026-09-04
 
-Status: implementation complete; clean-commit full execution and independent validation pending
+Status: complete clean-commit execution independently validated; compact aggregate evidence published
 
 ## Purpose and two estimands
 
@@ -49,3 +49,17 @@ Only aggregate metrics, full metric comparisons, headline comparisons, selected-
 The fit-free real-data preflight passed on all 1,200 INX rows with target support 194/874/132. It verified the six policy feature counts, the exact 10×5 fold system, eight candidates, 4,800 reusable fixed OOF rows, and 2,480 planned new fits. It made zero model fits, network calls, or paid-API calls. The policy-retuning contract SHA-256 is `d10c6f6c5e3a61e3895220f4d43a8d682e4d98c83b165f6694b20570ae950d22`.
 
 An in-memory P3/outer-fold-1 diagnostic then completed eight candidate records, one selected-hyperparameter record, 120 reused fixed OOF rows, and 120 independently retuned OOF rows. The P3 candidate schedule, labels, and probabilities replayed exactly. The diagnostic persisted nothing, was explicitly marked `diagnostic_incomplete_never_canonical`, and recorded zero attempted network operations and zero paid-API calls. These values establish execution feasibility only and are not scientific results.
+
+## Complete execution and independent validation
+
+Complete run `phase1d_v3_20260904T063324Z_823c848` executed from clean commit `823c84866b461266c75f3224527f679a86ab670e`. It produced 480 candidate-search records, 60 selected-hyperparameter records, 7,200 fixed and 7,200 retuned OOF rows, 120 fold-metric rows, 192 aggregate metrics, 96 full comparisons, and six headline policy rows. The enforced runtime recorded zero attempted network operations and zero paid-API calls.
+
+The independent validator checks the exact 12-file closed world and output hashes; binds the contract, source artifacts, and five implementation blobs to the generation commit; reconstructs the policy feature sets and canonical fold/target lineage; proves exact fixed P0–P3 OOF reuse; replays all 60 policy/fold candidate selections from the 480 training-only candidate records; validates probability simplexes and exactly-once coverage; confirms fixed-schedule lineage for P4/P5; and recomputes every fold, aggregate, comparison, and headline result from OOF evidence. P3 label, candidate, and probability replay error is exactly zero.
+
+## Results
+
+Independent retuning raises macro-F1 point estimates for P0, P1, P2, P4, and P5 by 0.0029, 0.0117, 0.0185, 0.0157, and 0.0087 respectively. P3 is unchanged by construction and exact replay. P2 also improves QWK by 0.0324, balanced accuracy by 0.0174, and ordinal MAE by 0.0267 in the favorable direction.
+
+The direction is not uniform. P0 balanced accuracy falls by 0.0115. P5 macro-F1 rises by 0.0087 and ordinal MAE improves by 0.0442, while QWK falls by 0.0344 and balanced accuracy by 0.0071. P4 improves macro-F1, QWK, and balanced accuracy but has unchanged ordinal MAE. These are descriptive point differences under one fixed fold system, not intervals or significance tests.
+
+P0's very high scores are retained adverse governance evidence: the policy includes outcome-proximal/timing-risk fields and is an information-rich diagnostic upper bound, not a deployable system. P4 remains only a prospective-plausibility sensitivity, and P5 does not establish absence of residual proxies or fairness. The tracked `phase1d_policy_retuning/` package contains only the four aggregate tables, bounded README, provenance, and manifest. Employee-level OOF rows, folds, fold metrics, candidate-search rows, selected fold records, raw data, and fitted models remain local and ignored.

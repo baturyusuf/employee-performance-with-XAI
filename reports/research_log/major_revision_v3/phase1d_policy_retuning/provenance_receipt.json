@@ -1,0 +1,119 @@
+{
+  "excluded_source_files": [
+    "candidate_search_results.csv",
+    "combined_oof_predictions.csv",
+    "fixed_oof_predictions.csv",
+    "fold_metrics.csv",
+    "policy_feature_contract.csv",
+    "retuned_oof_predictions.csv",
+    "selected_hyperparameters.csv",
+    "stage_metadata.json"
+  ],
+  "included_files": [
+    "aggregate_metrics.csv",
+    "headline_policy_comparison.csv",
+    "metric_comparison.csv",
+    "selected_candidate_frequency.csv"
+  ],
+  "independent_run_validation": {
+    "aggregate_metric_row_count": 192,
+    "candidate_search_row_count": 480,
+    "combined_oof_row_count": 14400,
+    "file_count": 12,
+    "fold_metric_row_count": 120,
+    "generation_commit": "823c84866b461266c75f3224527f679a86ab670e",
+    "headline_macro_f1_raw_differences": {
+      "P0": 0.002918650889780716,
+      "P1": 0.011684807891754523,
+      "P2": 0.018519931362211306,
+      "P3": 0.0,
+      "P4": 0.015678838558328412,
+      "P5": 0.008670005687731908
+    },
+    "metric_comparison_row_count": 96,
+    "network_calls": 0,
+    "p3_maximum_probability_replay_error": 0.0,
+    "paid_api_calls": 0,
+    "policy_contract_sha256": "d10c6f6c5e3a61e3895220f4d43a8d682e4d98c83b165f6694b20570ae950d22",
+    "run_id": "phase1d_v3_20260904T063324Z_823c848",
+    "scientific_input_sha256": "79bbbca3911c164daa85ab2dde3f8a45a7cf19af83856f104703a01b08e3a811",
+    "selected_hyperparameter_row_count": 60,
+    "status": "passed"
+  },
+  "package_kind": "phase1d_policy_retuning_compact_evidence",
+  "policy_contract_sha256": "d10c6f6c5e3a61e3895220f4d43a8d682e4d98c83b165f6694b20570ae950d22",
+  "publication_controls": {
+    "candidate_search_rows_included": false,
+    "employee_level_oof_rows_included": false,
+    "fitted_models_included": false,
+    "fixed_and_retuned_estimands_separately_labelled": true,
+    "fold_assignments_included": false,
+    "fold_metrics_included": false,
+    "inferential_claim_from_point_difference_allowed": false,
+    "raw_data_included": false,
+    "selected_fold_hyperparameters_included": false,
+    "universal_best_policy_claim_allowed": false
+  },
+  "row_counts": {
+    "aggregate_metrics.csv": 192,
+    "headline_policy_comparison.csv": 6,
+    "metric_comparison.csv": 96,
+    "selected_candidate_frequency.csv": 21
+  },
+  "schema_version": 1,
+  "scientific_input_sha256": "79bbbca3911c164daa85ab2dde3f8a45a7cf19af83856f104703a01b08e3a811",
+  "source_created_at_utc": "2026-09-04T06:44:07.878854+00:00",
+  "source_files": {
+    "aggregate_metrics.csv": {
+      "sha256": "9ebbd72115f070d4de127530d908c91b6b2f40c90deda019a817e7212570bced",
+      "size_bytes": 66599
+    },
+    "candidate_search_results.csv": {
+      "sha256": "8fb9bdd3aa64836c8330bb511cccca4c67987e5e82c6d1e654f97f2fbd220e88",
+      "size_bytes": 312524
+    },
+    "combined_oof_predictions.csv": {
+      "sha256": "8556769391210e2a1e17008c2104abe4e9cacd51d0ca7bfa79672def5bcac918",
+      "size_bytes": 6438759
+    },
+    "fixed_oof_predictions.csv": {
+      "sha256": "2dd97734d74f2a66576136d9bbebad71de62b2a1ce924ff93fbe0d5f35cdcbab",
+      "size_bytes": 3333653
+    },
+    "fold_metrics.csv": {
+      "sha256": "4713db163f7b469b22e4499c73c1b7cf27a893e12b6881aa3e92fb9a1ae5a74d",
+      "size_bytes": 72444
+    },
+    "headline_policy_comparison.csv": {
+      "sha256": "3ea78efa8b710759c1db2fa53e782b0144951ac927f3c86f0e18871b3c3e95e4",
+      "size_bytes": 2431
+    },
+    "metric_comparison.csv": {
+      "sha256": "162210e07f212e1738a0ec62112da604c4e49975adb33992ca6d3b01b2db2694",
+      "size_bytes": 11790
+    },
+    "policy_feature_contract.csv": {
+      "sha256": "a750a3bd86d676acd48e7ec2263737d95ebeacb1721671632e770de358dd78d0",
+      "size_bytes": 4314
+    },
+    "retuned_oof_predictions.csv": {
+      "sha256": "ba60eff5a990efa7ee7f76adbad08aace33bcbc3e9176565e953e73ce8d0a3b5",
+      "size_bytes": 3105360
+    },
+    "selected_candidate_frequency.csv": {
+      "sha256": "9b3e891f8abadcc52d958e939bf6d72c28d2ed5f468e9da1d24439e2755ea4fc",
+      "size_bytes": 2446
+    },
+    "selected_hyperparameters.csv": {
+      "sha256": "73d88b5d5a86d33a1c938072effbbd584d998796fc33fc4b36d47eb7ff88325d",
+      "size_bytes": 39632
+    },
+    "stage_metadata.json": {
+      "sha256": "59372409981e0e6dff31196a9aebf796b0e92d84d0e4a86f8e139b5d868b6fc5",
+      "size_bytes": 6511
+    }
+  },
+  "source_generation_commit": "823c84866b461266c75f3224527f679a86ab670e",
+  "source_run": "reports/major_revision_v3_runs/phase1d_v3_20260904T063324Z_823c848/policy_retuning",
+  "source_run_id": "phase1d_v3_20260904T063324Z_823c848"
+}

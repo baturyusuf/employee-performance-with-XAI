@@ -151,3 +151,11 @@ V2-033 atomic-publication consequence on 2026-07-14: transient Windows antivirus
 - Restrict the model to the prespecified eight-candidate XGBoost registry, use inner macro-F1 with QWK tie-breaking inside 0.001, and prohibit outer-test participation in preprocessing, tuning, candidate selection, or policy choice. Retuned P3 must exactly replay the canonical primary schedule, labels, and probabilities.
 - Report all 16 metrics for both estimands and headline macro-F1, QWK, balanced accuracy, and ordinal MAE. Publish both raw `retuned - fixed` differences and direction-aligned improvements without significance or universal-best-policy language.
 - Keep OOF, folds, candidate-search rows, and fitted models local and ignored. A later compact export may contain aggregate metrics, comparisons, candidate frequencies, and provenance only after independent validation.
+
+## Major-revision v3 policy-retuning result decision — 2026-09-04
+
+- Admit `phase1d_v3_20260904T063324Z_823c848` as complete Phase 1D evidence after independent closed-world byte validation, generation-source binding, exact P0–P3 reuse proof, all-60 selection replay, exactly-once OOF checks, zero-error P3 replay, and full fold/aggregate/comparison recomputation. It remains a phase result rather than an integrated canonical-v3 release.
+- Publish only the seven-file compact package under `reports/research_log/major_revision_v3/phase1d_policy_retuning/`. Keep 14,400 employee-level OOF rows, folds, fold metrics, 480 candidate rows, 60 selected fold records, raw data, and fitted models local and ignored.
+- Report that retuning raises macro-F1 point estimates for P0/P1/P2/P4/P5 and leaves P3 unchanged, but retain mixed/adverse criteria: P0 balanced accuracy declines; P5 QWK and balanced accuracy decline despite macro-F1 and ordinal-MAE gains; P4 ordinal MAE is unchanged.
+- Treat P0 only as an information-rich diagnostic upper bound because it retains outcome-proximal/timing-risk fields. Do not interpret P4 as prospective validation or P5 as absence of residual proxies/fairness.
+- Treat every fixed-versus-retuned contrast as descriptive and conditional on the exact candidate grid/folds. No significance, causal effect, universal-best-policy, leakage-free, or deployment-ready claim is authorized.

@@ -2,7 +2,7 @@
 
 Date: 2026-09-03
 Branch: `finalization/leakage-aware-v2`
-Status: active implementation contract; Phase 0 and INX Phase 1A complete; Phase 1B and Phase 1C evidence published; Phase 1D implementation complete and full execution pending
+Status: active implementation contract; Phase 0 and INX Phase 1A complete; Phase 1B, Phase 1C, and Phase 1D evidence published; Phase 2A next
 
 ## Purpose
 
@@ -23,7 +23,8 @@ The intended scientific conclusion is conditional rather than promotional: emplo
 - Phase 1C implementation was pushed at `f71077e98a464ce93351f82dc8d53b7659364096`; the Git-identity validation repair was pushed at `78649c426e69fb5270f9d027b11ba6ba87d71a41`. Complete run `phase1c_v3_20260903T215015Z_78649c4` refitted all nine systems across five prespecified 5×5 repetitions, produced 54,000 exactly-once OOF rows, and recorded zero network/API activity.
 - Independent validation reconstructed all five outer and inner fold systems from the persisted contracts and OOF evidence, rebound all generation inputs and six implementation blobs to the exact commit, and recomputed fold, repetition, variability, rank, stability, and tuning-frequency outputs. The safe aggregate package is `phase1c_repeated_nested_cv/`; local row-level evidence remains ignored.
 - Phase 1C finds metric-specific stability rather than a universal winner: LightGBM/XGBoost split macro-F1 wins 3/2, cumulative-threshold XGBoost wins balanced accuracy 4/5, and Random Forest wins QWK and ordinal MAE 5/5. Phase 1D independently retuned policy estimands are next.
-- Phase 1D now has a hash-bound two-estimand contract and runner. The fixed-schedule analysis exactly reuses canonical-v2 P0–P3 OOF evidence and newly fits P4/P5 under the P3 schedule; the retuned analysis independently tunes all six policies inside the same persisted 10×5 folds. Fit-free preflight and a non-persisted P3/fold-1 replay diagnostic passed with zero network/API activity. The clean-commit 2,480-fit execution and independent result validation are pending.
+- Phase 1D now has a hash-bound two-estimand contract and runner. The fixed-schedule analysis exactly reuses canonical-v2 P0–P3 OOF evidence and newly fits P4/P5 under the P3 schedule; the retuned analysis independently tunes all six policies inside the same persisted 10×5 folds. Fit-free preflight and a non-persisted P3/fold-1 replay diagnostic passed with zero network/API activity.
+- Complete run `phase1d_v3_20260904T063324Z_823c848` produced 14,400 exactly-once OOF rows and passed independent closed-world, source, selection-lineage, OOF-reuse, P3-replay, metric-recomputation, and publication-safety validation. Retuning raises macro-F1 for P0/P1/P2/P4/P5, but P0 balanced accuracy and P5 QWK/balanced accuracy decline; P3 is an exact zero-difference replay. The compact aggregate package is `phase1d_policy_retuning/`. Phase 2A SHAP stability and faithfulness is next.
 
 ## Non-negotiable controls
 
