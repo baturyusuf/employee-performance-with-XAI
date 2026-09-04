@@ -1,0 +1,123 @@
+{
+  "schema_version": 1,
+  "contract_id": "subgroup_proxy_use_v3",
+  "dataset_key": "inx_primary",
+  "target": "PerformanceRating",
+  "ordered_labels": [2, 3, 4],
+  "purpose": "extend_exact_canonical_oof_subgroup_evidence_and_separate_department_reconstructability_from_performance_model_proxy_dependence",
+  "source_contracts": {
+    "canonical_v2_receipt": {"path": "reports/research_log/finalization_v2/15_canonical_evidence_receipt.json", "sha256": "bd09523276dcbc54d036f8c9eb0c71ba62f8b0f913c495695a2259296101827c"},
+    "canonical_loader_config": {"path": "configs/manuscript_final.yaml", "sha256": "f8a6354ab67757c5d92c93cef2fe03ab88f4b16b10ce470f2db97ed4d0407779"},
+    "acquisition_manifest": {"path": "configs/data_acquisition.yaml", "sha256": "a5e820a7213967e494bc9238f104e478c5a65c0840d654397cc3063314262d97"},
+    "feature_availability": {"path": "configs/feature_availability_v3.json", "sha256": "6dd5fdde534e379cceacfaa01e865d1551310fb632b691f5b937ef39394e93cf"},
+    "subgroup_stage_contract": {"path": "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/subgroup_proxy/stage_contract.json", "sha256": "d19e925ed25188a17f5b55abf38bcd73ee5691f8d8797a43aaa3bd0f99d128bf"},
+    "subgroup_stage_metadata": {"path": "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/subgroup_proxy/stage_metadata.json", "sha256": "0027387995485b66bc6674bb6b0c59f43ad6f602805614c973ea481a673653f3"},
+    "fairness_oof_predictions": {"path": "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/subgroup_proxy/fairness_oof_predictions.csv", "sha256": "0dc72537d557dc31201740c56618a896c1f902f2f648d1029164398a0f565f9c"},
+    "performance_subgroup_bootstrap_metadata": {"path": "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/subgroup_proxy/performance_subgroup_bootstrap_metadata.json", "sha256": "5fbeffa68054feb9206f1fc4eefbb4de2e63987212cf0f7515d7162cccea4174"},
+    "proxy_metric_intervals": {"path": "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/subgroup_proxy/proxy_metric_intervals.csv", "sha256": "631e541052280573798009cf5291ce121d582ecfa0a0f11394af590a8b8b3ad3"},
+    "proxy_policy_paired_differences": {"path": "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/subgroup_proxy/proxy_policy_paired_differences.csv", "sha256": "74ce3f194458bda6ec7fc9bab708ec4435a2429e47ead76a6501e1032bfdf8c0"},
+    "proxy_bootstrap_metadata": {"path": "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/subgroup_proxy/proxy_bootstrap_metadata.json", "sha256": "7c204a014c58592ec8024209216301074f1d1c12234ae9812641ab24feb4bac8"},
+    "shared_fold_contract": {"path": "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/shared_folds/fold_contract.json", "sha256": "364b0fc0443dbe1d7eceeb82e383802aa4b1b91f268f09703aa8a9a3a7f41d28"},
+    "shared_outer_assignments": {"path": "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/shared_folds/fold_assignments.csv", "sha256": "6b22a827cdba12dff40162f784291399614fb2a9e9ffe1ac889545767129204f"},
+    "shared_inner_assignments": {"path": "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/shared_folds/inner_fold_assignments.csv", "sha256": "35c1afc7d2c8debb9ce54a4be3ac06d9830a2946c41fd756d3532a0f54d32e89"},
+    "benchmark_stage_metadata": {"path": "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/model_benchmarks/stage_metadata.json", "sha256": "b6116253cbdd7cb947957b8c8a9268d62852fccb6be89fa705e2e0a2b34e4ab1"},
+    "baseline_xgboost_gate": {"path": "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/model_benchmarks/baseline_xgboost_gate.json", "sha256": "150eb69b988f987da24b4b3fc76593fb3db60453e151962ce8d221371d03e6eb"},
+    "paired_model_differences": {"path": "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/model_benchmarks/paired_model_differences.csv", "sha256": "99b6ce63574a88ab1788990ee6253e5722f5fbc1b7ccdad1f41552fdfe4d6465"},
+    "candidate_search_results": {"path": "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/model_benchmarks/candidate_search_results.csv", "sha256": "5fc79013cebd77b819f8313187fc399906013ae9faabf07fa001b977478c6f6e"},
+    "selected_hyperparameters": {"path": "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/model_benchmarks/selected_hyperparameters.csv", "sha256": "5ee6b2c3b43453aa3f54bbc79fa58fdf6f6aa4eae35d02174232cb25f51615f1"},
+    "benchmark_oof_predictions": {"path": "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/model_benchmarks/oof_predictions.csv", "sha256": "9b769838b0a55feda162fec949ad17c9dc78141077cd6840598081fb77089104"},
+    "fitted_model_index": {"path": "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/model_benchmarks/fitted_model_index.csv", "sha256": "d0b28a68fac18fe8506626faa418c33094a7816b8536c9bdad4fb40b649a8471"},
+    "transformed_feature_lineage": {"path": "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/model_benchmarks/transformed_feature_lineage.csv", "sha256": "51c2bae4b2d52fd69701215a735180efa422c2c0b2e0bb3b74f47f848a0fb35d"}
+  },
+  "canonical_identity": {
+    "run_id": "canonical_v2_20260714T221501Z_483f96f",
+    "generation_commit": "483f96fdbaab16cb0f32d03d9dbe676a759af44a",
+    "config_hash": "51415c2ce68c89d9ce2b042b0a7a811fe3e98180b72460006f9d0465f6bf49b7",
+    "scientific_input_hash": "06c507bee525ea1daca43b61249764007d4d8baaa05c9333f23446ea723ce160",
+    "dataset_sha256": "b8deac0a615b97076622ae540f4cfd0d3c3f1e7acb83ba3ff6560470a9ccf60a",
+    "fold_contract_hash": "c1300316fe5baec24e789c06aec35dd4f283fa4843b71c7aab1edbf4818f8e91",
+    "xgboost_model_set_sha256": "d483d8ddb93a47a99a2eab54fe3d138d8f614798dd418bca860ea3f20c813f51",
+    "sample_count": 1200,
+    "outer_folds": 10
+  },
+  "subgroup_audit": {
+    "systems": [
+      {"system_id": "no_salary_hike_no_attrition", "v3_label": "P1_LEAKAGE_CONTROLLED_COMPARATOR"},
+      {"system_id": "no_salary_hike_no_attrition_no_department", "v3_label": "P3_PRIMARY_LEAKAGE_AWARE"},
+      {"system_id": "no_salary_hike_no_attrition_no_department_no_job_role", "v3_label": "P3_MINUS_JOB_ROLE_EXACT_CANONICAL_COMPARATOR_NOT_P5"}
+    ],
+    "primary_system_id": "no_salary_hike_no_attrition_no_department",
+    "attributes": ["Age", "Gender", "MaritalStatus", "BusinessTravelFrequency", "EmpDepartment", "EducationBackground"],
+    "age_bins": {"edges": [17, 29, 39, 49, 59, 200], "labels": ["18-29", "30-39", "40-49", "50-59", "60+"], "right_closed": true, "include_lowest": true},
+    "support_thresholds": [20, 30, 50],
+    "minimum_true_class_denominator": 10,
+    "metrics": ["macro_f1", "balanced_accuracy", "quadratic_weighted_kappa", "ordinal_mae", "recall_class_2", "recall_class_3", "recall_class_4", "multiclass_brier", "log_loss"],
+    "probability_source": "exact_raw_uncalibrated_canonical_oof",
+    "below_threshold_rows_retained": true,
+    "gap_definition": "maximum_minus_minimum_among_fixed_support_eligible_groups",
+    "maximum_gap_selection": "exploratory_selection_aware_no_single_largest_gap_claim",
+    "fairness_certification_allowed": false,
+    "formal_discrimination_claim_allowed": false
+  },
+  "simultaneous_bootstrap": {
+    "scope": "P3_primary_all_declared_attribute_threshold_metric_gap_cells",
+    "n_resamples": 5000,
+    "seed": 31041,
+    "random_generator": "numpy_default_rng_pcg64",
+    "stratify_by": ["outer_fold", "y_true"],
+    "eligibility_scope": "fixed_from_complete_oof_before_resampling",
+    "pointwise_interval": "percentile_95_two_sided_linear_quantile",
+    "simultaneous_interval": "studentized_max_absolute_bootstrap_deviation_95_familywise",
+    "family_definition": "all_estimable_declared_P3_gap_cells_including_threshold_sensitivity_rows",
+    "multiplicity_scope": "exploratory_familywise_simultaneous_not_confirmatory",
+    "model_training_variability_included": false
+  },
+  "proxy_prediction_comparison": {
+    "primary_system_id": "no_salary_hike_no_attrition_no_department",
+    "proxy_reduced_system_id": "no_salary_hike_no_attrition_no_department_no_job_role",
+    "proxy_reduced_label": "P3_minus_JobRole_exact_canonical_comparator_not_P5",
+    "comparison_direction": "proxy_reduced_minus_primary",
+    "department_breakdown": true,
+    "probability_change": "signed_classwise_change_total_variation_and_max_absolute_change",
+    "probability_margin": "top_one_minus_top_two_probability_and_log_p4_over_p2_ordinal_margin",
+    "prediction_change": "argmax_label_change_and_absolute_ordinal_shift",
+    "causal_claim_allowed": false
+  },
+  "job_role_permutation": {
+    "feature": "EmpJobRole",
+    "model_system": "P3_PRIMARY_LEAKAGE_AWARE",
+    "model_source": "exact_persisted_canonical_xgboost_outer_fold_models",
+    "schemes": ["marginal_within_outer_test_fold", "department_conditional_within_outer_test_fold_and_department"],
+    "seeds": [31042, 31043, 31044, 31045, 31046, 31047, 31048, 31049, 31050, 31051, 31052, 31053, 31054, 31055, 31056, 31057, 31058, 31059, 31060, 31061],
+    "outcome_used_for_permutation": false,
+    "new_model_fit_calls": 0,
+    "raw_margin_diagnostic": "drop_in_original_predicted_class_xgboost_raw_margin",
+    "interpretation": "descriptive_model_dependence_sensitivity_not_causal_or_discrimination_evidence",
+    "conditional_limitation": "conditioning_only_on_department_does_not_create_a_full_conditional_permutation_test",
+    "marginal_limitation": "marginal_shuffling_can_create_out_of_distribution_role_feature_combinations"
+  },
+  "department_reconstructability": {
+    "source": "exact_canonical_proxy_metric_intervals_and_paired_differences",
+    "interpretation": "department_information_is_reconstructable_from_the_feature_space_not_proof_that_the_performance_model_uses_department",
+    "performance_dependence_claim_from_reconstruction_alone_allowed": false
+  },
+  "computational_scope": {
+    "new_performance_model_fit_calls": 0,
+    "new_proxy_reconstruction_model_fit_calls": 0,
+    "probability_calibrator_fit_calls": 0,
+    "network_calls": 0,
+    "paid_api_calls": 0
+  },
+  "publication": {
+    "local_output_root": "reports/major_revision_v3_runs",
+    "publish_employee_level_prediction_comparison": false,
+    "publish_employee_level_permutation_rows": false,
+    "publish_group_metric_grid": true,
+    "publish_gap_threshold_sensitivity": true,
+    "publish_simultaneous_intervals": true,
+    "publish_department_aggregate_prediction_changes": true,
+    "publish_permutation_repetition_and_scheme_summaries": true,
+    "mandatory_limitations": ["same_dataset_oof_exploratory_audit", "fixed_model_and_fold_conditional_inference", "small_subgroups_and_rare_class_support", "maximum_gap_selection_issue", "proxy_reconstructability_is_not_performance_model_use", "permutation_is_model_dependence_sensitivity_not_causality", "no_fairness_certification_or_discrimination_claim"],
+    "prohibited_claims": ["fairness_certified", "no_discrimination", "department_used_because_reconstructable", "job_role_has_causal_effect", "P3_minus_JobRole_is_v3_P5", "deployment_ready_hr_decision"]
+  }
+}

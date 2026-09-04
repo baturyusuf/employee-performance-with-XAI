@@ -15,8 +15,9 @@ The broader reviewer brief is now the active extension. Preserve the complete v2
 9. Completed and pushed: Phase 2A 100-fit clean-commit run, independent validation/recomputation, and governed eight-file non-row-level package (`c4e25e42fccb6402ca14eef5b1ccd232ca47fc6d`). The complete SHAP/perturbation rows remain local and ignored.
 10. Completed and pushed: Phase 2B hash-bound calibration design, source validator, fit-free diagnostics runner, classwise/cumulative reliability figures, RPS/cumulative Brier, intercept/slope diagnostics, and complete regression (`21d1aecb6e61511e95aee498ab81c54fe6e5a6ab`).
 11. Completed: clean-commit Phase 2B run `phase2b_v3_20260904T120838Z_21d1aec`, independent full recomputation, pushed validator/export checkpoint (`25953b4`), governed 13-file compact package, 24 focused tests, 906-test full regression, and exact staged-byte audit. Keep the complete local run ignored.
-12. Next: Phase 2C expanded subgroup/proxy-use evidence, followed by HR sensitivity, data-quality, literature, provenance, and deliverable phases in `../major_revision_v3/PLAN.md`.
-13. Freeze and request approval for the final v3 claim matrix before editing `manuscript/mdpi_information/main.md` or `main.tex`.
+12. In progress: Phase 2C expanded subgroup/proxy-use contract, runner, protocol, fit-free preflight, and focused tests are complete. Next, push the tested implementation checkpoint, execute the exact clean-commit local run, independently validate/recompute it, and publish only the governed aggregate package.
+13. After Phase 2C: HR sensitivity, data-quality, literature, provenance, and deliverable phases in `../major_revision_v3/PLAN.md`.
+14. Freeze and request approval for the final v3 claim matrix before editing `manuscript/mdpi_information/main.md` or `main.tex`.
 
 Current planning evidence: `../major_revision_v3/REQUIREMENT_COVERAGE_AUDIT.md`.
 

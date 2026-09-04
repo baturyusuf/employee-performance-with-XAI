@@ -25,6 +25,8 @@ The exact-commit Phase 2B run is now independently validated. All aggregate resu
 
 Requirement 12 is now evidence-complete for the requested diagnostic scope. The governed `phase2b_calibration_diagnostics/` package publishes every aggregate/classwise/cumulative result, all 120 support-aware reliability bins, and both PNG/SVG figure pairs with source equivalence and a closed-world manifest. It retains the worse sigmoid top-label ECE point estimate, sparse/empty-bin cautions, and same-dataset OOF limitation. This does not authorize prospective/deployment calibration or selection of sigmoid over an untested alternative.
 
+Requirements 13–14 now have frozen Phase 2C designs and tested computation paths, while their pre-v3 classifications below remain audit history. `SUBGROUP_PROXY_USE_PROTOCOL.md` expands all three exact canonical policy systems across six attributes, nine metrics, and support thresholds 20/30/50; unsupported rows remain explicit and the full P3 gap family receives exploratory simultaneous bootstrap intervals. Separate evidence paths compare exact P3 against the exact P3-minus-JobRole comparator and perturb JobRole marginally and within department, while retaining department reconstruction only as feature-space information. Real-data in-memory evaluation completed the declared 2,025/486/162/1,200/48,000 row grids with no new model fits, but an exact clean-commit package and independent validation are still required before these requirements are evidence-complete.
+
 Status meanings:
 
 - `addressed`: executable or canonical evidence and claim boundaries materially satisfy the requirement.

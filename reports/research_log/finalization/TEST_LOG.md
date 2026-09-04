@@ -747,3 +747,13 @@ Push/recovery gate: the normal push timed out after 184 seconds with no remote r
 - Complete pytest: exit 0; 906 passed, 2 skipped, and 11 subtests passed in 349.11 seconds.
 - Final unittest discovery: exit 0; 179 tests passed, 1 skipped in 9.831 seconds.
 - Staged package audit: exit 0; all 12 manifest-declared files matched Git-index SHA-256, byte size, and working-tree bytes exactly; package attribute returned `text: unset`; zero calibration-prediction/sample/fold/model/stage-run paths were staged.
+
+## Major-revision v3 subgroup/proxy-use implementation — 2026-09-04
+
+- Contract validator: exit 0; SHA-256 `65bf6d1cdf99cda5f764b5ed93aa6b4bf214a5944ca8bf1248d0c804a73c9696`; 22 exact source hashes, 3,600 OOF rows, three aligned systems, six reconstruction intervals, three paired reconstruction differences, and zero fit/network/API scope passed.
+- Fit-free preflight: exit 0; 1,200 samples, ten persisted P3 models, six subgroup attributes, nine metrics, support thresholds 20/30/50, 5,000 planned bootstrap repetitions, and 40 planned JobRole perturbation repetitions.
+- First complete in-memory calculation: exit 0 in 65.79 seconds; output row counts 2,025/486/162/1,200/7/48,000/40/2/6/3; all 5,000 bootstrap draws complete for the 162-cell simultaneous family; no output package persisted.
+- Initial Phase 2C focus: 12 passed in 69.54 seconds. Metric-definition parity, exact sources, complete group/gap grids, explicit support failures, fixed age bins, threshold sensitivity, deterministic simultaneous intervals, paired probability simplexes, both perturbation schemes, reconstructability/use separation, fit-free preflight, and atomic-output inventory passed.
+- Combined new plus legacy subgroup/proxy regression: 53 passed in 77.17 seconds. Compileall over `src` and `tests` and `git diff --check` exited 0.
+- Complete pytest: exit 0; 918 passed, 2 skipped, and 11 subtests passed in 424.74 seconds.
+- Unittest discovery: exit 0; 179 tests passed, 1 skipped in 9.829 seconds.
