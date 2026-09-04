@@ -171,6 +171,11 @@ def _prepare_inputs(contract_path: Path) -> tuple[Any, ...]:
     return contract, receipt, canonical, features, excluded, target, artifacts, model_definition
 
 
+def _resolved_fold_model_path(artifacts: Any, fold_model: Any) -> Path:
+    path = Path(fold_model.path)
+    return path if path.is_absolute() else Path(artifacts.benchmark_dir) / path
+
+
 def preflight_shap_stability_faithfulness_v3(
     *, contract_path: Path | str = DEFAULT_SHAP_STABILITY_FAITHFULNESS_CONTRACT,
 ) -> dict[str, Any]:
@@ -946,7 +951,8 @@ def run_shap_stability_faithfulness_v3(
             for name, record in contract["source_contracts"].items():
                 _require(sha256_file(record["path"]) == record["sha256"], f"Phase 2A source changed during execution: {name}.")
             for fold_model in artifacts.fold_models.values():
-                _require(sha256_file(fold_model.path) == fold_model.sha256, f"Canonical fold model changed during execution: {fold_model.outer_fold}.")
+                model_path = _resolved_fold_model_path(artifacts, fold_model)
+                _require(sha256_file(model_path) == fold_model.sha256, f"Canonical fold model changed during execution: {fold_model.outer_fold}.")
             _write_json(staging / "stage_metadata.json", metadata)
             _require({path.name for path in staging.iterdir() if path.is_file()} == EXPECTED_LOCAL_FILES, "Phase 2A output inventory drifted.")
             os.replace(staging, output_dir)

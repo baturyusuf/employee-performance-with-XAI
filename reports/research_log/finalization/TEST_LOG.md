@@ -707,3 +707,5 @@ Push/recovery gate: the normal push timed out after 184 seconds with no remote r
 - Related SHAP regression after mask repair: 37 passed in 7.43 seconds. Compileall over `src` and `tests` and `git diff --check` exited 0.
 - Complete pytest: exit 0; 874 passed, 2 skipped, and 11 subtests passed in 180.68 seconds.
 - Unittest discovery: exit 0; 179 tests passed, 1 skipped in 8.041 seconds. The repository/README static gate passed.
+- First Phase 2A complete-run attempt: exit 1 at the final pre-publication model-byte rehash after computation; benchmark-relative model path was incorrectly resolved from repository root. Atomic staging cleanup succeeded and no output package was published.
+- Model-path repair focus: 38 related SHAP tests passed in 8.27 seconds; all ten indexed XGBoost paths resolve under the benchmark directory. Compileall, `git diff --check`, and explicit absence of a published failed-run output passed.

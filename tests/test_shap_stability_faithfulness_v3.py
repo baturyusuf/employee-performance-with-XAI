@@ -8,6 +8,7 @@ from src.experiments.shap_stability_faithfulness_v3 import (
     _mask_reference,
     _masked_frame,
     _prepare_inputs,
+    _resolved_fold_model_path,
     explain_stability_run_v3,
     preflight_shap_stability_faithfulness_v3,
     stability_pairwise_v3,
@@ -137,6 +138,16 @@ def test_real_phase2a_preflight_is_fit_free(monkeypatch) -> None:
     assert receipt["planned_new_estimator_fit_calls"] == 100
     assert receipt["model_fit_count"] == 0
     assert receipt["network_calls"] == receipt["paid_api_calls"] == 0
+
+
+def test_canonical_fold_model_paths_resolve_against_benchmark_directory() -> None:
+    _, _, _, _, _, _, artifacts, _ = _prepare_inputs(
+        DEFAULT_SHAP_STABILITY_FAITHFULNESS_CONTRACT
+    )
+    for fold_model in artifacts.fold_models.values():
+        resolved = _resolved_fold_model_path(artifacts, fold_model)
+        assert resolved.is_file()
+        assert resolved.parent.name == "xgboost"
 
 
 def test_exact_reference_grouped_shap_replays_canonical_global_evidence(monkeypatch) -> None:
