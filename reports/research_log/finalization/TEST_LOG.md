@@ -709,3 +709,9 @@ Push/recovery gate: the normal push timed out after 184 seconds with no remote r
 - Unittest discovery: exit 0; 179 tests passed, 1 skipped in 8.041 seconds. The repository/README static gate passed.
 - First Phase 2A complete-run attempt: exit 1 at the final pre-publication model-byte rehash after computation; benchmark-relative model path was incorrectly resolved from repository root. Atomic staging cleanup succeeded and no output package was published.
 - Model-path repair focus: 38 related SHAP tests passed in 8.27 seconds; all ten indexed XGBoost paths resolve under the benchmark directory. Compileall, `git diff --check`, and explicit absence of a published failed-run output passed.
+
+## Major-revision v3 SHAP stability/faithfulness result validation — 2026-09-04
+
+- Complete run: exit 0 from clean commit `6e52de76f7e486985cbc2b32a53b2554c1c6f6c1`; 14 closed-world files; 100 planned/executed new estimator fits; 110 SHAP model/fold explanations; 75,600 perturbation rows; 25,200 deletion-AUC rows; zero network/paid-API calls.
+- Independent validator CLI: exit 0 in 13.53 seconds; exact output/source/implementation hashes, full and resampled membership replay, candidate schedule, SHAP additivity/grouping rules, stability recomputation, canonical OOF baseline lineage, 20 random-order replays, nested deletions, and all faithfulness/AUC summary recomputations passed.
+- Initial Phase 2A contract/runner/run-validator/compact-export focus before tracked publication: 19 passed, 3 expected absent-package skips in 97.07 seconds. Two independently generated temporary compact packages were byte-identical; deliberate README tampering was rejected.
