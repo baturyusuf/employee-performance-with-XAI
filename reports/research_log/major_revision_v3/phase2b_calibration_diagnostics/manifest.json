@@ -1,0 +1,68 @@
+{
+  "file_count_excluding_manifest": 12,
+  "files": [
+    {
+      "path": "calibration_metric_summary.csv",
+      "sha256": "612ec6a3b69d5bf697aad4919cb4281d01718c24e983c5200c427fc522b3ae3a",
+      "size_bytes": 564
+    },
+    {
+      "path": "classwise_calibration_metrics.csv",
+      "sha256": "80f99c472c74d510da40d1b898d1d12d76f06abc48dd80569ce11b442fbc17c7",
+      "size_bytes": 1892
+    },
+    {
+      "path": "classwise_reliability.png",
+      "sha256": "ec28f642e14e84a1b50a9e5b0e0cc577f87501c005994109fe13d8da9b9e5801",
+      "size_bytes": 336575
+    },
+    {
+      "path": "classwise_reliability.svg",
+      "sha256": "7c5542d641b645067551961dce596a92b5ff29fcdcda3ddfa3b27091a7e6c172",
+      "size_bytes": 83977
+    },
+    {
+      "path": "cumulative_calibration_metrics.csv",
+      "sha256": "08bd6dc929b711b8f812a248016e41382550ac007c6bf231f4f643e9dab553e7",
+      "size_bytes": 1410
+    },
+    {
+      "path": "cumulative_reliability.png",
+      "sha256": "c6bd937904c8a04e4444c0f4c8ed5995e48b295a3f78ecbb7f43435a7305aa95",
+      "size_bytes": 241427
+    },
+    {
+      "path": "cumulative_reliability.svg",
+      "sha256": "194d6d637a07de798ffd02f6cb85b4bf1b7bee3b3c8a6dadcf889b162d722212",
+      "size_bytes": 63258
+    },
+    {
+      "path": "diagnostic_receipt.json",
+      "sha256": "72ed358c7b245a0a7928875bfd100899b1a11c39287238aeacb23dcc6bb7a7c2",
+      "size_bytes": 2204
+    },
+    {
+      "path": "extended_reliability_bins.csv",
+      "sha256": "64058ebe6eb14da71873af2d1c744b7a1756d046b52e3607b9946d32f488015c",
+      "size_bytes": 13540
+    },
+    {
+      "path": "method_comparison.csv",
+      "sha256": "bac8344ec08129d92a38ffe5c968da576b57fe8bac48aa0f7b50e052e4f3bbb3",
+      "size_bytes": 1662
+    },
+    {
+      "path": "provenance_receipt.json",
+      "sha256": "48919be56caadf2172f0528787608c3f2481b861591f70e4d58c8f117fc4e4df",
+      "size_bytes": 4722
+    },
+    {
+      "path": "README.md",
+      "sha256": "506fa99890bc3a915b83cbef440050db2824be590308a954ca22ee8f6b95a938",
+      "size_bytes": 3836
+    }
+  ],
+  "package_kind": "phase2b_calibration_diagnostics_compact_evidence",
+  "schema_version": 1,
+  "source_run_id": "phase2b_v3_20260904T120838Z_21d1aec"
+}

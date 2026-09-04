@@ -43,6 +43,9 @@
 - Clean run `phase2b_v3_20260904T120838Z_21d1aec` atomically produced 11 local files, 120 explicit reliability bins, and ten descriptive calibration regressions with zero new performance-model/calibrator fits and zero network/paid-API calls. Scientific-input SHA-256 is `97797e436e816623d8652772a5089d226f304b59a30ffcdee110c33e413eec86`.
 - Independent validation rebound all generation blobs and canonical sources and recomputed every table. Raw/sigmoid values are 0.5515/0.4556 log loss, 0.3426/0.2634 Brier, 0.0375/0.0419 top-label ECE, 0.1070/0.0249 macro classwise ECE, 0.0779/0.0184 cumulative ECE, and 0.0860/0.0669 RPS. Twenty-four empty bins are retained.
 - The reliability figures passed visual and structural inspection. The compact aggregate exporter is implemented and deterministic; validation/export checkpoint and tracked compact publication are next. The complete local run remains ignored and the manuscript remains untouched.
+- Validation/export checkpoint `25953b4` is pushed. The governed 13-file/757,267-byte compact Phase 2B package is generated and validates with manifest SHA-256 `196d9eea87a160b375ddf215fc131142598b0338fa373a7474aaaa1b865d29f3`.
+- The compact package contains five aggregate tables, all 120 reliability bins, two PNG/SVG figure pairs, and diagnostic/provenance/manifest documentation. It excludes employee-level OOF probabilities, folds, raw data, fitted models/calibrators, and stage internals. Phase 2C subgroup/proxy-use analysis is next after the final package checkpoint.
+- Final post-publication regression passed 906 tests, 2 skips, and 11 subtests. Focused compact validation passed all 24 Phase 2B tests, unittest passed 179 tests with 1 skip, and package byte-preservation is active. All Phase 2B evidence is included in the final result checkpoint.
 
 Date: 2026-07-16
 

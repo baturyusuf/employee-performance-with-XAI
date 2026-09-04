@@ -1,0 +1,46 @@
+{
+  "all_metrics_improved_claim_allowed": false,
+  "calibration_method_selection_performed": false,
+  "calibration_regression_scope": "pooled_exactly_once_oof_descriptive_diagnostic",
+  "classwise_ece_definition": "one_vs_rest_support_weighted_absolute_probability_frequency_gap",
+  "contract_sha256": "258a81b0a3a4038218ca9f185252ed9fcc12c8f7056314e9760f5285ffec831b",
+  "cumulative_ece_definition": "ordered_threshold_support_weighted_absolute_probability_frequency_gap",
+  "diagnostic_calibration_regression_fit_count": 10,
+  "empty_bins_persisted": true,
+  "future_calibration_validation_claim_allowed": false,
+  "new_calibrator_fit_calls": 0,
+  "new_model_fit_calls": 0,
+  "ordered_labels": [
+    2,
+    3,
+    4
+  ],
+  "outer_test_used_for_calibrator_fit_or_selection": false,
+  "reliability_bin_count": 10,
+  "reliability_binning": "fixed_equal_width",
+  "rps_equals_mean_cumulative_binary_brier": true,
+  "rps_normalized_by_threshold_count": true,
+  "run_id": "phase2b_v3_20260904T120838Z_21d1aec",
+  "sample_count_per_method": 1200,
+  "schema_version": 1,
+  "scientific_input_sha256": "97797e436e816623d8652772a5089d226f304b59a30ffcdee110c33e413eec86",
+  "sigmoid_algorithm": "one_vs_rest_platt_on_class_probability_logit_then_row_renormalize",
+  "sigmoid_predeclared": true,
+  "source_calibration_identity": {
+    "calibration_protocol_sha256": "2c9293055f64114c63c8f85e652d94e838c84501a718eea6c3852de78ce4808b",
+    "config_hash": "51415c2ce68c89d9ce2b042b0a7a811fe3e98180b72460006f9d0465f6bf49b7",
+    "dataset_sha256": "b8deac0a615b97076622ae540f4cfd0d3c3f1e7acb83ba3ff6560470a9ccf60a",
+    "fold_contract_hash": "c1300316fe5baec24e789c06aec35dd4f283fa4843b71c7aab1edbf4818f8e91",
+    "generation_commit": "483f96fdbaab16cb0f32d03d9dbe676a759af44a",
+    "outer_folds": 10,
+    "run_id": "canonical_v2_20260714T221501Z_483f96f",
+    "sample_count": 1200,
+    "scientific_input_hash": "06c507bee525ea1daca43b61249764007d4d8baaa05c9333f23446ea723ce160",
+    "xgboost_model_set_sha256": "d483d8ddb93a47a99a2eab54fe3d138d8f614798dd418bca860ea3f20c813f51"
+  },
+  "source_methods": [
+    "raw",
+    "sigmoid"
+  ],
+  "top_label_ece_definition": "support_weighted_absolute_confidence_accuracy_gap"
+}

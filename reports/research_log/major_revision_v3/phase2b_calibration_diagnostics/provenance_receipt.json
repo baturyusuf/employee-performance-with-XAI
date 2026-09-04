@@ -1,0 +1,121 @@
+{
+  "contract_sha256": "258a81b0a3a4038218ca9f185252ed9fcc12c8f7056314e9760f5285ffec831b",
+  "excluded_source_files": [
+    "stage_metadata.json"
+  ],
+  "included_files": [
+    "calibration_metric_summary.csv",
+    "classwise_calibration_metrics.csv",
+    "classwise_reliability.png",
+    "classwise_reliability.svg",
+    "cumulative_calibration_metrics.csv",
+    "cumulative_reliability.png",
+    "cumulative_reliability.svg",
+    "diagnostic_receipt.json",
+    "extended_reliability_bins.csv",
+    "method_comparison.csv"
+  ],
+  "independent_run_validation": {
+    "contract_sha256": "258a81b0a3a4038218ca9f185252ed9fcc12c8f7056314e9760f5285ffec831b",
+    "empty_reliability_bin_count": 24,
+    "file_count": 11,
+    "generation_commit": "21d1aecb6e61511e95aee498ab81c54fe6e5a6ab",
+    "maximum_regression_condition_number": 68.59714361778042,
+    "network_calls": 0,
+    "new_calibrator_fit_calls": 0,
+    "new_model_fit_calls": 0,
+    "paid_api_calls": 0,
+    "raw_metrics": {
+      "macro_classwise_ece": 0.1069726147230974,
+      "mean_cumulative_ece": 0.0779399114454063,
+      "multiclass_brier": 0.342606326573343,
+      "nll_log_loss": 0.5514626110693018,
+      "ranked_probability_score": 0.0859738324948221,
+      "top_label_ece": 0.0375426568313583
+    },
+    "reliability_bin_row_count": 120,
+    "run_id": "phase2b_v3_20260904T120838Z_21d1aec",
+    "scientific_input_sha256": "97797e436e816623d8652772a5089d226f304b59a30ffcdee110c33e413eec86",
+    "sigmoid_metrics": {
+      "macro_classwise_ece": 0.0249330578903988,
+      "mean_cumulative_ece": 0.018419102900621,
+      "multiclass_brier": 0.2634041394464624,
+      "nll_log_loss": 0.4556457723677246,
+      "ranked_probability_score": 0.066945035192262,
+      "top_label_ece": 0.0419338956850242
+    },
+    "status": "passed"
+  },
+  "package_kind": "phase2b_calibration_diagnostics_compact_evidence",
+  "publication_controls": {
+    "all_metrics_improved_claim_allowed": false,
+    "deployment_claim_allowed": false,
+    "employee_level_oof_probabilities_included": false,
+    "fitted_calibrators_or_parameters_included": false,
+    "fitted_models_included": false,
+    "fold_assignments_included": false,
+    "future_calibration_claim_allowed": false,
+    "inferential_claim_for_new_diagnostics_allowed": false,
+    "new_calibration_method_selected": false,
+    "raw_data_included": false
+  },
+  "row_counts": {
+    "calibration_metric_summary.csv": 2,
+    "classwise_calibration_metrics.csv": 6,
+    "cumulative_calibration_metrics.csv": 4,
+    "extended_reliability_bins.csv": 120,
+    "method_comparison.csv": 6
+  },
+  "schema_version": 1,
+  "scientific_input_sha256": "97797e436e816623d8652772a5089d226f304b59a30ffcdee110c33e413eec86",
+  "source_created_at_utc": "2026-09-04T12:08:41.175707+00:00",
+  "source_files": {
+    "calibration_metric_summary.csv": {
+      "sha256": "612ec6a3b69d5bf697aad4919cb4281d01718c24e983c5200c427fc522b3ae3a",
+      "size_bytes": 564
+    },
+    "classwise_calibration_metrics.csv": {
+      "sha256": "80f99c472c74d510da40d1b898d1d12d76f06abc48dd80569ce11b442fbc17c7",
+      "size_bytes": 1892
+    },
+    "classwise_reliability.png": {
+      "sha256": "ec28f642e14e84a1b50a9e5b0e0cc577f87501c005994109fe13d8da9b9e5801",
+      "size_bytes": 336575
+    },
+    "classwise_reliability.svg": {
+      "sha256": "7c5542d641b645067551961dce596a92b5ff29fcdcda3ddfa3b27091a7e6c172",
+      "size_bytes": 83977
+    },
+    "cumulative_calibration_metrics.csv": {
+      "sha256": "08bd6dc929b711b8f812a248016e41382550ac007c6bf231f4f643e9dab553e7",
+      "size_bytes": 1410
+    },
+    "cumulative_reliability.png": {
+      "sha256": "c6bd937904c8a04e4444c0f4c8ed5995e48b295a3f78ecbb7f43435a7305aa95",
+      "size_bytes": 241427
+    },
+    "cumulative_reliability.svg": {
+      "sha256": "194d6d637a07de798ffd02f6cb85b4bf1b7bee3b3c8a6dadcf889b162d722212",
+      "size_bytes": 63258
+    },
+    "diagnostic_receipt.json": {
+      "sha256": "72ed358c7b245a0a7928875bfd100899b1a11c39287238aeacb23dcc6bb7a7c2",
+      "size_bytes": 2204
+    },
+    "extended_reliability_bins.csv": {
+      "sha256": "64058ebe6eb14da71873af2d1c744b7a1756d046b52e3607b9946d32f488015c",
+      "size_bytes": 13540
+    },
+    "method_comparison.csv": {
+      "sha256": "bac8344ec08129d92a38ffe5c968da576b57fe8bac48aa0f7b50e052e4f3bbb3",
+      "size_bytes": 1662
+    },
+    "stage_metadata.json": {
+      "sha256": "581afa87b3be10a966b93cb7cb8ce8a9443b06f63cdb03283b60b5d5890b63c5",
+      "size_bytes": 5857
+    }
+  },
+  "source_generation_commit": "21d1aecb6e61511e95aee498ab81c54fe6e5a6ab",
+  "source_run": "reports/major_revision_v3_runs/phase2b_v3_20260904T120838Z_21d1aec/calibration_diagnostics",
+  "source_run_id": "phase2b_v3_20260904T120838Z_21d1aec"
+}

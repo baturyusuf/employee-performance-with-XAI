@@ -1,0 +1,3 @@
+method,primary_method,n_samples,nll_log_loss,multiclass_brier,top_label_ece,macro_classwise_ece,mean_cumulative_ece,ranked_probability_score,mean_cumulative_binary_brier,empty_reliability_bin_count,calibration_method_selection_performed
+raw,False,1200,0.5514626110693018,0.34260632657334306,0.03754265683135832,0.1069726147230974,0.07793991144540639,0.08597383249482213,0.0859738324948221,6,False
+sigmoid,True,1200,0.4556457723677246,0.26340413944646246,0.041933895685024244,0.0249330578903988,0.018419102900621,0.06694503519226208,0.06694503519226208,18,False

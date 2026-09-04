@@ -23,6 +23,8 @@ Requirement 12 now has complete Phase 2B design and implementation, while its fr
 
 The exact-commit Phase 2B run is now independently validated. All aggregate results were recomputed directly from the canonical OOF probabilities, the 120-bin grid and ten descriptive regression fits were verified, and figure/inventory/source/Git/offline receipts passed. Compact publication and its byte-preservation checks remain before Requirement 12 is declared publication-complete.
 
+Requirement 12 is now evidence-complete for the requested diagnostic scope. The governed `phase2b_calibration_diagnostics/` package publishes every aggregate/classwise/cumulative result, all 120 support-aware reliability bins, and both PNG/SVG figure pairs with source equivalence and a closed-world manifest. It retains the worse sigmoid top-label ECE point estimate, sparse/empty-bin cautions, and same-dataset OOF limitation. This does not authorize prospective/deployment calibration or selection of sigmoid over an untested alternative.
+
 Status meanings:
 
 - `addressed`: executable or canonical evidence and claim boundaries materially satisfy the requirement.

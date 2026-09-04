@@ -2,7 +2,7 @@
 
 Date: 2026-09-04
 
-Status: design, implementation, clean exact-commit execution, and independent full-run validation complete; compact publication pending
+Status: design, implementation, clean exact-commit execution, independent validation, and governed compact publication complete
 
 ## Preserved source calibration
 
@@ -43,3 +43,5 @@ The fail-closed contract validator binds all nine canonical calibration sources 
 Clean-commit run `phase2b_v3_20260904T120838Z_21d1aec` produced the exact 11-file local package from pushed commit `21d1aecb6e61511e95aee498ab81c54fe6e5a6ab`. An independent validator rebound the generation Git blobs and all canonical sources, verified output hashes and offline runtime, independently recomputed every metric/regression/bin/contrast row, and checked both PNG/SVG figure contracts. It passed with 120 reliability bins, including 24 explicit empty bins. Compact aggregate publication remains pending; the complete run stays local and ignored.
 
 The validated raw/sigmoid values are 0.5515/0.4556 for log loss, 0.3426/0.2634 for multiclass Brier, 0.0375/0.0419 for top-label ECE, 0.1070/0.0249 for macro classwise ECE, 0.0779/0.0184 for mean cumulative ECE, and 0.0860/0.0669 for normalized RPS. Thus the predeclared sigmoid method improves five point estimates but worsens top-label ECE; only the three legacy contrasts retain their existing paired bootstrap intervals.
+
+The governed compact package is `phase2b_calibration_diagnostics/`. Its 13-file/757,267-byte closed world contains the five aggregate tables, 120-bin support table, both PNG/SVG figure pairs, diagnostic/provenance receipts, bounded README, and manifest SHA-256 `196d9eea87a160b375ddf215fc131142598b0338fa373a7474aaaa1b865d29f3`. Employee-level probabilities, fold assignments, raw data, fitted performance models, calibrator objects/parameters, and stage internals are excluded.

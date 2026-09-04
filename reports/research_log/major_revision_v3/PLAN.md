@@ -2,7 +2,7 @@
 
 Date: 2026-09-03
 Branch: `finalization/leakage-aware-v2`
-Status: active implementation contract; Phase 0 and INX Phase 1A complete; Phase 1B, Phase 1C, Phase 1D, and Phase 2A evidence published; Phase 2B clean-commit run independently validated and compact publication pending
+Status: active implementation contract; Phase 0 and INX Phase 1A complete; Phase 1B, Phase 1C, Phase 1D, Phase 2A, and Phase 2B evidence published; Phase 2C subgroup/proxy use is next
 
 ## Purpose
 
@@ -28,6 +28,7 @@ The intended scientific conclusion is conditional rather than promotional: emplo
 - Complete Phase 2A run `phase2a_v3_20260904T073008Z_6e52de7` executed the hash-bound raw-margin aggregation, five fixed-fold seed refits, five stratified 80% outer-training resamples, and top-1/3/5 deletion against 20 random baselines. Independent validation replayed membership/ranking/random-order contracts and recomputed all stability and faithfulness outputs. The safe aggregate package is `phase2a_shap_stability_faithfulness/`; row-level perturbations remain ignored. Phase 2B extended calibration is next.
 - Phase 2B now has a hash-bound contract, exact-source validator, and fit-free runner. It reuses the canonical raw and predeclared cross-fitted one-vs-rest sigmoid OOF probabilities, makes renormalization/simplex and ten-bin boundary/empty-bin rules explicit, and adds top-label, classwise, cumulative, RPS, Brier, and descriptive pooled-OOF intercept/slope diagnostics. Sixteen focused tests and the complete 898-test suite pass. No new calibration method is selected and no model or probability calibrator is refitted; clean-commit execution and independent result validation remain next.
 - Complete Phase 2B run `phase2b_v3_20260904T120838Z_21d1aec` executed from the pushed clean implementation commit with zero new performance-model/calibrator fits and zero network/API calls. Independent validation recomputed all five output tables from the exact canonical OOF probabilities, verified the 11-file closed world, generation blobs, 120 reliability bins, ten regressions, and both figure pairs. Sigmoid improves five probability-diagnostic point estimates but worsens top-label ECE; compact aggregate publication is next.
+- The governed `phase2b_calibration_diagnostics/` package publishes the five aggregate tables, complete bin-support evidence, and classwise/cumulative reliability figures with exact source/provenance hashes. Its 13-file/757,267-byte closed world excludes employee-level probabilities, folds, raw data, and fitted models/calibrators. Phase 2C expanded subgroup/proxy-use analysis is next.
 
 ## Non-negotiable controls
 

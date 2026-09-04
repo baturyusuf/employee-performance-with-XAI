@@ -738,3 +738,12 @@ Push/recovery gate: the normal push timed out after 184 seconds with no remote r
 - Independent run-validator CLI: exit 0; generation Git blobs, nine canonical sources, output hashes, offline receipt, all table recomputations, empty bins, mixed directions, and PNG/SVG structure passed. Twenty-four empty bins were retained; maximum regression-information condition number was 68.5971.
 - Validator/compact-export focus before tracked publication: 5 passed and 3 expected absent-package skips in 4.06 seconds. Two temporary compact packages were byte-identical; unexpected/tampered source and compact files were rejected.
 - Compileall over `src` and `tests` and `git diff --check` exited 0.
+
+## Major-revision v3 calibration compact-package validation — 2026-09-04
+
+- Compact export and explicit validation: exit 0; 13 files/757,267 bytes; five aggregate tables with 2/6/4/120/6 rows; manifest SHA-256 `196d9eea87a160b375ddf215fc131142598b0338fa373a7474aaaa1b865d29f3`; no employee-level rows.
+- Post-publication Phase 2B focus: 24 passed in 7.01 seconds. Tracked-package validation, source equivalence, deterministic re-export, tamper/closed-world rejection, and byte-preservation checks passed.
+- Compileall over `src`, `tests`, and `tools`, `git diff --check`, and the four repository/README contract tests exited 0. Package attribute returned `text: unset`.
+- Complete pytest: exit 0; 906 passed, 2 skipped, and 11 subtests passed in 349.11 seconds.
+- Final unittest discovery: exit 0; 179 tests passed, 1 skipped in 9.831 seconds.
+- Staged package audit: exit 0; all 12 manifest-declared files matched Git-index SHA-256, byte size, and working-tree bytes exactly; package attribute returned `text: unset`; zero calibration-prediction/sample/fold/model/stage-run paths were staged.
