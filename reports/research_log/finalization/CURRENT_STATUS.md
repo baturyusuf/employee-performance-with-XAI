@@ -30,6 +30,9 @@
 - Fit-free real-data preflight verified 1,200 samples, target support 194/874/132, policy feature counts 26/24/21/20/13/6, eight XGBoost candidates, 4,800 reusable fixed OOF rows, and 2,480 planned new fits. A non-persisted P3/fold-1 diagnostic exactly replayed the primary candidate schedule, labels, and probabilities. Both recorded zero network/API activity.
 - Complete run `phase1d_v3_20260904T063324Z_823c848` produced 14,400 exactly-once OOF rows with zero network/API activity. Independent validation checked the 12-file closed world and exact source blobs, replayed all 60 policy/fold selections, proved P0–P3 source reuse and zero-error P3 replay, and recomputed all 120 fold and 192 aggregate metric records.
 - Retuning raises macro-F1 for five policies, but its criterion effects are mixed: P0 balanced accuracy falls, and P5 QWK/balanced accuracy fall despite improved macro-F1/ordinal MAE. The tracked seven-file/92,567-byte compact package excludes all employee/fold/candidate rows. Phase 2A SHAP stability and faithfulness is next.
+- Phase 2A implementation now separates grouped-SHAP aggregation validity, ranking stability, and model-level deletion faithfulness. It freezes the exact raw-margin grouping order, five fixed-fold seed refits, five stratified 80% outer-training resamples, and top-1/3/5 training-fold median/mode masking against 20 random baselines.
+- Exact-reference replay reproduces the canonical global grouped importance within `9.1e-17` and identical ranks. One seed and one resample diagnostic completed all ten folds with raw-margin additivity errors below `1e-5` and zero grouping-sum error; a two-random-baseline deletion diagnostic exercised 10,800 perturbation rows. All diagnostics are noncanonical and unpersisted.
+- Phase 2A contract SHA-256 is `cb48bae7c14db7bfb3f99a7cf2e4bf830232d9d27a420c320beddaa1b547dbab`; complete clean-commit execution and independent result validation are next.
 
 Date: 2026-07-16
 

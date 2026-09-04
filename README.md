@@ -31,6 +31,8 @@ The [`repeated nested-CV protocol`](reports/research_log/major_revision_v3/REPEA
 
 The Phase 1D [`fixed-schedule and independently retuned policy protocol`](reports/research_log/major_revision_v3/POLICY_RETUNING_PROTOCOL.md) and governed [`compact policy evidence package`](reports/research_log/major_revision_v3/phase1d_policy_retuning/README.md) separate feature-access sensitivity from within-policy retuning across P0–P5. Retuning improves Macro-F1 point estimates for five policies but is not uniformly favorable across criteria: P0 loses balanced accuracy, while P5 loses QWK and balanced accuracy despite improved Macro-F1 and ordinal MAE. P3 is an exact replay control. These are descriptive, noncausal point differences rather than significance or universal-policy evidence.
 
+Phase 2A implementation is frozen in the [`SHAP aggregation, stability, and faithfulness protocol`](reports/research_log/major_revision_v3/SHAP_STABILITY_FAITHFULNESS_PROTOCOL.md). It preserves exact outer-model TreeSHAP, explicitly documents raw-margin multiclass grouping, and adds separately labelled seed stability, 80% outer-training resampling stability, and training-fold median/mode deletion against 20 random baselines. Full clean-commit execution remains pending.
+
 ## Tracked manuscript-support assets
 
 GitHub contains a deterministic, source-mapped export at [`manuscript/mdpi_information/assets/`](manuscript/mdpi_information/assets/). It was generated from the validated canonical run without refitting models or recomputing scientific evidence. The compact package contains 109 files and 10,338,351 bytes; its closed-world manifest SHA-256 is `fbe7355b956df01ad9817f27b42dc13c0f3e0e33e7f0e5c42a2477beb9d001e1`.

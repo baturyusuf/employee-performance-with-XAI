@@ -17,6 +17,8 @@ Requirement 5 now has complete Phase 1C evidence, while its frozen pre-v3 baseli
 
 Requirement 6 now has complete Phase 1D evidence, while its frozen pre-v3 baseline classification below is retained for audit history. `POLICY_RETUNING_PROTOCOL.md` separates the canonical fixed-schedule feature-access sensitivity from independently retuned within-policy performance across P0–P5, uses identical persisted 10×5 assignments, and prohibits outer-test selection. The clean-commit run passed independent source, selection, OOF, replay, metric, and compact-publication validation. The safe aggregate package is `phase1d_policy_retuning/`; it retains mixed metric directions and authorizes no causal or universal-policy claim.
 
+Requirements 8–10 now have a completed Phase 2A implementation contract, while their frozen pre-v3 baseline classifications below are retained for audit history. `SHAP_STABILITY_FAITHFULNESS_PROTOCOL.md` formalizes the actual signed grouping and raw-margin additivity order, adds fixed-fold seed and 80% outer-training resampling designs, and defines top-1/3/5 training-reference deletion against 20 random baselines. Real-data diagnostics passed. Complete execution, independent recomputation, and compact evidence remain pending.
+
 Status meanings:
 
 - `addressed`: executable or canonical evidence and claim boundaries materially satisfy the requirement.

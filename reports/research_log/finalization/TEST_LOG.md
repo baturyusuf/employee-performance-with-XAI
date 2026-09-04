@@ -695,3 +695,15 @@ Push/recovery gate: the normal push timed out after 184 seconds with no remote r
 - Complete pytest: exit 0; 860 passed, 2 skipped, and 11 subtests passed in 202.80 seconds.
 - Unittest discovery: exit 0; 179 tests passed, 1 skipped in 9.364 seconds. The repository/README static gate passed.
 - Staged compact-package audit: exit 0; all six manifest-declared files matched Git-index SHA-256 and byte size exactly; package attribute returned `text: unset`; staged repository/README and attribute tests both passed.
+
+## Major-revision v3 SHAP stability/faithfulness implementation — 2026-09-04
+
+- Contract validator CLI: exit 0; SHA-256 `cb48bae7c14db7bfb3f99a7cf2e4bf830232d9d27a420c320beddaa1b547dbab`; 1,200 samples, 20 P3 features, ten exact models, six seed runs including reference, five resampling runs, 100 planned fits, zero actual fits/network/API calls.
+- Initial contract/runner focus: 14 passed in 5.88 seconds.
+- Exact reference replay diagnostic: canonical global importance maximum absolute error `9.1e-17`, ranks identical, maximum raw-margin additivity error `5.74e-6`, grouped-sum error zero.
+- One full seed and one full resampling diagnostic: exit 0; 20 new fits, 400 fold-feature rows, 20 additivity checks, 40 ranking rows; 1,080/864 training rows per fold; maximum additivity errors `5.41e-6`/`5.57e-6`; grouped-sum errors zero.
+- First deletion diagnostic: exit 1 before result construction because fractional median insertion into an integer pandas column was rejected. No artifact was persisted or admitted.
+- Corrected deletion diagnostic with two random repetitions: exit 0; 10,800 sample perturbation rows, nine summary rows, six contrasts, 3,600 deletion-AUC rows, three AUC summaries, and 59 guided feature-frequency rows.
+- Related SHAP regression after mask repair: 37 passed in 7.43 seconds. Compileall over `src` and `tests` and `git diff --check` exited 0.
+- Complete pytest: exit 0; 874 passed, 2 skipped, and 11 subtests passed in 180.68 seconds.
+- Unittest discovery: exit 0; 179 tests passed, 1 skipped in 8.041 seconds. The repository/README static gate passed.

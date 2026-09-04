@@ -11,9 +11,10 @@ The broader reviewer brief is now the active extension. Preserve the complete v2
 5. Completed and pushed: Phase 1C deterministic 5×5×5 repeated nested CV, all-nine-system refitting, independent full-run recomputation, and compact non-row-level variability/rank evidence (`2553e9b9798908adf67f7cea15a0977fa8f48df2`). The complete row-level run remains local and ignored.
 6. Completed and pushed: fixed-schedule and independently retuned P0–P5 estimands, exact historical crosswalk, outer-test isolation, 2,480-fit scope, runner, focused tests, preflight, and exact-replay diagnostic (`823c84866b461266c75f3224527f679a86ab670e`).
 7. Completed: clean-commit Phase 1D run, independent source/selection/OOF/metric validation, and governed compact non-row-level package. Push the evidence checkpoint; the complete row-level run remains local and ignored.
-8. Next: implement Phase 2A SHAP seed/resampling stability and model-level deletion faithfulness under exact model/fold lineage.
-9. Continue with calibration, subgroup/proxy, HR sensitivity, data-quality, literature, provenance, and deliverable phases in `../major_revision_v3/PLAN.md`.
-10. Freeze and request approval for the final v3 claim matrix before editing `manuscript/mdpi_information/main.md` or `main.tex`.
+8. Completed implementation: Phase 2A raw-margin grouped-SHAP aggregation contract, five-seed and five-resample ranking stability, training-reference deletion faithfulness against 20 random baselines, runner, preflight, real diagnostics, and focused tests.
+9. Next: checkpoint the Phase 2A implementation, execute the clean-commit 100-fit run, independently validate all aggregation/stability/faithfulness evidence, and publish only safe summaries.
+10. Continue with calibration, subgroup/proxy, HR sensitivity, data-quality, literature, provenance, and deliverable phases in `../major_revision_v3/PLAN.md`.
+11. Freeze and request approval for the final v3 claim matrix before editing `manuscript/mdpi_information/main.md` or `main.tex`.
 
 Current planning evidence: `../major_revision_v3/REQUIREMENT_COVERAGE_AUDIT.md`.
 
