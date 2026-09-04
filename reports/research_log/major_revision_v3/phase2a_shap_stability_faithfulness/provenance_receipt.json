@@ -1,0 +1,126 @@
+{
+  "contract_sha256": "cb48bae7c14db7bfb3f99a7cf2e4bf830232d9d27a420c320beddaa1b547dbab",
+  "excluded_source_files": [
+    "additivity_checks.csv",
+    "deletion_auc_contrast.csv",
+    "deletion_auc_sample.csv",
+    "faithfulness_feature_frequency.csv",
+    "faithfulness_sample_results.csv",
+    "fold_feature_importance.csv",
+    "stability_pairwise.csv",
+    "stability_run_rankings.csv",
+    "stage_metadata.json"
+  ],
+  "included_files": [
+    "aggregation_receipt.json",
+    "deletion_auc_summary.csv",
+    "faithfulness_contrasts.csv",
+    "faithfulness_summary.csv",
+    "stability_summary.csv"
+  ],
+  "independent_run_validation": {
+    "contract_sha256": "cb48bae7c14db7bfb3f99a7cf2e4bf830232d9d27a420c320beddaa1b547dbab",
+    "faithfulness_sample_row_count": 75600,
+    "file_count": 14,
+    "generation_commit": "6e52de76f7e486985cbc2b32a53b2554c1c6f6c1",
+    "guided_minus_random_mean_deletion_auc": 0.2207908111639551,
+    "guided_minus_random_probability_drop": {
+      "1": 0.2675683999606986,
+      "3": 0.2481269129837502,
+      "5": 0.2063476299112274
+    },
+    "maximum_raw_margin_additivity_error": 6.511458195745945e-06,
+    "network_calls": 0,
+    "paid_api_calls": 0,
+    "resample_stability_top5_jaccard_mean": 1.0,
+    "run_id": "phase2a_v3_20260904T073008Z_6e52de7",
+    "scientific_input_sha256": "c42546074956ea963d2fbc2aafaa40b3da11598e015e5171c6bc5e578e9c1b83",
+    "seed_stability_top5_jaccard_mean": 1.0,
+    "stability_pairwise_row_count": 75,
+    "status": "passed"
+  },
+  "package_kind": "phase2a_shap_stability_faithfulness_compact_evidence",
+  "publication_controls": {
+    "causal_feature_effect_claim_allowed": false,
+    "fitted_models_included": false,
+    "fold_feature_importance_rows_included": false,
+    "fold_or_resample_memberships_included": false,
+    "human_usefulness_claim_allowed": false,
+    "inferential_claim_allowed": false,
+    "pair_independence_assumed": false,
+    "pairwise_rows_included": false,
+    "per_sample_perturbation_rows_included": false,
+    "per_sample_shap_rows_included": false,
+    "raw_data_included": false
+  },
+  "row_counts": {
+    "deletion_auc_summary.csv": 21,
+    "faithfulness_contrasts.csv": 6,
+    "faithfulness_summary.csv": 63,
+    "stability_summary.csv": 9
+  },
+  "schema_version": 1,
+  "scientific_input_sha256": "c42546074956ea963d2fbc2aafaa40b3da11598e015e5171c6bc5e578e9c1b83",
+  "source_created_at_utc": "2026-09-04T07:31:14.216007+00:00",
+  "source_files": {
+    "additivity_checks.csv": {
+      "sha256": "2532462aee543740e1cbc42d42cc08de7666da83ca3db389ecb576683d4943f6",
+      "size_bytes": 19467
+    },
+    "aggregation_receipt.json": {
+      "sha256": "d49caa8a35b5f3878161601d80497ee179563a3846aae479b24a2c4283017f67",
+      "size_bytes": 1170
+    },
+    "deletion_auc_contrast.csv": {
+      "sha256": "76acdf2f0bcbb399ddee0d763ed64b4bf6d58cd02e12bb07617982e1e864f2ef",
+      "size_bytes": 335
+    },
+    "deletion_auc_sample.csv": {
+      "sha256": "07e26c4e2d5694c1a87952b90fcfdef8aaf4aa91d59c71e540eaee5c67b5f717",
+      "size_bytes": 895243
+    },
+    "deletion_auc_summary.csv": {
+      "sha256": "e27a8e302eaa43521b05742e2c799633b7064876340bd21be1837951cc1c94ce",
+      "size_bytes": 1700
+    },
+    "faithfulness_contrasts.csv": {
+      "sha256": "c8fa92829a3c519eeee7718e42c8ab13b5380d780ded9ab3019ef3175d5c06a3",
+      "size_bytes": 1114
+    },
+    "faithfulness_feature_frequency.csv": {
+      "sha256": "f75c4224fd8431cd159c38373671f9fe6c6b9106ada075b7dacd6bc2a2e20d13",
+      "size_bytes": 2888
+    },
+    "faithfulness_sample_results.csv": {
+      "sha256": "d8cb43e191fec0305419f7d1060a2fcc7fd7c427f530446edb889e2f56f6d634",
+      "size_bytes": 16077848
+    },
+    "faithfulness_summary.csv": {
+      "sha256": "6e85dfe3f43af4da6b6883632a6a6debffdb3ad6483d89aa99f4767934a4ae4e",
+      "size_bytes": 9162
+    },
+    "fold_feature_importance.csv": {
+      "sha256": "2259c3ac14dc6ee5b07d2f0fe1d56dca336e2f639d5a192916a4b14cc0048428",
+      "size_bytes": 396467
+    },
+    "stability_pairwise.csv": {
+      "sha256": "2a408b3b7003fcb17b5b24b2f4e63a33bf8029c1ec7d9e96492a61a3426598d3",
+      "size_bytes": 6265
+    },
+    "stability_run_rankings.csv": {
+      "sha256": "232d2a22ea0b9c6a2ecd3f2f0e812189ec6c36c0f662d16b65e9622afea823ff",
+      "size_bytes": 18870
+    },
+    "stability_summary.csv": {
+      "sha256": "4329e361ae3d006474efa724b4ef4b82d361ce4a3b3fb667f0b7169e0fbc0496",
+      "size_bytes": 1869
+    },
+    "stage_metadata.json": {
+      "sha256": "c811b520902c747e2886c3e63814eaf3bca3746bdc2fed10bb63983bb39e17e4",
+      "size_bytes": 6905
+    }
+  },
+  "source_generation_commit": "6e52de76f7e486985cbc2b32a53b2554c1c6f6c1",
+  "source_run": "reports/major_revision_v3_runs/phase2a_v3_20260904T073008Z_6e52de7/shap_stability_faithfulness",
+  "source_run_id": "phase2a_v3_20260904T073008Z_6e52de7"
+}

@@ -2,7 +2,7 @@
 
 Date: 2026-09-04
 
-Status: implementation complete; clean-commit full execution and independent validation pending
+Status: complete clean-commit execution, independent validation, and governed compact evidence
 
 ## Separated questions
 
@@ -52,10 +52,20 @@ Median/mode masking is deterministic and leakage-isolated, but it can create unr
 
 The complete run contains 100 new fits, 110 model/fold explanation evaluations including the reused reference, 3,600 guided sample perturbations, and 72,000 random sample perturbations. Scientific execution is offline, single-thread bounded, source/hash bound, and atomically published only from a clean unchanged Git state.
 
-Fold feature rows, resampling-membership hashes, sample SHAP/deletion rows, fitted models, raw data, and employee identifiers remain under the ignored local run root. A later governed compact export may include only the aggregation receipt, aggregate stability and faithfulness summaries/contrasts, deletion-AUC summary, and provenance.
+Fold feature rows, resampling-membership hashes, sample SHAP/deletion rows, fitted models, raw data, and employee identifiers remain under the ignored local run root. The governed compact export includes only the aggregation receipt, aggregate stability and faithfulness summaries/contrasts, deletion-AUC summary, and provenance.
 
 ## Verified implementation diagnostics
 
 Fit-free preflight validated the 1,200-row/20-feature P3 frame, all ten exact canonical models, eight XGBoost candidates, and the 100-fit scope with zero actual fits/network/API calls. Re-explaining the exact canonical models reproduced the historical global importance to maximum absolute error `9.1e-17` and identical ranks; observed maximum raw-margin additivity error was `5.74e-6`, and grouped-family sum error was zero.
 
 One full ten-fold seed-1044 diagnostic and one ten-fold 80% resample-11042 diagnostic completed with training counts 1,080 and 864 per fold. Their maximum raw-margin errors were `5.41e-6` and `5.57e-6`, with zero grouped-sum error. A noncanonical deletion diagnostic using two of the twenty random baselines generated 3,600 guided and 7,200 random perturbation records; it verified the output path only and is not admissible scientific evidence.
+
+## Complete execution and bounded results
+
+Run `phase2a_v3_20260904T073008Z_6e52de7` executed from clean pushed commit `6e52de76f7e486985cbc2b32a53b2554c1c6f6c1`. It completed all 100 new fits and 110 model/fold explanations, and generated 3,600 guided plus 72,000 random perturbation rows with zero network or paid-API calls. Maximum raw-margin additivity error was `6.5115e-6`; grouped-sum error was zero.
+
+Mean top-5 Jaccard was 1.0000 for canonical outer-fold pairs, fixed-fold model seeds, and 80% outer-training resamples. Their mean top-10 Jaccard values were 0.7945, 0.9394, and 0.8909; mean top-15 values were 0.8250, 0.9083, and 0.9250; and mean all-feature Spearman values were 0.9066, 0.9945, and 0.9847. These 45/15/10 pairs are dependent descriptive comparisons, not independent observations or confidence-interval units.
+
+SHAP-guided minus random-repetition-mean probability drops were +0.2676, +0.2481, and +0.2063 after deleting 1, 3, and 5 feature families. Mean probability-drop deletion AUC was 0.2720 for guided deletion and 0.0512 across the 20 random-repetition means, a descriptive difference of +0.2208. This supports only model-level perturbation faithfulness under the stated masking scheme; it does not validate realistic interventions, causal importance, fairness, human usefulness, or deployment.
+
+The independent validator rehashed the 14-file local package, rebound the contract/sources/implementation to generation Git bytes, reconstructed all training memberships and rankings, replayed deterministic random orders, and recomputed every stability, faithfulness, frequency, contrast, and AUC table. The publication-safe aggregate package is `phase2a_shap_stability_faithfulness/`; its manifest SHA-256 is `4cd7bcace03d556e2bd27eea4dca87143745914ddd56136476edc6c662e44481`.

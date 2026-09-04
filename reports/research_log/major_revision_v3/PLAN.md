@@ -2,7 +2,7 @@
 
 Date: 2026-09-03
 Branch: `finalization/leakage-aware-v2`
-Status: active implementation contract; Phase 0 and INX Phase 1A complete; Phase 1B, Phase 1C, and Phase 1D evidence published; Phase 2A implementation complete and full execution pending
+Status: active implementation contract; Phase 0 and INX Phase 1A complete; Phase 1B, Phase 1C, Phase 1D, and Phase 2A evidence published; Phase 2B calibration is next
 
 ## Purpose
 
@@ -25,7 +25,7 @@ The intended scientific conclusion is conditional rather than promotional: emplo
 - Phase 1C finds metric-specific stability rather than a universal winner: LightGBM/XGBoost split macro-F1 wins 3/2, cumulative-threshold XGBoost wins balanced accuracy 4/5, and Random Forest wins QWK and ordinal MAE 5/5. Phase 1D independently retuned policy estimands are next.
 - Phase 1D now has a hash-bound two-estimand contract and runner. The fixed-schedule analysis exactly reuses canonical-v2 P0–P3 OOF evidence and newly fits P4/P5 under the P3 schedule; the retuned analysis independently tunes all six policies inside the same persisted 10×5 folds. Fit-free preflight and a non-persisted P3/fold-1 replay diagnostic passed with zero network/API activity.
 - Complete run `phase1d_v3_20260904T063324Z_823c848` produced 14,400 exactly-once OOF rows and passed independent closed-world, source, selection-lineage, OOF-reuse, P3-replay, metric-recomputation, and publication-safety validation. Retuning raises macro-F1 for P0/P1/P2/P4/P5, but P0 balanced accuracy and P5 QWK/balanced accuracy decline; P3 is an exact zero-difference replay. The compact aggregate package is `phase1d_policy_retuning/`. Phase 2A SHAP stability and faithfulness is next.
-- Phase 2A now has a hash-bound aggregation/stability/faithfulness contract and runner. It formalizes raw-margin multiclass grouping, retains historical outer-fold pairs, adds five fixed-fold seed refits and five stratified 80% outer-training resamples, and tests top-1/3/5 SHAP-guided training-reference masking against 20 random baselines. Fit-free, exact-reference, seed, resampling, and bounded deletion diagnostics passed; the clean-commit 100-fit full execution and independent result validation are pending.
+- Complete Phase 2A run `phase2a_v3_20260904T073008Z_6e52de7` executed the hash-bound raw-margin aggregation, five fixed-fold seed refits, five stratified 80% outer-training resamples, and top-1/3/5 deletion against 20 random baselines. Independent validation replayed membership/ranking/random-order contracts and recomputed all stability and faithfulness outputs. The safe aggregate package is `phase2a_shap_stability_faithfulness/`; row-level perturbations remain ignored. Phase 2B extended calibration is next.
 
 ## Non-negotiable controls
 

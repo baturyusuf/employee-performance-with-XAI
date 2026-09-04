@@ -1,0 +1,43 @@
+{
+  "file_count_excluding_manifest": 7,
+  "files": [
+    {
+      "path": "aggregation_receipt.json",
+      "sha256": "d49caa8a35b5f3878161601d80497ee179563a3846aae479b24a2c4283017f67",
+      "size_bytes": 1170
+    },
+    {
+      "path": "deletion_auc_summary.csv",
+      "sha256": "e27a8e302eaa43521b05742e2c799633b7064876340bd21be1837951cc1c94ce",
+      "size_bytes": 1700
+    },
+    {
+      "path": "faithfulness_contrasts.csv",
+      "sha256": "c8fa92829a3c519eeee7718e42c8ab13b5380d780ded9ab3019ef3175d5c06a3",
+      "size_bytes": 1114
+    },
+    {
+      "path": "faithfulness_summary.csv",
+      "sha256": "6e85dfe3f43af4da6b6883632a6a6debffdb3ad6483d89aa99f4767934a4ae4e",
+      "size_bytes": 9162
+    },
+    {
+      "path": "provenance_receipt.json",
+      "sha256": "894b192a78b036e20c35d1588493cc77383bd4c74dca3d2ead4ef2808f38acc7",
+      "size_bytes": 4832
+    },
+    {
+      "path": "README.md",
+      "sha256": "3cfef71caf62e974e312fcebe92e8290b09c18ea7db048a9b89d0d94ff9235f9",
+      "size_bytes": 2888
+    },
+    {
+      "path": "stability_summary.csv",
+      "sha256": "4329e361ae3d006474efa724b4ef4b82d361ce4a3b3fb667f0b7169e0fbc0496",
+      "size_bytes": 1869
+    }
+  ],
+  "package_kind": "phase2a_shap_stability_faithfulness_compact_evidence",
+  "schema_version": 1,
+  "source_run_id": "phase2a_v3_20260904T073008Z_6e52de7"
+}
