@@ -9,6 +9,14 @@
 - Manuscript Markdown/LaTeX remains protected by the existing claim-approval gate. Planning, contract implementation, experiments, compact reports, and claim-matrix preparation may proceed; manuscript authoring waits for the final v3 claim matrix and user approval.
 - Tested, reviewable checkpoints should be committed and pushed periodically. Force-push, history rewriting, merge, release publication, DOI publication, raw-data publication, and paid API calls remain prohibited without separate authorization.
 
+## 2026-09-04 extended calibration decision
+
+- Preserve the canonical predeclared sigmoid method exactly: three one-vs-rest Platt calibrators are fitted only on cross-fitted outer-training probabilities, their positive outputs are renormalized to the simplex, and every untouched outer-test fold remains evaluation-only.
+- Do not add or select isotonic or another calibration method from the existing test evidence. A fair method comparison would require a separately prespecified nested training-only selection design; it is unnecessary for the requested diagnostic extension.
+- Reuse the exact persisted raw/sigmoid OOF probabilities and perform zero new performance-model or probability-calibrator fits. Add ten-bin top-label, classwise, and ordinal-cumulative reliability/ECE; normalized RPS and cumulative Brier; and pooled-OOF calibration intercept/slope as descriptive diagnostics.
+- Retain empty bins and sparse-class evidence. Keep legacy paired bootstrap intervals only for the three metrics that already have canonical intervals; new diagnostic differences remain descriptive.
+- Explicitly report mixed findings. Sigmoid improves log loss and multiclass Brier but worsens the top-label ECE point estimate; no claim that calibration improves every metric, proves future calibration, or validates HR thresholds is authorized.
+
 ## 2026-07-16 aggregate publication-assets decision
 
 - The user explicitly authorized GitHub publication of the final tables and figures so remote authoring/review agents can access the canonical numerical cells and data-derived graphics.

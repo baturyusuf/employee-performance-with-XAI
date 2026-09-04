@@ -1,0 +1,101 @@
+{
+  "schema_version": 1,
+  "contract_id": "calibration_diagnostics_v3",
+  "dataset_key": "inx_primary",
+  "target": "PerformanceRating",
+  "ordered_labels": [2, 3, 4],
+  "policy_id": "P3",
+  "policy_name": "PRIMARY_LEAKAGE_AWARE",
+  "model": "xgboost",
+  "purpose": "extend_exact_oof_raw_and_predeclared_sigmoid_evidence_with_explicit_multiclass_and_ordinal_calibration_diagnostics",
+  "source_contracts": {
+    "canonical_v2_receipt": {"path": "reports/research_log/finalization_v2/15_canonical_evidence_receipt.json", "sha256": "bd09523276dcbc54d036f8c9eb0c71ba62f8b0f913c495695a2259296101827c"},
+    "calibration_predictions": {"path": "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/sigmoid_calibration/calibration_predictions.csv", "sha256": "c38e46bba72aba74c1220b103b710cb7e9ffbc0a626b3e6966ea6bfe4fc38b1a"},
+    "calibration_bins": {"path": "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/sigmoid_calibration/calibration_bins.csv", "sha256": "7d65bf9f3c738080497027bb0e165c49c93ba8fe402d25968715979d3b92268e"},
+    "calibration_method_comparison": {"path": "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/sigmoid_calibration/calibration_method_comparison.csv", "sha256": "1c0352b5ee00bb7b3bfd516e47f337eaca7117a5923437bc2f8f437a46b41f82"},
+    "calibration_metric_intervals": {"path": "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/sigmoid_calibration/calibration_metric_intervals.csv", "sha256": "ebd6a8906dda22052802ef4f6b31bfdbaf74e41216c2bfbc98b31bdf142a1ed1"},
+    "calibration_paired_differences": {"path": "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/sigmoid_calibration/calibration_paired_differences.csv", "sha256": "4bcf2efbad04b49b83f0154942cae1563b5faf335eead1a277f1a624ab60babf"},
+    "calibration_protocol": {"path": "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/sigmoid_calibration/calibration_protocol.json", "sha256": "5f07fc43e0397146aa17b4c1f408aa9c81f846b0ddaa613a4734a12c4951acf2"},
+    "calibration_metadata": {"path": "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/sigmoid_calibration/calibration_metadata.json", "sha256": "9227c2cddb1cc08d6805f3c9055de1ed564844ad9b82b47ed20fb3637dbc9cf4"},
+    "calibration_validation": {"path": "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/sigmoid_calibration/calibration_validation.json", "sha256": "23a0661433433e1b6b687a1bc9cc7b0248ffab6b600cb5edfd74af8439640f31"}
+  },
+  "canonical_identity": {
+    "run_id": "canonical_v2_20260714T221501Z_483f96f",
+    "generation_commit": "483f96fdbaab16cb0f32d03d9dbe676a759af44a",
+    "config_hash": "51415c2ce68c89d9ce2b042b0a7a811fe3e98180b72460006f9d0465f6bf49b7",
+    "scientific_input_hash": "06c507bee525ea1daca43b61249764007d4d8baaa05c9333f23446ea723ce160",
+    "dataset_sha256": "b8deac0a615b97076622ae540f4cfd0d3c3f1e7acb83ba3ff6560470a9ccf60a",
+    "fold_contract_hash": "c1300316fe5baec24e789c06aec35dd4f283fa4843b71c7aab1edbf4818f8e91",
+    "xgboost_model_set_sha256": "d483d8ddb93a47a99a2eab54fe3d138d8f614798dd418bca860ea3f20c813f51",
+    "calibration_protocol_sha256": "2c9293055f64114c63c8f85e652d94e838c84501a718eea6c3852de78ce4808b",
+    "sample_count": 1200,
+    "outer_folds": 10
+  },
+  "source_calibration": {
+    "systems": ["raw", "sigmoid"],
+    "primary_method": "sigmoid",
+    "raw_role": "unaltered_exact_canonical_xgboost_oof_comparator",
+    "sigmoid_algorithm": "one_vs_rest_platt_on_class_probability_logit_then_row_renormalize",
+    "classwise_calibrators": true,
+    "probability_clip": 0.000001,
+    "renormalization": "divide_each_positive_classwise_sigmoid_output_by_row_sum",
+    "simplex_tolerance": 0.000000001,
+    "calibrator_training": "five_inner_fold_cross_fitted_probabilities_within_each_outer_training_partition_only",
+    "outer_test_role": "evaluation_only",
+    "method_selection": "predeclared_sigmoid_no_test_selected_comparison",
+    "method_selection_performed": false,
+    "outer_test_used_for_calibrator_fit_or_selection": false,
+    "new_model_fit_calls": 0,
+    "new_calibrator_fit_calls": 0
+  },
+  "reliability": {
+    "bin_count": 10,
+    "binning": "fixed_equal_width_over_zero_to_one",
+    "boundary_rule": "first_bin_closed_both_sides_then_left_open_right_closed",
+    "empty_bins": "persist_with_zero_support_and_missing_means",
+    "top_label_ece": "support_weighted_absolute_gap_between_max_probability_and_argmax_accuracy",
+    "classwise_ece": "one_vs_rest_support_weighted_absolute_gap_for_each_class_probability",
+    "cumulative_thresholds": ["Y<=2", "Y<=3"],
+    "cumulative_ece": "support_weighted_absolute_gap_for_cumulative_probability_and_binary_threshold_event",
+    "classwise_reliability_diagrams": true,
+    "cumulative_reliability_diagrams": true
+  },
+  "ordinal_probability_diagnostics": {
+    "ranked_probability_score": "mean_over_samples_and_two_nontrivial_ordered_cumulative_thresholds_of_squared_cdf_error",
+    "rps_normalized_by_threshold_count": true,
+    "cumulative_binary_brier_reported": true,
+    "lower_is_better": true
+  },
+  "calibration_regression": {
+    "targets": ["one_vs_rest_class_2", "one_vs_rest_class_3", "one_vs_rest_class_4", "cumulative_Y<=2", "cumulative_Y<=3"],
+    "predictor": "logit_of_probability_clipped_to_1e-6_and_1_minus_1e-6",
+    "model": "unpenalized_binary_logistic_intercept_and_slope_joint_fit",
+    "optimizer": "deterministic_newton_raphson",
+    "initial_intercept": 0.0,
+    "initial_slope": 1.0,
+    "maximum_iterations": 100,
+    "step_tolerance": 1e-10,
+    "hessian_ridge_for_numerical_solution": 1e-12,
+    "reporting_scope": "pooled_exactly_once_oof_descriptive_diagnostic",
+    "confidence_interval_applicable": false,
+    "future_calibration_validation_claim_allowed": false
+  },
+  "comparison": {
+    "contrast": "sigmoid_minus_raw",
+    "metrics": ["nll_log_loss", "multiclass_brier", "top_label_ece", "macro_classwise_ece", "mean_cumulative_ece", "ranked_probability_score"],
+    "test_set_method_selection_performed": false,
+    "inferential_claim_for_new_diagnostics_allowed": false,
+    "all_metrics_improved_claim_allowed": false
+  },
+  "publication": {
+    "local_output_root": "reports/major_revision_v3_runs",
+    "publish_oof_prediction_rows": false,
+    "publish_bin_rows": true,
+    "publish_classwise_and_cumulative_summaries": true,
+    "publish_reliability_figures": true,
+    "publish_fitted_calibration_regressions": false,
+    "publish_calibrator_parameters": false,
+    "mandatory_limitations": ["same_dataset_oof_diagnostic_not_future_calibration_validation", "ece_binning_dependence", "rare_class_bin_sparsity", "predeclared_sigmoid_can_improve_some_metrics_and_degrade_others", "probabilities_are_not_objective_employee_outcome_probabilities"],
+    "prohibited_claims": ["calibration_improved_everything", "test_selected_calibration_method", "future_calibration_proven", "deployment_ready_probability", "autonomous_hr_threshold_validated"]
+  }
+}

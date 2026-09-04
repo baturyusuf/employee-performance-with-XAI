@@ -721,3 +721,12 @@ Push/recovery gate: the normal push timed out after 184 seconds with no remote r
 - Unittest discovery: exit 0; 179 tests passed, 1 skipped in 9.14 seconds. Compileall over `src`, `tests`, and `tools` exited 0.
 - The repository gate reached its expected pre-commit clean-worktree refusal because the verified package and status updates were intentionally uncommitted; no content/hygiene invariant failed. A clean post-commit gate remains required.
 - Staged compact-package audit: exit 0; all seven manifest records matched Git-index SHA-256, byte size, and working-tree bytes; package attribute returned `text: unset`; zero prohibited row/fold/model files were staged.
+
+## Major-revision v3 calibration diagnostics implementation — 2026-09-04
+
+- Contract validator CLI: exit 0; contract SHA-256 `258a81b0a3a4038218ca9f185252ed9fcc12c8f7056314e9760f5285ffec831b`; nine exact canonical source bindings; 1,200 samples per raw/sigmoid method; 60 source classwise bins; zero planned performance-model/calibrator fits and zero network/paid-API calls.
+- Fit-free preflight: exit 0; 2,400 prediction rows, ten planned descriptive calibration regressions, and zero performance-model/calibrator fits or network/API calls.
+- Combined Phase 2B contract/runner focus: 16 passed in 1.69 seconds. Exact legacy metric replay, full 60-row classwise-bin replay at `1e-15`, bin boundaries/empty bins, RPS identity, mixed-direction controls, deterministic figures, clean-run gate, and atomic-output behavior passed.
+- Related calibration/ordinal focus: 33 passed. Compileall and `git diff --check` exited 0.
+- Complete pytest: exit 0; 898 passed, 2 skipped, and 11 subtests passed in 323.18 seconds.
+- Scientific result status: not yet executed from a clean implementation commit; no Phase 2B result package is admitted by these tests.

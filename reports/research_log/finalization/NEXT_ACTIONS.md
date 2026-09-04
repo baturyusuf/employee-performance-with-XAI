@@ -12,9 +12,10 @@ The broader reviewer brief is now the active extension. Preserve the complete v2
 6. Completed and pushed: fixed-schedule and independently retuned P0–P5 estimands, exact historical crosswalk, outer-test isolation, 2,480-fit scope, runner, focused tests, preflight, and exact-replay diagnostic (`823c84866b461266c75f3224527f679a86ab670e`).
 7. Completed and pushed: clean-commit Phase 1D run, independent source/selection/OOF/metric validation, and governed compact non-row-level package (`54ef16c50976aae2f839f6b33db7b078650ca88e`). The complete row-level run remains local and ignored.
 8. Completed and pushed: Phase 2A raw-margin grouped-SHAP aggregation contract, five-seed and five-resample ranking stability, training-reference deletion faithfulness against 20 random baselines, runner, preflight, diagnostics, and generation-path repair (`6e52de76f7e486985cbc2b32a53b2554c1c6f6c1`).
-9. Completed: Phase 2A 100-fit clean-commit run, independent validation/recomputation, and governed eight-file non-row-level package. Push the evidence checkpoint; the complete SHAP/perturbation rows remain local and ignored.
-10. Next: implement and execute Phase 2B extended calibration, followed by subgroup/proxy, HR sensitivity, data-quality, literature, provenance, and deliverable phases in `../major_revision_v3/PLAN.md`.
-11. Freeze and request approval for the final v3 claim matrix before editing `manuscript/mdpi_information/main.md` or `main.tex`.
+9. Completed and pushed: Phase 2A 100-fit clean-commit run, independent validation/recomputation, and governed eight-file non-row-level package (`c4e25e42fccb6402ca14eef5b1ccd232ca47fc6d`). The complete SHAP/perturbation rows remain local and ignored.
+10. In progress: Phase 2B hash-bound calibration design, source validator, fit-free diagnostics runner, classwise/cumulative reliability figures, RPS/cumulative Brier, intercept/slope diagnostics, and 16 focused tests are complete. Commit/push the implementation, then execute from the clean exact commit and independently validate/publish a compact aggregate package.
+11. Next after Phase 2B: subgroup/proxy, HR sensitivity, data-quality, literature, provenance, and deliverable phases in `../major_revision_v3/PLAN.md`.
+12. Freeze and request approval for the final v3 claim matrix before editing `manuscript/mdpi_information/main.md` or `main.tex`.
 
 Current planning evidence: `../major_revision_v3/REQUIREMENT_COVERAGE_AUDIT.md`.
 

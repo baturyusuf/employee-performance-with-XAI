@@ -35,6 +35,10 @@
 - Complete clean-commit run `phase2a_v3_20260904T073008Z_6e52de7` executed 100 new fits and 110 model/fold explanations and generated all 75,600 perturbation rows with zero network/API activity. Independent validation reconstructed memberships/rankings, replayed all random orders, and recomputed all stability/faithfulness/AUC outputs.
 - Mean top-5 Jaccard is 1.0000 across fold, seed, and resampling comparisons; all-feature Spearman means are 0.9066/0.9945/0.9847. Guided-minus-random probability drops are +0.2676/+0.2481/+0.2063 for top 1/3/5 deletion, and deletion-AUC difference is +0.2208. These are dependent/descriptive model-level results under potentially OOD masking, not causal or human-usefulness evidence.
 - The tracked eight-file/24,079-byte Phase 2A package has manifest SHA-256 `4cd7bcace03d556e2bd27eea4dca87143745914ddd56136476edc6c662e44481` and excludes sample/fold/membership/model data. Phase 2B extended calibration is next.
+- The Phase 2A result checkpoint `c4e25e42fccb6402ca14eef5b1ccd232ca47fc6d` is pushed and synchronized with GitHub; its clean post-commit repository gate passed with 1,932 tracked files and 54 resolved README links.
+- Phase 2B design and implementation are validated. The new contract binds the exact canonical raw and cross-fitted sigmoid OOF probabilities and makes the one-vs-rest Platt, renormalization/simplex, ten-bin boundary/empty-bin, and top-label/classwise/cumulative ECE definitions explicit.
+- The fit-free Phase 2B runner adds normalized RPS/cumulative Brier, classwise and cumulative reliability diagrams, and descriptive pooled-OOF calibration intercept/slope without fitting a performance model or probability calibrator. It retains the adverse sigmoid top-label ECE point change and forbids method selection or an all-metrics-improved claim.
+- Phase 2B focused validation passed 16 tests; complete repository regression passed 898 tests, 2 skips, and 11 subtests. Clean implementation checkpoint/push and exact-commit diagnostic execution are next; the manuscript remains untouched.
 
 Date: 2026-07-16
 
