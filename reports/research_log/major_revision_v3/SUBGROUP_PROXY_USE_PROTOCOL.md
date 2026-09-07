@@ -2,7 +2,7 @@
 
 Date: 2026-09-04
 
-Status: frozen design implemented; exact clean-commit execution and independent validation pending
+Status: frozen design, exact clean-commit execution, and independent validation complete; governed compact publication pending
 
 ## Scope and source evidence
 
@@ -40,3 +40,11 @@ Permutation repetitions describe perturbation variability, not independent sampl
 The permitted conclusion is narrow: subgroup performance and model dependence vary descriptively under the prespecified OOF, support, feature-policy, and perturbation contracts. The package cannot certify fairness, prove absence or presence of discrimination, infer department use merely from reconstructability, label P3-minus-JobRole as P5, infer causal feature effects, or support autonomous employment decisions.
 
 The complete local package will retain employee-level paired and permutation rows for reproducibility. The later governed compact package will exclude those rows and publish only support-aware aggregate grids, gap intervals, department summaries, perturbation summaries, reconstruction aggregates, and provenance receipts.
+
+## Implementation validation
+
+Clean-commit run `phase2c_v3_20260907T070905Z_e314bb5` executed from pushed commit `e314bb5d1935da6a23e26b2085330dacb468fe32` and atomically produced the exact 12-file local package. It contains 2,025 subgroup metric rows, 486 gap-sensitivity rows, 162 P3 bootstrap interval rows, 1,200 paired policy-change rows, seven overall/department summaries, 48,000 perturbation rows, 40 repetition summaries, two scheme summaries, and the preserved six/three reconstruction rows. The 5,000 stratified draws all remained complete for the simultaneous family; their index hash is `d16aadb56f2dde124df62387447bb01ddf51236f7f9e9e01b6218e8f6265f646`. Runtime receipts record zero new model fits, network calls, or paid API calls.
+
+An independent validator that imports no Phase 2C runner calculation rebound the generation Git blobs, all 22 source files, output hashes, offline receipt, canonical dataset, exact OOF alignment, persisted model set, and P3 feature order. It independently recalculated every group/support/metric/gap row, replayed the complete bootstrap family, reconstructed every paired probability/margin/prediction-change row, reran all 40 deterministic outer-fold perturbations, recomputed their aggregates, and verified byte-equivalence of the preserved reconstruction evidence. Validation passed for all 12 files and scientific-input SHA-256 `2a42827646702378fb92cf0e0b940fa2739334cc6b62fa1f2ff4f9af66787f1e`.
+
+The exact P3-minus-JobRole versus P3 comparison has overall mean total variation 0.0906, a 10.75% prediction-change rate, and macro-F1 change −0.0330. Marginal JobRole permutations average total variation 0.1024, prediction-change rate 0.1305, and macro-F1 change −0.0432; department-conditional values are 0.0529, 0.0739, and −0.0034. These differences support only the bounded model-dependence interpretation above. Some department-specific policy differences improve while others worsen, and the simultaneous subgroup intervals are wide; no single maximum gap, fairness, discrimination, or causal claim is authorized.

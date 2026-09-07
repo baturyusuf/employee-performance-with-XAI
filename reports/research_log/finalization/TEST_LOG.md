@@ -757,3 +757,13 @@ Push/recovery gate: the normal push timed out after 184 seconds with no remote r
 - Combined new plus legacy subgroup/proxy regression: 53 passed in 77.17 seconds. Compileall over `src` and `tests` and `git diff --check` exited 0.
 - Complete pytest: exit 0; 918 passed, 2 skipped, and 11 subtests passed in 424.74 seconds.
 - Unittest discovery: exit 0; 179 tests passed, 1 skipped in 9.829 seconds.
+
+## Major-revision v3 subgroup/proxy-use result validation — 2026-09-07
+
+- Clean implementation checkpoint gate: exit 0; commit `e314bb5d1935da6a23e26b2085330dacb468fe32`; 1,960 tracked files; 57 README links; zero raw/environment/large/secret/machine-path findings; local/origin divergence 0/0.
+- Complete exact run: exit 0; 12 files/8,428,003 bytes; 2,025/486/162/1,200/7/48,000/40/2/6/3 scientific table rows; zero new fits/network/paid-API calls.
+- Independent run validator CLI: exit 0; exact closed-world hashes, 22 sources, three generation blobs, offline receipt, group/support/metric/gap recomputation, all 5,000 bootstrap repetitions, paired prediction changes, all 40 exact-model perturbations, aggregate summaries, and reconstruction source equivalence passed.
+- Initial run-validator/compact-export focus: four run-validator tests passed; three temporary compact-export tests failed only because the aggregate `mean_delta_prob_class_*` columns matched an over-broad row-level probability token. One tracked-package test skipped as expected; no tracked package was created.
+- Corrected compact-export focus: 3 passed, 1 expected absent-package skip in 60.78 seconds. Two temporary exports were byte-identical; employee-level exclusions and deliberate README tamper rejection passed.
+- Complete pytest after validator/export integration: exit 0; 925 passed, 3 skipped, and 11 subtests passed in 460.90 seconds.
+- Unittest discovery: exit 0; 179 tests passed, 1 skipped in 7.808 seconds. Compileall and `git diff --check` exited 0.
