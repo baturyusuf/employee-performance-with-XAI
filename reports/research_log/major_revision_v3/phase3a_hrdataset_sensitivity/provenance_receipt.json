@@ -1,0 +1,208 @@
+{
+  "contract_sha256": "9a94052e8fc96ff0894c89cfe99eca898e1e0da5ed697c7fabac99e4fb22799b",
+  "derived_source_files": [
+    "selected_hyperparameters.csv"
+  ],
+  "directly_included_source_files": [
+    "baseline_comparisons.csv",
+    "canonical_v2_confusion_matrix.csv",
+    "canonical_v2_per_class_metrics.csv",
+    "confusion_matrices.csv",
+    "cv_design_sensitivity.csv",
+    "per_class_metrics.csv",
+    "protocol_comparison.csv",
+    "repetition_metrics.csv",
+    "target_mapping_support.csv",
+    "variability_summary.csv"
+  ],
+  "excluded_source_files": [
+    "calibration_training_oof.csv",
+    "calibrator_parameters.csv",
+    "candidate_search_results.csv",
+    "fold_contracts.json",
+    "fold_metrics.csv",
+    "oof_predictions.csv",
+    "selected_hyperparameters.csv",
+    "stage_metadata.json"
+  ],
+  "independent_run_validation": {
+    "calibration_training_oof_row_count": 12440,
+    "calibrator_parameter_row_count": 175,
+    "candidate_search_row_count": 400,
+    "confusion_matrix_row_count": 625,
+    "contract_sha256": "9a94052e8fc96ff0894c89cfe99eca898e1e0da5ed697c7fabac99e4fb22799b",
+    "cross_formulation_metric_difference_computed": false,
+    "distinct_outer_assignment_count": 10,
+    "file_count": 18,
+    "fold_metric_row_count": 250,
+    "formulations": 2,
+    "generation_commit": "f6e6a0af7f36d7d69f028df07b6c0842c25ebc56",
+    "generation_implementation_blobs_verified": 7,
+    "generation_local_hash_bound_sources_verified": 7,
+    "generation_tracked_source_blobs_verified": 5,
+    "locked_model_transport": false,
+    "maximum_sigmoid_probability_replay_error": 0.0,
+    "network_calls": 0,
+    "oof_prediction_row_count": 15550,
+    "paid_api_calls": 0,
+    "per_class_metric_row_count": 175,
+    "repetition_metric_row_count": 500,
+    "repetitions_per_formulation": 5,
+    "run_id": "phase3a_v3_20260907T141213Z_f6e6a0a",
+    "scientific_input_sha256": "76518cc8387a1f632b388e2e37f906879dcd73f32c6bc6a13443f15449e896bb",
+    "source_tree_receipt_internally_consistent": true,
+    "status": "passed",
+    "summary_priority_metric_means": {
+      "primary_three_class": {
+        "xgboost_raw": {
+          "ece_confidence": 0.07212657463332602,
+          "macro_f1": 0.6530863072598907,
+          "multiclass_brier": 0.3033441436424763,
+          "nll_log_loss": 0.5592768888480449,
+          "ordinal_mae": 0.19163987138263666,
+          "quadratic_weighted_kappa": 0.5339468057464363,
+          "ranked_probability_score": 0.07589268279822428
+        },
+        "xgboost_sigmoid": {
+          "ece_confidence": 0.05217107351668321,
+          "macro_f1": 0.627382962179569,
+          "multiclass_brier": 0.2323918031515893,
+          "nll_log_loss": 0.42158033685439955,
+          "ordinal_mae": 0.12797427652733118,
+          "quadratic_weighted_kappa": 0.6043709651015794,
+          "ranked_probability_score": 0.05888508440256625
+        }
+      },
+      "raw_order_four_class": {
+        "xgboost_raw": {
+          "ece_confidence": 0.09951954384281572,
+          "macro_f1": 0.5846691663028805,
+          "multiclass_brier": 0.36176920277801283,
+          "nll_log_loss": 0.664592347535508,
+          "ordinal_mae": 0.2360128617363344,
+          "quadratic_weighted_kappa": 0.628778996733584,
+          "ranked_probability_score": 0.06039364485469404
+        },
+        "xgboost_sigmoid": {
+          "ece_confidence": 0.03858801017047898,
+          "macro_f1": 0.5480971145687759,
+          "multiclass_brier": 0.27712072530295223,
+          "nll_log_loss": 0.5200755718527788,
+          "ordinal_mae": 0.1639871382636656,
+          "quadratic_weighted_kappa": 0.6621061914750201,
+          "ranked_probability_score": 0.04884414771378874
+        }
+      }
+    }
+  },
+  "package_kind": "phase3a_hrdataset_sensitivity_compact_evidence",
+  "publication_controls": {
+    "calibration_training_oof_included": false,
+    "calibrator_parameters_included": false,
+    "candidate_search_or_fold_selections_included": false,
+    "cross_formulation_metric_difference_computed": false,
+    "cv_design_robustness_claim_allowed_without_qualification": false,
+    "deployment_claim_allowed": false,
+    "employee_level_oof_included": false,
+    "external_validation_claim_allowed": false,
+    "fairness_certification_allowed": false,
+    "fitted_models_or_calibrators_included": false,
+    "fold_assignments_or_fold_metrics_included": false,
+    "locked_model_transport_claim_allowed": false,
+    "raw_data_included": false,
+    "target_equivalence_claim_allowed": false
+  },
+  "row_counts": {
+    "baseline_comparisons.csv": 210,
+    "canonical_v2_confusion_matrix.csv": 18,
+    "canonical_v2_per_class_metrics.csv": 6,
+    "confusion_matrices.csv": 625,
+    "cv_design_sensitivity.csv": 14,
+    "per_class_metrics.csv": 175,
+    "protocol_comparison.csv": 8,
+    "repetition_metrics.csv": 500,
+    "selected_candidate_frequency.csv": 16,
+    "target_mapping_support.csv": 10,
+    "variability_summary.csv": 100
+  },
+  "schema_version": 1,
+  "scientific_input_sha256": "76518cc8387a1f632b388e2e37f906879dcd73f32c6bc6a13443f15449e896bb",
+  "source_created_at_utc": "2026-09-07T14:17:02.902128+00:00",
+  "source_files": {
+    "baseline_comparisons.csv": {
+      "sha256": "6bb9067a6b47ecfd7fe80c75316ee8e8e17bba2a2a91c6514ca3e0f8444e8c76",
+      "size_bytes": 41355
+    },
+    "calibration_training_oof.csv": {
+      "sha256": "00812578d9c4d5f1af69cbd87d622eef0713da37a5136443df7aacf36ce03d8d",
+      "size_bytes": 5507342
+    },
+    "calibrator_parameters.csv": {
+      "sha256": "388c24d4b840322ecc3856e6fa448964a72be8ad22f638ccea9b3d1e358ec669",
+      "size_bytes": 123761
+    },
+    "candidate_search_results.csv": {
+      "sha256": "16974491f5e66e5201dabc176a684971ba4657d7ae922948e6d2665cdc2b05cf",
+      "size_bytes": 265846
+    },
+    "canonical_v2_confusion_matrix.csv": {
+      "sha256": "4354da22bc10c0930387568ecebddd7fbe19f1cba5864ee473bb13c1a9e1b6af",
+      "size_bytes": 2736
+    },
+    "canonical_v2_per_class_metrics.csv": {
+      "sha256": "40c1db75efda71527c6d62d1886c83ea6cd25e2ad58fc869f510097f5ca95a1e",
+      "size_bytes": 1252
+    },
+    "confusion_matrices.csv": {
+      "sha256": "f52c4e69574521d7fd16327611bd3bbb6c13d170c7aae51d319aad8885db07f5",
+      "size_bytes": 143465
+    },
+    "cv_design_sensitivity.csv": {
+      "sha256": "366b4834b25e3535c45ae2a2d1b7b1944cbdfe1ead5c3c086bccfe1d670ac1d9",
+      "size_bytes": 3483
+    },
+    "fold_contracts.json": {
+      "sha256": "d04b6364cdf54498ded0fd630aa31a51b22508b8adbeeab11cb5f548e0e47e86",
+      "size_bytes": 645718
+    },
+    "fold_metrics.csv": {
+      "sha256": "76fa83d9dca9c84bc716d93dcd7a7948d2e12b6d1dfc61ee7f93d077fb7d5f50",
+      "size_bytes": 162211
+    },
+    "oof_predictions.csv": {
+      "sha256": "f92561d8144c0298aca4a2bf66eb5ddcd9502cfa0173ec90e00be90a987b8d89",
+      "size_bytes": 6570551
+    },
+    "per_class_metrics.csv": {
+      "sha256": "b678f75db95b908274bee843c35614123ea31e1c84777f90cc43da6f84476adc",
+      "size_bytes": 46446
+    },
+    "protocol_comparison.csv": {
+      "sha256": "694fd7c8d30f4f61904cf0326d294f3e8ca2acedac8bb3160096739c843f5e4c",
+      "size_bytes": 1533
+    },
+    "repetition_metrics.csv": {
+      "sha256": "12909f7a77cd3650369c4de7f0a64ec69925f4c82e0d004ab98c1c2ef9e5583b",
+      "size_bytes": 128587
+    },
+    "selected_hyperparameters.csv": {
+      "sha256": "363c0ef2a7eabb5e8e156f9b511416a39159b0da4137bcb3446221ac5b54ebf6",
+      "size_bytes": 34910
+    },
+    "stage_metadata.json": {
+      "sha256": "489a88a73f896fc828d883aadfa2eba5d887080f49abcc12e90d6a894ef985bd",
+      "size_bytes": 6889
+    },
+    "target_mapping_support.csv": {
+      "sha256": "b526cc7b10daab24f490d2580604d65b178c29ce117b9f2c69277c16bddc00f0",
+      "size_bytes": 2551
+    },
+    "variability_summary.csv": {
+      "sha256": "1725d5161c414f21fe353fe01cf685cffc59ef5dde1b5253e0bf494b47659cd2",
+      "size_bytes": 21012
+    }
+  },
+  "source_generation_commit": "f6e6a0af7f36d7d69f028df07b6c0842c25ebc56",
+  "source_run": "reports/major_revision_v3_runs/phase3a_v3_20260907T141213Z_f6e6a0a/hrdataset_sensitivity",
+  "source_run_id": "phase3a_v3_20260907T141213Z_f6e6a0a"
+}

@@ -1,0 +1,73 @@
+{
+  "file_count_excluding_manifest": 13,
+  "files": [
+    {
+      "path": "baseline_comparisons.csv",
+      "sha256": "6bb9067a6b47ecfd7fe80c75316ee8e8e17bba2a2a91c6514ca3e0f8444e8c76",
+      "size_bytes": 41355
+    },
+    {
+      "path": "canonical_v2_confusion_matrix.csv",
+      "sha256": "4354da22bc10c0930387568ecebddd7fbe19f1cba5864ee473bb13c1a9e1b6af",
+      "size_bytes": 2736
+    },
+    {
+      "path": "canonical_v2_per_class_metrics.csv",
+      "sha256": "40c1db75efda71527c6d62d1886c83ea6cd25e2ad58fc869f510097f5ca95a1e",
+      "size_bytes": 1252
+    },
+    {
+      "path": "confusion_matrices.csv",
+      "sha256": "f52c4e69574521d7fd16327611bd3bbb6c13d170c7aae51d319aad8885db07f5",
+      "size_bytes": 143465
+    },
+    {
+      "path": "cv_design_sensitivity.csv",
+      "sha256": "366b4834b25e3535c45ae2a2d1b7b1944cbdfe1ead5c3c086bccfe1d670ac1d9",
+      "size_bytes": 3483
+    },
+    {
+      "path": "per_class_metrics.csv",
+      "sha256": "b678f75db95b908274bee843c35614123ea31e1c84777f90cc43da6f84476adc",
+      "size_bytes": 46446
+    },
+    {
+      "path": "protocol_comparison.csv",
+      "sha256": "694fd7c8d30f4f61904cf0326d294f3e8ca2acedac8bb3160096739c843f5e4c",
+      "size_bytes": 1533
+    },
+    {
+      "path": "provenance_receipt.json",
+      "sha256": "985b68edb3ff9f1b68407ead3c98a5337fcc0daaea6852064aab7ec00dea301e",
+      "size_bytes": 8124
+    },
+    {
+      "path": "README.md",
+      "sha256": "0ed65fed2414c386c53ee3f938c24b7f505bc4254adce6953ed727691b6afb83",
+      "size_bytes": 4432
+    },
+    {
+      "path": "repetition_metrics.csv",
+      "sha256": "12909f7a77cd3650369c4de7f0a64ec69925f4c82e0d004ab98c1c2ef9e5583b",
+      "size_bytes": 128587
+    },
+    {
+      "path": "selected_candidate_frequency.csv",
+      "sha256": "e319c7755ea975c847b4cc131bf3a0bdd049ac889788bcc905666aea27da21cb",
+      "size_bytes": 2663
+    },
+    {
+      "path": "target_mapping_support.csv",
+      "sha256": "b526cc7b10daab24f490d2580604d65b178c29ce117b9f2c69277c16bddc00f0",
+      "size_bytes": 2551
+    },
+    {
+      "path": "variability_summary.csv",
+      "sha256": "1725d5161c414f21fe353fe01cf685cffc59ef5dde1b5253e0bf494b47659cd2",
+      "size_bytes": 21012
+    }
+  ],
+  "package_kind": "phase3a_hrdataset_sensitivity_compact_evidence",
+  "schema_version": 1,
+  "source_run_id": "phase3a_v3_20260907T141213Z_f6e6a0a"
+}

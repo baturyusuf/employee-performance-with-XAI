@@ -1,0 +1,9 @@
+component,INX,HRDataset_v14,same_implementation,same_semantics,notes
+folds,canonical 10x5 plus v3 repeated 5x5,canonical 10x5 plus v3 repeated 5x5,same strategy; dataset-specific assignments,partial,not a common sample population
+tuning,nested candidate selection for benchmark systems,nested eight-candidate XGBoost selection,same XGBoost selection implementation,partial,different dataset and fitted parameters
+calibration,predeclared cross-fitted one-vs-rest sigmoid,predeclared cross-fitted one-vs-rest sigmoid,same algorithm,partial,probability quality is dataset conditional
+SHAP,exact-fold OOF XGBoost raw-margin SHAP,canonical-v2 exact-fold OOF XGBoost raw-margin SHAP,same attribution implementation,partial,different feature families and no causal meaning
+subgroup,support-aware descriptive diagnostics,support-aware descriptive diagnostics,same diagnostic framing,False,different attributes/support; no fairness certification
+proxy,department reconstructability and proxy-use sensitivity,department reconstructability in canonical v2,partially shared diagnostic design,False,reconstructability is not performance-model use
+target,native INX organisational rating 2/3/4,dataset-specific mapped PerformanceScore; 3-class primary plus raw-order 4-class sensitivity,different mapping implementation,False,semantics and prevalence are not equivalent
+features,20-feature P3 primary policy,seven-feature conservative-primary policy,same training-only preprocessing,False,feature spaces and availability semantics differ
