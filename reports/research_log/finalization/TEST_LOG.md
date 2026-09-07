@@ -823,3 +823,14 @@ Push/recovery gate: the normal push timed out after 184 seconds with no remote r
 - Complete post-publication pytest: exit 0; 969 passed, 2 skipped, and 11 subtests passed in 562.52 seconds.
 - Final unittest discovery: exit 0; 179 tests passed, one skipped in 7.609 seconds. Final package/CI focus passed nine tests in 2.10 seconds.
 - Staged compact-package audit: exit 0; all 12 manifest records matched Git-index and working-tree SHA-256/byte sizes; 13 package files and 22 total checkpoint paths were staged; zero local-run, raw-data, model, environment, row-level, or manuscript-source paths were included. Package attribute returned `text: unset`.
+
+## Major-revision v3 literature/novelty validation/publication — 2026-09-07
+
+- Contract-only validation: exit 0; 25 studies, four exact-INX records, one exact-HRDataset_v14 record, 16 registered DOIs, eight no-assigned-DOI records, one publisher-asserted unresolved DOI, six excluded candidates, and zero paid API calls.
+- Initial focused regression: six tests passed and two export tests failed because the protocol generator said the DOI “returned no Crossref work” while the boundary validator required the canonical phrase “did not resolve in Crossref.” The text was aligned without changing the evidence judgment; corrected focus passed eight tests in 0.97 seconds.
+- Implementation checkpoint `e408208bbd7fb3071c47717f21ef521b1917e93a` pushed normally with local/origin divergence 0/0.
+- Clean-commit export and explicit validation: exit 0; nine files/58,534 bytes, 25 evidence/positioning rows, six exclusion rows, generation commit `e408208...`, contract SHA-256 `ed9fdf7252b7d826e486fa68fe1f8b1359a16481df356090ae85bda485e7d9de`, and manifest SHA-256 `e7b8fdd654c228344d13ec37c8817414b977a5173e5ca3721cbd2641b61c1730`.
+- Literature/package plus CI-workflow focus: 12 passed in 0.50 seconds. Package documentation boundaries, exact contract-derived rows, deterministic temporary export, rehashed-content tamper rejection, and workflow contract passed.
+- Complete pre-publication pytest: exit 0; 977 passed, 2 skipped, and 11 subtests passed in 563.70 seconds.
+- Final unittest discovery: exit 0; 179 tests passed, one skipped in 7.771 seconds. Compileall over `src`, `tests`, and `tools`, `git diff --check`, and manuscript/reference no-change checks exited 0. Package manifest attribute returned `text: unset`.
+- Staged publication audit: exit 0; all eight manifest records matched working-tree SHA-256/size and Git-index bytes exactly; nine package files and 18 total checkpoint paths were staged; zero raw/run/model/spreadsheet/manuscript-source paths were included and no unstaged change remained.

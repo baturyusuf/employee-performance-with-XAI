@@ -1,0 +1,108 @@
+{
+  "contract_path": "configs/literature_positioning_v3.json",
+  "contract_sha256": "ed9fdf7252b7d826e486fa68fe1f8b1359a16481df356090ae85bda485e7d9de",
+  "contract_validation": {
+    "contract_path": "configs/literature_positioning_v3.json",
+    "contract_sha256": "ed9fdf7252b7d826e486fa68fe1f8b1359a16481df356090ae85bda485e7d9de",
+    "exact_hrdataset_v14_study_count": 1,
+    "exact_inx_study_count": 4,
+    "excluded_candidate_count": 6,
+    "flag_counts": {
+      "artifact_provenance": {
+        "no": 17,
+        "not_applicable": 4,
+        "partial": 4
+      },
+      "calibration": {
+        "no": 9,
+        "not_applicable": 12,
+        "partial": 2,
+        "yes": 2
+      },
+      "employee_performance": {
+        "no": 13,
+        "partial": 5,
+        "yes": 7
+      },
+      "exact_fold_explanations": {
+        "not_applicable": 24,
+        "not_reported": 1
+      },
+      "leakage_policy": {
+        "no": 6,
+        "not_applicable": 10,
+        "not_reported": 3,
+        "partial": 4,
+        "yes": 2
+      },
+      "nested_cv": {
+        "no": 7,
+        "not_applicable": 13,
+        "not_reported": 2,
+        "partial": 2,
+        "yes": 1
+      },
+      "proxy_reconstruction": {
+        "no": 9,
+        "not_applicable": 14,
+        "partial": 2
+      },
+      "same_or_similar_dataset": {
+        "no": 16,
+        "partial": 4,
+        "yes": 5
+      },
+      "second_dataset": {
+        "no": 7,
+        "not_applicable": 6,
+        "not_reported": 1,
+        "yes": 11
+      },
+      "shap_stability": {
+        "no": 4,
+        "not_applicable": 19,
+        "partial": 1,
+        "yes": 1
+      },
+      "subgroup_analysis": {
+        "no": 5,
+        "not_applicable": 14,
+        "not_reported": 4,
+        "partial": 2
+      }
+    },
+    "no_assigned_doi_count": 8,
+    "paid_api_calls": 0,
+    "publisher_asserted_unresolved_doi_count": 1,
+    "registered_doi_count": 16,
+    "retrieval_date": "2026-09-07",
+    "role_counts": {
+      "evaluation_calibration": 5,
+      "hr_governance": 4,
+      "provenance_reproducibility": 2,
+      "same_dataset_empirical": 5,
+      "similar_hr_empirical": 4,
+      "xai_validity": 5
+    },
+    "schema_version": 1,
+    "status": "passed",
+    "study_count": 25
+  },
+  "generation_commit": "e408208bbd7fb3071c47717f21ef521b1917e93a",
+  "package_kind": "phase4a_source_verified_literature_and_novelty",
+  "publication_controls": {
+    "exhaustive_systematic_review_claimed": false,
+    "fairness_or_causal_validity_established": false,
+    "full_text_source_copies_included": false,
+    "manuscript_bibliography_modified": false,
+    "manuscript_sources_modified": false,
+    "network_calls_during_package_generation": 0,
+    "paid_api_calls": 0,
+    "raw_source_extracts_included": false,
+    "source_licence_or_authenticity_established": false,
+    "unresolved_doi_presented_as_registered": false,
+    "world_first_claimed": false
+  },
+  "retrieval_date": "2026-09-07",
+  "schema_version": 1
+}

@@ -247,3 +247,11 @@ V2-033 atomic-publication consequence on 2026-07-14: transient Windows antivirus
 - Publish only the 13-file aggregate package under `reports/research_log/major_revision_v3/phase3b_data_quality/`: ten byte-copied CSVs, `DATA_QUALITY_REPORT.md`, provenance, and manifest. Exclude stage metadata, raw data, row-level values/identifiers, models, and supplementary datasets.
 - Retain all 52 rule rows, including zero-result rules, every missingness count, complete raw/cleaned schemas, target distributions, and identifier exclusions. No detected anomaly may be suppressed or converted into an undocumented correction.
 - Use the Phase 3B table only after the v3 claim matrix is frozen and approved. Do not edit the Markdown or LaTeX manuscript during this publication step.
+
+## Major-revision v3 literature/novelty decision — 2026-09-07
+
+- Freeze a bounded positioning set of 25 works: five same-dataset empirical studies, four similar-HR empirical studies, four HR-governance sources, five XAI-validity sources, five evaluation/leakage/calibration sources, and two provenance/reproducibility sources. Retain six close exclusions and their reasons rather than implying exhaustive coverage.
+- Treat DOI identity as registered only when the exact work resolves through Crossref. Retain the 2019 IJCSE article because its publisher record is direct exact-INX prior art, but mark its printed DOI as publisher-asserted and unresolved; downstream citation work must use the publisher URL and preserve this caveat unless independently resolved.
+- Distinguish `not_reported` from `no`, exact from similar datasets, log-loss reporting from explicit calibration assessment, ordinary CV from nested selection, SHAP use from exact-fold explanation identity/stability, and public code/data links from full artifact provenance.
+- Permit only the bounded novelty statement that no work in this source-verified 25-work set reports the complete shared evidence contract used here. Prohibit exhaustive-review, universal novelty, world-first, first-ever, leakage-free, bias-free, fairness-certified, causal, and deployment-ready claims.
+- Publish the deterministic nine-file package under `reports/research_log/major_revision_v3/phase4a_literature/`. Do not edit `references.bib` or the manuscript until the final v3 claim matrix is frozen and approved.

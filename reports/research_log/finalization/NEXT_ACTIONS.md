@@ -17,9 +17,10 @@ The broader reviewer brief is now the active extension. Preserve the complete v2
 11. Completed: clean-commit Phase 2B run `phase2b_v3_20260904T120838Z_21d1aec`, independent full recomputation, pushed validator/export checkpoint (`25953b4`), governed 13-file compact package, 24 focused tests, 906-test full regression, and exact staged-byte audit. Keep the complete local run ignored.
 12. Completed: Phase 2C implementation checkpoint `e314bb5` and validator/export checkpoint `33fe6b8` are pushed; exact run `phase2c_v3_20260907T070905Z_e314bb5`, independent full recomputation, and the governed 12-file aggregate package passed. Keep both employee-level local source tables ignored.
 13. Completed and pushed: Phase 3A exact run `phase3a_v3_20260907T141213Z_f6e6a0a`, independent full recomputation, and governed 14-file/409,991-byte compact non-row-level package (`858ee0e564703e2bcee2c4b78ebbf69ee3d4c702`).
-14. Completed pending final publication checkpoint push: Phase 3B exact run `phase3b_v3_20260907T154418Z_0d9643b`, independent reconstruction of every output table, and governed 13-file/53,868-byte aggregate-only package with `DATA_QUALITY_REPORT.md`. Preserve all HR findings and keep source rows unchanged.
-15. Next: perform Phase 4A source-verified literature/novelty work, then Phase 4B provenance/ethics/release preparation. Do not invent licence, ethics, DOI, or source-authority facts.
-16. Freeze and request approval for the final v3 claim matrix before editing `manuscript/mdpi_information/main.md` or `main.tex`.
+14. Completed and pushed: Phase 3B exact run `phase3b_v3_20260907T154418Z_0d9643b`, independent reconstruction of every output table, and governed 13-file/53,868-byte aggregate-only package with `DATA_QUALITY_REPORT.md` (`86bc66e`). Preserve all HR findings and keep source rows unchanged.
+15. Completed and pushed: Phase 4A 25-work source-verified contract and deterministic nine-file/58,534-byte literature/novelty package. Preserve the bounded positioning claim, all six exclusions, and the unresolved-DOI caveat; do not silently convert `not_reported` to `no`.
+16. Next: perform Phase 4B provenance/ethics/release preparation. Do not invent licence, ethics, DOI, release, or source-authority facts, and do not publish a release without explicit authorization.
+17. Freeze and request approval for the final v3 claim matrix before editing `manuscript/mdpi_information/main.md` or `main.tex`.
 
 Current planning evidence: `../major_revision_v3/REQUIREMENT_COVERAGE_AUDIT.md`.
 

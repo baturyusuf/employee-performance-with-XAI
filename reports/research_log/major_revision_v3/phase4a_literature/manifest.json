@@ -1,0 +1,49 @@
+{
+  "contract_sha256": "ed9fdf7252b7d826e486fa68fe1f8b1359a16481df356090ae85bda485e7d9de",
+  "file_count_excluding_manifest": 8,
+  "files": [
+    {
+      "path": "excluded_candidates.csv",
+      "sha256": "07bc1674a7d79789f3ce05f8f43b483ef2e6de1876a5da0c8c823e38863ee5db",
+      "size_bytes": 1902
+    },
+    {
+      "path": "literature_evidence_log.csv",
+      "sha256": "57d82688a4d4f06d54ab20660cd2f30b31ce02906f3eef67570f1ea0dedc673e",
+      "size_bytes": 23307
+    },
+    {
+      "path": "LITERATURE_SEARCH_PROTOCOL.md",
+      "sha256": "d5fe2e03842cc17d9e9cbec798dd63c6173576aa0e053d5696e9aa32116756da",
+      "size_bytes": 4970
+    },
+    {
+      "path": "NOVELTY_POSITIONING.md",
+      "sha256": "b32962d51746d31eba5122e6f4eb3e5c119a02558f0632f2a845f7d7dd435299",
+      "size_bytes": 3564
+    },
+    {
+      "path": "positioning_table.csv",
+      "sha256": "4500f7811bfc54d52f002b60c5644098bdd2b1891c76b3cd36ede21dab47afcc",
+      "size_bytes": 5915
+    },
+    {
+      "path": "provenance_receipt.json",
+      "sha256": "0269c07d4f85f70cd0fb8b54d71fe0153cea83aba93e1a6b59f7d07a12d20273",
+      "size_bytes": 2973
+    },
+    {
+      "path": "README.md",
+      "sha256": "a20374684df4581e434173a4497822e587c4b36e2b6cbcd14465fd7cc1a3f7ad",
+      "size_bytes": 1411
+    },
+    {
+      "path": "VERIFIED_BIBLIOGRAPHY.md",
+      "sha256": "f1f3eab8e724f7d515f438f8ec67ac13ecc062f848b8e3625db46bfafe645031",
+      "size_bytes": 12887
+    }
+  ],
+  "generation_commit": "e408208bbd7fb3071c47717f21ef521b1917e93a",
+  "package_kind": "phase4a_source_verified_literature_and_novelty",
+  "schema_version": 1
+}
