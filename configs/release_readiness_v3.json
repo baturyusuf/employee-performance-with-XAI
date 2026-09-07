@@ -1,0 +1,450 @@
+{
+  "schema_version": 1,
+  "phase": "4B",
+  "snapshot_date": "2026-09-07",
+  "scope": "Source provenance, dataset licensing, ethics/declaration handoff, and immutable-release preparation without publishing a release.",
+  "controls": {
+    "paid_api_calls": 0,
+    "public_release_authorized": false,
+    "tag_creation_authorized": false,
+    "doi_minting_authorized": false,
+    "history_rewrite_authorized": false,
+    "raw_dataset_publication_authorized": false,
+    "manuscript_editing_authorized": false,
+    "network_required_for_package_generation": false,
+    "source_authority_rule": "A public mirror or repository license does not establish upstream authorship or license rights. Byte identity, source authenticity, license terms, redistribution permission, and citation authority are recorded separately.",
+    "unknown_rule": "Unknown or unresolved legal, ethics, authorship, and release fields remain explicit and are never inferred from hashes, public visibility, or repository metadata."
+  },
+  "repository_snapshot": {
+    "snapshot_commit": "45fe0016f629f7ba9a9874e049d3a14dcc2e4360",
+    "active_branch": "finalization/leakage-aware-v2",
+    "remote_url": "https://github.com/baturyusuf/employee-performance-with-XAI",
+    "visibility": "public",
+    "default_branch": "main",
+    "repository_license_status": "not_present",
+    "github_release_count": 0,
+    "remote_tag_count": 0,
+    "local_only_historical_tag": "v0.3-real-llm-governance-evidence",
+    "local_only_historical_tag_commit": "a47dcdfcf9caacd59629156c37ce60547d6f9f5e",
+    "current_tracked_raw_dataset_paths": [],
+    "historical_raw_dataset_paths": [
+      "data/external/employee_turnover/raw.csv",
+      "data/external/hrdataset_v14/raw.csv",
+      "data/external/ibm_hr_analytics/raw.csv",
+      "data/raw/INX_Future_Inc_Employee_Performance_CDS_Project2_Data_V1.8.xls",
+      "data/raw/inx_employee_performance.csv"
+    ],
+    "historical_publication_status": "unresolved_separate_authorization_required"
+  },
+  "datasets": [
+    {
+      "dataset_id": "inx_employee_performance",
+      "analytical_scope": "core_primary",
+      "rows": 1200,
+      "columns": 28,
+      "local_files": [
+        {
+          "role": "canonical_csv",
+          "path": "data/raw/inx_employee_performance.csv",
+          "sha256": "b8deac0a615b97076622ae540f4cfd0d3c3f1e7acb83ba3ff6560470a9ccf60a",
+          "git_blob_sha1": "99a612bfeef999d4348e98e15afb6663c5d2fe56",
+          "size_bytes": 152715
+        },
+        {
+          "role": "source_workbook",
+          "path": "data/raw/INX_Future_Inc_Employee_Performance_CDS_Project2_Data_V1.8.xls",
+          "sha256": "d7d224e7c8f50693e0aba7621e56a55a84b0c2c156ff95afd2b156daa5d0f003",
+          "git_blob_sha1": "e69ef57e206c4bbfcf2ea8efe7fcedc08d6ee7b9",
+          "size_bytes": 410624
+        }
+      ],
+      "primary_source": {
+        "authority": "IABAC",
+        "record_title": "Employee Performance Analysis: INX Future Inc., Project 10281",
+        "record_url": "https://iabac.org/exam/p2/CDS_Project_2_INX_Future_Emp_Data_V1.6.pdf",
+        "dataset_url": "https://data.iabac.org/exam/p2/data/INX_Future_Inc_Employee_Performance_CDS_Project2_Data_V1.8.xls",
+        "retrieved_on": "2026-09-07",
+        "record_http_status": 200,
+        "dataset_head_http_status": 200,
+        "dataset_head_content_length": 410624,
+        "dataset_head_last_modified": "Wed, 15 Nov 2017 05:34:04 GMT",
+        "evidence": "The official three-page project brief names the dataset URL and states that the scenario is not based on an actual organization. The live dataset endpoint reports the same byte length as the local workbook, but the upstream file was not automatically downloaded, so exact upstream-to-local byte identity is not established."
+      },
+      "mirror": null,
+      "source_authenticity_status": "partial_official_record_local_byte_chain_unverified",
+      "synthetic_status": "official_project_brief_states_not_actual_organization",
+      "license": {
+        "status": "restrictive_notice_verified_permission_scope_requires_review",
+        "identifier": "IABAC-all-rights-reserved",
+        "evidence_url": "https://iabac.org/exam/p2/CDS_Project_2_INX_Future_Emp_Data_V1.6.pdf",
+        "evidence": "The official project brief states all rights reserved and that reproduction of the material requires IABAC permission. Whether and how that notice applies to redistribution of the linked workbook requires author/legal confirmation."
+      },
+      "redistribution_status": "blocked_pending_written_permission",
+      "citation_status": "primary_project_record_verified_no_dataset_doi",
+      "citation_text": "IABAC. Employee Performance Analysis: INX Future Inc., Project 10281, document CDS_Project_2_INX_Future_Emp_Data_V1.6 (2017). https://iabac.org/exam/p2/CDS_Project_2_INX_Future_Emp_Data_V1.6.pdf (accessed 2026-09-07).",
+      "public_release_policy": "Exclude both raw files; publish hashes, schema, acquisition instructions, and aggregate evidence only.",
+      "unresolved": "Obtain written redistribution permission or an authoritative dataset-specific license and independently bind the local workbook bytes to the authorized source."
+    },
+    {
+      "dataset_id": "hrdataset_v14",
+      "analytical_scope": "core_replication",
+      "rows": 311,
+      "columns": 36,
+      "local_files": [
+        {
+          "role": "canonical_csv",
+          "path": "data/external/hrdataset_v14/raw.csv",
+          "sha256": "cb19996755c93c0a8d6527f59da4701c80aef65eff854906546dce286249813c",
+          "git_blob_sha1": "d562e61d716ee642fe2f312e578729416fda692d",
+          "size_bytes": 76857
+        }
+      ],
+      "primary_source": {
+        "authority": "Dataset authors' Kaggle record",
+        "record_title": "Human Resources Data Set, Version 14",
+        "record_url": "https://www.kaggle.com/datasets/rhuebner/human-resources-data-set",
+        "metadata_api_url": "https://www.kaggle.com/api/v1/datasets/view/rhuebner/human-resources-data-set",
+        "codebook_url": "https://rpubs.com/rhuebner/hrd_cb_v14",
+        "retrieved_on": "2026-09-07",
+        "metadata_api_http_status": 200,
+        "evidence": "The author record names Dr. Carla Patalano and Dr. Rich Huebner, identifies version 14, describes a fictitious company and author-created teaching data, and provides the license statement and codebook."
+      },
+      "mirror": {
+        "url": "https://github.com/pouyasattari/HR-Dataset-Analysis/blob/f4ca2e3f8a6dbb70918f377c2cdfda3d57a9fe6f/HRDataset_v14.csv",
+        "repository": "pouyasattari/HR-Dataset-Analysis",
+        "commit": "f4ca2e3f8a6dbb70918f377c2cdfda3d57a9fe6f",
+        "path": "HRDataset_v14.csv",
+        "remote_blob_sha1": "d562e61d716ee642fe2f312e578729416fda692d",
+        "exact_local_blob_match": true,
+        "repository_license": null,
+        "evidence": "The local file is byte-identical under Git blob hashing to this immutable mirror commit. The mirror has no repository license and does not prove the byte identity of the authors' Kaggle version."
+      },
+      "source_authenticity_status": "partial_author_record_and_exact_mirror_chain_no_author_file_hash",
+      "synthetic_status": "author_record_states_created_for_fictitious_company",
+      "license": {
+        "status": "author_record_verified_conditional",
+        "identifier": "CC-BY-NC-ND-4.0",
+        "evidence_url": "https://creativecommons.org/licenses/by-nc-nd/4.0/",
+        "evidence": "The authors' Kaggle description grants learning/teaching use and directs sharing under CC BY-NC-ND 4.0. The license permits sharing with attribution for noncommercial use but prohibits distribution of adapted material."
+      },
+      "redistribution_status": "blocked_pending_exact_author_file_binding_and_nc_nd_review",
+      "citation_status": "author_record_verified_no_dataset_doi",
+      "citation_text": "Huebner, R.; Patalano, C. Human Resources Data Set, Version 14. Kaggle. https://www.kaggle.com/datasets/rhuebner/human-resources-data-set (accessed 2026-09-07).",
+      "public_release_policy": "Exclude raw data until the exact authors' version is byte-bound and noncommercial/no-derivatives redistribution compliance is approved; publish hashes, acquisition instructions, schema, and aggregates only.",
+      "unresolved": "Bind the local bytes to an author-controlled v14 artifact and obtain author/legal confirmation that the intended archive and any transformations satisfy attribution, noncommercial, and no-derivatives conditions."
+    },
+    {
+      "dataset_id": "ibm_hr_analytics",
+      "analytical_scope": "supplementary_performance_and_attrition",
+      "rows": 1470,
+      "columns": 35,
+      "local_files": [
+        {
+          "role": "canonical_csv",
+          "path": "data/external/ibm_hr_analytics/raw.csv",
+          "sha256": "a5c31e38bd7fafc9bc333884eb181b06b41b8e5e488e8f7ccb27199fb3be7659",
+          "git_blob_sha1": "b8531237e39eccb4f3c87ee840c3dfbb6cdbce3b",
+          "size_bytes": 227977
+        }
+      ],
+      "primary_source": {
+        "authority": "Kaggle dataset record attributed to IBM data scientists",
+        "record_title": "IBM HR Analytics Employee Attrition & Performance",
+        "record_url": "https://www.kaggle.com/datasets/pavansubhasht/ibm-hr-analytics-attrition-dataset",
+        "metadata_api_url": "https://www.kaggle.com/api/v1/datasets/view/pavansubhasht/ibm-hr-analytics-attrition-dataset",
+        "retrieved_on": "2026-09-07",
+        "metadata_api_http_status": 200,
+        "evidence": "The Kaggle record describes the file as a fictional dataset created by IBM data scientists and labels the database/content license, but the record is maintained by a Kaggle uploader rather than an authenticated IBM archival record."
+      },
+      "mirror": {
+        "url": "https://github.com/nelson-wu/employee-attrition-ml/blob/a65b5f6413cfccf2f916599fcac50054717e9d2b/WA_Fn-UseC_-HR-Employee-Attrition.csv",
+        "repository": "nelson-wu/employee-attrition-ml",
+        "commit": "a65b5f6413cfccf2f916599fcac50054717e9d2b",
+        "path": "WA_Fn-UseC_-HR-Employee-Attrition.csv",
+        "remote_blob_sha1": "b8531237e39eccb4f3c87ee840c3dfbb6cdbce3b",
+        "exact_local_blob_match": true,
+        "repository_license": null,
+        "evidence": "The local file is byte-identical under Git blob hashing to this immutable mirror commit. The mirror has no repository license and does not independently establish IBM authorization."
+      },
+      "source_authenticity_status": "partial_kaggle_record_and_exact_mirror_chain_no_ibm_archive",
+      "synthetic_status": "kaggle_record_states_fictional_and_created_by_ibm_data_scientists",
+      "license": {
+        "status": "platform_record_verified_rights_chain_requires_review",
+        "identifier": "ODbL-1.0-and-DbCL-1.0",
+        "evidence_url": "https://opendatacommons.org/licenses/odbl/1-0/",
+        "evidence": "Kaggle metadata labels the database as Open Database and its contents as Database Contents. ODbL/DbCL attribution, notice, and share-alike obligations require review, and the uploader-to-IBM rights chain is not independently verified."
+      },
+      "redistribution_status": "blocked_pending_rights_chain_and_odbl_dbcl_compliance",
+      "citation_status": "platform_record_verified_no_dataset_doi",
+      "citation_text": "IBM HR Analytics Employee Attrition & Performance [fictional dataset]. Kaggle dataset record maintained by pavansubhash. https://www.kaggle.com/datasets/pavansubhasht/ibm-hr-analytics-attrition-dataset (accessed 2026-09-07).",
+      "public_release_policy": "Exclude raw data pending IBM/uploader rights-chain and ODbL/DbCL compliance review; publish hashes, acquisition instructions, schema, and aggregates only.",
+      "unresolved": "Locate an authoritative IBM archival source or obtain rights-chain confirmation and document the exact attribution/share-alike notices before any raw redistribution."
+    },
+    {
+      "dataset_id": "employee_turnover",
+      "analytical_scope": "supplementary_related_task",
+      "rows": 14999,
+      "columns": 10,
+      "local_files": [
+        {
+          "role": "canonical_csv",
+          "path": "data/external/employee_turnover/raw.csv",
+          "sha256": "2510e274a90547f34c7b0db5a4ab70282c2710eb54252f14921bf980b81a928c",
+          "git_blob_sha1": "569b02db54e0c0e8bcc46caef301cfab540b018c",
+          "size_bytes": 566778
+        }
+      ],
+      "primary_source": {
+        "authority": "Historical Kaggle locator; SAS documentation provides secondary provenance",
+        "record_title": "Human Resources Analytics / HR_comma_sep.csv",
+        "record_url": "https://www.kaggle.com/datasets/ludobenistant/hr-analytics",
+        "secondary_record_url": "https://documentation.sas.com/api/docsets/caspg3r/3.5/content/caspg3r.pdf?locale=en",
+        "retrieved_on": "2026-09-07",
+        "record_http_status": 404,
+        "metadata_api_http_status": 403,
+        "evidence": "The historical Kaggle locator is cited by SAS documentation, which describes HR_comma_sep.csv as simulated data. The original record is no longer publicly retrievable through the tested page/API, so its authorship and license cannot be verified."
+      },
+      "mirror": {
+        "url": "https://github.com/ucg8j/kaggle_HR/blob/6febc254afad7ccd556171cdbb82a61b24045c5e/HR_comma_sep.csv",
+        "repository": "ucg8j/kaggle_HR",
+        "commit": "6febc254afad7ccd556171cdbb82a61b24045c5e",
+        "path": "HR_comma_sep.csv",
+        "remote_blob_sha1": "569b02db54e0c0e8bcc46caef301cfab540b018c",
+        "exact_local_blob_match": true,
+        "repository_license": null,
+        "evidence": "The local file is byte-identical under Git blob hashing to this immutable mirror commit. The mirror has no repository license, and other mirrors assign conflicting licenses; none is accepted as upstream authority."
+      },
+      "source_authenticity_status": "unresolved_exact_mirror_only_original_record_unavailable",
+      "synthetic_status": "authoritative_secondary_sas_documentation_states_simulated",
+      "license": {
+        "status": "unverified",
+        "identifier": null,
+        "evidence_url": null,
+        "evidence": "No accessible authoritative license statement was verified. Licenses attached to third-party copies conflict and do not establish upstream rights."
+      },
+      "redistribution_status": "blocked_no_authoritative_license",
+      "citation_status": "unresolved_original_record_unavailable",
+      "citation_text": "Human Resources Analytics / HR_comma_sep.csv. Historical Kaggle locator: https://www.kaggle.com/datasets/ludobenistant/hr-analytics (unavailable when checked 2026-09-07); provenance corroborated only by SAS documentation.",
+      "public_release_policy": "Exclude raw data; publish hashes, the immutable mirror locator, schema, aggregate results, and the unresolved source/license warning only.",
+      "unresolved": "Identify the original author/owner, recover an authoritative license and citation record, and bind the local bytes to that record before any redistribution."
+    }
+  ],
+  "declarations": [
+    {
+      "field": "Author Contributions",
+      "status": "pending_author_input",
+      "required_input": "Approved CRediT roles for Muhammed Yusuf Batur and Mehmet Göktürk.",
+      "safe_interim": "Do not infer roles from repository commits or manuscript order."
+    },
+    {
+      "field": "Funding",
+      "status": "pending_author_input",
+      "required_input": "Funder name and grant number, or explicit author confirmation of no external funding.",
+      "safe_interim": "No funding statement is asserted."
+    },
+    {
+      "field": "Institutional Review Board Statement",
+      "status": "pending_institutional_determination",
+      "required_input": "Institution, review unit, reference/application number, date, and determination or institution-approved not-applicable wording.",
+      "safe_interim": "The analysis appears to use secondary synthetic/fictitious HR-like records, but source-chain gaps prevent an invented IRB exemption or not-applicable claim."
+    },
+    {
+      "field": "Informed Consent Statement",
+      "status": "pending_institutional_determination",
+      "required_input": "Institution-approved consent applicability wording tied to the verified data provenance and IRB determination.",
+      "safe_interim": "No consent waiver or not-applicable assertion is made."
+    },
+    {
+      "field": "Data Availability Statement",
+      "status": "draft_ready_with_limits",
+      "required_input": "Final author approval and any authorized acquisition links; raw redistribution remains excluded.",
+      "safe_interim": "Publish aggregate evidence, schemas, hashes, and acquisition instructions; direct readers to upstream records and do not distribute raw files."
+    },
+    {
+      "field": "Code Availability Statement",
+      "status": "draft_ready_with_limits",
+      "required_input": "Final immutable tag/commit, repository software-license decision, and DOI or archive URL if created.",
+      "safe_interim": "Cite the public repository and exact commit only; do not claim a release, DOI, or open-source license that does not exist."
+    },
+    {
+      "field": "Conflicts of Interest",
+      "status": "pending_author_input",
+      "required_input": "Conflict disclosures from every author, or explicit confirmation that none exist.",
+      "safe_interim": "No conflict statement is asserted."
+    },
+    {
+      "field": "Use of Generative AI and AI-Assisted Technologies",
+      "status": "pending_author_and_journal_policy_review",
+      "required_input": "Author-approved disclosure aligned with the target journal's current policy and the actual drafting/tool-use record.",
+      "safe_interim": "Do not reuse stale v1 language or imply that an AI tool assumes author responsibility."
+    }
+  ],
+  "artifact_inventory": [
+    {
+      "artifact_id": "canonical_v2_manuscript_assets",
+      "path": "manuscript/mdpi_information/assets",
+      "role": "historical_v2_compact_manuscript_support",
+      "evidence_identity": "canonical_v2_20260714T221501Z_483f96f",
+      "file_count": 109,
+      "size_bytes": 10338351,
+      "manifest_path": "manuscript/mdpi_information/assets/manifests/manuscript_asset_manifest.json",
+      "manifest_sha256": "fbe7355b956df01ad9817f27b42dc13c0f3e0e33e7f0e5c42a2477beb9d001e1",
+      "release_inclusion": "candidate_tracked_component_after_final_gate"
+    },
+    {
+      "artifact_id": "phase1b_ordinal_benchmark",
+      "path": "reports/research_log/major_revision_v3/phase1b_ordinal_benchmark",
+      "role": "v3_compact_aggregate_evidence",
+      "evidence_identity": "phase1b_v3_20260903T130912Z_dc5cb8b",
+      "file_count": 9,
+      "size_bytes": 71654,
+      "manifest_path": "reports/research_log/major_revision_v3/phase1b_ordinal_benchmark/manifest.json",
+      "manifest_sha256": "b97b558d8c373958d79847b4e8d568ca6f670e5438859df56213799601f3d389",
+      "release_inclusion": "candidate_tracked_component_after_final_gate"
+    },
+    {
+      "artifact_id": "phase1c_repeated_nested_cv",
+      "path": "reports/research_log/major_revision_v3/phase1c_repeated_nested_cv",
+      "role": "v3_compact_aggregate_evidence",
+      "evidence_identity": "phase1c_v3_20260903T215015Z_78649c4",
+      "file_count": 9,
+      "size_bytes": 255182,
+      "manifest_path": "reports/research_log/major_revision_v3/phase1c_repeated_nested_cv/manifest.json",
+      "manifest_sha256": "ce930c634e6108e6a9859df6eaac628bacde98cd7b71563ad0a067dc1849638b",
+      "release_inclusion": "candidate_tracked_component_after_final_gate"
+    },
+    {
+      "artifact_id": "phase1d_policy_retuning",
+      "path": "reports/research_log/major_revision_v3/phase1d_policy_retuning",
+      "role": "v3_compact_aggregate_evidence",
+      "evidence_identity": "phase1d_v3_20260904T063324Z_823c848",
+      "file_count": 7,
+      "size_bytes": 92567,
+      "manifest_path": "reports/research_log/major_revision_v3/phase1d_policy_retuning/manifest.json",
+      "manifest_sha256": "57f00a27f7de87f2f931fef1b29f7435e5869f77b14f065d98b7dbd19d2c1303",
+      "release_inclusion": "candidate_tracked_component_after_final_gate"
+    },
+    {
+      "artifact_id": "phase2a_shap_stability_faithfulness",
+      "path": "reports/research_log/major_revision_v3/phase2a_shap_stability_faithfulness",
+      "role": "v3_compact_aggregate_evidence",
+      "evidence_identity": "phase2a_v3_20260904T073008Z_6e52de7",
+      "file_count": 8,
+      "size_bytes": 24079,
+      "manifest_path": "reports/research_log/major_revision_v3/phase2a_shap_stability_faithfulness/manifest.json",
+      "manifest_sha256": "4cd7bcace03d556e2bd27eea4dca87143745914ddd56136476edc6c662e44481",
+      "release_inclusion": "candidate_tracked_component_after_final_gate"
+    },
+    {
+      "artifact_id": "phase2b_calibration_diagnostics",
+      "path": "reports/research_log/major_revision_v3/phase2b_calibration_diagnostics",
+      "role": "v3_compact_aggregate_evidence",
+      "evidence_identity": "phase2b_v3_20260904T120838Z_21d1aec",
+      "file_count": 13,
+      "size_bytes": 757267,
+      "manifest_path": "reports/research_log/major_revision_v3/phase2b_calibration_diagnostics/manifest.json",
+      "manifest_sha256": "196d9eea87a160b375ddf215fc131142598b0338fa373a7474aaaa1b865d29f3",
+      "release_inclusion": "candidate_tracked_component_after_final_gate"
+    },
+    {
+      "artifact_id": "phase2c_subgroup_proxy_use",
+      "path": "reports/research_log/major_revision_v3/phase2c_subgroup_proxy_use",
+      "role": "v3_compact_aggregate_evidence",
+      "evidence_identity": "phase2c_v3_20260907T070905Z_e314bb5",
+      "file_count": 12,
+      "size_bytes": 994542,
+      "manifest_path": "reports/research_log/major_revision_v3/phase2c_subgroup_proxy_use/manifest.json",
+      "manifest_sha256": "0720d0575154b850a0d3cb89b9bb09403dd514f1e9ebde87ff458189185077f0",
+      "release_inclusion": "candidate_tracked_component_after_final_gate"
+    },
+    {
+      "artifact_id": "phase3a_hrdataset_sensitivity",
+      "path": "reports/research_log/major_revision_v3/phase3a_hrdataset_sensitivity",
+      "role": "v3_compact_aggregate_evidence",
+      "evidence_identity": "phase3a_v3_20260907T141213Z_f6e6a0a",
+      "file_count": 14,
+      "size_bytes": 409991,
+      "manifest_path": "reports/research_log/major_revision_v3/phase3a_hrdataset_sensitivity/manifest.json",
+      "manifest_sha256": "415f1bc5d346c282e51dcc1212335c80c0ee3cd7a673180b22bc4b36f52d1651",
+      "release_inclusion": "candidate_tracked_component_after_final_gate"
+    },
+    {
+      "artifact_id": "phase3b_data_quality",
+      "path": "reports/research_log/major_revision_v3/phase3b_data_quality",
+      "role": "v3_compact_aggregate_evidence",
+      "evidence_identity": "phase3b_v3_20260907T154418Z_0d9643b",
+      "file_count": 13,
+      "size_bytes": 53868,
+      "manifest_path": "reports/research_log/major_revision_v3/phase3b_data_quality/manifest.json",
+      "manifest_sha256": "07083ec83ac01e9393995b30c697190e2ee5221cd54aa3b54fbde01072f57eea",
+      "release_inclusion": "candidate_tracked_component_after_final_gate"
+    },
+    {
+      "artifact_id": "phase4a_literature",
+      "path": "reports/research_log/major_revision_v3/phase4a_literature",
+      "role": "v3_source_verified_positioning_evidence",
+      "evidence_identity": "e408208bbd7fb3071c47717f21ef521b1917e93a",
+      "file_count": 9,
+      "size_bytes": 58534,
+      "manifest_path": "reports/research_log/major_revision_v3/phase4a_literature/manifest.json",
+      "manifest_sha256": "e7b8fdd654c228344d13ec37c8817414b977a5173e5ca3721cbd2641b61c1730",
+      "release_inclusion": "candidate_tracked_component_after_final_gate"
+    }
+  ],
+  "blockers": [
+    {"blocker_id": "B01", "category": "authors", "status": "open", "item": "Author contributions/CRediT roles are not approved."},
+    {"blocker_id": "B02", "category": "authors", "status": "open", "item": "Funding statement is not supplied or explicitly confirmed as none."},
+    {"blocker_id": "B03", "category": "ethics", "status": "open", "item": "IRB/ethics institution, unit, reference, date, and determination are absent."},
+    {"blocker_id": "B04", "category": "authors", "status": "open", "item": "Conflict-of-interest declarations are not approved by all authors."},
+    {"blocker_id": "B05", "category": "authors", "status": "open", "item": "AI/tool-use disclosure requires author and target-journal policy review."},
+    {"blocker_id": "B06", "category": "data_rights", "status": "open", "item": "No raw dataset has a complete authoritative source-to-local-byte and redistribution-rights chain."},
+    {"blocker_id": "B07", "category": "software_license", "status": "open", "item": "The public repository has no detected software LICENSE; authors must select or explicitly decline one."},
+    {"blocker_id": "B08", "category": "git_history", "status": "open", "item": "Five raw dataset paths remain in public Git history; remediation/disclosure needs separate authorization and coordination."},
+    {"blocker_id": "B09", "category": "manuscript", "status": "open", "item": "The final v3 claim matrix is not frozen/approved and the manuscript/reviewer response/final simulation are incomplete."},
+    {"blocker_id": "B10", "category": "immutable_identity", "status": "open", "item": "A final release commit and remote immutable tag do not yet exist."},
+    {"blocker_id": "B11", "category": "publication", "status": "open", "item": "No GitHub release, archival deposit, release URL, or DOI exists."}
+  ],
+  "release_plan": {
+    "status": "blocked_preparation_only",
+    "proposed_tag": "v1.0.0-paper-revision",
+    "final_commit": null,
+    "github_release_url": null,
+    "archive_record_url": null,
+    "version_doi": null,
+    "concept_doi": null,
+    "release_notes_status": "draft_not_published",
+    "release_candidate_manifest_status": "component_inventory_only_not_final",
+    "allowed_payload": "Tracked source, configuration, tests, manuscript, and validated compact aggregate evidence at the final approved commit.",
+    "excluded_payload": "Raw/interim employee records, row-level predictions or SHAP values, fold/training partitions, fitted models/calibrators, secrets, caches, environments, and unlicensed local evidence.",
+    "steps": [
+      "Resolve author, ethics, software-license, dataset-rights, and Git-history decisions.",
+      "Freeze and obtain user approval for the final v3 claim matrix.",
+      "Rewrite and validate the manuscript, response package, declarations, figures, tables, and final review simulation.",
+      "Run full tests, independent package validators, repository hygiene, link, manifest, and manuscript render checks on a clean candidate commit.",
+      "Record the exact final commit in the release candidate manifest; create the proposed tag only on that commit after explicit authorization.",
+      "Publish a GitHub release only after explicit authorization and verify its immutable URL and attached artifact hashes.",
+      "Connect or upload the authorized release to Zenodo/OSF; reserve or mint a DOI through the archive UI; then record only the returned identifiers and URLs.",
+      "Update citation metadata and manuscript data/code-availability statements with the verified tag, commit, release URL, and DOI, followed by a final integrity pass."
+    ],
+    "official_guidance": [
+      "https://docs.github.com/en/repositories/releasing-projects-on-github/managing-releases-in-a-repository",
+      "https://docs.github.com/en/repositories/archiving-a-github-repository/referencing-and-citing-content",
+      "https://help.zenodo.org/docs/github/archive-software/github-upload/",
+      "https://help.zenodo.org/docs/get-started/quickstart/",
+      "https://support.zenodo.org/help/en-gb/18-general/216-what-is-a-doi"
+    ]
+  },
+  "prohibited_assertions": [
+    "all datasets are openly licensed",
+    "all raw data may be redistributed",
+    "source authenticity is proven by hashes",
+    "IRB approval was obtained",
+    "IRB is not applicable",
+    "informed consent is not applicable",
+    "the repository is open source",
+    "the final release exists",
+    "the final tag exists on GitHub",
+    "a DOI has been minted",
+    "the current mutable branch is the final reproducibility reference"
+  ]
+}
