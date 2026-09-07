@@ -802,3 +802,24 @@ Push/recovery gate: the normal push timed out after 184 seconds with no remote r
 - Final unittest discovery: exit 0; 179 tests passed, 1 skipped in 9.723 seconds. Compileall over `src`, `tests`, and `tools`, `git diff --check`, and manuscript no-change check exited 0.
 - Explicit compact validation: exit 0; 14 files/409,991 bytes, 11 CSVs with 210/18/6/625/14/175/8/500/16/10/100 rows, manifest SHA-256 `415f1bc5d346c282e51dcc1212335c80c0ee3cd7a673180b22bc4b36f52d1651`, and package attribute `text: unset`.
 - Staged compact-package audit: exit 0; all 13 manifest-declared files matched Git-index SHA-256, byte size, and working-tree bytes exactly; 14 package files and 23 total checkpoint paths were staged; zero local-run, employee-OOF, calibration-training, fold, candidate-detail, calibrator, raw/model, or manuscript paths were included.
+
+## Major-revision v3 core data-quality implementation — 2026-09-07
+
+- Contract/runner focus: exit 0; 30 tests passed in 0.72 seconds across the new contract, runner, acquisition, external-input, and feature-availability paths.
+- Fit-free preflight: exit 0; exact core scope of two datasets, row counts 1,200/311, raw columns 28/36, cleaned columns 28/39, primary features 20/7, 64 planned profiles, and zero model-fit/network/paid-API calls.
+- In-memory audit: exit 0; ten aggregate tables with 64 raw profiles, 27 categorical profiles, 64 raw-schema rows, 67 cleaned-schema rows, six identifier candidates, 52 rule rows, and ten target-distribution rows. INX missingness/findings are zero; HRDataset missing cells are 215 and three rules contain six total anomaly occurrences.
+- Complete pre-execution pytest: exit 0; 960 passed, 2 skipped, and 11 subtests passed in 592.71 seconds. Unittest discovery exited 0 with 179 tests and one skip in 7.911 seconds; compileall and diff/manuscript checks passed.
+- Clean implementation gate: exit 0 at `0d9643b0a1439144951bc0b657f7c9ba81bd6603`; 2,005 tracked files, 60 README links, and zero raw/environment/large/secret/machine-path findings. Push synchronized local/origin 0/0.
+- Exact run: exit 0; 11-file closed world, ten aggregate tables, 52 declared rules, zero model fits/source-row changes/network/paid-API calls, and scientific-input SHA-256 `578e0d1f5474e92a180c64d2deaf33fecb7826d2f64da0afca1d7a05b0ae84a0`.
+
+## Major-revision v3 core data-quality validation/publication — 2026-09-07
+
+- Independent run validator: exit 0; exact output/source/generation hashes, offline receipt, full reconstruction of all ten tables, zero identifier candidates in primary features, and exact three-rule/six-occurrence finding set passed.
+- Validator tests: four passed. Rehashed table-value tampering was rejected by independent recomputation; unexpected-file and runner-import guards passed.
+- Temporary compact-export tests: four passed and one expected absent-package test skipped. Two exports were byte-identical; deliberate report tampering was rejected.
+- Clean validator/export gate: exit 0 at `945060de21c513ba362497f62a2de9b36467fe1e`; 2,009 tracked files, 60 README links, and zero publication-hygiene findings. Push synchronized local/origin 0/0.
+- Compact export and explicit validation: exit 0; 13 files/53,868 bytes; CSV row counts 27/67/64/2/2/6/2/64/52/10; manifest SHA-256 `07083ec83ac01e9393995b30c697190e2ee5221cd54aa3b54fbde01072f57eea`; zero raw or row-level values.
+- Post-publication Phase 3B plus CI-workflow focus: exit 0; 23 tests passed in 3.02 seconds. Compileall, `git diff --check`, and manuscript no-change checks passed.
+- Complete post-publication pytest: exit 0; 969 passed, 2 skipped, and 11 subtests passed in 562.52 seconds.
+- Final unittest discovery: exit 0; 179 tests passed, one skipped in 7.609 seconds. Final package/CI focus passed nine tests in 2.10 seconds.
+- Staged compact-package audit: exit 0; all 12 manifest records matched Git-index and working-tree SHA-256/byte sizes; 13 package files and 22 total checkpoint paths were staged; zero local-run, raw-data, model, environment, row-level, or manuscript-source paths were included. Package attribute returned `text: unset`.

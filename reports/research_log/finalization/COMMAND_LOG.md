@@ -764,3 +764,19 @@ The independent validator imports no Phase 3A runner calculations. It bound seve
 Validator/export checkpoint `3e1e278eb22f6272b7398bc757c9644557a042d1` passed the clean repository gate with 1,986 tracked files and 59 resolved README links, then pushed normally with local/origin divergence 0/0. The governed exporter then independently revalidated the local source before and after atomically writing `phase3a_hrdataset_sensitivity/`.
 
 The tracked compact package has 14 files/409,991 bytes and manifest SHA-256 `415f1bc5d346c282e51dcc1212335c80c0ee3cd7a673180b22bc4b36f52d1651`. It includes ten direct aggregate/repetition/class/design tables, one complete derived candidate-frequency table, README, provenance, and manifest. All employee/calibration-training/fold/candidate-detail/calibrator/raw/model evidence is excluded, and package bytes are protected with a path-level `-text` attribute.
+
+## Major-revision v3 core data-quality implementation and execution — 2026-09-07
+
+Audited the canonical core scope, exact acquisition schemas, current feature/identifier exclusions, HR mapping adapter, target supports, missingness, duplicate patterns, field ranges, date semantics, and code/text correspondences. Added the SHA-bound `configs/data_quality_v3.json` contract, fail-closed validator, aggregate-only offline runner, and focused tests. The audit predeclares whitespace missingness, 0.99 near-constant and 0.98 identifier-uniqueness thresholds, raw/cleaned schema hashing, dataset-specific domain/temporal/consistency rules, construct boundaries, and no-repair/no-row-publication controls.
+
+Focused contract/runner validation passed 30 tests. The complete pre-run regression passed 960 tests, two skips, and 11 subtests in 592.71 seconds; unittest discovery passed 179 tests with one skip. Implementation checkpoint `0d9643b0a1439144951bc0b657f7c9ba81bd6603` passed the clean 2,005-file/60-link repository gate and pushed normally with local/origin divergence 0/0.
+
+Exact run `phase3b_v3_20260907T154418Z_0d9643b` then atomically produced ten aggregate tables plus metadata. Scientific-input SHA-256 is `578e0d1f5474e92a180c64d2deaf33fecb7826d2f64da0afca1d7a05b0ae84a0`. It audited two datasets, 64 raw columns, 67 cleaned-schema columns, and 52 rules with zero model fits, source-row modifications, network calls, or paid API calls.
+
+The independent validator imports no calculation from the runner. It binds the exact generation blobs/output/source hashes and offline receipt, reloads both canonical datasets, reconstructs every profile/schema/duplicate/identifier/rule/target/summary table, and rejects rehashed scientific-table tampering. It passed with zero primary-feature identifier candidates and exactly three HR rules containing two findings each. Validator/export checkpoint `945060de21c513ba362497f62a2de9b36467fe1e` passed the clean 2,009-file/60-link gate and pushed normally with divergence 0/0.
+
+## Major-revision v3 core data-quality compact evidence — 2026-09-07
+
+The governed exporter independently revalidated the complete run and atomically wrote `phase3b_data_quality/`. The package has 13 files/53,868 bytes and manifest SHA-256 `07083ec83ac01e9393995b30c697190e2ee5221cd54aa3b54fbde01072f57eea`: ten byte-identical aggregate CSVs, `DATA_QUALITY_REPORT.md`, provenance, and manifest. It excludes stage metadata, raw/row-level values, models, and supplementary datasets.
+
+Explicit run and compact validators exited 0. Post-publication focus passed 23 tests in 3.02 seconds; complete pytest passed 969 tests, two skips, and 11 subtests in 562.52 seconds. The manuscript sources remained unchanged. A path-level `-text` rule preserves manifest-bound package bytes on Windows.

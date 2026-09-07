@@ -1,0 +1,3 @@
+dataset_key,row_count,exact_duplicate_extra_rows,exact_duplicate_participating_rows,predictor_duplicate_extra_rows,predictor_duplicate_participating_rows,conflicting_target_groups,conflicting_target_rows,raw_target_excluded_for_predictor_duplicate_test,status
+inx_primary,1200,0,0,0,0,0,0,PerformanceRating,passed
+hrdataset_v14,311,0,0,0,0,0,0,PerformanceScore,passed

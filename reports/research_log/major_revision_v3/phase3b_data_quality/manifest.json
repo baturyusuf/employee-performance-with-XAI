@@ -1,0 +1,68 @@
+{
+  "file_count_excluding_manifest": 12,
+  "files": [
+    {
+      "path": "categorical_cardinality.csv",
+      "sha256": "e7d40244b10de051bd03edad0518b25cbfacaa96d72cfb912fc5f034432ec23d",
+      "size_bytes": 2310
+    },
+    {
+      "path": "cleaned_schema.csv",
+      "sha256": "1326867bd799b7672f5d3aede3950d980487859ee25aff88b414630245ce7577",
+      "size_bytes": 12097
+    },
+    {
+      "path": "column_profiles.csv",
+      "sha256": "5e1a7d1479834317c50adfe7ae9069dba7f1759edef538f3976a6abca9da39e1",
+      "size_bytes": 7129
+    },
+    {
+      "path": "DATA_QUALITY_REPORT.md",
+      "sha256": "7a7ff636b2803e399ec4b1ae30d9604769d15bd7e50b7cdb65a3ce8b81c26c2f",
+      "size_bytes": 5939
+    },
+    {
+      "path": "dataset_summary.csv",
+      "sha256": "df7d21a23be7cad851161d821f7ac376c30d5c6e5c8783c45fdee227de148d0b",
+      "size_bytes": 1018
+    },
+    {
+      "path": "duplicate_audit.csv",
+      "sha256": "c7c5828a5ff241e49692bb24d43947fcd303d605fa585666d5839d718325548d",
+      "size_bytes": 368
+    },
+    {
+      "path": "identifier_audit.csv",
+      "sha256": "81a367b09dda51266ad7914b6b060431cf27abcc1657cbab10c706daa90f75f1",
+      "size_bytes": 1070
+    },
+    {
+      "path": "manuscript_ready_data_quality.csv",
+      "sha256": "41102712be6f7ade750937468a25281a951e294aa9d0d11739f44174972138b5",
+      "size_bytes": 911
+    },
+    {
+      "path": "provenance_receipt.json",
+      "sha256": "abf3e76371a5445f26a925b450eda987cc6e3a06859e3c6773cab0ed9d60e2f1",
+      "size_bytes": 4684
+    },
+    {
+      "path": "raw_schema.csv",
+      "sha256": "d36ca457691637a09be61f176563535e632f55a1b023c1313ba31465e7ab34bf",
+      "size_bytes": 8999
+    },
+    {
+      "path": "rule_anomaly_audit.csv",
+      "sha256": "4ccae16bdc64e4f9b5067d89869cc761348a02eb0650d7e0c5b704b06edc3cc0",
+      "size_bytes": 6488
+    },
+    {
+      "path": "target_distribution.csv",
+      "sha256": "4845da4f51bdd6651e7a54c1aaa279cbe0af1d0dd5fc8d0175bcdaf1cc0a2502",
+      "size_bytes": 714
+    }
+  ],
+  "package_kind": "phase3b_core_data_quality_compact_evidence",
+  "schema_version": 1,
+  "source_run_id": "phase3b_v3_20260907T154418Z_0d9643b"
+}

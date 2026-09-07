@@ -1,0 +1,11 @@
+dataset_key,target_view,target_column,target_label,count,percentage
+inx_primary,raw,PerformanceRating,3,874,72.83333333333334
+inx_primary,raw,PerformanceRating,4,132,11.0
+inx_primary,raw,PerformanceRating,2,194,16.166666666666664
+hrdataset_v14,raw,PerformanceScore,Exceeds,37,11.89710610932476
+hrdataset_v14,raw,PerformanceScore,Fully Meets,243,78.13504823151125
+hrdataset_v14,raw,PerformanceScore,Needs Improvement,18,5.787781350482315
+hrdataset_v14,raw,PerformanceScore,PIP,13,4.180064308681672
+hrdataset_v14,canonical_mapped,PerformanceRating,4,37,11.89710610932476
+hrdataset_v14,canonical_mapped,PerformanceRating,3,243,78.13504823151125
+hrdataset_v14,canonical_mapped,PerformanceRating,2,31,9.967845659163988
