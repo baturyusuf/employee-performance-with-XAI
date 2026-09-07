@@ -1,0 +1,120 @@
+{
+  "contract_sha256": "65bf6d1cdf99cda5f764b5ed93aa6b4bf214a5944ca8bf1248d0c804a73c9696",
+  "excluded_source_files": [
+    "jobrole_permutation_sample.csv",
+    "proxy_prediction_change_sample.csv",
+    "stage_metadata.json"
+  ],
+  "included_files": [
+    "department_reconstructability_differences.csv",
+    "department_reconstructability_metrics.csv",
+    "diagnostic_receipt.json",
+    "jobrole_permutation_repetition.csv",
+    "jobrole_permutation_summary.csv",
+    "primary_gap_bootstrap_intervals.csv",
+    "proxy_prediction_change_by_department.csv",
+    "subgroup_gap_sensitivity.csv",
+    "subgroup_metric_grid.csv"
+  ],
+  "independent_run_validation": {
+    "bootstrap_resample_hash": "d16aadb56f2dde124df62387447bb01ddf51236f7f9e9e01b6218e8f6265f646",
+    "conditional_permutation_mean_total_variation": 0.052912334200205934,
+    "contract_sha256": "65bf6d1cdf99cda5f764b5ed93aa6b4bf214a5944ca8bf1248d0c804a73c9696",
+    "familywise_critical_value": 5.073968955515337,
+    "file_count": 12,
+    "generation_commit": "e314bb5d1935da6a23e26b2085330dacb468fe32",
+    "marginal_permutation_mean_total_variation": 0.10241861385666895,
+    "network_calls": 0,
+    "new_model_fit_calls": 0,
+    "paid_api_calls": 0,
+    "primary_gap_interval_rows": 162,
+    "proxy_overall_delta_macro_f1": -0.032993574605103104,
+    "proxy_overall_mean_total_variation": 0.09056839543686346,
+    "proxy_overall_prediction_change_rate": 0.1075,
+    "run_id": "phase2c_v3_20260907T070905Z_e314bb5",
+    "scientific_input_sha256": "2a42827646702378fb92cf0e0b940fa2739334cc6b62fa1f2ff4f9af66787f1e",
+    "status": "passed",
+    "subgroup_gap_rows": 486,
+    "subgroup_metric_rows": 2025
+  },
+  "package_kind": "phase2c_subgroup_proxy_use_compact_evidence",
+  "publication_controls": {
+    "P3_minus_JobRole_labelled_as_P5": false,
+    "causal_feature_effect_claim_allowed": false,
+    "deployment_claim_allowed": false,
+    "discrimination_claim_allowed": false,
+    "employee_level_permutation_rows_included": false,
+    "employee_level_prediction_comparison_rows_included": false,
+    "fairness_certification_allowed": false,
+    "fitted_models_included": false,
+    "fold_assignments_included": false,
+    "raw_data_included": false,
+    "reconstructability_proves_performance_use": false
+  },
+  "row_counts": {
+    "department_reconstructability_differences.csv": 3,
+    "department_reconstructability_metrics.csv": 6,
+    "jobrole_permutation_repetition.csv": 40,
+    "jobrole_permutation_summary.csv": 2,
+    "primary_gap_bootstrap_intervals.csv": 162,
+    "proxy_prediction_change_by_department.csv": 7,
+    "subgroup_gap_sensitivity.csv": 486,
+    "subgroup_metric_grid.csv": 2025
+  },
+  "schema_version": 1,
+  "scientific_input_sha256": "2a42827646702378fb92cf0e0b940fa2739334cc6b62fa1f2ff4f9af66787f1e",
+  "source_created_at_utc": "2026-09-07T07:10:26.727870+00:00",
+  "source_files": {
+    "department_reconstructability_differences.csv": {
+      "sha256": "d02aaad42ac055ab61d0d4cef8afa730058ec819080c03f585407a89bbb5bc3d",
+      "size_bytes": 4635
+    },
+    "department_reconstructability_metrics.csv": {
+      "sha256": "e838ea0f0e447df3abc6e6b10af5147db2b65ba955e8eaf92952bb54a6a82b4c",
+      "size_bytes": 9281
+    },
+    "diagnostic_receipt.json": {
+      "sha256": "7d432020fb5d75251d33741e0eaa9d9176cc266bc36c7119a514a71c0a885acb",
+      "size_bytes": 2199
+    },
+    "jobrole_permutation_repetition.csv": {
+      "sha256": "9ef49ba7642d1456f49cf017da8fdf4e32c72f20bd2f50d69bb0371e36b633db",
+      "size_bytes": 34694
+    },
+    "jobrole_permutation_sample.csv": {
+      "sha256": "67985aae6e243b273e883e161377a90f633909093dfcb0bb956345db7a6860fc",
+      "size_bytes": 7106511
+    },
+    "jobrole_permutation_summary.csv": {
+      "sha256": "8d0af59191a90fe7fd78b14f6055b3f06fbda2b74ac74016b4c78b96d016d5ca",
+      "size_bytes": 4704
+    },
+    "primary_gap_bootstrap_intervals.csv": {
+      "sha256": "10f63819d37933d8c28662c4226acf4bbcdb7c272c13102bb08930ea9397c31a",
+      "size_bytes": 82051
+    },
+    "proxy_prediction_change_by_department.csv": {
+      "sha256": "79ba56a192c8baccd5098ea37bfc1ab3e7d64f02276fe710df458df068d5963f",
+      "size_bytes": 4125
+    },
+    "proxy_prediction_change_sample.csv": {
+      "sha256": "8e11388d5cc53c006d8e3d4983505edb21a7fc40ae6cbe49d986db9cca734196",
+      "size_bytes": 330735
+    },
+    "stage_metadata.json": {
+      "sha256": "e5db6a95f96f495473e34a7e9a5b7941e52fbbc4604e0c0ea762941821a3ed9d",
+      "size_bytes": 7867
+    },
+    "subgroup_gap_sensitivity.csv": {
+      "sha256": "d78755b695b3520d17f877c843aca6f53414905b9a71de3a8a92f529038ee891",
+      "size_bytes": 172216
+    },
+    "subgroup_metric_grid.csv": {
+      "sha256": "6c8ef7a473d760a82492f3bb1a9abbd6d6d04d039e134c9ee3493acd6b60d6aa",
+      "size_bytes": 668985
+    }
+  },
+  "source_generation_commit": "e314bb5d1935da6a23e26b2085330dacb468fe32",
+  "source_run": "reports/major_revision_v3_runs/phase2c_v3_20260907T070905Z_e314bb5/subgroup_proxy_use",
+  "source_run_id": "phase2c_v3_20260907T070905Z_e314bb5"
+}

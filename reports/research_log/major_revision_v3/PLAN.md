@@ -2,7 +2,7 @@
 
 Date: 2026-09-03
 Branch: `finalization/leakage-aware-v2`
-Status: active implementation contract; Phase 0 and INX Phase 1A complete; Phase 1B, Phase 1C, Phase 1D, Phase 2A, and Phase 2B evidence published; Phase 2C exact run independently validated, compact publication next
+Status: active implementation contract; Phase 0 and INX Phase 1A complete; Phase 1B, Phase 1C, Phase 1D, Phase 2A, Phase 2B, and Phase 2C evidence published; Phase 3A replication sensitivities next
 
 ## Purpose
 
@@ -31,6 +31,7 @@ The intended scientific conclusion is conditional rather than promotional: emplo
 - The governed `phase2b_calibration_diagnostics/` package publishes the five aggregate tables, complete bin-support evidence, and classwise/cumulative reliability figures with exact source/provenance hashes. Its 13-file/757,267-byte closed world excludes employee-level probabilities, folds, raw data, and fitted models/calibrators. Phase 2C expanded subgroup/proxy-use analysis is next.
 - Phase 2C now has a hash-bound exact-source contract, fit-free runner, and focused regression tests. The complete 3-system × 3-threshold × 6-attribute design retains 2,025 group-metric rows and 486 gap cells; P3 receives a 5,000-repetition 162-cell simultaneous exploratory bootstrap family. Exact P3-versus-P3-minus-JobRole changes and 20-repetition marginal/department-conditional JobRole perturbations are explicitly separated from department reconstructability. Preflight binds all 3,600 canonical OOF rows and ten persisted P3 models with zero new fits/network/API calls. Clean-commit execution remains next.
 - Complete Phase 2C run `phase2c_v3_20260907T070905Z_e314bb5` executed from the pushed clean implementation checkpoint and produced the complete 12-file/8,428,003-byte local package. An independent validator rebound all source/output/generation hashes and recalculated the full group/gap/bootstrap/paired-change/permutation/reconstruction evidence without importing runner calculations. All 5,000 simultaneous-family draws were complete; compact aggregate publication is next.
+- The governed `phase2c_subgroup_proxy_use/` package publishes all eight aggregate tables and their diagnostic/provenance/manifest records in a 12-file/994,542-byte closed world with manifest SHA-256 `0720d0575154b850a0d3cb89b9bb09403dd514f1e9ebde87ff458189185077f0`. Both employee-level source tables, stage internals, folds, raw data, and models remain ignored. Phase 3A HRDataset_v14 mapping and repeated-CV sensitivities are next.
 
 ## Non-negotiable controls
 

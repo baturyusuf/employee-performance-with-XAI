@@ -767,3 +767,12 @@ Push/recovery gate: the normal push timed out after 184 seconds with no remote r
 - Corrected compact-export focus: 3 passed, 1 expected absent-package skip in 60.78 seconds. Two temporary exports were byte-identical; employee-level exclusions and deliberate README tamper rejection passed.
 - Complete pytest after validator/export integration: exit 0; 925 passed, 3 skipped, and 11 subtests passed in 460.90 seconds.
 - Unittest discovery: exit 0; 179 tests passed, 1 skipped in 7.808 seconds. Compileall and `git diff --check` exited 0.
+
+## Major-revision v3 subgroup/proxy-use compact-package validation — 2026-09-07
+
+- Validator/export checkpoint gate: exit 0; commit `33fe6b8430efb83ed9119f047d35f5f43fc41685`; 1,964 tracked files; 57 README links; zero raw/environment/large/secret/machine-path findings; local/origin divergence 0/0.
+- Compact export and explicit validation: exit 0; 12 files/994,542 bytes; eight aggregate CSVs with 2,025/486/162/7/40/2/6/3 rows; manifest SHA-256 `0720d0575154b850a0d3cb89b9bb09403dd514f1e9ebde87ff458189185077f0`; zero employee-level rows.
+- Final combined Phase 2C contract/runner/run-validator/compact-export focus: 20 passed in 198.97 seconds. The tracked compact package, deterministic temporary exports, tamper rejection, source equivalence, complete recomputation, row-count, boundary-language, and employee-level exclusion checks passed.
+- Complete pytest after tracked compact publication: exit 0; 926 passed, 2 skipped, and 11 subtests passed in 472.20 seconds.
+- Final unittest discovery: exit 0; 179 tests passed, 1 skipped in 7.436 seconds. Compileall over `src`, `tests`, and `tools` and `git diff --check` exited 0. Package attribute returned `text: unset`.
+- Staged compact-package audit: exit 0; all 11 manifest-declared files matched Git-index SHA-256, byte size, and working-tree bytes exactly; 12 package files and 22 total checkpoint paths were staged; zero employee-level source/stage/manuscript paths were included.

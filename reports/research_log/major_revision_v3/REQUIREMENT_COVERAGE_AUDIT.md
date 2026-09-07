@@ -29,6 +29,8 @@ Requirements 13–14 now have frozen Phase 2C designs and tested computation pat
 
 The exact Phase 2C run is now independently validated. The validator recomputed all 2,025 group rows, 486 gap cells, 162 multiplicity-aware P3 interval rows, 1,200 exact paired changes, seven department summaries, all 48,000 deterministic perturbations, 40/2 perturbation summaries, and six/three reconstruction records. It confirmed zero new model fits/network/API calls and preserved the P3-minus-JobRole-not-P5, reconstructability-not-use, selection, OOD perturbation, and no-fairness/discrimination/causality boundaries. Compact aggregate publication and byte-preservation remain before Requirements 13–14 are declared publication-complete.
 
+Requirements 13–14 are now evidence-complete for the requested diagnostic scope. The governed `phase2c_subgroup_proxy_use/` package publishes every support-aware group/gap/interval row, overall/department paired-change summary, all 40 perturbation-repetition summaries and two scheme aggregates, and the separately labelled reconstruction evidence. Its closed-world manifest and source-equivalence checks exclude 49,200 employee-level rows, folds, raw data, stage internals, and models. The conclusions remain exploratory and cannot certify fairness, prove discrimination or absence of discrimination, establish causal feature use, or support deployment.
+
 Status meanings:
 
 - `addressed`: executable or canonical evidence and claim boundaries materially satisfy the requirement.

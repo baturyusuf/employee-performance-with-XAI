@@ -15,3 +15,4 @@
 /reports/research_log/major_revision_v3/phase1d_policy_retuning/** -text whitespace=-trailing-space
 /reports/research_log/major_revision_v3/phase2a_shap_stability_faithfulness/** -text whitespace=-trailing-space
 /reports/research_log/major_revision_v3/phase2b_calibration_diagnostics/** -text whitespace=-trailing-space
+/reports/research_log/major_revision_v3/phase2c_subgroup_proxy_use/** -text whitespace=-trailing-space

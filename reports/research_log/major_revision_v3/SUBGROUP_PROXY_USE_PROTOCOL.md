@@ -2,7 +2,7 @@
 
 Date: 2026-09-04
 
-Status: frozen design, exact clean-commit execution, and independent validation complete; governed compact publication pending
+Status: frozen design, exact clean-commit execution, independent validation, and governed compact publication complete
 
 ## Scope and source evidence
 
@@ -48,3 +48,5 @@ Clean-commit run `phase2c_v3_20260907T070905Z_e314bb5` executed from pushed comm
 An independent validator that imports no Phase 2C runner calculation rebound the generation Git blobs, all 22 source files, output hashes, offline receipt, canonical dataset, exact OOF alignment, persisted model set, and P3 feature order. It independently recalculated every group/support/metric/gap row, replayed the complete bootstrap family, reconstructed every paired probability/margin/prediction-change row, reran all 40 deterministic outer-fold perturbations, recomputed their aggregates, and verified byte-equivalence of the preserved reconstruction evidence. Validation passed for all 12 files and scientific-input SHA-256 `2a42827646702378fb92cf0e0b940fa2739334cc6b62fa1f2ff4f9af66787f1e`.
 
 The exact P3-minus-JobRole versus P3 comparison has overall mean total variation 0.0906, a 10.75% prediction-change rate, and macro-F1 change −0.0330. Marginal JobRole permutations average total variation 0.1024, prediction-change rate 0.1305, and macro-F1 change −0.0432; department-conditional values are 0.0529, 0.0739, and −0.0034. These differences support only the bounded model-dependence interpretation above. Some department-specific policy differences improve while others worsen, and the simultaneous subgroup intervals are wide; no single maximum gap, fairness, discrimination, or causal claim is authorized.
+
+The governed `phase2c_subgroup_proxy_use/` package contains 12 files/994,542 bytes and manifest SHA-256 `0720d0575154b850a0d3cb89b9bb09403dd514f1e9ebde87ff458189185077f0`. It copies all eight publication-safe aggregate CSVs plus the diagnostic receipt byte-for-byte from the validated source run and adds a bounded README, provenance receipt, and closed-world manifest. It excludes both employee-level tables, stage metadata, folds, raw data, and fitted models. A package-specific Git attribute preserves the manifest-bound bytes across platforms.

@@ -1,0 +1,50 @@
+{
+  "bootstrap": {
+    "declared_family_rows": 162,
+    "family_size": 162,
+    "familywise_critical_value": 5.073968955515337,
+    "n_complete_familywise_draws": 5000,
+    "n_resamples": 5000,
+    "resample_hash": "d16aadb56f2dde124df62387447bb01ddf51236f7f9e9e01b6218e8f6265f646"
+  },
+  "canonical_identity": {
+    "config_hash": "51415c2ce68c89d9ce2b042b0a7a811fe3e98180b72460006f9d0465f6bf49b7",
+    "dataset_sha256": "b8deac0a615b97076622ae540f4cfd0d3c3f1e7acb83ba3ff6560470a9ccf60a",
+    "fold_contract_hash": "c1300316fe5baec24e789c06aec35dd4f283fa4843b71c7aab1edbf4818f8e91",
+    "generation_commit": "483f96fdbaab16cb0f32d03d9dbe676a759af44a",
+    "outer_folds": 10,
+    "run_id": "canonical_v2_20260714T221501Z_483f96f",
+    "sample_count": 1200,
+    "scientific_input_hash": "06c507bee525ea1daca43b61249764007d4d8baaa05c9333f23446ea723ce160",
+    "xgboost_model_set_sha256": "d483d8ddb93a47a99a2eab54fe3d138d8f614798dd418bca860ea3f20c813f51"
+  },
+  "contract_sha256": "65bf6d1cdf99cda5f764b5ed93aa6b4bf214a5944ca8bf1248d0c804a73c9696",
+  "department_reconstructability_difference_rows": 3,
+  "department_reconstructability_metric_rows": 6,
+  "department_reconstructability_proves_performance_use": false,
+  "fairness_certification_allowed": false,
+  "formal_discrimination_claim_allowed": false,
+  "jobrole_permutation_repetition_rows": 40,
+  "jobrole_permutation_sample_rows": 48000,
+  "jobrole_permutation_scheme_rows": 2,
+  "network_calls": 0,
+  "new_performance_model_fit_calls": 0,
+  "new_proxy_reconstruction_model_fit_calls": 0,
+  "paid_api_calls": 0,
+  "permutation_supports_causal_claim": false,
+  "primary_gap_interval_rows": 162,
+  "proxy_department_aggregate_rows": 7,
+  "proxy_prediction_change_sample_rows": 1200,
+  "run_id": "phase2c_v3_20260907T070905Z_e314bb5",
+  "schema_version": 1,
+  "scientific_input_sha256": "2a42827646702378fb92cf0e0b940fa2739334cc6b62fa1f2ff4f9af66787f1e",
+  "stage": "subgroup_proxy_use_v3",
+  "status": "complete",
+  "subgroup_gap_rows": 486,
+  "subgroup_metric_rows": 2025,
+  "subgroup_support_status_counts": {
+    "eligible_descriptive_estimate": 1704,
+    "insufficient_group_support": 216,
+    "insufficient_true_class_support": 105
+  }
+}

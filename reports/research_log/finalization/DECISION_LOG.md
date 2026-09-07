@@ -201,3 +201,9 @@ V2-033 atomic-publication consequence on 2026-07-14: transient Windows antivirus
 - Retain both perturbation schemes. Marginal shuffling shows larger average output/performance changes than department-conditional shuffling, but marginal combinations may be out of distribution and department conditioning is incomplete; neither scheme is a causal, fairness, or discrimination test.
 - Treat every P3 simultaneous interval as exploratory and conditional on fixed model/fold/support choices. All 486 gap cells remain visible, and no largest observed gap is promoted as a selection-adjusted finding.
 - Publish only the separately validated compact aggregate package. Exclude both employee-level local tables, raw data, folds, model objects, and stage internals; preserve department reconstruction as a distinct information-recoverability question.
+
+## Major-revision v3 subgroup/proxy-use compact publication decision — 2026-09-07
+
+- Publish only the 12-file package under `reports/research_log/major_revision_v3/phase2c_subgroup_proxy_use/`: eight aggregate source-run CSVs, the diagnostic receipt, bounded README, provenance receipt, and manifest.
+- Preserve each included scientific CSV/JSON byte-for-byte from the independently validated run. Bind the complete local source inventory in provenance while excluding the 1,200 paired employee rows, 48,000 permutation employee rows, stage metadata, folds, raw data, and model objects from the compact directory.
+- Preserve explicit support statuses and every gap/interval cell even when intervals are wide or results are adverse. The package remains a descriptive/multiplicity-aware exploratory research artifact and does not alter the no-fairness-certification, no-discrimination, no-causality, no-P5-relabeling, or no-deployment boundaries.

@@ -1,0 +1,63 @@
+{
+  "file_count_excluding_manifest": 11,
+  "files": [
+    {
+      "path": "department_reconstructability_differences.csv",
+      "sha256": "d02aaad42ac055ab61d0d4cef8afa730058ec819080c03f585407a89bbb5bc3d",
+      "size_bytes": 4635
+    },
+    {
+      "path": "department_reconstructability_metrics.csv",
+      "sha256": "e838ea0f0e447df3abc6e6b10af5147db2b65ba955e8eaf92952bb54a6a82b4c",
+      "size_bytes": 9281
+    },
+    {
+      "path": "diagnostic_receipt.json",
+      "sha256": "7d432020fb5d75251d33741e0eaa9d9176cc266bc36c7119a514a71c0a885acb",
+      "size_bytes": 2199
+    },
+    {
+      "path": "jobrole_permutation_repetition.csv",
+      "sha256": "9ef49ba7642d1456f49cf017da8fdf4e32c72f20bd2f50d69bb0371e36b633db",
+      "size_bytes": 34694
+    },
+    {
+      "path": "jobrole_permutation_summary.csv",
+      "sha256": "8d0af59191a90fe7fd78b14f6055b3f06fbda2b74ac74016b4c78b96d016d5ca",
+      "size_bytes": 4704
+    },
+    {
+      "path": "primary_gap_bootstrap_intervals.csv",
+      "sha256": "10f63819d37933d8c28662c4226acf4bbcdb7c272c13102bb08930ea9397c31a",
+      "size_bytes": 82051
+    },
+    {
+      "path": "provenance_receipt.json",
+      "sha256": "8fe826e6d8e39780684eb812c25b021326feaf10ea00599c59c9cdd517ddfaec",
+      "size_bytes": 5032
+    },
+    {
+      "path": "proxy_prediction_change_by_department.csv",
+      "sha256": "79ba56a192c8baccd5098ea37bfc1ab3e7d64f02276fe710df458df068d5963f",
+      "size_bytes": 4125
+    },
+    {
+      "path": "README.md",
+      "sha256": "15654d4f69a36ba82009f0d80a38c059a4c4ba2dd55faee673f7a0eae9894a98",
+      "size_bytes": 4535
+    },
+    {
+      "path": "subgroup_gap_sensitivity.csv",
+      "sha256": "d78755b695b3520d17f877c843aca6f53414905b9a71de3a8a92f529038ee891",
+      "size_bytes": 172216
+    },
+    {
+      "path": "subgroup_metric_grid.csv",
+      "sha256": "6c8ef7a473d760a82492f3bb1a9abbd6d6d04d039e134c9ee3493acd6b60d6aa",
+      "size_bytes": 668985
+    }
+  ],
+  "package_kind": "phase2c_subgroup_proxy_use_compact_evidence",
+  "schema_version": 1,
+  "source_run_id": "phase2c_v3_20260907T070905Z_e314bb5"
+}
