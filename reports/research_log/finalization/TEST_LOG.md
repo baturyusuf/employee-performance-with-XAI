@@ -787,3 +787,9 @@ Push/recovery gate: the normal push timed out after 184 seconds with no remote r
 - Combined Phase 3A plus existing HRDataset/external/calibration/ordinal/repeated-CV regression: 99 passed in 26.48 seconds.
 - Complete pytest: exit 0; 941 passed, 2 skipped, and 11 subtests passed in 514.46 seconds. Unittest discovery passed 179 tests with 1 skip in 7.960 seconds; compileall over `src`, `tests`, and `tools`, `git diff --check`, and manuscript no-change check exited 0.
 - Final Phase 3A plus CI-workflow focus: 19 passed in 4.94 seconds. README validation resolved 59 local links; staged review contains 14 small files, zero raw/model/environment/run-root/manuscript paths, and no whitespace errors.
+- Clean implementation repository gate at `656b1e393d3e2e41cd4e455c4b66f71c352c374b`: exit 0; 1,982 tracked files, 59 README links, and zero raw/environment/large/secret/machine-path findings; push synchronized 0/0.
+- First complete run: exit 0 after 2,300 XGBoost and 150 baseline fits with 15,550 OOF rows and zero network/API calls, but it is not admitted because independent sigmoid replay lacked persisted inner-OOF calibration probabilities.
+- Replay-receipt repair diagnostic: exit 0 in 13.9 seconds; both target formulations and one fold each completed with local calibration-training rows and full calibrator parameters. Focused regression passed 16 tests after adding exact parameter reconstruction; compile and diff checks passed.
+- Combined Phase 3A plus existing HRDataset/external/calibration/ordinal/repeated-CV regression after replay repair: 100 passed in 26.00 seconds.
+- Complete pytest after replay repair: exit 0; 942 passed, 2 skipped, and 11 subtests passed in 483.23 seconds.
+- Unittest discovery after replay repair: exit 0; 179 tests passed, 1 skipped in 7.685 seconds. Compileall over `src`, `tests`, and `tools`, `git diff --check`, and manuscript no-change check exited 0.

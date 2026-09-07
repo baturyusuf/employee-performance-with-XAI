@@ -66,6 +66,7 @@ FIT_THREAD_LIMIT = 1
 EXPECTED_LOCAL_FILES = frozenset(
     {
         "baseline_comparisons.csv",
+        "calibration_training_oof.csv",
         "calibrator_parameters.csv",
         "candidate_search_results.csv",
         "canonical_v2_confusion_matrix.csv",
@@ -96,6 +97,7 @@ class HRDatasetSensitivityResult:
     selected_hyperparameters: pd.DataFrame
     fold_metrics: pd.DataFrame
     oof_predictions: pd.DataFrame
+    calibration_training_oof: pd.DataFrame
     calibrator_parameters: pd.DataFrame
     repetition_metrics: pd.DataFrame
     variability_summary: pd.DataFrame
@@ -323,6 +325,16 @@ def _calibrator_parameter_rows(
         "training_probability_sha256": calibrator.training_probability_sha256,
         "training_labels_sha256": calibrator.training_labels_sha256,
         "algorithm": "one_vs_rest_platt_logit_then_row_renormalize",
+        "calibration_seed": calibrator.seed,
+        "solver": calibrator.solver,
+        "regularization": calibrator.regularization,
+        "l1_ratio": calibrator.l1_ratio,
+        "C": calibrator.c_value,
+        "fit_intercept": calibrator.fit_intercept,
+        "max_iter": calibrator.max_iter,
+        "tol": calibrator.tolerance,
+        "probability_clip": calibrator.probability_clip,
+        "threadpool_limit": calibrator.threadpool_limit,
         "outer_test_used_for_fit_or_selection": False,
     }
     return [{**shared, **asdict(parameters)} for parameters in calibrator.class_parameters]
@@ -343,7 +355,14 @@ def _evaluate_outer_fold(
     baseline_seed: int,
     tie_tolerance: float,
     forbidden_features: Sequence[str],
-) -> tuple[list[dict[str, Any]], dict[str, Any], list[dict[str, Any]], list[dict[str, Any]], list[dict[str, Any]]]:
+) -> tuple[
+    list[dict[str, Any]],
+    dict[str, Any],
+    list[dict[str, Any]],
+    list[dict[str, Any]],
+    list[dict[str, Any]],
+    list[dict[str, Any]],
+]:
     train_ids, test_ids, inner = _fold_membership(folds, outer_fold)
     candidates = [dict(value) for value in definition["candidates"]]
     candidate_rows: list[dict[str, Any]] = []
@@ -446,6 +465,25 @@ def _evaluate_outer_fold(
         for row_position, sample_index in enumerate(validation_ids):
             calibration_probability[training_position[sample_index], :] = scoped[row_position, :]
     _require(np.isfinite(calibration_probability).all(), "Calibration OOF probabilities are incomplete.")
+    calibration_training_rows: list[dict[str, Any]] = []
+    for position, sample_index in enumerate(train_ids):
+        row = {
+            **identity,
+            "formulation_id": formulation_id,
+            "ordered_labels_json": json.dumps(list(labels), separators=(",", ":")),
+            "outer_fold": int(outer_fold),
+            "sample_index": int(sample_index),
+            "y_true": int(target.loc[sample_index]),
+            "selected_candidate_index": int(selected_index),
+            "outer_test_used_for_fit_or_selection": False,
+        }
+        row.update(
+            {
+                f"prob_class_{int(label)}": float(calibration_probability[position, column])
+                for column, label in enumerate(labels)
+            }
+        )
+        calibration_training_rows.append(row)
     calibrator = fit_sigmoid_calibrator(
         calibration_probability,
         target.loc[train_ids].to_numpy(int),
@@ -536,7 +574,14 @@ def _evaluate_outer_fold(
         outer_fold=outer_fold,
         selected_candidate_index=selected_index,
     )
-    return candidate_rows, selected_row, fold_rows, prediction_rows, calibrator_rows
+    return (
+        candidate_rows,
+        selected_row,
+        fold_rows,
+        prediction_rows,
+        calibration_training_rows,
+        calibrator_rows,
+    )
 
 
 def _summarize_oof(
@@ -792,6 +837,7 @@ def evaluate_hrdataset_sensitivity_v3(
     selected_rows: list[dict[str, Any]] = []
     fold_rows: list[dict[str, Any]] = []
     prediction_rows: list[dict[str, Any]] = []
+    calibration_training_rows: list[dict[str, Any]] = []
     calibrator_rows: list[dict[str, Any]] = []
     fold_contracts: list[Mapping[str, Any]] = []
     fold_lookup: dict[tuple[str, int], pd.DataFrame] = {}
@@ -850,7 +896,14 @@ def evaluate_hrdataset_sensitivity_v3(
                 "fold_contract_hash": str(folds.contract["fold_contract_hash"]),
             }
             for outer_fold in selected_outer_folds:
-                candidate, selected, fold_metric, predictions, calibrators = _evaluate_outer_fold(
+                (
+                    candidate,
+                    selected,
+                    fold_metric,
+                    predictions,
+                    calibration_training,
+                    calibrators,
+                ) = _evaluate_outer_fold(
                     features,
                     target,
                     folds,
@@ -869,11 +922,15 @@ def evaluate_hrdataset_sensitivity_v3(
                 selected_rows.append(selected)
                 fold_rows.extend(fold_metric)
                 prediction_rows.extend(predictions)
+                calibration_training_rows.extend(calibration_training)
                 calibrator_rows.extend(calibrators)
     candidates = pd.DataFrame(candidate_rows).sort_values(["formulation_id", "repetition", "outer_fold", "candidate_index"]).reset_index(drop=True)
     selected = pd.DataFrame(selected_rows).sort_values(["formulation_id", "repetition", "outer_fold"]).reset_index(drop=True)
     fold_metrics = pd.DataFrame(fold_rows).sort_values(["formulation_id", "repetition", "outer_fold", "system"]).reset_index(drop=True)
     oof = pd.DataFrame(prediction_rows).sort_values(["formulation_id", "repetition", "system", "sample_index"]).reset_index(drop=True)
+    calibration_training = pd.DataFrame(calibration_training_rows).sort_values(
+        ["formulation_id", "repetition", "outer_fold", "sample_index"]
+    ).reset_index(drop=True)
     calibrators = pd.DataFrame(calibrator_rows).sort_values(["formulation_id", "repetition", "outer_fold", "class_label"]).reset_index(drop=True)
     _validate_oof(oof, fold_lookup, formulations, full_run=full_run)
     _require(not candidates["outer_test_used_for_selection"].astype(bool).any(), "Outer test entered selection.")
@@ -887,6 +944,7 @@ def evaluate_hrdataset_sensitivity_v3(
         selected_hyperparameters=selected,
         fold_metrics=fold_metrics,
         oof_predictions=oof,
+        calibration_training_oof=calibration_training,
         calibrator_parameters=calibrators,
         repetition_metrics=repetition_metrics,
         variability_summary=variability,
@@ -1043,6 +1101,7 @@ def _run_impl(*, contract_path: Path, output_dir: Path, run_id: str, offline_sta
         )
         frames = {
             "baseline_comparisons.csv": result.baseline_comparisons,
+            "calibration_training_oof.csv": result.calibration_training_oof,
             "calibrator_parameters.csv": result.calibrator_parameters,
             "candidate_search_results.csv": result.candidate_search_results,
             "canonical_v2_confusion_matrix.csv": result.canonical_v2_confusion_matrix,
@@ -1086,6 +1145,7 @@ def _run_impl(*, contract_path: Path, output_dir: Path, run_id: str, offline_sta
             "baseline_fit_calls": 150,
             "candidate_search_row_count": len(result.candidate_search_results),
             "oof_prediction_row_count": len(result.oof_predictions),
+            "calibration_training_oof_row_count": len(result.calibration_training_oof),
             "repetition_metric_row_count": len(result.repetition_metrics),
             "calibrator_parameter_row_count": len(result.calibrator_parameters),
             "outer_test_used_for_selection_or_calibration": False,

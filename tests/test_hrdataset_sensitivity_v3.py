@@ -8,15 +8,22 @@ import pandas as pd
 import pytest
 
 from src.experiments.hrdataset_sensitivity_v3 import (
+    EXPECTED_LOCAL_FILES,
     SYSTEMS,
     HRDatasetSensitivityV3Error,
     _baseline_comparisons,
+    _calibrator_parameter_rows,
     _canonical_v2_class_results,
     _formulation_map,
     _protocol_comparison,
     _summarize_oof,
     _target_series,
     preflight_hrdataset_sensitivity_v3,
+)
+from src.experiments.manuscript_calibration import (
+    apply_sigmoid_calibrator,
+    calibrator_from_parameter_rows,
+    fit_sigmoid_calibrator,
 )
 from src.governance.hrdataset_sensitivity_contract_v3 import METRICS, PRIORITY_METRICS
 
@@ -128,6 +135,36 @@ def test_target_formulations_retain_observed_raw_order(monkeypatch) -> None:
     formulations = _formulation_map(_contract())
     assert _target_series(Dataset(), formulations["primary_three_class"]).tolist() == [2, 2, 3, 4]
     assert _target_series(Dataset(), formulations["raw_order_four_class"]).tolist() == [1, 2, 3, 4]
+
+
+def test_persisted_calibrator_rows_are_replay_complete() -> None:
+    probabilities = np.asarray(
+        [
+            [0.80, 0.15, 0.05],
+            [0.70, 0.20, 0.10],
+            [0.15, 0.75, 0.10],
+            [0.10, 0.80, 0.10],
+            [0.05, 0.20, 0.75],
+            [0.10, 0.25, 0.65],
+        ]
+    )
+    target = np.asarray([2, 2, 3, 3, 4, 4])
+    calibrator = fit_sigmoid_calibrator(probabilities, target, (2, 3, 4), seed=4501)
+    rows = _calibrator_parameter_rows(
+        calibrator,
+        identity={"run_id": "synthetic", "repetition": 1},
+        formulation_id="primary_three_class",
+        outer_fold=1,
+        selected_candidate_index=0,
+    )
+    replay = calibrator_from_parameter_rows(pd.DataFrame(rows))
+    np.testing.assert_allclose(
+        apply_sigmoid_calibrator(replay, probabilities),
+        apply_sigmoid_calibrator(calibrator, probabilities),
+        rtol=0.0,
+        atol=1e-15,
+    )
+    assert "calibration_training_oof.csv" in EXPECTED_LOCAL_FILES
 
 
 @pytest.mark.skipif(
