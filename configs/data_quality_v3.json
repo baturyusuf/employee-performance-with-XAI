@@ -1,0 +1,144 @@
+{
+  "schema_version": 1,
+  "contract_id": "core_dataset_data_quality_v3",
+  "scope": {
+    "canonical_evidence_scope": "core",
+    "dataset_keys": ["inx_primary", "hrdataset_v14"],
+    "supplementary_datasets_included": false,
+    "scope_note": "The canonical core evidence scope contains INX and HRDataset_v14 only; IBM and turnover datasets remain supplementary and are not represented as core data-quality evidence."
+  },
+  "source_contracts": {
+    "canonical_config": {
+      "path": "configs/manuscript_final.yaml",
+      "sha256": "f8a6354ab67757c5d92c93cef2fe03ab88f4b16b10ce470f2db97ed4d0407779"
+    },
+    "acquisition_manifest": {
+      "path": "configs/data_acquisition.yaml",
+      "sha256": "a5e820a7213967e494bc9238f104e478c5a65c0840d654397cc3063314262d97"
+    },
+    "inx_feature_availability": {
+      "path": "configs/feature_availability_v3.json",
+      "sha256": "6dd5fdde534e379cceacfaa01e865d1551310fb632b691f5b937ef39394e93cf"
+    },
+    "hrdataset_schema_mapping": {
+      "path": "data/external/hrdataset_v14/schema_mapping.json",
+      "sha256": "65c40fecc75235f57209cff6231d7386e4279ebedca9390f53ad2bb67ae63788"
+    }
+  },
+  "audit_policy": {
+    "blank_string_policy": "strip_whitespace_then_count_empty_as_missing_for_audit_only",
+    "missing_percentage_denominator": "all_rows",
+    "duplicate_definitions": {
+      "exact_duplicate_extra_rows": "duplicated_keep_first_on_all_raw_columns",
+      "exact_duplicate_participating_rows": "duplicated_keep_false_on_all_raw_columns",
+      "predictor_duplicate_extra_rows": "duplicated_keep_first_after_excluding_raw_target",
+      "conflicting_target_groups": "same_all_raw_predictors_with_more_than_one_raw_target"
+    },
+    "near_constant_nonmissing_mode_share_threshold": 0.99,
+    "identifier_unique_ratio_threshold": 0.98,
+    "identifier_name_tokens": ["id", "identifier", "name", "number"],
+    "identifier_leakage_test": "every_declared_or_detected_identifier_must_be_absent_from_the_declared_primary_model_feature_set",
+    "schema_hash_definition": "sha256_of_canonical_json_ordered_position_name_pandas_dtype_records",
+    "categorical_profile_definition": "object_string_category_or_boolean_columns_only",
+    "raw_values_or_row_identifiers_may_be_published": false,
+    "automatic_download_allowed": false,
+    "network_calls_allowed": false,
+    "paid_api_calls_allowed": false
+  },
+  "datasets": {
+    "inx_primary": {
+      "raw_target": "PerformanceRating",
+      "declared_identifier_columns": ["EmpNumber"],
+      "primary_feature_policy": "P3",
+      "cleaned_view": "canonical_loader_verified_raw_frame",
+      "numeric_rules": [
+        {"column": "Age", "minimum": 18, "maximum": 100},
+        {"column": "DistanceFromHome", "minimum": 0, "maximum": 500},
+        {"column": "EmpEducationLevel", "allowed": [1, 2, 3, 4, 5]},
+        {"column": "EmpEnvironmentSatisfaction", "allowed": [1, 2, 3, 4]},
+        {"column": "EmpHourlyRate", "minimum": 0, "maximum": 10000},
+        {"column": "EmpJobInvolvement", "allowed": [1, 2, 3, 4]},
+        {"column": "EmpJobLevel", "allowed": [1, 2, 3, 4, 5]},
+        {"column": "EmpJobSatisfaction", "allowed": [1, 2, 3, 4]},
+        {"column": "NumCompaniesWorked", "minimum": 0, "maximum": 100},
+        {"column": "EmpLastSalaryHikePercent", "minimum": 0, "maximum": 100},
+        {"column": "EmpRelationshipSatisfaction", "allowed": [1, 2, 3, 4]},
+        {"column": "TotalWorkExperienceInYears", "minimum": 0, "maximum": 80},
+        {"column": "TrainingTimesLastYear", "minimum": 0, "maximum": 365},
+        {"column": "EmpWorkLifeBalance", "allowed": [1, 2, 3, 4]},
+        {"column": "ExperienceYearsAtThisCompany", "minimum": 0, "maximum": 80},
+        {"column": "ExperienceYearsInCurrentRole", "minimum": 0, "maximum": 80},
+        {"column": "YearsSinceLastPromotion", "minimum": 0, "maximum": 80},
+        {"column": "YearsWithCurrManager", "minimum": 0, "maximum": 80},
+        {"column": "PerformanceRating", "allowed": [2, 3, 4]}
+      ],
+      "relational_rules": [
+        {"rule_id": "company_tenure_le_total_experience", "left": "ExperienceYearsAtThisCompany", "operator": "<=", "right": "TotalWorkExperienceInYears"},
+        {"rule_id": "current_role_le_company_tenure", "left": "ExperienceYearsInCurrentRole", "operator": "<=", "right": "ExperienceYearsAtThisCompany"},
+        {"rule_id": "promotion_gap_le_company_tenure", "left": "YearsSinceLastPromotion", "operator": "<=", "right": "ExperienceYearsAtThisCompany"},
+        {"rule_id": "manager_tenure_le_company_tenure", "left": "YearsWithCurrManager", "operator": "<=", "right": "ExperienceYearsAtThisCompany"}
+      ]
+    },
+    "hrdataset_v14": {
+      "raw_target": "PerformanceScore",
+      "declared_identifier_columns": ["Employee_Name", "EmpID", "ManagerName", "ManagerID"],
+      "primary_feature_policy": "conservative_primary",
+      "cleaned_view": "external_adapter_canonical_frame",
+      "numeric_rules": [
+        {"column": "MarriedID", "allowed": [0, 1]},
+        {"column": "MaritalStatusID", "allowed": [0, 1, 2, 3, 4]},
+        {"column": "GenderID", "allowed": [0, 1]},
+        {"column": "EmpStatusID", "allowed": [1, 2, 3, 4, 5]},
+        {"column": "DeptID", "allowed": [1, 2, 3, 4, 5, 6]},
+        {"column": "PerfScoreID", "allowed": [1, 2, 3, 4]},
+        {"column": "FromDiversityJobFairID", "allowed": [0, 1]},
+        {"column": "Salary", "minimum": 0, "maximum": 10000000},
+        {"column": "Termd", "allowed": [0, 1]},
+        {"column": "PositionID", "minimum": 1, "maximum": 1000},
+        {"column": "Zip", "minimum": 0, "maximum": 99999},
+        {"column": "ManagerID", "minimum": 1, "maximum": 10000, "allow_missing": true},
+        {"column": "EngagementSurvey", "minimum": 1, "maximum": 5},
+        {"column": "EmpSatisfaction", "allowed": [1, 2, 3, 4, 5]},
+        {"column": "SpecialProjectsCount", "minimum": 0, "maximum": 365},
+        {"column": "DaysLateLast30", "minimum": 0, "maximum": 30},
+        {"column": "Absences", "minimum": 0, "maximum": 366}
+      ],
+      "date_rules": {
+        "DOB": {"format": "%m/%d/%y", "two_digit_year_policy": "subtract_100_years_if_after_latest_observed_non_dob_date"},
+        "DateofHire": {"format": "%m/%d/%Y"},
+        "DateofTermination": {"format": "%m/%d/%Y", "allow_missing": true},
+        "LastPerformanceReview_Date": {"format": "%m/%d/%Y"}
+      },
+      "relational_rules": [
+        {"rule_id": "dob_before_hire", "left": "DOB", "operator": "<", "right": "DateofHire"},
+        {"rule_id": "review_on_or_after_hire", "left": "LastPerformanceReview_Date", "operator": ">=", "right": "DateofHire"},
+        {"rule_id": "termination_on_or_after_hire", "left": "DateofTermination", "operator": ">=", "right": "DateofHire", "skip_missing": true}
+      ],
+      "consistency_rules": [
+        {"rule_id": "performance_text_matches_code", "type": "text_code_mapping", "text_column": "PerformanceScore", "code_column": "PerfScoreID", "mapping": {"PIP": 1, "Needs Improvement": 2, "Fully Meets": 3, "Exceeds": 4}},
+        {"rule_id": "gender_text_matches_code", "type": "normalized_text_code_mapping", "text_column": "Sex", "code_column": "GenderID", "mapping": {"F": 0, "M": 1}},
+        {"rule_id": "married_flag_matches_text", "type": "boolean_text_mapping", "text_column": "MaritalDesc", "code_column": "MarriedID", "positive_text": "Married", "positive_code": 1, "negative_code": 0},
+        {"rule_id": "termination_flag_matches_date", "type": "termination_flag_date"},
+        {"rule_id": "department_id_functionally_maps_to_text", "type": "code_to_text_function", "code_column": "DeptID", "text_column": "Department"}
+      ]
+    }
+  },
+  "construct_boundary": {
+    "target_construct": "recorded_organizational_performance_rating",
+    "not_established_as": ["true_employee_capability", "objective_productivity", "future_potential"],
+    "required_limitation": "Neither pinned source provides authoritative construct-validity evidence establishing the rating as true capability, objective productivity, or future potential."
+  },
+  "claim_boundary": {
+    "external_generalization_established": false,
+    "data_quality_audit_establishes_source_authenticity_or_licence": false,
+    "absence_of_detected_anomalies_establishes_data_validity": false,
+    "data_quality_repairs_authorized": false
+  },
+  "publication": {
+    "required_report": "DATA_QUALITY_REPORT.md",
+    "required_manuscript_table": "manuscript_ready_data_quality.csv",
+    "publish_row_level_values": false,
+    "publish_raw_data": false,
+    "publish_only_aggregate_profiles_and_schemas": true
+  }
+}
