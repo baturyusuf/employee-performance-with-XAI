@@ -1,0 +1,107 @@
+{
+  "schema_version": 1,
+  "contract_id": "hrdataset_sensitivity_v3",
+  "dataset_key": "hrdataset_v14",
+  "purpose": "independent_protocol_replication_target_mapping_and_repeated_nested_cv_sensitivity",
+  "source_contracts": {
+    "raw_dataset": {"path": "data/external/hrdataset_v14/raw.csv", "sha256": "cb19996755c93c0a8d6527f59da4701c80aef65eff854906546dce286249813c"},
+    "schema_mapping": {"path": "data/external/hrdataset_v14/schema_mapping.json", "sha256": "65c40fecc75235f57209cff6231d7386e4279ebedca9390f53ad2bb67ae63788"},
+    "acquisition_manifest": {"path": "configs/data_acquisition.yaml", "sha256": "a5e820a7213967e494bc9238f104e478c5a65c0840d654397cc3063314262d97"},
+    "model_grid": {"path": "configs/model_grid.yaml", "sha256": "d8fb0584d7106f8941ca8e1b0e0a9c58e13f39519c6c75b383ff333d92d41617"},
+    "canonical_config": {"path": "configs/manuscript_final.yaml", "sha256": "f8a6354ab67757c5d92c93cef2fe03ab88f4b16b10ce470f2db97ed4d0407779"},
+    "canonical_v2_receipt": {"path": "reports/research_log/finalization_v2/15_canonical_evidence_receipt.json", "sha256": "bd09523276dcbc54d036f8c9eb0c71ba62f8b0f913c495695a2259296101827c"},
+    "v2_external_metadata": {"path": "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/external_replication/external_replication_metadata.json", "sha256": "732e62045a448514879a6070cc04ff84d8be136a907d44a953a94a0babe9e047"},
+    "v2_primary_features": {"path": "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/external_replication/feature_policy_features.csv", "sha256": "a27365e55ceee7e3a15de7501a2b64e0fe80e44203e5afb5576d16cb8337f579"},
+    "v2_raw_intervals": {"path": "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/external_replication/raw_metric_intervals.csv", "sha256": "bc66bb334289e90d0ff03ed2a13ae8452c55bad73984725d26a9f5cb39ed7ee2"},
+    "v2_calibrated_intervals": {"path": "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/external_replication/calibration_metric_intervals.csv", "sha256": "3bec5cf30912979a87b0fafa18327c5ce713511c68347be5ca92489f774093f8"},
+    "v2_raw_oof": {"path": "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/external_replication/raw_oof_predictions.csv", "sha256": "5270d26a6bcde6b1c034bf3f71c0cd3475df269c917ec69567ed093bdabcf138"},
+    "v2_calibrated_oof": {"path": "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/external_replication/sigmoid_oof_predictions.csv", "sha256": "5eb46b5149c29a7b16e2ecffb9d39f4b890fa5632f68b75fe6e3b26ae9e9b947"}
+  },
+  "feature_policy": {
+    "policy_id": "conservative_primary",
+    "exact_features": ["EmpJobRole", "EngagementSurvey", "EmpJobSatisfaction", "SpecialProjectsCount", "DaysLateLast30", "Absences", "ExperienceYearsAtThisCompany"],
+    "feature_count": 7,
+    "same_exact_features_across_formulations": true,
+    "training_partition_only_preprocessing": true
+  },
+  "target_formulations": [
+    {
+      "formulation_id": "primary_three_class",
+      "role": "retained_primary_mapping",
+      "ordered_labels": [2, 3, 4],
+      "mapping": {"PIP": 2, "Needs Improvement": 2, "Fully Meets": 3, "Exceeds": 4, "Exceptional": 4},
+      "rationale": "Retains the canonical v2 mapping onto the INX-like 2/3/4 scale; it does not establish target equivalence."
+    },
+    {
+      "formulation_id": "raw_order_four_class",
+      "role": "supplementary_mapping_sensitivity",
+      "ordered_labels": [1, 2, 3, 4],
+      "mapping": {"PIP": 1, "Needs Improvement": 2, "Fully Meets": 3, "Exceeds": 4, "Exceptional": 4},
+      "rationale": "Preserves the dataset's ordered raw performance categories and isolates sensitivity to merging PIP with Needs Improvement; the unobserved Exceptional category shares the highest label without fabricating observations."
+    }
+  ],
+  "design": {
+    "repetitions": 5,
+    "outer_strategy": "StratifiedKFold",
+    "outer_splits": 5,
+    "outer_shuffle": true,
+    "inner_strategy": "StratifiedKFold",
+    "inner_splits": 5,
+    "inner_shuffle": true,
+    "seed_schedule": [
+      {"repetition": 1, "outer_seed": 4201, "inner_seed": 4301, "model_seed": 4401, "calibration_seed": 4501, "baseline_seed": 4601},
+      {"repetition": 2, "outer_seed": 4202, "inner_seed": 4302, "model_seed": 4402, "calibration_seed": 4502, "baseline_seed": 4602},
+      {"repetition": 3, "outer_seed": 4203, "inner_seed": 4303, "model_seed": 4403, "calibration_seed": 4503, "baseline_seed": 4603},
+      {"repetition": 4, "outer_seed": 4204, "inner_seed": 4304, "model_seed": 4404, "calibration_seed": 4504, "baseline_seed": 4604},
+      {"repetition": 5, "outer_seed": 4205, "inner_seed": 4305, "model_seed": 4405, "calibration_seed": 4505, "baseline_seed": 4605}
+    ],
+    "same_exact_outer_and_inner_folds_across_systems_within_formulation_and_repetition": true,
+    "different_target_formulations_have_independently_stratified_folds": true,
+    "every_sample_exactly_once_per_system_per_repetition": true,
+    "outer_test_usage": "evaluation_only_never_tuning_preprocessing_calibration_mapping_or_seed_selection"
+  },
+  "model_protocol": {
+    "model": "xgboost",
+    "candidate_count": 8,
+    "selection_metric": "macro_f1",
+    "tie_break_metric": "quadratic_weighted_kappa",
+    "primary_tie_tolerance": 0.001,
+    "fixed_and_candidate_parameters_source": "source_contracts.model_grid",
+    "outer_test_used_for_selection": false
+  },
+  "calibration": {
+    "methods": ["raw", "sigmoid"],
+    "sigmoid_algorithm": "one_vs_rest_platt_logit_then_row_renormalize",
+    "sigmoid_predeclared": true,
+    "training_source": "selected_candidate_five_fold_inner_oof_probabilities_within_each_outer_training_partition",
+    "outer_test_used_for_fit_or_method_selection": false,
+    "n_bins": 10
+  },
+  "naive_baselines": ["majority_baseline", "stratified_baseline", "ordinal_median_baseline"],
+  "evaluation": {
+    "aggregate_metrics": ["accuracy", "balanced_accuracy", "macro_f1", "quadratic_weighted_kappa", "ordinal_mae", "two_level_reversal_rate", "nll_log_loss", "multiclass_brier", "ece_confidence", "ranked_probability_score"],
+    "priority_cv_metrics": ["macro_f1", "quadratic_weighted_kappa", "ordinal_mae", "nll_log_loss", "multiclass_brier", "ece_confidence", "ranked_probability_score"],
+    "per_class_metrics": ["precision", "recall", "f1", "support"],
+    "confusion_matrix_required": true,
+    "variability_summary": ["mean", "sample_sd", "median", "minimum", "maximum"],
+    "cross_formulation_metric_difference_allowed": false,
+    "canonical_v2_ten_fold_reference_use": "descriptive_design_comparison_only_never_selection"
+  },
+  "protocol_comparison_components": ["folds", "tuning", "calibration", "SHAP", "subgroup", "proxy", "target", "features"],
+  "computational_scope": {
+    "planned_xgboost_fit_calls": 2300,
+    "planned_baseline_fit_calls": 150,
+    "network_calls": 0,
+    "paid_api_calls": 0
+  },
+  "publication": {
+    "local_output_root": "reports/major_revision_v3_runs",
+    "publish_employee_level_oof": false,
+    "publish_fold_assignments": false,
+    "publish_fitted_models_or_calibrators": false,
+    "publish_aggregate_repetition_variability": true,
+    "publish_per_class_and_confusion_results": true,
+    "mandatory_limitations": ["small_n_and_rare_classes", "mapping_specific_estimand", "cross_dataset_protocol_replication_not_locked_transport", "different_feature_spaces_and_target_semantics", "calibration_conditional_on_fixed_repeated_cv_design", "public_source_authenticity_and_licence_manual_review"],
+    "prohibited_claims": ["external_validation", "locked_model_transport", "target_equivalence", "robust_to_cv_design_without_close_results", "deployment_ready_hr_decision", "fairness_certified"]
+  }
+}

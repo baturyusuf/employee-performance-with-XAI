@@ -776,3 +776,14 @@ Push/recovery gate: the normal push timed out after 184 seconds with no remote r
 - Complete pytest after tracked compact publication: exit 0; 926 passed, 2 skipped, and 11 subtests passed in 472.20 seconds.
 - Final unittest discovery: exit 0; 179 tests passed, 1 skipped in 7.436 seconds. Compileall over `src`, `tests`, and `tools` and `git diff --check` exited 0. Package attribute returned `text: unset`.
 - Staged compact-package audit: exit 0; all 11 manifest-declared files matched Git-index SHA-256, byte size, and working-tree bytes exactly; 12 package files and 22 total checkpoint paths were staged; zero employee-level source/stage/manuscript paths were included.
+
+## Major-revision v3 HRDataset sensitivity implementation — 2026-09-07
+
+- Contract validator: exit 0; SHA-256 `9a94052e8fc96ff0894c89cfe99eca898e1e0da5ed697c7fabac99e4fb22799b`; 12 exact sources, 311 samples, seven features, mapped supports 31/243/37 and 13/18/243/37, canonical-v2 10×5 reference validation, and zero network/paid-API scope passed.
+- Fit-free preflight: exit 0 in 4.8 seconds; ten distinct fold contracts and semantic outer assignments; 2,300 planned XGBoost and 150 planned baseline fits; zero actual fits/network/API calls.
+- First bounded diagnostic: exit 1 at the first label-only baseline because missing feature values entered baseline input validation. No output was persisted or admitted.
+- Corrected bounded diagnostic: exit 0 in 13.9 seconds; both formulations, one outer fold each, 92 XGBoost fits, six baseline fits, 16 candidate rows, 630 OOF rows, and zero network/paid-API calls.
+- Initial focused contract/runner regression: 15 passed in 4.29 seconds after correcting two expected-error-message assertions. Compileall over `src` and `tests` and `git diff --check` exited 0.
+- Combined Phase 3A plus existing HRDataset/external/calibration/ordinal/repeated-CV regression: 99 passed in 26.48 seconds.
+- Complete pytest: exit 0; 941 passed, 2 skipped, and 11 subtests passed in 514.46 seconds. Unittest discovery passed 179 tests with 1 skip in 7.960 seconds; compileall over `src`, `tests`, and `tools`, `git diff --check`, and manuscript no-change check exited 0.
+- Final Phase 3A plus CI-workflow focus: 19 passed in 4.94 seconds. README validation resolved 59 local links; staged review contains 14 small files, zero raw/model/environment/run-root/manuscript paths, and no whitespace errors.
