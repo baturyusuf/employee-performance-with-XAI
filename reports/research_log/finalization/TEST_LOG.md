@@ -845,3 +845,11 @@ Push/recovery gate: the normal push timed out after 184 seconds with no remote r
 - Complete pre-publication pytest: exit 0; 990 passed, 2 skipped, and 11 subtests passed in 566.09 seconds.
 - Final unittest discovery: exit 0; 179 tests passed, one skipped in 7.610 seconds. Final Phase 4B/package plus CI-workflow focus passed 17 tests in 3.24 seconds; compileall over `src`, `tests`, and `tools` exited 0.
 - Staged publication audit: exit 0; all eleven manifest records matched working-tree SHA-256/size and Git-index bytes exactly; 12 package files and 21 total checkpoint paths were staged; zero raw/run/model/spreadsheet/manuscript-source paths were included and no unstaged change remained.
+
+## Major-revision v3 claim-matrix implementation — 2026-09-08
+
+- Contract-only validation: exit 0; 45 pending claims, 32 numerical, 13 narrative, 27 source files, all 12 components, exact claim-set SHA-256 `1664b188df14135d3b3de8642de3d080c25a3fbadc440615c2bd04b2f14ddabe`, zero manuscript authorization, and zero paid API calls.
+- Initial focused regression: ten tests passed and one assertion failed because rehashed sentence tampering was correctly rejected at manifest comparison before the later derived-file comparison named by the assertion. The assertion now accepts either rejection stage; no evidence or validator behavior changed. Corrected focus: 11 passed in 1.16 seconds.
+- Related claim-matrix, release-readiness, literature, and CI-workflow focus: 36 passed in 4.23 seconds.
+- Complete pre-publication pytest: exit 0; 1,001 passed, 2 skipped, and 11 subtests passed in 565.67 seconds.
+- Unittest discovery: exit 0; 179 tests passed, one skipped in 7.655 seconds. Compileall over `src`, `tests`, and `tools`, `git diff --check`, and manuscript/reference no-change checks exited 0.

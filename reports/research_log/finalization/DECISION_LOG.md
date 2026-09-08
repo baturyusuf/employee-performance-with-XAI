@@ -264,3 +264,10 @@ V2-033 atomic-publication consequence on 2026-07-14: transient Windows antivirus
 - Treat ethics/IRB, consent, author contributions, funding, conflicts, AI/tool-use disclosure, and final data/code availability wording as author/institution decisions. Synthetic/fictitious descriptions do not authorize an invented `not applicable` determination.
 - Retain the proposed future tag `v1.0.0-paper-revision` as draft preparation metadata only. Do not create a tag, GitHub release, archival record, DOI, repository software licence, or history rewrite without the required decisions and explicit authorization.
 - Publish only the 12-file fail-closed preparation package under `reports/research_log/major_revision_v3/phase4b_release_readiness/`; stop manuscript progression at the documented provenance/licence and approval boundary.
+
+## Phase 5A claim-matrix implementation — 2026-09-08
+
+- Permit preparation of a claim-review package despite unresolved provenance/licence and declaration blockers because preparation does not close, conceal, or bypass them. Carry those blockers into the claim boundaries and later approval handoff.
+- Require every numerical sentence to match exactly one SHA-bound CSV row, exact stored value, and deterministic half-even display rule. Require every narrative sentence to match a SHA-bound text anchor and to state its support level, mandatory qualifier, and prohibited overclaim.
+- Cover the feature contract and Phases 1B through 5A in one 45-claim set. Preserve metric-specific, cross-sectional, descriptive, noncausal, non-fairness-certifying, non-transport, and bounded-literature interpretations.
+- Record the claim set and every row as `pending_user_approval`. A generic “continue” instruction is not digest-specific approval. Keep manuscript Markdown, LaTeX, bibliography, reviewer response, tag, release, DOI, raw publication, and history rewriting unauthorized.
