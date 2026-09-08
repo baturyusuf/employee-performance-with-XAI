@@ -57,6 +57,8 @@ The independently validated Round 2 [`HR target-alias package`](reports/research
 
 The deterministic Round 2 [`P3 subgroup summary`](reports/research_log/major_revision_round2/SUBGROUP_MANUSCRIPT_SUMMARY.csv) publishes all six prespecified attributes at the n≥30 support threshold for macro-F1, QWK, and ordinal MAE. It preserves group endpoints, eligibility counts, statuses, and exploratory interval labels while remaining a descriptive diagnostic rather than fairness or discrimination evidence.
 
+The Round 2 [`method reproducibility tables`](reports/research_log/major_revision_round2/METHOD_REPRODUCIBILITY_TABLES/README.md) provide the complete 28-field P0–P5 availability matrix, preprocessing and all six model-search registries, exact CV/seed/reuse contracts, and self-contained ordinal-model notes. P4/P5 remain timestamp-unverified sensitivities, and no policy is described as leakage-free.
+
 ## Tracked manuscript-support assets
 
 GitHub contains a deterministic, source-mapped export at [`manuscript/mdpi_information/assets/`](manuscript/mdpi_information/assets/). It was generated from the validated canonical run without refitting models or recomputing scientific evidence. The compact package contains 109 files and 10,338,351 bytes; its closed-world manifest SHA-256 is `fbe7355b956df01ad9817f27b42dc13c0f3e0e33e7f0e5c42a2477beb9d001e1`.
