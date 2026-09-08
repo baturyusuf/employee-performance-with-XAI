@@ -1,0 +1,64 @@
+{
+  "contract_sha256": "f47f402756108377a6eae744bb6eae2684071d80b063571fdd58b0809a372970",
+  "file_count_excluding_manifest": 11,
+  "files": [
+    {
+      "path": "ARTIFACT_INVENTORY.csv",
+      "sha256": "0041d95835eda2efef3889dc48603f752fff4b56338a1012ae6fc5cced076b5c",
+      "size_bytes": 3687
+    },
+    {
+      "path": "BLOCKER_REGISTER.csv",
+      "sha256": "0d42241dc670f7c2773bc97830dcd8ec3aa4cf3396ad650d491bcdca87241954",
+      "size_bytes": 1167
+    },
+    {
+      "path": "DATA_PROVENANCE_LICENSE_REGISTER.csv",
+      "sha256": "9e5880bfcd44e5168ec373f3663a75cba53d0587f15d5b778933929953bcc5a4",
+      "size_bytes": 5307
+    },
+    {
+      "path": "ETHICS_DECLARATIONS_HANDOFF.md",
+      "sha256": "58b63c7dda2bbc7bd96662fedb2f0e2637074981bc4cb9d7faef62b5b44545fd",
+      "size_bytes": 3160
+    },
+    {
+      "path": "ETHICS_DECLARATIONS_REGISTER.csv",
+      "sha256": "c95a298194f42d1f77f8dfd9fbac5ba4a5f5dccfab607eb51f805acb43fc9f79",
+      "size_bytes": 1989
+    },
+    {
+      "path": "PROVENANCE_LICENSE_REPORT.md",
+      "sha256": "63d2edbab99f95065744862a43780e364c1f616e5efde8f2f54dfae89964699f",
+      "size_bytes": 6271
+    },
+    {
+      "path": "README.md",
+      "sha256": "3d5767a2943b3af932207c1a11570e98cff127bb1656530bd4d23d4d67093dd5",
+      "size_bytes": 1446
+    },
+    {
+      "path": "RELEASE_NOTES_DRAFT.md",
+      "sha256": "f5e266266436f054f58f7d937059adc92d41ca6ba35bc76e3778ff5767e7d881",
+      "size_bytes": 1406
+    },
+    {
+      "path": "RELEASE_READINESS.md",
+      "sha256": "e7f60b7428ec1906db312384362791db68b965ea038412a68c62397d16c011a5",
+      "size_bytes": 3839
+    },
+    {
+      "path": "provenance_receipt.json",
+      "sha256": "74357680c2e4741e6489507d7a46e32c74233f3b1977fea32adcf7f4f9ce9ff4",
+      "size_bytes": 1369
+    },
+    {
+      "path": "release_candidate_manifest.json",
+      "sha256": "566bf614850ce33125b60981c2437aefa2c482e7b053463d710090cf3d803f39",
+      "size_bytes": 6567
+    }
+  ],
+  "generation_commit": "1b08313633ba0c3bd343dc5b7175f87029b9425b",
+  "package_kind": "phase4b_provenance_ethics_release_readiness",
+  "schema_version": 1
+}

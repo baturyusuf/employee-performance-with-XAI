@@ -1,0 +1,141 @@
+{
+  "archive_record_url": null,
+  "candidate_kind": "paper_revision_release_preparation",
+  "component_artifacts": [
+    {
+      "artifact_id": "canonical_v2_manuscript_assets",
+      "evidence_identity": "canonical_v2_20260714T221501Z_483f96f",
+      "file_count": 109,
+      "manifest_path": "manuscript/mdpi_information/assets/manifests/manuscript_asset_manifest.json",
+      "manifest_sha256": "fbe7355b956df01ad9817f27b42dc13c0f3e0e33e7f0e5c42a2477beb9d001e1",
+      "path": "manuscript/mdpi_information/assets",
+      "release_inclusion": "candidate_tracked_component_after_final_gate",
+      "role": "historical_v2_compact_manuscript_support",
+      "size_bytes": 10338351
+    },
+    {
+      "artifact_id": "phase1b_ordinal_benchmark",
+      "evidence_identity": "phase1b_v3_20260903T130912Z_dc5cb8b",
+      "file_count": 9,
+      "manifest_path": "reports/research_log/major_revision_v3/phase1b_ordinal_benchmark/manifest.json",
+      "manifest_sha256": "b97b558d8c373958d79847b4e8d568ca6f670e5438859df56213799601f3d389",
+      "path": "reports/research_log/major_revision_v3/phase1b_ordinal_benchmark",
+      "release_inclusion": "candidate_tracked_component_after_final_gate",
+      "role": "v3_compact_aggregate_evidence",
+      "size_bytes": 71654
+    },
+    {
+      "artifact_id": "phase1c_repeated_nested_cv",
+      "evidence_identity": "phase1c_v3_20260903T215015Z_78649c4",
+      "file_count": 9,
+      "manifest_path": "reports/research_log/major_revision_v3/phase1c_repeated_nested_cv/manifest.json",
+      "manifest_sha256": "ce930c634e6108e6a9859df6eaac628bacde98cd7b71563ad0a067dc1849638b",
+      "path": "reports/research_log/major_revision_v3/phase1c_repeated_nested_cv",
+      "release_inclusion": "candidate_tracked_component_after_final_gate",
+      "role": "v3_compact_aggregate_evidence",
+      "size_bytes": 255182
+    },
+    {
+      "artifact_id": "phase1d_policy_retuning",
+      "evidence_identity": "phase1d_v3_20260904T063324Z_823c848",
+      "file_count": 7,
+      "manifest_path": "reports/research_log/major_revision_v3/phase1d_policy_retuning/manifest.json",
+      "manifest_sha256": "57f00a27f7de87f2f931fef1b29f7435e5869f77b14f065d98b7dbd19d2c1303",
+      "path": "reports/research_log/major_revision_v3/phase1d_policy_retuning",
+      "release_inclusion": "candidate_tracked_component_after_final_gate",
+      "role": "v3_compact_aggregate_evidence",
+      "size_bytes": 92567
+    },
+    {
+      "artifact_id": "phase2a_shap_stability_faithfulness",
+      "evidence_identity": "phase2a_v3_20260904T073008Z_6e52de7",
+      "file_count": 8,
+      "manifest_path": "reports/research_log/major_revision_v3/phase2a_shap_stability_faithfulness/manifest.json",
+      "manifest_sha256": "4cd7bcace03d556e2bd27eea4dca87143745914ddd56136476edc6c662e44481",
+      "path": "reports/research_log/major_revision_v3/phase2a_shap_stability_faithfulness",
+      "release_inclusion": "candidate_tracked_component_after_final_gate",
+      "role": "v3_compact_aggregate_evidence",
+      "size_bytes": 24079
+    },
+    {
+      "artifact_id": "phase2b_calibration_diagnostics",
+      "evidence_identity": "phase2b_v3_20260904T120838Z_21d1aec",
+      "file_count": 13,
+      "manifest_path": "reports/research_log/major_revision_v3/phase2b_calibration_diagnostics/manifest.json",
+      "manifest_sha256": "196d9eea87a160b375ddf215fc131142598b0338fa373a7474aaaa1b865d29f3",
+      "path": "reports/research_log/major_revision_v3/phase2b_calibration_diagnostics",
+      "release_inclusion": "candidate_tracked_component_after_final_gate",
+      "role": "v3_compact_aggregate_evidence",
+      "size_bytes": 757267
+    },
+    {
+      "artifact_id": "phase2c_subgroup_proxy_use",
+      "evidence_identity": "phase2c_v3_20260907T070905Z_e314bb5",
+      "file_count": 12,
+      "manifest_path": "reports/research_log/major_revision_v3/phase2c_subgroup_proxy_use/manifest.json",
+      "manifest_sha256": "0720d0575154b850a0d3cb89b9bb09403dd514f1e9ebde87ff458189185077f0",
+      "path": "reports/research_log/major_revision_v3/phase2c_subgroup_proxy_use",
+      "release_inclusion": "candidate_tracked_component_after_final_gate",
+      "role": "v3_compact_aggregate_evidence",
+      "size_bytes": 994542
+    },
+    {
+      "artifact_id": "phase3a_hrdataset_sensitivity",
+      "evidence_identity": "phase3a_v3_20260907T141213Z_f6e6a0a",
+      "file_count": 14,
+      "manifest_path": "reports/research_log/major_revision_v3/phase3a_hrdataset_sensitivity/manifest.json",
+      "manifest_sha256": "415f1bc5d346c282e51dcc1212335c80c0ee3cd7a673180b22bc4b36f52d1651",
+      "path": "reports/research_log/major_revision_v3/phase3a_hrdataset_sensitivity",
+      "release_inclusion": "candidate_tracked_component_after_final_gate",
+      "role": "v3_compact_aggregate_evidence",
+      "size_bytes": 409991
+    },
+    {
+      "artifact_id": "phase3b_data_quality",
+      "evidence_identity": "phase3b_v3_20260907T154418Z_0d9643b",
+      "file_count": 13,
+      "manifest_path": "reports/research_log/major_revision_v3/phase3b_data_quality/manifest.json",
+      "manifest_sha256": "07083ec83ac01e9393995b30c697190e2ee5221cd54aa3b54fbde01072f57eea",
+      "path": "reports/research_log/major_revision_v3/phase3b_data_quality",
+      "release_inclusion": "candidate_tracked_component_after_final_gate",
+      "role": "v3_compact_aggregate_evidence",
+      "size_bytes": 53868
+    },
+    {
+      "artifact_id": "phase4a_literature",
+      "evidence_identity": "e408208bbd7fb3071c47717f21ef521b1917e93a",
+      "file_count": 9,
+      "manifest_path": "reports/research_log/major_revision_v3/phase4a_literature/manifest.json",
+      "manifest_sha256": "e7b8fdd654c228344d13ec37c8817414b977a5173e5ca3721cbd2641b61c1730",
+      "path": "reports/research_log/major_revision_v3/phase4a_literature",
+      "release_inclusion": "candidate_tracked_component_after_final_gate",
+      "role": "v3_source_verified_positioning_evidence",
+      "size_bytes": 58534
+    }
+  ],
+  "concept_doi": null,
+  "contract_sha256": "f47f402756108377a6eae744bb6eae2684071d80b063571fdd58b0809a372970",
+  "final_commit": null,
+  "generation_commit": "1b08313633ba0c3bd343dc5b7175f87029b9425b",
+  "github_release_url": null,
+  "open_blocker_ids": [
+    "B01",
+    "B02",
+    "B03",
+    "B04",
+    "B05",
+    "B06",
+    "B07",
+    "B08",
+    "B09",
+    "B10",
+    "B11"
+  ],
+  "proposed_tag": "v1.0.0-paper-revision",
+  "raw_dataset_included": false,
+  "release_authorized": false,
+  "schema_version": 1,
+  "snapshot_date": "2026-09-07",
+  "status": "blocked_preparation_only",
+  "version_doi": null
+}

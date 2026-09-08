@@ -255,3 +255,12 @@ V2-033 atomic-publication consequence on 2026-07-14: transient Windows antivirus
 - Distinguish `not_reported` from `no`, exact from similar datasets, log-loss reporting from explicit calibration assessment, ordinary CV from nested selection, SHAP use from exact-fold explanation identity/stability, and public code/data links from full artifact provenance.
 - Permit only the bounded novelty statement that no work in this source-verified 25-work set reports the complete shared evidence contract used here. Prohibit exhaustive-review, universal novelty, world-first, first-ever, leakage-free, bias-free, fairness-certified, causal, and deployment-ready claims.
 - Publish the deterministic nine-file package under `reports/research_log/major_revision_v3/phase4a_literature/`. Do not edit `references.bib` or the manuscript until the final v3 claim matrix is frozen and approved.
+
+## Major-revision v3 provenance/licence and immutable-release decision — 2026-09-07
+
+- Separate byte identity, exact-mirror identity, primary-source authority, licence evidence, redistribution permission, citation authority, and synthetic/fictitious status. A hash or public GitHub mirror cannot close upstream authenticity or rights.
+- Retain the official IABAC source and restrictive reproduction notice for INX, the author-record CC BY-NC-ND 4.0 terms for HRDataset_v14, and the Kaggle ODbL/DbCL label for IBM only with their stated permission/right-chain limitations. Keep Employee Turnover provenance and licence unresolved because the original Kaggle record is unavailable and third-party copies conflict.
+- Block raw redistribution for all four datasets. Continue to publish only hashes, schemas, acquisition instructions, and aggregate evidence until exact source/right chains and applicable conditions are approved.
+- Treat ethics/IRB, consent, author contributions, funding, conflicts, AI/tool-use disclosure, and final data/code availability wording as author/institution decisions. Synthetic/fictitious descriptions do not authorize an invented `not applicable` determination.
+- Retain the proposed future tag `v1.0.0-paper-revision` as draft preparation metadata only. Do not create a tag, GitHub release, archival record, DOI, repository software licence, or history rewrite without the required decisions and explicit authorization.
+- Publish only the 12-file fail-closed preparation package under `reports/research_log/major_revision_v3/phase4b_release_readiness/`; stop manuscript progression at the documented provenance/licence and approval boundary.

@@ -19,8 +19,9 @@ The broader reviewer brief is now the active extension. Preserve the complete v2
 13. Completed and pushed: Phase 3A exact run `phase3a_v3_20260907T141213Z_f6e6a0a`, independent full recomputation, and governed 14-file/409,991-byte compact non-row-level package (`858ee0e564703e2bcee2c4b78ebbf69ee3d4c702`).
 14. Completed and pushed: Phase 3B exact run `phase3b_v3_20260907T154418Z_0d9643b`, independent reconstruction of every output table, and governed 13-file/53,868-byte aggregate-only package with `DATA_QUALITY_REPORT.md` (`86bc66e`). Preserve all HR findings and keep source rows unchanged.
 15. Completed and pushed: Phase 4A 25-work source-verified contract and deterministic nine-file/58,534-byte literature/novelty package. Preserve the bounded positioning claim, all six exclusions, and the unresolved-DOI caveat; do not silently convert `not_reported` to `no`.
-16. Next: perform Phase 4B provenance/ethics/release preparation. Do not invent licence, ethics, DOI, release, or source-authority facts, and do not publish a release without explicit authorization.
-17. Freeze and request approval for the final v3 claim matrix before editing `manuscript/mdpi_information/main.md` or `main.tex`.
+16. Completed and pushed: Phase 4B four-dataset provenance/licence audit and deterministic 12-file/38,324-byte release-readiness package. Preserve `blocked_preparation_only`, all eleven blockers, all four raw-data exclusions, and null final commit/release/DOI fields.
+17. Blocking boundary: obtain the missing dataset permissions/right-chain evidence, repository software-licence decision, ethics/IRB determination, author declarations, and separately authorized Git-history strategy. Do not create a tag/release/DOI or publish raw data before these are resolved.
+18. After the blocking inputs are supplied, freeze and request approval for the final v3 claim matrix before editing `manuscript/mdpi_information/main.md` or `main.tex`.
 
 Current planning evidence: `../major_revision_v3/REQUIREMENT_COVERAGE_AUDIT.md`.
 

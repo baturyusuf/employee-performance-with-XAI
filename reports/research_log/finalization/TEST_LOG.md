@@ -834,3 +834,14 @@ Push/recovery gate: the normal push timed out after 184 seconds with no remote r
 - Complete pre-publication pytest: exit 0; 977 passed, 2 skipped, and 11 subtests passed in 563.70 seconds.
 - Final unittest discovery: exit 0; 179 tests passed, one skipped in 7.771 seconds. Compileall over `src`, `tests`, and `tools`, `git diff --check`, and manuscript/reference no-change checks exited 0. Package manifest attribute returned `text: unset`.
 - Staged publication audit: exit 0; all eight manifest records matched working-tree SHA-256/size and Git-index bytes exactly; nine package files and 18 total checkpoint paths were staged; zero raw/run/model/spreadsheet/manuscript-source paths were included and no unstaged change remained.
+
+## Major-revision v3 provenance/licence and release-readiness validation — 2026-09-07
+
+- Contract-only validation: exit 0; four datasets, ten compact artifact components with 203 files/13,056,035 bytes, eight declaration fields, eleven open blockers, five historical raw-data paths, zero raw redistribution approvals, zero remote tags/releases/DOIs, and zero paid API calls.
+- Initial focused regression: 12 tests passed and one assertion failed because the test omitted the article “the” from an exact prohibited-assertion string. The test was corrected without changing the contract; final Phase 4B focus passed 13 tests in 3.60 seconds.
+- Related data-acquisition, explicit-input, dataset-card, sanitized-publication, and CI-workflow regression: 34 passed in 6.14 seconds. Compileall, diff hygiene, and manuscript/reference no-change checks passed.
+- Implementation checkpoint `1b08313633ba0c3bd343dc5b7175f87029b9425b` pushed normally with local/origin divergence 0/0.
+- Clean-commit export and explicit validation: exit 0; 12 files/38,324 bytes, four dataset rows, ten artifact rows, eight declaration rows, eleven blocker rows, contract SHA-256 `f47f402756108377a6eae744bb6eae2684071d80b063571fdd58b0809a372970`, and manifest SHA-256 `d166397d1a0c08df89c893cc092902d2c69671d0c5a52055f3a298bb4fe6ea9e`. Package attribute returned `text: unset`.
+- Complete pre-publication pytest: exit 0; 990 passed, 2 skipped, and 11 subtests passed in 566.09 seconds.
+- Final unittest discovery: exit 0; 179 tests passed, one skipped in 7.610 seconds. Final Phase 4B/package plus CI-workflow focus passed 17 tests in 3.24 seconds; compileall over `src`, `tests`, and `tools` exited 0.
+- Staged publication audit: exit 0; all eleven manifest records matched working-tree SHA-256/size and Git-index bytes exactly; 12 package files and 21 total checkpoint paths were staged; zero raw/run/model/spreadsheet/manuscript-source paths were included and no unstaged change remained.

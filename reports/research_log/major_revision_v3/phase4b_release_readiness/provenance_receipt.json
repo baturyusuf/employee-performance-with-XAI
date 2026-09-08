@@ -1,0 +1,39 @@
+{
+  "contract_path": "configs/release_readiness_v3.json",
+  "contract_sha256": "f47f402756108377a6eae744bb6eae2684071d80b063571fdd58b0809a372970",
+  "contract_validation": {
+    "artifact_component_count": 10,
+    "artifact_file_count": 203,
+    "artifact_size_bytes": 13056035,
+    "contract_path": "configs/release_readiness_v3.json",
+    "contract_sha256": "f47f402756108377a6eae744bb6eae2684071d80b063571fdd58b0809a372970",
+    "dataset_count": 4,
+    "declaration_count": 8,
+    "doi_recorded": false,
+    "final_commit_recorded": false,
+    "github_release_count": 0,
+    "historical_raw_path_count": 5,
+    "open_blocker_count": 11,
+    "paid_api_calls": 0,
+    "raw_redistribution_allowed_count": 0,
+    "remote_tag_count": 0,
+    "snapshot_date": "2026-09-07",
+    "status": "passed"
+  },
+  "generation_commit": "1b08313633ba0c3bd343dc5b7175f87029b9425b",
+  "package_kind": "phase4b_provenance_ethics_release_readiness",
+  "publication_controls": {
+    "doi_created": false,
+    "ethics_determination_invented": false,
+    "github_release_created": false,
+    "history_rewritten": false,
+    "manuscript_modified": false,
+    "network_calls_during_package_generation": 0,
+    "paid_api_calls": 0,
+    "raw_dataset_included": false,
+    "repository_license_created": false,
+    "tag_created": false
+  },
+  "schema_version": 1,
+  "snapshot_date": "2026-09-07"
+}

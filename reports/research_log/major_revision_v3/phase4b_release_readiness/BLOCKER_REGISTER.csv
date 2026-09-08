@@ -1,0 +1,12 @@
+blocker_id,category,status,item
+B01,authors,open,Author contributions/CRediT roles are not approved.
+B02,authors,open,Funding statement is not supplied or explicitly confirmed as none.
+B03,ethics,open,"IRB/ethics institution, unit, reference, date, and determination are absent."
+B04,authors,open,Conflict-of-interest declarations are not approved by all authors.
+B05,authors,open,AI/tool-use disclosure requires author and target-journal policy review.
+B06,data_rights,open,No raw dataset has a complete authoritative source-to-local-byte and redistribution-rights chain.
+B07,software_license,open,The public repository has no detected software LICENSE; authors must select or explicitly decline one.
+B08,git_history,open,Five raw dataset paths remain in public Git history; remediation/disclosure needs separate authorization and coordination.
+B09,manuscript,open,The final v3 claim matrix is not frozen/approved and the manuscript/reviewer response/final simulation are incomplete.
+B10,immutable_identity,open,A final release commit and remote immutable tag do not yet exist.
+B11,publication,open,"No GitHub release, archival deposit, release URL, or DOI exists."
