@@ -1,0 +1,49 @@
+{
+  "contract_sha256": "a3c55ac3d089b5e38b029d2364edc9d09b29b3ebc8decc3e04b4bce8f2e2c7f6",
+  "file_count_excluding_manifest": 8,
+  "files": [
+    {
+      "path": "APPROVAL_REQUEST.md",
+      "sha256": "0cf553447bd97532d9d8d56085e0a5ad56573d4143e88b9a4c661f6c8d6e56ed",
+      "size_bytes": 704
+    },
+    {
+      "path": "CLAIM_BOUNDARIES.md",
+      "sha256": "3c277c58ad6be2605326e48c9b6fcb7b2a8142cc1deaab85851368c97f71a828",
+      "size_bytes": 1493
+    },
+    {
+      "path": "CLAIM_MATRIX.csv",
+      "sha256": "b5b0455161a6e2f7f562f6057990133e81a3f791d7806926f773a79213880bf3",
+      "size_bytes": 30841
+    },
+    {
+      "path": "CLAIM_MATRIX.md",
+      "sha256": "8567dfc483572ed8ec140548b1fe752611a3f7a0906018f8796f53acffb6d20b",
+      "size_bytes": 24757
+    },
+    {
+      "path": "README.md",
+      "sha256": "23b3c0932397a0decdb20483010468f9ea7b0a02b721c388cf0bc254311f7207",
+      "size_bytes": 1129
+    },
+    {
+      "path": "SOURCE_REGISTER.csv",
+      "sha256": "9580233b62be6f6b3b5f26d165ba9e7be9b7a01c62b761f41ab638df3143a517",
+      "size_bytes": 8595
+    },
+    {
+      "path": "approval_record.json",
+      "sha256": "5ed161740cb0dc5fd9d3041fd6035708dbdc62a5c4be0ccaa81d2cf2afbc9a4c",
+      "size_bytes": 291
+    },
+    {
+      "path": "provenance_receipt.json",
+      "sha256": "76a1174ae505589aab4748b3519c759d1ebe8e2f5250c9e52a85fe50266ac5e0",
+      "size_bytes": 678
+    }
+  ],
+  "generation_commit": "fcfc4692466d7bc9f414db4b2fe693073d0d7f4e",
+  "package_kind": "phase5a_sentence_level_claim_matrix",
+  "schema_version": 1
+}

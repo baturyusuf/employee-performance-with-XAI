@@ -1,0 +1,18 @@
+{
+  "approval_status": "pending",
+  "claim_count": 45,
+  "claim_set_sha256": "1664b188df14135d3b3de8642de3d080c25a3fbadc440615c2bd04b2f14ddabe",
+  "component_count": 12,
+  "contract_path": "configs/claim_matrix_v3.json",
+  "contract_sha256": "a3c55ac3d089b5e38b029d2364edc9d09b29b3ebc8decc3e04b4bce8f2e2c7f6",
+  "generation_commit": "fcfc4692466d7bc9f414db4b2fe693073d0d7f4e",
+  "manuscript_editing_authorized": false,
+  "narrative_claim_count": 13,
+  "network_calls": 0,
+  "numerical_claim_count": 32,
+  "package_kind": "phase5a_sentence_level_claim_matrix",
+  "paid_api_calls": 0,
+  "schema_version": 1,
+  "source_file_count": 27,
+  "status": "passed_pending_user_approval"
+}

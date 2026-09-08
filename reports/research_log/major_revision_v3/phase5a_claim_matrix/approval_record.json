@@ -1,0 +1,10 @@
+{
+  "approved_at_utc": null,
+  "approved_by": null,
+  "approved_claim_set_sha256": null,
+  "claim_count": 45,
+  "claim_set_sha256": "1664b188df14135d3b3de8642de3d080c25a3fbadc440615c2bd04b2f14ddabe",
+  "decision": "pending",
+  "manuscript_editing_authorized": false,
+  "schema_version": 1
+}
