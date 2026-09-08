@@ -154,7 +154,10 @@ def export_selection_objective_sensitivity_compact_v4(
             "composite_material_dependence_flag_present": False, "paid_api_calls": 0, "network_calls": 0,
         }
         _write(staging / "provenance_receipt.json", _json_bytes(receipt))
-        payload_files = sorted(path for path in staging.iterdir() if path.is_file())
+        payload_files = sorted(
+            (path for path in staging.iterdir() if path.is_file()),
+            key=lambda path: path.name.lower(),
+        )
         manifest = {
             "schema_version": 1, "package": "selection_objective_sensitivity_v4",
             "file_count_excluding_manifest": len(payload_files),
@@ -185,7 +188,7 @@ def validate_selection_objective_sensitivity_compact_v4(directory: Path | str) -
     files = {path.name for path in root.iterdir() if path.is_file()}
     _require(files == EXPECTED_FILES, f"Compact package closed-world inventory drifted: {sorted(files)}.")
     manifest = json.loads((root / "manifest.json").read_text(encoding="utf-8"))
-    expected_payload = sorted(EXPECTED_FILES - {"manifest.json"})
+    expected_payload = sorted(EXPECTED_FILES - {"manifest.json"}, key=str.lower)
     _require([row["path"] for row in manifest["files"]] == expected_payload, "Manifest inventory drifted.")
     for row in manifest["files"]:
         path = root / row["path"]
