@@ -1,0 +1,42 @@
+{
+  "candidate_level_scores_published": false,
+  "created_at_utc": "2026-09-08T19:09:12.005961+00:00",
+  "employee_level_oof_published": false,
+  "fitted_models_published": false,
+  "matched_refit_evaluation_population_identical": true,
+  "network_calls": 0,
+  "package": "hr_target_alias_sensitivity_v4",
+  "paid_api_calls": 0,
+  "row_identities_published": false,
+  "run_validation": {
+    "aggregate_recomputed": true,
+    "candidate_rows": 40,
+    "historical_oof_replay_exact": true,
+    "matched_309_identity_fold_target_exact": true,
+    "network_calls": 0,
+    "oof_rows": 929,
+    "paid_api_calls": 0,
+    "restricted_oof_fit_free_replay_exact": true,
+    "row_identities_published": false,
+    "run_dir": "reports/major_revision_round2_runs/round2_hr_alias_v4_20260908T141019Z_ac50c6e/hr_target_alias_sensitivity",
+    "run_id": "round2_hr_alias_v4_20260908T141019Z_ac50c6e",
+    "selected_rows": 5,
+    "status": "passed"
+  },
+  "sample_removal_effect_fit_free": true,
+  "schema_version": 1,
+  "source_generation_commit": "ac50c6e81722053bfc32b1186954e203334732d8",
+  "source_output_hashes": {
+    "aggregate_metrics.csv": "c2b353f7acfa84b8046f47f8e7dce452b0d50fe27b5e20b1b5f0f998750c781d",
+    "candidate_search_results.csv": "8db5fc6de51f8ac89e81bcea8d82a041e8fc1231e5c5ff2b52ede67fc489b783",
+    "comparison_deltas.csv": "ef0c6e9782af1215a542286405d497fe17da4d43a9d0f053b159dde829c540eb",
+    "confusion_matrix.csv": "e54d25c1b31d5781f588eed16462c272df083ebb67c3f887239e3773d8e55f19",
+    "oof_predictions.csv": "2ea5f05ea54b4e320e2bd654cad98647df63c9aa940971841a96d67b65a2dbde",
+    "per_class_metrics.csv": "3b99f8cd1286939f8d8f637a42b7aa562482fe0e2096d246a058a4031242610b",
+    "population_receipt.json": "1bd9bffa5e6b46490064bed839e3a5c86414c6c1b023ef5fbc3bdfb9742aac87",
+    "selected_hyperparameters.csv": "c6d3eb2a0d421527fa1fde877cd29c3a5130db7ca5e5cc48ec035e578639de6e"
+  },
+  "source_run_id": "round2_hr_alias_v4_20260908T141019Z_ac50c6e",
+  "source_scientific_input_sha256": "f347e0bd66cedcef70f578949d1b25abf923c2a60b8585c0154c023acea500e5",
+  "status": "independently_validated_aggregate_only"
+}

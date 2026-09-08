@@ -1,0 +1,6 @@
+outer_fold,historical_candidate_index,exclusion_refit_candidate_index,selected_candidate_changed,exclusion_candidate_parameters_json,selected_inner_macro_f1_mean,selected_inner_qwk_mean,outer_test_used_for_selection
+1,2,6,True,"{""class_weight"":null,""max_depth"":5,""min_child_weight"":5.0}",0.6574359879453135,0.5952657231886473,False
+2,7,7,False,"{""class_weight"":""balanced"",""max_depth"":5,""min_child_weight"":5.0}",0.6710276751252361,0.5234865348788439,False
+3,4,4,False,"{""class_weight"":null,""max_depth"":5,""min_child_weight"":1.0}",0.6602519579714624,0.5743251691655842,False
+4,4,4,False,"{""class_weight"":null,""max_depth"":5,""min_child_weight"":1.0}",0.6777005947955714,0.600972814261268,False
+5,1,7,True,"{""class_weight"":""balanced"",""max_depth"":5,""min_child_weight"":5.0}",0.7199192659192659,0.5961102311089662,False

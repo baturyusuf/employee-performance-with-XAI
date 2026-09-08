@@ -1,0 +1,48 @@
+{
+  "file_count_excluding_manifest": 8,
+  "files": [
+    {
+      "bytes": 3002,
+      "path": "aggregate_metrics.csv",
+      "sha256": "c2b353f7acfa84b8046f47f8e7dce452b0d50fe27b5e20b1b5f0f998750c781d"
+    },
+    {
+      "bytes": 6918,
+      "path": "comparison_deltas.csv",
+      "sha256": "ef0c6e9782af1215a542286405d497fe17da4d43a9d0f053b159dde829c540eb"
+    },
+    {
+      "bytes": 1597,
+      "path": "confusion_matrix.csv",
+      "sha256": "e54d25c1b31d5781f588eed16462c272df083ebb67c3f887239e3773d8e55f19"
+    },
+    {
+      "bytes": 1062,
+      "path": "per_class_metrics.csv",
+      "sha256": "3b99f8cd1286939f8d8f637a42b7aa562482fe0e2096d246a058a4031242610b"
+    },
+    {
+      "bytes": 637,
+      "path": "population_receipt.json",
+      "sha256": "1bd9bffa5e6b46490064bed839e3a5c86414c6c1b023ef5fbc3bdfb9742aac87"
+    },
+    {
+      "bytes": 2123,
+      "path": "provenance_receipt.json",
+      "sha256": "7df1e43ea9086768f49f051d973803d957557d1775f4353c7d3149780f5af4e0"
+    },
+    {
+      "bytes": 2052,
+      "path": "README.md",
+      "sha256": "4e19325af102d3aaced0c73f554cd5de8c4fc42d5074e3e6495f3fd7934425fb"
+    },
+    {
+      "bytes": 850,
+      "path": "selected_hyperparameters.csv",
+      "sha256": "c6d3eb2a0d421527fa1fde877cd29c3a5130db7ca5e5cc48ec035e578639de6e"
+    }
+  ],
+  "package": "hr_target_alias_sensitivity_v4",
+  "payload_set_sha256": "44e7e4cea084103ba9f67f74492c1b49bfc742177a86525f3215242dfc6e7a47",
+  "schema_version": 1
+}
