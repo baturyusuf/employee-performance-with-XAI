@@ -1,0 +1,51 @@
+{
+  "caption": "Nine-system exactly-once OOF benchmark under P3",
+  "claim_ids": [
+    "C101",
+    "C102",
+    "C103",
+    "C104",
+    "C105",
+    "C106"
+  ],
+  "claim_set_sha256": "1664b188df14135d3b3de8642de3d080c25a3fbadc440615c2bd04b2f14ddabe",
+  "sources": [
+    {
+      "claim_id": "C101",
+      "source_path": "reports/research_log/major_revision_v3/phase1b_ordinal_benchmark/aggregate_metrics.csv",
+      "source_selector": "{\"dataset_key\":\"inx_primary\",\"metric\":\"macro_f1\",\"model_name\":\"cumulative_threshold_xgboost\"}",
+      "source_sha256": "b7dcd0fa01f40c6d11450bb4afd32b1e768f7b301ca804674d8ae589f5a58edf"
+    },
+    {
+      "claim_id": "C102",
+      "source_path": "reports/research_log/major_revision_v3/phase1b_ordinal_benchmark/aggregate_metrics.csv",
+      "source_selector": "{\"dataset_key\":\"inx_primary\",\"metric\":\"balanced_accuracy\",\"model_name\":\"cumulative_threshold_xgboost\"}",
+      "source_sha256": "b7dcd0fa01f40c6d11450bb4afd32b1e768f7b301ca804674d8ae589f5a58edf"
+    },
+    {
+      "claim_id": "C103",
+      "source_path": "reports/research_log/major_revision_v3/phase1b_ordinal_benchmark/aggregate_metrics.csv",
+      "source_selector": "{\"dataset_key\":\"inx_primary\",\"metric\":\"quadratic_weighted_kappa\",\"model_name\":\"random_forest\"}",
+      "source_sha256": "b7dcd0fa01f40c6d11450bb4afd32b1e768f7b301ca804674d8ae589f5a58edf"
+    },
+    {
+      "claim_id": "C104",
+      "source_path": "reports/research_log/major_revision_v3/phase1b_ordinal_benchmark/aggregate_metrics.csv",
+      "source_selector": "{\"dataset_key\":\"inx_primary\",\"metric\":\"ordinal_mae\",\"model_name\":\"random_forest\"}",
+      "source_sha256": "b7dcd0fa01f40c6d11450bb4afd32b1e768f7b301ca804674d8ae589f5a58edf"
+    },
+    {
+      "claim_id": "C105",
+      "source_path": "reports/research_log/major_revision_v3/phase1b_ordinal_benchmark/aggregate_metrics.csv",
+      "source_selector": "{\"dataset_key\":\"inx_primary\",\"metric\":\"ranked_probability_score\",\"model_name\":\"lightgbm\"}",
+      "source_sha256": "b7dcd0fa01f40c6d11450bb4afd32b1e768f7b301ca804674d8ae589f5a58edf"
+    },
+    {
+      "claim_id": "C106",
+      "source_path": "reports/research_log/major_revision_v3/phase1b_ordinal_benchmark/aggregate_metrics.csv",
+      "source_selector": "{\"dataset_key\":\"inx_primary\",\"metric\":\"nll_log_loss\",\"model_name\":\"xgboost\"}",
+      "source_sha256": "b7dcd0fa01f40c6d11450bb4afd32b1e768f7b301ca804674d8ae589f5a58edf"
+    }
+  ],
+  "table_number": 3
+}

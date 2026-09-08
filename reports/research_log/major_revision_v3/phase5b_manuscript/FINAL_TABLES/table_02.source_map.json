@@ -1,0 +1,16 @@
+{
+  "caption": "P0\u2013P5 information policies",
+  "claim_ids": [
+    "C001"
+  ],
+  "claim_set_sha256": "1664b188df14135d3b3de8642de3d080c25a3fbadc440615c2bd04b2f14ddabe",
+  "sources": [
+    {
+      "claim_id": "C001",
+      "source_path": "reports/research_log/major_revision_v3/FEATURE_AVAILABILITY_GOVERNANCE_CONTRACT.md",
+      "source_selector": "{}",
+      "source_sha256": "0f19e17db84e17f0a5e3aad179efb8323a37d5b63b9b032e119deadd159a7201"
+    }
+  ],
+  "table_number": 2
+}

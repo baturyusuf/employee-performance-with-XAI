@@ -1,0 +1,51 @@
+{
+  "caption": "Dataset roles, target mappings, and aggregate audit status",
+  "claim_ids": [
+    "C001",
+    "C703",
+    "C801",
+    "C802",
+    "C803",
+    "C804"
+  ],
+  "claim_set_sha256": "1664b188df14135d3b3de8642de3d080c25a3fbadc440615c2bd04b2f14ddabe",
+  "sources": [
+    {
+      "claim_id": "C001",
+      "source_path": "reports/research_log/major_revision_v3/FEATURE_AVAILABILITY_GOVERNANCE_CONTRACT.md",
+      "source_selector": "{}",
+      "source_sha256": "0f19e17db84e17f0a5e3aad179efb8323a37d5b63b9b032e119deadd159a7201"
+    },
+    {
+      "claim_id": "C703",
+      "source_path": "reports/research_log/major_revision_v3/phase3b_data_quality/target_distribution.csv",
+      "source_selector": "{\"dataset_key\":\"hrdataset_v14\",\"target_label\":\"2\",\"target_view\":\"canonical_mapped\"}",
+      "source_sha256": "4845da4f51bdd6651e7a54c1aaa279cbe0af1d0dd5fc8d0175bcdaf1cc0a2502"
+    },
+    {
+      "claim_id": "C801",
+      "source_path": "reports/research_log/major_revision_v3/phase3b_data_quality/dataset_summary.csv",
+      "source_selector": "{\"dataset_key\":\"inx_primary\"}",
+      "source_sha256": "df7d21a23be7cad851161d821f7ac376c30d5c6e5c8783c45fdee227de148d0b"
+    },
+    {
+      "claim_id": "C802",
+      "source_path": "reports/research_log/major_revision_v3/phase3b_data_quality/dataset_summary.csv",
+      "source_selector": "{\"dataset_key\":\"hrdataset_v14\"}",
+      "source_sha256": "df7d21a23be7cad851161d821f7ac376c30d5c6e5c8783c45fdee227de148d0b"
+    },
+    {
+      "claim_id": "C803",
+      "source_path": "reports/research_log/major_revision_v3/phase3b_data_quality/dataset_summary.csv",
+      "source_selector": "{\"dataset_key\":\"hrdataset_v14\"}",
+      "source_sha256": "df7d21a23be7cad851161d821f7ac376c30d5c6e5c8783c45fdee227de148d0b"
+    },
+    {
+      "claim_id": "C804",
+      "source_path": "reports/research_log/major_revision_v3/phase3b_data_quality/dataset_summary.csv",
+      "source_selector": "{\"dataset_key\":\"hrdataset_v14\"}",
+      "source_sha256": "df7d21a23be7cad851161d821f7ac376c30d5c6e5c8783c45fdee227de148d0b"
+    }
+  ],
+  "table_number": 1
+}

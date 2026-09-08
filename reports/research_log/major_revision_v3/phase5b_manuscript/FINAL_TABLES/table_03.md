@@ -1,0 +1,13 @@
+# Table 3. Nine-system exactly-once OOF benchmark under P3
+
+| System | Macro-F1 | Balanced acc. | QWK | Ordinal MAE | RPS | Log loss |
+| --- | --- | --- | --- | --- | --- | --- |
+| Cumulative-threshold XGBoost | 0.6255 | 0.6745 | 0.5550 | 0.3142 | 0.1029 | 1.3053 |
+| Nominal XGBoost | 0.6210 | 0.6360 | 0.5676 | 0.2433 | 0.0860 | 0.5515 |
+| LightGBM | 0.6055 | 0.6218 | 0.5883 | 0.1983 | 0.0804 | 0.5883 |
+| Random Forest | 0.5923 | 0.6253 | 0.6317 | 0.1583 | 0.0822 | 0.5982 |
+| Multinomial logistic | 0.5062 | 0.5240 | 0.3710 | 0.3550 | 0.1134 | 0.7142 |
+| Proportional-odds logistic | 0.4844 | 0.5531 | 0.3927 | 0.4683 | 0.1405 | 0.8982 |
+| Stratified baseline | 0.3304 | 0.3310 | 0.0243 | 0.4467 | 0.2233 | 15.1383 |
+| Ordinal-median baseline | 0.2809 | 0.3333 | 0.0000 | 0.2717 | 0.1358 | 9.7919 |
+| Majority baseline | 0.2809 | 0.3333 | 0.0000 | 0.2717 | 0.1358 | 9.7919 |

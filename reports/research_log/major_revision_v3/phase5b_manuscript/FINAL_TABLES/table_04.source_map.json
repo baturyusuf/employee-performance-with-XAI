@@ -1,0 +1,44 @@
+{
+  "caption": "Five-repetition nested-CV summaries",
+  "claim_ids": [
+    "C201",
+    "C202",
+    "C203",
+    "C204",
+    "C205"
+  ],
+  "claim_set_sha256": "1664b188df14135d3b3de8642de3d080c25a3fbadc440615c2bd04b2f14ddabe",
+  "sources": [
+    {
+      "claim_id": "C201",
+      "source_path": "reports/research_log/major_revision_v3/phase1c_repeated_nested_cv/variability_summary.csv",
+      "source_selector": "{\"metric\":\"macro_f1\",\"model_name\":\"xgboost\"}",
+      "source_sha256": "f50bbd1bb89e479ccdeb3e15538ea5f4a5c2eeabad6ef3d6d40d5439384c2acf"
+    },
+    {
+      "claim_id": "C202",
+      "source_path": "reports/research_log/major_revision_v3/phase1c_repeated_nested_cv/variability_summary.csv",
+      "source_selector": "{\"metric\":\"macro_f1\",\"model_name\":\"lightgbm\"}",
+      "source_sha256": "f50bbd1bb89e479ccdeb3e15538ea5f4a5c2eeabad6ef3d6d40d5439384c2acf"
+    },
+    {
+      "claim_id": "C203",
+      "source_path": "reports/research_log/major_revision_v3/phase1c_repeated_nested_cv/model_rank_summary.csv",
+      "source_selector": "{\"metric\":\"quadratic_weighted_kappa\",\"model_name\":\"random_forest\"}",
+      "source_sha256": "dfd3c314b88ee8bb9113d11189ad8c1ae1e9538f9fa385f526dd261ae2eedfe1"
+    },
+    {
+      "claim_id": "C204",
+      "source_path": "reports/research_log/major_revision_v3/phase1c_repeated_nested_cv/model_rank_summary.csv",
+      "source_selector": "{\"metric\":\"balanced_accuracy\",\"model_name\":\"cumulative_threshold_xgboost\"}",
+      "source_sha256": "dfd3c314b88ee8bb9113d11189ad8c1ae1e9538f9fa385f526dd261ae2eedfe1"
+    },
+    {
+      "claim_id": "C205",
+      "source_path": "reports/research_log/major_revision_v3/phase1c_repeated_nested_cv/ordering_stability.csv",
+      "source_selector": "{\"metric\":\"macro_f1\"}",
+      "source_sha256": "5b36d6eb639441408a5997a60aaddb5cfc3a9b8986b4e3a1be6b6eaf50c4ca22"
+    }
+  ],
+  "table_number": 4
+}

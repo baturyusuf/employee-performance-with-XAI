@@ -1,0 +1,1 @@
+Descriptive stability panels for grouped SHAP rankings across dependent outer-fold pairs, including top-k overlap and Spearman summaries.

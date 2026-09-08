@@ -1,0 +1,44 @@
+{
+  "caption": "SHAP and probability-quality diagnostics",
+  "claim_ids": [
+    "C401",
+    "C402",
+    "C403",
+    "C501",
+    "C502"
+  ],
+  "claim_set_sha256": "1664b188df14135d3b3de8642de3d080c25a3fbadc440615c2bd04b2f14ddabe",
+  "sources": [
+    {
+      "claim_id": "C401",
+      "source_path": "reports/research_log/major_revision_v3/phase2a_shap_stability_faithfulness/stability_summary.csv",
+      "source_selector": "{\"stability_type\":\"model_seed\",\"top_k\":\"5\"}",
+      "source_sha256": "4329e361ae3d006474efa724b4ef4b82d361ce4a3b3fb667f0b7169e0fbc0496"
+    },
+    {
+      "claim_id": "C402",
+      "source_path": "reports/research_log/major_revision_v3/phase2a_shap_stability_faithfulness/stability_summary.csv",
+      "source_selector": "{\"stability_type\":\"outer_train_resample\",\"top_k\":\"5\"}",
+      "source_sha256": "4329e361ae3d006474efa724b4ef4b82d361ce4a3b3fb667f0b7169e0fbc0496"
+    },
+    {
+      "claim_id": "C403",
+      "source_path": "reports/research_log/major_revision_v3/phase2a_shap_stability_faithfulness/faithfulness_contrasts.csv",
+      "source_selector": "{\"deleted_feature_count\":\"1\",\"metric\":\"mean_probability_drop\"}",
+      "source_sha256": "c8fa92829a3c519eeee7718e42c8ab13b5380d780ded9ab3019ef3175d5c06a3"
+    },
+    {
+      "claim_id": "C501",
+      "source_path": "reports/research_log/major_revision_v3/phase2b_calibration_diagnostics/method_comparison.csv",
+      "source_selector": "{\"comparison_id\":\"sigmoid_minus_raw\",\"metric\":\"nll_log_loss\"}",
+      "source_sha256": "bac8344ec08129d92a38ffe5c968da576b57fe8bac48aa0f7b50e052e4f3bbb3"
+    },
+    {
+      "claim_id": "C502",
+      "source_path": "reports/research_log/major_revision_v3/phase2b_calibration_diagnostics/method_comparison.csv",
+      "source_selector": "{\"comparison_id\":\"sigmoid_minus_raw\",\"metric\":\"top_label_ece\"}",
+      "source_sha256": "bac8344ec08129d92a38ffe5c968da576b57fe8bac48aa0f7b50e052e4f3bbb3"
+    }
+  ],
+  "table_number": 6
+}

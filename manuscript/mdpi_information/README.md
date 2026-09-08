@@ -1,60 +1,25 @@
-# MDPI Information Manuscript Package
+# MDPI Information Manuscript Package — Phase 5B
 
-This directory contains a draft manuscript package for *Information* (MDPI), article type: Original Research Article.
+This directory contains the revised manuscript for the leakage- and governance-aware ordinal XAI audit study.
 
-## Scope
+## Sources
 
-The manuscript is based on the repository snapshot tagged:
+- `main.md`: authoritative manuscript text.
+- `main.tex`: deterministically generated MDPI-style peer source.
+- `references.bib`: 25 entries from the frozen source-verified literature set.
+- `assets/`: canonical tables, figures, source maps, captions, alt text, and manifests.
+- `reports/research_log/major_revision_v3/phase5b_manuscript/`: Phase 5B reports, final asset copies, result/claim comparison, validation, and diff.
 
-```text
-v0.3-real-llm-governance-evidence
+The sole claim boundary is SHA-256 `1664b188df14135d3b3de8642de3d080c25a3fbadc440615c2bd04b2f14ddabe`.
+
+## Rebuild
+
+```powershell
+& .\myenv\Scripts\python.exe -m src.governance.manuscript_revision_v3 --replace-output
 ```
 
-It uses existing repository evidence only. No new OpenAI calls, model training runs, or LLM-output regeneration were performed for this manuscript package.
+No scientific computation or paid service call occurs during this build.
 
-## Main Files
+## Submission status
 
-```text
-main.tex
-main.md
-references.bib
-template_notes.md
-submission_checklist.md
-claim_audit.md
-missing_items.md
-reference_verification_needed.md
-figure_manifest.csv
-table_manifest.csv
-```
-
-Generated tables are under:
-
-```text
-tables/
-```
-
-Generated figures are under:
-
-```text
-figures/
-```
-
-Each figure is exported as SVG and PNG. The manifest files record source data paths.
-
-## Evidence Boundaries
-
-- The predictive model remains XGBoost.
-- The LLM is not the predictive model.
-- The final real OpenAI LLM-agent evidence covers 80 cases: 40 INX and 40 HRDataset_v14.
-- The final LLM model recorded by the evidence manifest is `gpt-5.4-mini`.
-- Stub/dry-run outputs are retained only for reproducibility and pipeline testing and are not manuscript-grade real LLM evidence.
-- Final readiness remains `not_ready` due to proxy-risk and counterfactual-actionability blockers.
-- No deployment-ready or autonomous HR decision claim is made.
-
-## Template Status
-
-The official MDPI template files are not bundled here. See `template_notes.md`.
-
-## Author Review Required
-
-The manuscript is ready for scientific and formatting review, not direct submission. All `AUTHOR_TO_COMPLETE` fields must be completed before submission.
+The scientific text is revised and structurally validated, but the package is not submission-ready. Author affiliations/ORCIDs, contributions, funding, institutional review, consent, conflicts, AI-use wording, data rights, software licensing, immutable release/archive identifiers, and official-template PDF compilation remain unresolved.

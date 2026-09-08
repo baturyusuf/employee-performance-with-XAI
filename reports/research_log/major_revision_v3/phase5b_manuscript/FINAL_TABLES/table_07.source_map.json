@@ -1,0 +1,51 @@
+{
+  "caption": "Proxy-use and reconstructability diagnostics",
+  "claim_ids": [
+    "C601",
+    "C602",
+    "C603",
+    "C604",
+    "C605",
+    "C606"
+  ],
+  "claim_set_sha256": "1664b188df14135d3b3de8642de3d080c25a3fbadc440615c2bd04b2f14ddabe",
+  "sources": [
+    {
+      "claim_id": "C601",
+      "source_path": "reports/research_log/major_revision_v3/phase2c_subgroup_proxy_use/proxy_prediction_change_by_department.csv",
+      "source_selector": "{\"department\":\"ALL\",\"scope\":\"overall\"}",
+      "source_sha256": "79ba56a192c8baccd5098ea37bfc1ab3e7d64f02276fe710df458df068d5963f"
+    },
+    {
+      "claim_id": "C602",
+      "source_path": "reports/research_log/major_revision_v3/phase2c_subgroup_proxy_use/proxy_prediction_change_by_department.csv",
+      "source_selector": "{\"department\":\"ALL\",\"scope\":\"overall\"}",
+      "source_sha256": "79ba56a192c8baccd5098ea37bfc1ab3e7d64f02276fe710df458df068d5963f"
+    },
+    {
+      "claim_id": "C603",
+      "source_path": "reports/research_log/major_revision_v3/phase2c_subgroup_proxy_use/jobrole_permutation_summary.csv",
+      "source_selector": "{\"scheme\":\"marginal_within_outer_test_fold\"}",
+      "source_sha256": "8d0af59191a90fe7fd78b14f6055b3f06fbda2b74ac74016b4c78b96d016d5ca"
+    },
+    {
+      "claim_id": "C604",
+      "source_path": "reports/research_log/major_revision_v3/phase2c_subgroup_proxy_use/jobrole_permutation_summary.csv",
+      "source_selector": "{\"scheme\":\"department_conditional_within_outer_test_fold_and_department\"}",
+      "source_sha256": "8d0af59191a90fe7fd78b14f6055b3f06fbda2b74ac74016b4c78b96d016d5ca"
+    },
+    {
+      "claim_id": "C605",
+      "source_path": "reports/research_log/major_revision_v3/phase2c_subgroup_proxy_use/department_reconstructability_metrics.csv",
+      "source_selector": "{\"metric\":\"accuracy\",\"system_id\":\"no_salary_hike_no_attrition_no_department\"}",
+      "source_sha256": "e838ea0f0e447df3abc6e6b10af5147db2b65ba955e8eaf92952bb54a6a82b4c"
+    },
+    {
+      "claim_id": "C606",
+      "source_path": "reports/research_log/major_revision_v3/phase2c_subgroup_proxy_use/department_reconstructability_metrics.csv",
+      "source_selector": "{\"metric\":\"accuracy\",\"system_id\":\"no_salary_hike_no_attrition_no_department_no_job_role\"}",
+      "source_sha256": "e838ea0f0e447df3abc6e6b10af5147db2b65ba955e8eaf92952bb54a6a82b4c"
+    }
+  ],
+  "table_number": 7
+}

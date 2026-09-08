@@ -1,0 +1,6 @@
+# Table 1. Dataset roles, target mappings, and aggregate audit status
+
+| Dataset | Analytical role | Rows | Target support | Key boundary |
+| --- | --- | --- | --- | --- |
+| INX | Primary development and internal OOF evaluation | 1200 | 2=194; 3=874; 4=132 | Cross-sectional; feature and decision timestamps unavailable |
+| HRDataset_v14 | Independently trained mapped-target protocol replication | 311 | 2=31; 3=243; 4=37 | Different features, semantics, parameters, and population |

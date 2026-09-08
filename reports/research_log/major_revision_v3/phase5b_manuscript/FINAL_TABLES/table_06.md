@@ -1,0 +1,10 @@
+# Table 6. SHAP and probability-quality diagnostics
+
+| Diagnostic | Result | Boundary |
+| --- | --- | --- |
+| Seed-pair top-5 Jaccard | 1.0000 | 15 dependent descriptive pairs |
+| Resample all-feature Spearman | 0.9847 | 10 dependent descriptive pairs |
+| Top-1 guided-minus-random drop | +0.2676 | Masking diagnostic, not causal effect |
+| Raw → sigmoid log loss | 0.5515 → 0.4556 | Training-only cross-fitted calibrator |
+| Raw → sigmoid Brier | 0.3426 → 0.2634 | Metric-specific improvement |
+| Raw → sigmoid top-label ECE | 0.0375 → 0.0419 | Point estimate worsened by 0.0044 |

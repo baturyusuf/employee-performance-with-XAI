@@ -1,204 +1,333 @@
-# Beyond Accuracy in HR Analytics: An LLM-Assisted Multi-Agent XAI Governance Framework for Leakage-Safe Employee Performance Decision Support
+# Beyond Predictive Accuracy: A Reproducible Leakage- and Governance-Aware XAI Audit Protocol for Ordinal Employee Performance Prediction
 
-**Article type:** Original Research Article  
-**Target journal:** *Information* (MDPI)  
-**Authors:** Muhammed Yusuf Batur^1,* and Mehmet Göktürk^2  
-**Affiliations:**  
-^1 Rumeli University, AUTHOR_TO_COMPLETE; myusuf.batur@rumeli.edu.tr  
-^2 Gebze Technical University, AUTHOR_TO_COMPLETE; gokturk@gtu.edu.tr  
-* Correspondence: myusuf.batur@rumeli.edu.tr; AUTHOR_TO_COMPLETE
+**Article type:** Original Research Article
+
+**Authors:** Muhammed Yusuf Batur^1,*^ and Mehmet Göktürk^2^
+
+**Affiliations:** ^1^ Rumeli University, [AUTHOR TO COMPLETE]; ^2^ Gebze Technical University, [AUTHOR TO COMPLETE]
+
+**Correspondence:** myusuf.batur@rumeli.edu.tr; [AUTHOR TO COMPLETE]
+
+<!-- claim-boundary-sha256: 1664b188df14135d3b3de8642de3d080c25a3fbadc440615c2bd04b2f14ddabe -->
 
 ## Abstract
 
-Human-resource analytics systems are often evaluated mainly by predictive accuracy, although employee-performance decision support also requires governance evidence about leakage, explanation reliability, calibration, fairness and proxy risk, and the practical actionability of counterfactual scenarios. This study presents a leakage-aware, SHAP-based, calibration-aware, fairness/proxy-audited, actionability-constrained governance framework for employee-performance decision support. The predictive component remains a tabular XGBoost model; large language models are not used for prediction. Instead, SHAP, calibration, subgroup, proxy-risk, leakage, and counterfactual evidence are serialized into structured case-level evidence that is interpreted by a governed OpenAI explanation layer and audited by deterministic multi-agent governance components. The primary internal research model is `no_salary_hike_no_attrition_no_department + XGBoost`; full-feature models are retained only as leakage-warning upper-bound baselines. External evidence includes HRDataset_v14 as an independent replication dataset with `PerformanceScore` mapped to the 2/3/4 target scale, while IBM and turnover datasets are treated only as restricted target-space or related-task robustness evidence. A final real OpenAI LLM-agent evaluation covered 80 cases, with 40 INX cases and 40 HRDataset_v14 cases using `gpt-5.4-mini`. Automated technical checks reported no unsupported, forbidden, or missing-warning failures in that run. Nevertheless, final readiness remains `not_ready` because high-severity proxy-risk and counterfactual-actionability blockers remain unresolved. The framework is therefore positioned as research-grade decision support, not as a deployment-ready or autonomous HR decision system.
+Employee-performance prediction is often summarized by a single accuracy score even though information availability, ordinal error severity, probability reliability, explanation stability, and organizational proxy channels can materially change the interpretation. We present a reproducible audit protocol for ordinal employee-performance prediction in two public cross-sectional tables. The protocol prespecifies six information policies, evaluates nine systems with exactly-once out-of-fold predictions, repeats nested cross-validation under five fixed designs, separates fixed-schedule from independently retuned policy contrasts, binds held-out predictions to exact-fold TreeSHAP explanations, tests attribution stability and deletion behavior, evaluates training-only cross-fitted sigmoid calibration, audits support-aware subgroup and proxy diagnostics, and performs an independently trained mapped-target replication. Under the primary INX policy, cumulative-threshold XGBoost led macro-F1 (0.6255) and balanced accuracy (0.6745), whereas Random Forest led quadratic weighted kappa (0.6317) and ordinal mean absolute error (0.1583). Cross-fitted sigmoid calibration reduced nominal-XGBoost log loss from 0.5515 to 0.4556 but increased top-label expected calibration error by 0.0044. Removing JobRole and refitting changed 10.75% of argmax predictions and reduced macro-F1 by 0.0330; separate department reconstruction fell from 0.9792 accuracy with JobRole to 0.2908 without it. The HRDataset_v14 mapped-target replication yielded mean raw-XGBoost macro-F1 of 0.6531 across five repetitions. These findings are descriptive of the audited samples and protocols: timestamps, construct validity, source rights, and prospective performance remain unresolved. The contribution is a shared, hash-bound evidence contract that keeps claims aligned with their data, folds, models, explanations, calibration path, and limitations.
 
-**Keywords:** HR analytics; explainable artificial intelligence; decision support systems; model governance; data leakage; SHAP; counterfactual explanations; large language models; multi-agent systems; algorithmic fairness
+**Keywords:** human-resource analytics; ordinal classification; explainable artificial intelligence; data leakage; nested cross-validation; SHAP stability; probability calibration; proxy diagnostics; reproducibility
 
 ## 1. Introduction
 
-Predictive analytics in human-resource settings can affect domains where errors, proxy effects, and overconfident explanations carry organizational and ethical risk. Prior work on artificial intelligence in human resources emphasizes that data-driven HR systems face small-data constraints, accountability requirements, possible employee reactions, and limitations of purely technical optimization [@tambe2019aihr; @leichtdeobald2019hr]. For this reason, employee-performance prediction should not be assessed only by classification metrics. A responsible decision-support pipeline must also document whether the model uses outcome-proximal variables, whether probabilities are calibrated, whether subgroup performance or proxy signals create risks, whether explanations are stable, and whether counterfactual outputs describe practically actionable changes or merely technical model scenarios.
+Algorithmic analysis of employee records can affect people even when a model is framed as decision support. HR data are typically small, organizationally produced, and entangled with prior managerial decisions. Consequently, an apparently strong classifier may exploit variables recorded during or after an evaluation, reproduce structural context, or report probabilities and explanations that have not been audited for reliability. HR scholarship therefore emphasizes accountability, employee reactions, personal integrity, and the limits of purely technical optimization [@tambe2019artificial; @leichtdeobald2019challenges; @kochling2020discriminated; @giermindl2021dark].
 
-This manuscript reports a code-side evidence package for an LLM-assisted multi-agent XAI governance framework. The framework uses XGBoost as the predictive model [@chen2016xgboost], SHAP as attribution evidence [@lundberg2017shap; @lundberg2020tree], calibration metrics [@guo2017calibration], subgroup and proxy-risk audits [@mehrabi2021bias; @barocas2023fairness], and counterfactual actionability checks [@wachter2018counterfactual; @karimi2022recourse]. A governed LLM layer then converts structured evidence into explanation JSON, and deterministic governance agents audit leakage, fairness/proxy risk, calibration, SHAP stability, counterfactual actionability, explanation compliance, and supervisor readiness. The LLM does not predict employee performance and is not used to invent evidence.
+The employee-performance literature has compared conventional classifiers on the 1,200-row INX table and related organizational data [@archana2019application; @lather2019prediction; @li2021employee; @patel2022ranker; @adeniyi2022comparison; @nayem2024unbiased; @putri2026klasifikasi]. Such studies establish practical interest, but predictive ranking alone does not answer whether information was available before the rating, whether tuning remained inside training data, whether an ordinal error crossed two rating levels, or whether post-hoc explanations are stable and faithful.
 
-The contribution is not a claim that XGBoost alone is a sufficient employee-performance system. Instead, the contribution is an auditable information-systems architecture for evidence-constrained HR analytics governance. The framework demonstrates how accuracy, leakage control, calibration, XAI, counterfactual actionability, LLM explanation faithfulness, guardrail behavior, and final readiness can be tracked together. The final repository snapshot is versioned as `v0.3-real-llm-governance-evidence`, and the manuscript tables and figures in this directory are generated from checked-in reports rather than new experiments.
+This study contributes:
+
+- a prespecified P0–P5 information contract distinguishing outcome-proximal, sensitive, timing-uncertain, and organizational-proxy fields;
+- a nine-system ordinal benchmark plus repeated nested-cross-validation and policy-specific retuning, all based on exactly-once held-out predictions;
+- exact-fold TreeSHAP, stability, deletion, calibration, subgroup, and proxy-use diagnostics with explicit noncausal and support-aware boundaries; and
+- an independently trained HRDataset_v14 mapped-target replication plus a hash-bound claim matrix linking reported numbers to frozen source rows.
+
+The intended use is methodological research and audit. The study does not establish a production HR system, causal determinants of performance, certified fairness, or prospective validity. Its targets are recorded organizational ratings, not validated measures of objective capability or productivity.
 
 ## 2. Related Work
 
-### 2.1 HR Analytics and Algorithmic Decision Support
+### 2.1 Employee-performance prediction and HR decision support
 
-HR analytics increasingly supports workforce planning, performance review, retention analysis, and other organizational decisions. However, HR data are often cross-sectional, historically biased, sparse for minority subgroups, and entangled with managerial processes. Tambe et al. identify the gap between the promise and reality of AI in HR management, including small data sets, fairness constraints, and adverse employee reactions [@tambe2019aihr]. Leicht-Deobald et al. argue that algorithm-based HR decision-making can affect personal integrity and organizational control [@leichtdeobald2019hr]. These concerns motivate decision-support framing rather than autonomous HR decision claims.
+Four verified studies in the bounded literature set use the exact INX data, while others use psychometric, organization-specific, HRDataset_v14, or newly collected employee-performance data [@archana2019application; @lather2019prediction; @li2021employee; @patel2022ranker; @adeniyi2022comparison; @nayem2024unbiased; @putri2026klasifikasi]. Related churn studies illustrate broader machine-learning and explanation work in people analytics but address different outcomes [@abufaty2025integrating; @chaudhary2025integrated]. Success on churn cannot be reinterpreted as validation of an ordinal performance-rating model.
 
-### 2.2 Explainable Artificial Intelligence for Decision Support
+### 2.2 Leakage, selection, and reproducible evaluation
 
-XAI methods such as LIME and SHAP were developed to make black-box predictions more inspectable [@ribeiro2016lime; @lundberg2017shap]. For tree ensembles, TreeSHAP provides efficient attribution estimates [@lundberg2020tree]. However, explanation methods should be evaluated in context and should not be mistaken for causal analysis [@doshi2017rigorous; @molnar2022interpretable]. In this project, SHAP is used as attribution evidence only.
+Leakage arises when information encodes the target or would not be available at the claimed decision point [@kaufman2012leakage; @kapoor2023leakage]. Evaluating a configuration on the data used to select it also produces optimistic estimates, motivating nested separation of selection and evaluation [@cawley2010overfitting]. Reproducibility guidance calls for transparent processing, sample allocation, hyperparameters, uncertainty, and artifact reporting [@mitchell2019model; @pineau2021improving]. Our protocol combines these principles through persisted folds, training-only selection, exact output identities, and hashes.
 
-### 2.3 Leakage and Outcome-Proximal Features
+### 2.3 Explanation stability and faithfulness
 
-Data leakage occurs when model inputs encode information that would not be available or appropriate at decision time. In HR data, outcome-proximal fields such as salary-hike percentages or attrition outcomes can inflate apparent predictive performance. The current framework therefore treats full-feature models as leakage-warning upper-bound baselines only and selects a primary candidate that excludes salary-hike, attrition, department, identity, and direct sensitive/audit-only fields.
+SHAP provides additive feature attributions, including efficient algorithms for tree models [@lundberg2017unified; @lundberg2020local]. Yet an attribution plot is not evidence of causality or reliability. Nearby inputs can produce unstable explanations, sensitivity and infidelity can be quantified, and post-hoc explanations can be manipulated [@alvarezmelis2018robustness; @yeh2019infidelity; @slack2020fooling]. We bind each held-out explanation to the exact prediction model, aggregate encoded columns to declared raw-feature families, and examine ranking stability separately from deletion behavior.
 
-### 2.4 Fairness, Proxy Risk, and Subgroup Auditing
+### 2.4 Calibration and subgroup/proxy boundaries
 
-Fairness cannot be established by simply removing direct group variables. Proxy variables may reconstruct sensitive or organizational group membership, and subgroup metrics remain sensitive to support thresholds [@mehrabi2021bias; @barocas2023fairness]. Selbst et al. further warn against abstracting fairness from sociotechnical context [@selbst2019abstraction]. The framework therefore reports subgroup and proxy-risk diagnostics as risk evidence rather than as proof of fairness.
+Classification and ordinal scores do not show whether probabilities are reliable. Post-hoc calibration can improve some metrics, but calibration is multidimensional and scalar summaries depend on the event and binning scheme [@guo2017calibration; @vaicenavicius2019evaluating]. In HR settings, removing direct attributes also does not remove every proxy channel or establish fairness. Our subgroup results are support-aware descriptive diagnostics, while department reconstructability is kept separate from performance-model output dependence.
 
-### 2.5 Counterfactual Explanations and Actionability
+### 2.5 Bounded positioning
 
-Counterfactual explanations can describe what changes would alter a model output [@wachter2018counterfactual], but actionable recourse is a stronger requirement than technical validity [@karimi2022recourse]. In HR performance settings, many changes may depend on managers, organizational assignments, review timing, or policy decisions. The framework therefore classifies counterfactuals by actionability mode and avoids employee-prescription language.
-
-### 2.6 LLMs and Agents for Governed Explanations
-
-LLMs can help structure complex evidence into readable explanations, but hallucination and unsupported claims remain central risks [@ji2023hallucination]. Documentation frameworks such as model cards and datasheets support traceability and intended-use limits [@mitchell2019modelcards; @gebru2021datasheets]. The present framework constrains the LLM to a structured evidence schema, then audits generated explanations through rule-based faithfulness checks and specialist governance agents.
+Within the frozen 25-work, source-verified set, no selected work reports the complete shared evidence contract used here. This is not an exhaustive review. The contribution is mechanistic: joining information policy, nested selection, exact held-out prediction–explanation identity, training-only calibration, explanation stability and deletion, subgroup/proxy boundaries, independent replication, and manuscript-number provenance. It is not a claim of universal novelty.
 
 ## 3. Materials and Methods
 
-### 3.1 Task Definition and Intended Use
+### 3.1 Study design, estimand, and intended use
 
-The task is employee-performance decision support for research and governance review. The system may be used by researchers, HR analysts, model auditors, and governance reviewers to inspect predictive and explanatory evidence. It must not be used for autonomous hiring, firing, promotion, compensation, discipline, applicant screening, or individual employment decisions.
+The INX analysis is a cross-sectional sensitivity study under explicit feature-availability assumptions, not an observed prospective prediction exercise (C001). The estimand treats `PerformanceRating` as an ordinal organizational rating with labels 2, 3, and 4. Feature-observation times and rating-decision time are absent, so retained variables are not verified as prospectively available.
 
-### 3.2 Datasets and External Validation Roles
+The protocol is intended for research, model audit, and reproducibility assessment. It is not intended for autonomous hiring, dismissal, promotion, compensation, discipline, or employee ranking. Predictions and SHAP values describe fitted models under observed cross-sectional data, not individual prescriptions.
 
-Dataset roles are defined before interpretation. The INX dataset is the internal primary benchmark. HRDataset_v14 is the independent external replication dataset because it contains `PerformanceScore`, which is mapped to the 2/3/4 performance target scale. IBM HR Analytics performance is restricted target-space robustness because the audited `PerformanceRating` values are restricted to classes 3 and 4. IBM Attrition and Employee Turnover are related HR risk task-transfer evidence only. Table 1 and Figure 2 summarize the claim boundaries.
+![Figure 1. Audit protocol and evidence-identity flow. Training-only operations remain separated from untouched outer-test prediction, explanation, and evaluation paths.](assets/figures/main/figure_01_audit_protocol.png)
 
-**Table 1 source:** `manuscript/mdpi_information/tables/table1_dataset_roles.csv` and `.md`.  
-**Figure 2 source:** `manuscript/mdpi_information/figures/figure2_dataset_roles_scope.svg` and `.png`.
+### 3.2 Datasets, targets, and data quality
 
-### 3.3 Feature Governance and Feature-Set Policies
+INX is the primary development and internal out-of-fold evaluation table. It contains 1,200 rows and 28 columns; target support is 194/874/132 for ratings 2/3/4. HRDataset_v14 contains 311 rows and 36 raw columns. Its retained mapping combines `PIP` and `Needs Improvement` as class 2, preserves `Fully Meets` as 3, and maps `Exceeds` as 4, producing support 31/243/37. This study estimand does not validate equivalence between organizations' rating constructs.
 
-The primary research model is `no_salary_hike_no_attrition_no_department + XGBoost`. The main comparison baseline is `no_salary_hike_no_attrition + XGBoost`, and the strict proxy-sensitivity baseline is `no_salary_hike_no_attrition_no_department_no_job_role + XGBoost`. Full-feature models are historical leakage-warning upper-bound baselines only. Table 2 summarizes the governance interpretation of each policy.
+The aggregate audit applies whitespace-aware missingness, duplicate checks, identifier rules, schema hashing, numeric-domain rules, and temporal/consistency rules fixed before the run. No source value was silently repaired. Provenance and redistribution rights require manual resolution, so raw employee-level tables are excluded.
 
-### 3.4 Predictive Modelling Protocol
+**Table 1. Dataset roles, target mappings, and aggregate audit status**
 
-The predictive model family is XGBoost. The model is evaluated with classification and ordinal metrics: macro-F1, balanced accuracy, weighted-F1 where available, quadratic weighted kappa, ordinal mean absolute error, severe error rate, log loss, Brier score, and expected calibration error. External validation outputs are generated under `reports/external_validation/`; cross-dataset INX-to-HRDataset transportability is reported as infeasible or too limited because only three department-free safe common features overlap.
+| Dataset | Analytical role | Rows | Target support | Key boundary |
+| --- | --- | ---: | --- | --- |
+| INX | Primary development and internal OOF evaluation | 1200 | 2=194; 3=874; 4=132 | Cross-sectional; feature and decision timestamps unavailable |
+| HRDataset_v14 | Independently trained mapped-target protocol replication | 311 | 2=31; 3=243; 4=37 | Different features, semantics, parameters, and population |
 
-### 3.5 SHAP Attribution and Explanation Stability
+### 3.3 Prespecified information policies
 
-SHAP evidence is used for local and grouped feature attribution. Explanation stability is summarized with grouped top-k overlap and rank-stability indicators. The manuscript does not treat SHAP as causal evidence.
+Six policies progressively restrict information. P0 excludes only identifier and target and is a diagnostic upper bound. P1 removes declared outcome-proximal and temporal-risk variables. P2 also removes direct sensitive demographics. P3, the primary policy, removes department. P4 removes timing-uncertain surveys and related measures but remains prospective-plausibility sensitivity because timestamps are absent. P5 further removes declared role, compensation, assignment, promotion, and manager-context proxy channels; residual proxies may remain.
 
-### 3.6 Calibration Diagnostics
+**Table 2. P0–P5 information policies**
 
-Calibration is assessed with log loss, multiclass Brier score, and ECE. The governance reports frame probabilities as approximate model confidence rather than objective correctness.
+| Policy | Role | Retained | Interpretation |
+| --- | --- | ---: | --- |
+| P0 Information-rich diagnostic | Diagnostic only | 26 | Outcome-proximal/timing-risk information retained |
+| P1 Leakage-controlled | Outcome/temporal-risk ablation | 24 | High-risk fields removed; other risks remain |
+| P2 Governance-controlled | Sensitive-feature ablation | 21 | Direct sensitive fields removed; not a fairness result |
+| P3 Primary leakage-aware | Canonical primary | 20 | Department removed; timing uncertainty and proxies remain |
+| P4 Strict prospective | Timestamp-unverified sensitivity | 13 | Semantically plausible prior fields only |
+| P5 Strict proxy | Organizational-proxy sensitivity | 6 | Declared strong proxies removed; residual proxies possible |
 
-### 3.7 Fairness and Proxy-Risk Audit
+### 3.4 Nine-system ordinal benchmark
 
-The framework audits available subgroup variables and proxy reconstructability. Department removal is treated as a policy choice, not proof that fairness risk has been solved. The primary model still contains EmpJobRole, which is documented as a department-proxy risk.
+The P3 benchmark includes nominal XGBoost, LightGBM, Random Forest, multinomial logistic regression, proportional-odds logistic regression, cumulative-threshold XGBoost, and stratified, majority, and ordinal-median baselines. The frozen benchmark uses ten outer folds with five-fold inner selection for trained systems. Every sample receives one outer-test prediction per system. Metrics include macro-F1, balanced accuracy, QWK, ordinal MAE, two-level reversal rate, normalized RPS, log loss, multiclass Brier, and top-label ECE.
 
-### 3.8 Counterfactual Actionability Protocol
+The benchmark identifies metric-specific leaders, not a universally superior model (C002). Rankings are conditional on P3 and the frozen folds. Nominal XGBoost remains the downstream explanation/calibration reference because that choice was prespecified.
 
-Counterfactual outputs are classified by actionability mode: employee-actionable, manager-actionable, organization-actionable, ethically risky, not actionable, or unavailable. Technical validity is distinguished from practical actionability.
+![Figure 2. Nine-system ordinal benchmark. Metric-specific leaders are shown under the common P3 protocol; the plot is not a universal leaderboard.](assets/figures/main/figure_02_model_benchmark.png)
 
-### 3.9 Governed LLM Explanation Layer
+### 3.5 Repeated nested-cross-validation
 
-The governed LLM layer consumes only structured `CompleteCaseEvidence` JSON. It produces short and detailed explanations, warnings, evidence references, unsupported-evidence flags, human-review reminders, SHAP non-causality reminders, and non-autonomous-HR-use reminders. The final 80-case run used the real OpenAI path with `gpt-5.4-mini`; stub/dry-run outputs are excluded from manuscript-grade real LLM evidence.
+Training and split variability use five fixed repetitions of 5-fold outer by 5-fold inner nested cross-validation. Each trained system is refitted in every repetition. Means, sample SDs, ranges, winner counts, and rank correlations are descriptive across the five repetition identities. Ranges are not confidence intervals (C003), and repetition pairs share samples.
 
-### 3.10 Multi-Agent Governance Audit
+### 3.6 Fixed-schedule and retuned policy contrasts
 
-Specialist agents audit leakage risk, fairness/proxy risk, calibration reliability, SHAP stability, counterfactual actionability, explanation compliance, and supervisor readiness. The agents audit evidence and warnings; they do not make HR decisions.
+P0–P5 are evaluated using the P3-selected fixed schedule and independently retuned, policy-specific inner selection. The former more tightly controls model specification; the latter combines information access with model selection. These contrasts answer different descriptive questions and neither estimates a causal feature-policy effect (C004). No confidence intervals or significance tests are attached to retuned-minus-fixed differences.
 
-### 3.11 G-XAIR Readiness Dashboard
+![Figure 3. Fixed-schedule feature-policy sensitivity. P0 is diagnostic only; P4/P5 do not establish prospective validity or absence of proxies.](assets/figures/main/figure_03_feature_policy_sensitivity.png)
 
-G-XAIR is implemented as a component readiness dashboard, not as a universal ethical score. Components include performance adequacy, leakage robustness, explanation stability, calibration reliability, fairness robustness, counterfactual actionability, proxy risk, LLM faithfulness, chatbot guardrails, and external validation robustness.
+### 3.7 Exact-fold SHAP stability and deletion diagnostics
 
-### 3.12 Reproducibility and Evidence Manifest
+For nominal XGBoost under P3, every held-out observation is explained by the persisted outer-fold model that generated its prediction. TreeSHAP values use raw-margin space; encoded columns are signed-summed to feature families before absolute values are averaged across classes and OOF observations. Stability is evaluated across outer-fold, model-seed, and stratified 80% outer-training-resample pairs using top-k Jaccard and all-feature Spearman agreement.
 
-The final evidence package is bound by `reports/manuscript_assets/final_evidence_manifest/`, including Markdown, CSV, and JSON manifests with row counts, hashes, manuscript-grade status, claim role, and run scope. The final evidence snapshot is tagged `v0.3-real-llm-governance-evidence`.
+Deletion compares SHAP-ranked masking against 20 random repetitions at one, three, and five deleted features. Median/mode masking may generate out-of-distribution records. Stability and deletion behavior therefore characterize the fitted model and declared interventions, not causal effects, actionability, human usefulness, or advice (C005).
+
+![Figure 4. Global grouped exact-fold TreeSHAP attribution. Magnitudes are raw-margin model attributions and must not be read as causal effects.](assets/figures/main/figure_05_global_grouped_shap.png)
+
+![Figure 5. SHAP ranking stability across folds, model seeds, and outer-training resamples. Pairwise comparisons are dependent and descriptive.](assets/figures/main/figure_06_shap_stability.png)
+
+### 3.8 Cross-fitted calibration
+
+Within each nominal-XGBoost outer fold, three one-vs-rest sigmoid calibrators are fitted only to five-fold cross-fitted outer-training probabilities. Outputs are renormalized; untouched outer-test outcomes are evaluation-only. Raw and sigmoid outputs are compared with log loss, Brier, top-label ECE, macro classwise ECE, cumulative ECE, and normalized RPS. ECE uses ten fixed equal-width bins and retains empty bins. Conclusions are metric-specific (C006).
+
+![Figure 6. Raw and cross-fitted sigmoid calibration diagnostics. Reliability curves retain bin support and do not provide prospective probability validation.](assets/figures/main/figure_04_calibration.png)
+
+### 3.9 Support-aware subgroup and proxy diagnostics
+
+The subgroup audit covers three systems, six attributes, nine metrics, and support thresholds 20/30/50. Unsupported groups or class denominators remain explicit. P3 exploratory intervals use 5,000 bootstrap repetitions stratified by fold and class, with eligibility fixed before resampling; they condition on the fitted models and are not confirmatory fairness inference.
+
+Proxy diagnostics separate prediction changes after refitting P3 without JobRole, output sensitivity when JobRole is shuffled within fold, and independent department reconstruction. Reconstructability shows information in a feature space, not use by the performance model. None establishes discrimination, fairness, causality, or legal compliance (C007).
+
+### 3.10 Independent mapped-target replication
+
+HRDataset_v14 uses a separate seven-feature conservative policy, its own nested selection, and five fixed 5×5 repetitions. Models are trained and tuned anew on its 311 records. This is an independently trained mapped-target protocol replication, not transport of a locked INX model (C008). Features, target semantics, parameters, and population differ.
+
+![Figure 7. HRDataset_v14 mapped-target replication. Results do not imply target equivalence or locked-model transport.](assets/figures/main/figure_07_hrdataset_replication.png)
+
+### 3.11 Evidence identity and claim control
+
+Each compact package records source run, inputs, exclusions, hashes, and manifest. The frozen Phase 5A matrix links 45 approved claims to source rows. Its SHA-256 is `1664b188df14135d3b3de8642de3d080c25a3fbadc440615c2bd04b2f14ddabe`; this manuscript is checked only against that boundary (C013). No model, calibrator, SHAP, bootstrap, or paid service call was rerun during assembly.
 
 ## 4. Results
 
-### 4.1 Internal and External Performance Evidence
+### 4.1 Metric-specific benchmark leaders
 
-Table 3 reports performance metrics from the checked-in external validation summaries. The INX primary model achieved macro-F1 0.59881, balanced accuracy 0.62606, QWK 0.637613, log loss 0.455092, Brier 0.260802, and ECE 0.063846. HRDataset_v14 achieved macro-F1 0.638943, balanced accuracy 0.656693, QWK 0.5945, log loss 0.550791, Brier 0.256523, and ECE 0.092454. IBM performance, IBM attrition, and Employee Turnover are included only under their restricted or related-task claim boundaries.
+The P3 comparison did not yield one winner. Cumulative-threshold XGBoost had highest macro-F1, 0.6255 (C101), and balanced accuracy, 0.6745 (C102). Random Forest had highest QWK, 0.6317 (C103), and lowest ordinal MAE, 0.1583 (C104). LightGBM had lowest normalized RPS, 0.0804 (C105), while nominal XGBoost had lowest raw log loss, 0.5515 (C106). Lower is preferable for MAE, RPS, and log loss; ranks apply only to evaluated P3 systems and metrics.
 
-**Table 3 source:** `manuscript/mdpi_information/tables/table3_performance_metrics.csv`.  
-**Figure 3 source:** `manuscript/mdpi_information/figures/figure3_performance_comparison.svg` and `.png`.
+**Table 3. Nine-system exactly-once OOF benchmark under P3**
 
-### 4.2 External Validation and Related-Task Boundaries
+| System | Macro-F1 | Balanced acc. | QWK | Ordinal MAE | RPS | Log loss |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| Cumulative-threshold XGBoost | 0.6255 | 0.6745 | 0.5550 | 0.3142 | 0.1029 | 1.3053 |
+| Nominal XGBoost | 0.6210 | 0.6360 | 0.5676 | 0.2433 | 0.0860 | 0.5515 |
+| LightGBM | 0.6055 | 0.6218 | 0.5883 | 0.1983 | 0.0804 | 0.5883 |
+| Random Forest | 0.5923 | 0.6253 | 0.6317 | 0.1583 | 0.0822 | 0.5982 |
+| Multinomial logistic | 0.5062 | 0.5240 | 0.3710 | 0.3550 | 0.1134 | 0.7142 |
+| Proportional-odds logistic | 0.4844 | 0.5531 | 0.3927 | 0.4683 | 0.1405 | 0.8982 |
+| Stratified baseline | 0.3304 | 0.3310 | 0.0243 | 0.4467 | 0.2233 | 15.1383 |
+| Ordinal-median baseline | 0.2809 | 0.3333 | 0.0000 | 0.2717 | 0.1358 | 9.7919 |
+| Majority baseline | 0.2809 | 0.3333 | 0.0000 | 0.2717 | 0.1358 | 9.7919 |
 
-HRDataset_v14 is the only external dataset in this package that supports independent replication on a directly mappable performance target. IBM performance robustness has a restricted target space, while IBM attrition and Employee Turnover are related HR risk tasks. The high Employee Turnover performance should not be interpreted as employee-performance validation because the target is turnover.
+### 4.2 Repetition variability and ranking
 
-### 4.3 Real LLM-Agent Governance Evaluation
+Across five repeated designs, nominal XGBoost mean macro-F1 was 0.6288 (C201), versus 0.6249 for LightGBM (C202). LightGBM won macro-F1 in three repetitions and XGBoost in two. Random Forest ranked first for QWK in 5/5 repetitions (C203). Cumulative-threshold XGBoost ranked first for balanced accuracy in 4/5 repetitions (C204). Mean pairwise macro-F1 rank Spearman correlation was 0.926 across ten dependent repetition pairs (C205). These describe the fixed designs rather than population uncertainty.
 
-The final real OpenAI LLM-agent evaluation covered 80 cases: 40 INX primary cases and 40 HRDataset_v14 cases. Run mode was `real`, `real_llm_used=True`, and the model was `gpt-5.4-mini`. Automated technical checks reported faithfulness pass rate 1.0, unsupported claim rate 0.0, forbidden claim rate 0.0, missing warning rate 0.0, parsing success rate 1.0, and agent compliance pass rate 1.0 for the final run. These values are technical evaluation results for the stated run scope and do not imply deployment readiness.
+**Table 4. Five-repetition nested-CV summaries**
 
-**Table 4 source:** `manuscript/mdpi_information/tables/table4_final_llm_agent_eval.csv`.  
-**Figure 5 source:** `manuscript/mdpi_information/figures/figure5_llm_agent_summary.svg` and `.png`.
+| System | Macro-F1 mean ± SD | Balanced acc. mean ± SD | QWK mean ± SD | Ordinal MAE mean ± SD |
+| --- | ---: | ---: | ---: | ---: |
+| Nominal XGBoost | 0.6288 ± 0.0099 | 0.6446 ± 0.0094 | 0.5833 ± 0.0156 | 0.2335 ± 0.0150 |
+| LightGBM | 0.6249 ± 0.0137 | 0.6364 ± 0.0127 | 0.6070 ± 0.0136 | 0.1902 ± 0.0051 |
+| Cumulative-threshold XGBoost | 0.6155 ± 0.0059 | 0.6524 ± 0.0074 | 0.5451 ± 0.0083 | 0.3062 ± 0.0092 |
+| Random Forest | 0.5955 ± 0.0027 | 0.6283 ± 0.0012 | 0.6311 ± 0.0022 | 0.1597 ± 0.0015 |
 
-### 4.4 Chatbot Guardrail and Explanation Compliance
+### 4.3 Information-policy sensitivity
 
-The final evidence manifest links chatbot guardrail outputs with 50 unsafe prompts and 25 safe prompts. The automated guardrail summary reports unsafe refusal rate 1.0 and safe audit-answer rate 1.0 for the evaluated prompt suite. This result supports technical guardrail behavior for the suite, not exhaustive coverage of all adversarial prompts.
+For P2, retuning changed macro-F1 by +0.0185 versus its fixed schedule (C301). For P5, retuning changed QWK by −0.0344 although ordinal MAE improved (C302). Retuned P0 reached macro-F1 0.8943 (C303), but P0 retains outcome-proximal and timing-risk fields and is only a diagnostic upper bound. The P0–P3 difference warns about information access; it is not an admissible prospective estimate.
 
-### 4.5 G-XAIR Readiness Components
+**Table 5. Fixed-schedule and independently retuned policy results**
 
-Table 5 and Figure 4 summarize the component dashboard. Performance adequacy and fairness robustness are warning-level components; leakage robustness, explanation stability, calibration reliability, LLM faithfulness, and chatbot guardrails pass under the available evidence. Counterfactual actionability and proxy risk fail with high severity.
+| Policy | Fixed macro-F1 | Retuned macro-F1 | Fixed QWK | Retuned QWK | Fixed MAE | Retuned MAE |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| P0 | 0.8914 | 0.8943 | 0.8496 | 0.8529 | 0.0775 | 0.0733 |
+| P1 | 0.6279 | 0.6396 | 0.5814 | 0.5892 | 0.2308 | 0.2300 |
+| P2 | 0.6150 | 0.6335 | 0.5569 | 0.5892 | 0.2483 | 0.2217 |
+| P3 | 0.6210 | 0.6210 | 0.5676 | 0.5676 | 0.2433 | 0.2433 |
+| P4 | 0.4117 | 0.4273 | 0.2095 | 0.2368 | 0.4833 | 0.4833 |
+| P5 | 0.3460 | 0.3547 | 0.0945 | 0.0601 | 0.5958 | 0.5517 |
 
-### 4.6 Why the Final Readiness Label Remains Not Ready
+### 4.4 Explanation stability and deletion behavior
 
-The final readiness label remains `not_ready`. The two principal blockers are Proxy Risk Penalty and Counterfactual Actionability. Proxy risk remains high because Department can still be reconstructed from remaining fields; removing Department does not establish fairness. Counterfactual actionability remains weak because technically valid scenarios often require manager or organization-controlled changes rather than employee-controllable actions. Figure 6 visualizes these blockers.
+The top five feature families were identical across 15 model-seed pairs: mean top-5 Jaccard 1.0000 (C401). Across ten outer-training-resample pairs, mean all-feature Spearman was 0.9847 (C402). Canonical outer-fold pairs had mean all-feature Spearman 0.9066. Pairwise comparisons are dependent and have no confidence interval.
+
+Deleting the top-ranked feature produced mean probability-drop contrast +0.2676 versus random deletion (C403). Contrasts remained +0.2481 at three features and +0.2063 at five. These support fitted-model sensitivity under the masking rule, not real-world intervention effects.
+
+### 4.5 Calibration diagnostics
+
+Sigmoid calibration reduced log loss from 0.5515 to 0.4556 (C501) and Brier from 0.3426 to 0.2634. Macro classwise ECE declined from 0.1070 to 0.0249, mean cumulative ECE from 0.0779 to 0.0184, and normalized RPS from 0.0860 to 0.0669. Top-label ECE changed by +0.0044, from 0.0375 to 0.0419, a worse point estimate whose paired interval spans zero (C502). Calibration performance depends on event and metric.
+
+**Table 6. SHAP and probability-quality diagnostics**
+
+| Diagnostic | Result | Boundary |
+| --- | ---: | --- |
+| Seed-pair top-5 Jaccard | 1.0000 | 15 dependent descriptive pairs |
+| Resample all-feature Spearman | 0.9847 | 10 dependent descriptive pairs |
+| Top-1 guided-minus-random drop | +0.2676 | Masking diagnostic, not causal effect |
+| Raw → sigmoid log loss | 0.5515 → 0.4556 | Training-only cross-fitted calibrator |
+| Raw → sigmoid Brier | 0.3426 → 0.2634 | Metric-specific improvement |
+| Raw → sigmoid top-label ECE | 0.0375 → 0.0419 | Point estimate worsened by 0.0044 |
+
+### 4.6 Subgroup and proxy diagnostics
+
+Refitting P3 without JobRole changed argmax prediction for 10.75% of cases (C601), with proxy-reduced-minus-primary macro-F1 −0.0330 (C602). Marginal within-fold JobRole permutation produced mean total variation 0.1024 (C603); department-conditional permutation produced 0.0529 (C604). Marginal perturbation can create implausible combinations, and conditioning only on department is not a fully conditional test.
+
+Separate department reconstruction accuracy was 0.9792 with JobRole (C605) and 0.2908 without it (C606). This documents an information channel but not how the performance model used department, absence of residual information, or discrimination.
+
+**Table 7. Proxy-use and reconstructability diagnostics**
+
+| Diagnostic | Value | Scope |
+| --- | ---: | --- |
+| P3 vs no-JobRole prediction-change rate | 10.75% | Paired OOF predictions after refitting |
+| Macro-F1 difference, reduced minus P3 | −0.0330 | Descriptive refit contrast |
+| Marginal permutation total variation | 0.1024 | 20 outcome-blind shuffles |
+| Department-conditional total variation | 0.0529 | 20 outcome-blind shuffles |
+| Reconstruction accuracy with JobRole | 0.9792 | Separate proxy task |
+| Reconstruction accuracy without JobRole | 0.2908 | Separate proxy task |
+
+### 4.7 Replication and data-quality findings
+
+Under the retained HRDataset_v14 mapping, raw XGBoost mean macro-F1 was 0.6531 across five repetitions (C701). Sigmoid-XGBoost mean QWK was 0.6044 (C702), although its macro-F1 was lower than raw. Mapped class 2 contained 31 records (C703). Repetition ranges are not confidence intervals.
+
+The INX table contained 1200 rows (C801). HRDataset_v14 contained 215 effective missing cells (C802): 207 termination dates aligned with non-terminated records and eight manager identifiers. Three of 29 declared rules had findings (C803), totaling six rule occurrences (C804): two review-before-hire cases, two target-text/identifier disagreements, and two department-text minority cases. Occurrences are not asserted as six unique erroneous employees; source values were retained.
+
+**Table 8. HRDataset_v14 replication and data-quality results**
+
+| Result | Value | Boundary |
+| --- | ---: | --- |
+| Raw XGBoost mean macro-F1 | 0.6531 | Five fixed 5×5 repetitions; independently trained |
+| Sigmoid XGBoost mean QWK | 0.6044 | Metric-specific calibration effect |
+| Mapped class-2 support | 31 | Study mapping; no construct equivalence |
+| Effective missing cells | 215 | 1.92% under declared rule |
+| Rules with findings | 3 of 29 | Declared-rule scope only |
+| Anomaly occurrences | 6 | No row-level uniqueness claim |
 
 ## 5. Discussion
 
-### 5.1 Accuracy Is Not Sufficient for HR Decision Support
+### 5.1 Accuracy alone obscures the result
 
-The evidence package shows why HR analytics should be evaluated as a governed information system rather than a single predictive model. A model can produce useful macro-F1 and QWK values while still retaining proxy-risk, actionability, calibration, and governance limitations.
+The system leading macro-F1 and balanced accuracy differs from the system leading QWK and ordinal MAE; probability-quality leaders differ again. Repeated validation preserves this pattern: macro-F1 leadership alternates, whereas Random Forest leads QWK in each fixed repetition. A single “best model” statement would discard ordinal and probabilistic structure.
 
-### 5.2 LLM Faithfulness Does Not Imply Deployment Readiness
+### 5.2 Information access is part of the estimand
 
-The final LLM-agent run did not detect unsupported or forbidden claims, but this is a bounded automated evaluation. It does not replace human-subject evaluation, legal review, organizational validation, or monitoring after deployment. The LLM layer improves evidence communication only within the constraints of the supplied evidence schema.
+P0’s high performance shows that the information contract matters, not that a high-performing prospective system exists. P3 removes outcome-proximal fields, direct demographics, and department, but retains timing-uncertain surveys and organizational proxies. P4/P5 make stronger semantic restrictions without verifying real-time availability. The justified claim is leakage-risk sensitivity under assumptions.
 
-### 5.3 Department Exclusion Is Not a Fairness Guarantee
+### 5.3 Explanations require identity and behavioral checks
 
-The primary policy excludes Department, but EmpJobRole remains a documented proxy-risk concern. This supports the broader fairness literature: group-variable removal can reduce direct use but does not eliminate indirect inference or structural effects.
+Exact-fold explanation prevents presenting a full-data-model explanation beside cross-validated performance. High top-k agreement and stronger deletion drops support internal consistency under tested procedures. They do not validate causal or employee-level meaning; dependent pairs and artificial masking remain material limits.
 
-### 5.4 Valid Counterfactuals Are Not Necessarily Actionable
+### 5.4 Calibration and proxy evidence are multidimensional
 
-Counterfactual validity is a model property, not an employee instruction. In this project, low employee-only validity and manager/organization dependencies motivate a high-severity readiness blocker. The manuscript therefore frames counterfactuals as actionability-audited model scenarios only.
+Sigmoid calibration improved several probability metrics but worsened top-label ECE. Department reconstructability and JobRole-dependent output changes also answer different questions: information available to a decoder versus performance-model dependence under refitting or perturbation. Neither is a legal or causal test, but together they reveal governance risk missed by removing department alone.
 
-### 5.5 Implications for Responsible HR Information Systems
+### 5.5 Relation to prior work
 
-The framework can support responsible HR analytics research by making the evidence chain explicit: data and feature policies, model metrics, explanation stability, calibration, subgroup/proxy audits, counterfactual actionability, governed LLM explanations, agent audits, guardrails, and final readiness. The approach is designed to prevent overclaiming, not to justify automated HR decisions.
+Prior employee studies supply classifier comparisons, HR scholarship explains sociotechnical stakes, and explanation, leakage, calibration, and reproducibility research supplies individual audit methods. Within the frozen set, this study's contribution is the shared evidence contract. It guards against model/explanation mismatch, held-out calibration fitting, conflation of information-policy and retuning effects, unsupported fairness inference, and stale numbers. Relevant unobserved work may overlap these components (C010).
 
 ## 6. Limitations
 
-The evidence relies on public cross-sectional datasets with provenance and licensing that should be independently verified before submission. HRDataset_v14 is a small external replication dataset. IBM performance uses restricted target classes 3 and 4, and attrition/turnover datasets are not direct performance validation. Cross-dataset INX-to-HRDataset transfer is limited by weak safe-feature overlap. Automated LLM-agent and chatbot checks are technical evaluations, not human-subject studies. The final readiness label remains `not_ready`, and the system is not deployment ready.
+First, both datasets are public cross-sectional tables with unresolved source-to-byte provenance and rights. Public availability does not establish authenticity, ownership, representativeness, or redistribution permission. No raw dataset is approved for publication (C011).
+
+Second, feature and decision timestamps are absent. P0–P5 encode assumptions, not observed temporal order. P4 is prospective-plausibility sensitivity; P5 cannot establish absence of residual proxies.
+
+Third, targets are recorded organizational ratings. Documentation does not establish objective capability, productivity, or future potential, and the audit does not establish construct validity (C009). The replication mapping does not prove category equivalence.
+
+Fourth, samples are modest and imbalanced. Five-repetition ranges are not confidence intervals. Some subgroup/class cells are unsupported; exploratory intervals condition on observed sample, models, folds, and eligibility.
+
+Fifth, SHAP values are noncausal raw-margin attributions. Stability pairs are dependent, masking can create out-of-distribution records, and no human study establishes explanation usefulness.
+
+Sixth, calibration is retrospective on OOF predictions. ECE depends on binning/support; future reliability, decision thresholds, and organizational utility remain untested.
+
+Seventh, proxy analyses are diagnostic. Refitting changes model and feature set; shuffles are artificial; reconstructability does not establish department use, discrimination, fairness, or legal compliance.
+
+Eighth, HRDataset_v14 is independently trained mapped-target replication, not locked-model transport. Feature space, semantics, parameters, and population differ.
+
+Finally, institutional review, consent wording, author roles, funding, conflicts, AI-use disclosure, software licensing, Git-history remediation, final release identity, and archive DOI remain unresolved. They cannot be inferred from analysis.
 
 ## 7. Conclusions
 
-This manuscript draft presents an LLM-assisted multi-agent XAI governance framework for leakage-safe employee-performance decision support. The framework integrates XGBoost prediction, SHAP attribution, calibration diagnostics, fairness/proxy audits, counterfactual actionability review, governed LLM explanations, multi-agent audits, chatbot guardrails, and a readiness dashboard. The final 80-case real OpenAI evaluation supports evidence-constrained LLM explanation behavior for INX and HRDataset_v14, but the readiness label remains `not_ready` because proxy-risk and counterfactual-actionability blockers remain unresolved. The system should therefore be interpreted as a research-grade governance and decision-support framework, not as an operational HR decision system.
+An ordinal employee-performance study changes meaning when information policy, evaluation nesting, explanation identity, calibration path, and proxy boundaries are explicit. Under P3, different systems led classification, ordinal, and probability metrics; retuning effects varied; SHAP rankings were descriptively stable but noncausal; calibration gains were metric-specific; and JobRole carried organizational-proxy risk. HRDataset_v14 replicated the protocol on a mapped target without transporting the INX model.
+
+The durable output is an auditable evidence contract, not a production decision system. Future work requires timestamped data, validated constructs, authorized provenance, preregistered prospective evaluation, stronger conditional proxy tests, human-centered explanation studies, and institutionally approved governance before real employment use.
 
 ## Supplementary Materials
 
-Supplementary files include the final evidence manifest, generated tables, generated figures, and repository reports under the tagged GitHub snapshot `v0.3-real-llm-governance-evidence`.
+The Phase 5B package provides claim-to-source comparison, final tables and figures, validation, revision and experiment reports, reproducibility and limitations reports, reviewer-response draft, final review simulation, and original-versus-revised diff. Employee rows, folds, fitted models, and raw data are excluded.
 
 ## Author Contributions
 
-Conceptualization, AUTHOR_TO_COMPLETE; methodology, AUTHOR_TO_COMPLETE; software, AUTHOR_TO_COMPLETE; validation, AUTHOR_TO_COMPLETE; formal analysis, AUTHOR_TO_COMPLETE; investigation, AUTHOR_TO_COMPLETE; resources, AUTHOR_TO_COMPLETE; data curation, AUTHOR_TO_COMPLETE; writing--original draft preparation, AUTHOR_TO_COMPLETE; writing--review and editing, AUTHOR_TO_COMPLETE; supervision, AUTHOR_TO_COMPLETE. All authors have read and agreed to the published version of the manuscript. AUTHOR_TO_COMPLETE
+[AUTHOR TO COMPLETE: approve CRediT roles for Muhammed Yusuf Batur and Mehmet Göktürk. Do not infer roles from repository activity.]
 
 ## Funding
 
-AUTHOR_TO_COMPLETE
+[AUTHOR TO COMPLETE: provide funder and grant number, or explicitly confirm no external funding.]
 
 ## Institutional Review Board Statement
 
-AUTHOR_TO_COMPLETE
+[AUTHOR/INSTITUTION TO COMPLETE: institution, review unit, determination, reference/application number, date, and approved wording. No approval, exemption, or not-applicable determination is asserted.] (C012)
 
 ## Informed Consent Statement
 
-AUTHOR_TO_COMPLETE
+[AUTHOR/INSTITUTION TO COMPLETE: provide approved consent-applicability wording tied to provenance and ethics determination. No waiver or not-applicable determination is asserted.]
 
 ## Data Availability Statement
 
-The source code, configuration files, generated governance reports, and manuscript-support evidence package are available at https://github.com/baturyusuf/employee-performance-with-XAI under the tag `v0.3-real-llm-governance-evidence`. The project uses public HR datasets; readers should consult the original dataset providers and dataset cards for provenance and licensing details. Stub/dry-run outputs are retained for reproducibility and testing only and are excluded from manuscript-grade real LLM evidence.
+Aggregate evidence, schemas, hashes, and qualified upstream locators are provided in the repository. Raw employee-level datasets are excluded because no dataset has a complete authoritative source-to-byte and redistribution-rights chain. A final immutable release identifier and archive URL remain to be supplied.
 
 ## Acknowledgments
 
-AUTHOR_TO_COMPLETE
+[AUTHOR TO COMPLETE, or remove this section.]
 
 ## Conflicts of Interest
 
-AUTHOR_TO_COMPLETE
+[AUTHOR TO COMPLETE: provide disclosures approved by all authors, or explicitly confirm none.]
 
-## Use of Generative AI and AI-Assisted Technologies
+## Use of AI-Assisted Technologies
 
-During manuscript preparation, generative AI tools were used for language refinement, structural drafting assistance, and consistency checking under author supervision. The authors reviewed, edited, and verified all scientific claims, numerical results, tables, figures, and references. No generative AI system was used as the predictive model in the reported experiments.
+[AUTHOR AND JOURNAL-POLICY REVIEW REQUIRED: approve wording that accurately describes tools used for code assistance and drafting. No scientific result was accepted without deterministic evidence checks; no paid service call was made during Phase 5B.]
 
 ## References
 
-See `references.bib`.
+The authoritative bibliography is `references.bib`; every cited entry belongs to the frozen, source-verified 25-work set.

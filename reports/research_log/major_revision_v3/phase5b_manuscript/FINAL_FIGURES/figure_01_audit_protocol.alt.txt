@@ -1,0 +1,1 @@
+Two-panel audit diagram. Panel A moves from predictive performance through unresolved audit risks to an integrated leakage-aware audit and bounded claims. Panel B separates training-only model and calibrator fitting from untouched outer-test prediction, with grouped SHAP explicitly tied to the same persisted fold model.
