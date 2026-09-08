@@ -55,6 +55,8 @@ The independently validated Round 2 [`selection-objective sensitivity package`](
 
 The independently validated Round 2 [`HR target-alias package`](reports/research_log/major_revision_round2/hr_target_alias_sensitivity/README.md) preserves the historical 311-row result, isolates the fit-free 311→309 sample-removal effect, and compares restricted-canonical with exclusion/refit predictions on an identical 309-row population. The combined [`HR target-construction and alias report`](reports/research_log/major_revision_round2/HR_MAPPING_SENSITIVITY_REPORT.md) also retains the existing three-versus-four-class formulation and CV-design boundaries.
 
+The deterministic Round 2 [`P3 subgroup summary`](reports/research_log/major_revision_round2/SUBGROUP_MANUSCRIPT_SUMMARY.csv) publishes all six prespecified attributes at the n≥30 support threshold for macro-F1, QWK, and ordinal MAE. It preserves group endpoints, eligibility counts, statuses, and exploratory interval labels while remaining a descriptive diagnostic rather than fairness or discrimination evidence.
+
 ## Tracked manuscript-support assets
 
 GitHub contains a deterministic, source-mapped export at [`manuscript/mdpi_information/assets/`](manuscript/mdpi_information/assets/). It was generated from the validated canonical run without refitting models or recomputing scientific evidence. The compact package contains 109 files and 10,338,351 bytes; its closed-world manifest SHA-256 is `fbe7355b956df01ad9817f27b42dc13c0f3e0e33e7f0e5c42a2477beb9d001e1`.
