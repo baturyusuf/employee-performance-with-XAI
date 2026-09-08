@@ -1,0 +1,57 @@
+{
+  "schema_version": 2,
+  "phase": "round2_claim_freeze",
+  "snapshot_date": "2026-09-08",
+  "status": "pending_user_approval",
+  "user_approval": {
+    "status": "pending",
+    "approved_by": null,
+    "approved_at_utc": null,
+    "approved_claim_set_sha256": null,
+    "approval_statement": null
+  },
+  "controls": {
+    "manuscript_editing_authorized": false,
+    "bibliography_editing_authorized": false,
+    "reviewer_response_editing_authorized": false,
+    "release_authorized": false,
+    "tag_creation_authorized": false,
+    "doi_minting_authorized": false,
+    "raw_data_publication_authorized": false,
+    "network_required": false,
+    "paid_api_calls": 0
+  },
+  "historical_claim_set_sha256": "1664b188df14135d3b3de8642de3d080c25a3fbadc440615c2bd04b2f14ddabe",
+  "round2_plan": {
+    "path": "reports/research_log/major_revision_round2/ROUND2_PLAN.md",
+    "sha256": "668543c1307ceb2ea93b022ab60e67f350db3ef1eae3159cc72e201b7b942c2f"
+  },
+  "legacy_dispositions": {
+    "C002": "modified",
+    "C004": "modified",
+    "C006": "modified",
+    "C007": "modified",
+    "C008": "modified",
+    "C010": "superseded",
+    "C013": "superseded"
+  },
+  "global_prohibited_assertions": [
+    "The study proves causal determinants of employee performance.",
+    "The evaluated systems are leakage-free.",
+    "P4 or P5 is timestamp-verified prospective validation.",
+    "A universally best model or information policy was identified.",
+    "Selection-objective sensitivity can be reduced to one binary material-dependence verdict.",
+    "A lower-order permutation alone establishes material ranking dependence.",
+    "Random Forest's aggregate ordinal scores imply adequate rating-4 detection.",
+    "The subgroup analysis proves fairness, discrimination, protected-class effects, or legal compliance.",
+    "The HR target formulations are construct-equivalent or their score differences are improvements.",
+    "The 311-row versus 309-row HR contrast isolates a refitting effect.",
+    "The matched HR target-alias analysis is an equivalence test or robustness certification.",
+    "HRDataset_v14 is a locked-model external validation of the INX system.",
+    "The literature review establishes a world-first or exhaustive novelty claim.",
+    "SHAP values identify causal, actionable, or employee-level prescriptions.",
+    "Raw employee-level data are approved for public redistribution.",
+    "Ethics approval, exemption, consent waiver, funding, conflicts, or author roles are resolved.",
+    "A final tag, GitHub release, archival record, or DOI already exists."
+  ]
+}
