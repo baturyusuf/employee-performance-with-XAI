@@ -47,6 +47,10 @@ The Phase 4B [`provenance, ethics, and immutable-release readiness package`](rep
 
 The Phase 5A [`sentence-level claim-matrix package`](reports/research_log/major_revision_v3/phase5a_claim_matrix/README.md) binds 32 numerical sentences to unique exact CSV rows and 13 narrative sentences to hash-bound text anchors across all 12 v3 components. Each claim includes its evidence scope, mandatory qualifier, and prohibited overclaim. The exact claim-set SHA-256 `1664b188df14135d3b3de8642de3d080c25a3fbadc440615c2bd04b2f14ddabe` was explicitly approved on 2026-09-08 as the sole Phase 5B claim boundary. The refreshed nine-file/69,458-byte package has manifest SHA-256 `055eb00478acfbb09c8e7bf3147a665a71ce85ceb0275f094a6f09afc7eff7dc`. Approval authorizes manuscript and reviewer-response drafting only; separate provenance, ethics, licensing, history, release, tag, and DOI blockers remain open.
 
+### Second-round major revision
+
+The additive [`Round 2 major-revision plan`](reports/research_log/major_revision_round2/ROUND2_PLAN.md) freezes the selection-objective sensitivity, training-only empirical-prior probability baseline, limited HR target-alias sensitivity, publication-table extractions, method/literature expansion, new claim-matrix gate, and manuscript/reviewer-response workflow. Baseline commit `0805b793a3b2a2adb077dfdf7f271e309bd5774f` and all Phase 1–5 evidence remain historical and immutable. No Round 2 result or manuscript change is implied by the planning checkpoint.
+
 ## Tracked manuscript-support assets
 
 GitHub contains a deterministic, source-mapped export at [`manuscript/mdpi_information/assets/`](manuscript/mdpi_information/assets/). It was generated from the validated canonical run without refitting models or recomputing scientific evidence. The compact package contains 109 files and 10,338,351 bytes; its closed-world manifest SHA-256 is `fbe7355b956df01ad9817f27b42dc13c0f3e0e33e7f0e5c42a2477beb9d001e1`.
