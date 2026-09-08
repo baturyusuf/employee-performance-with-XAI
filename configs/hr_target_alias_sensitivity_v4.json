@@ -1,0 +1,136 @@
+{
+  "schema_version": 1,
+  "contract_id": "hr_target_alias_sensitivity_v4",
+  "dataset_key": "hrdataset_v14",
+  "model": "xgboost",
+  "system": "xgboost_raw",
+  "feature_policy": {
+    "id": "conservative_primary",
+    "exact_features": [
+      "EmpJobRole",
+      "EngagementSurvey",
+      "EmpJobSatisfaction",
+      "SpecialProjectsCount",
+      "DaysLateLast30",
+      "Absences",
+      "ExperienceYearsAtThisCompany"
+    ]
+  },
+  "target": {
+    "canonical_column": "PerformanceScore",
+    "alias_column": "PerfScoreID",
+    "canonical_mapping": {
+      "PIP": 2,
+      "Needs Improvement": 2,
+      "Fully Meets": 3,
+      "Exceeds": 4,
+      "Exceptional": 4
+    },
+    "alias_audit_mapping": {
+      "PIP": 1,
+      "Needs Improvement": 2,
+      "Fully Meets": 3,
+      "Exceeds": 4,
+      "Exceptional": 4
+    },
+    "ordered_labels": [2, 3, 4],
+    "expected_disagreement_count": 2,
+    "canonical_rule_changes": false
+  },
+  "phase3a_design": {
+    "source_run_id": "phase3a_v3_20260907T141213Z_f6e6a0a",
+    "source_generation_commit": "f6e6a0af7f36d7d69f028df07b6c0842c25ebc56",
+    "source_scientific_input_sha256": "76518cc8387a1f632b388e2e37f906879dcd73f32c6bc6a13443f15449e896bb",
+    "formulation_id": "primary_three_class",
+    "repetition": 1,
+    "outer_splits": 5,
+    "inner_splits": 5,
+    "outer_seed": 4201,
+    "inner_seed": 4301,
+    "model_seed": 4401,
+    "fold_contract_hash": "d4dc3dda44eb1a7b5cb48fb4515002b5ee34811dc0748b81bed447e6e1fc7a09",
+    "selection_metric": "macro_f1",
+    "tie_break_metric": "quadratic_weighted_kappa",
+    "primary_tie_tolerance": 0.001,
+    "candidate_count": 8
+  },
+  "sources": {
+    "raw_dataset": {
+      "path": "data/external/hrdataset_v14/raw.csv",
+      "sha256": "cb19996755c93c0a8d6527f59da4701c80aef65eff854906546dce286249813c"
+    },
+    "schema_mapping": {
+      "path": "data/external/hrdataset_v14/schema_mapping.json",
+      "sha256": "65c40fecc75235f57209cff6231d7386e4279ebedca9390f53ad2bb67ae63788"
+    },
+    "model_grid": {
+      "path": "configs/model_grid.yaml",
+      "sha256": "d8fb0584d7106f8941ca8e1b0e0a9c58e13f39519c6c75b383ff333d92d41617"
+    },
+    "phase3a_contract": {
+      "path": "configs/hrdataset_sensitivity_v3.json",
+      "sha256": "9a94052e8fc96ff0894c89cfe99eca898e1e0da5ed697c7fabac99e4fb22799b"
+    },
+    "phase3a_metadata": {
+      "path": "reports/major_revision_v3_runs/phase3a_v3_20260907T141213Z_f6e6a0a/hrdataset_sensitivity/stage_metadata.json",
+      "sha256": "489a88a73f896fc828d883aadfa2eba5d887080f49abcc12e90d6a894ef985bd"
+    },
+    "phase3a_oof_predictions": {
+      "path": "reports/major_revision_v3_runs/phase3a_v3_20260907T141213Z_f6e6a0a/hrdataset_sensitivity/oof_predictions.csv",
+      "sha256": "f92561d8144c0298aca4a2bf66eb5ddcd9502cfa0173ec90e00be90a987b8d89"
+    },
+    "phase3a_fold_contracts": {
+      "path": "reports/major_revision_v3_runs/phase3a_v3_20260907T141213Z_f6e6a0a/hrdataset_sensitivity/fold_contracts.json",
+      "sha256": "d04b6364cdf54498ded0fd630aa31a51b22508b8adbeeab11cb5f548e0e47e86"
+    },
+    "phase3a_selected_hyperparameters": {
+      "path": "reports/major_revision_v3_runs/phase3a_v3_20260907T141213Z_f6e6a0a/hrdataset_sensitivity/selected_hyperparameters.csv",
+      "sha256": "363c0ef2a7eabb5e8e156f9b511416a39159b0da4137bcb3446221ac5b54ebf6"
+    },
+    "phase3a_repetition_metrics": {
+      "path": "reports/major_revision_v3_runs/phase3a_v3_20260907T141213Z_f6e6a0a/hrdataset_sensitivity/repetition_metrics.csv",
+      "sha256": "12909f7a77cd3650369c4de7f0a64ec69925f4c82e0d004ab98c1c2ef9e5583b"
+    },
+    "phase3b_anomaly_audit": {
+      "path": "reports/research_log/major_revision_v3/phase3b_data_quality/rule_anomaly_audit.csv",
+      "sha256": "4ccae16bdc64e4f9b5067d89869cc761348a02eb0650d7e0c5b704b06edc3cc0"
+    }
+  },
+  "arms": [
+    {
+      "id": "historical_canonical_311",
+      "mode": "reuse_phase3a_repetition1_raw_oof",
+      "population": "all_311_rows"
+    },
+    {
+      "id": "restricted_canonical_309",
+      "mode": "fit_free_remove_two_disagreement_rows_from_existing_oof",
+      "population": "matched_309_rows"
+    },
+    {
+      "id": "exclusion_refit_309",
+      "mode": "refit_selection_and_outer_models_after_exclusion",
+      "population": "matched_309_rows"
+    }
+  ],
+  "comparisons": {
+    "sample_removal_effect": {
+      "left": "historical_canonical_311",
+      "right": "restricted_canonical_309",
+      "interpretation": "fit_free_population_change_only"
+    },
+    "matched_refit_effect": {
+      "left": "restricted_canonical_309",
+      "right": "exclusion_refit_309",
+      "interpretation": "primary_training_and_data_rule_sensitivity_on_identical_population"
+    }
+  },
+  "excluded_scope": ["sigmoid_calibration", "naive_baselines", "additional_repetitions"],
+  "publication": {
+    "local_output_root": "reports/major_revision_round2_runs",
+    "publish_row_identities": false,
+    "publish_employee_level_oof": false,
+    "paid_api_calls": 0,
+    "network_calls": 0
+  }
+}
