@@ -1,6 +1,6 @@
 # Round 2 Major Revision Plan
 
-Status: **PRESPECIFIED PLAN — USER REVIEW GATE BEFORE SCIENTIFIC EXECUTION**
+Status: **PRESPECIFIED PLAN — APPROVED FOR SCIENTIFIC EXECUTION AFTER CORRECTED CHECKPOINT PUSH**
 
 Prepared: 2026-09-08
 
@@ -9,6 +9,7 @@ Baseline branch: `finalization/leakage-aware-v2`
 Frozen baseline commit: `0805b793a3b2a2adb077dfdf7f271e309bd5774f`
 
 Working branch: `revision/round2-major-v4`
+
 Historical approved Phase 5A claim-set SHA-256: `1664b188df14135d3b3de8642de3d080c25a3fbadc440615c2bd04b2f14ddabe`
 
 ## 1. Purpose and governing priority
@@ -102,7 +103,14 @@ The main sensitivity table will contain at least:
 | Model | Selection objective | Macro-F1 | QWK | Ordinal MAE | RPS | Class-4 recall |
 | --- | --- | ---: | ---: | ---: | ---: | ---: |
 
-The report will show selected-candidate changes by model/fold and rank/leader changes by evaluation metric. “Ranking depends on the selection objective” will mean that the exact six-model ordering or leader for at least one prespecified ordinal criterion (QWK or ordinal MAE) changes between regimes. The report will still show all rank movements if the leader is unchanged. This is a descriptive operational rule, not a hypothesis test.
+The report will not collapse sensitivity into one binary “ranking depends” conclusion. For every evaluation metric it will report separately:
+
+- `leader_changed`: whether the best-ranked model changes between Regimes A and B;
+- `full_ordering_changed`: whether the exact six-model ordering changes, even when the leader does not;
+- selected-candidate changes: model/fold indicators and counts, including unchanged selections; and
+- metric-effect magnitudes: signed and absolute Regime B minus Regime A score changes for every model, together with rank-position changes and the score separation around any leader change.
+
+A lower-rank permutation with negligible score changes will be described only as a small lower-order change, not as material dependence. Leader changes, full-ordering changes, candidate changes, and score magnitudes will remain distinct descriptive findings; no composite binary materiality label or hypothesis test is prespecified.
 
 ## 5. Experiment R2-E2 — training-only empirical-prior probability baseline
 
@@ -116,17 +124,20 @@ The majority, stratified, and ordinal-median hard-label baselines remain valid c
 
 ## 6. Experiment R2-E3 — HR target-alias disagreement sensitivity
 
-The Phase 3B audit found two `PerformanceScore` versus `PerfScoreID` disagreements. The canonical text-target rule remains unchanged. A limited sensitivity will be run as follows:
+The Phase 3B audit found two `PerformanceScore` versus `PerfScoreID` disagreements. The canonical text-target rule and the historical 311-row result remain unchanged. A limited matched-sample sensitivity will be run as follows:
 
 - target: retained three-class text mapping only;
 - model: raw-probability XGBoost only;
 - features/grid/preprocessing: exact Phase 3A conservative seven-feature and eight-candidate contract;
 - design: Phase 3A repetition-1 5 outer × 5 inner fold identity, restricted consistently after excluding the two disagreement rows;
-- canonical arm: reuse the independently validated Phase 3A repetition-1 raw-XGBoost evidence;
-- exclusion arm: refit candidate selection and outer models after excluding exactly the two audited disagreement rows;
+- historical canonical arm (311 rows): preserve and report the independently validated Phase 3A repetition-1 raw-XGBoost result without refitting;
+- restricted canonical arm (309 rows): remove the two disagreement rows from the existing canonical OOF predictions and recompute all metrics fit-free on the remaining rows;
+- exclusion/refit arm (309 rows): refit candidate selection and outer models after excluding exactly the two audited disagreement rows, then evaluate on exactly the same 309 row identities as the restricted canonical arm;
 - calibration and naive baselines: excluded from this limited sensitivity;
-- outputs: support, selected-candidate schedule, macro-F1, balanced accuracy, QWK, ordinal MAE, RPS, log loss, Brier, ECE, per-class metrics, and confusion matrix; and
+- outputs: row-identity match receipt, support, selected-candidate schedule, macro-F1, balanced accuracy, QWK, ordinal MAE, RPS, log loss, Brier, ECE, per-class metrics, confusion matrix, and signed deltas; and
 - interpretation: descriptive data-quality sensitivity only, with no equivalence test or robustness claim.
+
+The primary training/data-rule sensitivity comparison is the matched-population contrast `restricted canonical predictions (309 rows)` versus `exclusion/refit predictions (309 rows)`. The separate `historical canonical predictions (311 rows)` versus `restricted canonical predictions (309 rows)` contrast is labelled only as the fit-free sample-removal effect. It cannot be attributed to refitting or the exclusion training rule. The 311-row and 309-row results will never be used as the primary refitting comparison.
 
 The row identities and employee-level predictions remain local and untracked. The compact report may state only that two prespecified audited rows were removed and publish aggregate results.
 
@@ -313,8 +324,10 @@ Before any Round 2 scientific result is computed:
 - `git diff --check` and link validation pass; and
 - the branch is pushed for user review.
 
-Scientific execution begins only after this first plan-review checkpoint.
+Scientific execution begins only after the corrected plan checkpoint is pushed. The user explicitly authorized implementation and scientific execution to continue without a second plan-approval wait once the two requested corrections are incorporated and pushed.
 
-## 19. Approval request
+## 19. Approval record and remaining gate
 
-Please approve this exact prespecified plan before Round 2 implementation or scientific execution begins. Approval of this checkpoint will authorize the implementation and experiments described above, but it will not approve a future Round 2 claim digest, manuscript rewrite, release, tag, or DOI.
+On 2026-09-08, the user generally approved plan commit `0573b22f970d86ad862ef7fee5853286a155446c`, required the matched-sample HR comparison and non-binary selection-sensitivity reporting now incorporated above, approved omission of the optional MAE/RPS-selected third regime, prohibited result-contingent scope expansion, and authorized implementation and scientific experiments after this corrected checkpoint is pushed.
+
+This approval does not approve a future Round 2 claim digest, manuscript rewrite, release, tag, or DOI. Digest-specific approval of the new Round 2 claim matrix remains mandatory before any manuscript or bibliography rewrite.
