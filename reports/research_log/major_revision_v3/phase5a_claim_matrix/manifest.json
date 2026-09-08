@@ -1,11 +1,11 @@
 {
-  "contract_sha256": "a3c55ac3d089b5e38b029d2364edc9d09b29b3ebc8decc3e04b4bce8f2e2c7f6",
+  "contract_sha256": "7fc7e66f318613eec6af39b20c494d22b4ead4b746404405e36fdb39689c3403",
   "file_count_excluding_manifest": 8,
   "files": [
     {
       "path": "APPROVAL_REQUEST.md",
-      "sha256": "0cf553447bd97532d9d8d56085e0a5ad56573d4143e88b9a4c661f6c8d6e56ed",
-      "size_bytes": 704
+      "sha256": "197e0d23cb66bc97a57d8744b7e13647c03f17e36366ec49f2a0109977829fe4",
+      "size_bytes": 611
     },
     {
       "path": "CLAIM_BOUNDARIES.md",
@@ -14,18 +14,18 @@
     },
     {
       "path": "CLAIM_MATRIX.csv",
-      "sha256": "b5b0455161a6e2f7f562f6057990133e81a3f791d7806926f773a79213880bf3",
-      "size_bytes": 30841
+      "sha256": "b8b9fcd17b5ecf7865e1327bbc6fc0b58d2a72536194e33acc7144b706f94ae3",
+      "size_bytes": 30256
     },
     {
       "path": "CLAIM_MATRIX.md",
-      "sha256": "8567dfc483572ed8ec140548b1fe752611a3f7a0906018f8796f53acffb6d20b",
-      "size_bytes": 24757
+      "sha256": "ee1a969bb6ff76f2df79f2d441be243872f912739ef023d368418e969dc70da3",
+      "size_bytes": 24731
     },
     {
       "path": "README.md",
-      "sha256": "23b3c0932397a0decdb20483010468f9ea7b0a02b721c388cf0bc254311f7207",
-      "size_bytes": 1129
+      "sha256": "12ba65a34c0d192f851f32f68e8c36ee6d98ed42d30149a249bf2ead1760daa9",
+      "size_bytes": 1169
     },
     {
       "path": "SOURCE_REGISTER.csv",
@@ -34,16 +34,16 @@
     },
     {
       "path": "approval_record.json",
-      "sha256": "5ed161740cb0dc5fd9d3041fd6035708dbdc62a5c4be0ccaa81d2cf2afbc9a4c",
-      "size_bytes": 291
+      "sha256": "409d97c3e50b0fc00b5644830c09b886b124aed20bcba8d76ec166c072f4edb0",
+      "size_bytes": 373
     },
     {
       "path": "provenance_receipt.json",
-      "sha256": "76a1174ae505589aab4748b3519c759d1ebe8e2f5250c9e52a85fe50266ac5e0",
-      "size_bytes": 678
+      "sha256": "d68ba4030b6ce402b6a5221a01279eca17cead646cb05e0104d7989b9cb4864e",
+      "size_bytes": 677
     }
   ],
-  "generation_commit": "fcfc4692466d7bc9f414db4b2fe693073d0d7f4e",
+  "generation_commit": "5fb1ccb6128f83f6c18d15e61abb4289c5cbbfbc",
   "package_kind": "phase5a_sentence_level_claim_matrix",
   "schema_version": 1
 }

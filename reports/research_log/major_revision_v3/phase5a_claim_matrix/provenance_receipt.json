@@ -1,12 +1,12 @@
 {
-  "approval_status": "pending",
+  "approval_status": "approved",
   "claim_count": 45,
   "claim_set_sha256": "1664b188df14135d3b3de8642de3d080c25a3fbadc440615c2bd04b2f14ddabe",
   "component_count": 12,
   "contract_path": "configs/claim_matrix_v3.json",
-  "contract_sha256": "a3c55ac3d089b5e38b029d2364edc9d09b29b3ebc8decc3e04b4bce8f2e2c7f6",
-  "generation_commit": "fcfc4692466d7bc9f414db4b2fe693073d0d7f4e",
-  "manuscript_editing_authorized": false,
+  "contract_sha256": "7fc7e66f318613eec6af39b20c494d22b4ead4b746404405e36fdb39689c3403",
+  "generation_commit": "5fb1ccb6128f83f6c18d15e61abb4289c5cbbfbc",
+  "manuscript_editing_authorized": true,
   "narrative_claim_count": 13,
   "network_calls": 0,
   "numerical_claim_count": 32,
@@ -14,5 +14,5 @@
   "paid_api_calls": 0,
   "schema_version": 1,
   "source_file_count": 27,
-  "status": "passed_pending_user_approval"
+  "status": "passed_approved_for_phase5b"
 }

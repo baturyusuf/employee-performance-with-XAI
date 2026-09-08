@@ -43,6 +43,8 @@ Requirement 29 now has a tested and published Phase 5A review package. Its 45 pr
 
 On 2026-09-08 the user explicitly approved that exact claim-set digest as the sole boundary for Phase 5B manuscript and reviewer-response drafting. Requirement 29's approval criterion is therefore closed without changing any of the 45 claim objects or their digest. The approved package record must be regenerated from the approval checkpoint before drafting; all non-claim blockers remain open.
 
+The approved package refresh is complete from clean checkpoint `5fb1ccb6128f83f6c18d15e61abb4289c5cbbfbc`: nine files/69,458 bytes, manifest SHA-256 `055eb00478acfbb09c8e7bf3147a665a71ce85ceb0275f094a6f09afc7eff7dc`, approval state `approved`, and unchanged claim-set digest. Phase 5B drafting may now begin under this sole boundary.
+
 Requirements 13–14 are now evidence-complete for the requested diagnostic scope. The governed `phase2c_subgroup_proxy_use/` package publishes every support-aware group/gap/interval row, overall/department paired-change summary, all 40 perturbation-repetition summaries and two scheme aggregates, and the separately labelled reconstruction evidence. Its closed-world manifest and source-equivalence checks exclude 49,200 employee-level rows, folds, raw data, stage internals, and models. The conclusions remain exploratory and cannot certify fairness, prove discrimination or absence of discrimination, establish causal feature use, or support deployment.
 
 Status meanings:

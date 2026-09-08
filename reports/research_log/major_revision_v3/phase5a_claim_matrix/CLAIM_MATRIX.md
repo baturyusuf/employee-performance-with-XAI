@@ -1,6 +1,6 @@
 # Phase 5A Sentence-Level Claim Matrix
 
-Status: **PENDING USER APPROVAL**. These sentences are candidates for later manuscript drafting; none is approved or inserted into the manuscript by this package.
+Status: **APPROVED FOR PHASE 5B**. These sentences are the sole authorized claim boundary for manuscript and reviewer-response drafting.
 
 ## Methods — estimand and information contract
 
