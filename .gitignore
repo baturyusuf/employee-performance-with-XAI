@@ -195,6 +195,9 @@ cython_debug/
 # Local v3 scientific runs include employee-level OOF rows and fitted-stage internals.
 # Only separately governed compact aggregate exports may be admitted to Git.
 /reports/major_revision_v3_runs/
+# Local Round 2 scientific runs contain row-level OOF evidence and fit lineage.
+# Only independently validated compact aggregate exports may be tracked.
+/reports/major_revision_round2_runs/
 
 # User-provided HR data and row-level/fit-derived working data remain local.
 # Dataset cards, schema mappings, README files, and directory placeholders stay tracked.

@@ -1,0 +1,106 @@
+{
+  "schema_version": 1,
+  "contract_id": "selection_objective_sensitivity_v4",
+  "dataset_key": "inx_primary",
+  "target": "PerformanceRating",
+  "ordered_labels": [2, 3, 4],
+  "feature_policy": {
+    "id": "P3",
+    "contract_path": "configs/feature_availability_v3.json",
+    "contract_sha256": "6dd5fdde534e379cceacfaa01e865d1551310fb632b691f5b937ef39394e93cf",
+    "retained_feature_count": 20
+  },
+  "data_source": {
+    "canonical_loader_config_path": "configs/manuscript_final.yaml",
+    "acquisition_manifest_path": "configs/data_acquisition.yaml",
+    "automatic_download_allowed": false
+  },
+  "folds": {
+    "directory": "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/shared_folds",
+    "fold_contract_sha256": "364b0fc0443dbe1d7eceeb82e383802aa4b1b91f268f09703aa8a9a3a7f41d28",
+    "outer_assignments_sha256": "6b22a827cdba12dff40162f784291399614fb2a9e9ffe1ac889545767129204f",
+    "inner_assignments_sha256": "35c1afc7d2c8debb9ce54a4be3ac06d9830a2946c41fd756d3532a0f54d32e89",
+    "outer_splits": 10,
+    "inner_splits": 5,
+    "outer_seed": 42,
+    "inner_seed": 43,
+    "model_seed": 44
+  },
+  "model_registries": {
+    "nominal": {
+      "path": "configs/model_grid.yaml",
+      "sha256": "d8fb0584d7106f8941ca8e1b0e0a9c58e13f39519c6c75b383ff333d92d41617",
+      "models": ["logistic_regression", "random_forest", "lightgbm", "xgboost"]
+    },
+    "ordinal": {
+      "path": "configs/ordinal_benchmark_v3.json",
+      "sha256": "39bcc62580515888783120a00ed807c0ede0f4c46f587f50897aced4c7999b02",
+      "models": ["proportional_odds_logistic", "cumulative_threshold_xgboost"]
+    }
+  },
+  "immutable_sources": {
+    "nominal_candidate_scores": {
+      "path": "reports/manuscript_final/canonical_v2_20260714T221501Z_483f96f/core/model_benchmarks/candidate_search_results.csv",
+      "sha256": "5fc79013cebd77b819f8313187fc399906013ae9faabf07fa001b977478c6f6e"
+    },
+    "ordinal_candidate_scores": {
+      "path": "reports/major_revision_v3_runs/phase1b_v3_20260903T130912Z_dc5cb8b/ordinal_benchmark/candidate_search_results.csv",
+      "sha256": "85bd014da08168b955fd39d59f25365760334e56b5765617c60a88b2c1d1e8ec"
+    },
+    "macro_f1_oof_predictions": {
+      "path": "reports/major_revision_v3_runs/phase1b_v3_20260903T130912Z_dc5cb8b/ordinal_benchmark/combined_oof_predictions.csv",
+      "sha256": "ef5fcecb94b9a17f7f4e8503a23744e74be882d72a9c5367bdf47580143afde0"
+    }
+  },
+  "selection_regimes": {
+    "macro_f1": {
+      "primary_metric": "macro_f1",
+      "tie_break_metric": "quadratic_weighted_kappa",
+      "practical_tie_tolerance": 0.001,
+      "oof_mode": "reuse_validated_phase1b_predictions_without_refit"
+    },
+    "qwk": {
+      "primary_metric": "quadratic_weighted_kappa",
+      "tie_break_metric": "macro_f1",
+      "practical_tie_tolerance": 0.001,
+      "oof_mode": "refit_every_model_in_every_outer_fold_from_persisted_candidate_scores"
+    }
+  },
+  "ranking_report": {
+    "metrics": {
+      "macro_f1": "higher",
+      "balanced_accuracy": "higher",
+      "quadratic_weighted_kappa": "higher",
+      "ordinal_mae": "lower",
+      "ranked_probability_score": "lower",
+      "nll_log_loss": "lower",
+      "multiclass_brier": "lower",
+      "ece_confidence": "lower",
+      "two_level_reversal_rate": "lower"
+    },
+    "separate_fields": [
+      "leader_changed",
+      "full_ordering_changed",
+      "selected_candidate_changes",
+      "metric_effect_magnitudes"
+    ],
+    "composite_material_dependence_flag_allowed": false
+  },
+  "empirical_prior_baseline": {
+    "id": "outer_training_empirical_prior",
+    "derivation": "class_prevalence_from_current_outer_training_labels_only",
+    "probability_metrics": [
+      "nll_log_loss",
+      "multiclass_brier",
+      "ranked_probability_score",
+      "ece_confidence"
+    ],
+    "enters_hyperparameter_selection": false
+  },
+  "publication": {
+    "local_output_root": "reports/major_revision_round2_runs",
+    "publish_employee_level_oof": false,
+    "paid_api_calls": 0,
+    "network_calls": 0
+  }
+}
