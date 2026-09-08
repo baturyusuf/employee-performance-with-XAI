@@ -18,6 +18,7 @@ CLAIM_DIR = ROOT / "reports/research_log/major_revision_v3/phase5a_claim_matrix"
 PHASE_DIR = ROOT / "reports/research_log/major_revision_v3/phase5b_manuscript"
 MANUSCRIPT_DIR = ROOT / "manuscript/mdpi_information"
 ASSET_DIR = MANUSCRIPT_DIR / "assets"
+MANUSCRIPT_FIGURE_DIR = MANUSCRIPT_DIR / "phase5b_figures"
 LITERATURE_CONFIG = ROOT / "configs/literature_positioning_v3.json"
 
 
@@ -308,6 +309,72 @@ def write_verified_bibliography(path: Path) -> None:
     path.write_text("\n\n".join(blocks) + "\n", encoding="utf-8", newline="\n")
 
 
+def write_nine_system_figure() -> None:
+    import matplotlib
+
+    matplotlib.use("Agg")
+    import matplotlib.pyplot as plt
+
+    source = ROOT / "reports/research_log/major_revision_v3/phase1b_ordinal_benchmark/aggregate_metrics.csv"
+    with source.open(encoding="utf-8-sig", newline="") as stream:
+        rows = list(csv.DictReader(stream))
+    values: dict[str, dict[str, float]] = {}
+    for row in rows:
+        values.setdefault(row["model_name"], {})[row["metric"]] = float(row["value"])
+    labels = {
+        "cumulative_threshold_xgboost": "Cumulative-threshold XGBoost",
+        "xgboost": "Nominal XGBoost",
+        "lightgbm": "LightGBM",
+        "random_forest": "Random Forest",
+        "logistic_regression": "Multinomial logistic",
+        "proportional_odds_logistic": "Proportional-odds logistic",
+        "stratified_baseline": "Stratified baseline",
+        "ordinal_median_baseline": "Ordinal-median baseline",
+        "majority_baseline": "Majority baseline",
+    }
+    order = sorted(labels, key=lambda name: values[name]["macro_f1"])
+    panels = (
+        ("macro_f1", "Macro-F1", True),
+        ("balanced_accuracy", "Balanced accuracy", True),
+        ("quadratic_weighted_kappa", "Quadratic weighted kappa", True),
+        ("ordinal_mae", "Ordinal MAE", False),
+    )
+    baseline_names = {"stratified_baseline", "ordinal_median_baseline", "majority_baseline"}
+    fig, axes = plt.subplots(2, 2, figsize=(13.5, 8.5), sharey=True, constrained_layout=True)
+    positions = list(range(len(order)))
+    for axis, (metric, title, higher_is_better) in zip(axes.flat, panels):
+        metric_values = [values[name][metric] for name in order]
+        leader_value = (max if higher_is_better else min)(metric_values)
+        colors = [
+            "#2E7D32" if value == leader_value else ("#8A8F98" if name in baseline_names else "#176B87")
+            for name, value in zip(order, metric_values)
+        ]
+        axis.scatter(metric_values, positions, s=62, c=colors, zorder=3)
+        for y, value in zip(positions, metric_values):
+            axis.annotate(f"{value:.4f}", (value, y), xytext=(7, 0), textcoords="offset points", va="center", fontsize=8)
+        axis.set_title(title, fontweight="bold")
+        axis.grid(axis="x", color="#D8DEE6", linewidth=0.8, zorder=0)
+        axis.set_yticks(positions, [labels[name] for name in order])
+        axis.spines[["top", "right"]].set_visible(False)
+        span = max(metric_values) - min(metric_values)
+        margin = max(0.025, span * 0.12)
+        axis.set_xlim(min(metric_values) - margin, max(metric_values) + margin * 2.1)
+    fig.suptitle("Nine-system ordinal benchmark under the P3 information policy", fontsize=18, fontweight="bold")
+    fig.supxlabel("Exactly-once out-of-fold point estimate; green marks the metric-specific leader", fontsize=11)
+    MANUSCRIPT_FIGURE_DIR.mkdir(parents=True, exist_ok=True)
+    target = MANUSCRIPT_FIGURE_DIR / "figure_02_nine_system_benchmark"
+    fig.savefig(target.with_suffix(".png"), dpi=300, bbox_inches="tight", facecolor="white")
+    svg_path = target.with_suffix(".svg")
+    fig.savefig(svg_path, bbox_inches="tight", facecolor="white")
+    svg_text = svg_path.read_text(encoding="utf-8")
+    svg_path.write_text(
+        "\n".join(line.rstrip() for line in svg_text.splitlines()) + "\n",
+        encoding="utf-8",
+        newline="\n",
+    )
+    plt.close(fig)
+
+
 def validate_manuscript(markdown: str, tex: str, claims: list[dict[str, str]]) -> dict[str, object]:
     required = [
         "## 1. Introduction",
@@ -458,10 +525,19 @@ def _write_final_figures(markdown: str) -> None:
         (destination / f"{target_stem}.caption.md").write_text(
             f"# Figure {number}\n\n{caption}\n", encoding="utf-8"
         )
-        source_number = re.match(r"^figure_(\d+)_", source_png.stem)
-        canonical_alt = ASSET_DIR / "figures/alt_text" / f"figure_{source_number.group(1)}_alt_text.txt"
-        if canonical_alt.is_file():
-            shutil.copy2(canonical_alt, destination / f"{target_stem}.alt.txt")
+        alt_target = destination / f"{target_stem}.alt.txt"
+        if source_png.parent == MANUSCRIPT_FIGURE_DIR:
+            alt_target.write_text(
+                "Nine-system P3 benchmark in four horizontal dot-plot panels: macro-F1, "
+                "balanced accuracy, quadratic weighted kappa, and ordinal mean absolute error. "
+                "All systems appear in each panel and the metric-specific leader is highlighted.\n",
+                encoding="utf-8",
+            )
+        else:
+            source_number = re.match(r"^figure_(\d+)_", source_png.stem)
+            canonical_alt = ASSET_DIR / "figures/alt_text" / f"figure_{source_number.group(1)}_alt_text.txt"
+            if canonical_alt.is_file():
+                shutil.copy2(canonical_alt, alt_target)
 
 
 def _write_results_comparison(path: Path, claims: list[dict[str, str]]) -> None:
@@ -506,7 +582,12 @@ def _write_diff(path: Path) -> None:
         text=True,
         encoding="utf-8",
     )
-    path.write_text(result.stdout, encoding="utf-8", newline="\n")
+    sanitized = re.sub(
+        r"sk-[A-Za-z0-9_-]{20,}",
+        "[REDACTED_API_KEY_PATTERN]",
+        result.stdout,
+    )
+    path.write_text(sanitized, encoding="utf-8", newline="\n")
 
 
 BUILDER_OUTPUTS = (
@@ -536,6 +617,7 @@ def _remove_builder_outputs() -> None:
 
 def build(*, replace: bool = False) -> dict[str, object]:
     claims = load_approved_claims()
+    write_nine_system_figure()
     markdown_path = MANUSCRIPT_DIR / "main.md"
     markdown = markdown_path.read_text(encoding="utf-8")
     tex = markdown_to_tex(markdown)

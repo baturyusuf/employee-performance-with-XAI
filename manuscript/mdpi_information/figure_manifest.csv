@@ -1,6 +1,6 @@
 figure_id,title,png_path,svg_path,source_data,boundary
 figure_01,Audit protocol and evidence-identity flow,assets/figures/main/figure_01_audit_protocol.png,assets/figures/main/figure_01_audit_protocol.svg,assets/source_data/figures/figure_01_audit_protocol_source.csv,Conceptual protocol rendering
-figure_02,Nine-system ordinal benchmark,assets/figures/main/figure_02_model_benchmark.png,assets/figures/main/figure_02_model_benchmark.svg,assets/source_data/figures/figure_02_model_benchmark_source.csv,Metric-specific P3 comparison
+figure_02,Nine-system ordinal benchmark,phase5b_figures/figure_02_nine_system_benchmark.png,phase5b_figures/figure_02_nine_system_benchmark.svg,reports/research_log/major_revision_v3/phase1b_ordinal_benchmark/aggregate_metrics.csv,Metric-specific P3 comparison
 figure_03,Feature-policy sensitivity,assets/figures/main/figure_03_feature_policy_sensitivity.png,assets/figures/main/figure_03_feature_policy_sensitivity.svg,assets/source_data/figures/figure_03_feature_policy_sensitivity_source.csv,Noncausal fixed-schedule sensitivity
 figure_04,Global grouped OOF SHAP,assets/figures/main/figure_05_global_grouped_shap.png,assets/figures/main/figure_05_global_grouped_shap.svg,assets/source_data/figures/figure_05_global_grouped_shap_source.csv,Noncausal raw-margin attribution
 figure_05,SHAP ranking stability,assets/figures/main/figure_06_shap_stability.png,assets/figures/main/figure_06_shap_stability.svg,assets/source_data/figures/figure_06_shap_stability_source.csv,Dependent descriptive pairs

@@ -278,3 +278,13 @@ V2-033 atomic-publication consequence on 2026-07-14: transient Windows antivirus
 - Phase 5B manuscript and bibliography drafting is authorized only under those 45 unchanged claim objects. The approval is recorded separately from the claim-set digest so the approved evidence identity remains exactly the digest the user reviewed.
 - The approval does not authorize release/tag/DOI creation, raw-data publication, Git-history rewriting, or inferred source rights, software licensing, ethics determinations, funding, conflicts, author roles, consent language, or AI-disclosure language.
 - Refresh the Phase 5A package deterministically from a clean approval checkpoint and publish that record before making the first manuscript change.
+
+## Phase 5B manuscript and reviewer-response decision — 2026-09-08
+
+- Use only approved claim-set SHA-256 `1664b188df14135d3b3de8642de3d080c25a3fbadc440615c2bd04b2f14ddabe`. Do not introduce an unapproved numerical result or relax any required qualifier while translating the claims into prose, tables, figures, or reviewer responses.
+- Replace the historical manuscript's LLM/agent/chatbot/counterfactual/readiness framing with the evidence-supported contribution: a reproducible leakage-, governance-, and XAI-validity audit protocol for ordinal employee-performance prediction.
+- Treat `manuscript/mdpi_information/main.md` as the authoring source and generate `main.tex` deterministically. Build `references.bib` only from the 25 Phase 4A source-verified records; preserve the unresolved-DOI qualification and never infer missing bibliographic facts.
+- Publish eight manuscript-ready tables and seven figures using aggregate governed evidence only. Generate the nine-system benchmark figure directly from Phase 1B aggregate results so the plotted systems and four reported metrics match its caption; retain PNG/SVG, caption, and alt-text peers.
+- Retain explicit noncausal, non-fairness-certifying, non-transport, non-deployment, and metric-specific interpretation boundaries. Author/institution/declaration placeholders remain visible until the authors supply approved values.
+- Accept deterministic Markdown/LaTeX parity validation in this phase, but make no compiled-PDF or journal-template compliance claim because no LaTeX engine or official target-journal template is available locally.
+- Keep release/tag/DOI creation, raw-data publication, rights/licence conclusions, ethics/consent conclusions, Git-history rewriting, and invented author declarations outside Phase 5B authorization.

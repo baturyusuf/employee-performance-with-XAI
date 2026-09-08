@@ -1,0 +1,1 @@
+Nine-system P3 benchmark in four horizontal dot-plot panels: macro-F1, balanced accuracy, quadratic weighted kappa, and ordinal mean absolute error. All systems appear in each panel and the metric-specific leader is highlighted.

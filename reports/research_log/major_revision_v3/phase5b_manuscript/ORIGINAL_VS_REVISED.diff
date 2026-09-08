@@ -1,5 +1,5 @@
 diff --git a/manuscript/mdpi_information/main.md b/manuscript/mdpi_information/main.md
-index 9012a81..ea0c97e 100644
+index 9012a81..5ce9d6b 100644
 --- a/manuscript/mdpi_information/main.md
 +++ b/manuscript/mdpi_information/main.md
 @@ -1,204 +1,333 @@
@@ -141,7 +141,7 @@ index 9012a81..ea0c97e 100644
 +The benchmark identifies metric-specific leaders, not a universally superior model (C002). Rankings are conditional on P3 and the frozen folds. Nominal XGBoost remains the downstream explanation/calibration reference because that choice was prespecified.
  
 -### 3.6 Calibration Diagnostics
-+![Figure 2. Nine-system ordinal benchmark. Metric-specific leaders are shown under the common P3 protocol; the plot is not a universal leaderboard.](assets/figures/main/figure_02_model_benchmark.png)
++![Figure 2. Nine-system ordinal benchmark. Metric-specific leaders are shown under the common P3 protocol; the plot is not a universal leaderboard.](phase5b_figures/figure_02_nine_system_benchmark.png)
  
 -Calibration is assessed with log loss, multiclass Brier score, and ECE. The governance reports frame probabilities as approximate model confidence rather than objective correctness.
 +### 3.5 Repeated nested-cross-validation
@@ -428,7 +428,7 @@ index 9012a81..ea0c97e 100644
 -See `references.bib`.
 +The authoritative bibliography is `references.bib`; every cited entry belongs to the frozen, source-verified 25-work set.
 diff --git a/manuscript/mdpi_information/main.tex b/manuscript/mdpi_information/main.tex
-index 847e684..1431278 100644
+index 847e684..39eef4d 100644
 --- a/manuscript/mdpi_information/main.tex
 +++ b/manuscript/mdpi_information/main.tex
 @@ -1,310 +1,437 @@
@@ -657,7 +657,7 @@ index 847e684..1431278 100644
 -Calibration is assessed with log loss, multiclass Brier score, and ECE. The governance reports frame probabilities as approximate model confidence rather than objective correctness.
 +\begin{figure}[H]
 +\centering
-+\includegraphics[width=0.98\textwidth]{\detokenize{assets/figures/main/figure_02_model_benchmark.png}}
++\includegraphics[width=0.98\textwidth]{\detokenize{phase5b_figures/figure_02_nine_system_benchmark.png}}
 +\caption{Nine-system ordinal benchmark. Metric-specific leaders are shown under the common P3 protocol; the plot is not a universal leaderboard.}
 +\label{fig:2}
 +\end{figure}
@@ -1444,7 +1444,7 @@ index 887977b..54490e5 100644
 -  title = {{Artificial Intelligence Risk Management Framework (AI RMF 1.0)}},
 -  year = {2023},
 -  institution = {National Institute of Standards and Technology},
--  url = {https://www.nist.gov/itl/ai-risk-management-framework}
+-  url = {https://www.nist.gov/itl/ai-ri[REDACTED_API_KEY_PATTERN]}
 -}
 -
 -@article{pedregosa2011scikit,

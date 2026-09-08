@@ -97,7 +97,7 @@ The P3 benchmark includes nominal XGBoost, LightGBM, Random Forest, multinomial 
 
 The benchmark identifies metric-specific leaders, not a universally superior model (C002). Rankings are conditional on P3 and the frozen folds. Nominal XGBoost remains the downstream explanation/calibration reference because that choice was prespecified.
 
-![Figure 2. Nine-system ordinal benchmark. Metric-specific leaders are shown under the common P3 protocol; the plot is not a universal leaderboard.](assets/figures/main/figure_02_model_benchmark.png)
+![Figure 2. Nine-system ordinal benchmark. Metric-specific leaders are shown under the common P3 protocol; the plot is not a universal leaderboard.](phase5b_figures/figure_02_nine_system_benchmark.png)
 
 ### 3.5 Repeated nested-cross-validation
 

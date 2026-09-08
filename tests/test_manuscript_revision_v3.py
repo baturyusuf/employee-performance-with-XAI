@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import json
 import csv
+import re
 from pathlib import Path
 
 import pytest
@@ -101,3 +102,8 @@ def test_final_assets_match_revised_manuscript_scope() -> None:
     assert "chatbot" not in searchable
     assert "multi-agent" not in searchable
     assert "counterfactual" not in searchable
+
+
+def test_revision_diff_cannot_publish_api_key_pattern() -> None:
+    path = ROOT / "reports/research_log/major_revision_v3/phase5b_manuscript/ORIGINAL_VS_REVISED.diff"
+    assert re.search(r"sk-[A-Za-z0-9_-]{20,}", path.read_text(encoding="utf-8")) is None

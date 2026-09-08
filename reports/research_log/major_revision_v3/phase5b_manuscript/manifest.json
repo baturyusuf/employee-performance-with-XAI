@@ -29,24 +29,24 @@
       "sha256": "a20edebd095048c36af8dd258cfbb3344b053db4cf91d7453387a1bc9ffece70"
     },
     {
-      "bytes": 169,
-      "path": "reports/research_log/major_revision_v3/phase5b_manuscript/FINAL_FIGURES/figure_02_model_benchmark.alt.txt",
-      "sha256": "3294f5d656130e7520fdc22d14418513ace113d811f4d4941e784fd6068d3c29"
+      "bytes": 230,
+      "path": "reports/research_log/major_revision_v3/phase5b_manuscript/FINAL_FIGURES/figure_02_nine_system_benchmark.alt.txt",
+      "sha256": "59823513d40df8d021caa5150c708ba7ab80d2db08b2d812bc923ff77ca5f501"
     },
     {
       "bytes": 151,
-      "path": "reports/research_log/major_revision_v3/phase5b_manuscript/FINAL_FIGURES/figure_02_model_benchmark.caption.md",
+      "path": "reports/research_log/major_revision_v3/phase5b_manuscript/FINAL_FIGURES/figure_02_nine_system_benchmark.caption.md",
       "sha256": "c89556dc8214abcecaaab4f2490479ab99d52b346f6c39463fe9b036dc0f7df6"
     },
     {
-      "bytes": 122503,
-      "path": "reports/research_log/major_revision_v3/phase5b_manuscript/FINAL_FIGURES/figure_02_model_benchmark.png",
-      "sha256": "2268d29fe2bc03632ca63f2185eed98d7e140f2cd506c645e6217ad042d262a1"
+      "bytes": 403125,
+      "path": "reports/research_log/major_revision_v3/phase5b_manuscript/FINAL_FIGURES/figure_02_nine_system_benchmark.png",
+      "sha256": "d4213b6644ce30fe7bc9ee264820e4d12089fa53a1d07555e368d23ee52e984d"
     },
     {
-      "bytes": 69719,
-      "path": "reports/research_log/major_revision_v3/phase5b_manuscript/FINAL_FIGURES/figure_02_model_benchmark.svg",
-      "sha256": "87c214a63e04398509940ef0752805d767db4944e790d455a484b024b76bb48b"
+      "bytes": 135073,
+      "path": "reports/research_log/major_revision_v3/phase5b_manuscript/FINAL_FIGURES/figure_02_nine_system_benchmark.svg",
+      "sha256": "7441d5a17b3ee14792e9b71546581f14f8cb5fb903bb4b34b9d29afda2087069"
     },
     {
       "bytes": 175,
@@ -284,9 +284,9 @@
       "sha256": "d75ae8ec08a7b2701b931d88831bec8f1aae030dbcb56e97a569e66af9efd022"
     },
     {
-      "bytes": 138714,
+      "bytes": 138721,
       "path": "reports/research_log/major_revision_v3/phase5b_manuscript/ORIGINAL_VS_REVISED.diff",
-      "sha256": "12787255bc0f261a9bc21c734552a95f1ad4006709c6e1fc491966997dbb5537"
+      "sha256": "c489b827fa46d826a4ed24184c15e4904a7280b0475a0e296f2bc825bd44d2a9"
     },
     {
       "bytes": 1043,
