@@ -154,3 +154,17 @@ def test_ranking_outputs_keep_leader_and_full_ordering_changes_separate() -> Non
     assert changes.loc[0, "full_ordering_changed"] in (True, np.bool_(True))
     assert "material" not in " ".join(changes.columns).lower()
     assert {"qwk_minus_macro_f1_selection", "absolute_effect_magnitude", "rank_position_change"}.issubset(effects.columns)
+
+
+def test_empirical_prior_metric_order_is_deterministic() -> None:
+    sample_index = np.arange(30)
+    target = pd.Series(np.tile([2, 3, 4], 10), index=sample_index)
+    outer = pd.DataFrame(
+        {
+            "sample_index": sample_index,
+            "outer_fold": np.repeat(np.arange(1, 11), 3),
+            "y_true": target.to_numpy(),
+        }
+    )
+    _, _, metrics = _empirical_prior(target, outer)
+    assert metrics["metric"].tolist() == sorted(metrics["metric"].tolist())

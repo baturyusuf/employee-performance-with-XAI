@@ -409,7 +409,17 @@ def _summarize_oof(rows: pd.DataFrame) -> tuple[pd.DataFrame, pd.DataFrame, pd.D
         )
         per_class.extend({"selection_objective": regime, **record} for record in bundle["per_class_metrics"])
         confusion.extend({"selection_objective": regime, **record} for record in bundle["confusion_matrix"])
-    return pd.DataFrame(aggregate), pd.DataFrame(per_class), pd.DataFrame(confusion)
+    return (
+        pd.DataFrame(aggregate).sort_values(
+            ["selection_objective", "model", "metric"]
+        ).reset_index(drop=True),
+        pd.DataFrame(per_class).sort_values(
+            ["selection_objective", "model_name", "class_label"]
+        ).reset_index(drop=True),
+        pd.DataFrame(confusion).sort_values(
+            ["selection_objective", "model_name", "true_label", "predicted_label"]
+        ).reset_index(drop=True),
+    )
 
 
 def _comparison_tables(
@@ -498,7 +508,7 @@ def _empirical_prior(
     )
     metrics = pd.DataFrame(
         [{"model": "outer_training_empirical_prior", "metric": metric, "value": value} for metric, value in bundle["aggregate_metrics"].items()]
-    )
+    ).sort_values(["model", "metric"]).reset_index(drop=True)
     return pd.DataFrame(parameter_rows), predictions, metrics
 
 
