@@ -288,3 +288,10 @@ V2-033 atomic-publication consequence on 2026-07-14: transient Windows antivirus
 - Retain explicit noncausal, non-fairness-certifying, non-transport, non-deployment, and metric-specific interpretation boundaries. Author/institution/declaration placeholders remain visible until the authors supply approved values.
 - Accept deterministic Markdown/LaTeX parity validation in this phase, but make no compiled-PDF or journal-template compliance claim because no LaTeX engine or official target-journal template is available locally.
 - Keep release/tag/DOI creation, raw-data publication, rights/licence conclusions, ethics/consent conclusions, Git-history rewriting, and invented author declarations outside Phase 5B authorization.
+
+## 2026-09-08 — Freeze the Round 2 claim boundary before rewriting
+
+- Decision: preserve the 45 historical claim rows and classify every historical and Round 2 item as retained, modified, superseded, new, or prohibited instead of mutating the approved Phase 5A package.
+- Decision: keep `leader_changed`, `full_ordering_changed`, selected-candidate changes, and metric-effect magnitudes separate; no binary material-dependence conclusion is authorized.
+- Decision: treat restricted-canonical 309 versus exclusion/refit 309 as the primary HR target-alias comparison and report historical 311 versus restricted 309 only as a fit-free sample-removal effect.
+- Decision: freeze claim-set SHA-256 `751208d036597461606bd02d68bfa9e642a4aa5ecf5df2df3fd7e46b99084aea` with manuscript, bibliography, and reviewer-response authorization false pending explicit digest-specific user approval.

@@ -826,3 +826,11 @@ Checked for local LaTeX/Pandoc/Tectonic executables; none was available. The rep
 The final current-tree complete regression passed 1,011 tests with two skips in 605.65 seconds. The earlier current-tree attempt's only failure was caused by its own diagnostic prose reproducing the synthetic key-like substring being documented; after removing that trigger, the isolated security test and the complete suite both passed.
 
 Committed the corrected nine-system benchmark, normalized SVGs, regenerated package/manifest, and Phase 5B handoff records as `5320afd1a5abcac6d198355c11875158961749b5` (`fix(manuscript): align phase 5b benchmark figure`) and pushed it normally to `origin/finalization/leakage-aware-v2`. The clean repository gate then passed at that exact commit with 2,128 tracked files, 64 README links, and zero raw-data, environment, large-file, secret, or machine-path findings.
+
+## Major-revision Round 2 claim freeze — 2026-09-08
+
+Added and pushed implementation checkpoint `b42d5fafedd26e8d6ae46b76f7992b306ddc399d` with the offline Round 2 claim builder, pending-approval contract, and focused tests. Generated the additive package from that checkpoint, preserving the historical Phase 5A and Phase 5B packages as read-only inputs.
+
+The generator produced a 12-file closed-world package including the manifest, plus top-level review mirrors. The exact claim digest is `751208d036597461606bd02d68bfa9e642a4aa5ecf5df2df3fd7e46b99084aea`; all manuscript/bibliography/reviewer-response edit flags remain false and network/paid-API counts are zero.
+
+The first complete pytest run had one failure after 1,053 passes because the frozen-v2 additive-source guard recognized `_v3` additions but not the already introduced `_v4` Round 2 naming convention. The guard was extended only to accept added versioned `_v4` files while continuing to require every source/config change since the v2 generation commit to have Git status `A`. The focused guard test then passed, and the second full run passed completely.

@@ -151,3 +151,11 @@ There is no remaining executable P0/P1 scientific or engineering blocker for the
 4. Claim-matrix approval, manuscript writing/formatting, journal submission metadata, release/DOI publication, and any public evidence upload remain separate manual tasks.
 
 Do not begin manuscript writing in this technical-finalization chat.
+
+## Major-revision Round 2 claim freeze — 2026-09-08
+
+- The user-corrected Round 2 plan was implemented without adding an MAE/RPS-selected third regime or expanding scope after seeing results. Selection-objective, empirical-prior, extreme-class, subgroup, methods, literature, HR target-construction/CV, and matched target-alias evidence are complete and independently validated.
+- The Round 2 claim package preserves all 45 historical claims and contains 129 classified rows: 38 retained, five modified, two superseded, 79 new, and five prohibited. There are 99 numerical and 30 narrative rows; 117 are active rewrite candidates.
+- Claim-set SHA-256 is `751208d036597461606bd02d68bfa9e642a4aa5ecf5df2df3fd7e46b99084aea`. The cross-source audit revalidated the historical Phase 5A digest, matched all 32 historical numerical claims to Phase 5B, rehashed 62 Phase 5B manifest entries, and resolved every active numerical claim to one exact source row/value/hash.
+- Full current-tree pytest passed 1,054 tests, two skips, and 11 subtests; unittest discovery passed 179 tests with one skip. The manuscript, bibliography, and reviewer response remain unchanged and unauthorized.
+- The only next action is an explicit user decision identifying the exact Round 2 digest. A generic instruction to continue does not authorize manuscript rewrite.

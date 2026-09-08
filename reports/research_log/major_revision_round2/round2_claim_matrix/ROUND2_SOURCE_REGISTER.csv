@@ -1,0 +1,41 @@
+source_path,source_sha256,source_size_bytes,source_format,claim_count,active_claim_count,claim_ids
+reports/research_log/major_revision_round2/HR_MAPPING_SENSITIVITY_REPORT.md,53b836dc250d60f1e14f4d7fc2217f062aa8cfe43cf78806f816d5d6c10117de,6088,md,5,3,R2N006 | R2N007 | R2N008 | R2P002 | R2P003
+reports/research_log/major_revision_round2/LITERATURE_V4/NOVELTY_BOUNDARY.md,85e83a24ed6d12e9d9104503076494625f72e982a84f2ede81c4003aadee8851,1145,md,1,1,R2N010
+reports/research_log/major_revision_round2/METHOD_REPRODUCIBILITY_TABLES/METHODS_NOTES.md,16b2ce99950f7ada253d558a444292baca3f3a2f17956921935ab1c6e0449ba2,2752,md,1,1,R2N009
+reports/research_log/major_revision_round2/PER_CLASS_EXTREME_CLASS_REPORT.md,4437bf690f9d5ab902f1d5e4b7267ccd1649ce050cb3f1df3463b751f3185db0,2069,md,1,1,R2N003
+reports/research_log/major_revision_round2/PROBABILITY_BASELINE_REPORT.md,389b191a1c50799eaeedc0736c09b9c6fdd6c5bece088635940c05f83497ed99,1951,md,1,1,R2N002
+reports/research_log/major_revision_round2/ROUND2_PLAN.md,668543c1307ceb2ea93b022ab60e67f350db3ef1eae3159cc72e201b7b942c2f,24136,md,6,4,R2N004 | R2N005 | R2N011 | R2N012 | R2P004 | R2P005
+reports/research_log/major_revision_round2/SELECTION_OBJECTIVE_SENSITIVITY.md,4c4e712aa1deb49345b02d29a8df8129045f4ac89e9037ceeaf3744adca4801f,5336,md,2,1,R2N001 | R2P001
+reports/research_log/major_revision_round2/SUBGROUP_MANUSCRIPT_SUMMARY.csv,42b27483275e7de1f183b898764c9b6227670ab75d417d708025b1aec89d36c9,12136,csv,18,18,R2E101 | R2E102 | R2E103 | R2E104 | R2E105 | R2E106 | R2E107 | R2E108 | R2E109 | R2E110 | R2E111 | R2E112 | R2E113 | R2E114 | R2E115 | R2E116 | R2E117 | R2E118
+reports/research_log/major_revision_round2/hr_target_alias_sensitivity/comparison_deltas.csv,ef0c6e9782af1215a542286405d497fe17da4d43a9d0f053b159dde829c540eb,6918,csv,11,11,R2E218 | R2E219 | R2E220 | R2E221 | R2E222 | R2E223 | R2E224 | R2E225 | R2E226 | R2E227 | R2E228
+reports/research_log/major_revision_round2/round2_claim_matrix/DERIVED_SUMMARIES.csv,7b1600988d2f0e9539cf529a23e4c633f44f4f0f2540202e523eb14e96b7ddf5,5017,csv,12,12,R2E001 | R2E002 | R2E003 | R2E011 | R2E012 | R2E013 | R2E014 | R2E015 | R2E016 | R2E216 | R2E217 | R2E229
+reports/research_log/major_revision_round2/selection_objective_sensitivity/empirical_prior_metrics.csv,c2df616438acde3541588e0b40cdd4f37d0bc59fe5bb9a2b57691139c7ad3132,1040,csv,2,2,R2E009 | R2E010
+reports/research_log/major_revision_round2/selection_objective_sensitivity/metric_effect_magnitudes.csv,a78d36ec202748c8c6ad0c4568fba63f7743f9ca99dcb6c669ae045df1da0938,7006,csv,2,2,R2E004 | R2E005
+reports/research_log/major_revision_round2/selection_objective_sensitivity/per_class_metrics.csv,7766cd76abb7e1dda22629889f968cacc99d84e91df3c740e8aa0f59eb39a4f7,3553,csv,3,3,R2E006 | R2E007 | R2E008
+reports/research_log/major_revision_v3/FEATURE_AVAILABILITY_GOVERNANCE_CONTRACT.md,0f19e17db84e17f0a5e3aad179efb8323a37d5b63b9b032e119deadd159a7201,20259,md,1,1,C001
+reports/research_log/major_revision_v3/phase1b_ordinal_benchmark/README.md,f6ca7b8e8a48addaf6541595e0038d54eab8fb655c54d18c7b734844e74fb64c,3476,md,1,0,C002
+reports/research_log/major_revision_v3/phase1b_ordinal_benchmark/aggregate_metrics.csv,b7dcd0fa01f40c6d11450bb4afd32b1e768f7b301ca804674d8ae589f5a58edf,9461,csv,6,6,C101 | C102 | C103 | C104 | C105 | C106
+reports/research_log/major_revision_v3/phase1c_repeated_nested_cv/README.md,3631b3508bcbbfa181b6503bd6ff7ff76ca9d9eb57f315ecd0200794047647c6,3528,md,1,1,C003
+reports/research_log/major_revision_v3/phase1c_repeated_nested_cv/model_rank_summary.csv,dfd3c314b88ee8bb9113d11189ad8c1ae1e9538f9fa385f526dd261ae2eedfe1,1927,csv,2,2,C203 | C204
+reports/research_log/major_revision_v3/phase1c_repeated_nested_cv/ordering_stability.csv,5b36d6eb639441408a5997a60aaddb5cfc3a9b8986b4e3a1be6b6eaf50c4ca22,985,csv,1,1,C205
+reports/research_log/major_revision_v3/phase1c_repeated_nested_cv/variability_summary.csv,f50bbd1bb89e479ccdeb3e15538ea5f4a5c2eeabad6ef3d6d40d5439384c2acf,6493,csv,2,2,C201 | C202
+reports/research_log/major_revision_v3/phase1d_policy_retuning/README.md,6454f8eae651fee2b40d9b9e5834d623cbb69e6e381749446bbf079036ca41a1,3596,md,1,0,C004
+reports/research_log/major_revision_v3/phase1d_policy_retuning/headline_policy_comparison.csv,3ea78efa8b710759c1db2fa53e782b0144951ac927f3c86f0e18871b3c3e95e4,2431,csv,7,7,C301 | C302 | C303 | R2E017 | R2E018 | R2E019 | R2E020
+reports/research_log/major_revision_v3/phase2a_shap_stability_faithfulness/README.md,3cfef71caf62e974e312fcebe92e8290b09c18ea7db048a9b89d0d94ff9235f9,2888,md,1,1,C005
+reports/research_log/major_revision_v3/phase2a_shap_stability_faithfulness/faithfulness_contrasts.csv,c8fa92829a3c519eeee7718e42c8ab13b5380d780ded9ab3019ef3175d5c06a3,1114,csv,1,1,C403
+reports/research_log/major_revision_v3/phase2a_shap_stability_faithfulness/stability_summary.csv,4329e361ae3d006474efa724b4ef4b82d361ce4a3b3fb667f0b7169e0fbc0496,1869,csv,2,2,C401 | C402
+reports/research_log/major_revision_v3/phase2b_calibration_diagnostics/README.md,506fa99890bc3a915b83cbef440050db2824be590308a954ca22ee8f6b95a938,3836,md,1,0,C006
+reports/research_log/major_revision_v3/phase2b_calibration_diagnostics/method_comparison.csv,bac8344ec08129d92a38ffe5c968da576b57fe8bac48aa0f7b50e052e4f3bbb3,1662,csv,2,2,C501 | C502
+reports/research_log/major_revision_v3/phase2c_subgroup_proxy_use/README.md,15654d4f69a36ba82009f0d80a38c059a4c4ba2dd55faee673f7a0eae9894a98,4535,md,1,0,C007
+reports/research_log/major_revision_v3/phase2c_subgroup_proxy_use/department_reconstructability_metrics.csv,e838ea0f0e447df3abc6e6b10af5147db2b65ba955e8eaf92952bb54a6a82b4c,9281,csv,2,2,C605 | C606
+reports/research_log/major_revision_v3/phase2c_subgroup_proxy_use/jobrole_permutation_summary.csv,8d0af59191a90fe7fd78b14f6055b3f06fbda2b74ac74016b4c78b96d016d5ca,4704,csv,2,2,C603 | C604
+reports/research_log/major_revision_v3/phase2c_subgroup_proxy_use/proxy_prediction_change_by_department.csv,79ba56a192c8baccd5098ea37bfc1ab3e7d64f02276fe710df458df068d5963f,4125,csv,2,2,C601 | C602
+reports/research_log/major_revision_v3/phase3a_hrdataset_sensitivity/README.md,0ed65fed2414c386c53ee3f938c24b7f505bc4254adce6953ed727691b6afb83,4432,md,1,0,C008
+reports/research_log/major_revision_v3/phase3a_hrdataset_sensitivity/variability_summary.csv,1725d5161c414f21fe353fe01cf685cffc59ef5dde1b5253e0bf494b47659cd2,21012,csv,10,10,C701 | C702 | R2E208 | R2E209 | R2E210 | R2E211 | R2E212 | R2E213 | R2E214 | R2E215
+reports/research_log/major_revision_v3/phase3b_data_quality/DATA_QUALITY_REPORT.md,7a7ff636b2803e399ec4b1ae30d9604769d15bd7e50b7cdb65a3ce8b81c26c2f,5939,md,1,1,C009
+reports/research_log/major_revision_v3/phase3b_data_quality/dataset_summary.csv,df7d21a23be7cad851161d821f7ac376c30d5c6e5c8783c45fdee227de148d0b,1018,csv,4,4,C801 | C802 | C803 | C804
+reports/research_log/major_revision_v3/phase3b_data_quality/target_distribution.csv,4845da4f51bdd6651e7a54c1aaa279cbe0af1d0dd5fc8d0175bcdaf1cc0a2502,714,csv,8,8,C703 | R2E201 | R2E202 | R2E203 | R2E204 | R2E205 | R2E206 | R2E207
+reports/research_log/major_revision_v3/phase4a_literature/NOVELTY_POSITIONING.md,b32962d51746d31eba5122e6f4eb3e5c119a02558f0632f2a845f7d7dd435299,3564,md,1,0,C010
+reports/research_log/major_revision_v3/phase4b_release_readiness/BLOCKER_REGISTER.csv,0d42241dc670f7c2773bc97830dcd8ec3aa4cf3396ad650d491bcdca87241954,1167,csv,1,0,C013
+reports/research_log/major_revision_v3/phase4b_release_readiness/DATA_PROVENANCE_LICENSE_REGISTER.csv,9e5880bfcd44e5168ec373f3663a75cba53d0587f15d5b778933929953bcc5a4,5307,csv,1,1,C011
+reports/research_log/major_revision_v3/phase4b_release_readiness/ETHICS_DECLARATIONS_REGISTER.csv,c95a298194f42d1f77f8dfd9fbac5ba4a5f5dccfab607eb51f805acb43fc9f79,1989,csv,1,1,C012

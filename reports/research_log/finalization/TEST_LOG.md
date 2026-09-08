@@ -876,3 +876,12 @@ Push/recovery gate: the normal push timed out after 184 seconds with no remote r
 - Final Phase 5B package validation after SVG normalization: 63 files/3,044,248 bytes; 62 closed manifest records; manifest SHA-256 `4abcf95137a3af0a02aa4e85b111575afaa69237b0af88d62a50de43c164660c`; zero raw employee rows and zero paid API calls. PDF compilation was not attempted because no LaTeX engine or official journal class/template is installed.
 - Final current-tree complete pytest after the Figure 2 and log-security corrections: exit 0; 1,011 passed and two skipped in 605.65 seconds. The isolated project-text secret scan also passed. Compileall over `src`, `tests`, and `tools` and `git diff --check` exited 0; line-ending notices were non-failing working-copy warnings.
 - Clean post-publication repository gate at `5320afd1a5abcac6d198355c11875158961749b5`: exit 0; 2,128 tracked files, 64 README links, 33 issue-register rows, and zero raw-data, environment, large-file, secret, or machine-path findings.
+
+## Major-revision Round 2 claim freeze — 2026-09-08
+
+- Initial package export and explicit validation: exit 0; 129 classified claims, 117 active rewrite candidates, 99 numerical, 30 narrative, 40 source files, and claim-set SHA-256 `751208d036597461606bd02d68bfa9e642a4aa5ecf5df2df3fd7e46b99084aea`. Manuscript/bibliography/reviewer-response authorization remained false; network and paid-API calls were zero.
+- Round 2 claim focus plus selection, HR alias, subgroup, methods, and literature publication regressions: 27 passed in 0.95 seconds. Closed-world/tamper rejection, all five dispositions, separate ranking diagnostics, and distinct 309↔309 versus 311→309 HR selectors passed.
+- First complete pytest: 1 failure, 1,053 passed, two skipped, and 11 subtests in 580.94 seconds. The only failure was the historical additive-source guard not recognizing the `_v4` filename convention; no scientific/package test failed.
+- Updated additive-source guard focus: one passed. The guard still requires every post-v2 source/config change to be additive and now accepts explicitly versioned `_v3` and `_v4` filenames.
+- Final complete pytest: exit 0; 1,054 passed, two skipped, and 11 subtests in 584.42 seconds.
+- Final unittest discovery: exit 0; 179 passed and one skipped in 8.027 seconds. Compileall over `src`, `tests`, and `tools`, `git diff --check`, claim-package validation, cross-source historical rehash, and manuscript/reference no-change checks exited 0.

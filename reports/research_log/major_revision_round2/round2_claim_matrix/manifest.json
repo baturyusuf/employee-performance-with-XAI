@@ -1,0 +1,64 @@
+{
+  "config_sha256": "865176dee5c9996b5b9d18980f2eb3e4bbe61fca2f83a1e5b4ab4ef986800a86",
+  "file_count_excluding_manifest": 11,
+  "files": [
+    {
+      "path": "APPROVAL_REQUEST.md",
+      "sha256": "83a3d1880577b05469ada985238111fa1f72019f31ca50ba5e963157f960262f",
+      "size_bytes": 471
+    },
+    {
+      "path": "DERIVED_SUMMARIES.csv",
+      "sha256": "7b1600988d2f0e9539cf529a23e4c633f44f4f0f2540202e523eb14e96b7ddf5",
+      "size_bytes": 5017
+    },
+    {
+      "path": "README.md",
+      "sha256": "e7bb65c7b65a6f89aaf51d7fa9e9664edb5fbf11d291871982eb18f134140a79",
+      "size_bytes": 631
+    },
+    {
+      "path": "RESULTS_COMPARISON_ROUND2.csv",
+      "sha256": "1bffab6c344594b6620b7ba64c462f4d8486560d79ea702164c576b4178cc530",
+      "size_bytes": 56855
+    },
+    {
+      "path": "ROUND2_CLAIM_DIGEST.txt",
+      "sha256": "ae1a4e50b5898d484c5c26f5e5cdd6fa7f84ee1cd81a50a09606d36562022f7b",
+      "size_bytes": 65
+    },
+    {
+      "path": "ROUND2_CLAIM_MATRIX.csv",
+      "sha256": "e8362c3b9751f0387cf09d79c9a8d6821f1efaca143ba6c4eb6758bbdd5abc2c",
+      "size_bytes": 87556
+    },
+    {
+      "path": "ROUND2_CLAIM_MATRIX.md",
+      "sha256": "074ac178641b31eddaadfaee7493c48edfca0d6635cacda5bb3c564a38e763f3",
+      "size_bytes": 67112
+    },
+    {
+      "path": "ROUND2_CROSS_SOURCE_AUDIT.md",
+      "sha256": "58c619a3508e1cbb360ab362c7ebe92cf74910614f904c37b30ea7de52ca9b5c",
+      "size_bytes": 895
+    },
+    {
+      "path": "ROUND2_SOURCE_REGISTER.csv",
+      "sha256": "4c6c25bc5856c0086bcc40ce39b28ea56ac13bedaa196271552adfd590774d53",
+      "size_bytes": 7680
+    },
+    {
+      "path": "approval_record.json",
+      "sha256": "ef3376046d2a82734b5957fedd975a671ce1e6b0a22a4bf2d2e6affad9c9f945",
+      "size_bytes": 270
+    },
+    {
+      "path": "provenance_receipt.json",
+      "sha256": "b92c27390e3ff78974b60a455b771e748cea475e2deb30f956a4e14a640b8f7f",
+      "size_bytes": 847
+    }
+  ],
+  "generation_commit": "b42d5fafedd26e8d6ae46b76f7992b306ddc399d",
+  "package_kind": "round2_claim_matrix",
+  "schema_version": 2
+}

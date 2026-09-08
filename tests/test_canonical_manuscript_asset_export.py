@@ -91,7 +91,7 @@ def test_manuscript_figure_numbering_is_explicit_and_gap_free() -> None:
     ]
 
 
-def test_additive_v3_work_does_not_modify_frozen_v2_scientific_sources() -> None:
+def test_additive_v3_v4_work_does_not_modify_frozen_v2_scientific_sources() -> None:
     result = _git(
         "diff",
         "--name-status",
@@ -113,7 +113,9 @@ def test_additive_v3_work_does_not_modify_frozen_v2_scientific_sources() -> None
     }
     assert all(status == "A" for status, _ in changes)
     assert all(
-        path in phase_1a_exception or "_v3." in Path(path).name
+        path in phase_1a_exception
+        or "_v3." in Path(path).name
+        or "_v4" in Path(path).stem
         for _, path in changes
     )
 

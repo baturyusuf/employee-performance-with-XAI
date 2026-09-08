@@ -54,3 +54,10 @@ Canonical handoff inputs:
 - `../../../manuscript/mdpi_information/assets/manifests/manuscript_asset_manifest.json`
 
 The compact publication-support export is tracked in Git and linked from README. The complete 545-file canonical package is intentionally local/ignored and is not replaced by this export. Use a separately approved Release/Zenodo-sized workflow only if publication of those internals is later authorized.
+
+## Immediate Round 2 gate — 2026-09-08
+
+1. Obtain an explicit user approval or rejection that identifies claim-set SHA-256 `751208d036597461606bd02d68bfa9e642a4aa5ecf5df2df3fd7e46b99084aea`.
+2. If approved, record the decision without changing the claim objects or digest, regenerate and validate the approved package, and push that approval checkpoint.
+3. Only after the approved-package checkpoint, rewrite `manuscript/mdpi_information/main.md`, regenerate `main.tex`, update `references.bib`, and draft the Round 2 reviewer response under the approved boundary.
+4. Do not infer approval from a generic continue instruction; do not create a release, tag, DOI, history rewrite, raw-data publication, or invented author/institution declaration.

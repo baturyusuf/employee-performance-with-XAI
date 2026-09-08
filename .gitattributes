@@ -27,3 +27,10 @@
 /reports/research_log/major_revision_round2/selection_objective_sensitivity/** -text whitespace=-trailing-space
 /reports/research_log/major_revision_round2/hr_target_alias_sensitivity/** -text whitespace=-trailing-space
 /reports/research_log/major_revision_round2/LITERATURE_V4/** -text whitespace=-trailing-space
+/reports/research_log/major_revision_round2/round2_claim_matrix/** -text whitespace=-trailing-space
+/reports/research_log/major_revision_round2/ROUND2_CLAIM_MATRIX.md -text whitespace=-trailing-space
+/reports/research_log/major_revision_round2/ROUND2_SOURCE_REGISTER.csv -text whitespace=-trailing-space
+/reports/research_log/major_revision_round2/RESULTS_COMPARISON_ROUND2.csv -text whitespace=-trailing-space
+/reports/research_log/major_revision_round2/ROUND2_CROSS_SOURCE_AUDIT.md -text whitespace=-trailing-space
+/reports/research_log/major_revision_round2/ROUND2_CLAIM_DIGEST.txt -text whitespace=-trailing-space
+/configs/round2_claim_matrix_v4.json -text whitespace=-trailing-space
