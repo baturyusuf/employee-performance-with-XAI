@@ -1,0 +1,38 @@
+{
+  "file_count_excluding_manifest": 6,
+  "files": [
+    {
+      "bytes": 2987,
+      "path": "BIBTEX_CANDIDATES.bib",
+      "sha256": "fecc6201911f424a198b6108dcc6976f255d1b27dc94d5aa3e91d5827f77a271"
+    },
+    {
+      "bytes": 5302,
+      "path": "CORE_METHOD_REFERENCES.csv",
+      "sha256": "e9019087a712c6db92479265429fb4ce42fb4faf2541c4d3c2f7f2621bc9e415"
+    },
+    {
+      "bytes": 1145,
+      "path": "NOVELTY_BOUNDARY.md",
+      "sha256": "85e83a24ed6d12e9d9104503076494625f72e982a84f2ede81c4003aadee8851"
+    },
+    {
+      "bytes": 965,
+      "path": "provenance_receipt.json",
+      "sha256": "51db53d7d198b4469c17b718fc0098e8e4e6cfe5522d0fd886fc7026a4981877"
+    },
+    {
+      "bytes": 1440,
+      "path": "README.md",
+      "sha256": "05795de438d3562b20b76110beb2f7d0108145d68718bbc284c5c86ab89ad5a7"
+    },
+    {
+      "bytes": 3246,
+      "path": "VERIFIED_CORE_METHOD_BIBLIOGRAPHY.md",
+      "sha256": "ea35cefd693aa888b0a681e64c7736175fb30ae6e227197314b9180a6f87fa14"
+    }
+  ],
+  "package": "round2_core_method_literature_v4",
+  "payload_set_sha256": "606edfd5b98b3a854bb4574f3bb36d5e6488084e1ea9e8bd79781d11a01e16aa",
+  "schema_version": 1
+}

@@ -59,6 +59,8 @@ The deterministic Round 2 [`P3 subgroup summary`](reports/research_log/major_rev
 
 The Round 2 [`method reproducibility tables`](reports/research_log/major_revision_round2/METHOD_REPRODUCIBILITY_TABLES/README.md) provide the complete 28-field P0–P5 availability matrix, preprocessing and all six model-search registries, exact CV/seed/reuse contracts, and self-contained ordinal-model notes. P4/P5 remain timestamp-unverified sensitivities, and no policy is described as leakage-free.
 
+The additive Round 2 [`core-method literature package`](reports/research_log/major_revision_round2/LITERATURE_V4/README.md) source-verifies proportional-odds, ordinal classification/evaluation, QWK, RPS/proper scoring, Random Forest, XGBoost, and LightGBM references. Its BibTeX entries are preapproval candidates only; the historical Phase 4A package and manuscript bibliography remain unchanged.
+
 ## Tracked manuscript-support assets
 
 GitHub contains a deterministic, source-mapped export at [`manuscript/mdpi_information/assets/`](manuscript/mdpi_information/assets/). It was generated from the validated canonical run without refitting models or recomputing scientific evidence. The compact package contains 109 files and 10,338,351 bytes; its closed-world manifest SHA-256 is `fbe7355b956df01ad9817f27b42dc13c0f3e0e33e7f0e5c42a2477beb9d001e1`.

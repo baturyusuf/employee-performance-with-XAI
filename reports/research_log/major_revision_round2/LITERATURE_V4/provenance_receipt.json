@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "package": "round2_core_method_literature_v4",
+  "status": "source_verified_preapproval",
+  "retrieval_date": "2026-09-08",
+  "reference_count": 9,
+  "coverage": [
+    "proportional_odds_and_cumulative_link",
+    "cumulative_threshold_ordinal_classification",
+    "ordinal_evaluation",
+    "quadratic_weighted_kappa",
+    "ranked_probability_score",
+    "proper_probability_scoring",
+    "random_forest",
+    "xgboost",
+    "lightgbm"
+  ],
+  "authority_rule": "publisher_page_or_official_proceedings_record",
+  "historical_phase4a_modified": false,
+  "manuscript_bibliography_modified": false,
+  "manuscript_modified": false,
+  "paid_api_calls": 0,
+  "notes": [
+    "The LightGBM official proceedings record supplies volume and pages but no DOI.",
+    "The bibliography candidates remain outside the manuscript until digest-specific claim approval.",
+    "This targeted method supplement is not an exhaustive or systematic review."
+  ]
+}
