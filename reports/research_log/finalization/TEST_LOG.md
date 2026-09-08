@@ -856,3 +856,9 @@ Push/recovery gate: the normal push timed out after 184 seconds with no remote r
 - Clean implementation gate: exit 0 at `fcfc4692466d7bc9f414db4b2fe693073d0d7f4e`; 2,052 tracked files, 63 README links, zero raw/environment/large/secret/machine-path findings, and local/origin divergence 0/0.
 - Clean-commit export and explicit validation: exit 0; nine files/70,041 bytes, 45 exact claims, 32 numerical, 13 narrative, 27 source files, 12 components, claim-set SHA-256 `1664b188df14135d3b3de8642de3d080c25a3fbadc440615c2bd04b2f14ddabe`, contract SHA-256 `a3c55ac3d089b5e38b029d2364edc9d09b29b3ebc8decc3e04b4bce8f2e2c7f6`, and manifest SHA-256 `76be9a39b48fc2577487fc6d90129119642de0ab92afd71ff39cc1aea1f6977d`. Approval remained pending, manuscript authorization false, and paid API calls zero.
 - Staged publication audit: exit 0; all eight manifest records matched working-tree SHA-256/size and Git-index bytes exactly; nine package files and 17 total checkpoint paths were staged; zero raw/run/model/spreadsheet/manuscript-source paths were included and no unstaged change remained.
+
+## Major-revision v3 explicit claim approval — 2026-09-08
+
+- Approved contract validation: exit 0; the 45 frozen claims retained exact claim-set SHA-256 `1664b188df14135d3b3de8642de3d080c25a3fbadc440615c2bd04b2f14ddabe`; approval state `approved`, manuscript editing authorized, 32 numerical/13 narrative claims, 27 sources, 12 components, and zero paid API calls.
+- Approval/export focus: 13 tests passed in 1.44 seconds. Exact digest mismatch, state/authorization disagreement, source/value/anchor drift, rehashed output tampering, and unsafe replacement boundaries fail closed; deterministic approved exports and validated atomic replacement pass.
+- Python compilation and `git diff --check` exited 0. No manuscript or bibliography file was modified before the approved-package checkpoint.

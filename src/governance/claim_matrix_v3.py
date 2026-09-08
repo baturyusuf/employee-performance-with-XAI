@@ -149,19 +149,20 @@ def _validate_and_enrich(
     _require(payload.get("schema_version") == 1, "Claim-matrix schema version must be 1.")
     _require(payload.get("phase") == "5A", "Claim-matrix phase must be 5A.")
     _require(payload.get("snapshot_date") == "2026-09-08", "Claim-matrix snapshot date drifted.")
-    _require(payload.get("status") == "pending_user_approval", "Claim-matrix status must remain pending user approval.")
+    state = payload.get("status")
+    _require(state in {"pending_user_approval", "approved_for_phase5b"}, "Claim-matrix status is invalid.")
 
     approval = payload.get("user_approval")
     _require(isinstance(approval, dict), "User-approval record is absent.")
-    _require(approval.get("status") == "pending", "User approval must not be inferred.")
-    for field in ("approved_by", "approved_at_utc", "approved_claim_set_sha256"):
-        _require(approval.get(field) is None, f"Unapproved field must remain null: {field}.")
+    _require(approval.get("status") in {"pending", "approved"}, "User-approval status is invalid.")
+    _require((state == "approved_for_phase5b") == (approval.get("status") == "approved"), "Contract and approval states disagree.")
 
     controls = payload.get("controls")
     _require(isinstance(controls, dict), "Claim-matrix controls are absent.")
+    approved = approval.get("status") == "approved"
+    _require(controls.get("manuscript_editing_authorized") is approved, "Manuscript authorization does not match approval state.")
+    _require(controls.get("bibliography_editing_authorized") is approved, "Bibliography authorization does not match approval state.")
     expected_false = (
-        "manuscript_editing_authorized",
-        "bibliography_editing_authorized",
         "release_authorized",
         "tag_creation_authorized",
         "doi_minting_authorized",
@@ -248,6 +249,15 @@ def _validate_and_enrich(
 
     _require(numerical_count >= 20, "At least 20 exact numerical claims are required.")
     _require(narrative_count >= 10, "At least 10 bounded narrative claims are required.")
+    claim_set_sha256 = _sha256_bytes(_json_bytes({"claims": payload["claims"]}))
+    if approved:
+        _require(approval.get("approved_by") == "user", "Approved claim set must identify the user as approver.")
+        _require(re.fullmatch(r"\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z", str(approval.get("approved_at_utc", ""))) is not None, "Approval timestamp is invalid.")
+        _require(approval.get("approved_claim_set_sha256") == claim_set_sha256, "Approved claim-set digest does not match the frozen claims.")
+        _require(len(str(approval.get("approval_statement", ""))) >= 80, "Approval statement is incomplete.")
+    else:
+        for field in ("approved_by", "approved_at_utc", "approved_claim_set_sha256"):
+            _require(approval.get(field) is None, f"Unapproved field must remain null: {field}.")
     return contract, payload, enriched
 
 
@@ -274,7 +284,7 @@ def validate_claim_matrix_contract_v3(
     }
 
 
-def _claim_rows(claims: Sequence[Mapping[str, Any]]) -> list[dict[str, Any]]:
+def _claim_rows(claims: Sequence[Mapping[str, Any]], approval_status: str) -> list[dict[str, Any]]:
     rows: list[dict[str, Any]] = []
     for claim in claims:
         rows.append(
@@ -284,7 +294,7 @@ def _claim_rows(claims: Sequence[Mapping[str, Any]]) -> list[dict[str, Any]]:
                 "component": claim["component"],
                 "claim_type": claim["claim_type"],
                 "support_level": claim["support_level"],
-                "approval_status": claim["approval_status"],
+                "approval_status": approval_status,
                 "proposed_claim": claim["proposed_claim"],
                 "source_path": claim["source_path"],
                 "source_sha256": claim["source_sha256"],
@@ -304,11 +314,16 @@ def _claim_rows(claims: Sequence[Mapping[str, Any]]) -> list[dict[str, Any]]:
     return rows
 
 
-def _claim_matrix_md(claims: Sequence[Mapping[str, Any]]) -> str:
+def _claim_matrix_md(claims: Sequence[Mapping[str, Any]], approval_status: str) -> str:
+    status_line = (
+        "Status: **APPROVED FOR PHASE 5B**. These sentences are the sole authorized claim boundary for manuscript and reviewer-response drafting."
+        if approval_status == "approved"
+        else "Status: **PENDING USER APPROVAL**. These sentences are candidates for later manuscript drafting; none is approved or inserted into the manuscript by this package."
+    )
     lines = [
         "# Phase 5A Sentence-Level Claim Matrix",
         "",
-        "Status: **PENDING USER APPROVAL**. These sentences are candidates for later manuscript drafting; none is approved or inserted into the manuscript by this package.",
+        status_line,
         "",
     ]
     sections: list[str] = []
@@ -352,6 +367,23 @@ def _boundaries_md(payload: Mapping[str, Any]) -> str:
 
 
 def _approval_request(payload: Mapping[str, Any], claim_set_sha256: str) -> str:
+    approval = payload["user_approval"]
+    if approval["status"] == "approved":
+        return "\n".join(
+            [
+                "# Explicit Approval Record",
+                "",
+                "Decision: `approved`",
+                f"Approved by: `{approval['approved_by']}`",
+                f"Approved at UTC: `{approval['approved_at_utc']}`",
+                f"Approved claim-set SHA-256: `{approval['approved_claim_set_sha256']}`",
+                "",
+                str(approval["approval_statement"]),
+                "",
+                "This approval authorizes Phase 5B manuscript and reviewer-response drafting under this sole claim boundary. It does not authorize a release, tag, DOI, raw-data publication, Git-history rewrite, or invented declaration/licence/ethics value.",
+                "",
+            ]
+        )
     return "\n".join(
         [
             "# Explicit Approval Request",
@@ -399,29 +431,30 @@ def _build_outputs(
 ) -> tuple[dict[str, bytes], dict[str, Any]]:
     contract, payload, claims = _validate_and_enrich(contract_path)
     claim_set_sha256 = _sha256_bytes(_json_bytes({"claims": payload["claims"]}))
-    rows = _claim_rows(claims)
+    approval_status = str(payload["user_approval"]["status"])
+    rows = _claim_rows(claims, approval_status)
     source_rows = _source_rows(claims)
     fields = list(rows[0])
     source_fields = list(source_rows[0])
     approval_record = {
-        "approved_at_utc": None,
-        "approved_by": None,
-        "approved_claim_set_sha256": None,
+        "approved_at_utc": payload["user_approval"]["approved_at_utc"],
+        "approved_by": payload["user_approval"]["approved_by"],
+        "approved_claim_set_sha256": payload["user_approval"]["approved_claim_set_sha256"],
         "claim_count": len(claims),
         "claim_set_sha256": claim_set_sha256,
-        "decision": "pending",
-        "manuscript_editing_authorized": False,
+        "decision": approval_status,
+        "manuscript_editing_authorized": payload["controls"]["manuscript_editing_authorized"],
         "schema_version": 1,
     }
     provenance = {
-        "approval_status": "pending",
+        "approval_status": approval_status,
         "claim_count": len(claims),
         "claim_set_sha256": claim_set_sha256,
         "component_count": len({claim["component"] for claim in claims}),
         "contract_path": contract.as_posix(),
         "contract_sha256": _sha256(contract),
         "generation_commit": generation_commit,
-        "manuscript_editing_authorized": False,
+        "manuscript_editing_authorized": payload["controls"]["manuscript_editing_authorized"],
         "narrative_claim_count": sum(claim["claim_type"] == "narrative" for claim in claims),
         "network_calls": 0,
         "numerical_claim_count": sum(claim["claim_type"] == "numerical" for claim in claims),
@@ -429,7 +462,7 @@ def _build_outputs(
         "paid_api_calls": 0,
         "schema_version": 1,
         "source_file_count": len(source_rows),
-        "status": "passed_pending_user_approval",
+        "status": "passed_approved_for_phase5b" if approval_status == "approved" else "passed_pending_user_approval",
     }
     readme = "\n".join(
         [
@@ -437,18 +470,22 @@ def _build_outputs(
             "",
             f"Generation commit: `{generation_commit}`",
             f"Claim-set SHA-256: `{claim_set_sha256}`",
-            "Status: `pending_user_approval`",
+            f"Status: `{payload['status']}`",
             "",
             "This deterministic package binds every proposed numerical sentence to one exact CSV row/value and every proposed narrative sentence to a hash-bound text anchor. Each row carries its evidence scope, required qualifier, and prohibited overclaim.",
             "",
-            "The package does not edit or authorize edits to the manuscript or bibliography. It also does not resolve the separate provenance/licence, ethics/declaration, Git-history, release, tag, or DOI blockers.",
+            (
+                "The recorded digest-specific approval authorizes Phase 5B manuscript and reviewer-response drafting under this claim boundary. It does not resolve the separate provenance/licence, ethics/declaration, Git-history, release, tag, or DOI blockers."
+                if approval_status == "approved"
+                else "The package does not edit or authorize edits to the manuscript or bibliography. It also does not resolve the separate provenance/licence, ethics/declaration, Git-history, release, tag, or DOI blockers."
+            ),
             "",
             "## Contents",
             "",
             "- `CLAIM_MATRIX.csv` and `CLAIM_MATRIX.md`: machine-readable and review-readable claim sets.",
             "- `CLAIM_BOUNDARIES.md`: global non-negotiable language boundaries.",
             "- `SOURCE_REGISTER.csv`: source hashes, sizes, claim coverage, and parent manifest hashes.",
-            "- `APPROVAL_REQUEST.md` and `approval_record.json`: the exact digest awaiting an explicit decision.",
+            "- `APPROVAL_REQUEST.md` and `approval_record.json`: the exact digest and explicit decision record.",
             "- `provenance_receipt.json` and `manifest.json`: offline generation identity and closed-world hashes.",
             "",
         ]
@@ -456,7 +493,7 @@ def _build_outputs(
     outputs = {
         "README.md": readme.encode("utf-8"),
         "CLAIM_MATRIX.csv": _csv_bytes(fields, rows),
-        "CLAIM_MATRIX.md": _claim_matrix_md(claims).encode("utf-8"),
+        "CLAIM_MATRIX.md": _claim_matrix_md(claims, approval_status).encode("utf-8"),
         "CLAIM_BOUNDARIES.md": _boundaries_md(payload).encode("utf-8"),
         "SOURCE_REGISTER.csv": _csv_bytes(source_fields, source_rows),
         "APPROVAL_REQUEST.md": _approval_request(payload, claim_set_sha256).encode("utf-8"),
@@ -486,6 +523,7 @@ def export_claim_matrix_package_v3(
     *,
     generation_commit: str | None = None,
     require_clean_git: bool = True,
+    replace_existing: bool = False,
 ) -> dict[str, Any]:
     """Atomically publish the deterministic pending-approval claim package."""
 
@@ -500,7 +538,7 @@ def export_claim_matrix_package_v3(
     outputs[MANIFEST_NAME] = _json_bytes(manifest)
 
     output = Path(output_dir)
-    _require(not output.exists(), f"Claim-matrix output already exists: {output.as_posix()}.")
+    _require(replace_existing or not output.exists(), f"Claim-matrix output already exists: {output.as_posix()}.")
     output.parent.mkdir(parents=True, exist_ok=True)
     staging = output.parent / f".{output.name}.staging-{uuid.uuid4().hex}"
     staging.mkdir()
@@ -511,7 +549,20 @@ def export_claim_matrix_package_v3(
                 stream.write(content)
                 stream.flush()
                 os.fsync(stream.fileno())
-        staging.replace(output)
+        validate_claim_matrix_package_v3(staging, contract_path=contract_path)
+        if output.exists():
+            _require(output.is_dir(), f"Claim-matrix output is not a directory: {output.as_posix()}.")
+            _require(output.resolve().parent == staging.resolve().parent, "Replacement target escaped the intended package parent.")
+            backup = output.parent / f".{output.name}.backup-{uuid.uuid4().hex}"
+            output.replace(backup)
+            try:
+                staging.replace(output)
+            except BaseException:
+                backup.replace(output)
+                raise
+            shutil.rmtree(backup)
+        else:
+            staging.replace(output)
     except BaseException:
         shutil.rmtree(staging, ignore_errors=True)
         raise
@@ -539,9 +590,9 @@ def validate_claim_matrix_package_v3(
     for name, expected in expected_outputs.items():
         _require((output / name).read_bytes() == expected, f"Claim-matrix derived file drifted: {name}.")
     approval = json.loads((output / "approval_record.json").read_text(encoding="utf-8"))
-    _require(approval["decision"] == "pending", "Claim-matrix package falsely records approval.")
+    _require(approval["decision"] == provenance["approval_status"], "Claim-matrix package approval state drifted.")
     return {
-        "status": "passed_pending_user_approval",
+        "status": provenance["status"],
         "package_dir": output.as_posix(),
         "file_count": len(names),
         "size_bytes": sum(path.stat().st_size for path in output.iterdir() if path.is_file()),
@@ -555,7 +606,7 @@ def validate_claim_matrix_package_v3(
         "source_file_count": provenance["source_file_count"],
         "component_count": provenance["component_count"],
         "approval_status": provenance["approval_status"],
-        "manuscript_editing_authorized": False,
+        "manuscript_editing_authorized": provenance["manuscript_editing_authorized"],
         "paid_api_calls": 0,
     }
 
@@ -566,6 +617,7 @@ def _parser() -> argparse.ArgumentParser:
     parser.add_argument("--output-dir", type=Path, default=DEFAULT_OUTPUT)
     parser.add_argument("--generation-commit")
     parser.add_argument("--allow-dirty", action="store_true")
+    parser.add_argument("--replace-output", action="store_true")
     parser.add_argument("--validate-contract-only", action="store_true")
     parser.add_argument("--validate-package-only", action="store_true")
     return parser
@@ -584,6 +636,7 @@ def main(argv: Sequence[str] | None = None) -> int:
             args.output_dir,
             generation_commit=args.generation_commit,
             require_clean_git=not args.allow_dirty,
+            replace_existing=args.replace_output,
         )
     print(json.dumps(result, indent=2, sort_keys=True))
     return 0

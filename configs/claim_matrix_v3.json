@@ -2,16 +2,17 @@
   "schema_version": 1,
   "phase": "5A",
   "snapshot_date": "2026-09-08",
-  "status": "pending_user_approval",
+  "status": "approved_for_phase5b",
   "user_approval": {
-    "status": "pending",
-    "approved_by": null,
-    "approved_at_utc": null,
-    "approved_claim_set_sha256": null
+    "status": "approved",
+    "approved_by": "user",
+    "approved_at_utc": "2026-09-08T07:31:24Z",
+    "approved_claim_set_sha256": "1664b188df14135d3b3de8642de3d080c25a3fbadc440615c2bd04b2f14ddabe",
+    "approval_statement": "The identified Phase 5A claim set is approved as the sole valid claim boundary for the subsequent manuscript revision and reviewer response. Phase 5B is authorized."
   },
   "controls": {
-    "manuscript_editing_authorized": false,
-    "bibliography_editing_authorized": false,
+    "manuscript_editing_authorized": true,
+    "bibliography_editing_authorized": true,
     "release_authorized": false,
     "tag_creation_authorized": false,
     "doi_minting_authorized": false,

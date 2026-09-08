@@ -2,7 +2,7 @@
 
 Date: 2026-09-03
 Branch: `finalization/leakage-aware-v2`
-Status: active implementation contract; Phase 0 and INX Phase 1A complete; Phase 1B through Phase 5A evidence prepared/published; the Phase 5A claim set remains pending explicit digest-specific user approval
+Status: active implementation contract; Phase 0 and INX Phase 1A complete; Phase 1B through Phase 5A evidence prepared/published; claim set `1664b188...` explicitly approved on 2026-09-08; approved-package refresh precedes authorized Phase 5B drafting
 
 ## Purpose
 
@@ -38,6 +38,7 @@ The intended scientific conclusion is conditional rather than promotional: emplo
 - Phase 4B freezes the provenance/licence/redistribution and release-preparation audit in `configs/release_readiness_v3.json`. The governed `phase4b_release_readiness/` package publishes 12 files/38,324 bytes with manifest SHA-256 `d166397d1a0c08df89c893cc092902d2c69671d0c5a52055f3a298bb4fe6ea9e`, covering four physical datasets, ten compact evidence components (203 files/13,056,035 bytes), eight declaration fields, and eleven open blockers. All raw redistribution remains blocked; repository licence, final commit/tag/release/DOI, ethics determination, author declarations, and the separately authorized history strategy remain unresolved. The proposed `v1.0.0-paper-revision` tag is preparation metadata only and was not created.
 - Phase 5A implementation now defines 45 pending-approval sentence-level claims in `configs/claim_matrix_v3.json`: 32 numerical claims each resolve to one unique hash-bound CSV row/value with deterministic display rounding, while 13 narrative claims resolve to hash-bound text anchors and carry a support level, mandatory qualifier, and prohibited overclaim. All 12 v3 components are covered. The validator/exporter creates only a review package and records approval as pending; a generic instruction to continue is not treated as approval, and manuscript/bibliography editing remains unauthorized.
 - The governed `phase5a_claim_matrix/` review package contains nine files/70,041 bytes with manifest SHA-256 `76be9a39b48fc2577487fc6d90129119642de0ab92afd71ff39cc1aea1f6977d` and claim-set SHA-256 `1664b188df14135d3b3de8642de3d080c25a3fbadc440615c2bd04b2f14ddabe`. It publishes the machine-readable and review-readable matrices, global boundaries, 27-source register, explicit approval request, pending approval record, provenance receipt, and closed-world manifest. No manuscript, bibliography, raw data, tag, release, DOI, licence, ethics determination, or history change was made.
+- On 2026-09-08 the user explicitly approved exact claim-set SHA-256 `1664b188df14135d3b3de8642de3d080c25a3fbadc440615c2bd04b2f14ddabe` as the sole valid claim boundary for the Phase 5B manuscript revision and reviewer response. The 45 frozen claim objects and their digest remain unchanged. The approval/provenance layer now authorizes manuscript and bibliography drafting only; release, tag, DOI, raw-data publication, history rewriting, and unresolved licence/ethics/declaration assertions remain unauthorized.
 
 ## Non-negotiable controls
 

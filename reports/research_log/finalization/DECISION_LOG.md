@@ -271,3 +271,10 @@ V2-033 atomic-publication consequence on 2026-07-14: transient Windows antivirus
 - Require every numerical sentence to match exactly one SHA-bound CSV row, exact stored value, and deterministic half-even display rule. Require every narrative sentence to match a SHA-bound text anchor and to state its support level, mandatory qualifier, and prohibited overclaim.
 - Cover the feature contract and Phases 1B through 5A in one 45-claim set. Preserve metric-specific, cross-sectional, descriptive, noncausal, non-fairness-certifying, non-transport, and bounded-literature interpretations.
 - Record the claim set and every row as `pending_user_approval`. A generic “continue” instruction is not digest-specific approval. Keep manuscript Markdown, LaTeX, bibliography, reviewer response, tag, release, DOI, raw publication, and history rewriting unauthorized.
+
+## Phase 5A explicit approval — 2026-09-08
+
+- The user explicitly approved claim-set SHA-256 `1664b188df14135d3b3de8642de3d080c25a3fbadc440615c2bd04b2f14ddabe` and authorized it as the sole valid claim boundary for the subsequent manuscript revision and reviewer response.
+- Phase 5B manuscript and bibliography drafting is authorized only under those 45 unchanged claim objects. The approval is recorded separately from the claim-set digest so the approved evidence identity remains exactly the digest the user reviewed.
+- The approval does not authorize release/tag/DOI creation, raw-data publication, Git-history rewriting, or inferred source rights, software licensing, ethics determinations, funding, conflicts, author roles, consent language, or AI-disclosure language.
+- Refresh the Phase 5A package deterministically from a clean approval checkpoint and publish that record before making the first manuscript change.
