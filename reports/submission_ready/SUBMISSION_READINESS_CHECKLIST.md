@@ -29,15 +29,15 @@
 | Current-tree raw-data hygiene | PASS | Prior clean repository gate reported zero current-tree raw-data findings. |
 | Historical Git raw-data exposure | BLOCKED / AUTHOR ACTION | Historical raw paths confirmed; choose preserve-history, authorized purge, or separate clean archive. No destructive rewrite performed. |
 | Software licence | AUTHOR ACTION | Root LICENSE absent; rightsholder must select/approve a compatible licence. |
-| Supplementary S1-S3 | PASS | Validated reproducibility tables exist and are assembled into the final supplement package. |
-| Supplementary S4 | PASS | Full per-class metrics added. |
-| Confusion matrices | PASS | Existing validated confusion evidence assembled into final supplement package. |
+| Supplementary S1-S3 | PASS — VALIDATED SOURCE | Existing validated reproducibility tables remain authoritative at their versioned Round 2 paths; exact blob identities are recorded for byte-identical production-package copying. |
+| Supplementary S4 | PASS | Full per-class metrics added to `reports/submission_ready/supplement/`. |
+| Confusion matrices | PASS — VALIDATED SOURCE | Existing validated confusion evidence remains authoritative at its Round 2 path; exact blob identity recorded for production-package copying. |
 | Protocol/Audit Gates S5 | PASS | Added as reusable operational audit artifact. |
 | Detailed subgroup uncertainty S6 | PASS | Point estimates, eligibility, and exploratory simultaneous intervals added. |
-| Supplementary Evidence Ledger | PASS | Existing versioned evidence ledger assembled into final supplement package. |
-| Internal workflow artifacts excluded from journal supplement | PASS | Reviewer simulations, approval logs, diffs, and development logs excluded. |
+| Supplementary Evidence Ledger | PASS — VALIDATED SOURCE | Existing versioned evidence ledger remains authoritative; exact blob identity recorded for production-package copying. |
+| Internal workflow artifacts excluded from journal supplement | PASS | Reviewer simulations, approval logs, diffs, and development logs are excluded from the journal-facing supplement definition. |
 | Figures | NEEDS FINAL PRODUCTION QC | Scientific figure set exists; journal-size resolution/layout/official-template placement still requires final visual inspection. |
-| References | PASS FOR SCIENTIFIC RESOLUTION / NEEDS PRODUCTION QC | Existing Round 2 package validates 34 cited sources; authoritative `references.bib` assembled. Final rendering/order in the official MDPI template must be inspected. |
+| References | PASS FOR SCIENTIFIC RESOLUTION / NEEDS PRODUCTION QC | Existing Round 2 package validates 34 cited sources; authoritative `manuscript/mdpi_information/references.bib` retained. Final rendering/order in the official MDPI template must be inspected. |
 | Current MDPI policy verification | PASS | Current official MDPI ethics/AI/data/template requirements reviewed and recorded. |
 | Official current MDPI template | BLOCKED | Exact current official June-2026 MDPI bundle has not been safely materialized into this workspace/repository; no older/third-party substitute used. |
 | `main.tex` in exact current official template | BLOCKED | Must be generated only after the exact official template bundle is available. |
