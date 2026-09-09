@@ -1,0 +1,1 @@
+Nominal-XGBoost information-policy sensitivity under fixed and independently retuned schedules. Counts are retained features. P0 is an information-rich diagnostic comparator; P3/P4/P5 changes confound timing restrictions with feature count and information loss. No prospective validity is established.

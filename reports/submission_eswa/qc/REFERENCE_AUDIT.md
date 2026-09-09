@@ -1,0 +1,31 @@
+# Reference audit — ESWA preparation
+
+Checked 2026-09-09. Scope: the 34 existing bibliography entries were checked afresh against public DOI-registration metadata or official proceedings/publisher/arXiv records. The earlier literature audit was used only to locate candidates, not as proof that the records were correct. All 34 entries are cited in the source Markdown and have distinct keys; the 24 existing DOI-bearing entries have distinct DOIs and returned Crossref HTTP 200 after transient rate-limit responses were retried. Ten entries were checked through primary records without inferring that no DOI exists.
+
+The row-level result is [REFERENCE_AUDIT.csv](REFERENCE_AUDIT.csv). The exact returned metadata, retrieval times and response hashes are in [existing_reference_metadata.json](../literature/existing_reference_metadata.json). Eight newly verified additions are in [VERIFIED_ADDITIONS.bib](../literature/VERIFIED_ADDITIONS.bib) and [addition_metadata.json](../literature/addition_metadata.json). No paid service was used, and no experiment was run.
+
+## Concrete corrections and unresolved details
+
+| Entry | Finding | Editorial action |
+| --- | --- | --- |
+| Giermindl et al. | The publisher's Crossref record distinguishes online publication in 2021 from the version of record in **2022**, volume 31(3), 410–435. | Use 2022 with this volume/issue/pages. The citation key may remain `giermindl2021dark`; keys are identifiers, not printed years. [Publisher record](https://www.tandfonline.com/doi/full/10.1080/0960085X.2021.1927213). |
+| Yeh et al. | Official NeurIPS metadata lists **Pradeep K. Ravikumar**. The existing entry omits K. | Add K. for source-consistent author metadata. [Proceedings](https://proceedings.neurips.cc/paper_files/paper/2019/hash/a7471fdc77b3435276507cc8f2dc2569-Abstract.html). |
+| Vaicenavicius et al. | Official PMLR metadata lists **Thomas Schön**; the existing bibliography uses Thomas B. Schön. | Use the official PMLR citation form consistently; this is an initial variant, not a different author. [Proceedings](https://proceedings.mlr.press/v89/vaicenavicius19a.html). |
+| Adeniyi et al. | Fresh Crossref returns “Comparison of the Performance of Machine Learning Techniques in the Prediction of Employee”; the publisher full text and displayed title identify **“Comparative Analysis of Machine Learning Techniques for the Prediction of Employee Performance.”** Authors, DOI, year and venue match. | **Retain the existing publisher full-text title.** This discrepancy is resolved by source precedence, not by silently adopting the DOI deposit. [Publisher full text](https://paradigmplus.itiud.org/volume3/number3/adeniyi/); [DOI metadata](https://api.crossref.org/works/10.55969%2Fparadigmplus.v3n3a1). |
+| Archana et al. | The visible publisher record lists Archana B.; Sharma S.; Singh S.; Rafsan A. The page's structured metadata expands these to Boob Archana; Sandeep Sharma; Saurabh Singh; Ali Rafsan. Those forms imply conflicting name order. | Preserve the visible published initials until a source-consistent surname form is established. Do not invent name order. The asserted DOI in historical evidence is not in the current bibliography; keep the publisher URL and do not silently add it. [Publisher record](https://ijcseonline.org/index.php/j/article/view/5706). |
+| Slack, Kaufman, Chen | Crossref stores the main title and subtitle in separate fields. | Join both fields for the full displayed title; do not truncate to “Fooling LIME and SHAP,” “Leakage in data mining,” or “XGBoost.” |
+| Alvarez-Melis and Jaakkola | The cited record is arXiv:1806.08049. | Explicitly format as a preprint; do not invent a journal venue. [arXiv](https://arxiv.org/abs/1806.08049). |
+
+Titles differing only in case, punctuation, HTML entities, accents, or the missing space in JMLR's subtitle are normalization differences. They are not evidence of duplicate works. Author order was checked against the returned records; fuller versus abbreviated given names are recorded rather than guessed. The BibTeX exporter must preserve case for names such as SHAP, LIME, XGBoost, LightGBM and REFORMS where needed.
+
+## Claim support and integrity-check boundary
+
+The CSV records a distinct support role and limitation for every source, checked against the current source manuscript's citation contexts. Algorithm citations support algorithm attribution; governance sources support institutional limitations; calibration and explanation sources support definitions or evaluation rationale. None independently supports this manuscript's empirical headline numbers. Titles containing “unbiased” are not evidence of established fairness. Adjacent attrition/churn studies are not validation of ordinal performance ratings.
+
+The fresh Crossref responses were checked for `update-to`, `updated-by`, `relation`, and publisher assertions. **No correction/retraction notice was returned in those fields for the 24 existing registered records or eight additions. This is not a comprehensive clean-status finding.** Some publishers do not deposit complete update relations; a separate correction may exist without an inbound link. No exhaustive Retraction Watch/Crossmark index was queried. DOI registration is distinguished from uninterrupted resolver access: the 200 responses prove registered metadata, not successful access to every publisher landing page. Publisher access restrictions and the ten DOI-less citations prevent a universal clearance statement.
+
+The appropriate status is **metadata audit completed with documented source discrepancies; comprehensive correction/retraction clearance unresolved**. Recheck authoritative article status on the day of submission. Do not label all references “exact and unretracted” on the strength of these receipts.
+
+## Integration check
+
+The new eight-entry bibliography is deliberately separate. Only include sources actually used in the revised text. REFORMS is a relevant prior reporting protocol, so the manuscript should state what executable linkage and empirical audit interaction its own protocol adds; it should not claim that combining established controls is unprecedented. The retained author and date decisions above must be applied to the ESWA copy only.

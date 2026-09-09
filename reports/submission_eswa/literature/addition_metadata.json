@@ -1,0 +1,1522 @@
+[
+  {
+    "key": "lofstrom2024calibrated",
+    "checked_at_utc": "2026-09-09T12:00:05.163042+00:00",
+    "source_bib": {
+      "key": "lofstrom2024calibrated",
+      "doi": "10.1016/j.eswa.2024.123154"
+    },
+    "source_url": "https://api.crossref.org/works/10.1016%2Fj.eswa.2024.123154",
+    "http_status": 200,
+    "resolved_url": "https://api.crossref.org/works/10.1016%2Fj.eswa.2024.123154",
+    "sha256": "63d887f2d4150372bf5d5dcfa3a2019185eea7bf92e6ee669d0f44c8e7cdeb62",
+    "registered_metadata": {
+      "DOI": "10.1016/j.eswa.2024.123154",
+      "title": [
+        "Calibrated explanations: With uncertainty information and counterfactuals"
+      ],
+      "subtitle": [],
+      "author": [
+        {
+          "ORCID": "https://orcid.org/0000-0001-9633-0423",
+          "authenticated-orcid": false,
+          "given": "Helena",
+          "family": "Löfström",
+          "sequence": "first",
+          "affiliation": [],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "ORCID": "https://orcid.org/0000-0003-0274-9026",
+          "authenticated-orcid": false,
+          "given": "Tuwe",
+          "family": "Löfström",
+          "sequence": "additional",
+          "affiliation": [],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "ORCID": "https://orcid.org/0000-0003-0412-6199",
+          "authenticated-orcid": false,
+          "given": "Ulf",
+          "family": "Johansson",
+          "sequence": "additional",
+          "affiliation": [],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "ORCID": "https://orcid.org/0009-0009-0404-2586",
+          "authenticated-orcid": false,
+          "given": "Cecilia",
+          "family": "Sönströd",
+          "sequence": "additional",
+          "affiliation": [],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        }
+      ],
+      "container-title": [
+        "Expert Systems with Applications"
+      ],
+      "published": {
+        "date-parts": [
+          [
+            2024,
+            7
+          ]
+        ]
+      },
+      "published-print": {
+        "date-parts": [
+          [
+            2024,
+            7
+          ]
+        ]
+      },
+      "issued": {
+        "date-parts": [
+          [
+            2024,
+            7
+          ]
+        ]
+      },
+      "volume": "246",
+      "page": "123154",
+      "article-number": "123154",
+      "type": "journal-article",
+      "URL": "https://doi.org/10.1016/j.eswa.2024.123154",
+      "link": [
+        {
+          "URL": "https://api.elsevier.com/content/article/PII:S0957417424000198?httpAccept=text/xml",
+          "content-type": "text/xml",
+          "content-version": "vor",
+          "intended-application": "text-mining"
+        },
+        {
+          "URL": "https://api.elsevier.com/content/article/PII:S0957417424000198?httpAccept=text/plain",
+          "content-type": "text/plain",
+          "content-version": "vor",
+          "intended-application": "text-mining"
+        }
+      ],
+      "relation": {},
+      "assertion": [
+        {
+          "value": "Elsevier",
+          "name": "publisher",
+          "label": "This article is maintained by"
+        },
+        {
+          "value": "Calibrated explanations: With uncertainty information and counterfactuals",
+          "name": "articletitle",
+          "label": "Article Title"
+        },
+        {
+          "value": "Expert Systems with Applications",
+          "name": "journaltitle",
+          "label": "Journal Title"
+        },
+        {
+          "value": "https://doi.org/10.1016/j.eswa.2024.123154",
+          "name": "articlelink",
+          "label": "CrossRef DOI link to publisher maintained version"
+        },
+        {
+          "value": "article",
+          "name": "content_type",
+          "label": "Content Type"
+        },
+        {
+          "value": "© 2024 The Author(s). Published by Elsevier Ltd.",
+          "name": "copyright",
+          "label": "Copyright"
+        }
+      ],
+      "publisher": "Elsevier BV",
+      "resource": {
+        "primary": {
+          "URL": "https://linkinghub.elsevier.com/retrieve/pii/S0957417424000198"
+        }
+      }
+    }
+  },
+  {
+    "key": "sepulveda2025enhancing",
+    "checked_at_utc": "2026-09-09T12:00:05.160041+00:00",
+    "source_bib": {
+      "key": "sepulveda2025enhancing",
+      "doi": "10.1016/j.eswa.2025.126922"
+    },
+    "source_url": "https://api.crossref.org/works/10.1016%2Fj.eswa.2025.126922",
+    "http_status": 200,
+    "resolved_url": "https://api.crossref.org/works/10.1016%2Fj.eswa.2025.126922",
+    "sha256": "954ed64fe7d6124dae93281b5d06f4fb7fac32c4755592ef2983d56e3809e612",
+    "registered_metadata": {
+      "DOI": "10.1016/j.eswa.2025.126922",
+      "title": [
+        "Enhancing explainability in real-world scenarios: Towards a robust stability measure for local interpretability"
+      ],
+      "subtitle": [],
+      "author": [
+        {
+          "ORCID": "https://orcid.org/0009-0009-9973-9828",
+          "authenticated-orcid": false,
+          "given": "Eduardo",
+          "family": "Sepúlveda",
+          "sequence": "first",
+          "affiliation": [],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "ORCID": "https://orcid.org/0000-0002-7887-9452",
+          "authenticated-orcid": false,
+          "given": "Félix",
+          "family": "Vandervorst",
+          "sequence": "additional",
+          "affiliation": [],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "ORCID": "https://orcid.org/0000-0002-5831-5668",
+          "authenticated-orcid": false,
+          "given": "Bart",
+          "family": "Baesens",
+          "sequence": "additional",
+          "affiliation": [],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "ORCID": "https://orcid.org/0000-0003-1105-2028",
+          "authenticated-orcid": false,
+          "given": "Tim",
+          "family": "Verdonck",
+          "sequence": "additional",
+          "affiliation": [],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        }
+      ],
+      "container-title": [
+        "Expert Systems with Applications"
+      ],
+      "published": {
+        "date-parts": [
+          [
+            2025,
+            5
+          ]
+        ]
+      },
+      "published-print": {
+        "date-parts": [
+          [
+            2025,
+            5
+          ]
+        ]
+      },
+      "issued": {
+        "date-parts": [
+          [
+            2025,
+            5
+          ]
+        ]
+      },
+      "volume": "274",
+      "page": "126922",
+      "article-number": "126922",
+      "type": "journal-article",
+      "URL": "https://doi.org/10.1016/j.eswa.2025.126922",
+      "link": [
+        {
+          "URL": "https://api.elsevier.com/content/article/PII:S0957417425005445?httpAccept=text/xml",
+          "content-type": "text/xml",
+          "content-version": "vor",
+          "intended-application": "text-mining"
+        },
+        {
+          "URL": "https://api.elsevier.com/content/article/PII:S0957417425005445?httpAccept=text/plain",
+          "content-type": "text/plain",
+          "content-version": "vor",
+          "intended-application": "text-mining"
+        }
+      ],
+      "relation": {},
+      "assertion": [
+        {
+          "value": "Elsevier",
+          "name": "publisher",
+          "label": "This article is maintained by"
+        },
+        {
+          "value": "Enhancing explainability in real-world scenarios: Towards a robust stability measure for local interpretability",
+          "name": "articletitle",
+          "label": "Article Title"
+        },
+        {
+          "value": "Expert Systems with Applications",
+          "name": "journaltitle",
+          "label": "Journal Title"
+        },
+        {
+          "value": "https://doi.org/10.1016/j.eswa.2025.126922",
+          "name": "articlelink",
+          "label": "CrossRef DOI link to publisher maintained version"
+        },
+        {
+          "value": "article",
+          "name": "content_type",
+          "label": "Content Type"
+        },
+        {
+          "value": "© 2025 Elsevier Ltd. All rights are reserved, including those for text and data mining, AI training, and similar technologies.",
+          "name": "copyright",
+          "label": "Copyright"
+        }
+      ],
+      "publisher": "Elsevier BV",
+      "resource": {
+        "primary": {
+          "URL": "https://linkinghub.elsevier.com/retrieve/pii/S0957417425005445"
+        }
+      }
+    }
+  },
+  {
+    "key": "manafivarkiani2025predicting",
+    "checked_at_utc": "2026-09-09T12:00:05.857158+00:00",
+    "source_bib": {
+      "key": "manafivarkiani2025predicting",
+      "doi": "10.1016/j.eswa.2025.126575"
+    },
+    "source_url": "https://api.crossref.org/works/10.1016%2Fj.eswa.2025.126575",
+    "http_status": 200,
+    "resolved_url": "https://api.crossref.org/works/10.1016%2Fj.eswa.2025.126575",
+    "sha256": "a2cab22b15e490e42f679883789a07a1d5c9b3677b2165626b1b0c3543bea9d9",
+    "registered_metadata": {
+      "DOI": "10.1016/j.eswa.2025.126575",
+      "title": [
+        "Predicting employee attrition and explaining its determinants"
+      ],
+      "subtitle": [],
+      "author": [
+        {
+          "ORCID": "https://orcid.org/0000-0002-0396-4054",
+          "authenticated-orcid": false,
+          "given": "Shahin",
+          "family": "Manafi Varkiani",
+          "sequence": "first",
+          "affiliation": [],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "ORCID": "https://orcid.org/0000-0002-6302-7900",
+          "authenticated-orcid": false,
+          "given": "Francesco",
+          "family": "Pattarin",
+          "sequence": "additional",
+          "affiliation": [],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "ORCID": "https://orcid.org/0000-0001-7140-7519",
+          "authenticated-orcid": false,
+          "given": "Tommaso",
+          "family": "Fabbri",
+          "sequence": "additional",
+          "affiliation": [],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "ORCID": "https://orcid.org/0000-0003-0772-600X",
+          "authenticated-orcid": false,
+          "given": "Gualtiero",
+          "family": "Fantoni",
+          "sequence": "additional",
+          "affiliation": [],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        }
+      ],
+      "container-title": [
+        "Expert Systems with Applications"
+      ],
+      "published": {
+        "date-parts": [
+          [
+            2025,
+            5
+          ]
+        ]
+      },
+      "published-print": {
+        "date-parts": [
+          [
+            2025,
+            5
+          ]
+        ]
+      },
+      "issued": {
+        "date-parts": [
+          [
+            2025,
+            5
+          ]
+        ]
+      },
+      "volume": "272",
+      "page": "126575",
+      "article-number": "126575",
+      "type": "journal-article",
+      "URL": "https://doi.org/10.1016/j.eswa.2025.126575",
+      "link": [
+        {
+          "URL": "https://api.elsevier.com/content/article/PII:S0957417425001976?httpAccept=text/xml",
+          "content-type": "text/xml",
+          "content-version": "vor",
+          "intended-application": "text-mining"
+        },
+        {
+          "URL": "https://api.elsevier.com/content/article/PII:S0957417425001976?httpAccept=text/plain",
+          "content-type": "text/plain",
+          "content-version": "vor",
+          "intended-application": "text-mining"
+        }
+      ],
+      "relation": {},
+      "assertion": [
+        {
+          "value": "Elsevier",
+          "name": "publisher",
+          "label": "This article is maintained by"
+        },
+        {
+          "value": "Predicting employee attrition and explaining its determinants",
+          "name": "articletitle",
+          "label": "Article Title"
+        },
+        {
+          "value": "Expert Systems with Applications",
+          "name": "journaltitle",
+          "label": "Journal Title"
+        },
+        {
+          "value": "https://doi.org/10.1016/j.eswa.2025.126575",
+          "name": "articlelink",
+          "label": "CrossRef DOI link to publisher maintained version"
+        },
+        {
+          "value": "article",
+          "name": "content_type",
+          "label": "Content Type"
+        },
+        {
+          "value": "© 2025 The Author(s). Published by Elsevier Ltd.",
+          "name": "copyright",
+          "label": "Copyright"
+        }
+      ],
+      "publisher": "Elsevier BV",
+      "resource": {
+        "primary": {
+          "URL": "https://linkinghub.elsevier.com/retrieve/pii/S0957417425001976"
+        }
+      }
+    }
+  },
+  {
+    "key": "rass2026statistically",
+    "checked_at_utc": "2026-09-09T12:00:05.747042+00:00",
+    "source_bib": {
+      "key": "rass2026statistically",
+      "doi": "10.1016/j.eswa.2025.130156"
+    },
+    "source_url": "https://api.crossref.org/works/10.1016%2Fj.eswa.2025.130156",
+    "http_status": 200,
+    "resolved_url": "https://api.crossref.org/works/10.1016%2Fj.eswa.2025.130156",
+    "sha256": "14c91d0c77e6760b3aadec44f8702a9671f800e29d45ce79f0c1d89ad422265b",
+    "registered_metadata": {
+      "DOI": "10.1016/j.eswa.2025.130156",
+      "title": [
+        "Statistically testing training data for unwanted error patterns using rule-oriented regression"
+      ],
+      "subtitle": [],
+      "author": [
+        {
+          "ORCID": "https://orcid.org/0000-0003-2821-2489",
+          "authenticated-orcid": false,
+          "given": "Stefan",
+          "family": "Rass",
+          "sequence": "first",
+          "affiliation": [],
+          "role": [
+            {
+              "role": "author",
+              "vocabulary": "crossref"
+            }
+          ]
+        },
+        {
+          "ORCID": "https://orcid.org/0009-0002-5293-2937",
+          "authenticated-orcid": false,
+          "given": "Martin",
+          "family": "Dallinger",
+          "sequence": "additional",
+          "affiliation": [],
+          "role": [
+            {
+              "role": "author",
+              "vocabulary": "crossref"
+            }
+          ]
+        }
+      ],
+      "container-title": [
+        "Expert Systems with Applications"
+      ],
+      "published": {
+        "date-parts": [
+          [
+            2026,
+            3
+          ]
+        ]
+      },
+      "published-print": {
+        "date-parts": [
+          [
+            2026,
+            3
+          ]
+        ]
+      },
+      "issued": {
+        "date-parts": [
+          [
+            2026,
+            3
+          ]
+        ]
+      },
+      "volume": "300",
+      "page": "130156",
+      "article-number": "130156",
+      "type": "journal-article",
+      "URL": "https://doi.org/10.1016/j.eswa.2025.130156",
+      "link": [
+        {
+          "URL": "https://api.elsevier.com/content/article/PII:S0957417425037716?httpAccept=text/xml",
+          "content-type": "text/xml",
+          "content-version": "vor",
+          "intended-application": "text-mining"
+        },
+        {
+          "URL": "https://api.elsevier.com/content/article/PII:S0957417425037716?httpAccept=text/plain",
+          "content-type": "text/plain",
+          "content-version": "vor",
+          "intended-application": "text-mining"
+        }
+      ],
+      "relation": {},
+      "assertion": [
+        {
+          "value": "Elsevier",
+          "name": "publisher",
+          "label": "This article is maintained by"
+        },
+        {
+          "value": "Statistically testing training data for unwanted error patterns using rule-oriented regression",
+          "name": "articletitle",
+          "label": "Article Title"
+        },
+        {
+          "value": "Expert Systems with Applications",
+          "name": "journaltitle",
+          "label": "Journal Title"
+        },
+        {
+          "value": "https://doi.org/10.1016/j.eswa.2025.130156",
+          "name": "articlelink",
+          "label": "CrossRef DOI link to publisher maintained version"
+        },
+        {
+          "value": "article",
+          "name": "content_type",
+          "label": "Content Type"
+        },
+        {
+          "value": "© 2025 The Author(s). Published by Elsevier Ltd.",
+          "name": "copyright",
+          "label": "Copyright"
+        }
+      ],
+      "publisher": "Elsevier BV",
+      "resource": {
+        "primary": {
+          "URL": "https://linkinghub.elsevier.com/retrieve/pii/S0957417425037716"
+        }
+      }
+    }
+  },
+  {
+    "key": "abusitta2024survey",
+    "checked_at_utc": "2026-09-09T12:00:06.485208+00:00",
+    "source_bib": {
+      "key": "abusitta2024survey",
+      "doi": "10.1016/j.eswa.2024.124710"
+    },
+    "source_url": "https://api.crossref.org/works/10.1016%2Fj.eswa.2024.124710",
+    "http_status": 200,
+    "resolved_url": "https://api.crossref.org/works/10.1016%2Fj.eswa.2024.124710",
+    "sha256": "b06b71a411a1e2c7ee15171ee7f26834f19285d5e7731f43ae3fe806aeef5a87",
+    "registered_metadata": {
+      "DOI": "10.1016/j.eswa.2024.124710",
+      "title": [
+        "Survey on Explainable AI: Techniques, challenges and open issues"
+      ],
+      "subtitle": [],
+      "author": [
+        {
+          "ORCID": "https://orcid.org/0000-0003-0860-3220",
+          "authenticated-orcid": false,
+          "given": "Adel",
+          "family": "Abusitta",
+          "sequence": "first",
+          "affiliation": [],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "ORCID": "https://orcid.org/0000-0001-7091-3268",
+          "authenticated-orcid": false,
+          "given": "Miles Q.",
+          "family": "Li",
+          "sequence": "additional",
+          "affiliation": [],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "ORCID": "https://orcid.org/0000-0001-8423-2906",
+          "authenticated-orcid": false,
+          "given": "Benjamin C.M.",
+          "family": "Fung",
+          "sequence": "additional",
+          "affiliation": [],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        }
+      ],
+      "container-title": [
+        "Expert Systems with Applications"
+      ],
+      "published": {
+        "date-parts": [
+          [
+            2024,
+            12
+          ]
+        ]
+      },
+      "published-print": {
+        "date-parts": [
+          [
+            2024,
+            12
+          ]
+        ]
+      },
+      "issued": {
+        "date-parts": [
+          [
+            2024,
+            12
+          ]
+        ]
+      },
+      "volume": "255",
+      "page": "124710",
+      "article-number": "124710",
+      "type": "journal-article",
+      "URL": "https://doi.org/10.1016/j.eswa.2024.124710",
+      "link": [
+        {
+          "URL": "https://api.elsevier.com/content/article/PII:S095741742401577X?httpAccept=text/xml",
+          "content-type": "text/xml",
+          "content-version": "vor",
+          "intended-application": "text-mining"
+        },
+        {
+          "URL": "https://api.elsevier.com/content/article/PII:S095741742401577X?httpAccept=text/plain",
+          "content-type": "text/plain",
+          "content-version": "vor",
+          "intended-application": "text-mining"
+        }
+      ],
+      "relation": {},
+      "assertion": [
+        {
+          "value": "Elsevier",
+          "name": "publisher",
+          "label": "This article is maintained by"
+        },
+        {
+          "value": "Survey on Explainable AI: Techniques, challenges and open issues",
+          "name": "articletitle",
+          "label": "Article Title"
+        },
+        {
+          "value": "Expert Systems with Applications",
+          "name": "journaltitle",
+          "label": "Journal Title"
+        },
+        {
+          "value": "https://doi.org/10.1016/j.eswa.2024.124710",
+          "name": "articlelink",
+          "label": "CrossRef DOI link to publisher maintained version"
+        },
+        {
+          "value": "article",
+          "name": "content_type",
+          "label": "Content Type"
+        },
+        {
+          "value": "© 2024 Elsevier Ltd. All rights are reserved, including those for text and data mining, AI training, and similar technologies.",
+          "name": "copyright",
+          "label": "Copyright"
+        }
+      ],
+      "publisher": "Elsevier BV",
+      "resource": {
+        "primary": {
+          "URL": "https://linkinghub.elsevier.com/retrieve/pii/S095741742401577X"
+        }
+      }
+    }
+  },
+  {
+    "key": "kapoor2024reforms",
+    "checked_at_utc": "2026-09-09T12:00:06.573081+00:00",
+    "source_bib": {
+      "key": "kapoor2024reforms",
+      "doi": "10.1126/sciadv.adk3452"
+    },
+    "source_url": "https://api.crossref.org/works/10.1126%2Fsciadv.adk3452",
+    "http_status": 200,
+    "resolved_url": "https://api.crossref.org/works/10.1126%2Fsciadv.adk3452",
+    "sha256": "ebdeebf9c5f2a290bfbe932232c521ac6f2ab75e8d5e05eb01a0c542530c88dd",
+    "registered_metadata": {
+      "DOI": "10.1126/sciadv.adk3452",
+      "title": [
+        "REFORMS: Consensus-based Recommendations for Machine-learning-based Science"
+      ],
+      "subtitle": [],
+      "author": [
+        {
+          "ORCID": "https://orcid.org/0000-0001-5695-280X",
+          "authenticated-orcid": true,
+          "given": "Sayash",
+          "family": "Kapoor",
+          "sequence": "first",
+          "affiliation": [
+            {
+              "name": "Department of Computer Science, Princeton University, Princeton, NJ 08544, USA."
+            },
+            {
+              "name": "Center for Information Technology Policy, Princeton University, Princeton, NJ 08544, USA."
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "ORCID": "https://orcid.org/0000-0001-5954-9346",
+          "authenticated-orcid": true,
+          "given": "Emily M.",
+          "family": "Cantrell",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Department of Sociology, Princeton University, Princeton, NJ 08544, USA."
+            },
+            {
+              "name": "School of Public and International Affairs, Princeton University, Princeton, NJ 08544, USA."
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "ORCID": "https://orcid.org/0000-0002-0472-540X",
+          "authenticated-orcid": true,
+          "given": "Kenny",
+          "family": "Peng",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Department of Computer Science, Cornell University, Ithaca, NY 14850, USA."
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Thanh Hien",
+          "family": "Pham",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Department of Computer Science, Princeton University, Princeton, NJ 08544, USA."
+            },
+            {
+              "name": "Center for Information Technology Policy, Princeton University, Princeton, NJ 08544, USA."
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "ORCID": "https://orcid.org/0000-0002-5310-2372",
+          "authenticated-orcid": true,
+          "given": "Christopher A.",
+          "family": "Bail",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Department of Sociology, Duke University, Durham, NC 27708, USA."
+            },
+            {
+              "name": "Department of Political Science, Duke University, Durham, NC 27708, USA."
+            },
+            {
+              "name": "Sanford School of Public Policy, Duke University, Durham, NC 27708, USA."
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "ORCID": "https://orcid.org/0000-0002-9754-5941",
+          "authenticated-orcid": true,
+          "given": "Odd Erik",
+          "family": "Gundersen",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Department of Computer Science, Norwegian University of Science and Technology, Trondheim, Norway."
+            },
+            {
+              "name": "Aneo AS, Trondheim, Norway."
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "ORCID": "https://orcid.org/0000-0002-9364-9604",
+          "authenticated-orcid": true,
+          "given": "Jake M.",
+          "family": "Hofman",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Microsoft Research, New York, NY 10012, USA."
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "ORCID": "https://orcid.org/0000-0001-6826-3550",
+          "authenticated-orcid": true,
+          "given": "Jessica",
+          "family": "Hullman",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Department of Computer Science, Northwestern University, Evanston, IL 60208, USA."
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "ORCID": "https://orcid.org/0000-0002-2745-9896",
+          "authenticated-orcid": true,
+          "given": "Michael A.",
+          "family": "Lones",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "School of Mathematical and Computer Sciences, Heriot-Watt University, Edinburgh, UK."
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "ORCID": "https://orcid.org/0000-0002-4871-0429",
+          "authenticated-orcid": true,
+          "given": "Momin M.",
+          "family": "Malik",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Center for Digital Health, Mayo Clinic, Rochester, MN 55905, USA."
+            },
+            {
+              "name": "School of Social Policy &amp; Practice, University of Pennsylvania, Philadelphia, PA 19104, USA."
+            },
+            {
+              "name": "Institute in Critical Quantitative, Computational, &amp; Mixed Methodologies, Johns Hopkins University, Baltimore, MD 21218, USA."
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Priyanka",
+          "family": "Nanayakkara",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Department of Computer Science, Northwestern University, Evanston, IL 60208, USA."
+            },
+            {
+              "name": "Department of Communication Studies, Northwestern University, Evanston, IL 60208, USA."
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "ORCID": "https://orcid.org/0000-0001-6755-0259",
+          "authenticated-orcid": true,
+          "given": "Russell A.",
+          "family": "Poldrack",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Department of Psychology, Stanford University, Stanford, CA 94305, USA."
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Inioluwa Deborah",
+          "family": "Raji",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Department of Computer Science, University of California, Berkeley, Berkeley, CA 94720, USA."
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "ORCID": "https://orcid.org/0000-0002-3484-5031",
+          "authenticated-orcid": true,
+          "given": "Michael",
+          "family": "Roberts",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Department of Applied Mathematics and Theoretical Physics, University of Cambridge, Cambridge, UK."
+            },
+            {
+              "name": "Department of Medicine, University of Cambridge, Cambridge, UK."
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "ORCID": "https://orcid.org/0000-0001-8968-1356",
+          "authenticated-orcid": true,
+          "given": "Matthew J.",
+          "family": "Salganik",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Center for Information Technology Policy, Princeton University, Princeton, NJ 08544, USA."
+            },
+            {
+              "name": "Department of Sociology, Princeton University, Princeton, NJ 08544, USA."
+            },
+            {
+              "name": "Office of Population Research, Princeton University, Princeton, NJ 08544, USA."
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "ORCID": "https://orcid.org/0000-0002-5875-4986",
+          "authenticated-orcid": true,
+          "given": "Marta",
+          "family": "Serra-Garcia",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Rady School of Management, University of California, San Diego, La Jolla, CA 92093, USA."
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "ORCID": "https://orcid.org/0000-0002-7657-3089",
+          "authenticated-orcid": true,
+          "given": "Brandon M.",
+          "family": "Stewart",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Center for Information Technology Policy, Princeton University, Princeton, NJ 08544, USA."
+            },
+            {
+              "name": "Department of Sociology, Princeton University, Princeton, NJ 08544, USA."
+            },
+            {
+              "name": "Office of Population Research, Princeton University, Princeton, NJ 08544, USA."
+            },
+            {
+              "name": "Department of Politics, Princeton University, Princeton, NJ 08544, USA."
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "ORCID": "https://orcid.org/0000-0001-9531-0623",
+          "authenticated-orcid": true,
+          "given": "Gilles",
+          "family": "Vandewiele",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Department of Information Technology, Ghent University, Ghent, Belgium."
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "ORCID": "https://orcid.org/0000-0001-7176-4479",
+          "authenticated-orcid": true,
+          "given": "Arvind",
+          "family": "Narayanan",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Department of Computer Science, Princeton University, Princeton, NJ 08544, USA."
+            },
+            {
+              "name": "Center for Information Technology Policy, Princeton University, Princeton, NJ 08544, USA."
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        }
+      ],
+      "container-title": [
+        "Science Advances"
+      ],
+      "published": {
+        "date-parts": [
+          [
+            2024,
+            5,
+            3
+          ]
+        ]
+      },
+      "published-print": {
+        "date-parts": [
+          [
+            2024,
+            5,
+            3
+          ]
+        ]
+      },
+      "issued": {
+        "date-parts": [
+          [
+            2024,
+            5,
+            3
+          ]
+        ]
+      },
+      "volume": "10",
+      "issue": "18",
+      "article-number": "eadk3452",
+      "type": "journal-article",
+      "URL": "https://doi.org/10.1126/sciadv.adk3452",
+      "link": [
+        {
+          "URL": "https://www.science.org/doi/pdf/10.1126/sciadv.adk3452",
+          "content-type": "unspecified",
+          "content-version": "vor",
+          "intended-application": "similarity-checking"
+        }
+      ],
+      "relation": {},
+      "assertion": [
+        {
+          "value": "2023-08-16",
+          "order": 0,
+          "name": "received",
+          "label": "Received",
+          "group": {
+            "name": "publication_history",
+            "label": "Publication History"
+          }
+        },
+        {
+          "value": "2024-03-29",
+          "order": 1,
+          "name": "accepted",
+          "label": "Accepted",
+          "group": {
+            "name": "publication_history",
+            "label": "Publication History"
+          }
+        },
+        {
+          "value": "2024-05-01",
+          "order": 2,
+          "name": "published",
+          "label": "Published",
+          "group": {
+            "name": "publication_history",
+            "label": "Publication History"
+          }
+        }
+      ],
+      "publisher": "American Association for the Advancement of Science (AAAS)",
+      "resource": {
+        "primary": {
+          "URL": "https://www.science.org/doi/10.1126/sciadv.adk3452"
+        }
+      }
+    }
+  },
+  {
+    "key": "bargil2024ai",
+    "checked_at_utc": "2026-09-09T12:00:07.061005+00:00",
+    "source_bib": {
+      "key": "tursunbayeva2024ai",
+      "doi": "10.1016/j.techsoc.2024.102527"
+    },
+    "source_url": "https://api.crossref.org/works/10.1016%2Fj.techsoc.2024.102527",
+    "http_status": 200,
+    "resolved_url": "https://api.crossref.org/works/10.1016%2Fj.techsoc.2024.102527",
+    "sha256": "693aa3be3d35639a0d80f054866b004f4ba446107c9bf957ad183c8699818ab4",
+    "registered_metadata": {
+      "DOI": "10.1016/j.techsoc.2024.102527",
+      "title": [
+        "AI for the people? Embedding AI ethics in HR and people analytics projects"
+      ],
+      "subtitle": [],
+      "author": [
+        {
+          "ORCID": "https://orcid.org/0000-0003-2601-6409",
+          "authenticated-orcid": false,
+          "given": "Oshri",
+          "family": "Bar-Gil",
+          "sequence": "first",
+          "affiliation": [],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Tom",
+          "family": "Ron",
+          "sequence": "additional",
+          "affiliation": [],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Ofir",
+          "family": "Czerniak",
+          "sequence": "additional",
+          "affiliation": [],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        }
+      ],
+      "container-title": [
+        "Technology in Society"
+      ],
+      "published": {
+        "date-parts": [
+          [
+            2024,
+            6
+          ]
+        ]
+      },
+      "published-print": {
+        "date-parts": [
+          [
+            2024,
+            6
+          ]
+        ]
+      },
+      "issued": {
+        "date-parts": [
+          [
+            2024,
+            6
+          ]
+        ]
+      },
+      "volume": "77",
+      "page": "102527",
+      "article-number": "102527",
+      "type": "journal-article",
+      "URL": "https://doi.org/10.1016/j.techsoc.2024.102527",
+      "link": [
+        {
+          "URL": "https://api.elsevier.com/content/article/PII:S0160791X24000757?httpAccept=text/xml",
+          "content-type": "text/xml",
+          "content-version": "vor",
+          "intended-application": "text-mining"
+        },
+        {
+          "URL": "https://api.elsevier.com/content/article/PII:S0160791X24000757?httpAccept=text/plain",
+          "content-type": "text/plain",
+          "content-version": "vor",
+          "intended-application": "text-mining"
+        }
+      ],
+      "relation": {},
+      "assertion": [
+        {
+          "value": "Elsevier",
+          "name": "publisher",
+          "label": "This article is maintained by"
+        },
+        {
+          "value": "AI for the people? Embedding AI ethics in HR and people analytics projects",
+          "name": "articletitle",
+          "label": "Article Title"
+        },
+        {
+          "value": "Technology in Society",
+          "name": "journaltitle",
+          "label": "Journal Title"
+        },
+        {
+          "value": "https://doi.org/10.1016/j.techsoc.2024.102527",
+          "name": "articlelink",
+          "label": "CrossRef DOI link to publisher maintained version"
+        },
+        {
+          "value": "article",
+          "name": "content_type",
+          "label": "Content Type"
+        },
+        {
+          "value": "© 2024 Elsevier Ltd. All rights reserved.",
+          "name": "copyright",
+          "label": "Copyright"
+        }
+      ],
+      "publisher": "Elsevier BV",
+      "resource": {
+        "primary": {
+          "URL": "https://linkinghub.elsevier.com/retrieve/pii/S0160791X24000757"
+        }
+      }
+    }
+  },
+  {
+    "key": "lones2024avoiding",
+    "checked_at_utc": "2026-09-09T12:00:07.137748+00:00",
+    "source_bib": {
+      "key": "lones2024avoiding",
+      "doi": "10.1016/j.patter.2024.101046"
+    },
+    "source_url": "https://api.crossref.org/works/10.1016%2Fj.patter.2024.101046",
+    "http_status": 200,
+    "resolved_url": "https://api.crossref.org/works/10.1016%2Fj.patter.2024.101046",
+    "sha256": "fe344e810cb166caf5ec6d7c931b91bfec14052df184a4459647089a424e83d4",
+    "registered_metadata": {
+      "DOI": "10.1016/j.patter.2024.101046",
+      "title": [
+        "Avoiding common machine learning pitfalls"
+      ],
+      "subtitle": [],
+      "author": [
+        {
+          "ORCID": "https://orcid.org/0000-0002-2745-9896",
+          "authenticated-orcid": false,
+          "given": "Michael A.",
+          "family": "Lones",
+          "sequence": "first",
+          "affiliation": [],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        }
+      ],
+      "container-title": [
+        "Patterns"
+      ],
+      "published": {
+        "date-parts": [
+          [
+            2024,
+            10
+          ]
+        ]
+      },
+      "published-print": {
+        "date-parts": [
+          [
+            2024,
+            10
+          ]
+        ]
+      },
+      "issued": {
+        "date-parts": [
+          [
+            2024,
+            10
+          ]
+        ]
+      },
+      "volume": "5",
+      "issue": "10",
+      "page": "101046",
+      "article-number": "101046",
+      "type": "journal-article",
+      "URL": "https://doi.org/10.1016/j.patter.2024.101046",
+      "link": [
+        {
+          "URL": "https://api.elsevier.com/content/article/PII:S2666389924001880?httpAccept=text/xml",
+          "content-type": "text/xml",
+          "content-version": "vor",
+          "intended-application": "text-mining"
+        },
+        {
+          "URL": "https://api.elsevier.com/content/article/PII:S2666389924001880?httpAccept=text/plain",
+          "content-type": "text/plain",
+          "content-version": "vor",
+          "intended-application": "text-mining"
+        }
+      ],
+      "relation": {},
+      "assertion": [
+        {
+          "value": "Elsevier",
+          "name": "publisher",
+          "label": "This article is maintained by"
+        },
+        {
+          "value": "Avoiding common machine learning pitfalls",
+          "name": "articletitle",
+          "label": "Article Title"
+        },
+        {
+          "value": "Patterns",
+          "name": "journaltitle",
+          "label": "Journal Title"
+        },
+        {
+          "value": "https://doi.org/10.1016/j.patter.2024.101046",
+          "name": "articlelink",
+          "label": "CrossRef DOI link to publisher maintained version"
+        },
+        {
+          "value": "article",
+          "name": "content_type",
+          "label": "Content Type"
+        },
+        {
+          "value": "© 2024 The Author(s). Published by Elsevier Inc.",
+          "name": "copyright",
+          "label": "Copyright"
+        }
+      ],
+      "publisher": "Elsevier BV",
+      "resource": {
+        "primary": {
+          "URL": "https://linkinghub.elsevier.com/retrieve/pii/S2666389924001880"
+        }
+      }
+    }
+  }
+]

@@ -171,3 +171,10 @@ Do not begin manuscript writing in this technical-finalization chat.
 - Claim-set SHA-256 is `751208d036597461606bd02d68bfa9e642a4aa5ecf5df2df3fd7e46b99084aea`. The cross-source audit revalidated the historical Phase 5A digest, matched all 32 historical numerical claims to Phase 5B, rehashed 62 Phase 5B manifest entries, and resolved every active numerical claim to one exact source row/value/hash.
 - Full current-tree pytest passed 1,054 tests, two skips, and 11 subtests; unittest discovery passed 179 tests with one skip. The manuscript, bibliography, and reviewer response remain unchanged and unauthorized.
 - The only next action is an explicit user decision identifying the exact Round 2 digest. A generic instruction to continue does not authorize manuscript rewrite.
+
+## ESWA author-review package — 2026-09-09
+
+- The already approved Round 2 digest `751208d036597461606bd02d68bfa9e642a4aa5ecf5df2df3fd7e46b99084aea` was retargeted to *Expert Systems with Applications* in the additive `reports/submission_eswa` workspace; the historical MDPI source/package was not edited.
+- The package contains a double-anonymous 33-page manuscript, an 11-page anonymous supplement with exact CSV tables and a 99-claim numerical evidence ledger, title-page and highlights DOCX files, a cover-letter PDF, seven figure sets, portal worksheets, declaration drafts, literature verification records, and deterministic build/QC scripts.
+- Scientific/source-binding and journal-format QC pass. The abstract is 229 words, there are six keywords and four highlights within 85 characters, all 42 bibliography entries are cited, anonymous artifacts contain no scanned author identifiers, and PDF metadata has no author.
+- Submission remains blocked only by author-controlled or external decisions recorded in `reports/submission_eswa/declarations/AUTHOR_DECISIONS.md`. No portal upload, release, DOI, raw-data publication, paid API call, ethics determination, or invented declaration occurred.

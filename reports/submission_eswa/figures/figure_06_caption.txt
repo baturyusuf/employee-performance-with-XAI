@@ -1,0 +1,1 @@
+Raw and cross-fitted sigmoid probability diagnostics for P3 nominal XGBoost. Sigmoid improves several scores but worsens the top-label calibration-error point estimate. These retrospective diagnostics do not validate future probabilities.

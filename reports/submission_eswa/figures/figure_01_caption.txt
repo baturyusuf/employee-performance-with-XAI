@@ -1,0 +1,1 @@
+Audit protocol for intelligent employee-performance prediction. Training-only operations are isolated from held-out assessment. The diagram was drawn programmatically with AI-assisted coding and checked against the reported procedure.

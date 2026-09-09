@@ -1,0 +1,4243 @@
+[
+  {
+    "key": "archana2019application",
+    "checked_at_utc": "2026-09-09T11:58:46.294888+00:00",
+    "source_bib": {
+      "key": "archana2019application",
+      "type": "misc",
+      "author": "Archana B. and Sharma S. and Singh S. and Rafsan A.",
+      "title": "Application of Machine Learning in Employee Performance Prediction",
+      "year": "2019",
+      "howpublished": "International Journal of Computer Sciences and Engineering, 7(Special Issue 14), 443-447",
+      "url": "https://ijcseonline.org/index.php/j/article/view/5706"
+    },
+    "source_url": "https://ijcseonline.org/index.php/j/article/view/5706",
+    "http_status": 200,
+    "resolved_url": "https://ijcseonline.org/index.php/j/article/view/5706",
+    "sha256": "a72a8868cf31f20c4b53121e76d67161f4ab99b5f2c17398a2c1ba0c56ed4b9a",
+    "primary_metadata_tags": [
+      "<meta name=\"citation_journal_title\" content=\"International Journal of Computer Sciences and Engineering\"/>",
+      "<meta name=\"citation_journal_abbrev\" content=\"Int. J.  Comp. Sci. Eng.\"/>",
+      "<meta name=\"citation_issn\" content=\"2347-2693\"/>",
+      "<meta name=\"citation_author\" content=\"Boob Archana\"/>",
+      "<meta name=\"citation_author_institution\" content=\"School of C&IT REVA University Rukmini Knowledge Park Yelahanka Bangarore.\"/>",
+      "<meta name=\"citation_author\" content=\"Sandeep Sharma\"/>",
+      "<meta name=\"citation_author_institution\" content=\"School of C&IT REVA University Rukmini Knowledge Park Yelahanka Bangarore.\"/>",
+      "<meta name=\"citation_author\" content=\"Saurabh Singh\"/>",
+      "<meta name=\"citation_author_institution\" content=\"School of C&IT REVA University Rukmini Knowledge Park Yelahanka Bangarore.\"/>",
+      "<meta name=\"citation_author\" content=\"Ali Rafsan\"/>",
+      "<meta name=\"citation_author_institution\" content=\"School of C&IT REVA University Rukmini Knowledge Park Yelahanka Bangarore.\"/>",
+      "<meta name=\"citation_title\" content=\"Application of Machine Learning in Employee Performance Prediction\"/>",
+      "<meta name=\"citation_language\" content=\"en\"/>",
+      "<meta name=\"citation_date\" content=\"2019\"/>",
+      "<meta name=\"citation_volume\" content=\"7\"/>",
+      "<meta name=\"citation_issue\" content=\"14\"/>",
+      "<meta name=\"citation_firstpage\" content=\"443\"/>",
+      "<meta name=\"citation_lastpage\" content=\"447\"/>",
+      "<meta name=\"citation_abstract_html_url\" content=\"https://ijcseonline.org/index.php/j/article/view/5706\"/>",
+      "<meta name=\"citation_keywords\" xml:lang=\"en\" content=\"Employee Performance Analysis\"/>",
+      "<meta name=\"citation_keywords\" xml:lang=\"en\" content=\"SVM\"/>",
+      "<meta name=\"citation_keywords\" xml:lang=\"en\" content=\"Machine Learning\"/>",
+      "<meta name=\"citation_keywords\" xml:lang=\"en\" content=\"Algorithm K-NN algorithm\"/>",
+      "<meta name=\"citation_keywords\" xml:lang=\"en\" content=\"random forest\"/>",
+      "<meta name=\"citation_pdf_url\" content=\"https://ijcseonline.org/index.php/j/article/download/5706/5690\"/>",
+      "<meta name=\"citation_reference\" content=\"[1] Al-Radideh, Q.P., Al-Naagi, E., (2011). Machine learning used for Classification Model for Employees Performance prediction, International Journal of Advanced sciences of computer and Applications, 3(2), pp 144 – 151\"/>",
+      "<meta name=\"citation_reference\" content=\"[2] Anchetra, R.A, Cabautan, R.J.M., Lorenaa, B.T.T., Rabagoo, W., (2010). Predicting faculty trainings and performance development using rule-based algorithm classification, Asean Journal of Science of Computer and Information Technology 2: 7, pp 204 – 208.\"/>",
+      "<meta name=\"citation_reference\" content=\"[3] heine, C.F., Chen, L.F., (2008). Learning machine to improve employee selection and increase human input: A case study in technology industry, Expert applications on system, 34(1), pp 283–293\"/>",
+      "<meta name=\"citation_reference\" content=\"[4] Delaavari, N., Phon-Amnnuaisuk S., (2009). Machine learning Application in Higher Learning Institutions, education on informatics, 7(1), pp. 32–55\"/>",
+      "<meta name=\"citation_reference\" content=\"[5] Hamidah J., Abdul R.H., Zulaiha A.O., (2010). Discover Knowledge Techniques for Talent Forecasting in employee Resource Applications, World Academy of Engineering, Science and Technology.\"/>",
+      "<meta name=\"citation_reference\" content=\"[6] Jantan, H., Hamdan, A. R., Othman, Z. A. (2011). applying Machine learning techniques for talent management. International Conference on Engineering of Computer and Applications IPCSIT Vol. 3.\"/>",
+      "<meta name=\"citation_reference\" content=\"[7] Jantan, H., Hamdan, A. R., & Othman, Z. A. (2010). resource talent prediction in HRM using C4. 5 classification algorithm, International Journal on Science Computer and Engineering, 2(08-2011), pp 2525-2535.\"/>",
+      "<meta name=\"citation_reference\" content=\"[8] Jantan, H., Hamdana, A. R., Othman, Z. A. (2008). Knowledge discovery techniques for talent forecasting in human resource application. World Academy of Science, Engineering and Technology, Penang, Malaysia, pp 803.\"/>",
+      "<meta name=\"citation_reference\" content=\"[9] Jayanthi R., D.P. Goyal, S.I Ahson, (2008). Data techniques of Mining for better decisions in human resource systems, International Journal of Business Information Systems, 3(6), pp 468 – 484\"/>",
+      "<meta name=\"citation_reference\" content=\"[10] Kotsiantiss, S.B., (2008). Supervised machine learning: a view of classification techniques, Informatics, 31, pp 247-268.\"/>",
+      "<meta name=\"citation_reference\" content=\"[11] Kurgana, L.A., Musileke, P. (2008). A survey of knowledge discovery and Data Mining Models, The Knowledge Engineering Review, 21(2), pp 1 - 25\"/>",
+      "<meta name=\"DC.Creator.PersonalName\" content=\"Boob Archana\"/>",
+      "<meta name=\"DC.Creator.PersonalName\" content=\"Sandeep Sharma\"/>",
+      "<meta name=\"DC.Creator.PersonalName\" content=\"Saurabh Singh\"/>",
+      "<meta name=\"DC.Creator.PersonalName\" content=\"Ali Rafsan\"/>",
+      "<meta name=\"DC.Date.created\" scheme=\"ISO8601\" content=\"2026-02-05\"/>",
+      "<meta name=\"DC.Date.dateSubmitted\" scheme=\"ISO8601\" content=\"2025-10-09\"/>",
+      "<meta name=\"DC.Date.issued\" scheme=\"ISO8601\" content=\"2019-05-15\"/>",
+      "<meta name=\"DC.Date.modified\" scheme=\"ISO8601\" content=\"2026-02-05\"/>",
+      "<meta name=\"DC.Description\" xml:lang=\"en\" content=\"In emerging developing countries such as India, companies heavily rely on their human workforce for services. That is why employee performance management at the individual level is must and the business case for implementing a system to measure and improve employee performance should be strong. The concept of the project is: Today majority of the giant retail companies are facing a lot of issues in their current assessment planning of their employees. This wrong assessment planning leads to employees not being used to the fullest potential which causes loss to businesses and major capital loss in man hours, also this assessment planning requires a lot of manual strategies which are very costly and hence these assessment strategies then turn out to be costly, time taking, biased and working on mostly non relevant data. We used the Machine learning classification technique for the extraction of knowledge significant for predicting employee performance using a .csv file sourced from (INX Future Inc.).\"/>",
+      "<meta name=\"DC.Format\" scheme=\"IMT\" content=\"application/pdf\"/>",
+      "<meta name=\"DC.Identifier\" content=\"5706\"/>",
+      "<meta name=\"DC.Identifier.pageNumber\" content=\"443-447\"/>",
+      "<meta name=\"DC.Identifier.URI\" content=\"https://ijcseonline.org/index.php/j/article/view/5706\"/>",
+      "<meta name=\"DC.Language\" scheme=\"ISO639-1\" content=\"en\"/>",
+      "<meta name=\"DC.Rights\" content=\"Copyright (c) 2019 \"/>",
+      "<meta name=\"DC.Rights\" content=\"https://creativecommons.org/licenses/by/4.0\"/>",
+      "<meta name=\"DC.Source\" content=\"International Journal of Computer Sciences and Engineering\"/>",
+      "<meta name=\"DC.Source.ISSN\" content=\"2347-2693\"/>",
+      "<meta name=\"DC.Source.Issue\" content=\"14\"/>",
+      "<meta name=\"DC.Source.Volume\" content=\"7\"/>",
+      "<meta name=\"DC.Source.URI\" content=\"https://ijcseonline.org/index.php/j\"/>",
+      "<meta name=\"DC.Subject\" xml:lang=\"en\" content=\"Employee Performance Analysis\"/>",
+      "<meta name=\"DC.Subject\" xml:lang=\"en\" content=\"SVM\"/>",
+      "<meta name=\"DC.Subject\" xml:lang=\"en\" content=\"Machine Learning\"/>",
+      "<meta name=\"DC.Subject\" xml:lang=\"en\" content=\"Algorithm K-NN algorithm\"/>",
+      "<meta name=\"DC.Subject\" xml:lang=\"en\" content=\"random forest\"/>",
+      "<meta name=\"DC.Title\" content=\"Application of Machine Learning in Employee Performance Prediction\"/>",
+      "<meta name=\"DC.Type\" content=\"Text.Serial.Journal\"/>",
+      "<meta name=\"DC.Type.articleType\" content=\"Research Article\"/>"
+    ],
+    "page_title": [
+      "\n\t\tApplication of Machine Learning in Employee Performance Prediction\n\t\t\t\t\t\t\t| International Journal of Computer Sciences and Engineering\n\t\t\t"
+    ]
+  },
+  {
+    "key": "lather2019prediction",
+    "checked_at_utc": "2026-09-09T11:58:46.575137+00:00",
+    "source_bib": {
+      "key": "lather2019prediction",
+      "type": "misc",
+      "author": "Lather, Anu Singh and Malhotra, Ruchika and Saloni, Priya and Singh, Prabhjot and Mittal, Sarthak",
+      "title": "Prediction of Employee Performance Using Machine Learning Techniques",
+      "year": "2019",
+      "howpublished": "Proceedings of the 1st International Conference on Advanced Information Science and System, Article 30, 1-6",
+      "url": "https://dl.acm.org/doi/10.1145/3373477.3373696",
+      "doi": "10.1145/3373477.3373696"
+    },
+    "source_url": "https://api.crossref.org/works/10.1145%2F3373477.3373696",
+    "http_status": 200,
+    "resolved_url": "https://api.crossref.org/works/10.1145%2F3373477.3373696",
+    "sha256": "7ba3abc1de8ed2bf90d1164d881a926801b7739e81741c1f4a24f707c5b4e692",
+    "registered_metadata": {
+      "DOI": "10.1145/3373477.3373696",
+      "title": [
+        "Prediction of employee performance using machine learning techniques"
+      ],
+      "subtitle": [],
+      "author": [
+        {
+          "given": "Anu Singh",
+          "family": "Lather",
+          "sequence": "first",
+          "affiliation": [
+            {
+              "name": "Delhi Technological University, Delhi, India"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Ruchika",
+          "family": "Malhotra",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Delhi Technological University, Delhi, India"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Priya",
+          "family": "Saloni",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Delhi Technological University, Delhi, India"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Prabhjot",
+          "family": "Singh",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Delhi Technological University, Delhi, India"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Sarthak",
+          "family": "Mittal",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Delhi Technological University, Delhi, India"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        }
+      ],
+      "container-title": [
+        "Proceedings of the 1st International Conference on Advanced Information Science and System"
+      ],
+      "published": {
+        "date-parts": [
+          [
+            2019,
+            11,
+            15
+          ]
+        ]
+      },
+      "published-print": {
+        "date-parts": [
+          [
+            2019,
+            11,
+            15
+          ]
+        ]
+      },
+      "published-online": {
+        "date-parts": [
+          [
+            2020,
+            1,
+            15
+          ]
+        ]
+      },
+      "issued": {
+        "date-parts": [
+          [
+            2019,
+            11,
+            15
+          ]
+        ]
+      },
+      "page": "1-6",
+      "type": "proceedings-article",
+      "URL": "https://doi.org/10.1145/3373477.3373696",
+      "link": [
+        {
+          "URL": "https://dl.acm.org/doi/10.1145/3373477.3373696",
+          "content-type": "unspecified",
+          "content-version": "vor",
+          "intended-application": "text-mining"
+        },
+        {
+          "URL": "https://dl.acm.org/doi/pdf/10.1145/3373477.3373696",
+          "content-type": "unspecified",
+          "content-version": "vor",
+          "intended-application": "similarity-checking"
+        }
+      ],
+      "relation": {},
+      "assertion": [
+        {
+          "value": "2020-01-15",
+          "order": 2,
+          "name": "published",
+          "label": "Published",
+          "group": {
+            "name": "publication_history",
+            "label": "Publication History"
+          }
+        }
+      ],
+      "publisher": "ACM",
+      "resource": {
+        "primary": {
+          "URL": "https://dl.acm.org/doi/10.1145/3373477.3373696"
+        }
+      }
+    }
+  },
+  {
+    "key": "li2021employee",
+    "checked_at_utc": "2026-09-09T11:58:48.250656+00:00",
+    "source_bib": {
+      "key": "li2021employee",
+      "type": "misc",
+      "author": "Li, Merry Grace T. and Lazo, Macrina and Balan, Ariel Kelly and de Goma, Joel",
+      "title": "Employee Performance Prediction Using Different Supervised Classifiers",
+      "year": "2021",
+      "howpublished": "Proceedings of the 11th Annual International Conference on Industrial Engineering and Operations Management, 6870-6876",
+      "url": "https://ieomsociety.org/singapore2021/papers/1188.pdf"
+    },
+    "source_url": "https://ieomsociety.org/singapore2021/papers/1188.pdf",
+    "http_status": 200,
+    "resolved_url": "https://ieomsociety.org/singapore2021/papers/1188.pdf",
+    "sha256": "e0687be22fbef85b0711dae24ac7d5081db391a928872e3a696b88f566b6e9d0",
+    "primary_metadata_tags": [],
+    "page_title": []
+  },
+  {
+    "key": "patel2022ranker",
+    "checked_at_utc": "2026-09-09T11:58:47.155918+00:00",
+    "source_bib": {
+      "key": "patel2022ranker",
+      "type": "misc",
+      "author": "Patel, Keyur and Sheth, Karan and Mehta, Dev and Tanwar, Sudeep and Florea, Bogdan Cristian and Taralunga, Dragos Daniel and Altameem, Ahmed and Altameem, Torki and Sharma, Ravi",
+      "title": "RanKer: An AI-Based Employee-Performance Classification Scheme to Rank and Identify Low Performers",
+      "year": "2022",
+      "howpublished": "Mathematics, 10(19), 3714",
+      "url": "https://www.mdpi.com/2227-7390/10/19/3714",
+      "doi": "10.3390/math10193714"
+    },
+    "source_url": "https://api.crossref.org/works/10.3390%2Fmath10193714",
+    "http_status": 200,
+    "resolved_url": "https://api.crossref.org/works/10.3390%2Fmath10193714",
+    "sha256": "b877f34752e2abb1bc72c349682ee178f0b917473fcc53960be4f53d3a611b22",
+    "registered_metadata": {
+      "DOI": "10.3390/math10193714",
+      "title": [
+        "RanKer: An AI-Based Employee-Performance Classification Scheme to Rank and Identify Low Performers"
+      ],
+      "subtitle": [],
+      "author": [
+        {
+          "given": "Keyur",
+          "family": "Patel",
+          "sequence": "first",
+          "affiliation": [
+            {
+              "name": "Department of Computer Science and Engineering, Institute of Technology, Nirma University, Ahmedabad 382481, India"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Karan",
+          "family": "Sheth",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Department of Computer Science and Engineering, Institute of Technology, Nirma University, Ahmedabad 382481, India"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Dev",
+          "family": "Mehta",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Department of Computer Science and Engineering, Institute of Technology, Nirma University, Ahmedabad 382481, India"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "ORCID": "https://orcid.org/0000-0002-1776-4651",
+          "authenticated-orcid": false,
+          "given": "Sudeep",
+          "family": "Tanwar",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Department of Computer Science and Engineering, Institute of Technology, Nirma University, Ahmedabad 382481, India"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "ORCID": "https://orcid.org/0000-0002-1113-6400",
+          "authenticated-orcid": false,
+          "given": "Bogdan Cristian",
+          "family": "Florea",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Department of Applied Electronics and Information Engineering, Faculty of Electronics, Telecommunications and Information Technology, Politehnica University of Bucharest, 061071 Bucharest, Romania"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "ORCID": "https://orcid.org/0000-0001-8729-9292",
+          "authenticated-orcid": false,
+          "given": "Dragos Daniel",
+          "family": "Taralunga",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Department of Applied Electronics and Information Engineering, Faculty of Electronics, Telecommunications and Information Technology, Politehnica University of Bucharest, 061071 Bucharest, Romania"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Ahmed",
+          "family": "Altameem",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Computer Science Department, Community College, King Saud University, Riyadh 11451, Saudi Arabia"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Torki",
+          "family": "Altameem",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Computer Science Department, Community College, King Saud University, Riyadh 11451, Saudi Arabia"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Ravi",
+          "family": "Sharma",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Centre for Inter-Disciplinary Research and Innovation, University of Petroleum and Energy Studies, P.O. Bidholi Via-Prem Nagar, Dehradun 248007, India"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        }
+      ],
+      "container-title": [
+        "Mathematics"
+      ],
+      "published": {
+        "date-parts": [
+          [
+            2022,
+            10,
+            10
+          ]
+        ]
+      },
+      "published-online": {
+        "date-parts": [
+          [
+            2022,
+            10,
+            10
+          ]
+        ]
+      },
+      "issued": {
+        "date-parts": [
+          [
+            2022,
+            10,
+            10
+          ]
+        ]
+      },
+      "volume": "10",
+      "issue": "19",
+      "page": "3714",
+      "type": "journal-article",
+      "URL": "https://doi.org/10.3390/math10193714",
+      "link": [
+        {
+          "URL": "https://www.mdpi.com/2227-7390/10/19/3714/pdf",
+          "content-type": "unspecified",
+          "content-version": "vor",
+          "intended-application": "similarity-checking"
+        }
+      ],
+      "relation": {},
+      "publisher": "MDPI AG",
+      "resource": {
+        "primary": {
+          "URL": "https://www.mdpi.com/2227-7390/10/19/3714"
+        }
+      }
+    }
+  },
+  {
+    "key": "adeniyi2022comparison",
+    "checked_at_utc": "2026-09-09T11:58:47.609975+00:00",
+    "source_bib": {
+      "key": "adeniyi2022comparison",
+      "type": "misc",
+      "author": "Adeniyi, Jide Kehinde and Adeniyi, Abidemi Emmanuel and Oguns, Yetunde Josephine and Egbedokun, Gabriel Olumide and Ajagbe, Kehinde Douglas and Obuzor, Princewill Chima and Ajagbe, Sunday Adeola",
+      "title": "Comparative Analysis of Machine Learning Techniques for the Prediction of Employee Performance",
+      "year": "2022",
+      "howpublished": "ParadigmPlus, 3(3), 1-15",
+      "url": "https://paradigmplus.itiud.org/volume3/number3/adeniyi/",
+      "doi": "10.55969/paradigmplus.v3n3a1"
+    },
+    "source_url": "https://api.crossref.org/works/10.55969%2Fparadigmplus.v3n3a1",
+    "http_status": 200,
+    "resolved_url": "https://api.crossref.org/works/10.55969%2Fparadigmplus.v3n3a1",
+    "sha256": "349d7cd4bca08e4679aa716047fb51e460210126b38526d220e8e56fa639d6e7",
+    "registered_metadata": {
+      "DOI": "10.55969/paradigmplus.v3n3a1",
+      "title": [
+        "Comparison of the Performance of Machine Learning Techniques in the Prediction of Employee"
+      ],
+      "subtitle": [],
+      "author": [
+        {
+          "given": "Jide Kehinde",
+          "family": "Adeniyi",
+          "sequence": "first",
+          "affiliation": [],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "ORCID": "https://orcid.org/0000-0002-2728-0116",
+          "authenticated-orcid": false,
+          "given": "Abidemi Emmanuel",
+          "family": "Adeniyi",
+          "sequence": "additional",
+          "affiliation": [],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "ORCID": "https://orcid.org/0000-0001-7976-9258",
+          "authenticated-orcid": false,
+          "given": "Yetunde Josephine",
+          "family": "Oguns",
+          "sequence": "additional",
+          "affiliation": [],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "ORCID": "https://orcid.org/0000-0003-4796-0503",
+          "authenticated-orcid": false,
+          "given": "Gabriel Olumide",
+          "family": "Egbedokun",
+          "sequence": "additional",
+          "affiliation": [],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "ORCID": "https://orcid.org/0000-0002-8452-5917",
+          "authenticated-orcid": false,
+          "given": "Kehinde Douglas",
+          "family": "Ajagbe",
+          "sequence": "additional",
+          "affiliation": [],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "ORCID": "https://orcid.org/0000-0002-9893-1473",
+          "authenticated-orcid": false,
+          "given": "Princewill Chima",
+          "family": "Obuzor",
+          "sequence": "additional",
+          "affiliation": [],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "ORCID": "https://orcid.org/0000-0002-7010-5540",
+          "authenticated-orcid": false,
+          "given": "Sunday Adeola",
+          "family": "Ajagbe",
+          "sequence": "additional",
+          "affiliation": [],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        }
+      ],
+      "container-title": [
+        "ParadigmPlus"
+      ],
+      "published": {
+        "date-parts": [
+          [
+            2022,
+            11,
+            28
+          ]
+        ]
+      },
+      "published-online": {
+        "date-parts": [
+          [
+            2022,
+            11,
+            28
+          ]
+        ]
+      },
+      "issued": {
+        "date-parts": [
+          [
+            2022,
+            11,
+            28
+          ]
+        ]
+      },
+      "volume": "3",
+      "issue": "3",
+      "page": "1-15",
+      "type": "journal-article",
+      "URL": "https://doi.org/10.55969/paradigmplus.v3n3a1",
+      "link": [
+        {
+          "URL": "https://journals.itiud.org/index.php/paradigmplus/article/download/38/42",
+          "content-type": "application/pdf",
+          "content-version": "vor",
+          "intended-application": "text-mining"
+        },
+        {
+          "URL": "https://journals.itiud.org/index.php/paradigmplus/article/download/38/42",
+          "content-type": "unspecified",
+          "content-version": "vor",
+          "intended-application": "similarity-checking"
+        }
+      ],
+      "relation": {},
+      "publisher": "ITI Research Group",
+      "resource": {
+        "primary": {
+          "URL": "https://journals.itiud.org/index.php/paradigmplus/article/view/38"
+        }
+      }
+    }
+  },
+  {
+    "key": "nayem2024unbiased",
+    "checked_at_utc": "2026-09-09T11:58:48.180765+00:00",
+    "source_bib": {
+      "key": "nayem2024unbiased",
+      "type": "misc",
+      "author": "Nayem, Zannatul and Uddin, Md. Aftab",
+      "title": "Unbiased Employee Performance Evaluation Using Machine Learning",
+      "year": "2024",
+      "howpublished": "Journal of Open Innovation: Technology, Market, and Complexity, 10(1), 100243",
+      "url": "https://www.sciencedirect.com/science/article/pii/S2199853124000374",
+      "doi": "10.1016/j.joitmc.2024.100243"
+    },
+    "source_url": "https://api.crossref.org/works/10.1016%2Fj.joitmc.2024.100243",
+    "http_status": 200,
+    "resolved_url": "https://api.crossref.org/works/10.1016%2Fj.joitmc.2024.100243",
+    "sha256": "3facadf274f588b942cac7dff644e4af4d9b9bbad6c5669bd518c2981e1a118d",
+    "registered_metadata": {
+      "DOI": "10.1016/j.joitmc.2024.100243",
+      "title": [
+        "Unbiased employee performance evaluation using machine learning"
+      ],
+      "subtitle": [],
+      "author": [
+        {
+          "ORCID": "https://orcid.org/0009-0004-5488-2202",
+          "authenticated-orcid": false,
+          "given": "Zannatul",
+          "family": "Nayem",
+          "sequence": "first",
+          "affiliation": [],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Md. Aftab",
+          "family": "Uddin",
+          "sequence": "additional",
+          "affiliation": [],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        }
+      ],
+      "container-title": [
+        "Journal of Open Innovation: Technology, Market, and Complexity"
+      ],
+      "published": {
+        "date-parts": [
+          [
+            2024,
+            3
+          ]
+        ]
+      },
+      "published-print": {
+        "date-parts": [
+          [
+            2024,
+            3
+          ]
+        ]
+      },
+      "issued": {
+        "date-parts": [
+          [
+            2024,
+            3
+          ]
+        ]
+      },
+      "volume": "10",
+      "issue": "1",
+      "page": "100243",
+      "article-number": "100243",
+      "type": "journal-article",
+      "URL": "https://doi.org/10.1016/j.joitmc.2024.100243",
+      "link": [
+        {
+          "URL": "https://api.elsevier.com/content/article/PII:S2199853124000374?httpAccept=text/xml",
+          "content-type": "text/xml",
+          "content-version": "vor",
+          "intended-application": "text-mining"
+        },
+        {
+          "URL": "https://api.elsevier.com/content/article/PII:S2199853124000374?httpAccept=text/plain",
+          "content-type": "text/plain",
+          "content-version": "vor",
+          "intended-application": "text-mining"
+        }
+      ],
+      "relation": {},
+      "assertion": [
+        {
+          "value": "Elsevier",
+          "name": "publisher",
+          "label": "This article is maintained by"
+        },
+        {
+          "value": "Unbiased employee performance evaluation using machine learning",
+          "name": "articletitle",
+          "label": "Article Title"
+        },
+        {
+          "value": "Journal of Open Innovation: Technology, Market, and Complexity",
+          "name": "journaltitle",
+          "label": "Journal Title"
+        },
+        {
+          "value": "https://doi.org/10.1016/j.joitmc.2024.100243",
+          "name": "articlelink",
+          "label": "CrossRef DOI link to publisher maintained version"
+        },
+        {
+          "value": "article",
+          "name": "content_type",
+          "label": "Content Type"
+        },
+        {
+          "value": "© 2024 The Author(s). Published by Elsevier Ltd on behalf of Prof JinHyo Joseph Yun.",
+          "name": "copyright",
+          "label": "Copyright"
+        }
+      ],
+      "publisher": "Elsevier BV",
+      "resource": {
+        "primary": {
+          "URL": "https://linkinghub.elsevier.com/retrieve/pii/S2199853124000374"
+        }
+      }
+    }
+  },
+  {
+    "key": "abufaty2025integrating",
+    "checked_at_utc": "2026-09-09T11:58:48.768567+00:00",
+    "source_bib": {
+      "key": "abufaty2025integrating",
+      "type": "misc",
+      "author": "Abu-Faty, Hagar G. and Kafafy, Ahmed and Hadhoud, Mohiy M. and Abdel-Raouf, Osama",
+      "title": "Integrating Generative AI and Machine Learning Classifiers for Solving Heterogenous MCGDM: A Case of Employee Churn Prediction",
+      "year": "2025",
+      "howpublished": "Scientific Reports, 15, 15645",
+      "url": "https://www.nature.com/articles/s41598-025-99119-0",
+      "doi": "10.1038/s41598-025-99119-0"
+    },
+    "source_url": "https://api.crossref.org/works/10.1038%2Fs41598-025-99119-0",
+    "http_status": 200,
+    "resolved_url": "https://api.crossref.org/works/10.1038%2Fs41598-025-99119-0",
+    "sha256": "472d31410e245671036b3cc9134df318e0c196ba089fb27420240c68f8cd76b5",
+    "registered_metadata": {
+      "DOI": "10.1038/s41598-025-99119-0",
+      "title": [
+        "Integrating generative AI and machine learning classifiers for solving heterogenous MCGDM: a case of employee churn prediction"
+      ],
+      "subtitle": [],
+      "author": [
+        {
+          "given": "Hagar G.",
+          "family": "Abu-Faty",
+          "sequence": "first",
+          "affiliation": [],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Ahmed",
+          "family": "Kafafy",
+          "sequence": "additional",
+          "affiliation": [],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Mohiy M.",
+          "family": "Hadhoud",
+          "sequence": "additional",
+          "affiliation": [],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Osama",
+          "family": "Abdel-Raouf",
+          "sequence": "additional",
+          "affiliation": [],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        }
+      ],
+      "container-title": [
+        "Scientific Reports"
+      ],
+      "published": {
+        "date-parts": [
+          [
+            2025,
+            5,
+            5
+          ]
+        ]
+      },
+      "published-online": {
+        "date-parts": [
+          [
+            2025,
+            5,
+            5
+          ]
+        ]
+      },
+      "issued": {
+        "date-parts": [
+          [
+            2025,
+            5,
+            5
+          ]
+        ]
+      },
+      "volume": "15",
+      "issue": "1",
+      "article-number": "15645",
+      "type": "journal-article",
+      "URL": "https://doi.org/10.1038/s41598-025-99119-0",
+      "link": [
+        {
+          "URL": "https://www.nature.com/articles/s41598-025-99119-0.pdf",
+          "content-type": "application/pdf",
+          "content-version": "vor",
+          "intended-application": "text-mining"
+        },
+        {
+          "URL": "https://www.nature.com/articles/s41598-025-99119-0",
+          "content-type": "text/html",
+          "content-version": "vor",
+          "intended-application": "text-mining"
+        },
+        {
+          "URL": "https://www.nature.com/articles/s41598-025-99119-0.pdf",
+          "content-type": "application/pdf",
+          "content-version": "vor",
+          "intended-application": "similarity-checking"
+        }
+      ],
+      "relation": {},
+      "assertion": [
+        {
+          "value": "29 December 2024",
+          "order": 1,
+          "name": "received",
+          "label": "Received",
+          "group": {
+            "name": "ArticleHistory",
+            "label": "Article History"
+          }
+        },
+        {
+          "value": "17 April 2025",
+          "order": 2,
+          "name": "accepted",
+          "label": "Accepted",
+          "group": {
+            "name": "ArticleHistory",
+            "label": "Article History"
+          }
+        },
+        {
+          "value": "5 May 2025",
+          "order": 3,
+          "name": "first_online",
+          "label": "First Online",
+          "group": {
+            "name": "ArticleHistory",
+            "label": "Article History"
+          }
+        },
+        {
+          "order": 1,
+          "name": "Ethics",
+          "group": {
+            "name": "EthicsHeading",
+            "label": "Declarations"
+          }
+        },
+        {
+          "value": "The authors declare no competing interests.",
+          "order": 2,
+          "name": "Ethics",
+          "group": {
+            "name": "EthicsHeading",
+            "label": "Competing interests"
+          }
+        }
+      ],
+      "publisher": "Springer Science and Business Media LLC",
+      "resource": {
+        "primary": {
+          "URL": "https://www.nature.com/articles/s41598-025-99119-0"
+        }
+      }
+    }
+  },
+  {
+    "key": "putri2026klasifikasi",
+    "checked_at_utc": "2026-09-09T11:58:48.707549+00:00",
+    "source_bib": {
+      "key": "putri2026klasifikasi",
+      "type": "misc",
+      "author": "Putri, Jelly Helia and Sitohang, Sunarsan",
+      "title": "Klasifikasi Kinerja Pegawai Menggunakan Algoritma Random Forest",
+      "year": "2026",
+      "howpublished": "Journal Automation Computer Information System, 6(1), 103-115",
+      "url": "https://jacis.pubmedia.id/index.php/jacis/article/view/170",
+      "doi": "10.47134/jacis.v6i1.170"
+    },
+    "source_url": "https://api.crossref.org/works/10.47134%2Fjacis.v6i1.170",
+    "http_status": 200,
+    "resolved_url": "https://api.crossref.org/works/10.47134%2Fjacis.v6i1.170",
+    "sha256": "0ae904b80de23ba6827744427deef09ca0fe64fe5bf11b3535394808a529c275",
+    "registered_metadata": {
+      "DOI": "10.47134/jacis.v6i1.170",
+      "title": [
+        "Klasifikasi Kinerja Pegawai Menggunakan Algoritma Random Forest"
+      ],
+      "subtitle": [],
+      "author": [
+        {
+          "given": "Jelly Helia",
+          "family": "Putri",
+          "sequence": "first",
+          "affiliation": [],
+          "role": [
+            {
+              "role": "author",
+              "vocabulary": "crossref"
+            }
+          ]
+        },
+        {
+          "given": "Sunarsan",
+          "family": "Sitohang",
+          "sequence": "additional",
+          "affiliation": [],
+          "role": [
+            {
+              "role": "author",
+              "vocabulary": "crossref"
+            }
+          ]
+        }
+      ],
+      "container-title": [
+        "Journal Automation Computer Information System"
+      ],
+      "published": {
+        "date-parts": [
+          [
+            2026,
+            3,
+            11
+          ]
+        ]
+      },
+      "published-online": {
+        "date-parts": [
+          [
+            2026,
+            3,
+            11
+          ]
+        ]
+      },
+      "issued": {
+        "date-parts": [
+          [
+            2026,
+            3,
+            11
+          ]
+        ]
+      },
+      "volume": "6",
+      "issue": "1",
+      "page": "103-115",
+      "type": "journal-article",
+      "URL": "https://doi.org/10.47134/jacis.v6i1.170",
+      "link": [
+        {
+          "URL": "https://jacis.pubmedia.id/index.php/jacis/article/download/170/111",
+          "content-type": "application/pdf",
+          "content-version": "vor",
+          "intended-application": "text-mining"
+        },
+        {
+          "URL": "https://jacis.pubmedia.id/index.php/jacis/article/download/170/111",
+          "content-type": "unspecified",
+          "content-version": "vor",
+          "intended-application": "similarity-checking"
+        }
+      ],
+      "relation": {},
+      "publisher": "Indonesian Journal Publisher",
+      "resource": {
+        "primary": {
+          "URL": "https://jacis.pubmedia.id/index.php/jacis/article/view/170"
+        }
+      }
+    }
+  },
+  {
+    "key": "chaudhary2025integrated",
+    "checked_at_utc": "2026-09-09T11:58:49.273209+00:00",
+    "source_bib": {
+      "key": "chaudhary2025integrated",
+      "type": "misc",
+      "author": "Chaudhary, Meenu and Gaur, Loveleen and Chakrabarti, Amlan and Singh, Gurmeet and Jones, Paul and Kraus, Sascha",
+      "title": "An Integrated Model to Evaluate the Transparency in Predicting Employee Churn Using Explainable Artificial Intelligence",
+      "year": "2025",
+      "howpublished": "Journal of Innovation \\& Knowledge, 10(3), 100700",
+      "url": "https://www.sciencedirect.com/science/article/pii/S2444569X25000502",
+      "doi": "10.1016/j.jik.2025.100700"
+    },
+    "source_url": "https://api.crossref.org/works/10.1016%2Fj.jik.2025.100700",
+    "http_status": 200,
+    "resolved_url": "https://api.crossref.org/works/10.1016%2Fj.jik.2025.100700",
+    "sha256": "a0949ceb714caec084dbfcb5ea6dce5c4eae4342bfe3260cc643a24c0ba4a509",
+    "registered_metadata": {
+      "DOI": "10.1016/j.jik.2025.100700",
+      "title": [
+        "An integrated model to evaluate the transparency in predicting employee churn using explainable artificial intelligence"
+      ],
+      "subtitle": [],
+      "author": [
+        {
+          "ORCID": "https://orcid.org/0000-0003-3727-7460",
+          "authenticated-orcid": false,
+          "given": "Meenu",
+          "family": "Chaudhary",
+          "sequence": "first",
+          "affiliation": [],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Loveleen",
+          "family": "Gaur",
+          "sequence": "additional",
+          "affiliation": [],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Amlan",
+          "family": "Chakrabarti",
+          "sequence": "additional",
+          "affiliation": [],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Gurmeet",
+          "family": "Singh",
+          "sequence": "additional",
+          "affiliation": [],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "ORCID": "https://orcid.org/0000-0003-0417-9143",
+          "authenticated-orcid": false,
+          "given": "Paul",
+          "family": "Jones",
+          "sequence": "additional",
+          "affiliation": [],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "ORCID": "https://orcid.org/0000-0003-4886-7482",
+          "authenticated-orcid": false,
+          "given": "Sascha",
+          "family": "Kraus",
+          "sequence": "additional",
+          "affiliation": [],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        }
+      ],
+      "container-title": [
+        "Journal of Innovation &amp; Knowledge"
+      ],
+      "published": {
+        "date-parts": [
+          [
+            2025,
+            5
+          ]
+        ]
+      },
+      "published-print": {
+        "date-parts": [
+          [
+            2025,
+            5
+          ]
+        ]
+      },
+      "issued": {
+        "date-parts": [
+          [
+            2025,
+            5
+          ]
+        ]
+      },
+      "volume": "10",
+      "issue": "3",
+      "page": "100700",
+      "article-number": "100700",
+      "type": "journal-article",
+      "URL": "https://doi.org/10.1016/j.jik.2025.100700",
+      "link": [
+        {
+          "URL": "https://api.elsevier.com/content/article/PII:S2444569X25000502?httpAccept=text/xml",
+          "content-type": "text/xml",
+          "content-version": "vor",
+          "intended-application": "text-mining"
+        },
+        {
+          "URL": "https://api.elsevier.com/content/article/PII:S2444569X25000502?httpAccept=text/plain",
+          "content-type": "text/plain",
+          "content-version": "vor",
+          "intended-application": "text-mining"
+        }
+      ],
+      "relation": {},
+      "assertion": [
+        {
+          "value": "Elsevier",
+          "name": "publisher",
+          "label": "This article is maintained by"
+        },
+        {
+          "value": "An integrated model to evaluate the transparency in predicting employee churn using explainable artificial intelligence",
+          "name": "articletitle",
+          "label": "Article Title"
+        },
+        {
+          "value": "Journal of Innovation & Knowledge",
+          "name": "journaltitle",
+          "label": "Journal Title"
+        },
+        {
+          "value": "https://doi.org/10.1016/j.jik.2025.100700",
+          "name": "articlelink",
+          "label": "CrossRef DOI link to publisher maintained version"
+        },
+        {
+          "value": "article",
+          "name": "content_type",
+          "label": "Content Type"
+        },
+        {
+          "value": "© 2025 The Authors. Published by Elsevier España, S.L.U. on behalf of Journal of Innovation & Knowledge.",
+          "name": "copyright",
+          "label": "Copyright"
+        }
+      ],
+      "publisher": "Elsevier BV",
+      "resource": {
+        "primary": {
+          "URL": "https://linkinghub.elsevier.com/retrieve/pii/S2444569X25000502"
+        }
+      }
+    }
+  },
+  {
+    "key": "tambe2019artificial",
+    "checked_at_utc": "2026-09-09T11:58:49.199403+00:00",
+    "source_bib": {
+      "key": "tambe2019artificial",
+      "type": "misc",
+      "author": "Tambe, Prasanna and Cappelli, Peter and Yakubovich, Valery",
+      "title": "Artificial Intelligence in Human Resources Management: Challenges and a Path Forward",
+      "year": "2019",
+      "howpublished": "California Management Review, 61(4), 15-42",
+      "url": "https://journals.sagepub.com/doi/10.1177/0008125619867910",
+      "doi": "10.1177/0008125619867910"
+    },
+    "source_url": "https://api.crossref.org/works/10.1177%2F0008125619867910",
+    "http_status": 200,
+    "resolved_url": "https://api.crossref.org/works/10.1177%2F0008125619867910",
+    "sha256": "dfc2be53e1b690d62ee0b15a540ffae03bfb2d8a9a183730b75b2c74ad4e2418",
+    "registered_metadata": {
+      "DOI": "10.1177/0008125619867910",
+      "title": [
+        "Artificial Intelligence in Human Resources Management: Challenges and a Path Forward"
+      ],
+      "subtitle": [],
+      "author": [
+        {
+          "given": "Prasanna",
+          "family": "Tambe",
+          "sequence": "first",
+          "affiliation": [
+            {
+              "name": "Wharton School, Philadelphia, PA, USA"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Peter",
+          "family": "Cappelli",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Wharton School, Philadelphia, PA, USA"
+            },
+            {
+              "name": "The National Bureau of Economic Research, Cambridge, MA, USA"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Valery",
+          "family": "Yakubovich",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "ESSEC Business School, Cergy, France"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        }
+      ],
+      "container-title": [
+        "California Management Review"
+      ],
+      "published": {
+        "date-parts": [
+          [
+            2019,
+            8
+          ]
+        ]
+      },
+      "published-print": {
+        "date-parts": [
+          [
+            2019,
+            8
+          ]
+        ]
+      },
+      "published-online": {
+        "date-parts": [
+          [
+            2019,
+            8,
+            2
+          ]
+        ]
+      },
+      "issued": {
+        "date-parts": [
+          [
+            2019,
+            8
+          ]
+        ]
+      },
+      "volume": "61",
+      "issue": "4",
+      "page": "15-42",
+      "type": "journal-article",
+      "URL": "https://doi.org/10.1177/0008125619867910",
+      "link": [
+        {
+          "URL": "https://journals.sagepub.com/doi/pdf/10.1177/0008125619867910",
+          "content-type": "application/pdf",
+          "content-version": "vor",
+          "intended-application": "text-mining"
+        },
+        {
+          "URL": "https://journals.sagepub.com/doi/full-xml/10.1177/0008125619867910",
+          "content-type": "application/xml",
+          "content-version": "vor",
+          "intended-application": "text-mining"
+        },
+        {
+          "URL": "https://journals.sagepub.com/doi/pdf/10.1177/0008125619867910",
+          "content-type": "unspecified",
+          "content-version": "vor",
+          "intended-application": "similarity-checking"
+        }
+      ],
+      "relation": {},
+      "publisher": "SAGE Publications",
+      "resource": {
+        "primary": {
+          "URL": "https://journals.sagepub.com/doi/10.1177/0008125619867910"
+        }
+      }
+    }
+  },
+  {
+    "key": "leichtdeobald2019challenges",
+    "checked_at_utc": "2026-09-09T11:58:49.899405+00:00",
+    "source_bib": {
+      "key": "leichtdeobald2019challenges",
+      "type": "misc",
+      "author": "Leicht-Deobald, Ulrich and Busch, Thorsten and Schank, Christoph and Weibel, Antoinette and Schafheitle, Simon and Wildhaber, Isabelle and Kasper, Gabriel",
+      "title": "The Challenges of Algorithm-Based HR Decision-Making for Personal Integrity",
+      "year": "2019",
+      "howpublished": "Journal of Business Ethics, 160(2), 377-392",
+      "url": "https://link.springer.com/article/10.1007/s10551-019-04204-w",
+      "doi": "10.1007/s10551-019-04204-w"
+    },
+    "source_url": "https://api.crossref.org/works/10.1007%2Fs10551-019-04204-w",
+    "http_status": 200,
+    "resolved_url": "https://api.crossref.org/works/10.1007%2Fs10551-019-04204-w",
+    "sha256": "f198e1dec4a347025ffcca60e38f2d1a3112bb2c08dfd94aebc75b388f767f17",
+    "registered_metadata": {
+      "DOI": "10.1007/s10551-019-04204-w",
+      "title": [
+        "The Challenges of Algorithm-Based HR Decision-Making for Personal Integrity"
+      ],
+      "subtitle": [],
+      "author": [
+        {
+          "ORCID": "https://orcid.org/0000-0003-4554-7192",
+          "authenticated-orcid": false,
+          "given": "Ulrich",
+          "family": "Leicht-Deobald",
+          "sequence": "first",
+          "affiliation": [],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Thorsten",
+          "family": "Busch",
+          "sequence": "additional",
+          "affiliation": [],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Christoph",
+          "family": "Schank",
+          "sequence": "additional",
+          "affiliation": [],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Antoinette",
+          "family": "Weibel",
+          "sequence": "additional",
+          "affiliation": [],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Simon",
+          "family": "Schafheitle",
+          "sequence": "additional",
+          "affiliation": [],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Isabelle",
+          "family": "Wildhaber",
+          "sequence": "additional",
+          "affiliation": [],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Gabriel",
+          "family": "Kasper",
+          "sequence": "additional",
+          "affiliation": [],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        }
+      ],
+      "container-title": [
+        "Journal of Business Ethics"
+      ],
+      "published": {
+        "date-parts": [
+          [
+            2019,
+            6,
+            7
+          ]
+        ]
+      },
+      "published-print": {
+        "date-parts": [
+          [
+            2019,
+            12
+          ]
+        ]
+      },
+      "published-online": {
+        "date-parts": [
+          [
+            2019,
+            6,
+            7
+          ]
+        ]
+      },
+      "issued": {
+        "date-parts": [
+          [
+            2019,
+            6,
+            7
+          ]
+        ]
+      },
+      "volume": "160",
+      "issue": "2",
+      "page": "377-392",
+      "type": "journal-article",
+      "URL": "https://doi.org/10.1007/s10551-019-04204-w",
+      "link": [
+        {
+          "URL": "http://link.springer.com/content/pdf/10.1007/s10551-019-04204-w.pdf",
+          "content-type": "application/pdf",
+          "content-version": "vor",
+          "intended-application": "text-mining"
+        },
+        {
+          "URL": "http://link.springer.com/article/10.1007/s10551-019-04204-w/fulltext.html",
+          "content-type": "text/html",
+          "content-version": "vor",
+          "intended-application": "text-mining"
+        },
+        {
+          "URL": "http://link.springer.com/content/pdf/10.1007/s10551-019-04204-w.pdf",
+          "content-type": "application/pdf",
+          "content-version": "vor",
+          "intended-application": "similarity-checking"
+        }
+      ],
+      "relation": {},
+      "assertion": [
+        {
+          "value": "11 September 2017",
+          "order": 1,
+          "name": "received",
+          "label": "Received",
+          "group": {
+            "name": "ArticleHistory",
+            "label": "Article History"
+          }
+        },
+        {
+          "value": "27 May 2019",
+          "order": 2,
+          "name": "accepted",
+          "label": "Accepted",
+          "group": {
+            "name": "ArticleHistory",
+            "label": "Article History"
+          }
+        },
+        {
+          "value": "7 June 2019",
+          "order": 3,
+          "name": "first_online",
+          "label": "First Online",
+          "group": {
+            "name": "ArticleHistory",
+            "label": "Article History"
+          }
+        },
+        {
+          "order": 1,
+          "name": "Ethics",
+          "group": {
+            "name": "EthicsHeading",
+            "label": "Compliance with Ethical Standards"
+          }
+        },
+        {
+          "value": "The authors declare that they have no conflict of interest.",
+          "order": 2,
+          "name": "Ethics",
+          "group": {
+            "name": "EthicsHeading",
+            "label": "Conflict of interest"
+          }
+        },
+        {
+          "value": "This article does not contain any studies with human participants performed by any of the authors.",
+          "order": 3,
+          "name": "Ethics",
+          "group": {
+            "name": "EthicsHeading",
+            "label": "Ethical Approval"
+          }
+        }
+      ],
+      "publisher": "Springer Science and Business Media LLC",
+      "resource": {
+        "primary": {
+          "URL": "http://link.springer.com/10.1007/s10551-019-04204-w"
+        }
+      }
+    }
+  },
+  {
+    "key": "kochling2020discriminated",
+    "checked_at_utc": "2026-09-09T11:58:49.973012+00:00",
+    "source_bib": {
+      "key": "kochling2020discriminated",
+      "type": "misc",
+      "author": "Köchling, Alina and Wehner, Marius Claus",
+      "title": "Discriminated by an Algorithm: A Systematic Review of Discrimination and Fairness by Algorithmic Decision-Making in the Context of HR Recruitment and HR Development",
+      "year": "2020",
+      "howpublished": "Business Research, 13(3), 795-848",
+      "url": "https://link.springer.com/article/10.1007/s40685-020-00134-w",
+      "doi": "10.1007/s40685-020-00134-w"
+    },
+    "source_url": "https://api.crossref.org/works/10.1007%2Fs40685-020-00134-w",
+    "http_status": 200,
+    "resolved_url": "https://api.crossref.org/works/10.1007%2Fs40685-020-00134-w",
+    "sha256": "33105e97472cdd64458a63eb7556156f163a34a278b1523b8fd8ae7ace935543",
+    "registered_metadata": {
+      "DOI": "10.1007/s40685-020-00134-w",
+      "title": [
+        "Discriminated by an algorithm: a systematic review of discrimination and fairness by algorithmic decision-making in the context of HR recruitment and HR development"
+      ],
+      "subtitle": [],
+      "author": [
+        {
+          "ORCID": "https://orcid.org/0000-0001-7039-9852",
+          "authenticated-orcid": false,
+          "given": "Alina",
+          "family": "Köchling",
+          "sequence": "first",
+          "affiliation": [],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "ORCID": "https://orcid.org/0000-0002-1932-3155",
+          "authenticated-orcid": false,
+          "given": "Marius Claus",
+          "family": "Wehner",
+          "sequence": "additional",
+          "affiliation": [],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        }
+      ],
+      "container-title": [
+        "Business Research"
+      ],
+      "published": {
+        "date-parts": [
+          [
+            2020,
+            11
+          ]
+        ]
+      },
+      "published-print": {
+        "date-parts": [
+          [
+            2020,
+            11
+          ]
+        ]
+      },
+      "published-online": {
+        "date-parts": [
+          [
+            2020,
+            11,
+            20
+          ]
+        ]
+      },
+      "issued": {
+        "date-parts": [
+          [
+            2020,
+            11
+          ]
+        ]
+      },
+      "volume": "13",
+      "issue": "3",
+      "page": "795-848",
+      "type": "journal-article",
+      "URL": "https://doi.org/10.1007/s40685-020-00134-w",
+      "link": [
+        {
+          "URL": "https://link.springer.com/content/pdf/10.1007/s40685-020-00134-w.pdf",
+          "content-type": "application/pdf",
+          "content-version": "vor",
+          "intended-application": "text-mining"
+        },
+        {
+          "URL": "https://link.springer.com/article/10.1007/s40685-020-00134-w/fulltext.html",
+          "content-type": "text/html",
+          "content-version": "vor",
+          "intended-application": "text-mining"
+        },
+        {
+          "URL": "https://link.springer.com/content/pdf/10.1007/s40685-020-00134-w.pdf",
+          "content-type": "application/pdf",
+          "content-version": "vor",
+          "intended-application": "similarity-checking"
+        }
+      ],
+      "relation": {},
+      "assertion": [
+        {
+          "value": "15 October 2019",
+          "order": 1,
+          "name": "received",
+          "label": "Received",
+          "group": {
+            "name": "ArticleHistory",
+            "label": "Article History"
+          }
+        },
+        {
+          "value": "1 November 2020",
+          "order": 2,
+          "name": "accepted",
+          "label": "Accepted",
+          "group": {
+            "name": "ArticleHistory",
+            "label": "Article History"
+          }
+        },
+        {
+          "value": "20 November 2020",
+          "order": 3,
+          "name": "first_online",
+          "label": "First Online",
+          "group": {
+            "name": "ArticleHistory",
+            "label": "Article History"
+          }
+        },
+        {
+          "order": 1,
+          "name": "Ethics",
+          "group": {
+            "name": "EthicsHeading",
+            "label": "Compliance with ethical standards"
+          }
+        },
+        {
+          "value": "The authors declare that they have no conflict of interest.",
+          "order": 2,
+          "name": "Ethics",
+          "group": {
+            "name": "EthicsHeading",
+            "label": "Conflict of interest"
+          }
+        }
+      ],
+      "publisher": "Springer Science and Business Media LLC",
+      "resource": {
+        "primary": {
+          "URL": "https://link.springer.com/10.1007/s40685-020-00134-w"
+        }
+      }
+    }
+  },
+  {
+    "key": "giermindl2021dark",
+    "checked_at_utc": "2026-09-09T11:58:50.455828+00:00",
+    "source_bib": {
+      "key": "giermindl2021dark",
+      "type": "misc",
+      "author": "Giermindl, Lisa Marie and Strich, Franz and Christ, Oliver and Leicht-Deobald, Ulrich and Redzepi, Abdullah",
+      "title": "The Dark Sides of People Analytics: Reviewing the Perils for Organisations and Employees",
+      "year": "2021",
+      "howpublished": "European Journal of Information Systems, 31(3), 410-435",
+      "url": "https://www.tandfonline.com/doi/full/10.1080/0960085X.2021.1927213",
+      "doi": "10.1080/0960085X.2021.1927213"
+    },
+    "source_url": "https://api.crossref.org/works/10.1080%2F0960085X.2021.1927213",
+    "http_status": 200,
+    "resolved_url": "https://api.crossref.org/works/10.1080%2F0960085X.2021.1927213",
+    "sha256": "b133e76a49690b3f0b40cef088970b289878f6b966a75ab8e8c5db24c4109f48",
+    "registered_metadata": {
+      "DOI": "10.1080/0960085x.2021.1927213",
+      "title": [
+        "The dark sides of people analytics: reviewing the perils for organisations and employees"
+      ],
+      "subtitle": [],
+      "author": [
+        {
+          "given": "Lisa Marie",
+          "family": "Giermindl",
+          "sequence": "first",
+          "affiliation": [
+            {
+              "name": "School of Business, OST Eastern Switzerland University of Applied Sciences, St. Gallen, Switzerland"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Franz",
+          "family": "Strich",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Chair of Human Resource Management and Intrapreneurship, University of Bayreuth, Bayreuth, Germany"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Oliver",
+          "family": "Christ",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "School of Business, OST Eastern Switzerland University of Applied Sciences, St. Gallen, Switzerland"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "ORCID": "https://orcid.org/0000-0003-4554-7192",
+          "authenticated-orcid": false,
+          "given": "Ulrich",
+          "family": "Leicht-Deobald",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Institute for Business Ethics, University of St. Gallen, St. Gallen, Switzerland"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Abdullah",
+          "family": "Redzepi",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "School of Business, OST Eastern Switzerland University of Applied Sciences, St. Gallen, Switzerland"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        }
+      ],
+      "container-title": [
+        "European Journal of Information Systems"
+      ],
+      "published": {
+        "date-parts": [
+          [
+            2021,
+            6,
+            2
+          ]
+        ]
+      },
+      "published-print": {
+        "date-parts": [
+          [
+            2022,
+            5,
+            4
+          ]
+        ]
+      },
+      "published-online": {
+        "date-parts": [
+          [
+            2021,
+            6,
+            2
+          ]
+        ]
+      },
+      "issued": {
+        "date-parts": [
+          [
+            2021,
+            6,
+            2
+          ]
+        ]
+      },
+      "volume": "31",
+      "issue": "3",
+      "page": "410-435",
+      "type": "journal-article",
+      "URL": "https://doi.org/10.1080/0960085x.2021.1927213",
+      "link": [
+        {
+          "URL": "https://www.tandfonline.com/doi/pdf/10.1080/0960085X.2021.1927213",
+          "content-type": "unspecified",
+          "content-version": "vor",
+          "intended-application": "similarity-checking"
+        }
+      ],
+      "relation": {},
+      "assertion": [
+        {
+          "value": "The publishing and review policy for this title is described in its Aims & Scope.",
+          "order": 1,
+          "name": "peerreview_statement",
+          "label": "Peer Review Statement"
+        },
+        {
+          "value": "http://www.tandfonline.com/action/journalInformation?show=aimsScope&journalCode=tjis20",
+          "URL": "http://www.tandfonline.com/action/journalInformation?show=aimsScope&journalCode=tjis20",
+          "order": 2,
+          "name": "aims_and_scope_url",
+          "label": "Aim & Scope"
+        },
+        {
+          "value": "2020-05-01",
+          "order": 0,
+          "name": "received",
+          "label": "Received",
+          "group": {
+            "name": "publication_history",
+            "label": "Publication History"
+          }
+        },
+        {
+          "value": "2021-04-29",
+          "order": 2,
+          "name": "accepted",
+          "label": "Accepted",
+          "group": {
+            "name": "publication_history",
+            "label": "Publication History"
+          }
+        },
+        {
+          "value": "2021-06-02",
+          "order": 3,
+          "name": "published",
+          "label": "Published",
+          "group": {
+            "name": "publication_history",
+            "label": "Publication History"
+          }
+        }
+      ],
+      "publisher": "Informa UK Limited",
+      "resource": {
+        "primary": {
+          "URL": "https://www.tandfonline.com/doi/full/10.1080/0960085X.2021.1927213"
+        }
+      }
+    }
+  },
+  {
+    "key": "lundberg2017unified",
+    "checked_at_utc": "2026-09-09T11:58:50.845564+00:00",
+    "source_bib": {
+      "key": "lundberg2017unified",
+      "type": "misc",
+      "author": "Lundberg, Scott M. and Lee, Su-In",
+      "title": "A Unified Approach to Interpreting Model Predictions",
+      "year": "2017",
+      "howpublished": "Advances in Neural Information Processing Systems 30",
+      "url": "https://papers.nips.cc/paper/2017/hash/8a20a8621978632d76c43dfd28b67767-Abstract.html"
+    },
+    "source_url": "https://papers.nips.cc/paper/2017/hash/8a20a8621978632d76c43dfd28b67767-Abstract.html",
+    "http_status": 200,
+    "resolved_url": "https://papers.nips.cc/paper/2017/hash/8a20a8621978632d76c43dfd28b67767-Abstract.html",
+    "sha256": "fe83fe99ac106054d178450481cc872206b99f271ff661ea562adc0796c1499e",
+    "primary_metadata_tags": [
+      "<meta name=\"citation_title\" content=\"A Unified Approach to Interpreting Model Predictions\">",
+      "<meta name=\"citation_author\" content=\"Lundberg, Scott M.\">",
+      "<meta name=\"citation_author\" content=\"Lee, Su-In\">",
+      "<meta name=\"citation_journal_title\" content=\"Advances in Neural Information Processing Systems\">",
+      "<meta name=\"citation_volume\" content=\"30\">",
+      "<meta name=\"citation_pdf_url\" content=\"https://proceedings.neurips.cc/paper_files/paper/2017/file/8a20a8621978632d76c43dfd28b67767-Paper.pdf\">",
+      "<meta name=\"citation_publication_date\" content=\"2017\">"
+    ],
+    "page_title": [
+      "A Unified Approach to Interpreting Model Predictions"
+    ]
+  },
+  {
+    "key": "lundberg2020local",
+    "checked_at_utc": "2026-09-09T11:58:51.014909+00:00",
+    "source_bib": {
+      "key": "lundberg2020local",
+      "type": "misc",
+      "author": "Lundberg, Scott M. and Erion, Gabriel and Chen, Hugh and DeGrave, Alex and Prutkin, Jordan M. and Nair, Bala and Katz, Ronit and Himmelfarb, Jonathan and Bansal, Nisha and Lee, Su-In",
+      "title": "From Local Explanations to Global Understanding with Explainable AI for Trees",
+      "year": "2020",
+      "howpublished": "Nature Machine Intelligence, 2(1), 56-67",
+      "url": "https://www.nature.com/articles/s42256-019-0138-9",
+      "doi": "10.1038/s42256-019-0138-9"
+    },
+    "source_url": "https://api.crossref.org/works/10.1038%2Fs42256-019-0138-9",
+    "http_status": 200,
+    "resolved_url": "https://api.crossref.org/works/10.1038%2Fs42256-019-0138-9",
+    "sha256": "1de72af53a6b4f68ebbd7cd054acc2edaa2dffc2f03890f2ac27c0623fd449a0",
+    "registered_metadata": {
+      "DOI": "10.1038/s42256-019-0138-9",
+      "title": [
+        "From local explanations to global understanding with explainable AI for trees"
+      ],
+      "subtitle": [],
+      "author": [
+        {
+          "given": "Scott M.",
+          "family": "Lundberg",
+          "sequence": "first",
+          "affiliation": [],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "ORCID": "https://orcid.org/0000-0001-8741-131X",
+          "authenticated-orcid": false,
+          "given": "Gabriel",
+          "family": "Erion",
+          "sequence": "additional",
+          "affiliation": [],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Hugh",
+          "family": "Chen",
+          "sequence": "additional",
+          "affiliation": [],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Alex",
+          "family": "DeGrave",
+          "sequence": "additional",
+          "affiliation": [],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Jordan M.",
+          "family": "Prutkin",
+          "sequence": "additional",
+          "affiliation": [],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Bala",
+          "family": "Nair",
+          "sequence": "additional",
+          "affiliation": [],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Ronit",
+          "family": "Katz",
+          "sequence": "additional",
+          "affiliation": [],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Jonathan",
+          "family": "Himmelfarb",
+          "sequence": "additional",
+          "affiliation": [],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Nisha",
+          "family": "Bansal",
+          "sequence": "additional",
+          "affiliation": [],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "ORCID": "https://orcid.org/0000-0001-5833-5215",
+          "authenticated-orcid": false,
+          "given": "Su-In",
+          "family": "Lee",
+          "sequence": "additional",
+          "affiliation": [],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        }
+      ],
+      "container-title": [
+        "Nature Machine Intelligence"
+      ],
+      "published": {
+        "date-parts": [
+          [
+            2020,
+            1,
+            17
+          ]
+        ]
+      },
+      "published-online": {
+        "date-parts": [
+          [
+            2020,
+            1,
+            17
+          ]
+        ]
+      },
+      "issued": {
+        "date-parts": [
+          [
+            2020,
+            1,
+            17
+          ]
+        ]
+      },
+      "volume": "2",
+      "issue": "1",
+      "page": "56-67",
+      "type": "journal-article",
+      "URL": "https://doi.org/10.1038/s42256-019-0138-9",
+      "link": [
+        {
+          "URL": "https://www.nature.com/articles/s42256-019-0138-9.pdf",
+          "content-type": "application/pdf",
+          "content-version": "vor",
+          "intended-application": "text-mining"
+        },
+        {
+          "URL": "https://www.nature.com/articles/s42256-019-0138-9",
+          "content-type": "text/html",
+          "content-version": "vor",
+          "intended-application": "text-mining"
+        },
+        {
+          "URL": "https://www.nature.com/articles/s42256-019-0138-9.pdf",
+          "content-type": "application/pdf",
+          "content-version": "vor",
+          "intended-application": "similarity-checking"
+        }
+      ],
+      "relation": {
+        "has-part": [
+          {
+            "id-type": "doi",
+            "id": "10.5194/amt-15-3663-2022",
+            "asserted-by": "object"
+          }
+        ]
+      },
+      "assertion": [
+        {
+          "value": "27 June 2019",
+          "order": 1,
+          "name": "received",
+          "label": "Received",
+          "group": {
+            "name": "ArticleHistory",
+            "label": "Article History"
+          }
+        },
+        {
+          "value": "6 December 2019",
+          "order": 2,
+          "name": "accepted",
+          "label": "Accepted",
+          "group": {
+            "name": "ArticleHistory",
+            "label": "Article History"
+          }
+        },
+        {
+          "value": "17 January 2020",
+          "order": 3,
+          "name": "first_online",
+          "label": "First Online",
+          "group": {
+            "name": "ArticleHistory",
+            "label": "Article History"
+          }
+        },
+        {
+          "value": "The authors declare no competing interests.",
+          "order": 1,
+          "name": "Ethics",
+          "group": {
+            "name": "EthicsHeading",
+            "label": "Competing interests"
+          }
+        }
+      ],
+      "publisher": "Springer Science and Business Media LLC",
+      "resource": {
+        "primary": {
+          "URL": "https://www.nature.com/articles/s42256-019-0138-9"
+        }
+      }
+    }
+  },
+  {
+    "key": "alvarezmelis2018robustness",
+    "checked_at_utc": "2026-09-09T11:58:51.066171+00:00",
+    "source_bib": {
+      "key": "alvarezmelis2018robustness",
+      "type": "misc",
+      "author": "Alvarez-Melis, David and Jaakkola, Tommi S.",
+      "title": "On the Robustness of Interpretability Methods",
+      "year": "2018",
+      "howpublished": "arXiv:1806.08049",
+      "url": "https://arxiv.org/abs/1806.08049"
+    },
+    "source_url": "https://arxiv.org/abs/1806.08049",
+    "http_status": 200,
+    "resolved_url": "https://arxiv.org/abs/1806.08049",
+    "sha256": "cc13c21b85adc06b9044d091b460b0be91167a055432c98b9c2d1541c6c8e0f5",
+    "primary_metadata_tags": [
+      "<meta property=\"og:title\" content=\"On the Robustness of Interpretability Methods\" />",
+      "<meta name=\"citation_title\" content=\"On the Robustness of Interpretability Methods\" />",
+      "<meta name=\"citation_author\" content=\"Alvarez-Melis, David\" />",
+      "<meta name=\"citation_author\" content=\"Jaakkola, Tommi S.\" />",
+      "<meta name=\"citation_date\" content=\"2018/06/21\" />",
+      "<meta name=\"citation_online_date\" content=\"2018/06/21\" />",
+      "<meta name=\"citation_pdf_url\" content=\"https://arxiv.org/pdf/1806.08049\" />",
+      "<meta name=\"citation_arxiv_id\" content=\"1806.08049\" />",
+      "<meta name=\"citation_abstract\" content=\"We argue that robustness of explanations---i.e., that similar inputs should give rise to similar explanations---is a key desideratum for interpretability. We introduce metrics to quantify robustness and demonstrate that current methods do not perform well according to these metrics. Finally, we propose ways that robustness can be enforced on existing interpretability approaches.\" />"
+    ],
+    "page_title": [
+      "[1806.08049] On the Robustness of Interpretability Methods"
+    ]
+  },
+  {
+    "key": "yeh2019infidelity",
+    "checked_at_utc": "2026-09-09T11:58:51.924163+00:00",
+    "source_bib": {
+      "key": "yeh2019infidelity",
+      "type": "misc",
+      "author": "Yeh, Chih-Kuan and Hsieh, Cheng-Yu and Suggala, Arun and Inouye, David I. and Ravikumar, Pradeep",
+      "title": "On the (In)fidelity and Sensitivity of Explanations",
+      "year": "2019",
+      "howpublished": "Advances in Neural Information Processing Systems 32",
+      "url": "https://proceedings.neurips.cc/paper_files/paper/2019/hash/a7471fdc77b3435276507cc8f2dc2569-Abstract.html"
+    },
+    "source_url": "https://proceedings.neurips.cc/paper_files/paper/2019/hash/a7471fdc77b3435276507cc8f2dc2569-Abstract.html",
+    "http_status": 200,
+    "resolved_url": "https://proceedings.neurips.cc/paper_files/paper/2019/hash/a7471fdc77b3435276507cc8f2dc2569-Abstract.html",
+    "sha256": "3ffa2895b46dd4c22045fe6bd903393ed357595592f3ac970c93cab5a406ed6d",
+    "primary_metadata_tags": [
+      "<meta name=\"citation_title\" content=\"On the (In)fidelity and Sensitivity of Explanations\">",
+      "<meta name=\"citation_author\" content=\"Yeh, Chih-Kuan\">",
+      "<meta name=\"citation_author\" content=\"Hsieh, Cheng-Yu\">",
+      "<meta name=\"citation_author\" content=\"Suggala, Arun\">",
+      "<meta name=\"citation_author\" content=\"Inouye, David I.\">",
+      "<meta name=\"citation_author\" content=\"Ravikumar, Pradeep K.\">",
+      "<meta name=\"citation_journal_title\" content=\"Advances in Neural Information Processing Systems\">",
+      "<meta name=\"citation_volume\" content=\"32\">",
+      "<meta name=\"citation_pdf_url\" content=\"https://proceedings.neurips.cc/paper_files/paper/2019/file/a7471fdc77b3435276507cc8f2dc2569-Paper.pdf\">",
+      "<meta name=\"citation_publication_date\" content=\"2019\">"
+    ],
+    "page_title": [
+      "On the (In)fidelity and Sensitivity of Explanations"
+    ]
+  },
+  {
+    "key": "slack2020fooling",
+    "checked_at_utc": "2026-09-09T11:58:51.492983+00:00",
+    "source_bib": {
+      "key": "slack2020fooling",
+      "type": "misc",
+      "author": "Slack, Dylan and Hilgard, Sophie and Jia, Emily and Singh, Sameer and Lakkaraju, Himabindu",
+      "title": "Fooling LIME and SHAP: Adversarial Attacks on Post Hoc Explanation Methods",
+      "year": "2020",
+      "howpublished": "Proceedings of the AAAI/ACM Conference on AI, Ethics, and Society, 180-186",
+      "url": "https://dl.acm.org/doi/10.1145/3375627.3375830",
+      "doi": "10.1145/3375627.3375830"
+    },
+    "source_url": "https://api.crossref.org/works/10.1145%2F3375627.3375830",
+    "http_status": 200,
+    "resolved_url": "https://api.crossref.org/works/10.1145%2F3375627.3375830",
+    "sha256": "95f9422f57ad4ca76620ba18a44af9a2f5897d332ac5ac46c3c5f46d5168d520",
+    "registered_metadata": {
+      "DOI": "10.1145/3375627.3375830",
+      "title": [
+        "Fooling LIME and SHAP"
+      ],
+      "subtitle": [
+        "Adversarial Attacks on Post hoc Explanation Methods"
+      ],
+      "author": [
+        {
+          "given": "Dylan",
+          "family": "Slack",
+          "sequence": "first",
+          "affiliation": [
+            {
+              "name": "University of California, Irvine, Irvine, CA, USA"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Sophie",
+          "family": "Hilgard",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Harvard University, Cambridge, MA, USA"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Emily",
+          "family": "Jia",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Harvard University, Cambridge, MA, USA"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Sameer",
+          "family": "Singh",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "University of California, Irvine, Irvine, CA, USA"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Himabindu",
+          "family": "Lakkaraju",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Harvard University, Cambridge, MA, USA"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        }
+      ],
+      "container-title": [
+        "Proceedings of the AAAI/ACM Conference on AI, Ethics, and Society"
+      ],
+      "published": {
+        "date-parts": [
+          [
+            2020,
+            2,
+            7
+          ]
+        ]
+      },
+      "published-print": {
+        "date-parts": [
+          [
+            2020,
+            2,
+            7
+          ]
+        ]
+      },
+      "published-online": {
+        "date-parts": [
+          [
+            2020,
+            2,
+            7
+          ]
+        ]
+      },
+      "issued": {
+        "date-parts": [
+          [
+            2020,
+            2,
+            7
+          ]
+        ]
+      },
+      "page": "180-186",
+      "type": "proceedings-article",
+      "URL": "https://doi.org/10.1145/3375627.3375830",
+      "link": [
+        {
+          "URL": "https://dl.acm.org/doi/10.1145/3375627.3375830",
+          "content-type": "unspecified",
+          "content-version": "vor",
+          "intended-application": "text-mining"
+        },
+        {
+          "URL": "https://dl.acm.org/doi/pdf/10.1145/3375627.3375830",
+          "content-type": "application/pdf",
+          "content-version": "vor",
+          "intended-application": "syndication"
+        },
+        {
+          "URL": "https://dl.acm.org/doi/pdf/10.1145/3375627.3375830",
+          "content-type": "unspecified",
+          "content-version": "vor",
+          "intended-application": "similarity-checking"
+        }
+      ],
+      "relation": {},
+      "assertion": [
+        {
+          "value": "2020-02-07",
+          "order": 3,
+          "name": "published",
+          "label": "Published",
+          "group": {
+            "name": "publication_history",
+            "label": "Publication History"
+          }
+        }
+      ],
+      "publisher": "ACM",
+      "resource": {
+        "primary": {
+          "URL": "https://dl.acm.org/doi/10.1145/3375627.3375830"
+        }
+      }
+    }
+  },
+  {
+    "key": "cawley2010overfitting",
+    "checked_at_utc": "2026-09-09T11:58:51.763225+00:00",
+    "source_bib": {
+      "key": "cawley2010overfitting",
+      "type": "misc",
+      "author": "Cawley, Gavin C. and Talbot, Nicola L. C.",
+      "title": "On Over-fitting in Model Selection and Subsequent Selection Bias in Performance Evaluation",
+      "year": "2010",
+      "howpublished": "Journal of Machine Learning Research, 11, 2079-2107",
+      "url": "https://www.jmlr.org/papers/v11/cawley10a.html"
+    },
+    "source_url": "https://www.jmlr.org/papers/v11/cawley10a.html",
+    "http_status": 200,
+    "resolved_url": "https://www.jmlr.org/papers/v11/cawley10a.html",
+    "sha256": "c3118f2b3a84d3826d6e45565a8e7f5a308b356635a30776844ded55b7db4509",
+    "primary_metadata_tags": [
+      "<meta name=\"citation_title\" content=\"On Over-fitting in Model Selection and Subsequent Selection Bias in Performance Evaluation\">",
+      "<meta name=\"citation_author\" content=\"Gavin C. Cawley\">",
+      "<meta name=\"citation_author\" content=\"Nicola L. C. Talbot\">",
+      "<meta name=\"citation_journal_title\" content=\"Journal of Machine Learning Research\">",
+      "<meta name=\"citation_volume\" content=\"11\">",
+      "<meta name=\"citation_issue\" content=\"70\">",
+      "<meta name=\"citation_firstpage\" content=\"2079\">",
+      "<meta name=\"citation_lastpage\" content=\"2107\">",
+      "<meta name=\"citation_pdf_url\" content=\"http://jmlr.org/papers/volume11/cawley10a/cawley10a.pdf\">",
+      "<meta name=\"citation_publication_date\" content=\"2010\">",
+      "<meta name=\"citation_public_url\" content=\"http://jmlr.org/papers/v11/cawley10a.html\">",
+      "<meta name=\"citation_abstract_html_url\" content=\"http://jmlr.org/papers/v11/cawley10a.html\">",
+      "<meta name=\"citation_issn\" content=\"1533-7928\">"
+    ],
+    "page_title": [
+      "On Over-fitting in Model Selection and Subsequent Selection Bias in Performance Evaluation"
+    ]
+  },
+  {
+    "key": "kaufman2012leakage",
+    "checked_at_utc": "2026-09-09T11:58:52.182142+00:00",
+    "source_bib": {
+      "key": "kaufman2012leakage",
+      "type": "misc",
+      "author": "Kaufman, Shachar and Rosset, Saharon and Perlich, Claudia and Stitelman, Ori",
+      "title": "Leakage in Data Mining: Formulation, Detection, and Avoidance",
+      "year": "2012",
+      "howpublished": "ACM Transactions on Knowledge Discovery from Data, 6(4), Article 15, 1-21",
+      "url": "https://dl.acm.org/doi/10.1145/2382577.2382579",
+      "doi": "10.1145/2382577.2382579"
+    },
+    "source_url": "https://api.crossref.org/works/10.1145%2F2382577.2382579",
+    "http_status": 200,
+    "resolved_url": "https://api.crossref.org/works/10.1145%2F2382577.2382579",
+    "sha256": "94bb71aecf74933ad03b7660629aba6a356b2b28f295fc172df640c5e9a5abeb",
+    "registered_metadata": {
+      "DOI": "10.1145/2382577.2382579",
+      "title": [
+        "Leakage in data mining"
+      ],
+      "subtitle": [
+        "Formulation, detection, and avoidance"
+      ],
+      "author": [
+        {
+          "given": "Shachar",
+          "family": "Kaufman",
+          "sequence": "first",
+          "affiliation": [
+            {
+              "name": "Tel Aviv University, Israel"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Saharon",
+          "family": "Rosset",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "Tel Aviv University, Israel"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Claudia",
+          "family": "Perlich",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "m6d"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Ori",
+          "family": "Stitelman",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "m6d"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        }
+      ],
+      "container-title": [
+        "ACM Transactions on Knowledge Discovery from Data"
+      ],
+      "published": {
+        "date-parts": [
+          [
+            2012,
+            12
+          ]
+        ]
+      },
+      "published-print": {
+        "date-parts": [
+          [
+            2012,
+            12
+          ]
+        ]
+      },
+      "published-online": {
+        "date-parts": [
+          [
+            2012,
+            12,
+            18
+          ]
+        ]
+      },
+      "issued": {
+        "date-parts": [
+          [
+            2012,
+            12
+          ]
+        ]
+      },
+      "volume": "6",
+      "issue": "4",
+      "page": "1-21",
+      "type": "journal-article",
+      "URL": "https://doi.org/10.1145/2382577.2382579",
+      "link": [
+        {
+          "URL": "https://dl.acm.org/doi/10.1145/2382577.2382579",
+          "content-type": "unspecified",
+          "content-version": "vor",
+          "intended-application": "text-mining"
+        },
+        {
+          "URL": "https://dl.acm.org/doi/pdf/10.1145/2382577.2382579",
+          "content-type": "unspecified",
+          "content-version": "vor",
+          "intended-application": "similarity-checking"
+        }
+      ],
+      "relation": {},
+      "assertion": [
+        {
+          "value": "2011-11-01",
+          "order": 0,
+          "name": "received",
+          "label": "Received",
+          "group": {
+            "name": "publication_history",
+            "label": "Publication History"
+          }
+        },
+        {
+          "value": "2012-05-01",
+          "order": 1,
+          "name": "accepted",
+          "label": "Accepted",
+          "group": {
+            "name": "publication_history",
+            "label": "Publication History"
+          }
+        },
+        {
+          "value": "2012-12-18",
+          "order": 2,
+          "name": "published",
+          "label": "Published",
+          "group": {
+            "name": "publication_history",
+            "label": "Publication History"
+          }
+        }
+      ],
+      "publisher": "Association for Computing Machinery (ACM)",
+      "resource": {
+        "primary": {
+          "URL": "https://dl.acm.org/doi/10.1145/2382577.2382579"
+        }
+      }
+    }
+  },
+  {
+    "key": "kapoor2023leakage",
+    "checked_at_utc": "2026-09-09T11:58:52.516011+00:00",
+    "source_bib": {
+      "key": "kapoor2023leakage",
+      "type": "misc",
+      "author": "Kapoor, Sayash and Narayanan, Arvind",
+      "title": "Leakage and the Reproducibility Crisis in Machine-Learning-Based Science",
+      "year": "2023",
+      "howpublished": "Patterns, 4(9), 100804",
+      "url": "https://www.sciencedirect.com/science/article/pii/S2666389923001599",
+      "doi": "10.1016/j.patter.2023.100804"
+    },
+    "source_url": "https://api.crossref.org/works/10.1016%2Fj.patter.2023.100804",
+    "http_status": 200,
+    "resolved_url": "https://api.crossref.org/works/10.1016%2Fj.patter.2023.100804",
+    "sha256": "ca1c93cad71e37f2645c81cc5e5a9fa7529a37414fb53d343c8f6ab9c9615b6b",
+    "registered_metadata": {
+      "DOI": "10.1016/j.patter.2023.100804",
+      "title": [
+        "Leakage and the reproducibility crisis in machine-learning-based science"
+      ],
+      "subtitle": [],
+      "author": [
+        {
+          "ORCID": "https://orcid.org/0000-0001-5695-280X",
+          "authenticated-orcid": false,
+          "given": "Sayash",
+          "family": "Kapoor",
+          "sequence": "first",
+          "affiliation": [],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Arvind",
+          "family": "Narayanan",
+          "sequence": "additional",
+          "affiliation": [],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        }
+      ],
+      "container-title": [
+        "Patterns"
+      ],
+      "published": {
+        "date-parts": [
+          [
+            2023,
+            9
+          ]
+        ]
+      },
+      "published-print": {
+        "date-parts": [
+          [
+            2023,
+            9
+          ]
+        ]
+      },
+      "issued": {
+        "date-parts": [
+          [
+            2023,
+            9
+          ]
+        ]
+      },
+      "volume": "4",
+      "issue": "9",
+      "page": "100804",
+      "article-number": "100804",
+      "type": "journal-article",
+      "URL": "https://doi.org/10.1016/j.patter.2023.100804",
+      "link": [
+        {
+          "URL": "https://api.elsevier.com/content/article/PII:S2666389923001599?httpAccept=text/xml",
+          "content-type": "text/xml",
+          "content-version": "vor",
+          "intended-application": "text-mining"
+        },
+        {
+          "URL": "https://api.elsevier.com/content/article/PII:S2666389923001599?httpAccept=text/plain",
+          "content-type": "text/plain",
+          "content-version": "vor",
+          "intended-application": "text-mining"
+        }
+      ],
+      "relation": {},
+      "assertion": [
+        {
+          "value": "Elsevier",
+          "name": "publisher",
+          "label": "This article is maintained by"
+        },
+        {
+          "value": "Leakage and the reproducibility crisis in machine-learning-based science",
+          "name": "articletitle",
+          "label": "Article Title"
+        },
+        {
+          "value": "Patterns",
+          "name": "journaltitle",
+          "label": "Journal Title"
+        },
+        {
+          "value": "https://doi.org/10.1016/j.patter.2023.100804",
+          "name": "articlelink",
+          "label": "CrossRef DOI link to publisher maintained version"
+        },
+        {
+          "value": "article",
+          "name": "content_type",
+          "label": "Content Type"
+        },
+        {
+          "value": "© 2023 The Author(s).",
+          "name": "copyright",
+          "label": "Copyright"
+        }
+      ],
+      "publisher": "Elsevier BV",
+      "resource": {
+        "primary": {
+          "URL": "https://linkinghub.elsevier.com/retrieve/pii/S2666389923001599"
+        }
+      }
+    }
+  },
+  {
+    "key": "guo2017calibration",
+    "checked_at_utc": "2026-09-09T11:58:52.366929+00:00",
+    "source_bib": {
+      "key": "guo2017calibration",
+      "type": "misc",
+      "author": "Guo, Chuan and Pleiss, Geoff and Sun, Yu and Weinberger, Kilian Q.",
+      "title": "On Calibration of Modern Neural Networks",
+      "year": "2017",
+      "howpublished": "Proceedings of the 34th International Conference on Machine Learning, PMLR 70, 1321-1330",
+      "url": "https://proceedings.mlr.press/v70/guo17a.html"
+    },
+    "source_url": "https://proceedings.mlr.press/v70/guo17a.html",
+    "http_status": 200,
+    "resolved_url": "https://proceedings.mlr.press/v70/guo17a.html",
+    "sha256": "fcd644b81c1d06d034060e3ff8079ccc6acc2213dbf846043b92059ce10d26f8",
+    "primary_metadata_tags": [
+      "<meta name=\"citation_publisher\" content=\"PMLR\"/>",
+      "<meta name=\"citation_title\" content=\"On Calibration of Modern Neural Networks\"/>",
+      "<meta name=\"citation_language\" content=\"en\"/>",
+      "<meta name=\"citation_abstract_html_url\" content=\"https://proceedings.mlr.press/v70/guo17a.html\"/>",
+      "<meta name=\"citation_pdf_url\" content=\"http://proceedings.mlr.press/v70/guo17a/guo17a.pdf\">",
+      "<meta name=\"citation_firstpage\" content=\"1321\">",
+      "<meta name=\"citation_lastpage\" content=\"1330\">",
+      "<meta name=\"citation_author\" content=\"Chuan Guo\">",
+      "<meta name=\"citation_author\" content=\"Geoff Pleiss\">",
+      "<meta name=\"citation_author\" content=\"Yu Sun\">",
+      "<meta name=\"citation_author\" content=\"Kilian Q. Weinberger\">",
+      "<meta name=\"citation_publication_date\" content=\"2017/07/17\">",
+      "<meta name=\"citation_inbook_title\" content=\"International Conference on Machine Learning\"/>",
+      "<meta name=\"citation_conference_title\" content=\"International Conference on Machine Learning\"/>",
+      "<meta name=\"citation_issn\" content=\"2640-3498\">",
+      "<meta property=\"og:title\" content=\"On Calibration of Modern Neural Networks\"/>"
+    ],
+    "page_title": [
+      "On Calibration of Modern Neural Networks"
+    ]
+  },
+  {
+    "key": "vaicenavicius2019evaluating",
+    "checked_at_utc": "2026-09-09T11:58:52.555269+00:00",
+    "source_bib": {
+      "key": "vaicenavicius2019evaluating",
+      "type": "misc",
+      "author": "Vaicenavicius, Juozas and Widmann, David and Andersson, Carl and Lindsten, Fredrik and Roll, Jacob and Schön, Thomas B.",
+      "title": "Evaluating Model Calibration in Classification",
+      "year": "2019",
+      "howpublished": "Proceedings of the Twenty-Second International Conference on Artificial Intelligence and Statistics, PMLR 89, 3459-3467",
+      "url": "https://proceedings.mlr.press/v89/vaicenavicius19a.html"
+    },
+    "source_url": "https://proceedings.mlr.press/v89/vaicenavicius19a.html",
+    "http_status": 200,
+    "resolved_url": "https://proceedings.mlr.press/v89/vaicenavicius19a.html",
+    "sha256": "04a4888f9ffb424d905af0a06eed7407b3f8576c917e4439d7c644e926063d1b",
+    "primary_metadata_tags": [
+      "<meta name=\"citation_publisher\" content=\"PMLR\"/>",
+      "<meta name=\"citation_title\" content=\"Evaluating model calibration in classification\"/>",
+      "<meta name=\"citation_language\" content=\"en\"/>",
+      "<meta name=\"citation_abstract_html_url\" content=\"https://proceedings.mlr.press/v89/vaicenavicius19a.html\"/>",
+      "<meta name=\"citation_pdf_url\" content=\"http://proceedings.mlr.press/v89/vaicenavicius19a/vaicenavicius19a.pdf\">",
+      "<meta name=\"citation_firstpage\" content=\"3459\">",
+      "<meta name=\"citation_lastpage\" content=\"3467\">",
+      "<meta name=\"citation_author\" content=\"Juozas Vaicenavicius\">",
+      "<meta name=\"citation_author\" content=\"David Widmann\">",
+      "<meta name=\"citation_author\" content=\"Carl Andersson\">",
+      "<meta name=\"citation_author\" content=\"Fredrik Lindsten\">",
+      "<meta name=\"citation_author\" content=\"Jacob Roll\">",
+      "<meta name=\"citation_author\" content=\"Thomas Schön\">",
+      "<meta name=\"citation_publication_date\" content=\"2019/04/11\">",
+      "<meta name=\"citation_inbook_title\" content=\"The 22nd International Conference on Artificial Intelligence and Statistics\"/>",
+      "<meta name=\"citation_conference_title\" content=\"The 22nd International Conference on Artificial Intelligence and Statistics\"/>",
+      "<meta name=\"citation_issn\" content=\"2640-3498\">",
+      "<meta property=\"og:title\" content=\"Evaluating model calibration in classification\"/>"
+    ],
+    "page_title": [
+      "Evaluating model calibration in classification"
+    ]
+  },
+  {
+    "key": "mitchell2019model",
+    "checked_at_utc": "2026-09-09T11:58:53.077847+00:00",
+    "source_bib": {
+      "key": "mitchell2019model",
+      "type": "misc",
+      "author": "Mitchell, Margaret and Wu, Simone and Zaldivar, Andrew and Barnes, Parker and Vasserman, Lucy and Hutchinson, Ben and Spitzer, Elena and Raji, Inioluwa Deborah and Gebru, Timnit",
+      "title": "Model Cards for Model Reporting",
+      "year": "2019",
+      "howpublished": "Proceedings of the Conference on Fairness, Accountability, and Transparency, 220-229",
+      "url": "https://dl.acm.org/doi/10.1145/3287560.3287596",
+      "doi": "10.1145/3287560.3287596"
+    },
+    "source_url": "https://api.crossref.org/works/10.1145%2F3287560.3287596",
+    "http_status": 200,
+    "resolved_url": "https://api.crossref.org/works/10.1145%2F3287560.3287596",
+    "sha256": "a405a5350e0d7056d5a4ac730e0940a9299da9640023c18de3d6ce3c34e56973",
+    "registered_metadata": {
+      "DOI": "10.1145/3287560.3287596",
+      "title": [
+        "Model Cards for Model Reporting"
+      ],
+      "subtitle": [],
+      "author": [
+        {
+          "given": "Margaret",
+          "family": "Mitchell",
+          "sequence": "first",
+          "affiliation": [],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Simone",
+          "family": "Wu",
+          "sequence": "additional",
+          "affiliation": [],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Andrew",
+          "family": "Zaldivar",
+          "sequence": "additional",
+          "affiliation": [],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Parker",
+          "family": "Barnes",
+          "sequence": "additional",
+          "affiliation": [],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Lucy",
+          "family": "Vasserman",
+          "sequence": "additional",
+          "affiliation": [],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Ben",
+          "family": "Hutchinson",
+          "sequence": "additional",
+          "affiliation": [],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Elena",
+          "family": "Spitzer",
+          "sequence": "additional",
+          "affiliation": [],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Inioluwa Deborah",
+          "family": "Raji",
+          "sequence": "additional",
+          "affiliation": [],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Timnit",
+          "family": "Gebru",
+          "sequence": "additional",
+          "affiliation": [],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        }
+      ],
+      "container-title": [
+        "Proceedings of the Conference on Fairness, Accountability, and Transparency"
+      ],
+      "published": {
+        "date-parts": [
+          [
+            2019,
+            1,
+            29
+          ]
+        ]
+      },
+      "published-print": {
+        "date-parts": [
+          [
+            2019,
+            1,
+            29
+          ]
+        ]
+      },
+      "published-online": {
+        "date-parts": [
+          [
+            2019,
+            1,
+            29
+          ]
+        ]
+      },
+      "issued": {
+        "date-parts": [
+          [
+            2019,
+            1,
+            29
+          ]
+        ]
+      },
+      "page": "220-229",
+      "type": "proceedings-article",
+      "URL": "https://doi.org/10.1145/3287560.3287596",
+      "link": [
+        {
+          "URL": "https://dl.acm.org/doi/10.1145/3287560.3287596",
+          "content-type": "unspecified",
+          "content-version": "vor",
+          "intended-application": "text-mining"
+        },
+        {
+          "URL": "https://dl.acm.org/doi/pdf/10.1145/3287560.3287596",
+          "content-type": "unspecified",
+          "content-version": "vor",
+          "intended-application": "similarity-checking"
+        }
+      ],
+      "relation": {},
+      "assertion": [
+        {
+          "value": "2019-01-29",
+          "order": 2,
+          "name": "published",
+          "label": "Published",
+          "group": {
+            "name": "publication_history",
+            "label": "Publication History"
+          }
+        }
+      ],
+      "publisher": "ACM",
+      "resource": {
+        "primary": {
+          "URL": "https://dl.acm.org/doi/10.1145/3287560.3287596"
+        }
+      }
+    }
+  },
+  {
+    "key": "pineau2021improving",
+    "checked_at_utc": "2026-09-09T11:58:52.843860+00:00",
+    "source_bib": {
+      "key": "pineau2021improving",
+      "type": "misc",
+      "author": "Pineau, Joelle and Vincent-Lamarre, Philippe and Sinha, Koustuv and Larivière, Vincent and Beygelzimer, Alina and d'Alché-Buc, Florence and Fox, Emily and Larochelle, Hugo",
+      "title": "Improving Reproducibility in Machine Learning Research (A Report from the NeurIPS 2019 Reproducibility Program)",
+      "year": "2021",
+      "howpublished": "Journal of Machine Learning Research, 22(164), 1-20",
+      "url": "https://www.jmlr.org/papers/v22/20-303.html"
+    },
+    "source_url": "https://www.jmlr.org/papers/v22/20-303.html",
+    "http_status": 200,
+    "resolved_url": "https://www.jmlr.org/papers/v22/20-303.html",
+    "sha256": "31455f7b094e852992ceb4b0cd1f0829f1031cd3036150fed7467213777dc4b4",
+    "primary_metadata_tags": [
+      "<meta name=\"citation_title\" content=\"Improving Reproducibility in Machine Learning Research(A Report from the NeurIPS 2019 Reproducibility Program)\">",
+      "<meta name=\"citation_author\" content=\"Joelle Pineau\">",
+      "<meta name=\"citation_author\" content=\"Philippe Vincent-Lamarre\">",
+      "<meta name=\"citation_author\" content=\"Koustuv Sinha\">",
+      "<meta name=\"citation_author\" content=\"Vincent Lariviere\">",
+      "<meta name=\"citation_author\" content=\"Alina Beygelzimer\">",
+      "<meta name=\"citation_author\" content=\"Florence d'Alche-Buc\">",
+      "<meta name=\"citation_author\" content=\"Emily Fox\">",
+      "<meta name=\"citation_author\" content=\"Hugo Larochelle\">",
+      "<meta name=\"citation_journal_title\" content=\"Journal of Machine Learning Research\">",
+      "<meta name=\"citation_volume\" content=\"22\">",
+      "<meta name=\"citation_issue\" content=\"164\">",
+      "<meta name=\"citation_firstpage\" content=\"1\">",
+      "<meta name=\"citation_lastpage\" content=\"20\">",
+      "<meta name=\"citation_pdf_url\" content=\"http://jmlr.org/papers/volume22/20-303/20-303.pdf\">",
+      "<meta name=\"citation_publication_date\" content=\"2021\">",
+      "<meta name=\"citation_public_url\" content=\"http://jmlr.org/papers/v22/20-303.html\">",
+      "<meta name=\"citation_abstract_html_url\" content=\"http://jmlr.org/papers/v22/20-303.html\">",
+      "<meta name=\"citation_issn\" content=\"1533-7928\">"
+    ],
+    "page_title": [
+      "Improving Reproducibility in Machine Learning Research(A Report from the NeurIPS 2019 Reproducibility Program)"
+    ]
+  },
+  {
+    "key": "mccullagh1980regression",
+    "checked_at_utc": "2026-09-09T11:58:53.281484+00:00",
+    "source_bib": {
+      "key": "mccullagh1980regression",
+      "type": "article",
+      "author": "McCullagh, Peter",
+      "title": "Regression Models for Ordinal Data",
+      "journal": "Journal of the Royal Statistical Society Series B: Methodological",
+      "year": "1980",
+      "volume": "42",
+      "number": "2",
+      "pages": "109--127",
+      "doi": "10.1111/j.2517-6161.1980.tb01109.x"
+    },
+    "source_url": "https://api.crossref.org/works/10.1111%2Fj.2517-6161.1980.tb01109.x",
+    "http_status": 200,
+    "resolved_url": "https://api.crossref.org/works/10.1111%2Fj.2517-6161.1980.tb01109.x",
+    "sha256": "fb1d5a000bfd31cae5ab2d728dfab1a58e0d32e31b4f2b6224203dfa0bc46be4",
+    "registered_metadata": {
+      "DOI": "10.1111/j.2517-6161.1980.tb01109.x",
+      "title": [
+        "Regression Models for Ordinal Data"
+      ],
+      "subtitle": [],
+      "author": [
+        {
+          "given": "Peter",
+          "family": "McCullagh",
+          "sequence": "first",
+          "affiliation": [
+            {
+              "name": "University of Chicago , Chicago , Illinois , U.S.A."
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        }
+      ],
+      "container-title": [
+        "Journal of the Royal Statistical Society Series B: Statistical Methodology"
+      ],
+      "published": {
+        "date-parts": [
+          [
+            1980,
+            1,
+            1
+          ]
+        ]
+      },
+      "published-print": {
+        "date-parts": [
+          [
+            1980,
+            1,
+            1
+          ]
+        ]
+      },
+      "published-online": {
+        "date-parts": [
+          [
+            2018,
+            12,
+            5
+          ]
+        ]
+      },
+      "issued": {
+        "date-parts": [
+          [
+            1980,
+            1,
+            1
+          ]
+        ]
+      },
+      "volume": "42",
+      "issue": "2",
+      "page": "109-127",
+      "type": "journal-article",
+      "URL": "https://doi.org/10.1111/j.2517-6161.1980.tb01109.x",
+      "link": [
+        {
+          "URL": "https://api.wiley.com/onlinelibrary/tdm/v1/articles/10.1111%2Fj.2517-6161.1980.tb01109.x",
+          "content-type": "application/pdf",
+          "content-version": "vor",
+          "intended-application": "text-mining"
+        },
+        {
+          "URL": "https://academic.oup.com/jrsssb/article-pdf/42/2/109/49097431/jrsssb_42_2_109.pdf",
+          "content-type": "application/pdf",
+          "content-version": "vor",
+          "intended-application": "syndication"
+        },
+        {
+          "URL": "https://academic.oup.com/jrsssb/article-pdf/42/2/109/49097431/jrsssb_42_2_109.pdf",
+          "content-type": "unspecified",
+          "content-version": "vor",
+          "intended-application": "similarity-checking"
+        }
+      ],
+      "relation": {},
+      "publisher": "Oxford University Press (OUP)",
+      "resource": {
+        "primary": {
+          "URL": "https://academic.oup.com/jrsssb/article/42/2/109/7027621"
+        }
+      }
+    }
+  },
+  {
+    "key": "frank2001simple",
+    "checked_at_utc": "2026-09-09T11:58:53.503933+00:00",
+    "source_bib": {
+      "key": "frank2001simple",
+      "type": "inproceedings",
+      "author": "Frank, Eibe and Hall, Mark",
+      "title": "A Simple Approach to Ordinal Classification",
+      "booktitle": "Machine Learning: ECML 2001",
+      "series": "Lecture Notes in Computer Science",
+      "volume": "2167",
+      "pages": "145--156",
+      "year": "2001",
+      "publisher": "Springer",
+      "doi": "10.1007/3-540-44795-4_13"
+    },
+    "source_url": "https://api.crossref.org/works/10.1007%2F3-540-44795-4_13",
+    "http_status": 200,
+    "resolved_url": "https://api.crossref.org/works/10.1007%2F3-540-44795-4_13",
+    "sha256": "edf2a332bba70e3e5523d6792ecd8aeaaaaa2a68ebea5d3c4aa7c49a29e050e2",
+    "registered_metadata": {
+      "DOI": "10.1007/3-540-44795-4_13",
+      "title": [
+        "A Simple Approach to Ordinal Classification"
+      ],
+      "subtitle": [],
+      "author": [
+        {
+          "given": "Eibe",
+          "family": "Frank",
+          "sequence": "first",
+          "affiliation": [],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Mark",
+          "family": "Hall",
+          "sequence": "additional",
+          "affiliation": [],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        }
+      ],
+      "container-title": [
+        "Lecture Notes in Computer Science",
+        "Machine Learning: ECML 2001"
+      ],
+      "published": {
+        "date-parts": [
+          [
+            2001
+          ]
+        ]
+      },
+      "published-print": {
+        "date-parts": [
+          [
+            2001
+          ]
+        ]
+      },
+      "published-online": {
+        "date-parts": [
+          [
+            2001,
+            8,
+            30
+          ]
+        ]
+      },
+      "issued": {
+        "date-parts": [
+          [
+            2001
+          ]
+        ]
+      },
+      "page": "145-156",
+      "type": "book-chapter",
+      "URL": "https://doi.org/10.1007/3-540-44795-4_13",
+      "link": [
+        {
+          "URL": "http://link.springer.com/content/pdf/10.1007/3-540-44795-4_13",
+          "content-type": "unspecified",
+          "content-version": "vor",
+          "intended-application": "similarity-checking"
+        }
+      ],
+      "relation": {},
+      "publisher": "Springer Berlin Heidelberg",
+      "resource": {
+        "primary": {
+          "URL": "http://link.springer.com/10.1007/3-540-44795-4_13"
+        }
+      }
+    }
+  },
+  {
+    "key": "cardoso2011measuring",
+    "checked_at_utc": "2026-09-09T11:58:53.705392+00:00",
+    "source_bib": {
+      "key": "cardoso2011measuring",
+      "type": "article",
+      "author": "Cardoso, Jaime S. and Sousa, Ricardo",
+      "title": "Measuring the Performance of Ordinal Classification",
+      "journal": "International Journal of Pattern Recognition and Artificial Intelligence",
+      "year": "2011",
+      "volume": "25",
+      "number": "8",
+      "pages": "1173--1195",
+      "doi": "10.1142/S0218001411009093"
+    },
+    "source_url": "https://api.crossref.org/works/10.1142%2FS0218001411009093",
+    "http_status": 200,
+    "resolved_url": "https://api.crossref.org/works/10.1142%2FS0218001411009093",
+    "sha256": "b09fd9fa06b2e44bcb731a4dbdbe8477da38c3dc6ccec6ba1299f300fe6b65b7",
+    "registered_metadata": {
+      "DOI": "10.1142/s0218001411009093",
+      "title": [
+        "MEASURING THE PERFORMANCE OF ORDINAL CLASSIFICATION"
+      ],
+      "subtitle": [],
+      "author": [
+        {
+          "given": "JAIME S.",
+          "family": "CARDOSO",
+          "sequence": "first",
+          "affiliation": [
+            {
+              "name": "INESC Porto, Faculdade de Engenharia, Universidade do Porto, Campus da FEUP, Rua Dr. Roberto Frias, n 378, 4200-465 Porto, Portugal"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "RICARDO",
+          "family": "SOUSA",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "INESC Porto, Faculdade de Engenharia, Universidade do Porto, Campus da FEUP, Rua Dr. Roberto Frias, n 378, 4200-465 Porto, Portugal"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        }
+      ],
+      "container-title": [
+        "International Journal of Pattern Recognition and Artificial Intelligence"
+      ],
+      "published": {
+        "date-parts": [
+          [
+            2011,
+            12
+          ]
+        ]
+      },
+      "published-print": {
+        "date-parts": [
+          [
+            2011,
+            12
+          ]
+        ]
+      },
+      "published-online": {
+        "date-parts": [
+          [
+            2012,
+            4,
+            7
+          ]
+        ]
+      },
+      "issued": {
+        "date-parts": [
+          [
+            2011,
+            12
+          ]
+        ]
+      },
+      "volume": "25",
+      "issue": "08",
+      "page": "1173-1195",
+      "type": "journal-article",
+      "URL": "https://doi.org/10.1142/s0218001411009093",
+      "link": [
+        {
+          "URL": "https://www.worldscientific.com/doi/pdf/10.1142/S0218001411009093",
+          "content-type": "unspecified",
+          "content-version": "vor",
+          "intended-application": "similarity-checking"
+        }
+      ],
+      "relation": {},
+      "publisher": "World Scientific Pub Co Pte Ltd",
+      "resource": {
+        "primary": {
+          "URL": "https://www.worldscientific.com/doi/abs/10.1142/S0218001411009093"
+        }
+      }
+    }
+  },
+  {
+    "key": "cohen1968weighted",
+    "checked_at_utc": "2026-09-09T11:58:53.935129+00:00",
+    "source_bib": {
+      "key": "cohen1968weighted",
+      "type": "article",
+      "author": "Cohen, Jacob",
+      "title": "Weighted Kappa: Nominal Scale Agreement Provision for Scaled Disagreement or Partial Credit",
+      "journal": "Psychological Bulletin",
+      "year": "1968",
+      "volume": "70",
+      "number": "4",
+      "pages": "213--220",
+      "doi": "10.1037/h0026256"
+    },
+    "source_url": "https://api.crossref.org/works/10.1037%2Fh0026256",
+    "http_status": 200,
+    "resolved_url": "https://api.crossref.org/works/10.1037%2Fh0026256",
+    "sha256": "82adbf511cc135765637b7544ac4fedbddd29e37ddc8fa42d3cb3b340c9114d1",
+    "registered_metadata": {
+      "DOI": "10.1037/h0026256",
+      "title": [
+        "Weighted kappa: Nominal scale agreement provision for scaled disagreement or partial credit."
+      ],
+      "subtitle": [],
+      "author": [
+        {
+          "given": "Jacob",
+          "family": "Cohen",
+          "sequence": "first",
+          "affiliation": [],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        }
+      ],
+      "container-title": [
+        "Psychological Bulletin"
+      ],
+      "published": {
+        "date-parts": [
+          [
+            1968
+          ]
+        ]
+      },
+      "published-online": {
+        "date-parts": [
+          [
+            1968
+          ]
+        ]
+      },
+      "issued": {
+        "date-parts": [
+          [
+            1968
+          ]
+        ]
+      },
+      "volume": "70",
+      "issue": "4",
+      "page": "213-220",
+      "type": "journal-article",
+      "URL": "https://doi.org/10.1037/h0026256",
+      "link": [
+        {
+          "URL": "http://psycnet.apa.org/journals/bul/70/4/213.pdf",
+          "content-type": "unspecified",
+          "content-version": "vor",
+          "intended-application": "similarity-checking"
+        }
+      ],
+      "relation": {},
+      "publisher": "American Psychological Association (APA)",
+      "resource": {
+        "primary": {
+          "URL": "https://doi.apa.org/doi/10.1037/h0026256"
+        }
+      }
+    }
+  },
+  {
+    "key": "epstein1969scoring",
+    "checked_at_utc": "2026-09-09T11:58:54.132651+00:00",
+    "source_bib": {
+      "key": "epstein1969scoring",
+      "type": "article",
+      "author": "Epstein, Edward S.",
+      "title": "A Scoring System for Probability Forecasts of Ranked Categories",
+      "journal": "Journal of Applied Meteorology",
+      "year": "1969",
+      "volume": "8",
+      "number": "6",
+      "pages": "985--987",
+      "doi": "10.1175/1520-0450(1969)008<0985:ASSFPF>2.0.CO;2"
+    },
+    "source_url": "https://api.crossref.org/works/10.1175%2F1520-0450%281969%29008%3C0985%3AASSFPF%3E2.0.CO%3B2",
+    "http_status": 200,
+    "resolved_url": "https://api.crossref.org/works/10.1175%2F1520-0450%281969%29008%3C0985%3AASSFPF%3E2.0.CO%3B2",
+    "sha256": "1fec53ad0f7a72d55c2007c81b831a888df2afa1176bd2789d4832440c681e38",
+    "registered_metadata": {
+      "DOI": "10.1175/1520-0450(1969)008<0985:assfpf>2.0.co;2",
+      "title": [
+        "A Scoring System for Probability Forecasts of Ranked Categories"
+      ],
+      "subtitle": [],
+      "author": [
+        {
+          "given": "Edward S.",
+          "family": "Epstein",
+          "sequence": "first",
+          "affiliation": [],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        }
+      ],
+      "container-title": [
+        "Journal of Applied Meteorology"
+      ],
+      "published": {
+        "date-parts": [
+          [
+            1969,
+            12
+          ]
+        ]
+      },
+      "published-print": {
+        "date-parts": [
+          [
+            1969,
+            12
+          ]
+        ]
+      },
+      "issued": {
+        "date-parts": [
+          [
+            1969,
+            12
+          ]
+        ]
+      },
+      "volume": "8",
+      "issue": "6",
+      "page": "985-987",
+      "type": "journal-article",
+      "URL": "https://doi.org/10.1175/1520-0450(1969)008<0985:assfpf>2.0.co;2",
+      "link": [
+        {
+          "URL": "http://journals.ametsoc.org/doi/pdf/abs/10.1175/1520-0450%281969%29008%3C0985%3AASSFPF%3E2.0.CO%3B2",
+          "content-type": "unspecified",
+          "content-version": "vor",
+          "intended-application": "similarity-checking"
+        }
+      ],
+      "relation": {},
+      "publisher": "American Meteorological Society",
+      "resource": {
+        "primary": {
+          "URL": "http://journals.ametsoc.org/doi/10.1175/1520-0450(1969)008<0985:ASSFPF>2.0.CO;2"
+        }
+      }
+    }
+  },
+  {
+    "key": "gneiting2007strictly",
+    "checked_at_utc": "2026-09-09T11:58:54.361910+00:00",
+    "source_bib": {
+      "key": "gneiting2007strictly",
+      "type": "article",
+      "author": "Gneiting, Tilmann and Raftery, Adrian E.",
+      "title": "Strictly Proper Scoring Rules, Prediction, and Estimation",
+      "journal": "Journal of the American Statistical Association",
+      "year": "2007",
+      "volume": "102",
+      "number": "477",
+      "pages": "359--378",
+      "doi": "10.1198/016214506000001437"
+    },
+    "source_url": "https://api.crossref.org/works/10.1198%2F016214506000001437",
+    "http_status": 200,
+    "resolved_url": "https://api.crossref.org/works/10.1198%2F016214506000001437",
+    "sha256": "523cb16b10f120dd0b030dbf0816caa5fc8a0cd1e470f1d741d3079c2762dbeb",
+    "registered_metadata": {
+      "DOI": "10.1198/016214506000001437",
+      "title": [
+        "Strictly Proper Scoring Rules, Prediction, and Estimation"
+      ],
+      "subtitle": [],
+      "author": [
+        {
+          "given": "Tilmann",
+          "family": "Gneiting",
+          "sequence": "first",
+          "affiliation": [],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Adrian E",
+          "family": "Raftery",
+          "sequence": "additional",
+          "affiliation": [],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        }
+      ],
+      "container-title": [
+        "Journal of the American Statistical Association"
+      ],
+      "published": {
+        "date-parts": [
+          [
+            2007,
+            3
+          ]
+        ]
+      },
+      "published-print": {
+        "date-parts": [
+          [
+            2007,
+            3
+          ]
+        ]
+      },
+      "issued": {
+        "date-parts": [
+          [
+            2007,
+            3
+          ]
+        ]
+      },
+      "volume": "102",
+      "issue": "477",
+      "page": "359-378",
+      "type": "journal-article",
+      "URL": "https://doi.org/10.1198/016214506000001437",
+      "link": [
+        {
+          "URL": "http://www.tandfonline.com/doi/pdf/10.1198/016214506000001437",
+          "content-type": "unspecified",
+          "content-version": "vor",
+          "intended-application": "similarity-checking"
+        }
+      ],
+      "relation": {},
+      "publisher": "Informa UK Limited",
+      "resource": {
+        "primary": {
+          "URL": "http://www.tandfonline.com/doi/abs/10.1198/016214506000001437"
+        }
+      }
+    }
+  },
+  {
+    "key": "breiman2001random",
+    "checked_at_utc": "2026-09-09T11:58:54.546230+00:00",
+    "source_bib": {
+      "key": "breiman2001random",
+      "type": "article",
+      "author": "Breiman, Leo",
+      "title": "Random Forests",
+      "journal": "Machine Learning",
+      "year": "2001",
+      "volume": "45",
+      "pages": "5--32",
+      "doi": "10.1023/A:1010933404324"
+    },
+    "source_url": "https://api.crossref.org/works/10.1023%2FA%3A1010933404324",
+    "http_status": 200,
+    "resolved_url": "https://api.crossref.org/works/10.1023%2FA%3A1010933404324",
+    "sha256": "04c1d1bbc380f67bff6450a63dd10393ca0e250ababd457be584cc3f0288cb3f",
+    "registered_metadata": {
+      "DOI": "10.1023/a:1010933404324",
+      "title": [
+        "Random Forests"
+      ],
+      "subtitle": [],
+      "author": [
+        {
+          "given": "Leo",
+          "family": "Breiman",
+          "sequence": "first",
+          "affiliation": [],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        }
+      ],
+      "container-title": [
+        "Machine Learning"
+      ],
+      "published": {
+        "date-parts": [
+          [
+            2001,
+            10
+          ]
+        ]
+      },
+      "published-print": {
+        "date-parts": [
+          [
+            2001,
+            10
+          ]
+        ]
+      },
+      "issued": {
+        "date-parts": [
+          [
+            2001,
+            10
+          ]
+        ]
+      },
+      "volume": "45",
+      "issue": "1",
+      "page": "5-32",
+      "type": "journal-article",
+      "URL": "https://doi.org/10.1023/a:1010933404324",
+      "link": [
+        {
+          "URL": "https://link.springer.com/content/pdf/10.1023/A:1010933404324.pdf",
+          "content-type": "application/pdf",
+          "content-version": "vor",
+          "intended-application": "text-mining"
+        },
+        {
+          "URL": "https://link.springer.com/article/10.1023/A:1010933404324/fulltext.html",
+          "content-type": "text/html",
+          "content-version": "vor",
+          "intended-application": "text-mining"
+        },
+        {
+          "URL": "https://link.springer.com/content/pdf/10.1023/A:1010933404324.pdf",
+          "content-type": "application/pdf",
+          "content-version": "vor",
+          "intended-application": "similarity-checking"
+        }
+      ],
+      "relation": {},
+      "assertion": [
+        {
+          "value": "This content has been made available to all.",
+          "name": "free",
+          "label": "Free to read"
+        }
+      ],
+      "publisher": "Springer Science and Business Media LLC",
+      "resource": {
+        "primary": {
+          "URL": "https://link.springer.com/10.1023/A:1010933404324"
+        }
+      }
+    }
+  },
+  {
+    "key": "chen2016xgboost",
+    "checked_at_utc": "2026-09-09T11:58:54.780612+00:00",
+    "source_bib": {
+      "key": "chen2016xgboost",
+      "type": "inproceedings",
+      "author": "Chen, Tianqi and Guestrin, Carlos",
+      "title": "{XGBoost}: A Scalable Tree Boosting System",
+      "booktitle": "Proceedings of the 22nd ACM SIGKDD International Conference on Knowledge Discovery and Data Mining",
+      "year": "2016",
+      "pages": "785--794",
+      "publisher": "ACM",
+      "doi": "10.1145/2939672.2939785"
+    },
+    "source_url": "https://api.crossref.org/works/10.1145%2F2939672.2939785",
+    "http_status": 200,
+    "resolved_url": "https://api.crossref.org/works/10.1145%2F2939672.2939785",
+    "sha256": "c225f032dd39f0a7157b93a0b0b57f1ae18af2144838c9f4a84ce854f8035dc2",
+    "registered_metadata": {
+      "DOI": "10.1145/2939672.2939785",
+      "title": [
+        "XGBoost"
+      ],
+      "subtitle": [
+        "A Scalable Tree Boosting System"
+      ],
+      "author": [
+        {
+          "given": "Tianqi",
+          "family": "Chen",
+          "sequence": "first",
+          "affiliation": [
+            {
+              "name": "University of Washington, Seattle, WA, USA"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Carlos",
+          "family": "Guestrin",
+          "sequence": "additional",
+          "affiliation": [
+            {
+              "name": "University of Washington, Seattle, WA, USA"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        }
+      ],
+      "container-title": [
+        "Proceedings of the 22nd ACM SIGKDD International Conference on Knowledge Discovery and Data Mining"
+      ],
+      "published": {
+        "date-parts": [
+          [
+            2016,
+            8,
+            13
+          ]
+        ]
+      },
+      "published-print": {
+        "date-parts": [
+          [
+            2016,
+            8,
+            13
+          ]
+        ]
+      },
+      "published-online": {
+        "date-parts": [
+          [
+            2016,
+            8,
+            13
+          ]
+        ]
+      },
+      "issued": {
+        "date-parts": [
+          [
+            2016,
+            8,
+            13
+          ]
+        ]
+      },
+      "page": "785-794",
+      "type": "proceedings-article",
+      "URL": "https://doi.org/10.1145/2939672.2939785",
+      "link": [
+        {
+          "URL": "https://dl.acm.org/doi/10.1145/2939672.2939785",
+          "content-type": "unspecified",
+          "content-version": "vor",
+          "intended-application": "text-mining"
+        },
+        {
+          "URL": "https://dl.acm.org/doi/pdf/10.1145/2939672.2939785",
+          "content-type": "application/pdf",
+          "content-version": "vor",
+          "intended-application": "syndication"
+        },
+        {
+          "URL": "https://dl.acm.org/doi/pdf/10.1145/2939672.2939785",
+          "content-type": "unspecified",
+          "content-version": "vor",
+          "intended-application": "similarity-checking"
+        }
+      ],
+      "relation": {
+        "is-referenced-by": [
+          {
+            "id-type": "doi",
+            "id": "10.1186/s13007-026-01545-2",
+            "asserted-by": "object"
+          },
+          {
+            "id-type": "doi",
+            "id": "10.1007/s43621-026-03407-2",
+            "asserted-by": "object"
+          }
+        ],
+        "has-part": [
+          {
+            "id-type": "doi",
+            "id": "10.5194/acp-20-8063-2020",
+            "asserted-by": "object"
+          }
+        ]
+      },
+      "assertion": [
+        {
+          "value": "2016-08-13",
+          "order": 3,
+          "name": "published",
+          "label": "Published",
+          "group": {
+            "name": "publication_history",
+            "label": "Publication History"
+          }
+        }
+      ],
+      "publisher": "ACM",
+      "resource": {
+        "primary": {
+          "URL": "https://dl.acm.org/doi/10.1145/2939672.2939785"
+        }
+      }
+    }
+  },
+  {
+    "key": "ke2017lightgbm",
+    "checked_at_utc": "2026-09-09T11:58:55.394149+00:00",
+    "source_bib": {
+      "key": "ke2017lightgbm",
+      "type": "inproceedings",
+      "author": "Ke, Guolin and Meng, Qi and Finley, Thomas and Wang, Taifeng and Chen, Wei and Ma, Weidong and Ye, Qiwei and Liu, Tie-Yan",
+      "title": "{LightGBM}: A Highly Efficient Gradient Boosting Decision Tree",
+      "booktitle": "Advances in Neural Information Processing Systems",
+      "year": "2017",
+      "volume": "30",
+      "pages": "3146--3154",
+      "url": "https://proceedings.neurips.cc/paper/2017/hash/6449f44a102fde848669bdd9eb6b76fa-Abstract.html"
+    },
+    "source_url": "https://proceedings.neurips.cc/paper/2017/hash/6449f44a102fde848669bdd9eb6b76fa-Abstract.html",
+    "http_status": 200,
+    "resolved_url": "https://proceedings.neurips.cc/paper/2017/hash/6449f44a102fde848669bdd9eb6b76fa-Abstract.html",
+    "sha256": "7143ec14aa61edd87aa5959d5a4abaf5846d79cdd82da8d8c647fb72ca29fd2a",
+    "primary_metadata_tags": [
+      "<meta name=\"citation_title\" content=\"LightGBM: A Highly Efficient Gradient Boosting Decision Tree\">",
+      "<meta name=\"citation_author\" content=\"Ke, Guolin\">",
+      "<meta name=\"citation_author\" content=\"Meng, Qi\">",
+      "<meta name=\"citation_author\" content=\"Finley, Thomas\">",
+      "<meta name=\"citation_author\" content=\"Wang, Taifeng\">",
+      "<meta name=\"citation_author\" content=\"Chen, Wei\">",
+      "<meta name=\"citation_author\" content=\"Ma, Weidong\">",
+      "<meta name=\"citation_author\" content=\"Ye, Qiwei\">",
+      "<meta name=\"citation_author\" content=\"Liu, Tie-Yan\">",
+      "<meta name=\"citation_journal_title\" content=\"Advances in Neural Information Processing Systems\">",
+      "<meta name=\"citation_volume\" content=\"30\">",
+      "<meta name=\"citation_pdf_url\" content=\"https://proceedings.neurips.cc/paper_files/paper/2017/file/6449f44a102fde848669bdd9eb6b76fa-Paper.pdf\">",
+      "<meta name=\"citation_publication_date\" content=\"2017\">"
+    ],
+    "page_title": [
+      "LightGBM: A Highly Efficient Gradient Boosting Decision Tree"
+    ]
+  }
+]

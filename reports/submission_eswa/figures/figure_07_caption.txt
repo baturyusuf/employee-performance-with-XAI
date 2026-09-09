@@ -1,0 +1,1 @@
+Partial cross-dataset protocol replication on HRDataset_v14. Points and bars show five-repetition means and observed ranges, not confidence intervals. Three- and four-class target formulations are different estimands and must not be compared as an improvement sequence.

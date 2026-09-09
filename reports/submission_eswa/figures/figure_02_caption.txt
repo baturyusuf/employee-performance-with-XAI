@@ -1,0 +1,1 @@
+Nine-system P3 benchmark under macro-F1 selection. Metric-specific leaders differ; the hard-label baselines are not probability comparators.

@@ -306,3 +306,11 @@ V2-033 atomic-publication consequence on 2026-07-14: transient Windows antivirus
 - Remove visible claim codes and the full digest from ordinary manuscript prose. Retain complete claim IDs, selectors, values, qualifiers, and hashes in the Supplementary Evidence Ledger.
 - Add only the nine source-verified Round 2 core-method references. Preserve the bounded contribution statement and prohibit world-first, exhaustive-review, leakage-free, target-equivalence, fairness, causal, prospective-validation, and deployment claims.
 - Treat scientific rewriting as complete after deterministic package validation and full regression. Continue to block release/tag/DOI creation, raw-data redistribution, software-licence selection, ethics/IRB and consent wording, Git-history action, and author declarations pending separate decisions.
+
+## 2026-09-09 — Retarget the approved science to ESWA
+
+- Preserve the approved Round 2 claim digest as the sole numerical boundary and create an additive ESWA package without changing `manuscript/mdpi_information/main.md` or historical submission evidence.
+- Position the contribution as an operational intelligent-system audit protocol, with a bounded employee-performance application and no new-algorithm, world-first, prospective, causal, fairness-certification, or deployment-readiness claim.
+- Use the current official double-anonymized review workflow, APA 7 author-year references, a 250-word abstract limit, one to seven keywords, and three to five highlights of at most 85 characters. Keep the graphical abstract optional because the current guide does not require one.
+- Supply editable DOCX, compiled PDF, LaTeX source, separate identifying title page, highlights, supplement, cover letter, portal metadata, declaration worksheets, verified literature additions, anonymous evidence, and reproducibility receipts.
+- Mark the package scientifically and structurally reviewed while keeping `submission_ready=false` until both authors complete and approve identity, correspondence, CRediT, funding, interests, ethics/consent, data/software rights, AI disclosure, acknowledgments, reviewer conflicts, title, cover letter, and final submission choices.

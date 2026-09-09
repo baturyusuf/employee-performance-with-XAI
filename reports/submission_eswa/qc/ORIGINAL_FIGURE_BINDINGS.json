@@ -1,0 +1,44 @@
+[
+  {
+    "figure": 1,
+    "source": "manuscript/mdpi_information/assets/figures/main/figure_01_audit_protocol.png",
+    "sha256": "00c09d2ed1c673ee0a1b1a7747af7d6bdf4825da0b4b5196f0a16ee681e32bd6",
+    "destination": "figures/figure_01.png"
+  },
+  {
+    "figure": 2,
+    "source": "manuscript/mdpi_information/phase5b_figures/figure_02_nine_system_benchmark.png",
+    "sha256": "d4213b6644ce30fe7bc9ee264820e4d12089fa53a1d07555e368d23ee52e984d",
+    "destination": "figures/figure_02.png"
+  },
+  {
+    "figure": 3,
+    "source": "manuscript/mdpi_information/assets/figures/main/figure_03_feature_policy_sensitivity.png",
+    "sha256": "b1161e7ad6aa4ab5d586a0094bd9d879b78852293ffd97c62cce6d7460285573",
+    "destination": "figures/figure_03.png"
+  },
+  {
+    "figure": 4,
+    "source": "manuscript/mdpi_information/assets/figures/main/figure_05_global_grouped_shap.png",
+    "sha256": "f383e206b54776375b9e3495838291d3ad65dd2dd06b21b97959b79ae8825a07",
+    "destination": "figures/figure_04.png"
+  },
+  {
+    "figure": 5,
+    "source": "manuscript/mdpi_information/assets/figures/main/figure_06_shap_stability.png",
+    "sha256": "bc6b41acb78f9f3d450e8081cc312a02ea9c411c913b64022e9fd221158bb90b",
+    "destination": "figures/figure_05.png"
+  },
+  {
+    "figure": 6,
+    "source": "manuscript/mdpi_information/assets/figures/main/figure_04_calibration.png",
+    "sha256": "f4adcf7e05787c41610e6fea111545fa8ea5bfcfa326e5d0eda603efcd3cd724",
+    "destination": "figures/figure_06.png"
+  },
+  {
+    "figure": 7,
+    "source": "manuscript/mdpi_information/assets/figures/main/figure_07_hrdataset_replication.png",
+    "sha256": "9f88c25d44130af7675f14ecb5a3b2d4bc48fa37f593754dc9064bf43f90d2f8",
+    "destination": "figures/figure_07.png"
+  }
+]

@@ -848,3 +848,9 @@ The generated package validates with 11 files, 117 active claims, 99 numerical c
 The pre-commit portability audit identified that the new manifest-bound directory did not yet inherit a `-text` rule. Added an exact package-path attribute and normalized external manuscript/document hashes so validation is stable across Windows and Unix checkouts. The rebuilt package passed all focused gates, and all ten manifest-declared staged blobs matched their recorded SHA-256 values exactly.
 
 Committed the complete Round 2 rewrite as `1c43ec7918313c35d851736dc1f9918900401598` (`docs(research): complete approved round2 manuscript rewrite`). The package revalidated from the clean commit. The production repository gate passed with 2,229 tracked files, 77 resolved README links, 34 issue rows, and zero raw-data, environment, large-file, secret, or machine-path findings. A normal push advanced `origin/revision/round2-major-v4` from `08619b2` to `1c43ec7`; no tag, release, DOI, raw publication, history rewrite, licence, ethics statement, or author declaration was created.
+
+## ESWA package build — 2026-09-09
+
+Created branch `codex/eswa-submission-preparation` from `eb5ada99172ffbe8fbedefae8caae213a73586c2`. Read the finalization handoff in its required order, audited official journal instructions, inspected the frozen evidence, and generated the additive ESWA workspace. No scientific training, model selection, bootstrap analysis, employee-level export, paid API call, portal action, release, or history rewrite was performed.
+
+Built four DOCX files, three stable PDFs, and two LaTeX sources with Pandoc, the official Elsevier `elsarticle` class, APA CSL, and Tectonic. Rebuilt figures 1, 2, 3, 5, 6, and 7 from existing aggregate evidence and preserved the canonical Figure 4. Reorganized the supplement into readable compact tables plus exact CSV peers after visual inspection identified wide-table overflow.

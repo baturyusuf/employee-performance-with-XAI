@@ -1,0 +1,247 @@
+{
+  "scientific_and_format_qc": "PASS",
+  "submission_ready": false,
+  "checks": [
+    {
+      "check": "Abstract length",
+      "passed": true,
+      "severity": "required",
+      "evidence": "229 words; limit 250"
+    },
+    {
+      "check": "Keyword count",
+      "passed": true,
+      "severity": "required",
+      "evidence": "6 keywords; journal range 1–7; project cap 6"
+    },
+    {
+      "check": "Highlight count",
+      "passed": true,
+      "severity": "required",
+      "evidence": "4 highlights"
+    },
+    {
+      "check": "Highlight 1 length",
+      "passed": true,
+      "severity": "required",
+      "evidence": "70 characters; limit 85"
+    },
+    {
+      "check": "Highlight 2 length",
+      "passed": true,
+      "severity": "required",
+      "evidence": "67 characters; limit 85"
+    },
+    {
+      "check": "Highlight 3 length",
+      "passed": true,
+      "severity": "required",
+      "evidence": "69 characters; limit 85"
+    },
+    {
+      "check": "Highlight 4 length",
+      "passed": true,
+      "severity": "required",
+      "evidence": "72 characters; limit 85"
+    },
+    {
+      "check": "Citation closure: cited keys resolve",
+      "passed": true,
+      "severity": "required",
+      "evidence": "unresolved=[]"
+    },
+    {
+      "check": "Citation closure: bibliography entries cited",
+      "passed": true,
+      "severity": "required",
+      "evidence": "uncited=[]; bibliography=42"
+    },
+    {
+      "check": "Figure 1 cited and supplied",
+      "passed": true,
+      "severity": "required",
+      "evidence": "caption/reference and PNG present"
+    },
+    {
+      "check": "Figure 2 cited and supplied",
+      "passed": true,
+      "severity": "required",
+      "evidence": "caption/reference and PNG present"
+    },
+    {
+      "check": "Figure 3 cited and supplied",
+      "passed": true,
+      "severity": "required",
+      "evidence": "caption/reference and PNG present"
+    },
+    {
+      "check": "Figure 4 cited and supplied",
+      "passed": true,
+      "severity": "required",
+      "evidence": "caption/reference and PNG present"
+    },
+    {
+      "check": "Figure 5 cited and supplied",
+      "passed": true,
+      "severity": "required",
+      "evidence": "caption/reference and PNG present"
+    },
+    {
+      "check": "Figure 6 cited and supplied",
+      "passed": true,
+      "severity": "required",
+      "evidence": "caption/reference and PNG present"
+    },
+    {
+      "check": "Figure 7 cited and supplied",
+      "passed": true,
+      "severity": "required",
+      "evidence": "caption/reference and PNG present"
+    },
+    {
+      "check": "Table 1 present",
+      "passed": true,
+      "severity": "required",
+      "evidence": "numbered main-text table"
+    },
+    {
+      "check": "Table 2 present",
+      "passed": true,
+      "severity": "required",
+      "evidence": "numbered main-text table"
+    },
+    {
+      "check": "Table 3 present",
+      "passed": true,
+      "severity": "required",
+      "evidence": "numbered main-text table"
+    },
+    {
+      "check": "Table 4 present",
+      "passed": true,
+      "severity": "required",
+      "evidence": "numbered main-text table"
+    },
+    {
+      "check": "Table 5 present",
+      "passed": true,
+      "severity": "required",
+      "evidence": "numbered main-text table"
+    },
+    {
+      "check": "Table 6 present",
+      "passed": true,
+      "severity": "required",
+      "evidence": "numbered main-text table"
+    },
+    {
+      "check": "Table 7 present",
+      "passed": true,
+      "severity": "required",
+      "evidence": "numbered main-text table"
+    },
+    {
+      "check": "Table 8 present",
+      "passed": true,
+      "severity": "required",
+      "evidence": "numbered main-text table"
+    },
+    {
+      "check": "Table 9 present",
+      "passed": true,
+      "severity": "required",
+      "evidence": "numbered main-text table"
+    },
+    {
+      "check": "Anonymous text/evidence identity scan",
+      "passed": true,
+      "severity": "required",
+      "evidence": "hits=[]"
+    },
+    {
+      "check": "Anonymous DOCX identity scan: manuscript/anonymous_manuscript.docx",
+      "passed": true,
+      "severity": "required",
+      "evidence": "hits=[]"
+    },
+    {
+      "check": "Anonymous DOCX identity scan: supplement/supplementary_material.docx",
+      "passed": true,
+      "severity": "required",
+      "evidence": "hits=[]"
+    },
+    {
+      "check": "Internal-workflow language absent",
+      "passed": true,
+      "severity": "required",
+      "evidence": "hits=[]"
+    },
+    {
+      "check": "Deliverable exists: manuscript/final_submission.pdf",
+      "passed": true,
+      "severity": "required",
+      "evidence": "1126007 bytes"
+    },
+    {
+      "check": "Deliverable exists: manuscript/anonymous_manuscript.docx",
+      "passed": true,
+      "severity": "required",
+      "evidence": "881566 bytes"
+    },
+    {
+      "check": "Deliverable exists: manuscript/main.tex",
+      "passed": true,
+      "severity": "required",
+      "evidence": "89928 bytes"
+    },
+    {
+      "check": "Deliverable exists: manuscript/references.bib",
+      "passed": true,
+      "severity": "required",
+      "evidence": "16431 bytes"
+    },
+    {
+      "check": "Deliverable exists: supplement/Supplementary_Material.pdf",
+      "passed": true,
+      "severity": "required",
+      "evidence": "64047 bytes"
+    },
+    {
+      "check": "Deliverable exists: supplement/supplementary_material.docx",
+      "passed": true,
+      "severity": "required",
+      "evidence": "20599 bytes"
+    },
+    {
+      "check": "Deliverable exists: declarations/TITLE_PAGE.docx",
+      "passed": true,
+      "severity": "required",
+      "evidence": "12152 bytes"
+    },
+    {
+      "check": "Deliverable exists: highlights/HIGHLIGHTS.docx",
+      "passed": true,
+      "severity": "required",
+      "evidence": "10842 bytes"
+    },
+    {
+      "check": "Deliverable exists: cover_letter/COVER_LETTER.pdf",
+      "passed": true,
+      "severity": "required",
+      "evidence": "3164 bytes"
+    },
+    {
+      "check": "DOCX visual render",
+      "passed": false,
+      "severity": "environmental",
+      "evidence": "Bundled renderer cannot run because LibreOffice soffice.exe is unavailable; equivalent PDFs were rendered and inspected."
+    },
+    {
+      "check": "Author decisions complete",
+      "passed": false,
+      "severity": "submission_blocker",
+      "evidence": "47 unresolved status markers across declaration drafts"
+    }
+  ],
+  "manifest_entries": 17
+}

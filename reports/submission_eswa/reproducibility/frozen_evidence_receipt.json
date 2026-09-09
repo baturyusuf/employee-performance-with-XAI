@@ -1,0 +1,34 @@
+{
+  "status": "PASS_SOURCE_BINDINGS",
+  "claim_digest": "751208d036597461606bd02d68bfa9e642a4aa5ecf5df2df3fd7e46b99084aea",
+  "matrix_rows": 129,
+  "active_claims": 117,
+  "active_numeric_claims": 99,
+  "source_files_rehashed": 40,
+  "derived_rows_recalculated": 18,
+  "candidate_changes": [
+    37,
+    60
+  ],
+  "metric_leader_changes": [
+    6,
+    9
+  ],
+  "full_ordering_changes": [
+    9,
+    9
+  ],
+  "hr_exact_features": [
+    "EmpJobRole",
+    "EngagementSurvey",
+    "EmpJobSatisfaction",
+    "SpecialProjectsCount",
+    "DaysLateLast30",
+    "Absences",
+    "ExperienceYearsAtThisCompany"
+  ],
+  "hr_alias_delta_rows_recalculated": 32,
+  "manuscript": "reports/submission_eswa/manuscript/main.md",
+  "manuscript_sha256": "c08219ec7bcf1797aae1770665a15fd9431a6844951cb0b276d1765c46538c0b",
+  "limitation": "Exact source and number-occurrence checks are distinct from semantic manuscript review. No new model fit or employee-level prediction recomputation was performed."
+}

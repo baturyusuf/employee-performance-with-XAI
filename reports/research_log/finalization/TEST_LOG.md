@@ -898,3 +898,11 @@ Push/recovery gate: the normal push timed out after 184 seconds with no remote r
 - Post-log/issue/portability focus: 25 passed in 1.03 seconds; explicit package validation and `git diff --check` passed.
 - Staged compact-package audit: all ten manifest-declared non-manifest files matched their staged Git blobs by SHA-256; the closed directory contains eleven files and uses an exact `-text` portability rule.
 - Clean post-commit repository gate at `1c43ec7918313c35d851736dc1f9918900401598`: exit 0; 2,229 tracked files, 77 README links, 34 issue rows, and zero raw-data, environment, large-file, secret, or machine-path findings. The Round 2 package revalidated immediately before the gate.
+
+## ESWA author-review package — 2026-09-09
+
+- Frozen-evidence audit: exit 0; digest `751208d...`, 129 matrix rows, 117 active claims, 99 numerical claims, 40 source files rehashed, 18 derived summaries and 32 HR alias deltas recalculated, with 37/60 candidate changes, 6/9 metric-leader changes, and 9/9 full-ordering changes verified.
+- Final package QC: PASS with zero required failures across 40 checks. Abstract 229/250 words; six keywords; four highlights of 67–72 characters; 42/42 references cited and resolved; seven figures and nine main tables present; anonymous Markdown, evidence, and DOCX XML scans found zero author-identity hits.
+- Typesetting: main PDF 33 A4 pages and supplement PDF 11 A4 pages; both carry blank author metadata. All pages of the main PDF and the rebuilt supplement were rendered and visually inspected. LaTeX compilation completed; remaining box warnings were visually non-clipping after the supplement redesign.
+- DOCX structural generation and XML anonymity checks passed. The bundled DOCX visual renderer could not execute because LibreOffice `soffice.exe` is absent in the environment; equivalent generated PDFs were used for visual layout review, and this environmental limitation is explicit in `qc/FINAL_QC.md`.
+- Submission readiness intentionally remains false because declaration and author-approval markers are unresolved; this is a correct blocker state rather than a scientific or format failure.

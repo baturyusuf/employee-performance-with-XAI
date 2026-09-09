@@ -1,0 +1,62 @@
+[
+  {
+    "figure": 1,
+    "sources": [
+      {
+        "path": "reports/submission_eswa/manuscript/main.md",
+        "sha256": "5f7ede45efc9d32e5cee78ba0c9a130e66fbf9a7766f93f0f56ac4ae0b1e64e1"
+      }
+    ],
+    "caption": "Audit protocol for intelligent employee-performance prediction. Training-only operations are isolated from held-out assessment. The diagram was drawn programmatically with AI-assisted coding and checked against the reported procedure."
+  },
+  {
+    "figure": 2,
+    "sources": [
+      {
+        "path": "reports/research_log/major_revision_v3/phase1b_ordinal_benchmark/aggregate_metrics.csv",
+        "sha256": "b7dcd0fa01f40c6d11450bb4afd32b1e768f7b301ca804674d8ae589f5a58edf"
+      }
+    ],
+    "caption": "Nine-system P3 benchmark under macro-F1 selection. Metric-specific leaders differ; the hard-label baselines are not probability comparators."
+  },
+  {
+    "figure": 3,
+    "sources": [
+      {
+        "path": "reports/research_log/major_revision_v3/phase1d_policy_retuning/aggregate_metrics.csv",
+        "sha256": "9ebbd72115f070d4de127530d908c91b6b2f40c90deda019a817e7212570bced"
+      }
+    ],
+    "caption": "Nominal-XGBoost information-policy sensitivity under fixed and independently retuned schedules. Counts are retained features. P0 is an information-rich diagnostic comparator; P3/P4/P5 changes confound timing restrictions with feature count and information loss. No prospective validity is established."
+  },
+  {
+    "figure": 5,
+    "sources": [
+      {
+        "path": "reports/research_log/major_revision_v3/phase2a_shap_stability_faithfulness/stability_summary.csv",
+        "sha256": "4329e361ae3d006474efa724b4ef4b82d361ce4a3b3fb667f0b7169e0fbc0496"
+      }
+    ],
+    "caption": "Explanation ranking stability across outer folds, model seeds and outer-training resamples. Points are means and bars are observed ranges across dependent pairs, not confidence intervals."
+  },
+  {
+    "figure": 6,
+    "sources": [
+      {
+        "path": "reports/research_log/major_revision_v3/phase2b_calibration_diagnostics/calibration_metric_summary.csv",
+        "sha256": "612ec6a3b69d5bf697aad4919cb4281d01718c24e983c5200c427fc522b3ae3a"
+      }
+    ],
+    "caption": "Raw and cross-fitted sigmoid probability diagnostics for P3 nominal XGBoost. Sigmoid improves several scores but worsens the top-label calibration-error point estimate. These retrospective diagnostics do not validate future probabilities."
+  },
+  {
+    "figure": 7,
+    "sources": [
+      {
+        "path": "reports/research_log/major_revision_v3/phase3a_hrdataset_sensitivity/variability_summary.csv",
+        "sha256": "1725d5161c414f21fe353fe01cf685cffc59ef5dde1b5253e0bf494b47659cd2"
+      }
+    ],
+    "caption": "Partial cross-dataset protocol replication on HRDataset_v14. Points and bars show five-repetition means and observed ranges, not confidence intervals. Three- and four-class target formulations are different estimands and must not be compared as an improvement sequence."
+  }
+]

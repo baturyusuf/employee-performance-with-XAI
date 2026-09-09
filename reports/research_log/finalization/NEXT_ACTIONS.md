@@ -63,3 +63,11 @@ The compact publication-support export is tracked in Git and linked from README.
 4. Manual submission actions: complete ethics/IRB and consent wording, author contributions, affiliations, funding, conflicts, acknowledgments, AI disclosure, and journal-template fields; obtain the official target-journal class/toolchain and inspect the compiled PDF.
 5. Manual legal/release actions: resolve dataset source/right chains and redistribution permissions, select a software licence, decide any authorized Git-history strategy, and approve an exact release commit/tag/archive/DOI.
 6. Do not widen the approved scientific claim boundary, create a release/tag/DOI, publish raw data, rewrite history, or invent author/institution declarations without the required separate authorization.
+
+## ESWA submission-day sequence — 2026-09-09
+
+1. Both authors complete and approve `reports/submission_eswa/declarations/AUTHOR_DECISIONS.md` and the identifying declarations/title page.
+2. Resolve data-source and redistribution wording, software-licence wording, ethics/consent determination, complete AI disclosure, corresponding-author details, and reviewer conflicts with verified facts.
+3. Synchronize the approved title, author metadata, abstract, keywords, cover letter, and portal worksheet; rebuild artifacts and require `qc/FINAL_QC.json` to report `submission_ready=true`.
+4. Recheck the authenticated Editorial Manager fields and journal guide on the actual submission date, then upload the anonymous manuscript, anonymous supplement/evidence, title page, highlights, cover letter, and required declarations under their correct file designations.
+5. Submission, release/tag/DOI creation, public data upload, and Git-history action remain separate explicit actions.
