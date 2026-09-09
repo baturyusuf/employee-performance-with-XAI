@@ -295,3 +295,14 @@ V2-033 atomic-publication consequence on 2026-07-14: transient Windows antivirus
 - Decision: keep `leader_changed`, `full_ordering_changed`, selected-candidate changes, and metric-effect magnitudes separate; no binary material-dependence conclusion is authorized.
 - Decision: treat restricted-canonical 309 versus exclusion/refit 309 as the primary HR target-alias comparison and report historical 311 versus restricted 309 only as a fit-free sample-removal effect.
 - Decision: freeze claim-set SHA-256 `751208d036597461606bd02d68bfa9e642a4aa5ecf5df2df3fd7e46b99084aea` with manuscript, bibliography, and reviewer-response authorization false pending explicit digest-specific user approval.
+
+## 2026-09-09 — Apply the approved Round 2 claim boundary
+
+- The user explicitly approved claim-set SHA-256 `751208d036597461606bd02d68bfa9e642a4aa5ecf5df2df3fd7e46b99084aea` as the only valid scientific boundary for the Round 2 manuscript, bibliography, and reviewer-response rewrite.
+- Require the main text to expose selection-objective sensitivity, extreme-class failure, P3→P4 timing/information sensitivity, all six subgroup attributes, HR target-mapping sensitivity, and CV-design sensitivity. State explicitly that aggregate QWK/MAE gains do not guarantee rating-4 success.
+- Keep selected-candidate changes, metric-leader changes, full-ordering changes, and model/metric effect magnitudes separate. Do not convert a lower-order swap into a binary material-dependence verdict.
+- Preserve the historical 311-row HR result; identify 311→309 only as fit-free sample removal; attribute refitting/data-rule sensitivity only to the matched 309↔309 comparison.
+- Do not add an MAE- or RPS-selected third regime after inspecting the Round 2 results.
+- Remove visible claim codes and the full digest from ordinary manuscript prose. Retain complete claim IDs, selectors, values, qualifiers, and hashes in the Supplementary Evidence Ledger.
+- Add only the nine source-verified Round 2 core-method references. Preserve the bounded contribution statement and prohibit world-first, exhaustive-review, leakage-free, target-equivalence, fairness, causal, prospective-validation, and deployment claims.
+- Treat scientific rewriting as complete after deterministic package validation and full regression. Continue to block release/tag/DOI creation, raw-data redistribution, software-licence selection, ethics/IRB and consent wording, Git-history action, and author declarations pending separate decisions.

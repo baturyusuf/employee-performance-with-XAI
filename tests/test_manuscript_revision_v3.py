@@ -3,6 +3,7 @@ from __future__ import annotations
 import json
 import csv
 import re
+import subprocess
 from pathlib import Path
 
 import pytest
@@ -11,11 +12,23 @@ from src.governance import manuscript_revision_v3 as revision
 
 
 ROOT = Path(__file__).resolve().parents[1]
+HISTORICAL_MANUSCRIPT_COMMIT = "5320afd1a5abcac6d198355c11875158961749b5"
+
+
+def _historical_text(path: str) -> str:
+    return subprocess.run(
+        ["git", "show", f"{HISTORICAL_MANUSCRIPT_COMMIT}:{path}"],
+        cwd=ROOT,
+        check=True,
+        capture_output=True,
+        text=True,
+        encoding="utf-8",
+    ).stdout
 
 
 def test_current_manuscript_matches_approved_claim_boundary() -> None:
     claims = revision.load_approved_claims()
-    markdown = (ROOT / "manuscript/mdpi_information/main.md").read_text(encoding="utf-8")
+    markdown = _historical_text("manuscript/mdpi_information/main.md")
     tex = revision.markdown_to_tex(markdown)
 
     report = revision.validate_manuscript(markdown, tex, claims)
@@ -29,9 +42,9 @@ def test_current_manuscript_matches_approved_claim_boundary() -> None:
 
 
 def test_generated_latex_preserves_structural_parity() -> None:
-    markdown = (ROOT / "manuscript/mdpi_information/main.md").read_text(encoding="utf-8")
+    markdown = _historical_text("manuscript/mdpi_information/main.md")
     generated = revision.markdown_to_tex(markdown)
-    persisted = (ROOT / "manuscript/mdpi_information/main.tex").read_text(encoding="utf-8")
+    persisted = _historical_text("manuscript/mdpi_information/main.tex")
 
     assert generated == persisted
     assert generated.count(r"\begin{figure}") == 7
@@ -42,7 +55,7 @@ def test_generated_latex_preserves_structural_parity() -> None:
 
 def test_obsolete_v1_concept_is_rejected() -> None:
     claims = revision.load_approved_claims()
-    markdown = (ROOT / "manuscript/mdpi_information/main.md").read_text(encoding="utf-8")
+    markdown = _historical_text("manuscript/mdpi_information/main.md")
     changed = markdown.replace("The intended use", "A chatbot was evaluated. The intended use", 1)
 
     with pytest.raises(revision.ManuscriptRevisionError, match="Obsolete v1 concepts"):
@@ -51,7 +64,7 @@ def test_obsolete_v1_concept_is_rejected() -> None:
 
 def test_unverified_citation_is_rejected() -> None:
     claims = revision.load_approved_claims()
-    markdown = (ROOT / "manuscript/mdpi_information/main.md").read_text(encoding="utf-8")
+    markdown = _historical_text("manuscript/mdpi_information/main.md")
     changed = markdown.replace("[@tambe2019artificial", "[@unverified2026; @tambe2019artificial", 1)
 
     with pytest.raises(revision.ManuscriptRevisionError, match="Unverified citation"):
@@ -76,7 +89,7 @@ def test_results_comparison_is_numeric_claim_complete() -> None:
 def test_bibliography_uses_only_frozen_verified_keys() -> None:
     literature = json.loads((ROOT / "configs/literature_positioning_v3.json").read_text(encoding="utf-8"))
     expected = {study["citation_key"] for study in literature["studies"]}
-    bibliography = (ROOT / "manuscript/mdpi_information/references.bib").read_text(encoding="utf-8")
+    bibliography = _historical_text("manuscript/mdpi_information/references.bib")
     observed = {
         line.split("{", 1)[1].rstrip(",")
         for line in bibliography.splitlines()

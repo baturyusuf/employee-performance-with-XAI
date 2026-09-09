@@ -1,0 +1,13 @@
+manuscript_location,claim_ids,assertion_anchor,claim_set_sha256
+Related Work 2.6,R2N010,The contribution is not the novelty of any single component,751208d036597461606bd02d68bfa9e642a4aa5ecf5df2df3fd7e46b99084aea
+Methods 3.1,"C001,C009",cross-sectional sensitivity study,751208d036597461606bd02d68bfa9e642a4aa5ecf5df2df3fd7e46b99084aea
+Methods 3.4–3.6,R2N009,Preprocessing is fitted anew,751208d036597461606bd02d68bfa9e642a4aa5ecf5df2df3fd7e46b99084aea
+Results 4.1,"C101,C102,C103,C104,C105,C106,R2N003,R2E006,R2E007",Aggregate ordinal performance did not guarantee extreme-class success,751208d036597461606bd02d68bfa9e642a4aa5ecf5df2df3fd7e46b99084aea
+Results 4.2,"R2N001,R2N002,R2E001,R2E002,R2E003,R2E004,R2E005,R2E008,R2E009,R2E010",Changing the inner selection objective,751208d036597461606bd02d68bfa9e642a4aa5ecf5df2df3fd7e46b99084aea
+Results 4.3,"C201,C202,C203,C204,C205",Across five repeated designs,751208d036597461606bd02d68bfa9e642a4aa5ecf5df2df3fd7e46b99084aea
+Results 4.4,"C301,C302,C303,R2E011,R2E012,R2E013,R2E014,R2E015,R2E016,R2E017,R2E018,R2E019,R2E020",The restriction from P3 Primary Leakage-Aware,751208d036597461606bd02d68bfa9e642a4aa5ecf5df2df3fd7e46b99084aea
+Results 4.5,"C401,C402,C403,C501,C502",The top five feature families,751208d036597461606bd02d68bfa9e642a4aa5ecf5df2df3fd7e46b99084aea
+Results 4.6,"R2N005,R2E101,R2E102,R2E103,R2E104,R2E105,R2E106,R2E107,R2E108,R2E109,R2E110,R2E111,R2E112,R2E113,R2E114,R2E115,R2E116,R2E117,R2E118",At the prespecified support threshold of 30,751208d036597461606bd02d68bfa9e642a4aa5ecf5df2df3fd7e46b99084aea
+Results 4.7,"C601,C602,C603,C604,C605,C606",Refitting P3 without JobRole,751208d036597461606bd02d68bfa9e642a4aa5ecf5df2df3fd7e46b99084aea
+Results 4.8,"C701,C702,C703,R2N006,R2N007,R2E201,R2E202,R2E203,R2E204,R2E205,R2E206,R2E207,R2E208,R2E209,R2E210,R2E211,R2E212,R2E213,R2E214,R2E215,R2E216,R2E217",Across five repeated designs under the retained three-class mapping,751208d036597461606bd02d68bfa9e642a4aa5ecf5df2df3fd7e46b99084aea
+Results 4.9,"C802,C803,C804,R2N008,R2E218,R2E219,R2E220,R2E221,R2E222,R2E223,R2E224,R2E225,R2E226,R2E227,R2E228,R2E229",The two target-text/identifier disagreement rows,751208d036597461606bd02d68bfa9e642a4aa5ecf5df2df3fd7e46b99084aea

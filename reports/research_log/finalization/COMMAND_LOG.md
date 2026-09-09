@@ -834,3 +834,15 @@ Added and pushed implementation checkpoint `b42d5fafedd26e8d6ae46b76f7992b306ddc
 The generator produced a 12-file closed-world package including the manifest, plus top-level review mirrors. The exact claim digest is `751208d036597461606bd02d68bfa9e642a4aa5ecf5df2df3fd7e46b99084aea`; all manuscript/bibliography/reviewer-response edit flags remain false and network/paid-API counts are zero.
 
 The first complete pytest run had one failure after 1,053 passes because the frozen-v2 additive-source guard recognized `_v3` additions but not the already introduced `_v4` Round 2 naming convention. The guard was extended only to accept added versioned `_v4` files while continuing to require every source/config change since the v2 generation commit to have Git status `A`. The focused guard test then passed, and the second full run passed completely.
+
+## Round 2 manuscript, bibliography, and reviewer-response rewrite — 2026-09-09
+
+Matched the user's authorization to the exact approved claim digest and preserved the approved claim objects unchanged. Rewrote the Markdown manuscript, generated the LaTeX peer, appended the nine verified core-method BibTeX records, and created the Round 2 reviewer response, final review simulation, author-action register, Supplementary Evidence Ledger, claim trace, validation receipt, provenance receipt, source diff, and closed-world manifest.
+
+Added `src/governance/round2_manuscript_v4.py` and focused tests. The validator revalidates the approved claim package, requires all 99 active numerical display values in the manuscript, checks the user-mandated sensitivity sections and extreme-class boundary, rejects visible claim IDs/full digests and prohibited overclaims, enforces the exact 25+9 citation registry, and proves seven-figure/eleven-table Markdown–LaTeX parity. Historical Phase 5B tests now read the immutable `5320afd1...` manuscript and bibliography rather than constraining the current Round 2 sources.
+
+Two command invocations changed no evidence: the Windows Store `python.exe` alias was unavailable, so the project interpreter was used; one focused command named a nonexistent approval-test file and was corrected to the actual Round 2 claim-matrix test. No LaTeX engine or official MDPI class/template was found, so PDF compilation was not claimed.
+
+The generated package validates with 11 files, 117 active claims, 99 numerical claims, 34 citations, seven figures, eleven tables, zero visible claim IDs, exact Markdown/LaTeX parity, zero paid API calls, and release/submission flags false.
+
+The pre-commit portability audit identified that the new manifest-bound directory did not yet inherit a `-text` rule. Added an exact package-path attribute and normalized external manuscript/document hashes so validation is stable across Windows and Unix checkouts. The rebuilt package passed all focused gates, and all ten manifest-declared staged blobs matched their recorded SHA-256 values exactly.

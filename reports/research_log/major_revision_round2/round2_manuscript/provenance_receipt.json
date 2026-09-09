@@ -1,0 +1,34 @@
+{
+  "assembly_base_commit": "08619b2ef7f6394b48bf02586a9161188fcd26c6",
+  "claim_set_sha256": "751208d036597461606bd02d68bfa9e642a4aa5ecf5df2df3fd7e46b99084aea",
+  "controls": {
+    "author_declarations_resolved": false,
+    "doi_authorized": false,
+    "ethics_irb_resolved": false,
+    "paid_api_calls": 0,
+    "raw_data_redistribution_authorized": false,
+    "release_authorized": false,
+    "software_licence_resolved": false,
+    "tag_authorized": false
+  },
+  "inputs": {
+    "claim_matrix": {
+      "path": "reports/research_log/major_revision_round2/round2_claim_matrix/ROUND2_CLAIM_MATRIX.csv",
+      "sha256": "e4cd67a82f459aa63294ad3f94b7ff8b8e0c2d91420e79a7465aa27be6e3b47d"
+    },
+    "main_md": {
+      "normalized_text_sha256": "bafbcace3e6b3a29957e6fd39b8cea0a043212fc45f8c9c9f27c88c74a3faa8d",
+      "path": "manuscript/mdpi_information/main.md"
+    },
+    "main_tex": {
+      "normalized_text_sha256": "17197cb2d36c929b29372feccc7e5678284b390c0f37d77827bb4b30ed433d71",
+      "path": "manuscript/mdpi_information/main.tex"
+    },
+    "references_bib": {
+      "normalized_text_sha256": "49bce7390ff8ab084a3274aac3bc7758c3788bedb189361f13a33eb3a2569bee",
+      "path": "manuscript/mdpi_information/references.bib"
+    }
+  },
+  "schema_version": 1,
+  "status": "scientifically_revised_author_actions_open"
+}

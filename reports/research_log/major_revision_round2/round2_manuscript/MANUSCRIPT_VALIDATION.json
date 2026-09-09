@@ -1,0 +1,15 @@
+{
+  "active_claim_count": 117,
+  "active_numerical_claim_count": 99,
+  "citation_count": 34,
+  "claim_set_sha256": "751208d036597461606bd02d68bfa9e642a4aa5ecf5df2df3fd7e46b99084aea",
+  "figure_count": 7,
+  "full_digest_in_ordinary_prose": false,
+  "markdown_tex_parity": true,
+  "paid_api_calls": 0,
+  "release_authorized": false,
+  "status": "scientifically_revised_author_actions_open",
+  "submission_ready": false,
+  "table_count": 11,
+  "visible_claim_id_count": 0
+}

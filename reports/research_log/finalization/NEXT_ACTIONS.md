@@ -55,9 +55,11 @@ Canonical handoff inputs:
 
 The compact publication-support export is tracked in Git and linked from README. The complete 545-file canonical package is intentionally local/ignored and is not replaced by this export. Use a separately approved Release/Zenodo-sized workflow only if publication of those internals is later authorized.
 
-## Immediate Round 2 gate — 2026-09-08
+## Round 2 closeout and remaining manual gates — 2026-09-09
 
-1. Obtain an explicit user approval or rejection that identifies claim-set SHA-256 `751208d036597461606bd02d68bfa9e642a4aa5ecf5df2df3fd7e46b99084aea`.
-2. If approved, record the decision without changing the claim objects or digest, regenerate and validate the approved package, and push that approval checkpoint.
-3. Only after the approved-package checkpoint, rewrite `manuscript/mdpi_information/main.md`, regenerate `main.tex`, update `references.bib`, and draft the Round 2 reviewer response under the approved boundary.
-4. Do not infer approval from a generic continue instruction; do not create a release, tag, DOI, history rewrite, raw-data publication, or invented author/institution declaration.
+1. Completed: the user explicitly approved claim-set SHA-256 `751208d036597461606bd02d68bfa9e642a4aa5ecf5df2df3fd7e46b99084aea`, and the approved claim package was refreshed and pushed before manuscript editing.
+2. Completed: the Round 2 Markdown manuscript, generated LaTeX, 34-work bibliography, reviewer response, final review simulation, Supplementary Evidence Ledger, claim trace, validation receipt, and compact package were produced under that sole scientific boundary.
+3. Immediate repository action: create and push the tested Round 2 manuscript checkpoint, then run the clean-worktree repository gate and record its exact commit and outcome.
+4. Manual submission actions: complete ethics/IRB and consent wording, author contributions, affiliations, funding, conflicts, acknowledgments, AI disclosure, and journal-template fields; obtain the official target-journal class/toolchain and inspect the compiled PDF.
+5. Manual legal/release actions: resolve dataset source/right chains and redistribution permissions, select a software licence, decide any authorized Git-history strategy, and approve an exact release commit/tag/archive/DOI.
+6. Do not widen the approved scientific claim boundary, create a release/tag/DOI, publish raw data, rewrite history, or invent author/institution declarations without the required separate authorization.

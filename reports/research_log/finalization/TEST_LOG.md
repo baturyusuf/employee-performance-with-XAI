@@ -885,3 +885,15 @@ Push/recovery gate: the normal push timed out after 184 seconds with no remote r
 - Updated additive-source guard focus: one passed. The guard still requires every post-v2 source/config change to be additive and now accepts explicitly versioned `_v3` and `_v4` filenames.
 - Final complete pytest: exit 0; 1,054 passed, two skipped, and 11 subtests in 584.42 seconds.
 - Final unittest discovery: exit 0; 179 passed and one skipped in 8.027 seconds. Compileall over `src`, `tests`, and `tools`, `git diff --check`, claim-package validation, cross-source historical rehash, and manuscript/reference no-change checks exited 0.
+
+## Round 2 manuscript revision — 2026-09-09
+
+- Initial manuscript/package build: exit 0; 117 active claims, 99 numerical claims, 34 citations, seven figures, eleven tables, exact Markdown/LaTeX parity, zero visible claim IDs, zero paid API calls, and release/submission authorization false.
+- Historical Phase 5B plus new Round 2 manuscript focus: 15 passed in 0.52 seconds. Expanded claim-matrix/manuscript focus: 21 passed in 1.51 seconds.
+- Active-numerical-value coverage: all 99 approved numerical display values are present in the revised manuscript after normalizing the typographic minus sign; no claim code or full claim digest occurs in ordinary prose.
+- Complete current-tree pytest: exit 0; 1,061 passed, two skipped, and 11 subtests passed in 596.67 seconds.
+- Unittest discovery: exit 0; 179 passed and one skipped in 7.789 seconds.
+- Compileall over `src`, `tests`, and `tools`, explicit Round 2 package validation, and `git diff --check` exited 0. Line-ending notices were non-failing working-copy warnings.
+- No LaTeX engine or official target-journal class/template is installed; the LaTeX source is structurally validated but no compiled-PDF or visual-layout claim is made.
+- Post-log/issue/portability focus: 25 passed in 1.03 seconds; explicit package validation and `git diff --check` passed.
+- Staged compact-package audit: all ten manifest-declared non-manifest files matched their staged Git blobs by SHA-256; the closed directory contains eleven files and uses an exact `-text` portability rule.

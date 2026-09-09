@@ -1,5 +1,16 @@
 # Current Status
 
+## Round 2 manuscript rewrite — 2026-09-09
+
+- The user explicitly approved claim-set SHA-256 `751208d036597461606bd02d68bfa9e642a4aa5ecf5df2df3fd7e46b99084aea` as the sole scientific boundary for the Round 2 manuscript, bibliography, and reviewer-response rewrite.
+- `manuscript/mdpi_information/main.md` has been rewritten and `main.tex` regenerated. The main text visibly reports selection-objective sensitivity, extreme-class failure, P3→P4 timing/information sensitivity, all six subgroup attributes, HR target-mapping sensitivity, HR CV-design sensitivity, and the matched 309-row target-alias comparison.
+- Aggregate QWK/MAE improvement is explicitly separated from rating-4 success. Selection candidate changes (37/60), leader changes (6/9), full-ordering changes (9/9), and metric-effect magnitudes remain separate facts rather than one binary material-dependence claim.
+- The bibliography now contains all 25 previously verified works plus nine Round 2 core-method references. Visible claim codes and full digests are absent from ordinary manuscript prose; all 117 active claims, including 99 numerical claims, remain source/hash-bound in `SUPPLEMENTARY_EVIDENCE_LEDGER_ROUND2.csv`.
+- The deterministic `round2_manuscript/` package contains 11 files and validates 34 cited sources, seven figures, eleven tables, exact Markdown/LaTeX parity, zero paid API calls, and release authorization false.
+- The Round 2 reviewer response, final review simulation, and author-action register are complete. The scientific revision status is complete, but the manuscript is not submission-ready and no release is authorized.
+- Full current-tree regression passed 1,061 tests, two skips, and 11 subtests in 596.67 seconds. Unittest discovery passed 179 tests with one skip; compileall, package validation, and diff hygiene passed. No local LaTeX engine or official journal class/template is available, so no compiled-PDF claim is made.
+- Dataset rights/provenance, software licence, ethics/IRB, consent, author contributions, affiliations, funding, conflicts, AI disclosure, Git-history strategy, exact release/tag, and DOI remain manual blockers.
+
 ## Major-revision v3 extension — 2026-09-04
 
 - The user supplied a broader 42-part reviewer-remediation brief and requested periodic tested GitHub pushes.
