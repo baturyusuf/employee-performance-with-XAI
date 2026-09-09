@@ -1,0 +1,3 @@
+# Final Package Scope
+
+The scientific source artifacts remain authoritative at their validated repository paths; the submission-facing finalization directory contains the revised manuscript, new supplementary S4-S6 materials, policy/provenance audits, cover letter, declarations drafts, and readiness status. Existing validated S1-S3, confusion matrices, evidence ledger, and bibliography are incorporated by reference to their immutable Git identities until the official MDPI production bundle is assembled.
