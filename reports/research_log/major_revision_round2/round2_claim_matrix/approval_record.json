@@ -1,9 +1,10 @@
 {
-  "approved_at_utc": null,
-  "approved_by": null,
-  "approved_claim_set_sha256": null,
+  "approval_statement": "The user explicitly approves claim-set SHA-256 751208d036597461606bd02d68bfa9e642a4aa5ecf5df2df3fd7e46b99084aea as the sole scientific claim boundary for the Round 2 manuscript, bibliography, and reviewer-response rewrite. Release, tag, DOI, dataset redistribution rights, software licensing, ethics/IRB, and author declarations remain separately blocked.",
+  "approved_at_utc": "2026-09-09T06:37:45Z",
+  "approved_by": "user",
+  "approved_claim_set_sha256": "751208d036597461606bd02d68bfa9e642a4aa5ecf5df2df3fd7e46b99084aea",
   "claim_set_sha256": "751208d036597461606bd02d68bfa9e642a4aa5ecf5df2df3fd7e46b99084aea",
-  "decision": "pending",
-  "manuscript_editing_authorized": false,
+  "decision": "approved",
+  "manuscript_editing_authorized": true,
   "schema_version": 2
 }

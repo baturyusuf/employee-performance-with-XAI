@@ -1,7 +1,7 @@
 {
   "active_claim_count": 117,
-  "approval_status": "pending",
-  "bibliography_editing_authorized": false,
+  "approval_status": "approved",
+  "bibliography_editing_authorized": true,
   "claim_count": 129,
   "claim_set_sha256": "751208d036597461606bd02d68bfa9e642a4aa5ecf5df2df3fd7e46b99084aea",
   "disposition_counts": {
@@ -11,16 +11,16 @@
     "retained": 38,
     "superseded": 2
   },
-  "generation_commit": "b42d5fafedd26e8d6ae46b76f7992b306ddc399d",
+  "generation_commit": "35fd0cbe9ce2083ebbbe0f70add043029c4be64e",
   "historical_claim_set_sha256": "1664b188df14135d3b3de8642de3d080c25a3fbadc440615c2bd04b2f14ddabe",
-  "manuscript_editing_authorized": false,
+  "manuscript_editing_authorized": true,
   "narrative_claim_count": 30,
   "network_calls": 0,
   "numerical_claim_count": 99,
   "package_kind": "round2_claim_matrix",
   "paid_api_calls": 0,
-  "reviewer_response_editing_authorized": false,
+  "reviewer_response_editing_authorized": true,
   "schema_version": 2,
   "source_file_count": 40,
-  "status": "passed_pending_user_approval"
+  "status": "passed_approved_for_rewrite"
 }

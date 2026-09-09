@@ -1,6 +1,6 @@
 # Round 2 Claim Matrix
 
-Status: **PENDING DIGEST-SPECIFIC USER APPROVAL**. No manuscript, bibliography, or reviewer-response edit is authorized.
+Status: **APPROVED FOR ROUND 2 REWRITE**. These active claims are the sole scientific boundary for manuscript, bibliography, and reviewer-response drafting.
 
 Claim-set SHA-256: `751208d036597461606bd02d68bfa9e642a4aa5ecf5df2df3fd7e46b99084aea`
 

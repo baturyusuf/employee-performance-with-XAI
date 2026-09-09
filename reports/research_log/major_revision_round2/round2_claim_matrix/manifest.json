@@ -1,11 +1,11 @@
 {
-  "config_sha256": "865176dee5c9996b5b9d18980f2eb3e4bbe61fca2f83a1e5b4ab4ef986800a86",
+  "config_sha256": "ce3360d7e65308300323ebb5da70d948f7fdc6d6a34b4b910b80412615cc2b4e",
   "file_count_excluding_manifest": 11,
   "files": [
     {
       "path": "APPROVAL_REQUEST.md",
-      "sha256": "83a3d1880577b05469ada985238111fa1f72019f31ca50ba5e963157f960262f",
-      "size_bytes": 471
+      "sha256": "d357fe595ef2acc6f5b1f9bfc9900b6458bdee05fd012bb58774e195217b5297",
+      "size_bytes": 619
     },
     {
       "path": "DERIVED_SUMMARIES.csv",
@@ -14,8 +14,8 @@
     },
     {
       "path": "README.md",
-      "sha256": "e7bb65c7b65a6f89aaf51d7fa9e9664edb5fbf11d291871982eb18f134140a79",
-      "size_bytes": 631
+      "sha256": "69ff689902a0c77bc03def95c20fe740819f2c273fba78cf74c80ac1390ee115",
+      "size_bytes": 754
     },
     {
       "path": "RESULTS_COMPARISON_ROUND2.csv",
@@ -29,13 +29,13 @@
     },
     {
       "path": "ROUND2_CLAIM_MATRIX.csv",
-      "sha256": "e8362c3b9751f0387cf09d79c9a8d6821f1efaca143ba6c4eb6758bbdd5abc2c",
-      "size_bytes": 87556
+      "sha256": "e4cd67a82f459aa63294ad3f94b7ff8b8e0c2d91420e79a7465aa27be6e3b47d",
+      "size_bytes": 85879
     },
     {
       "path": "ROUND2_CLAIM_MATRIX.md",
-      "sha256": "074ac178641b31eddaadfaee7493c48edfca0d6635cacda5bb3c564a38e763f3",
-      "size_bytes": 67112
+      "sha256": "dc80c4faeb54a764e308060039ac56fc046de0b0c5f91d8eb1831e5ab327cc1e",
+      "size_bytes": 67148
     },
     {
       "path": "ROUND2_CROSS_SOURCE_AUDIT.md",
@@ -49,16 +49,16 @@
     },
     {
       "path": "approval_record.json",
-      "sha256": "ef3376046d2a82734b5957fedd975a671ce1e6b0a22a4bf2d2e6affad9c9f945",
-      "size_bytes": 270
+      "sha256": "58c395be8ab63ecf2b89fc43555d065d8211070bb1b46773bfa77a0b1eb2647a",
+      "size_bytes": 735
     },
     {
       "path": "provenance_receipt.json",
-      "sha256": "b92c27390e3ff78974b60a455b771e748cea475e2deb30f956a4e14a640b8f7f",
-      "size_bytes": 847
+      "sha256": "2d546b6835c8798d46255a4cac7945d97cd573100591caa05a312cf7d697b32e",
+      "size_bytes": 844
     }
   ],
-  "generation_commit": "b42d5fafedd26e8d6ae46b76f7992b306ddc399d",
+  "generation_commit": "35fd0cbe9ce2083ebbbe0f70add043029c4be64e",
   "package_kind": "round2_claim_matrix",
   "schema_version": 2
 }

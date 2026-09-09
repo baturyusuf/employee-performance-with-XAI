@@ -1,8 +1,8 @@
 # Round 2 Scientific Revision Report
 
-Status: **scientific implementation complete; claim matrix pending digest-specific user approval**
+Status: **scientific implementation complete; exact claim digest approved for rewrite**
 
-This report synthesizes the prespecified Round 2 implementation and scientific experiments. It does not rewrite the manuscript, bibliography, or reviewer response. Those files remain outside the authorized edit scope until the user explicitly approves the exact Round 2 claim digest.
+This report synthesizes the prespecified Round 2 implementation and scientific experiments. The user explicitly approved the exact Round 2 claim digest on 2026-09-09 for manuscript, bibliography, and reviewer-response rewriting; release and author/institution blockers remain separate.
 
 ## What the new evidence changes
 
@@ -83,8 +83,8 @@ The Round 2 matrix preserves all 45 historical claims and classifies every row a
 
 The cross-source audit revalidated the historical Phase 5A digest, matched all 32 historical numerical claims to the Phase 5B comparison table, rehashed all 62 historical Phase 5B manifest-bound files, and independently resolved every active Round 2 numerical claim. Historical Phase 5A and Phase 5B bytes remain unchanged.
 
-Pending claim-set SHA-256: `751208d036597461606bd02d68bfa9e642a4aa5ecf5df2df3fd7e46b99084aea`
+Approved claim-set SHA-256: `751208d036597461606bd02d68bfa9e642a4aa5ecf5df2df3fd7e46b99084aea`
 
 Review artifacts: [`ROUND2_CLAIM_MATRIX.md`](ROUND2_CLAIM_MATRIX.md), [`RESULTS_COMPARISON_ROUND2.csv`](RESULTS_COMPARISON_ROUND2.csv), [`ROUND2_SOURCE_REGISTER.csv`](ROUND2_SOURCE_REGISTER.csv), and [`ROUND2_CROSS_SOURCE_AUDIT.md`](ROUND2_CROSS_SOURCE_AUDIT.md).
 
-An explicit user decision identifying this exact digest is required before editing `manuscript/mdpi_information/main.md`, `main.tex`, `references.bib`, or drafting the Round 2 reviewer response. A generic instruction to continue is not digest approval.
+The explicit digest-specific decision authorizes editing `manuscript/mdpi_information/main.md`, regenerating `main.tex`, updating `references.bib`, and drafting the Round 2 reviewer response under this sole scientific boundary. It does not authorize release, tag, DOI, dataset redistribution, a software-licence decision, ethics/IRB wording, or author declarations.
