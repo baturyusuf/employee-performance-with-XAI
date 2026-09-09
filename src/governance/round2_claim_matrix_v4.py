@@ -449,7 +449,7 @@ def _validate_claims(claims: Sequence[Mapping[str, Any]]) -> None:
     _require(sum(row["prior_claim_id"] != "" for row in claims) == 45, "Historical claim coverage drifted.")
     for row in claims:
         _require(row["disposition"] in DISPOSITIONS, f"Invalid disposition for {row['claim_id']}.")
-        _require(row["approval_status"] == "pending_user_approval", "Claim approval was inferred.")
+        _require(row["approval_status"] in {"pending_user_approval", "approved"}, "Claim approval state is invalid.")
         source = Path(str(row["source_path"]))
         _require(source.is_file(), f"Claim source is absent: {source.as_posix()}.")
         _require(_sha256(source) == row["source_sha256"], f"Source hash drifted for {row['claim_id']}.")
@@ -472,10 +472,16 @@ def _claim_digest(claims: Sequence[Mapping[str, Any]]) -> str:
 
 
 def _matrix_md(claims: Sequence[Mapping[str, Any]], digest: str) -> str:
+    approved = all(row["approval_status"] == "approved" for row in claims)
+    status = (
+        "Status: **APPROVED FOR ROUND 2 REWRITE**. These active claims are the sole scientific boundary for manuscript, bibliography, and reviewer-response drafting."
+        if approved
+        else "Status: **PENDING DIGEST-SPECIFIC USER APPROVAL**. No manuscript, bibliography, or reviewer-response edit is authorized."
+    )
     lines = [
         "# Round 2 Claim Matrix",
         "",
-        "Status: **PENDING DIGEST-SPECIFIC USER APPROVAL**. No manuscript, bibliography, or reviewer-response edit is authorized.",
+        status,
         "",
         f"Claim-set SHA-256: `{digest}`",
         "",
@@ -578,6 +584,9 @@ def _build_outputs(generation_commit: str, config_path: Path = CONFIG) -> tuple[
         derived_path = temporary_dir / "DERIVED_SUMMARIES.csv"
         derived_path.write_bytes(derived_bytes)
         claims = _legacy_claims(config) + _new_claims(derived_path, _sha256_bytes(derived_bytes))
+        claim_approval_status = "approved" if config["user_approval"]["status"] == "approved" else "pending_user_approval"
+        for claim in claims:
+            claim["approval_status"] = claim_approval_status
         # Replace the temporary path with its final governed path without changing source bytes.
         final_derived = OUTPUT_DIR / "DERIVED_SUMMARIES.csv"
         for claim in claims:
@@ -637,6 +646,11 @@ def _build_outputs(generation_commit: str, config_path: Path = CONFIG) -> tuple[
         "paid_api_calls": 0,
         "status": "passed_pending_user_approval" if approval["status"] == "pending" else "passed_approved_for_rewrite",
     }
+    approval_boundary = (
+        "The recorded digest-specific approval authorizes manuscript, bibliography, and reviewer-response drafting under the active rows in this package. It does not authorize release, tag, DOI, raw-data publication, or resolution of licence, ethics, and author-declaration blockers."
+        if approval["status"] == "approved"
+        else "The package does not authorize manuscript, bibliography, or reviewer-response edits. A generic instruction to continue is not approval of this digest."
+    )
     readme = "\n".join(
         [
             "# Round 2 Claim-Matrix Package",
@@ -647,21 +661,38 @@ def _build_outputs(generation_commit: str, config_path: Path = CONFIG) -> tuple[
             "",
             "This additive package preserves the historical Phase 5A claim bytes, classifies every historical and Round 2 item, binds every numerical claim to one exact aggregate source row/value/hash, and binds every narrative or prohibited item to a hashed text anchor.",
             "",
-            "The package does not authorize manuscript, bibliography, or reviewer-response edits. A generic instruction to continue is not approval of this digest.",
+            approval_boundary,
             "",
         ]
     )
-    approval_request = "\n".join(
-        [
-            "# Round 2 Digest-Specific Approval Request",
-            "",
-            f"Claim-set SHA-256: `{digest}`",
-            f"Claims: `{len(claims)}`; active rewrite claims: `{provenance['active_claim_count']}`",
-            "Current decision: `pending`",
-            "",
-            "Please explicitly approve or reject this exact digest as the sole Round 2 claim boundary. Until that decision is recorded, `manuscript/mdpi_information/main.md`, `main.tex`, `references.bib`, and the Round 2 reviewer response remain outside the authorized edit scope.",
-            "",
-        ]
+    approval_request = (
+        "\n".join(
+            [
+                "# Round 2 Digest-Specific Approval Record",
+                "",
+                f"Claim-set SHA-256: `{digest}`",
+                f"Claims: `{len(claims)}`; active rewrite claims: `{provenance['active_claim_count']}`",
+                "Current decision: `approved`",
+                f"Approved by: `{approval['approved_by']}`",
+                f"Approved at UTC: `{approval['approved_at_utc']}`",
+                "",
+                str(approval["approval_statement"]),
+                "",
+            ]
+        )
+        if approval["status"] == "approved"
+        else "\n".join(
+            [
+                "# Round 2 Digest-Specific Approval Request",
+                "",
+                f"Claim-set SHA-256: `{digest}`",
+                f"Claims: `{len(claims)}`; active rewrite claims: `{provenance['active_claim_count']}`",
+                "Current decision: `pending`",
+                "",
+                "Please explicitly approve or reject this exact digest as the sole Round 2 claim boundary. Until that decision is recorded, `manuscript/mdpi_information/main.md`, `main.tex`, `references.bib`, and the Round 2 reviewer response remain outside the authorized edit scope.",
+                "",
+            ]
+        )
     )
     approval_record = {
         "schema_version": 2,
@@ -670,6 +701,7 @@ def _build_outputs(generation_commit: str, config_path: Path = CONFIG) -> tuple[
         "approved_claim_set_sha256": approval["approved_claim_set_sha256"],
         "approved_by": approval["approved_by"],
         "approved_at_utc": approval["approved_at_utc"],
+        "approval_statement": approval["approval_statement"],
         "manuscript_editing_authorized": config["controls"]["manuscript_editing_authorized"],
     }
     outputs = {
