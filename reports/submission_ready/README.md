@@ -5,18 +5,25 @@ This directory is the controlled submission-finalization workspace for the MDPI 
 ## Manuscript
 
 - `main.md` — finalized submission-facing scientific manuscript.
-- `references.bib` — byte-identical copy of the validated authoritative bibliography (assembled from the manuscript source).
+- Authoritative bibliography — `manuscript/mdpi_information/references.bib` (validated source blob recorded in `supplement/VALIDATED_SOURCE_IDENTITIES.md`).
 
-## Supplement
+## Journal-facing supplement
 
-- `supplement/TABLE_S1_FEATURE_AVAILABILITY.md`
-- `supplement/TABLE_S2_PREPROCESSING_HYPERPARAMETER_SEARCH.md`
-- `supplement/TABLE_S3_CV_SEED_CONTRACT.md`
+New finalization materials stored here:
+
 - `supplement/TABLE_S4_PER_CLASS_METRICS.md`
-- `supplement/CONFUSION_MATRICES.csv`
 - `supplement/TABLE_S5_PROTOCOL_AUDIT_GATES.md`
 - `supplement/TABLE_S6_SUBGROUP_UNCERTAINTY.md`
-- `supplement/SUPPLEMENTARY_EVIDENCE_LEDGER_ROUND2.csv`
+
+Existing validated scientific source artifacts incorporated by reference without retyping or scientific modification:
+
+- S1 — `reports/research_log/major_revision_round2/METHOD_REPRODUCIBILITY_TABLES/TABLE_S1_FEATURE_AVAILABILITY.md`
+- S2 — `reports/research_log/major_revision_round2/METHOD_REPRODUCIBILITY_TABLES/TABLE_S2_PREPROCESSING_HYPERPARAMETER_SEARCH.md`
+- S3 — `reports/research_log/major_revision_round2/METHOD_REPRODUCIBILITY_TABLES/TABLE_S3_CV_SEED_CONTRACT.md`
+- Confusion matrices — `reports/research_log/major_revision_round2/selection_objective_sensitivity/confusion_matrix.csv`
+- Supplementary Evidence Ledger — `reports/research_log/major_revision_round2/SUPPLEMENTARY_EVIDENCE_LEDGER_ROUND2.csv`
+
+`Supplement/source-copy` manifests record the exact Git blob identities so these validated sources can be copied byte-identically when the official MDPI production ZIP is assembled.
 
 ## Submission documents
 
@@ -36,6 +43,7 @@ This directory is the controlled submission-finalization workspace for the MDPI 
 - `MDPI_POLICY_VERIFICATION.md`
 - `REFERENCE_QC_STATUS.md`
 - `FIGURE_TABLE_QC_STATUS.md`
+- `TEMPLATE_COMPILE_BLOCKER.md`
 
 ## Current status
 
