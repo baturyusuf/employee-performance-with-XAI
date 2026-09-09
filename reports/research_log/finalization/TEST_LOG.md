@@ -897,3 +897,4 @@ Push/recovery gate: the normal push timed out after 184 seconds with no remote r
 - No LaTeX engine or official target-journal class/template is installed; the LaTeX source is structurally validated but no compiled-PDF or visual-layout claim is made.
 - Post-log/issue/portability focus: 25 passed in 1.03 seconds; explicit package validation and `git diff --check` passed.
 - Staged compact-package audit: all ten manifest-declared non-manifest files matched their staged Git blobs by SHA-256; the closed directory contains eleven files and uses an exact `-text` portability rule.
+- Clean post-commit repository gate at `1c43ec7918313c35d851736dc1f9918900401598`: exit 0; 2,229 tracked files, 77 README links, 34 issue rows, and zero raw-data, environment, large-file, secret, or machine-path findings. The Round 2 package revalidated immediately before the gate.

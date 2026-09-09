@@ -10,6 +10,7 @@
 - The Round 2 reviewer response, final review simulation, and author-action register are complete. The scientific revision status is complete, but the manuscript is not submission-ready and no release is authorized.
 - Full current-tree regression passed 1,061 tests, two skips, and 11 subtests in 596.67 seconds. Unittest discovery passed 179 tests with one skip; compileall, package validation, and diff hygiene passed. No local LaTeX engine or official journal class/template is available, so no compiled-PDF claim is made.
 - Dataset rights/provenance, software licence, ethics/IRB, consent, author contributions, affiliations, funding, conflicts, AI disclosure, Git-history strategy, exact release/tag, and DOI remain manual blockers.
+- Round 2 manuscript checkpoint `1c43ec7918313c35d851736dc1f9918900401598` is pushed to `origin/revision/round2-major-v4`. Its clean repository gate passed with 2,229 tracked files, 77 README links, 34 issue rows, and zero raw-data, environment, large-file, secret, or machine-path findings.
 
 ## Major-revision v3 extension — 2026-09-04
 
