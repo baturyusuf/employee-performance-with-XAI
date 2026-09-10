@@ -1,11 +1,13 @@
 import json
 from pathlib import Path
 import pandas as pd
+import pytest
 from src.experiments.eswa_repeated_selection_objective_v1 import build_schedule, validate_contract
 from src.experiments.repeated_nested_cv_v3 import TUNED_MODEL_NAMES
 from src.governance.repeated_nested_cv_run_validator_v3 import validate_repeated_nested_cv_run_v3
 
 SOURCE=Path("reports/major_revision_v3_runs/phase1c_v3_20260903T215015Z_78649c4/repeated_nested_cv")
+pytestmark=pytest.mark.skipif(not SOURCE.is_dir(),reason="local row-level Phase 1C run is intentionally ignored")
 
 def test_contract_reuses_exact_phase1c_sources_and_registries():
     contract,hashes=validate_contract()
