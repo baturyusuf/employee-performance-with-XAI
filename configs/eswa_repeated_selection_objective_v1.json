@@ -1,0 +1,74 @@
+{
+  "schema_version": 1,
+  "contract_id": "eswa_repeated_selection_objective_v1",
+  "dataset_key": "inx_primary",
+  "target": "PerformanceRating",
+  "ordered_labels": [2, 3, 4],
+  "feature_policy": "P3",
+  "repeated_design_contract": {
+    "path": "configs/repeated_nested_cv_v3.json",
+    "sha256": "5681e521cfbaff5963494212fcc047116056fd7d66393346df0463aef7553af9"
+  },
+  "phase1c_source_run": {
+    "directory": "reports/major_revision_v3_runs/phase1c_v3_20260903T215015Z_78649c4/repeated_nested_cv",
+    "candidate_search_results_sha256": "9c72c363ea22f8fb71cd947256f8003102810c240bd898e74cdfb7bd91a94768",
+    "fold_contracts_sha256": "714587a58464a04fcbf714de8c8ad3d9704e23186d1d115a317d54c37acd77e4",
+    "macro_f1_oof_predictions_sha256": "47675d4666fb9d29a9db2ed0c9516ff939acd053589a72aace7612fb11934ced",
+    "selected_hyperparameters_sha256": "65a83c724698748a47644c60b4c2fef0cb6337704bd40bcf1054f422eab4bd68",
+    "stage_metadata_sha256": "f3ac788c27ac32c879e6c34e8e0c5f9fc4d7d9e0713f315328bdf74592809dc7"
+  },
+  "selection_regimes": {
+    "macro_f1": {
+      "primary_metric": "macro_f1",
+      "tie_break_metric": "quadratic_weighted_kappa",
+      "practical_tie_tolerance": 0.001,
+      "oof_mode": "reuse_hash_bound_phase1c_macro_f1_selected_oof"
+    },
+    "qwk": {
+      "primary_metric": "quadratic_weighted_kappa",
+      "tie_break_metric": "macro_f1",
+      "practical_tie_tolerance": 0.001,
+      "oof_mode": "refit_selected_candidate_on_each_phase1c_outer_training_fold"
+    }
+  },
+  "models": [
+    "logistic_regression",
+    "random_forest",
+    "lightgbm",
+    "xgboost",
+    "proportional_odds_logistic",
+    "cumulative_threshold_xgboost"
+  ],
+  "report_metrics": [
+    "macro_f1",
+    "balanced_accuracy",
+    "quadratic_weighted_kappa",
+    "ordinal_mae",
+    "ranked_probability_score",
+    "nll_log_loss",
+    "multiclass_brier"
+  ],
+  "ranking_metrics": {
+    "macro_f1": "higher",
+    "balanced_accuracy": "higher",
+    "quadratic_weighted_kappa": "higher",
+    "ordinal_mae": "lower",
+    "ranked_probability_score": "lower",
+    "nll_log_loss": "lower",
+    "multiclass_brier": "lower"
+  },
+  "publication": {
+    "local_output_root": "reports/major_revision_round2_runs",
+    "publish_employee_level_oof": false,
+    "publish_fold_assignments": false,
+    "network_calls": 0,
+    "paid_api_calls": 0
+  },
+  "prohibited_claims": [
+    "selection_objective_effect_is_universal",
+    "qwk_optimization_always_destroys_rating_4_recall",
+    "repeated_splits_are_independent_real_world_validation",
+    "p3_is_leakage_free",
+    "deployment_ready"
+  ]
+}
