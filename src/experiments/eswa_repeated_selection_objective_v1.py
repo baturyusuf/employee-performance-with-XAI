@@ -15,9 +15,11 @@ from src.experiments.manuscript_model_benchmark import select_candidate_index
 from src.experiments.repeated_nested_cv_v3 import (
     TUNED_MODEL_NAMES, _fit_or_fail, _pipeline, _prepare_inputs,
 )
-from src.experiments.shared_folds import generate_shared_folds, validate_shared_folds
 from src.governance.manuscript_contract import source_tree_hash
 from src.governance.offline_runtime import enforce_offline_runtime
+from src.governance.repeated_nested_cv_run_validator_v3 import (
+    _rebuild_fold_artifacts, validate_repeated_nested_cv_run_v3,
+)
 from src.models.canonical_models import aligned_predict_proba
 from src.models.ordinal_evaluation_v3 import ordinal_evaluation_bundle_v3
 from src.utils.config_loader import PROJECT_ROOT
@@ -37,7 +39,7 @@ def _git_identity() -> dict[str,str]:
     def git(*args: str) -> str:
         return subprocess.run(["git",*args],cwd=PROJECT_ROOT,check=True,capture_output=True,text=True).stdout.strip()
     status=git("status","--porcelain","--untracked-files=all"); _require(not status,f"Scientific run requires clean worktree: {status.splitlines()[:5]}")
-    return {"commit":git("rev-parse","HEAD"),"branch":git("branch","--show-current")}
+    return {"commit":git("rev-parse","HEAD"),"branch":git("rev-parse","--abbrev-ref","HEAD")}
 
 def validate_contract(path: Path=DEFAULT_CONTRACT) -> tuple[dict[str,Any],dict[str,str]]:
     c=_load(path); _require(c.get("contract_id")=="eswa_repeated_selection_objective_v1","Contract ID drifted")
@@ -76,12 +78,15 @@ def build_schedule(candidates: pd.DataFrame) -> tuple[pd.DataFrame,pd.DataFrame]
     _require(len(schedule)==300 and len(change)==150,"Selection schedule coverage drifted")
     return schedule,change
 
-def _folds(contract: Mapping[str,Any], source_frame: pd.DataFrame, target: pd.Series, run_id: str, contract_hash: str, scientific_hash: str, dataset_hash: str):
+def _folds(source: Path, macro_oof: pd.DataFrame):
     result={}
-    for seed in contract["design"]["seed_schedule"]:
-        rep=int(seed["repetition"])
-        artifact=generate_shared_folds(source_frame,target_column=str(contract["target"]),id_column="EmpNumber",run_id=f"{run_id}_rep{rep}",config_hash=contract_hash,scientific_input_hash=scientific_hash,dataset_key=str(contract["dataset_key"]),dataset_sha256=dataset_hash,outer_splits=5,inner_splits=5,seed=int(seed["outer_seed"]),inner_seed=int(seed["inner_seed"]))
-        validate_shared_folds(artifact); result[rep]=(artifact,seed)
+    records=json.loads((source/"fold_contracts.json").read_text(encoding="utf-8"))
+    _require(isinstance(records,list) and len(records)==5,"Phase 1C fold-contract inventory drifted")
+    for record in records:
+        rep=int(record["repetition"]); scoped=macro_oof[macro_oof["repetition"]==rep]
+        artifact=_rebuild_fold_artifacts(record,scoped)
+        seed={"repetition":rep,"outer_seed":int(record["outer_seed"]),"inner_seed":int(record["inner_seed"]),"model_seed":int(record["model_seed"])}
+        result[rep]=(artifact,seed)
     return result
 
 def _validate_oof(oof: pd.DataFrame, folds: Mapping[int,Any], samples: int) -> None:
@@ -128,11 +133,11 @@ def run(contract_path: Path, output_dir: Path, run_id: str) -> dict[str,Any]:
     with enforce_offline_runtime() as offline:
         identity=_git_identity(); c,source_hashes=validate_contract(contract_path); repeated_path=Path(c["repeated_design_contract"]["path"])
         repeated,receipt,canonical,features,exclusions,target,nominal,ordinal=_prepare_inputs(repeated_path)
-        source=Path(c["phase1c_source_run"]["directory"]); candidates=pd.read_csv(source/"candidate_search_results.csv"); macro=pd.read_csv(source/"oof_predictions.csv")
+        source=Path(c["phase1c_source_run"]["directory"]); phase1c_validation=validate_repeated_nested_cv_run_v3(source,repeated_path); candidates=pd.read_csv(source/"candidate_search_results.csv"); macro=pd.read_csv(source/"oof_predictions.csv")
         schedule,changes=build_schedule(candidates); contract_hash=sha256_file(contract_path)
         implementation=[Path(__file__).relative_to(PROJECT_ROOT),contract_path]
         scientific={"git_identity":identity,"source_tree_hash":source_tree_hash(PROJECT_ROOT),"contract_sha256":contract_hash,"source_hashes":source_hashes,"implementation_hashes":{p.as_posix():sha256_file(p) for p in implementation},"dataset_sha256":canonical.receipt["actual_sha256"]}; scientific_hash=_digest(scientific)
-        folds=_folds(repeated,canonical.frame,target,run_id,receipt["contract_sha256"],scientific_hash,canonical.receipt["actual_sha256"])
+        folds=_folds(source,macro)
         definitions={**{name:nominal["models"][name] for name in TUNED_MODEL_NAMES if name in nominal["models"]},**{name:ordinal["ordinal_models"][name] for name in TUNED_MODEL_NAMES if name in ordinal["ordinal_models"]}}
         macro=macro[macro["model"].isin(TUNED_MODEL_NAMES)].copy(); macro["selection_objective"]="macro_f1"; macro["evidence_source"]="hash_bound_phase1c_macro_f1_oof_reuse"
         macro=macro.drop(columns=["selected_candidate_index"]).merge(schedule[schedule["selection_objective"]=="macro_f1"][["repetition","outer_fold","model","selected_candidate_index"]],on=["repetition","outer_fold","model"],validate="many_to_one")
@@ -153,7 +158,7 @@ def run(contract_path: Path, output_dir: Path, run_id: str) -> dict[str,Any]:
         _require(not output_dir.exists(),f"Output exists: {output_dir}"); output_dir.parent.mkdir(parents=True,exist_ok=True); staging=output_dir.parent/f".{output_dir.name}.staging.{uuid.uuid4().hex}"; staging.mkdir()
         frames={"candidate_evidence.csv":candidates,"selection_schedule.csv":schedule,"selected_candidate_changes.csv":changes,"oof_predictions.csv":combined,"repeated_selection_results.csv":results,"per_class_metrics.csv":per_class,"repetition_comparisons.csv":comparisons}
         for name,frame in frames.items(): frame.to_csv(staging/name,index=False)
-        metadata={"schema_version":1,"stage":"eswa_repeated_selection_objective_v1","status":"complete","run_id":run_id,"created_at_utc":datetime.now(timezone.utc).isoformat(),"git_identity":identity,"scientific_input_sha256":scientific_hash,"scientific_inputs":scientific,"repetitions":5,"outer_folds_per_repetition":5,"inner_folds":5,"models":list(TUNED_MODEL_NAMES),"selection_objectives":["macro_f1","qwk"],"qwk_outer_model_fit_count":150,"new_inner_model_fit_count":0,"macro_f1_oof_reused":True,"outer_test_used_for_selection":False,"seed_or_repetition_selected_from_results":False,"employee_level_outputs_publication_authorized":False,"runtime_policy":offline.receipt(),"network_calls":0,"paid_api_calls":0,"output_hashes":{name:sha256_file(staging/name) for name in frames}}
+        metadata={"schema_version":1,"stage":"eswa_repeated_selection_objective_v1","status":"complete","run_id":run_id,"created_at_utc":datetime.now(timezone.utc).isoformat(),"git_identity":identity,"scientific_input_sha256":scientific_hash,"scientific_inputs":scientific,"phase1c_validation":phase1c_validation,"repetitions":5,"outer_folds_per_repetition":5,"inner_folds":5,"models":list(TUNED_MODEL_NAMES),"selection_objectives":["macro_f1","qwk"],"historical_phase1c_model_fit_count":5725,"qwk_outer_model_fit_count":150,"total_lineage_model_fit_count":5875,"new_inner_model_fit_count":0,"macro_f1_oof_reused":True,"folds_reconstructed_from_phase1c_contracts":True,"outer_test_used_for_selection":False,"seed_or_repetition_selected_from_results":False,"employee_level_outputs_publication_authorized":False,"runtime_policy":offline.receipt(),"network_calls":0,"paid_api_calls":0,"output_hashes":{name:sha256_file(staging/name) for name in frames}}
         (staging/"stage_metadata.json").write_text(json.dumps(metadata,indent=2,sort_keys=True)+"\n",encoding="utf-8"); _require(_git_identity()==identity,"Git identity changed during run"); _require(source_tree_hash(PROJECT_ROOT)==scientific["source_tree_hash"],"Source tree changed during run"); os.replace(staging,output_dir)
         return {"status":"complete","run_id":run_id,"output_dir":output_dir.as_posix(),"qwk_outer_model_fit_count":150,"oof_rows":len(combined),"scientific_input_sha256":scientific_hash,"network_calls":0,"paid_api_calls":0}
 

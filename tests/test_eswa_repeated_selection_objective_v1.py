@@ -29,3 +29,8 @@ def test_candidate_registry_is_unchanged_and_macro_schedule_replays_phase1c():
     historical=source[source["selected_by_protocol"].astype(str).str.lower().eq("true")]
     merged=macro.merge(historical,on=["repetition","outer_fold","model"],validate="one_to_one")
     assert (merged["selected_candidate_index"]==merged["candidate_index"]).all()
+
+def test_runner_reconstructs_persisted_folds_without_generating_new_splits():
+    source=Path("src/experiments/eswa_repeated_selection_objective_v1.py").read_text(encoding="utf-8")
+    assert "_rebuild_fold_artifacts" in source
+    assert "generate_shared_folds" not in source
