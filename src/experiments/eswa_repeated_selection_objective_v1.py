@@ -13,7 +13,7 @@ import pandas as pd
 from src.data.canonical_loader import sha256_file
 from src.experiments.manuscript_model_benchmark import select_candidate_index
 from src.experiments.repeated_nested_cv_v3 import (
-    TUNED_MODEL_NAMES, _fit_or_fail, _pipeline, _prepare_inputs,
+    TUNED_MODEL_NAMES, _fit_or_fail, _model_definitions, _pipeline, _prepare_inputs,
 )
 from src.governance.manuscript_contract import source_tree_hash
 from src.governance.offline_runtime import enforce_offline_runtime
@@ -138,7 +138,7 @@ def run(contract_path: Path, output_dir: Path, run_id: str) -> dict[str,Any]:
         implementation=[Path(__file__).relative_to(PROJECT_ROOT),contract_path]
         scientific={"git_identity":identity,"source_tree_hash":source_tree_hash(PROJECT_ROOT),"contract_sha256":contract_hash,"source_hashes":source_hashes,"implementation_hashes":{p.as_posix():sha256_file(p) for p in implementation},"dataset_sha256":canonical.receipt["actual_sha256"]}; scientific_hash=_digest(scientific)
         folds=_folds(source,macro)
-        definitions={**{name:nominal["models"][name] for name in TUNED_MODEL_NAMES if name in nominal["models"]},**{name:ordinal["ordinal_models"][name] for name in TUNED_MODEL_NAMES if name in ordinal["ordinal_models"]}}
+        definitions=_model_definitions(nominal,ordinal)
         macro=macro[macro["model"].isin(TUNED_MODEL_NAMES)].copy(); macro["selection_objective"]="macro_f1"; macro["evidence_source"]="hash_bound_phase1c_macro_f1_oof_reuse"
         macro=macro.drop(columns=["selected_candidate_index"]).merge(schedule[schedule["selection_objective"]=="macro_f1"][["repetition","outer_fold","model","selected_candidate_index"]],on=["repetition","outer_fold","model"],validate="many_to_one")
         qwk=[]
@@ -165,6 +165,6 @@ def run(contract_path: Path, output_dir: Path, run_id: str) -> dict[str,Any]:
 def main(argv: Sequence[str]|None=None)->int:
     parser=argparse.ArgumentParser(); parser.add_argument("--contract",type=Path,default=DEFAULT_CONTRACT); parser.add_argument("--output-root",type=Path,default=DEFAULT_OUTPUT_ROOT); parser.add_argument("--run-id"); parser.add_argument("--preflight-only",action="store_true"); args=parser.parse_args(argv)
     if args.preflight_only:
-        c,h=validate_contract(args.contract); print(json.dumps({"status":"passed","models":c["models"],"repetitions":5,"outer_folds":5,"new_model_fits":0,"source_hashes":h},indent=2)); return 0
+        c,h=validate_contract(args.contract); repeated=Path(c["repeated_design_contract"]["path"]); _,_,canonical,features,_,target,nominal,ordinal=_prepare_inputs(repeated); definitions=_model_definitions(nominal,ordinal); source=Path(c["phase1c_source_run"]["directory"]); validation=validate_repeated_nested_cv_run_v3(source); schedule,changes=build_schedule(pd.read_csv(source/"candidate_search_results.csv")); print(json.dumps({"status":"passed","models":list(definitions),"repetitions":5,"outer_folds":5,"samples":len(target),"features":features.shape[1],"schedule_rows":len(schedule),"candidate_changes":int(changes["selected_candidate_changed"].sum()),"new_model_fits":0,"phase1c_validation":validation,"source_hashes":h},indent=2)); return 0
     _require(bool(args.run_id),"--run-id required"); print(json.dumps(run(args.contract,args.output_root/args.run_id/"repeated_selection_objective",args.run_id),indent=2)); return 0
 if __name__=="__main__": raise SystemExit(main())
