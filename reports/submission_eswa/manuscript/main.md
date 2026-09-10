@@ -1,8 +1,10 @@
 # Auditing Intelligent Employee-Performance Prediction Systems Beyond Accuracy: A Traceable XAI Protocol
 
+**Author-review draft — not for submission. Mandatory author, institutional, rights, and portal decisions remain open.**
+
 ## Abstract
 
-Intelligent human-resource prediction systems can appear reliable under aggregate scores while failing on consequential rating categories or relying on information whose availability is uncertain. Evaluating these systems requires a consistent connection between predictions, probability quality, explanations, and the claims made about them. We present an integrated audit protocol for ordinal employee-performance prediction that combines nested model selection, explicit information policies, ordinal and per-class evaluation, training-only calibration, exact-model explanations, stability and deletion diagnostics, support-aware subgroup and proxy analysis, and traceable evidence. The protocol is examined on a primary cross-sectional employee table and through partial cross-dataset protocol replication. Benchmark leaders differed across classification, ordinal, and probability metrics. Changing the selection objective altered 37 of 60 model-fold candidate choices. Under quadratic-weighted-kappa selection, nominal XGBoost attained kappa 0.6418 while its highest-rating recall fell to 0.0076; Random Forest also failed to recognize that rating despite strong aggregate ordinal scores. In the nominal-XGBoost information-policy sensitivity experiment, restricting timing-uncertain information reduced macro-F1 by 0.1937 after independent retuning. This contrast also changes feature count and does not isolate a temporal effect. Calibration findings depended on the metric, and subgroup support and target mapping further limited interpretation. The contribution is an operational evaluation protocol that makes such conflicting evidence visible and binds conclusions to the evaluated system. The cross-sectional results support bounded system-audit claims; they do not establish prospective performance, fairness certification, or deployment readiness.
+Intelligent human-resource prediction systems can appear reliable under aggregate scores while failing on consequential rating categories or relying on timing-uncertain information. We present an integrated audit protocol for ordinal employee-performance prediction that connects nested model selection, information policies, ordinal and per-class evaluation, training-only calibration, exact-model explanations, stability and deletion diagnostics, support-aware subgroup and proxy analysis, and traceable evidence. We examine it on a primary cross-sectional employee table and through secondary protocol sensitivity on a synthetic HR teaching dataset. Benchmark leaders differed across classification, ordinal, and probability metrics. In the canonical split, changing the selection objective altered 37 of 60 model-fold candidate choices. Across five repeated split identities, the macro-F1-versus-QWK trade-off was strongly replicated for nominal and cumulative-threshold XGBoost, with model-specific heterogeneity: both gained QWK while rating-4 recall fell in all five repetitions. Under canonical QWK selection, nominal XGBoost attained kappa 0.6418 while its highest-rating recall fell to 0.0076. Restricting timing-uncertain information reduced nominal-XGBoost macro-F1 by 0.1937 after independent retuning, although feature count also changed and the contrast does not isolate a temporal effect. Calibration findings depended on the metric; subgroup support and target mapping further limited interpretation. The protocol makes conflicting evidence visible and binds conclusions to the evaluated system. These results support bounded system-audit and protocol-portability claims, without establishing prospective performance, observed organizational transport, fairness certification, or deployment readiness.
 
 **Keywords:** Employee performance prediction; Explainable artificial intelligence; Intelligent decision support; Ordinal classification; Model evaluation; Data leakage
 
@@ -21,7 +23,7 @@ The study makes four contributions:
 - An operational audit protocol connects information availability, nested selection, held-out prediction, and permissible system claims.
 - A common benchmark and selection-objective sensitivity analysis expose disagreement between aggregate ordinal performance and extreme-class recognition.
 - Fixed-schedule and independently retuned information policies separate feature-access sensitivity from the additional effects of within-policy selection.
-- Calibration, explanation stability and deletion, support-aware subgroup/proxy diagnostics, and partial cross-dataset protocol replication are linked through traceable aggregate evidence.
+- Calibration, explanation stability and deletion, support-aware subgroup/proxy diagnostics, and protocol portability under a second synthetic schema are linked through traceable aggregate evidence.
 
 The target is the recorded organizational rating, not a validated measure of capability or productivity. The intended application is research and system audit; prospective validity, causal determinants, fairness certification, and autonomous employment decisions are outside the supported claims.
 
@@ -95,7 +97,7 @@ Output: a traceable report of the evaluated system and the claims its evidence p
 
 ### 3.2 Datasets, targets, and data quality
 
-INX is the primary development and internal out-of-fold (OOF) evaluation table. It contains 1,200 rows and 28 columns; target support is 194/874/132 for ratings 2/3/4. HRDataset_v14 contains 311 rows and 36 raw columns. The retained three-class mapping combines `PIP` and `Needs Improvement` as class 2, preserves `Fully Meets` as 3, and maps `Exceeds` as 4, producing support 31/243/37. A prespecified sensitivity retains the two lower source categories as distinct ordered classes, producing four-class support 13/18/243/37. These are different estimands; neither validates equivalence between organizations' rating constructs.
+INX is the primary development and internal out-of-fold (OOF) evaluation table. It contains 1,200 rows and 28 columns; target support is 194/874/132 for ratings 2/3/4. HRDataset_v14 is a publicly available synthetic teaching dataset created for a graduate HR case study and representing a fictitious organizational setting. It contains 311 rows and 36 raw columns. The retained three-class mapping combines `PIP` and `Needs Improvement` as class 2, preserves `Fully Meets` as 3, and maps `Exceeds` as 4, producing support 31/243/37. A prespecified sensitivity retains the two lower source categories as distinct ordered classes, producing four-class support 13/18/243/37. These are different estimands; neither establishes equivalence with the INX rating construct or a real organizational population.
 
 The aggregate audit applies whitespace-aware missingness, duplicate checks, identifier rules, schema hashing, numeric-domain rules, and temporal/consistency rules fixed before analysis. No source value was silently repaired. Provenance and redistribution rights require manual resolution, so raw employee-level tables are excluded.
 
@@ -104,8 +106,8 @@ The aggregate audit applies whitespace-aware missingness, duplicate checks, iden
 | Dataset/estimand | Analytical role | Rows | Target support | Key boundary |
 | --- | --- | ---: | --- | --- |
 | INX, three ratings | Primary development and internal OOF evaluation | 1200 | 2=194; 3=874; 4=132 | Cross-sectional; feature and decision timestamps unavailable |
-| HRDataset_v14, retained three-class mapping | Partial cross-dataset protocol replication | 311 | 2=31; 3=243; 4=37 | Different features, semantics, parameters, and population |
-| HRDataset_v14, four-class sensitivity | Target-formulation sensitivity | 311 | 13/18/243/37 | Distinct estimand; not an accuracy-improvement comparison |
+| HRDataset_v14, retained three-class mapping | Secondary protocol sensitivity on synthetic teaching data | 311 | 2=31; 3=243; 4=37 | Fictitious setting; not real-world transport evidence |
+| HRDataset_v14, four-class sensitivity | Synthetic-data target-formulation sensitivity | 311 | 13/18/243/37 | Distinct estimand; not an accuracy-improvement comparison |
 
 ### 3.3 Prespecified information policies
 
@@ -142,7 +144,7 @@ We report selected-candidate changes, metric-leader changes, complete-ordering c
 
 ### 3.6 Repeated nested cross-validation
 
-Training and split variability use five fixed repetitions of 5-fold outer by 5-fold inner nested cross-validation. Each trained system is selected and refitted in every repetition. Means, sample SDs, ranges, winner counts, and rank correlations are descriptive across the five repetition identities. Ranges are not confidence intervals, and repetition pairs share samples.
+Training and split variability use five fixed repetitions of 5-fold outer by 5-fold inner nested cross-validation. Each trained system is selected and refitted in every repetition. The repeated selection-objective sensitivity reuses these exact outer and inner split identities, preprocessing, six trained-system registries, candidate grids, estimator seeds, inclusive 0.001 tolerance, and deterministic tie logic. Existing macro-F1-selected OOF predictions are reused; QWK selection adds one refit per system and outer fold, for 150 new outer fits and no new inner or baseline fits. Selection uses inner evidence only. Means, sample SDs, ranges, winner counts, and rank correlations are descriptive across the five repetition identities. Ranges and direction counts are not confidence intervals, and repetition pairs share samples.
 
 ### 3.7 Fixed-schedule and retuned information-policy contrasts
 
@@ -168,17 +170,17 @@ Within each nominal-XGBoost outer fold, three one-vs-rest sigmoid calibrators ar
 
 ### 3.10 Support-aware subgroup and proxy diagnostics
 
-The subgroup audit covers three systems, all six prespecified attributes (Age, Gender, Marital Status, Business Travel, Department, and Education), nine metrics, and support thresholds 20/30/50. Unsupported groups or class denominators remain explicit. The P3 manuscript summary uses the prespecified threshold of 30 and 5,000 bootstrap repetitions stratified by fold and class, with eligibility fixed before resampling. The 95% simultaneous exploratory intervals use the studentized maximum absolute bootstrap deviation over all estimable prespecified P3 attribute, support-threshold, and metric gap cells, including threshold-sensitivity cells. They condition on fixed fitted models, folds, and support eligibility, exclude model-training variability, and are not confirmatory fairness inference. “Gender” denotes the source-record field; its collection process and correspondence to sex or gender identity are not established. Subgroup comparisons describe these recorded categories.
+The subgroup audit covers three exact canonical systems, all six prespecified attributes (Age, Gender, Marital Status, Business Travel, Department, and Education), nine metrics, and support thresholds 20/30/50. Unsupported groups or class denominators remain explicit. The primary manuscript summary is the **P3 nominal-XGBoost subgroup diagnostic**: P3 names the feature policy, and nominal XGBoost names the fitted-system family. It uses the prespecified threshold of 30 and 5,000 bootstrap repetitions stratified by fold and class, with eligibility fixed before resampling. The 95% simultaneous exploratory intervals use the studentized maximum absolute bootstrap deviation over all estimable prespecified P3 nominal-XGBoost attribute, support-threshold, and metric gap cells, including threshold-sensitivity cells. They condition on fixed fitted models, folds, and support eligibility, exclude model-training variability, and are not confirmatory fairness inference. “Gender” denotes the source-record field; its collection process and correspondence to sex or gender identity are not established. Subgroup comparisons describe these recorded categories and are not generalized to all six trained systems.
 
 Proxy diagnostics separate prediction changes after refitting P3 without JobRole, output sensitivity when JobRole is shuffled within fold, and independent department reconstruction. Reconstructability shows information in a feature space, not use by the performance model. None establishes discrimination, fairness, causality, or legal compliance.
 
 ### 3.11 HR target mapping, CV design, and target-alias sensitivity
 
-HRDataset_v14 is a partial cross-dataset protocol replication with models trained anew on a separate seven-feature conservative policy: `EmpJobRole`, `EngagementSurvey`, `EmpJobSatisfaction`, `SpecialProjectsCount`, `DaysLateLast30`, `Absences`, and `ExperienceYearsAtThisCompany`. Feature-observation and rating-decision timestamps are unavailable, so temporal availability is not established. For target-formulation sensitivity, the retained three-class mapping and distinct four-class mapping each use five fixed repetitions of 5-fold outer by 5-fold inner nested validation, with selection and cross-fitted sigmoid calibration confined to outer-training data. The two mappings define different estimands and are not treated as an improvement comparison.
+HRDataset_v14 provides secondary protocol sensitivity on a synthetic HR teaching dataset, with models trained anew on a separate seven-feature conservative policy: `EmpJobRole`, `EngagementSurvey`, `EmpJobSatisfaction`, `SpecialProjectsCount`, `DaysLateLast30`, `Absences`, and `ExperienceYearsAtThisCompany`. Feature-observation and rating-decision timestamps are unavailable, so temporal availability is not established. For target-formulation sensitivity, the retained three-class mapping and distinct four-class mapping each use five fixed repetitions of 5-fold outer by 5-fold inner nested validation, with selection and cross-fitted sigmoid calibration confined to outer-training data. The two mappings define different estimands and are not treated as an improvement comparison. Because the source represents a fictitious setting, this analysis assesses methodological portability under another schema rather than real-world organizational transport.
 
 CV-design sensitivity compares the canonical 10-fold-outer/5-fold-inner estimates with the ranges from repeated 5-fold-outer/5-fold-inner analysis. Range inclusion is a descriptive stability check, not an equivalence test or confidence statement. Target-alias sensitivity preserves the 311-row result from the first repeated 5×5 design, removes the two target-text/identifier disagreement rows from those predictions to obtain fit-free metrics on 309 rows, and separately selects/refits on those same 309 rows using consistently restricted fold identities. The primary training/data-rule comparison is therefore matched-population 309-row restricted first-design predictions versus 309-row exclusion/refit predictions; the 311→309 contrast is reported separately as a sample-removal effect.
 
-![Figure 7. Partial cross-dataset protocol replication on HRDataset_v14 with the retained three-class mapping. Results do not imply target equivalence or locked-model transport.](../figures/figure_07.png)
+![Figure 7. Secondary protocol sensitivity on synthetic HRDataset_v14 with the retained three-class mapping. Results describe methodological portability under a fictitious setting and do not establish target equivalence or real-world organizational transport.](../figures/figure_07.png)
 
 ### 3.12 Evidence identity and claim control
 
@@ -186,7 +188,7 @@ Each aggregate evidence package records input identities, preprocessing and feat
 
 ### 3.13 Research software assistance
 
-Generative AI tools assisted research coding and documentation. The authors retain responsibility for the implementation, selection of analyses, and interpretation. Scientific outputs were checked through persisted input and model identities, independent replay or recomputation, and automated validation. [AUTHOR CONFIRMATION REQUIRED: complete the verified tool/provider/model inventory and describe the human code-review process before submission.]
+Generative AI tools assisted research coding and documentation. The authors retain responsibility for the implementation, selection of analyses, and interpretation. Scientific outputs were checked through persisted input and model identities, independent replay or recomputation, and automated validation. The complete verified tool inventory and human-review attestation remain an author action; this draft is not for submission until that record is approved.
 
 ## 4. Results
 
@@ -237,6 +239,8 @@ The empirical class-prior probability reference had log loss 0.7683, Brier score
 
 Across five repeated designs, nominal XGBoost mean macro-F1 was 0.6288, versus 0.6249 for LightGBM. LightGBM won macro-F1 in three repetitions and XGBoost in two. Random Forest ranked first for QWK in 5/5 repetitions, and cumulative-threshold XGBoost ranked first for balanced accuracy in 4/5 repetitions. Mean pairwise macro-F1 rank Spearman correlation was 0.926 across ten dependent repetition pairs. These describe the fixed designs rather than population uncertainty.
 
+Repeating the macro-F1-versus-QWK selection comparison on those same five split identities changed 15, 20, 17, 20, and 20 of 30 candidate choices (92/150 overall); the complete six-model ordering changed for all seven compared aggregate metrics in every repetition. For nominal XGBoost, mean QWK increased from 0.5833 to 0.6377 and mean ordinal MAE fell from 0.2335 to 0.1550, while mean rating-4 recall fell from 0.1894 to 0.0167. QWK and MAE improved and rating-4 recall deteriorated in all five repetitions. Cumulative-threshold XGBoost likewise gained QWK in 5/5, while its QWK-selected rating-4 recall was zero in 5/5. Random Forest was less sensitive: QWK increased in four repetitions and was unchanged in one, while rating-4 recall fell in two and was unchanged in three. Thus the canonical trade-off is strongly replicated for the two XGBoost systems across these fixed split identities, with model-specific heterogeneity; it is not a universal or inferential result. Full repetition-by-system values appear in Supplementary Table S9.
+
 **Table 6. Five-repetition nested-CV summaries**
 
 | System | Macro-F1 mean ± SD | Balanced acc. mean ± SD | QWK mean ± SD | Ordinal MAE mean ± SD |
@@ -280,9 +284,9 @@ Sigmoid calibration reduced log loss from 0.5515 to 0.4556 and Brier score from 
 
 ### 4.5 Subgroup and proxy diagnostics
 
-At the prespecified support threshold of 30, the widest descriptive macro-F1/QWK/MAE gaps were: Age, 0.0301/0.0653/0.0770; Gender, 0.0363/0.0527/0.0508; Marital Status, 0.0101/0.0381/0.0291; Business Travel, 0.0528/0.0711/0.0613; Department, 0.2179/0.4388/0.1193; and Education, 0.0413/0.1190/0.0891. All six prespecified attributes are retained rather than reporting only the largest result. QWK eligibility was limited to three of six Department groups; macro-F1 and MAE each had five eligible Department groups. Simultaneous exploratory intervals and eligibility appear in Table 9; Supplementary Table S6 gives group endpoints, support, and denominator flags. These diagnostics do not establish fairness or discrimination.
+For the P3 nominal-XGBoost system at the prespecified support threshold of 30, the widest descriptive macro-F1/QWK/MAE gaps were: Age, 0.0301/0.0653/0.0770; Gender, 0.0363/0.0527/0.0508; Marital Status, 0.0101/0.0381/0.0291; Business Travel, 0.0528/0.0711/0.0613; Department, 0.2179/0.4388/0.1193; and Education, 0.0413/0.1190/0.0891. All six prespecified attributes are retained rather than reporting only the largest result. QWK eligibility was limited to three of six Department groups; macro-F1 and MAE each had five eligible Department groups. Simultaneous exploratory intervals and eligibility appear in Table 9; Supplementary Table S6 gives group endpoints, support, and denominator flags. These diagnostics apply to the named system and do not establish fairness or discrimination.
 
-**Table 9. P3 descriptive subgroup gaps at support threshold 30**
+**Table 9. P3 nominal-XGBoost descriptive subgroup gaps at support threshold 30**
 
 | Attribute | Metric | Gap | Simultaneous interval | Eligible/declared |
 | --- | --- | --- | --- | --- |
@@ -305,7 +309,7 @@ At the prespecified support threshold of 30, the widest descriptive macro-F1/QWK
 | Education Background | QWK | 0.1190 | [0.0000, 0.5064] | 4/6 |
 | Education Background | MAE | 0.0891 | [0.0000, 0.3211] | 5/6 |
 
-Intervals are simultaneous exploratory intervals conditional on the fixed models, fold identities, and support eligibility; the minimum group support is 30. Full group counts and class-denominator flags are in Supplementary Table S6. This is a descriptive audit, not fairness certification.
+Intervals are simultaneous exploratory intervals conditional on the fixed P3 nominal-XGBoost models, fold identities, and support eligibility; the minimum group support is 30. Full group counts and class-denominator flags are in Supplementary Table S6. This is a system-specific descriptive audit, not fairness certification.
 
 #### Proxy diagnostics
 
@@ -324,9 +328,9 @@ Separate department reconstruction accuracy was 0.9792 with JobRole and 0.2908 w
 | Reconstruction accuracy with JobRole | 0.9792 | Separate proxy task |
 | Reconstruction accuracy without JobRole | 0.2908 | Separate proxy task |
 
-### 4.6 Partial cross-dataset protocol replication
+### 4.6 Secondary protocol sensitivity on a synthetic HR teaching dataset
 
-Across five repeated designs under the retained three-class mapping, raw XGBoost had mean macro-F1 0.6531, QWK 0.5339, MAE 0.1916, log loss 0.5593, Brier score 0.3033, top-label ECE 0.0721, and RPS 0.0759. Its cross-fitted sigmoid counterpart had 0.6274, 0.6044, 0.1280, 0.4216, 0.2324, 0.0522, and 0.0589. Under the distinct four-class estimand, raw results were 0.5847, 0.6288, 0.2360, 0.6646, 0.3618, 0.0995, and 0.0604; sigmoid results were 0.5481, 0.6621, 0.1640, 0.5201, 0.2771, 0.0386, and 0.0488. These values are reported side by side without subtracting one target formulation from the other.
+Across five repeated designs on synthetic HRDataset_v14 under the retained three-class mapping, raw XGBoost had mean macro-F1 0.6531, QWK 0.5339, MAE 0.1916, log loss 0.5593, Brier score 0.3033, top-label ECE 0.0721, and RPS 0.0759. Its cross-fitted sigmoid counterpart had 0.6274, 0.6044, 0.1280, 0.4216, 0.2324, 0.0522, and 0.0589. Under the distinct four-class estimand, raw results were 0.5847, 0.6288, 0.2360, 0.6646, 0.3618, 0.0995, and 0.0604; sigmoid results were 0.5481, 0.6621, 0.1640, 0.5201, 0.2771, 0.0386, and 0.0488. These values are reported side by side without subtracting one target formulation from the other. They demonstrate protocol and target-formulation sensitivity in a fictitious setting, not real-world external performance.
 
 Of the 14 raw and sigmoid canonical 10×5 estimates assessed against repeated-5×5 ranges, 11 fell inside. The three outside-range estimates were raw macro-F1 and sigmoid Brier score and RPS. Range inclusion is descriptive and does not establish equivalence between validation designs.
 
@@ -360,7 +364,7 @@ The HRDataset_v14 audit also found 215 effective missing cells: 207 termination 
 
 ### 5.1 Selection objective and extreme-class failure
 
-Model choice is not captured by a single leaderboard. The shift from macro-F1 to QWK selection changed 37/60 selected candidates, 6/9 metric leaders, and 9/9 complete orderings, but these describe distinct levels of sensitivity. The scientifically important effect is metric- and model-specific: QWK selection greatly improved nominal-XGBoost QWK and MAE while almost eliminating rating-4 recall. Random Forest already led aggregate QWK and MAE with zero rating-4 recall. Aggregate QWK or MAE improvement therefore does not guarantee class-4 success; class-specific recall must remain visible beside ordinal summaries.
+Model choice is not captured by a single leaderboard. In the canonical split, the shift from macro-F1 to QWK selection changed 37/60 selected candidates, 6/9 metric leaders, and 9/9 complete orderings, but these describe distinct levels of sensitivity. The repeated analysis retained the direction of the central trade-off for nominal and cumulative-threshold XGBoost in all five split identities while showing smaller, less uniform Random Forest changes. The effect is therefore robust within the fixed repeated design for the two XGBoost systems but remains metric-, model-, and split-specific. Aggregate QWK or MAE improvement does not guarantee class-4 success; class-specific recall must remain visible beside ordinal summaries.
 
 ### 5.2 Timing and information access define the estimand
 
@@ -368,11 +372,11 @@ P0’s high performance shows that the information contract matters, not that a 
 
 ### 5.3 Subgroup and proxy evidence are descriptive boundaries
 
-Reporting all six attributes prevents the largest Department gap from becoming the whole subgroup narrative. The Department result is nevertheless salient, especially the QWK gap of 0.4388, and its restricted group eligibility limits interpretation. JobRole refitting, permutation, and Department reconstruction answer different questions about performance-model output and available organizational information. None is a causal, legal, or confirmatory fairness test.
+Reporting all six attributes for the P3 nominal-XGBoost system prevents the largest Department gap from becoming the whole subgroup narrative. The Department result is nevertheless salient, especially the QWK gap of 0.4388, and its restricted group eligibility limits interpretation. The displayed gaps do not characterize all six trained systems. JobRole refitting, permutation, and Department reconstruction answer different questions about performance-model output and available organizational information. None is a causal, legal, or confirmatory fairness test.
 
 ### 5.4 Target mapping and validation design change the question
 
-The three- and four-class HR formulations change class support and target meaning, so their metrics are separate estimands rather than an improvement sequence. Likewise, 11/14 canonical estimates falling within repeated-design ranges is descriptive stability evidence, not equivalence. The matched 309-row alias analysis further shows why sample removal and model refitting must be separated: the primary refit contrasts are small for several aggregate metrics, while log loss and ECE move in opposite directions.
+The three- and four-class synthetic HR formulations change class support and target meaning, so their metrics are separate estimands rather than an improvement sequence. Because HRDataset_v14 is synthetic, these results demonstrate protocol portability and target-formulation sensitivity rather than real-world cross-organizational transport. Likewise, 11/14 canonical estimates falling within repeated-design ranges is descriptive stability evidence, not equivalence. The matched 309-row alias analysis further shows why sample removal and model refitting must be separated: the primary refit contrasts are small for several aggregate metrics, while log loss and ECE move in opposite directions.
 
 ### 5.5 Explanations and calibration require metric-specific evidence
 
@@ -390,7 +394,7 @@ Prior employee studies supply classifier comparisons, HR scholarship explains so
 
 ## 6. Limitations
 
-First, both datasets are public cross-sectional tables with unresolved source-to-byte provenance and rights. Public availability does not establish authenticity, ownership, representativeness, or redistribution permission. No raw dataset is approved for publication.
+First, both datasets are public cross-sectional tables with unresolved source-to-byte provenance and rights. HRDataset_v14 is synthetic teaching data representing a fictitious setting, so it cannot supply an observed external organizational cohort. Public availability does not establish authenticity, ownership, representativeness, or redistribution permission. No raw dataset is approved for publication.
 
 Second, feature and decision timestamps are absent. P0–P5 encode assumptions, not observed temporal order. P4 is prospective-plausibility sensitivity; P5 cannot establish absence of residual proxies.
 
@@ -406,13 +410,13 @@ Sixth, calibration is retrospective on OOF predictions. ECE depends on event, bi
 
 Seventh, proxy analyses are diagnostic. Refitting changes model and feature set; shuffles are artificial; reconstructability does not establish department use, discrimination, fairness, or legal compliance.
 
-Eighth, HRDataset_v14 is independently trained protocol replication, not locked-model transport. Feature space, semantics, parameters, target formulation, and population differ. CV-range inclusion is not equivalence, and alias exclusion does not validate either source field as ground truth.
+Eighth, HRDataset_v14 supplies independently trained protocol sensitivity on synthetic teaching data. Feature space, semantics, parameters, target formulation, and represented setting differ. Its results do not establish real-world cross-organizational transport. CV-range inclusion is not equivalence, and alias exclusion does not validate either source field as ground truth.
 
 Source-rights, ethical applicability, and consent determinations require documentary resolution before submission or reuse. The statistical audit does not establish those permissions.
 
 ## 7. Conclusions
 
-An ordinal employee-performance study changes meaning when selection objective, class-specific behavior, information policy, evaluation nesting, explanation identity, calibration path, subgroup support, target mapping, and proxy boundaries are explicit. Under P3, different systems led classification, ordinal, and probability metrics; QWK-oriented selection improved aggregate ordinal scores while extreme-class recall collapsed for important systems; and the P3→P4 step showed substantial timestamp-unverified information sensitivity. Subgroup, HR target-mapping, target-alias, and CV-design results further bounded generalization.
+An ordinal employee-performance study changes meaning when selection objective, class-specific behavior, information policy, evaluation nesting, explanation identity, calibration path, subgroup support, target mapping, and proxy boundaries are explicit. Under P3, different systems led classification, ordinal, and probability metrics; QWK-oriented selection improved aggregate ordinal scores while extreme-class recall collapsed for important systems; and the P3→P4 step showed substantial timestamp-unverified information sensitivity. The selection trade-off persisted across all five fixed split identities for nominal and cumulative-threshold XGBoost, with model-specific heterogeneity. P3 nominal-XGBoost subgroup diagnostics and synthetic HR target-mapping, target-alias, and CV-design sensitivities further bounded interpretation without supplying observed transport evidence.
 
 The durable output is an auditable evidence contract, not a production decision system. Future work requires timestamped data, validated constructs, authorized provenance, preregistered prospective evaluation, stronger conditional proxy tests, human-centered explanation studies, and institutionally approved governance before real employment use.
 
@@ -422,14 +426,14 @@ The scientific supplement contains feature contracts (Table S1), preprocessing a
 
 ## Ethics and informed consent
 
-[AUTHOR AND INSTITUTION CONFIRMATION REQUIRED: insert the documented ethics determination and linked consent applicability, including committee or institutional authority, reference and date.]
+No ethics or consent statement is asserted in this author-review draft. The documented institutional determination, authority, reference, date, and linked consent applicability remain unresolved; this draft is not for submission.
 
 ## Data availability
 
-Aggregate scientific tables, feature schemas, and numerical evidence identifiers accompany this submission draft. Employee-level INX and HRDataset_v14 records are not redistributed because authoritative source-to-file provenance and the applicable redistribution permissions remain unresolved. Software and configuration release terms and a durable code location require rightsholder approval before public distribution. [AUTHOR CONFIRMATION REQUIRED: approve the final data and code availability statement and any repository link.]
+Aggregate scientific tables, feature schemas, and numerical evidence identifiers accompany this author-review draft. Employee-level INX and HRDataset_v14 records are not redistributed because authoritative source-to-file provenance and the applicable redistribution permissions remain unresolved. Synthetic status does not establish redistribution permission. Software and configuration release terms and a durable code location require rightsholder approval before public distribution. The final data and code availability statement remains an author action; this draft is not for submission.
 
 ## Declaration of generative AI and AI-assisted technologies in the manuscript preparation process
 
-During preparation of this manuscript, the authors used OpenAI ChatGPT and Codex for drafting and revision assistance, literature organization, and document preparation. Research coding assistance is described in Methods. [AUTHOR CONFIRMATION REQUIRED: verify the complete tools and purposes, and attest to human review, editing and responsibility for the submitted work.]
+During preparation of this manuscript, the authors used OpenAI ChatGPT and Codex for drafting and revision assistance, literature organization, and document preparation. Research coding assistance is described in Methods. The complete tool-and-purpose inventory and the authors' human-review, editing, and responsibility attestation remain unapproved; this draft is not for submission.
 
 ## References

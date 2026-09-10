@@ -1,6 +1,8 @@
 # Supplementary material
 
-This anonymous scientific supplement reports method contracts and aggregate evidence for the accompanying manuscript. It contains no author identity, employee-level record, fitted model, approval history, internal review, or development diary. Exact, unabridged versions of Tables S1--S4 and S6--S8 are supplied as CSV files in the `tables` directory.
+**Author-review draft — not for submission. Mandatory author, institutional, rights, and portal decisions remain open.**
+
+This anonymous scientific supplement reports method contracts and aggregate evidence for the accompanying manuscript. It contains no author identity, employee-level record, fitted model, approval history, internal review, or development diary. Exact, unabridged versions of Tables S1--S4 and S6--S9 are supplied as CSV files in the `tables` directory.
 
 # Table S1. Feature-availability and governance matrix
 
@@ -100,9 +102,10 @@ Exact seed schedules, fold identities, out-of-fold coverage, calibration isolati
 | Fixed-policy sensitivity | INX/P0-P5 | 1 | 10-fold stratified | 5-fold stratified | Evaluation only |
 | Retuned-policy sensitivity | INX/P0-P5 | 1 | 10-fold stratified | 5-fold stratified | Evaluation only |
 | Selection-objective sensitivity | INX/P3 | 1 | 10-fold stratified | 5-fold stratified | Evaluation only |
+| Repeated selection-objective sensitivity | INX/P3 | 5 | Same persisted 5-fold identities | Same persisted 5-fold identities | Evaluation only |
 | Sigmoid calibration | INX/P3/XGBoost | 1 | 10-fold stratified | Persisted folds | Evaluation only |
-| HR target/CV sensitivity | HRDataset v14/conservative seven features | 5 | 5-fold stratified | 5-fold stratified | Evaluation only |
-| HR target-alias sensitivity | HRDataset v14/311 historical and matched 309 | 1 | 5-fold stratified | 5-fold stratified | Evaluation only |
+| Synthetic HR target/CV sensitivity | HRDataset v14/conservative seven features | 5 | 5-fold stratified | 5-fold stratified | Evaluation only |
+| Synthetic HR target-alias sensitivity | HRDataset v14/311 historical and matched 309 | 1 | 5-fold stratified | 5-fold stratified | Evaluation only |
 
 # Table S4. Per-class performance by selection objective
 
@@ -157,12 +160,12 @@ Hard predictions use the declared argmax rule with no class-specific threshold o
 | Calibration | Cross-fitted training probabilities | Predeclared sigmoid fit | Outer-test fit/selection | Calibration invalid |
 | Explanation | Prediction-producing fold model | Identity, additivity, stability, deletion | Model mismatch | No explanation claim |
 | Subgroup/proxy | Held-out outputs/categories | Support, interval, distinct proxy questions | Unsupported denominator | Descriptive/not estimated |
-| Replication | Separately fitted HR systems | Target, folds, calibration, support | Construct/transport conflation | Partial replication |
+| Synthetic protocol sensitivity | Separately fitted HR systems on a fictitious teaching dataset | Target, folds, calibration, support | Construct/transport conflation | Methodological portability only |
 | Evidence | Aggregate source rows | Selector, value, hash, qualifier | Unresolved/stale number | No numerical claim |
 
-# Table S6. Subgroup gap uncertainty and support
+# Table S6. P3 nominal-XGBoost subgroup gap uncertainty and support
 
-Intervals are 95% simultaneous exploratory intervals based on the studentized maximum absolute bootstrap deviation over all estimable prespecified P3 attribute, support-threshold, and metric gap cells. Eligibility is fixed before resampling; fitted-model variability is excluded. These diagnostics do not certify fairness.
+P3 is the feature policy and nominal XGBoost is the fitted-system family. Intervals are 95% simultaneous exploratory intervals based on the studentized maximum absolute bootstrap deviation over all estimable prespecified P3 nominal-XGBoost attribute, support-threshold, and metric gap cells. Eligibility is fixed before resampling; fitted-model variability is excluded. These diagnostics apply to the named system and do not certify fairness or describe all six trained systems.
 
 ## Age
 
@@ -377,10 +380,26 @@ The exact table, including the dataset key, is `tables/Table_S7.csv`.
 
 ## Present study
 
-**Problem and evidence:** Auditing ordinal employee-performance prediction; INX; partial HRDataset_v14 protocol replication. **Method and XAI:** Nested benchmark; objective/policy sensitivities; exact evidence identities; Exact-model grouped SHAP; stability; model-level deletion. **Boundary relative to this study:** Integration links conflicting findings to the evaluated system; no new predictor or deployment claim. Frozen claim boundary; not an additional experimental result.
+**Problem and evidence:** Auditing ordinal employee-performance prediction; INX; secondary protocol sensitivity on synthetic HRDataset_v14. **Method and XAI:** Nested benchmark; repeated objective/policy sensitivities; exact evidence identities; exact-model grouped SHAP; stability; model-level deletion. **Boundary relative to this study:** Integration links conflicting findings to the evaluated system; synthetic teaching data do not supply observed organizational transport evidence. Frozen claim boundary; not an additional predictor or deployment result.
 
 The full comparison dimensions and official-source links appear in `tables/Table_S8.csv`.
 
 # Numerical evidence ledger
 
 The machine-readable ledger and its twenty anonymous aggregate source tables are supplied in the `evidence` directory. `SOURCE_INDEX.csv` records every anonymous source hash. The ledger preserves exact values, selectors, rounding, required qualifiers, and prohibited interpretations for the 99 active numerical claims.
+# Table S9. Repeated selection-objective sensitivity
+
+This analysis reuses the exact five Phase 1C repeated 5×5 nested-CV split identities, preprocessing, candidate registries, seeds, inclusive 0.001 tolerance, and deterministic tie logic. Macro-F1-selected OOF predictions were reused. QWK selection added 150 outer fits and no inner or baseline fits; outer-test outcomes remained evaluation-only. Values below are descriptive means over the five fixed repetitions.
+
+| System | Selection | Macro-F1 | Balanced acc. | QWK | MAE | RPS | Log loss | Brier | Rating-4 recall |
+| --- | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| Nominal XGBoost | macro-f1 | 0.6288 | 0.6446 | 0.5833 | 0.2335 | 0.0863 | 0.5677 | 0.3453 | 0.1894 |
+| Nominal XGBoost | qwk | 0.6021 | 0.6279 | 0.6377 | 0.1550 | 0.0682 | 0.4863 | 0.2700 | 0.0167 |
+| Cumulative-threshold XGBoost | macro-f1 | 0.6155 | 0.6524 | 0.5451 | 0.3062 | 0.1007 | 1.2592 | 0.4069 | 0.3288 |
+| Cumulative-threshold XGBoost | qwk | 0.5933 | 0.6251 | 0.6374 | 0.1522 | 0.0673 | 0.4795 | 0.2653 | 0.0000 |
+| Random Forest | macro-f1 | 0.5955 | 0.6283 | 0.6311 | 0.1597 | 0.0854 | 0.6228 | 0.3561 | 0.0106 |
+| Random Forest | qwk | 0.5952 | 0.6278 | 0.6351 | 0.1565 | 0.0837 | 0.6107 | 0.3475 | 0.0061 |
+
+Candidate selections changed in 15, 20, 17, 20, and 20 of 30 model-fold cells (92/150 overall). Full six-model ordering changed for all seven compared aggregate metrics in every repetition. Nominal XGBoost gained QWK and improved MAE while rating-4 recall fell in 5/5 repetitions. Cumulative-threshold XGBoost gained QWK in 5/5 and had zero QWK-selected rating-4 recall in 5/5. Random Forest gained QWK in 4/5 with one zero change; its rating-4 recall fell in 2/5 and was unchanged in 3/5.
+
+The exact 60 repetition × model × selection rows, including all required aggregate and per-class metrics plus the five selected candidate IDs, are supplied in `tables/Table_S9.csv`. Direction counts are not confidence intervals. Repetitions reuse the same observations, and the effect is not claimed to be universal.

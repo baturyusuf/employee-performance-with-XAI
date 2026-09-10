@@ -57,6 +57,6 @@
         "sha256": "1725d5161c414f21fe353fe01cf685cffc59ef5dde1b5253e0bf494b47659cd2"
       }
     ],
-    "caption": "Partial cross-dataset protocol replication on HRDataset_v14. Points and bars show five-repetition means and observed ranges, not confidence intervals. Three- and four-class target formulations are different estimands and must not be compared as an improvement sequence."
+    "caption": "Secondary protocol sensitivity on synthetic HRDataset_v14. Points and bars show five-repetition means and observed ranges, not confidence intervals. The fictitious teaching setting does not establish real-world organizational transport, and the three- and four-class formulations are different estimands."
   }
 ]
