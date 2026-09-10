@@ -1,0 +1,55 @@
+{
+  "files": [
+    {
+      "bytes": 661303,
+      "contains_employee_level_rows": false,
+      "path": "candidate_evidence.csv",
+      "sha256": "69eca584977dc817ab3bfa3ea190a26e53db4be73062bef2dbebca5da49345fa"
+    },
+    {
+      "bytes": 728,
+      "contains_employee_level_rows": false,
+      "path": "independent_validation_receipt.json",
+      "sha256": "f379fc49870f3b336a24aad7c1812fd289bffd639ce676fef1bfbe374c739bc5"
+    },
+    {
+      "bytes": 18032,
+      "contains_employee_level_rows": false,
+      "path": "per_class_metrics.csv",
+      "sha256": "e6e8379fdf502d958f7201da085c373e298e26622395111f4908a41f1aa33d48"
+    },
+    {
+      "bytes": 17149,
+      "contains_employee_level_rows": false,
+      "path": "repeated_selection_results.csv",
+      "sha256": "1f34b9f33b77c77ea4990c368da24e829eabf7b4686b7b63016d6e4b16c7b273"
+    },
+    {
+      "bytes": 2426,
+      "contains_employee_level_rows": false,
+      "path": "repetition_comparisons.csv",
+      "sha256": "fed1bf08dcc7f75455b2dfdf5c84c5183ea651749f43ab7a2f1406bae022273f"
+    },
+    {
+      "bytes": 4934,
+      "contains_employee_level_rows": false,
+      "path": "selected_candidate_changes.csv",
+      "sha256": "0f5e99aa1007bc46561c5e0288ab40a0cf62366c300eaa44c6a95acbd3e43d88"
+    },
+    {
+      "bytes": 43636,
+      "contains_employee_level_rows": false,
+      "path": "selection_schedule.csv",
+      "sha256": "8fbd61cad8968294c07102f2602609781d0af055ef7250c54a546777542880be"
+    },
+    {
+      "bytes": 5553,
+      "contains_employee_level_rows": false,
+      "path": "stage_metadata.json",
+      "sha256": "303a699bdfde631995303a7c95f05b589ceb0f7d00ecc73e95dac78d92cf6369"
+    }
+  ],
+  "historical_claim_digest": "751208d036597461606bd02d68bfa9e642a4aa5ecf5df2df3fd7e46b99084aea",
+  "package": "eswa_repeated_selection_objective_v1",
+  "schema_version": 1
+}

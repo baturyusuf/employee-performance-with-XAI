@@ -1,0 +1,21 @@
+{
+  "candidate_changes": 92,
+  "candidate_rows": 1100,
+  "generation_commit": "914e1e0dc6d1cade80f7fe2830b72c00acd7568a",
+  "macro_reuse_max_abs_serialization_difference": 3.3881317890172014e-21,
+  "models": 6,
+  "network_calls": 0,
+  "new_inner_fits": 0,
+  "oof_rows": 72000,
+  "paid_api_calls": 0,
+  "per_class_rows": 180,
+  "phase1c_generation_commit": "78649c426e69fb5270f9d027b11ba6ba87d71a41",
+  "qwk_outer_fits": 150,
+  "repetitions": 5,
+  "result_rows": 60,
+  "run_id": "eswa_selection_v1_20260910T000000Z_914e1e0",
+  "schedule_rows": 300,
+  "status": "PASS_INDEPENDENT_RECOMPUTATION",
+  "unchanged_candidate_cells": 58,
+  "unchanged_replay_max_abs_probability_difference": 3.3881317890172014e-21
+}
