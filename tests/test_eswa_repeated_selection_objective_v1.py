@@ -3,6 +3,7 @@ from pathlib import Path
 import pandas as pd
 from src.experiments.eswa_repeated_selection_objective_v1 import build_schedule, validate_contract
 from src.experiments.repeated_nested_cv_v3 import TUNED_MODEL_NAMES
+from src.governance.repeated_nested_cv_run_validator_v3 import validate_repeated_nested_cv_run_v3
 
 SOURCE=Path("reports/major_revision_v3_runs/phase1c_v3_20260903T215015Z_78649c4/repeated_nested_cv")
 
@@ -34,3 +35,9 @@ def test_runner_reconstructs_persisted_folds_without_generating_new_splits():
     source=Path("src/experiments/eswa_repeated_selection_objective_v1.py").read_text(encoding="utf-8")
     assert "_rebuild_fold_artifacts" in source
     assert "generate_shared_folds" not in source
+
+def test_complete_phase1c_source_run_passes_independent_validation():
+    receipt=validate_repeated_nested_cv_run_v3(SOURCE)
+    assert receipt["status"]=="passed"
+    assert receipt["distinct_outer_assignment_count"]==5
+    assert receipt["network_calls"]==receipt["paid_api_calls"]==0

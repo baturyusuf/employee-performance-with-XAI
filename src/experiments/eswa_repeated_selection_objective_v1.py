@@ -133,7 +133,7 @@ def run(contract_path: Path, output_dir: Path, run_id: str) -> dict[str,Any]:
     with enforce_offline_runtime() as offline:
         identity=_git_identity(); c,source_hashes=validate_contract(contract_path); repeated_path=Path(c["repeated_design_contract"]["path"])
         repeated,receipt,canonical,features,exclusions,target,nominal,ordinal=_prepare_inputs(repeated_path)
-        source=Path(c["phase1c_source_run"]["directory"]); phase1c_validation=validate_repeated_nested_cv_run_v3(source,repeated_path); candidates=pd.read_csv(source/"candidate_search_results.csv"); macro=pd.read_csv(source/"oof_predictions.csv")
+        source=Path(c["phase1c_source_run"]["directory"]); phase1c_validation=validate_repeated_nested_cv_run_v3(source); candidates=pd.read_csv(source/"candidate_search_results.csv"); macro=pd.read_csv(source/"oof_predictions.csv")
         schedule,changes=build_schedule(candidates); contract_hash=sha256_file(contract_path)
         implementation=[Path(__file__).relative_to(PROJECT_ROOT),contract_path]
         scientific={"git_identity":identity,"source_tree_hash":source_tree_hash(PROJECT_ROOT),"contract_sha256":contract_hash,"source_hashes":source_hashes,"implementation_hashes":{p.as_posix():sha256_file(p) for p in implementation},"dataset_sha256":canonical.receipt["actual_sha256"]}; scientific_hash=_digest(scientific)
