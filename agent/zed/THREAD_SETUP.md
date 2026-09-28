@@ -1,6 +1,6 @@
 # Zed Thread Setup
 
-Create one long-lived Zed thread for each scientific advisor and the implementation lead. Worker and verifier threads may be persistent or task-scoped.
+Zed is the execution surface. GitHub is the durable memory and coordination layer.
 
 ## Thread naming
 
@@ -9,60 +9,100 @@ Use:
 `[AGENT-ID] Short Role Name`
 
 Examples:
-
 - `[SCI-DIRECTOR] Scientific Director`
 - `[SCI-DATA] Data & Validity`
+- `[SCI-LEAKAGE] Leakage Audit`
 - `[IMP-LEAD] Implementation Lead`
 - `[VER-TECH] Technical Verifier`
 
-## Initial instruction
+## Bootstrap
 
-For each thread, the only manual bootstrap instruction should be:
+Do not paste long prompts into Zed. Use the one-line bootstraps in:
 
-```text
-Read AGENTS.md and <PROMPT_PATH>. Adopt that file as your persistent operating contract for this thread. Execute its startup sequence before doing any task.
-```
+`agent/zed/BOOTSTRAP_COMMANDS.md`
 
-The prompt path is listed in `agent/registry.yaml`.
+Each thread must read its repository prompt and treat it as the persistent role contract.
 
-Do not paste the full role prompt into chat. The repository file is the canonical prompt.
+## Persistent threads
 
-## Persistent vs temporary threads
-
-Persistent:
+Keep these long-lived:
 - SCI-DIRECTOR
-- all SCI-* advisors
+- SCI-NOVELTY
+- SCI-DATA
+- SCI-ML
+- SCI-STATS
+- SCI-XAI
+- SCI-PUB
 - IMP-LEAD
 - VER-TECH
 - MGT-SECRETARY
 
-Task-scoped:
-- implementation workers when a work package is short
-- search/literature subagents
-- one-off audit agents
+These are the stable organizational backbone.
+
+## Task-scoped scientific specialists
+
+Open only when a concrete problem exists:
+- SCI-LEAKAGE
+- SCI-ORDINAL
+- SCI-CAL
+- SCI-SHAP
+- SCI-CF
+- SCI-FAIR
+- SCI-XROBUST
+- SCI-REPRO
+- SCI-GOV
+- SCI-LLMFAITH only if LLM explanations are explicitly returned to manuscript scope
+
+This avoids keeping 15–20 expensive Sol contexts alive while preserving one-prompt-per-problem specialization.
+
+## Task-scoped local workers
+
+Open only against a READY Work Package:
+- IMP-DATA
+- IMP-ML
+- IMP-STATS
+- IMP-XAI
+- IMP-RUN
+- IMP-REPRO
+
+The worker bootstrap must include the exact WP path.
 
 ## Context discipline
 
-When context becomes large, do not rely on thread history. Write or refresh a handoff file, then resume from:
-- role prompt
-- current management state
-- active Work Package
-- latest Evidence/Review artifact
+When a thread becomes large, do not trust conversation history as project memory. Create or refresh a Handoff and resume from:
+- AGENTS.md;
+- role prompt;
+- management current state;
+- active Work Package;
+- latest Evidence/Review/Decision records.
 
 ## Parallel code work
 
-Never let two code-writing agents modify the same checkout concurrently.
+Never let two write-capable agents modify the same checkout concurrently.
 
 Use one branch/worktree per active implementation package:
 
-`agent/<agent-id>/<wp-id>`
+`agent/<agent-id-lower>/<wp-id-lower>`
 
 Example:
 
 `agent/imp-ml/wp-ml-004`
 
-Scientific advisors normally do not require isolated worktrees because they should not edit source code.
+Scientific advisors normally do not require isolated code worktrees because they do not edit production source.
+
+## Recommended first launch order
+
+1. SCI-DIRECTOR
+2. SCI-NOVELTY, SCI-DATA, SCI-ML, SCI-STATS, SCI-XAI, SCI-PUB
+3. MGT-SECRETARY
+4. SCI-DIRECTOR creates a gap inventory
+5. specialist Sol threads are opened only for substantiated gaps
+6. approved WPs go to IMP-LEAD
+7. local workers execute in isolated worktrees
+8. VER-TECH verifies
+9. relevant SCI advisor interprets the EP
+10. SCI-DIRECTOR resolves cross-domain conflicts and updates decisions
 
 ## Human control
 
-The Human PI may stop, reprioritize, reject, or supersede any agent action. No agent can self-authorize a change to the frozen scientific protocol merely because it is technically convenient.
+The Human PI may stop, reprioritize, reject or supersede any agent action. No agent can self-authorize a change to the frozen scientific protocol merely because it is technically convenient.
