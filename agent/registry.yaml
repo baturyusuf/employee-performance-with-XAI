@@ -125,3 +125,73 @@ agents:
     layer: management
     preferred_model: local efficient model
     prompt: agent/prompts/management/01_project_secretary.md
+
+  - id: SCI-LEAKAGE
+    role: Leakage and Feature-Governance Advisor
+    layer: scientific
+    lifecycle: task_scoped
+    preferred_model: GPT-5.6 Sol High
+    prompt: agent/prompts/scientific/08_leakage_feature_governance_advisor.md
+
+  - id: SCI-ORDINAL
+    role: Ordinal Learning Advisor
+    layer: scientific
+    lifecycle: task_scoped
+    preferred_model: GPT-5.6 Sol High
+    prompt: agent/prompts/scientific/09_ordinal_learning_advisor.md
+
+  - id: SCI-CAL
+    role: Calibration and Uncertainty Advisor
+    layer: scientific
+    lifecycle: task_scoped
+    preferred_model: GPT-5.6 Sol High
+    prompt: agent/prompts/scientific/10_calibration_uncertainty_advisor.md
+
+  - id: SCI-SHAP
+    role: SHAP and Feature Attribution Advisor
+    layer: scientific
+    lifecycle: task_scoped
+    preferred_model: GPT-5.6 Sol High
+    prompt: agent/prompts/scientific/11_shap_attribution_advisor.md
+
+  - id: SCI-CF
+    role: Counterfactual and Actionability Advisor
+    layer: scientific
+    lifecycle: task_scoped
+    preferred_model: GPT-5.6 Sol High
+    prompt: agent/prompts/scientific/12_counterfactual_actionability_advisor.md
+
+  - id: SCI-FAIR
+    role: Fairness and Proxy Audit Advisor
+    layer: scientific
+    lifecycle: task_scoped
+    preferred_model: GPT-5.6 Sol High
+    prompt: agent/prompts/scientific/13_fairness_proxy_advisor.md
+
+  - id: SCI-XROBUST
+    role: Explanation Robustness / OCEA-PCES Advisor
+    layer: scientific
+    lifecycle: task_scoped
+    preferred_model: GPT-5.6 Sol High
+    prompt: agent/prompts/scientific/14_explanation_robustness_ocea_pces_advisor.md
+
+  - id: SCI-LLMFAITH
+    role: LLM Explanation Faithfulness Advisor
+    layer: scientific
+    lifecycle: inactive_by_default
+    preferred_model: GPT-5.6 Sol High
+    prompt: agent/prompts/scientific/15_llm_explanation_faithfulness_advisor.md
+
+  - id: SCI-REPRO
+    role: Reproducibility and Scientific Integrity Advisor
+    layer: scientific
+    lifecycle: task_scoped
+    preferred_model: GPT-5.6 Sol High
+    prompt: agent/prompts/scientific/16_reproducibility_scientific_integrity_advisor.md
+
+  - id: SCI-GOV
+    role: Ethics, Provenance and Governance Advisor
+    layer: scientific
+    lifecycle: task_scoped
+    preferred_model: GPT-5.6 Sol High
+    prompt: agent/prompts/scientific/17_ethics_provenance_governance_advisor.md
