@@ -1,0 +1,153 @@
+{
+  "bootstrap": {
+    "declared_family_rows": 162,
+    "family_size": 162,
+    "familywise_critical_value": 5.073968955515337,
+    "n_complete_familywise_draws": 5000,
+    "n_resamples": 5000,
+    "resample_hash": "d16aadb56f2dde124df62387447bb01ddf51236f7f9e9e01b6218e8f6265f646"
+  },
+  "canonical_identity": {
+    "config_hash": "51415c2ce68c89d9ce2b042b0a7a811fe3e98180b72460006f9d0465f6bf49b7",
+    "dataset_sha256": "b8deac0a615b97076622ae540f4cfd0d3c3f1e7acb83ba3ff6560470a9ccf60a",
+    "fold_contract_hash": "c1300316fe5baec24e789c06aec35dd4f283fa4843b71c7aab1edbf4818f8e91",
+    "generation_commit": "483f96fdbaab16cb0f32d03d9dbe676a759af44a",
+    "outer_folds": 10,
+    "run_id": "canonical_v2_20260714T221501Z_483f96f",
+    "sample_count": 1200,
+    "scientific_input_hash": "06c507bee525ea1daca43b61249764007d4d8baaa05c9333f23446ea723ce160",
+    "xgboost_model_set_sha256": "d483d8ddb93a47a99a2eab54fe3d138d8f614798dd418bca860ea3f20c813f51"
+  },
+  "contract_sha256": "65bf6d1cdf99cda5f764b5ed93aa6b4bf214a5944ca8bf1248d0c804a73c9696",
+  "created_at_utc": "2026-09-07T07:10:26.727870+00:00",
+  "department_reconstructability_difference_rows": 3,
+  "department_reconstructability_metric_rows": 6,
+  "department_reconstructability_proves_performance_use": false,
+  "fairness_certification_allowed": false,
+  "formal_discrimination_claim_allowed": false,
+  "git_identity": {
+    "branch": "finalization/leakage-aware-v2",
+    "commit": "e314bb5d1935da6a23e26b2085330dacb468fe32"
+  },
+  "jobrole_permutation_repetition_rows": 40,
+  "jobrole_permutation_sample_rows": 48000,
+  "jobrole_permutation_scheme_rows": 2,
+  "network_calls": 0,
+  "new_performance_model_fit_calls": 0,
+  "new_proxy_reconstruction_model_fit_calls": 0,
+  "output_hashes": {
+    "department_reconstructability_differences.csv": "d02aaad42ac055ab61d0d4cef8afa730058ec819080c03f585407a89bbb5bc3d",
+    "department_reconstructability_metrics.csv": "e838ea0f0e447df3abc6e6b10af5147db2b65ba955e8eaf92952bb54a6a82b4c",
+    "diagnostic_receipt.json": "7d432020fb5d75251d33741e0eaa9d9176cc266bc36c7119a514a71c0a885acb",
+    "jobrole_permutation_repetition.csv": "9ef49ba7642d1456f49cf017da8fdf4e32c72f20bd2f50d69bb0371e36b633db",
+    "jobrole_permutation_sample.csv": "67985aae6e243b273e883e161377a90f633909093dfcb0bb956345db7a6860fc",
+    "jobrole_permutation_summary.csv": "8d0af59191a90fe7fd78b14f6055b3f06fbda2b74ac74016b4c78b96d016d5ca",
+    "primary_gap_bootstrap_intervals.csv": "10f63819d37933d8c28662c4226acf4bbcdb7c272c13102bb08930ea9397c31a",
+    "proxy_prediction_change_by_department.csv": "79ba56a192c8baccd5098ea37bfc1ab3e7d64f02276fe710df458df068d5963f",
+    "proxy_prediction_change_sample.csv": "8e11388d5cc53c006d8e3d4983505edb21a7fc40ae6cbe49d986db9cca734196",
+    "subgroup_gap_sensitivity.csv": "d78755b695b3520d17f877c843aca6f53414905b9a71de3a8a92f529038ee891",
+    "subgroup_metric_grid.csv": "6c8ef7a473d760a82492f3bb1a9abbd6d6d04d039e134c9ee3493acd6b60d6aa"
+  },
+  "paid_api_calls": 0,
+  "permutation_supports_causal_claim": false,
+  "primary_gap_interval_rows": 162,
+  "proxy_department_aggregate_rows": 7,
+  "proxy_prediction_change_sample_rows": 1200,
+  "run_id": "phase2c_v3_20260907T070905Z_e314bb5",
+  "runtime_policy": {
+    "allowed_git_subcommands": [
+      "--version",
+      "cat-file",
+      "diff",
+      "ls-files",
+      "ls-tree",
+      "rev-parse",
+      "show",
+      "status"
+    ],
+    "allowed_subprocess_executables": [
+      "git",
+      "git.exe"
+    ],
+    "api_credential_environment_cleared": [
+      "ANTHROPIC_API_KEY",
+      "AZURE_OPENAI_API_KEY",
+      "COHERE_API_KEY",
+      "GOOGLE_API_KEY",
+      "MISTRAL_API_KEY",
+      "OPENAI_API_KEY"
+    ],
+    "attempted_network_operations": 0,
+    "blocked_socket_operations": [
+      "socket.accept",
+      "socket.bind",
+      "socket.connect",
+      "socket.connect_ex",
+      "socket.listen",
+      "socket.send",
+      "socket.sendall",
+      "socket.sendmsg",
+      "socket.sendto",
+      "socket.create_connection",
+      "socket.create_server",
+      "socket.getaddrinfo",
+      "socket.gethostbyaddr",
+      "socket.gethostbyname",
+      "socket.gethostbyname_ex"
+    ],
+    "mode": "deny_all_network_and_paid_api_during_scientific_execution",
+    "network_allowed": false,
+    "paid_api_allowed": false,
+    "policy_version": 1,
+    "subprocess_policy": "shell_denied_and_only_git_executable_allowed",
+    "successful_network_operations": 0
+  },
+  "schema_version": 1,
+  "scientific_input_sha256": "2a42827646702378fb92cf0e0b940fa2739334cc6b62fa1f2ff4f9af66787f1e",
+  "scientific_inputs": {
+    "bound_source_hashes": {
+      "acquisition_manifest": "a5e820a7213967e494bc9238f104e478c5a65c0840d654397cc3063314262d97",
+      "baseline_xgboost_gate": "150eb69b988f987da24b4b3fc76593fb3db60453e151962ce8d221371d03e6eb",
+      "benchmark_oof_predictions": "9b769838b0a55feda162fec949ad17c9dc78141077cd6840598081fb77089104",
+      "benchmark_stage_metadata": "b6116253cbdd7cb947957b8c8a9268d62852fccb6be89fa705e2e0a2b34e4ab1",
+      "candidate_search_results": "5fc79013cebd77b819f8313187fc399906013ae9faabf07fa001b977478c6f6e",
+      "canonical_loader_config": "f8a6354ab67757c5d92c93cef2fe03ab88f4b16b10ce470f2db97ed4d0407779",
+      "canonical_v2_receipt": "bd09523276dcbc54d036f8c9eb0c71ba62f8b0f913c495695a2259296101827c",
+      "fairness_oof_predictions": "0dc72537d557dc31201740c56618a896c1f902f2f648d1029164398a0f565f9c",
+      "feature_availability": "6dd5fdde534e379cceacfaa01e865d1551310fb632b691f5b937ef39394e93cf",
+      "fitted_model_index": "d0b28a68fac18fe8506626faa418c33094a7816b8536c9bdad4fb40b649a8471",
+      "paired_model_differences": "99b6ce63574a88ab1788990ee6253e5722f5fbc1b7ccdad1f41552fdfe4d6465",
+      "performance_subgroup_bootstrap_metadata": "5fbeffa68054feb9206f1fc4eefbb4de2e63987212cf0f7515d7162cccea4174",
+      "proxy_bootstrap_metadata": "7c204a014c58592ec8024209216301074f1d1c12234ae9812641ab24feb4bac8",
+      "proxy_metric_intervals": "631e541052280573798009cf5291ce121d582ecfa0a0f11394af590a8b8b3ad3",
+      "proxy_policy_paired_differences": "74ce3f194458bda6ec7fc9bab708ec4435a2429e47ead76a6501e1032bfdf8c0",
+      "selected_hyperparameters": "5ee6b2c3b43453aa3f54bbc79fa58fdf6f6aa4eae35d02174232cb25f51615f1",
+      "shared_fold_contract": "364b0fc0443dbe1d7eceeb82e383802aa4b1b91f268f09703aa8a9a3a7f41d28",
+      "shared_inner_assignments": "35c1afc7d2c8debb9ce54a4be3ac06d9830a2946c41fd756d3532a0f54d32e89",
+      "shared_outer_assignments": "6b22a827cdba12dff40162f784291399614fb2a9e9ffe1ac889545767129204f",
+      "subgroup_stage_contract": "d19e925ed25188a17f5b55abf38bcd73ee5691f8d8797a43aaa3bd0f99d128bf",
+      "subgroup_stage_metadata": "0027387995485b66bc6674bb6b0c59f43ad6f602805614c973ea481a673653f3",
+      "transformed_feature_lineage": "51c2bae4b2d52fd69701215a735180efa422c2c0b2e0bb3b74f47f848a0fb35d"
+    },
+    "contract_sha256": "65bf6d1cdf99cda5f764b5ed93aa6b4bf214a5944ca8bf1248d0c804a73c9696",
+    "git_identity": {
+      "branch": "finalization/leakage-aware-v2",
+      "commit": "e314bb5d1935da6a23e26b2085330dacb468fe32"
+    },
+    "implementation_hashes": {
+      "src/experiments/benchmark_artifact_contract.py": "ecc952061cf346e2e8a03a4b6c4e41b9f842e829bb0715d70f58ec9144b5196c",
+      "src/experiments/subgroup_proxy_use_v3.py": "69cd9eb4b407db0869a34562c63850743ad1b0096930c49e513af205167407f6",
+      "src/governance/subgroup_proxy_use_contract_v3.py": "fd53290191e38428931a56d33f68b0929c2a3c2d8a4acee72eb90a39c1dd6604"
+    },
+    "source_tree_hash": "c61ac131a39193721a631e90169d73f58b0469c2bc65e8f9843847b3c0329262"
+  },
+  "stage": "subgroup_proxy_use_v3",
+  "status": "complete",
+  "subgroup_gap_rows": 486,
+  "subgroup_metric_rows": 2025,
+  "subgroup_support_status_counts": {
+    "eligible_descriptive_estimate": 1704,
+    "insufficient_group_support": 216,
+    "insufficient_true_class_support": 105
+  }
+}

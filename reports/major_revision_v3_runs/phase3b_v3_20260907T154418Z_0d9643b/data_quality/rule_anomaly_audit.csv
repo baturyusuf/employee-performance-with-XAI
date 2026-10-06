@@ -1,0 +1,53 @@
+dataset_key,rule_id,rule_type,columns,checked_count,missing_or_skipped_count,anomaly_count,anomaly_percentage_of_checked,status,expectation
+inx_primary,numeric_Age,numeric_domain,Age,1200,0,0,0.0,passed,inclusive_range_18_to_100
+inx_primary,numeric_DistanceFromHome,numeric_domain,DistanceFromHome,1200,0,0,0.0,passed,inclusive_range_0_to_500
+inx_primary,numeric_EmpEducationLevel,numeric_domain,EmpEducationLevel,1200,0,0,0.0,passed,allowed_values_contract
+inx_primary,numeric_EmpEnvironmentSatisfaction,numeric_domain,EmpEnvironmentSatisfaction,1200,0,0,0.0,passed,allowed_values_contract
+inx_primary,numeric_EmpHourlyRate,numeric_domain,EmpHourlyRate,1200,0,0,0.0,passed,inclusive_range_0_to_10000
+inx_primary,numeric_EmpJobInvolvement,numeric_domain,EmpJobInvolvement,1200,0,0,0.0,passed,allowed_values_contract
+inx_primary,numeric_EmpJobLevel,numeric_domain,EmpJobLevel,1200,0,0,0.0,passed,allowed_values_contract
+inx_primary,numeric_EmpJobSatisfaction,numeric_domain,EmpJobSatisfaction,1200,0,0,0.0,passed,allowed_values_contract
+inx_primary,numeric_NumCompaniesWorked,numeric_domain,NumCompaniesWorked,1200,0,0,0.0,passed,inclusive_range_0_to_100
+inx_primary,numeric_EmpLastSalaryHikePercent,numeric_domain,EmpLastSalaryHikePercent,1200,0,0,0.0,passed,inclusive_range_0_to_100
+inx_primary,numeric_EmpRelationshipSatisfaction,numeric_domain,EmpRelationshipSatisfaction,1200,0,0,0.0,passed,allowed_values_contract
+inx_primary,numeric_TotalWorkExperienceInYears,numeric_domain,TotalWorkExperienceInYears,1200,0,0,0.0,passed,inclusive_range_0_to_80
+inx_primary,numeric_TrainingTimesLastYear,numeric_domain,TrainingTimesLastYear,1200,0,0,0.0,passed,inclusive_range_0_to_365
+inx_primary,numeric_EmpWorkLifeBalance,numeric_domain,EmpWorkLifeBalance,1200,0,0,0.0,passed,allowed_values_contract
+inx_primary,numeric_ExperienceYearsAtThisCompany,numeric_domain,ExperienceYearsAtThisCompany,1200,0,0,0.0,passed,inclusive_range_0_to_80
+inx_primary,numeric_ExperienceYearsInCurrentRole,numeric_domain,ExperienceYearsInCurrentRole,1200,0,0,0.0,passed,inclusive_range_0_to_80
+inx_primary,numeric_YearsSinceLastPromotion,numeric_domain,YearsSinceLastPromotion,1200,0,0,0.0,passed,inclusive_range_0_to_80
+inx_primary,numeric_YearsWithCurrManager,numeric_domain,YearsWithCurrManager,1200,0,0,0.0,passed,inclusive_range_0_to_80
+inx_primary,numeric_PerformanceRating,numeric_domain,PerformanceRating,1200,0,0,0.0,passed,allowed_values_contract
+inx_primary,company_tenure_le_total_experience,numeric_relation,ExperienceYearsAtThisCompany <= TotalWorkExperienceInYears,1200,0,0,0.0,passed,declared_cross_field_relation
+inx_primary,current_role_le_company_tenure,numeric_relation,ExperienceYearsInCurrentRole <= ExperienceYearsAtThisCompany,1200,0,0,0.0,passed,declared_cross_field_relation
+inx_primary,promotion_gap_le_company_tenure,numeric_relation,YearsSinceLastPromotion <= ExperienceYearsAtThisCompany,1200,0,0,0.0,passed,declared_cross_field_relation
+inx_primary,manager_tenure_le_company_tenure,numeric_relation,YearsWithCurrManager <= ExperienceYearsAtThisCompany,1200,0,0,0.0,passed,declared_cross_field_relation
+hrdataset_v14,numeric_MarriedID,numeric_domain,MarriedID,311,0,0,0.0,passed,allowed_values_contract
+hrdataset_v14,numeric_MaritalStatusID,numeric_domain,MaritalStatusID,311,0,0,0.0,passed,allowed_values_contract
+hrdataset_v14,numeric_GenderID,numeric_domain,GenderID,311,0,0,0.0,passed,allowed_values_contract
+hrdataset_v14,numeric_EmpStatusID,numeric_domain,EmpStatusID,311,0,0,0.0,passed,allowed_values_contract
+hrdataset_v14,numeric_DeptID,numeric_domain,DeptID,311,0,0,0.0,passed,allowed_values_contract
+hrdataset_v14,numeric_PerfScoreID,numeric_domain,PerfScoreID,311,0,0,0.0,passed,allowed_values_contract
+hrdataset_v14,numeric_FromDiversityJobFairID,numeric_domain,FromDiversityJobFairID,311,0,0,0.0,passed,allowed_values_contract
+hrdataset_v14,numeric_Salary,numeric_domain,Salary,311,0,0,0.0,passed,inclusive_range_0_to_10000000
+hrdataset_v14,numeric_Termd,numeric_domain,Termd,311,0,0,0.0,passed,allowed_values_contract
+hrdataset_v14,numeric_PositionID,numeric_domain,PositionID,311,0,0,0.0,passed,inclusive_range_1_to_1000
+hrdataset_v14,numeric_Zip,numeric_domain,Zip,311,0,0,0.0,passed,inclusive_range_0_to_99999
+hrdataset_v14,numeric_ManagerID,numeric_domain,ManagerID,303,8,0,0.0,passed,inclusive_range_1_to_10000
+hrdataset_v14,numeric_EngagementSurvey,numeric_domain,EngagementSurvey,311,0,0,0.0,passed,inclusive_range_1_to_5
+hrdataset_v14,numeric_EmpSatisfaction,numeric_domain,EmpSatisfaction,311,0,0,0.0,passed,allowed_values_contract
+hrdataset_v14,numeric_SpecialProjectsCount,numeric_domain,SpecialProjectsCount,311,0,0,0.0,passed,inclusive_range_0_to_365
+hrdataset_v14,numeric_DaysLateLast30,numeric_domain,DaysLateLast30,311,0,0,0.0,passed,inclusive_range_0_to_30
+hrdataset_v14,numeric_Absences,numeric_domain,Absences,311,0,0,0.0,passed,inclusive_range_0_to_366
+hrdataset_v14,date_parse_DOB,date_parse,DOB,311,0,0,0.0,passed,%m/%d/%y_with_declared_two_digit_year_normalization
+hrdataset_v14,date_parse_DateofHire,date_parse,DateofHire,311,0,0,0.0,passed,%m/%d/%Y
+hrdataset_v14,date_parse_DateofTermination,date_parse,DateofTermination,104,207,0,0.0,passed,%m/%d/%Y
+hrdataset_v14,date_parse_LastPerformanceReview_Date,date_parse,LastPerformanceReview_Date,311,0,0,0.0,passed,%m/%d/%Y
+hrdataset_v14,dob_before_hire,date_relation,DOB < DateofHire,311,0,0,0.0,passed,declared_temporal_relation
+hrdataset_v14,review_on_or_after_hire,date_relation,LastPerformanceReview_Date >= DateofHire,311,0,2,0.6430868167202572,finding,declared_temporal_relation
+hrdataset_v14,termination_on_or_after_hire,date_relation,DateofTermination >= DateofHire,104,207,0,0.0,passed,declared_temporal_relation
+hrdataset_v14,performance_text_matches_code,text_code_mapping,PerformanceScore->PerfScoreID,311,0,2,0.6430868167202572,finding,declared_text_code_correspondence
+hrdataset_v14,gender_text_matches_code,normalized_text_code_mapping,Sex->GenderID,311,0,0,0.0,passed,declared_text_code_correspondence
+hrdataset_v14,married_flag_matches_text,boolean_text_mapping,MaritalDesc->MarriedID,311,0,0,0.0,passed,positive_text_flag_correspondence
+hrdataset_v14,termination_flag_matches_date,termination_flag_date,Termd<->DateofTermination,311,0,0,0.0,passed,terminated_iff_termination_date_present
+hrdataset_v14,department_id_functionally_maps_to_text,code_to_text_function,DeptID->Department,311,0,2,0.6430868167202572,finding,each_code_has_one_text_label_minority_rows_counted_as_findings

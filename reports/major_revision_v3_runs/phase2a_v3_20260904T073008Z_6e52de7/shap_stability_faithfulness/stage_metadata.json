@@ -1,0 +1,133 @@
+{
+  "additivity_check_row_count": 110,
+  "canonical_model_set_sha256": "d483d8ddb93a47a99a2eab54fe3d138d8f614798dd418bca860ea3f20c813f51",
+  "contract_sha256": "cb48bae7c14db7bfb3f99a7cf2e4bf830232d9d27a420c320beddaa1b547dbab",
+  "created_at_utc": "2026-09-04T07:31:14.216007+00:00",
+  "dataset_sha256": "b8deac0a615b97076622ae540f4cfd0d3c3f1e7acb83ba3ff6560470a9ccf60a",
+  "deletion_auc_sample_row_count": 25200,
+  "deletion_auc_summary_row_count": 21,
+  "faithfulness_contrast_row_count": 6,
+  "faithfulness_sample_row_count": 75600,
+  "faithfulness_summary_row_count": 63,
+  "feature_count": 20,
+  "fold_feature_importance_row_count": 2200,
+  "git_identity": {
+    "branch": "finalization/leakage-aware-v2",
+    "commit": "6e52de76f7e486985cbc2b32a53b2554c1c6f6c1"
+  },
+  "human_usefulness_claim_allowed": false,
+  "masking_out_of_distribution_risk": true,
+  "network_calls": 0,
+  "outer_folds": 10,
+  "output_hashes": {
+    "additivity_checks.csv": "2532462aee543740e1cbc42d42cc08de7666da83ca3db389ecb576683d4943f6",
+    "aggregation_receipt.json": "d49caa8a35b5f3878161601d80497ee179563a3846aae479b24a2c4283017f67",
+    "deletion_auc_contrast.csv": "76acdf2f0bcbb399ddee0d763ed64b4bf6d58cd02e12bb07617982e1e864f2ef",
+    "deletion_auc_sample.csv": "07e26c4e2d5694c1a87952b90fcfdef8aaf4aa91d59c71e540eaee5c67b5f717",
+    "deletion_auc_summary.csv": "e27a8e302eaa43521b05742e2c799633b7064876340bd21be1837951cc1c94ce",
+    "faithfulness_contrasts.csv": "c8fa92829a3c519eeee7718e42c8ab13b5380d780ded9ab3019ef3175d5c06a3",
+    "faithfulness_feature_frequency.csv": "f75c4224fd8431cd159c38373671f9fe6c6b9106ada075b7dacd6bc2a2e20d13",
+    "faithfulness_sample_results.csv": "d8cb43e191fec0305419f7d1060a2fcc7fd7c427f530446edb889e2f56f6d634",
+    "faithfulness_summary.csv": "6e85dfe3f43af4da6b6883632a6a6debffdb3ad6483d89aa99f4767934a4ae4e",
+    "fold_feature_importance.csv": "2259c3ac14dc6ee5b07d2f0fe1d56dca336e2f639d5a192916a4b14cc0048428",
+    "stability_pairwise.csv": "2a408b3b7003fcb17b5b24b2f4e63a33bf8029c1ec7d9e96492a61a3426598d3",
+    "stability_run_rankings.csv": "232d2a22ea0b9c6a2ecd3f2f0e812189ec6c36c0f662d16b65e9622afea823ff",
+    "stability_summary.csv": "4329e361ae3d006474efa724b4ef4b82d361ce4a3b3fb667f0b7169e0fbc0496"
+  },
+  "paid_api_calls": 0,
+  "planned_new_estimator_fit_calls": 100,
+  "resampling_run_count": 5,
+  "run_id": "phase2a_v3_20260904T073008Z_6e52de7",
+  "runtime_policy": {
+    "allowed_git_subcommands": [
+      "--version",
+      "cat-file",
+      "diff",
+      "ls-files",
+      "ls-tree",
+      "rev-parse",
+      "show",
+      "status"
+    ],
+    "allowed_subprocess_executables": [
+      "git",
+      "git.exe"
+    ],
+    "api_credential_environment_cleared": [
+      "ANTHROPIC_API_KEY",
+      "AZURE_OPENAI_API_KEY",
+      "COHERE_API_KEY",
+      "GOOGLE_API_KEY",
+      "MISTRAL_API_KEY",
+      "OPENAI_API_KEY"
+    ],
+    "attempted_network_operations": 0,
+    "blocked_socket_operations": [
+      "socket.accept",
+      "socket.bind",
+      "socket.connect",
+      "socket.connect_ex",
+      "socket.listen",
+      "socket.send",
+      "socket.sendall",
+      "socket.sendmsg",
+      "socket.sendto",
+      "socket.create_connection",
+      "socket.create_server",
+      "socket.getaddrinfo",
+      "socket.gethostbyaddr",
+      "socket.gethostbyname",
+      "socket.gethostbyname_ex"
+    ],
+    "mode": "deny_all_network_and_paid_api_during_scientific_execution",
+    "network_allowed": false,
+    "paid_api_allowed": false,
+    "policy_version": 1,
+    "subprocess_policy": "shell_denied_and_only_git_executable_allowed",
+    "successful_network_operations": 0
+  },
+  "sample_count": 1200,
+  "schema_version": 1,
+  "scientific_input_sha256": "c42546074956ea963d2fbc2aafaa40b3da11598e015e5171c6bc5e578e9c1b83",
+  "scientific_inputs": {
+    "bound_source_hashes": {
+      "acquisition_manifest": "a5e820a7213967e494bc9238f104e478c5a65c0840d654397cc3063314262d97",
+      "canonical_loader_config": "f8a6354ab67757c5d92c93cef2fe03ab88f4b16b10ce470f2db97ed4d0407779",
+      "canonical_v2_benchmark_metadata": "b6116253cbdd7cb947957b8c8a9268d62852fccb6be89fa705e2e0a2b34e4ab1",
+      "canonical_v2_benchmark_oof": "9b769838b0a55feda162fec949ad17c9dc78141077cd6840598081fb77089104",
+      "canonical_v2_fitted_model_index": "d0b28a68fac18fe8506626faa418c33094a7816b8536c9bdad4fb40b649a8471",
+      "canonical_v2_fold_contract": "364b0fc0443dbe1d7eceeb82e383802aa4b1b91f268f09703aa8a9a3a7f41d28",
+      "canonical_v2_inner_assignments": "35c1afc7d2c8debb9ce54a4be3ac06d9830a2946c41fd756d3532a0f54d32e89",
+      "canonical_v2_outer_assignments": "6b22a827cdba12dff40162f784291399614fb2a9e9ffe1ac889545767129204f",
+      "canonical_v2_receipt": "bd09523276dcbc54d036f8c9eb0c71ba62f8b0f913c495695a2259296101827c",
+      "canonical_v2_selected_hyperparameters": "5ee6b2c3b43453aa3f54bbc79fa58fdf6f6aa4eae35d02174232cb25f51615f1",
+      "canonical_v2_shap_fold_rankings": "56ef319560996e2888116e74883adf2e18ecb8e27606ff375a0a0e2fe1efa8e9",
+      "canonical_v2_shap_global": "abc8c3f34a3b42281898ef8e2a3f3458b6bf6f0a21c3eea9911fb1b16a41bec2",
+      "canonical_v2_shap_metadata": "899ee364e1244d1052cfd9407892dc0718a5133ae3e46027b21c41605f095707",
+      "canonical_v2_shap_stability": "9de4bbc2838512eff822be3c51e946370d08ebbdf3225cae152b5102ced6f9a0",
+      "canonical_v2_transformed_lineage": "51c2bae4b2d52fd69701215a735180efa422c2c0b2e0bb3b74f47f848a0fb35d",
+      "feature_availability": "6dd5fdde534e379cceacfaa01e865d1551310fb632b691f5b937ef39394e93cf",
+      "xgboost_candidate_registry": "d8fb0584d7106f8941ca8e1b0e0a9c58e13f39519c6c75b383ff333d92d41617"
+    },
+    "contract_sha256": "cb48bae7c14db7bfb3f99a7cf2e4bf830232d9d27a420c320beddaa1b547dbab",
+    "dataset_sha256": "b8deac0a615b97076622ae540f4cfd0d3c3f1e7acb83ba3ff6560470a9ccf60a",
+    "git_identity": {
+      "branch": "finalization/leakage-aware-v2",
+      "commit": "6e52de76f7e486985cbc2b32a53b2554c1c6f6c1"
+    },
+    "implementation_hashes": {
+      "src/experiments/benchmark_artifact_contract.py": "ecc952061cf346e2e8a03a4b6c4e41b9f842e829bb0715d70f58ec9144b5196c",
+      "src/experiments/shap_stability_faithfulness_v3.py": "13838753d84a7d8868e849aba94b79219c6c2bcfd0be5a5ba714445a37c6ab49",
+      "src/explainability/canonical_shap_axis.py": "5f07f0cbe02ac94e1b02a11c0bf7a8f9024e26b6816961f92c9cca13a0b40b04",
+      "src/governance/shap_stability_faithfulness_contract_v3.py": "07e7c5bb3ef478e62737cea43072ce897609fed0f5c7a0c7421a8f35038ae969",
+      "src/models/canonical_models.py": "c1161f50cc3193461390b38407df77d4cf71e1924c9f295a47849923c0f6d874"
+    },
+    "source_tree_hash": "6c30d2f0eda70b34c2ed309a10141a099c16998c751b3a08d458728a2431db15"
+  },
+  "seed_stability_run_count_including_reference": 6,
+  "stability_pairwise_row_count": 75,
+  "stability_ranking_row_count": 220,
+  "stability_summary_row_count": 9,
+  "stage": "shap_stability_faithfulness_v3",
+  "status": "complete"
+}

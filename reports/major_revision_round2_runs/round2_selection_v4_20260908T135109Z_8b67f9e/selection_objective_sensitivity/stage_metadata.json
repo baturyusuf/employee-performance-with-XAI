@@ -1,0 +1,71 @@
+{
+  "composite_material_dependence_flag_present": false,
+  "created_at_utc": "2026-09-08T13:51:27.076022+00:00",
+  "empirical_prior_model_fit_count": 0,
+  "employee_level_outputs_publication_authorized": false,
+  "git_identity": {
+    "branch": "revision/round2-major-v4",
+    "commit": "8b67f9e23ec8aaba52e4b5422d63cd33eb3590b9"
+  },
+  "macro_f1_oof_reused": true,
+  "models": [
+    "logistic_regression",
+    "random_forest",
+    "lightgbm",
+    "xgboost",
+    "proportional_odds_logistic",
+    "cumulative_threshold_xgboost"
+  ],
+  "network_calls": 0,
+  "new_inner_model_fit_count": 0,
+  "outer_test_used_for_selection": false,
+  "output_hashes": {
+    "aggregate_metrics.csv": "c6294c56c4fc7eca7d840aef5c60a24c502a344307a270e625335de2d0f8999d",
+    "candidate_evidence.csv": "ab54c2b98cf476f4624ea17f4e13333126e75e25cdcda77b2130a81773b833c9",
+    "confusion_matrix.csv": "c219439a578bf552a96f9e329b12ef2c3f964edd994b0f69f548d534d7190ea6",
+    "empirical_prior_fold_parameters.csv": "1d93ff07ba1619dffae28d61b2efabbf30af4902514fb4299c75a802e6f240bb",
+    "empirical_prior_metrics.csv": "c2df616438acde3541588e0b40cdd4f37d0bc59fe5bb9a2b57691139c7ad3132",
+    "empirical_prior_oof_predictions.csv": "70ef9a3094eecad0a0f95f11f48e30165903f0326effd7c6a48f4aa5764272c9",
+    "metric_effect_magnitudes.csv": "a78d36ec202748c8c6ad0c4568fba63f7743f9ca99dcb6c669ae045df1da0938",
+    "oof_predictions.csv": "f053c040cbb575eba393f6695586511156a493e3c955ba7987ce2863b04144b1",
+    "per_class_metrics.csv": "7766cd76abb7e1dda22629889f968cacc99d84e91df3c740e8aa0f59eb39a4f7",
+    "ranking_changes.csv": "531f5279bbd89f69eae68d6826fa3a668029b401de89f1e03f9a5ee8744bcbbd",
+    "selected_candidate_changes.csv": "064fab3f79d428b15855e2dfef9a4af9aa27f672db2af0f253d6dcf66326d6b0",
+    "selection_schedule.csv": "8374670e6143822bf25df3164f8f91b2dcf417a0678928fe2a1cbe7866330d2f"
+  },
+  "paid_api_calls": 0,
+  "qwk_outer_model_fit_count": 60,
+  "run_id": "round2_selection_v4_20260908T135109Z_8b67f9e",
+  "sample_count_per_model_regime": 1200,
+  "schema_version": 1,
+  "scientific_input_sha256": "872cc2195755c7ff943146fdb617c3a36b19fd101d3616060a6f7100bfaab796",
+  "scientific_inputs": {
+    "contract_sha256": "ed46b263644c1d1fc49969c3d7a2936e2452eab02240e66a4b53016d9eb3f719",
+    "git_identity": {
+      "branch": "revision/round2-major-v4",
+      "commit": "8b67f9e23ec8aaba52e4b5422d63cd33eb3590b9"
+    },
+    "implementation_hashes": {
+      "src/experiments/selection_objective_sensitivity_v4.py": "9019603d4442f46dc681850d113a6ac8dfaf72625e9db3ff51226139e63b0c0f"
+    },
+    "source_hashes": {
+      "dataset": "b8deac0a615b97076622ae540f4cfd0d3c3f1e7acb83ba3ff6560470a9ccf60a",
+      "feature_contract": "6dd5fdde534e379cceacfaa01e865d1551310fb632b691f5b937ef39394e93cf",
+      "fold_contract": "364b0fc0443dbe1d7eceeb82e383802aa4b1b91f268f09703aa8a9a3a7f41d28",
+      "inner_assignments": "35c1afc7d2c8debb9ce54a4be3ac06d9830a2946c41fd756d3532a0f54d32e89",
+      "macro_f1_oof_predictions": "ef5fcecb94b9a17f7f4e8503a23744e74be882d72a9c5367bdf47580143afde0",
+      "nominal_candidate_scores": "5fc79013cebd77b819f8313187fc399906013ae9faabf07fa001b977478c6f6e",
+      "nominal_registry": "d8fb0584d7106f8941ca8e1b0e0a9c58e13f39519c6c75b383ff333d92d41617",
+      "ordinal_candidate_scores": "85bd014da08168b955fd39d59f25365760334e56b5765617c60a88b2c1d1e8ec",
+      "ordinal_registry": "39bcc62580515888783120a00ed807c0ede0f4c46f587f50897aced4c7999b02",
+      "outer_assignments": "6b22a827cdba12dff40162f784291399614fb2a9e9ffe1ac889545767129204f"
+    },
+    "source_tree_hash": "a0bd27ef2b3e72a7ce83b27cf0041210c136c81073865c673670ababd8ec02f5"
+  },
+  "selection_objectives": [
+    "macro_f1",
+    "qwk"
+  ],
+  "stage": "selection_objective_sensitivity_v4",
+  "status": "complete"
+}

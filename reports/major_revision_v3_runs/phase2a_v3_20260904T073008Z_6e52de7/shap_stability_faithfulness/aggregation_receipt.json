@@ -1,0 +1,32 @@
+{
+  "absolute_before_transformed_grouping": false,
+  "additivity_tolerance": 1e-05,
+  "background_data": null,
+  "class_labels": [
+    2,
+    3,
+    4
+  ],
+  "contract_sha256": "cb48bae7c14db7bfb3f99a7cf2e4bf830232d9d27a420c320beddaa1b547dbab",
+  "explainer": "shap.TreeExplainer",
+  "feature_perturbation": "tree_path_dependent",
+  "grouped_sum_preservation_required_per_sample_class": true,
+  "library": "shap",
+  "library_version": "0.51.0",
+  "maximum_observed_grouped_sum_error": 0.0,
+  "maximum_observed_raw_margin_additivity_error": 6.511458195745945e-06,
+  "model_output": "raw_margin",
+  "normalized_axis_order": "sample_class_transformed_feature",
+  "operation_order": [
+    "normalize_library_output_to_sample_class_transformed_feature",
+    "sum_signed_encoded_values_within_raw_feature_family",
+    "take_absolute_grouped_value",
+    "mean_across_classes",
+    "mean_across_exactly_once_oof_samples"
+  ],
+  "probability_space_explanation": false,
+  "run_id": "phase2a_v3_20260904T073008Z_6e52de7",
+  "schema_version": 1,
+  "scientific_input_sha256": "c42546074956ea963d2fbc2aafaa40b3da11598e015e5171c6bc5e578e9c1b83",
+  "stability_is_faithfulness": false
+}
