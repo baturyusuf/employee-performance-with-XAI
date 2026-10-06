@@ -1,0 +1,78 @@
+{
+  "benchmark_contract_sha256": "39bcc62580515888783120a00ed807c0ede0f4c46f587f50897aced4c7999b02",
+  "created_at_utc": "2026-09-03T13:10:22.390793+00:00",
+  "employee_level_outputs_publication_authorized": false,
+  "evidence_status": "complete_exactly_once_oof",
+  "feature_count": 20,
+  "feature_policy": "P3",
+  "fold_contract_hash": "c1300316fe5baec24e789c06aec35dd4f283fa4843b71c7aab1edbf4818f8e91",
+  "git_identity": {
+    "branch": "finalization/leakage-aware-v2",
+    "commit": "dc5cb8b96b096bb2efc6c242403b7e51f870a01b"
+  },
+  "inner_folds": 5,
+  "model_count": 9,
+  "network_calls": 0,
+  "new_naive_baselines_fitted": [
+    "majority_baseline",
+    "stratified_baseline",
+    "ordinal_median_baseline"
+  ],
+  "new_ordinal_models_fitted": [
+    "proportional_odds_logistic",
+    "cumulative_threshold_xgboost"
+  ],
+  "nominal_models_reused": [
+    "logistic_regression",
+    "random_forest",
+    "lightgbm",
+    "xgboost"
+  ],
+  "ordered_labels": [
+    2,
+    3,
+    4
+  ],
+  "outer_folds": 10,
+  "outer_test_used_for_selection": false,
+  "output_hashes": {
+    "aggregate_metrics": "b7dcd0fa01f40c6d11450bb4afd32b1e768f7b301ca804674d8ae589f5a58edf",
+    "candidate_search_results": "85bd014da08168b955fd39d59f25365760334e56b5765617c60a88b2c1d1e8ec",
+    "combined_oof_predictions": "ef5fcecb94b9a17f7f4e8503a23744e74be882d72a9c5367bdf47580143afde0",
+    "confusion_matrix": "667cfa6605c5d2e3490e87801b0906940dd320595125727fda8f2c7ccbb53e0c",
+    "extension_oof_predictions": "7e697e1993a78572d33658a4d1425cc797fc0b970c1bfd623855e62b79aff15d",
+    "fold_metrics": "bb7ff59f53350840a4059ed4770e25ca6ac0274d03400ee0c80fe024efb9c9e0",
+    "per_class_metrics": "d58ca07066b74a5648a2f0bea9c26594e607942320913d1c29ff24e46f72fea8",
+    "selected_hyperparameters": "a85fba71c4562392f0d9246e23f6b047624aeda4c00d3151a3178c68ef845fc7"
+  },
+  "paid_api_calls": 0,
+  "run_id": "phase1b_v3_20260903T130912Z_dc5cb8b",
+  "sample_count_per_model": 1200,
+  "schema_version": 1,
+  "scientific_input_sha256": "09e39f0920369ecfbc5be28d731833c7695e2618de47825ffa4529362dfc0b2a",
+  "scientific_inputs": {
+    "benchmark_contract_sha256": "39bcc62580515888783120a00ed807c0ede0f4c46f587f50897aced4c7999b02",
+    "canonical_v2_artifact_hashes": {
+      "fold_contract": "364b0fc0443dbe1d7eceeb82e383802aa4b1b91f268f09703aa8a9a3a7f41d28",
+      "inner_assignments": "35c1afc7d2c8debb9ce54a4be3ac06d9830a2946c41fd756d3532a0f54d32e89",
+      "nominal_oof_predictions": "9b769838b0a55feda162fec949ad17c9dc78141077cd6840598081fb77089104",
+      "outer_assignments": "6b22a827cdba12dff40162f784291399614fb2a9e9ffe1ac889545767129204f"
+    },
+    "dataset_sha256": "b8deac0a615b97076622ae540f4cfd0d3c3f1e7acb83ba3ff6560470a9ccf60a",
+    "feature_contract_sha256": "6dd5fdde534e379cceacfaa01e865d1551310fb632b691f5b937ef39394e93cf",
+    "git_identity": {
+      "branch": "finalization/leakage-aware-v2",
+      "commit": "dc5cb8b96b096bb2efc6c242403b7e51f870a01b"
+    },
+    "implementation_hashes": {
+      "src/experiments/ordinal_benchmark_v3.py": "f8e8cd04987cf54e78958f12364d9ad7df74c23b64d25bb090e4079182833f8f",
+      "src/models/ordinal_evaluation_v3.py": "bc546632454696d96c64ec60285b31f729319405a645b97d89da9fe27daefb4e",
+      "src/models/ordinal_models_v3.py": "8df4bc881662fda56f56288da314c826733bda3fb72c658d6f2465d3464b7a8d"
+    },
+    "nominal_model_registry_sha256": "d8fb0584d7106f8941ca8e1b0e0a9c58e13f39519c6c75b383ff333d92d41617",
+    "source_tree_hash": "b2df1fd2c1390aaecf1f2dba5e1443beb6d5549a1d22df10273f47bd4740aa25"
+  },
+  "source_tree_hash": "b2df1fd2c1390aaecf1f2dba5e1443beb6d5549a1d22df10273f47bd4740aa25",
+  "stage": "ordinal_benchmark_v3",
+  "status": "complete"
+}

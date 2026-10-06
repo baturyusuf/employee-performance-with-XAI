@@ -1,0 +1,124 @@
+{
+  "cleaned_column_counts": {
+    "hrdataset_v14": 39,
+    "inx_primary": 28
+  },
+  "contract_sha256": "d448a6a4e02dc8891d5ee87d918d52c19de616d644d11b63b50a3c1703b2be59",
+  "created_at_utc": "2026-09-07T15:44:19.178742+00:00",
+  "dataset_count": 2,
+  "dataset_keys": [
+    "inx_primary",
+    "hrdataset_v14"
+  ],
+  "declared_rule_count": 52,
+  "git_identity": {
+    "branch": "finalization/leakage-aware-v2",
+    "commit": "0d9643b0a1439144951bc0b657f7c9ba81bd6603"
+  },
+  "model_fit_calls": 0,
+  "network_calls": 0,
+  "output_hashes": {
+    "categorical_cardinality.csv": "e7d40244b10de051bd03edad0518b25cbfacaa96d72cfb912fc5f034432ec23d",
+    "cleaned_schema.csv": "1326867bd799b7672f5d3aede3950d980487859ee25aff88b414630245ce7577",
+    "column_profiles.csv": "5e1a7d1479834317c50adfe7ae9069dba7f1759edef538f3976a6abca9da39e1",
+    "dataset_summary.csv": "df7d21a23be7cad851161d821f7ac376c30d5c6e5c8783c45fdee227de148d0b",
+    "duplicate_audit.csv": "c7c5828a5ff241e49692bb24d43947fcd303d605fa585666d5839d718325548d",
+    "identifier_audit.csv": "81a367b09dda51266ad7914b6b060431cf27abcc1657cbab10c706daa90f75f1",
+    "manuscript_ready_data_quality.csv": "41102712be6f7ade750937468a25281a951e294aa9d0d11739f44174972138b5",
+    "raw_schema.csv": "d36ca457691637a09be61f176563535e632f55a1b023c1313ba31465e7ab34bf",
+    "rule_anomaly_audit.csv": "4ccae16bdc64e4f9b5067d89869cc761348a02eb0650d7e0c5b704b06edc3cc0",
+    "target_distribution.csv": "4845da4f51bdd6651e7a54c1aaa279cbe0af1d0dd5fc8d0175bcdaf1cc0a2502"
+  },
+  "paid_api_calls": 0,
+  "raw_column_counts": {
+    "hrdataset_v14": 36,
+    "inx_primary": 28
+  },
+  "raw_column_profile_count": 64,
+  "raw_data_published": false,
+  "raw_row_counts": {
+    "hrdataset_v14": 311,
+    "inx_primary": 1200
+  },
+  "row_level_values_published": false,
+  "rules_with_findings": 3,
+  "run_id": "phase3b_v3_20260907T154418Z_0d9643b",
+  "runtime_policy": {
+    "allowed_git_subcommands": [
+      "--version",
+      "cat-file",
+      "diff",
+      "ls-files",
+      "ls-tree",
+      "rev-parse",
+      "show",
+      "status"
+    ],
+    "allowed_subprocess_executables": [
+      "git",
+      "git.exe"
+    ],
+    "api_credential_environment_cleared": [
+      "ANTHROPIC_API_KEY",
+      "AZURE_OPENAI_API_KEY",
+      "COHERE_API_KEY",
+      "GOOGLE_API_KEY",
+      "MISTRAL_API_KEY",
+      "OPENAI_API_KEY"
+    ],
+    "attempted_network_operations": 0,
+    "blocked_socket_operations": [
+      "socket.accept",
+      "socket.bind",
+      "socket.connect",
+      "socket.connect_ex",
+      "socket.listen",
+      "socket.send",
+      "socket.sendall",
+      "socket.sendmsg",
+      "socket.sendto",
+      "socket.create_connection",
+      "socket.create_server",
+      "socket.getaddrinfo",
+      "socket.gethostbyaddr",
+      "socket.gethostbyname",
+      "socket.gethostbyname_ex"
+    ],
+    "mode": "deny_all_network_and_paid_api_during_scientific_execution",
+    "network_allowed": false,
+    "paid_api_allowed": false,
+    "policy_version": 1,
+    "subprocess_policy": "shell_denied_and_only_git_executable_allowed",
+    "successful_network_operations": 0
+  },
+  "schema_version": 1,
+  "scientific_input_sha256": "578e0d1f5474e92a180c64d2deaf33fecb7826d2f64da0afca1d7a05b0ae84a0",
+  "scientific_inputs": {
+    "contract_sha256": "d448a6a4e02dc8891d5ee87d918d52c19de616d644d11b63b50a3c1703b2be59",
+    "dataset_hashes": {
+      "hrdataset_v14": "cb19996755c93c0a8d6527f59da4701c80aef65eff854906546dce286249813c",
+      "inx_primary": "b8deac0a615b97076622ae540f4cfd0d3c3f1e7acb83ba3ff6560470a9ccf60a"
+    },
+    "git_identity": {
+      "branch": "finalization/leakage-aware-v2",
+      "commit": "0d9643b0a1439144951bc0b657f7c9ba81bd6603"
+    },
+    "implementation_hashes": {
+      "src/data/canonical_loader.py": "4b5b6126037a8343c59f5bd1badc33c07f5378bd2c92873cb2a853b6d8b70670",
+      "src/data/external_adapters.py": "59e3a342bb58a818520bfbd3d0e068d33646759b8a8111b92d7930302f9bec94",
+      "src/experiments/data_quality_v3.py": "c0d607391e96483f8ca0bd52ec8377faf290856ddedf419825751084e1172034",
+      "src/governance/data_quality_contract_v3.py": "55443761d38dc0d7e6000fb5f2cb8303dff23cbf604849fc81b69ffb50013923"
+    },
+    "source_hashes": {
+      "acquisition_manifest": "a5e820a7213967e494bc9238f104e478c5a65c0840d654397cc3063314262d97",
+      "canonical_config": "f8a6354ab67757c5d92c93cef2fe03ab88f4b16b10ce470f2db97ed4d0407779",
+      "hrdataset_schema_mapping": "65c40fecc75235f57209cff6231d7386e4279ebedca9390f53ad2bb67ae63788",
+      "inx_feature_availability": "6dd5fdde534e379cceacfaa01e865d1551310fb632b691f5b937ef39394e93cf"
+    },
+    "source_tree_hash": "808659fcfc0648aa6be54b9e9c864c0d5d8cad5844a936ac424ef4887a90fbc4"
+  },
+  "source_rows_modified": 0,
+  "stage": "core_data_quality_v3",
+  "status": "complete",
+  "summed_rule_anomaly_occurrences": 6
+}

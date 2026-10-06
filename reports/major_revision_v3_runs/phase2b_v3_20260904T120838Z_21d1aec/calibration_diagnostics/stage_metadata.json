@@ -1,0 +1,125 @@
+{
+  "all_metrics_improved_claim_allowed": false,
+  "classwise_metric_row_count": 6,
+  "contract_sha256": "258a81b0a3a4038218ca9f185252ed9fcc12c8f7056314e9760f5285ffec831b",
+  "created_at_utc": "2026-09-04T12:08:41.175707+00:00",
+  "cumulative_metric_row_count": 4,
+  "diagnostic_calibration_regression_fit_count": 10,
+  "git_identity": {
+    "branch": "finalization/leakage-aware-v2",
+    "commit": "21d1aecb6e61511e95aee498ab81c54fe6e5a6ab"
+  },
+  "method_comparison_row_count": 6,
+  "method_count": 2,
+  "metric_summary_row_count": 2,
+  "network_calls": 0,
+  "new_calibrator_fit_calls": 0,
+  "new_model_fit_calls": 0,
+  "output_hashes": {
+    "calibration_metric_summary.csv": "612ec6a3b69d5bf697aad4919cb4281d01718c24e983c5200c427fc522b3ae3a",
+    "classwise_calibration_metrics.csv": "80f99c472c74d510da40d1b898d1d12d76f06abc48dd80569ce11b442fbc17c7",
+    "classwise_reliability.png": "ec28f642e14e84a1b50a9e5b0e0cc577f87501c005994109fe13d8da9b9e5801",
+    "classwise_reliability.svg": "7c5542d641b645067551961dce596a92b5ff29fcdcda3ddfa3b27091a7e6c172",
+    "cumulative_calibration_metrics.csv": "08bd6dc929b711b8f812a248016e41382550ac007c6bf231f4f643e9dab553e7",
+    "cumulative_reliability.png": "c6bd937904c8a04e4444c0f4c8ed5995e48b295a3f78ecbb7f43435a7305aa95",
+    "cumulative_reliability.svg": "194d6d637a07de798ffd02f6cb85b4bf1b7bee3b3c8a6dadcf889b162d722212",
+    "diagnostic_receipt.json": "72ed358c7b245a0a7928875bfd100899b1a11c39287238aeacb23dcc6bb7a7c2",
+    "extended_reliability_bins.csv": "64058ebe6eb14da71873af2d1c744b7a1756d046b52e3607b9946d32f488015c",
+    "method_comparison.csv": "bac8344ec08129d92a38ffe5c968da576b57fe8bac48aa0f7b50e052e4f3bbb3"
+  },
+  "paid_api_calls": 0,
+  "prediction_row_count": 2400,
+  "reliability_bin_row_count": 120,
+  "run_id": "phase2b_v3_20260904T120838Z_21d1aec",
+  "runtime_policy": {
+    "allowed_git_subcommands": [
+      "--version",
+      "cat-file",
+      "diff",
+      "ls-files",
+      "ls-tree",
+      "rev-parse",
+      "show",
+      "status"
+    ],
+    "allowed_subprocess_executables": [
+      "git",
+      "git.exe"
+    ],
+    "api_credential_environment_cleared": [
+      "ANTHROPIC_API_KEY",
+      "AZURE_OPENAI_API_KEY",
+      "COHERE_API_KEY",
+      "GOOGLE_API_KEY",
+      "MISTRAL_API_KEY",
+      "OPENAI_API_KEY"
+    ],
+    "attempted_network_operations": 0,
+    "blocked_socket_operations": [
+      "socket.accept",
+      "socket.bind",
+      "socket.connect",
+      "socket.connect_ex",
+      "socket.listen",
+      "socket.send",
+      "socket.sendall",
+      "socket.sendmsg",
+      "socket.sendto",
+      "socket.create_connection",
+      "socket.create_server",
+      "socket.getaddrinfo",
+      "socket.gethostbyaddr",
+      "socket.gethostbyname",
+      "socket.gethostbyname_ex"
+    ],
+    "mode": "deny_all_network_and_paid_api_during_scientific_execution",
+    "network_allowed": false,
+    "paid_api_allowed": false,
+    "policy_version": 1,
+    "subprocess_policy": "shell_denied_and_only_git_executable_allowed",
+    "successful_network_operations": 0
+  },
+  "same_dataset_oof_diagnostic_not_future_validation": true,
+  "sample_count_per_method": 1200,
+  "schema_version": 1,
+  "scientific_input_sha256": "97797e436e816623d8652772a5089d226f304b59a30ffcdee110c33e413eec86",
+  "scientific_inputs": {
+    "bound_source_hashes": {
+      "calibration_bins": "7d65bf9f3c738080497027bb0e165c49c93ba8fe402d25968715979d3b92268e",
+      "calibration_metadata": "9227c2cddb1cc08d6805f3c9055de1ed564844ad9b82b47ed20fb3637dbc9cf4",
+      "calibration_method_comparison": "1c0352b5ee00bb7b3bfd516e47f337eaca7117a5923437bc2f8f437a46b41f82",
+      "calibration_metric_intervals": "ebd6a8906dda22052802ef4f6b31bfdbaf74e41216c2bfbc98b31bdf142a1ed1",
+      "calibration_paired_differences": "4bcf2efbad04b49b83f0154942cae1563b5faf335eead1a277f1a624ab60babf",
+      "calibration_predictions": "c38e46bba72aba74c1220b103b710cb7e9ffbc0a626b3e6966ea6bfe4fc38b1a",
+      "calibration_protocol": "5f07fc43e0397146aa17b4c1f408aa9c81f846b0ddaa613a4734a12c4951acf2",
+      "calibration_validation": "23a0661433433e1b6b687a1bc9cc7b0248ffab6b600cb5edfd74af8439640f31",
+      "canonical_v2_receipt": "bd09523276dcbc54d036f8c9eb0c71ba62f8b0f913c495695a2259296101827c"
+    },
+    "contract_sha256": "258a81b0a3a4038218ca9f185252ed9fcc12c8f7056314e9760f5285ffec831b",
+    "git_identity": {
+      "branch": "finalization/leakage-aware-v2",
+      "commit": "21d1aecb6e61511e95aee498ab81c54fe6e5a6ab"
+    },
+    "implementation_hashes": {
+      "src/experiments/calibration_diagnostics_v3.py": "4fee34c297f74c36a63a36e47e3e62d05e228551ddd521815aed16b57678641f",
+      "src/governance/calibration_diagnostics_contract_v3.py": "4adf7fd482ea03916c4432a832fa9655832d08e5bfd09d03df7fa1298cca6ed7",
+      "src/models/ordinal_evaluation_v3.py": "bc546632454696d96c64ec60285b31f729319405a645b97d89da9fe27daefb4e"
+    },
+    "source_tree_hash": "4e556afdb57b004a3b06d4f42f64c89b720f81e777209a7b3d354fb3bfc87a50"
+  },
+  "source_calibration_identity": {
+    "calibration_protocol_sha256": "2c9293055f64114c63c8f85e652d94e838c84501a718eea6c3852de78ce4808b",
+    "config_hash": "51415c2ce68c89d9ce2b042b0a7a811fe3e98180b72460006f9d0465f6bf49b7",
+    "dataset_sha256": "b8deac0a615b97076622ae540f4cfd0d3c3f1e7acb83ba3ff6560470a9ccf60a",
+    "fold_contract_hash": "c1300316fe5baec24e789c06aec35dd4f283fa4843b71c7aab1edbf4818f8e91",
+    "generation_commit": "483f96fdbaab16cb0f32d03d9dbe676a759af44a",
+    "outer_folds": 10,
+    "run_id": "canonical_v2_20260714T221501Z_483f96f",
+    "sample_count": 1200,
+    "scientific_input_hash": "06c507bee525ea1daca43b61249764007d4d8baaa05c9333f23446ea723ce160",
+    "xgboost_model_set_sha256": "d483d8ddb93a47a99a2eab54fe3d138d8f614798dd418bca860ea3f20c813f51"
+  },
+  "stage": "calibration_diagnostics_v3",
+  "status": "complete",
+  "test_set_method_selection_performed": false
+}

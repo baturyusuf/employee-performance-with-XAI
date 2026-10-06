@@ -1,0 +1,126 @@
+{
+  "candidate_search_row_count": 1100,
+  "created_at_utc": "2026-09-03T22:11:56.624299+00:00",
+  "dataset_sha256": "b8deac0a615b97076622ae540f4cfd0d3c3f1e7acb83ba3ff6560470a9ccf60a",
+  "employee_level_outputs_publication_authorized": false,
+  "evidence_status": "complete_five_repetition_exactly_once_oof",
+  "feature_count": 20,
+  "feature_policy": "P3",
+  "fold_metric_row_count": 225,
+  "git_identity": {
+    "branch": "finalization/leakage-aware-v2",
+    "commit": "78649c426e69fb5270f9d027b11ba6ba87d71a41"
+  },
+  "inner_folds": 5,
+  "model_count": 9,
+  "network_calls": 0,
+  "oof_prediction_row_count": 54000,
+  "ordered_labels": [
+    2,
+    3,
+    4
+  ],
+  "outer_folds_per_repetition": 5,
+  "outer_test_used_for_selection": false,
+  "output_hashes": {
+    "candidate_search_results.csv": "9c72c363ea22f8fb71cd947256f8003102810c240bd898e74cdfb7bd91a94768",
+    "fold_contracts.json": "714587a58464a04fcbf714de8c8ad3d9704e23186d1d115a317d54c37acd77e4",
+    "fold_metrics.csv": "11208ce9a9ca154c2a402966584e65b251fee47fd4e92f45c36e3ebb6edfe5af",
+    "model_rank_summary.csv": "dfd3c314b88ee8bb9113d11189ad8c1ae1e9538f9fa385f526dd261ae2eedfe1",
+    "oof_predictions.csv": "47675d4666fb9d29a9db2ed0c9516ff939acd053589a72aace7612fb11934ced",
+    "ordering_stability.csv": "5b36d6eb639441408a5997a60aaddb5cfc3a9b8986b4e3a1be6b6eaf50c4ca22",
+    "rank_by_repetition.csv": "53723baa4d8d9615f4a92228bbdc53aed0d615c69de366b6002c0667e600157b",
+    "repetition_metrics.csv": "2128042c4d5f39c4d2c02f00398bf0c8aa5789d28a71dc54d13d1607afdd837b",
+    "selected_candidate_frequency.csv": "f1b52d4d881fd2e4e391fd49bccae015ec2741aea9222687f864c929718cf7d7",
+    "selected_hyperparameters.csv": "65a83c724698748a47644c60b4c2fef0cb6337704bd40bcf1054f422eab4bd68",
+    "variability_summary.csv": "f50bbd1bb89e479ccdeb3e15538ea5f4a5c2eeabad6ef3d6d40d5439384c2acf"
+  },
+  "paid_api_calls": 0,
+  "planned_estimator_fit_calls": 5725,
+  "repeated_contract_sha256": "5681e521cfbaff5963494212fcc047116056fd7d66393346df0463aef7553af9",
+  "repetition_metric_row_count": 720,
+  "repetitions": 5,
+  "run_id": "phase1c_v3_20260903T215015Z_78649c4",
+  "runtime_policy": {
+    "allowed_git_subcommands": [
+      "--version",
+      "cat-file",
+      "diff",
+      "ls-files",
+      "ls-tree",
+      "rev-parse",
+      "show",
+      "status"
+    ],
+    "allowed_subprocess_executables": [
+      "git",
+      "git.exe"
+    ],
+    "api_credential_environment_cleared": [
+      "ANTHROPIC_API_KEY",
+      "AZURE_OPENAI_API_KEY",
+      "COHERE_API_KEY",
+      "GOOGLE_API_KEY",
+      "MISTRAL_API_KEY",
+      "OPENAI_API_KEY"
+    ],
+    "attempted_network_operations": 0,
+    "blocked_socket_operations": [
+      "socket.accept",
+      "socket.bind",
+      "socket.connect",
+      "socket.connect_ex",
+      "socket.listen",
+      "socket.send",
+      "socket.sendall",
+      "socket.sendmsg",
+      "socket.sendto",
+      "socket.create_connection",
+      "socket.create_server",
+      "socket.getaddrinfo",
+      "socket.gethostbyaddr",
+      "socket.gethostbyname",
+      "socket.gethostbyname_ex"
+    ],
+    "mode": "deny_all_network_and_paid_api_during_scientific_execution",
+    "network_allowed": false,
+    "paid_api_allowed": false,
+    "policy_version": 1,
+    "subprocess_policy": "shell_denied_and_only_git_executable_allowed",
+    "successful_network_operations": 0
+  },
+  "sample_count": 1200,
+  "schema_version": 1,
+  "scientific_input_sha256": "b5c5df19ecb1a3d61e01fbfae30f5774b8659d7b038f15ae93adee008130f7da",
+  "scientific_inputs": {
+    "bound_source_hashes": {
+      "acquisition_manifest": "a5e820a7213967e494bc9238f104e478c5a65c0840d654397cc3063314262d97",
+      "canonical_loader_config": "f8a6354ab67757c5d92c93cef2fe03ab88f4b16b10ce470f2db97ed4d0407779",
+      "feature_availability": "6dd5fdde534e379cceacfaa01e865d1551310fb632b691f5b937ef39394e93cf",
+      "nominal_model_grid": "d8fb0584d7106f8941ca8e1b0e0a9c58e13f39519c6c75b383ff333d92d41617",
+      "ordinal_benchmark": "39bcc62580515888783120a00ed807c0ede0f4c46f587f50897aced4c7999b02",
+      "phase1b_aggregate_reference": "b7dcd0fa01f40c6d11450bb4afd32b1e768f7b301ca804674d8ae589f5a58edf"
+    },
+    "dataset_sha256": "b8deac0a615b97076622ae540f4cfd0d3c3f1e7acb83ba3ff6560470a9ccf60a",
+    "git_identity": {
+      "branch": "finalization/leakage-aware-v2",
+      "commit": "78649c426e69fb5270f9d027b11ba6ba87d71a41"
+    },
+    "implementation_hashes": {
+      "src/experiments/repeated_nested_cv_v3.py": "c552117dc6037ffe761b16d9d0a13e6e2f6d66cb9f35852c6907bedcbd980ee9",
+      "src/experiments/shared_folds.py": "57fadcff7fc611b4f319ecb986dc20d43b033e05a645fb24ed80f7b0c802da76",
+      "src/governance/repeated_nested_cv_contract_v3.py": "f5c15245c40821d8d67705826aeec61926af20cd0fa944a1156208d18ac23477",
+      "src/models/canonical_models.py": "c1161f50cc3193461390b38407df77d4cf71e1924c9f295a47849923c0f6d874",
+      "src/models/ordinal_evaluation_v3.py": "bc546632454696d96c64ec60285b31f729319405a645b97d89da9fe27daefb4e",
+      "src/models/ordinal_models_v3.py": "8df4bc881662fda56f56288da314c826733bda3fb72c658d6f2465d3464b7a8d"
+    },
+    "repeated_contract_sha256": "5681e521cfbaff5963494212fcc047116056fd7d66393346df0463aef7553af9",
+    "source_tree_hash": "81cbbb74c5c59a3088e395b0054316617687da73272571d54f04ec88b44180ab"
+  },
+  "seed_or_repetition_selected_from_results": false,
+  "selected_hyperparameter_row_count": 225,
+  "source_tree_hash": "81cbbb74c5c59a3088e395b0054316617687da73272571d54f04ec88b44180ab",
+  "stage": "repeated_nested_cv_v3",
+  "status": "complete",
+  "tuned_model_count": 6
+}

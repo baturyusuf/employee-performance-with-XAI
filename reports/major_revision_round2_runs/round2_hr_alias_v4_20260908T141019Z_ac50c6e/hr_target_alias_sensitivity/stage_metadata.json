@@ -1,0 +1,60 @@
+{
+  "baseline_fit_count": 0,
+  "calibration_fit_count": 0,
+  "candidate_fit_count": 200,
+  "created_at_utc": "2026-09-08T14:10:44.572919+00:00",
+  "disagreement_count": 2,
+  "employee_level_outputs_publication_authorized": false,
+  "git_identity": {
+    "branch": "revision/round2-major-v4",
+    "commit": "ac50c6e81722053bfc32b1186954e203334732d8"
+  },
+  "historical_sample_count": 311,
+  "matched_refit_evaluation_population_identical": true,
+  "matched_sample_count": 309,
+  "network_calls": 0,
+  "outer_model_fit_count": 5,
+  "outer_test_used_for_selection": false,
+  "output_hashes": {
+    "aggregate_metrics.csv": "c2b353f7acfa84b8046f47f8e7dce452b0d50fe27b5e20b1b5f0f998750c781d",
+    "candidate_search_results.csv": "8db5fc6de51f8ac89e81bcea8d82a041e8fc1231e5c5ff2b52ede67fc489b783",
+    "comparison_deltas.csv": "ef0c6e9782af1215a542286405d497fe17da4d43a9d0f053b159dde829c540eb",
+    "confusion_matrix.csv": "e54d25c1b31d5781f588eed16462c272df083ebb67c3f887239e3773d8e55f19",
+    "oof_predictions.csv": "2ea5f05ea54b4e320e2bd654cad98647df63c9aa940971841a96d67b65a2dbde",
+    "per_class_metrics.csv": "3b99f8cd1286939f8d8f637a42b7aa562482fe0e2096d246a058a4031242610b",
+    "population_receipt.json": "1bd9bffa5e6b46490064bed839e3a5c86414c6c1b023ef5fbc3bdfb9742aac87",
+    "selected_hyperparameters.csv": "c6d3eb2a0d421527fa1fde877cd29c3a5130db7ca5e5cc48ec035e578639de6e"
+  },
+  "paid_api_calls": 0,
+  "run_id": "round2_hr_alias_v4_20260908T141019Z_ac50c6e",
+  "sample_removal_effect_fit_free": true,
+  "schema_version": 1,
+  "scientific_input_sha256": "f347e0bd66cedcef70f578949d1b25abf923c2a60b8585c0154c023acea500e5",
+  "scientific_inputs": {
+    "contract_sha256": "87f447ac5ad9e6b33254c8f63d34cef0c0b4ebbd183610b6db009372ac5d6fb7",
+    "disagreement_sample_set_sha256": "ae7ae3e02cf40be5023f74e53dde2a1300685b7f2270b3e86f1f9862936c9801",
+    "git_identity": {
+      "branch": "revision/round2-major-v4",
+      "commit": "ac50c6e81722053bfc32b1186954e203334732d8"
+    },
+    "implementation_hashes": {
+      "src/experiments/hr_target_alias_sensitivity_v4.py": "e35900dcfc4416248544ccc5b585ff2ef3f034afb90c805b254c97643dad031d"
+    },
+    "source_hashes": {
+      "model_grid": "d8fb0584d7106f8941ca8e1b0e0a9c58e13f39519c6c75b383ff333d92d41617",
+      "phase3a_contract": "9a94052e8fc96ff0894c89cfe99eca898e1e0da5ed697c7fabac99e4fb22799b",
+      "phase3a_fold_contracts": "d04b6364cdf54498ded0fd630aa31a51b22508b8adbeeab11cb5f548e0e47e86",
+      "phase3a_metadata": "489a88a73f896fc828d883aadfa2eba5d887080f49abcc12e90d6a894ef985bd",
+      "phase3a_oof_predictions": "f92561d8144c0298aca4a2bf66eb5ddcd9502cfa0173ec90e00be90a987b8d89",
+      "phase3a_repetition_metrics": "12909f7a77cd3650369c4de7f0a64ec69925f4c82e0d004ab98c1c2ef9e5583b",
+      "phase3a_selected_hyperparameters": "363c0ef2a7eabb5e8e156f9b511416a39159b0da4137bcb3446221ac5b54ebf6",
+      "phase3b_anomaly_audit": "4ccae16bdc64e4f9b5067d89869cc761348a02eb0650d7e0c5b704b06edc3cc0",
+      "raw_dataset": "cb19996755c93c0a8d6527f59da4701c80aef65eff854906546dce286249813c",
+      "schema_mapping": "65c40fecc75235f57209cff6231d7386e4279ebedca9390f53ad2bb67ae63788"
+    },
+    "source_tree_hash": "a10d6940f736dea6546829d30235fd80fb703d3fa2120be4c7a898a17df4da20"
+  },
+  "stage": "hr_target_alias_sensitivity_v4",
+  "status": "complete",
+  "total_model_fit_count": 205
+}

@@ -1,0 +1,197 @@
+schema_version: 1
+project: employee-performance-with-XAI
+system_of_record: github
+execution_surface: zed
+
+layers:
+  scientific:
+    code_write: false
+    protocol_authority: true
+  implementation:
+    code_write: true
+    protocol_authority: false
+  verification:
+    code_write: false
+    protocol_authority: false
+  management:
+    code_write: false
+    protocol_authority: false
+
+agents:
+  - id: SCI-DIRECTOR
+    role: Scientific Director
+    layer: scientific
+    preferred_model: GPT-5.6 Sol High
+    prompt: agent/prompts/scientific/01_scientific_director.md
+
+  - id: SCI-NOVELTY
+    role: Novelty and Literature Advisor
+    layer: scientific
+    preferred_model: GPT-5.6 Sol High
+    prompt: agent/prompts/scientific/02_novelty_literature_advisor.md
+
+  - id: SCI-DATA
+    role: Data and Validity Advisor
+    layer: scientific
+    preferred_model: GPT-5.6 Sol High
+    prompt: agent/prompts/scientific/03_data_validity_advisor.md
+
+  - id: SCI-ML
+    role: ML Methodology Advisor
+    layer: scientific
+    preferred_model: GPT-5.6 Sol High
+    prompt: agent/prompts/scientific/04_ml_methodology_advisor.md
+
+  - id: SCI-STATS
+    role: Evaluation and Statistics Advisor
+    layer: scientific
+    preferred_model: GPT-5.6 Sol High
+    prompt: agent/prompts/scientific/05_evaluation_statistics_advisor.md
+
+  - id: SCI-XAI
+    role: XAI and Responsible AI Advisor
+    layer: scientific
+    preferred_model: GPT-5.6 Sol High
+    prompt: agent/prompts/scientific/06_xai_responsible_ai_advisor.md
+
+  - id: SCI-PUB
+    role: Publication and Reviewer Advisor
+    layer: scientific
+    preferred_model: GPT-5.6 Sol High
+    prompt: agent/prompts/scientific/07_publication_reviewer_advisor.md
+
+  - id: IMP-LEAD
+    role: Implementation Lead
+    layer: implementation
+    preferred_model: Qwen3.5-122B-A10B
+    prompt: agent/prompts/implementation/01_implementation_lead.md
+
+  - id: IMP-DATA
+    role: Data Engineer
+    layer: implementation
+    preferred_model: Qwen3.5 family local
+    prompt: agent/prompts/implementation/02_data_engineer.md
+
+  - id: IMP-ML
+    role: ML Engineer
+    layer: implementation
+    preferred_model: gpt-oss-120b
+    prompt: agent/prompts/implementation/03_ml_engineer.md
+
+  - id: IMP-STATS
+    role: Statistics Engineer
+    layer: implementation
+    preferred_model: gpt-oss-120b
+    prompt: agent/prompts/implementation/04_statistics_engineer.md
+
+  - id: IMP-XAI
+    role: XAI Engineer
+    layer: implementation
+    preferred_model: Qwen3.5-122B-A10B
+    prompt: agent/prompts/implementation/05_xai_engineer.md
+
+  - id: IMP-RUN
+    role: Experiment Runner
+    layer: implementation
+    preferred_model: Qwen3.5 family local
+    prompt: agent/prompts/implementation/06_experiment_runner.md
+
+  - id: IMP-REPRO
+    role: Reproducibility Engineer
+    layer: implementation
+    preferred_model: Mistral Small 4
+    prompt: agent/prompts/implementation/07_reproducibility_engineer.md
+
+  - id: VER-TECH
+    role: Technical Verifier
+    layer: verification
+    preferred_model: Mistral Small 4
+    prompt: agent/prompts/review/01_technical_verifier.md
+
+  - id: VER-ADV
+    role: Adversarial Scientific Reviewer
+    layer: verification
+    preferred_model: GPT-5.6 Sol High
+    prompt: agent/prompts/review/02_adversarial_scientific_reviewer.md
+
+  - id: VER-CLAIM
+    role: Claim-Evidence Auditor
+    layer: verification
+    preferred_model: GPT-5.6 Sol High
+    prompt: agent/prompts/review/03_claim_evidence_auditor.md
+
+  - id: MGT-SECRETARY
+    role: Project Secretary
+    layer: management
+    preferred_model: local efficient model
+    prompt: agent/prompts/management/01_project_secretary.md
+
+  - id: SCI-LEAKAGE
+    role: Leakage and Feature-Governance Advisor
+    layer: scientific
+    lifecycle: task_scoped
+    preferred_model: GPT-5.6 Sol High
+    prompt: agent/prompts/scientific/08_leakage_feature_governance_advisor.md
+
+  - id: SCI-ORDINAL
+    role: Ordinal Learning Advisor
+    layer: scientific
+    lifecycle: task_scoped
+    preferred_model: GPT-5.6 Sol High
+    prompt: agent/prompts/scientific/09_ordinal_learning_advisor.md
+
+  - id: SCI-CAL
+    role: Calibration and Uncertainty Advisor
+    layer: scientific
+    lifecycle: task_scoped
+    preferred_model: GPT-5.6 Sol High
+    prompt: agent/prompts/scientific/10_calibration_uncertainty_advisor.md
+
+  - id: SCI-SHAP
+    role: SHAP and Feature Attribution Advisor
+    layer: scientific
+    lifecycle: task_scoped
+    preferred_model: GPT-5.6 Sol High
+    prompt: agent/prompts/scientific/11_shap_attribution_advisor.md
+
+  - id: SCI-CF
+    role: Counterfactual and Actionability Advisor
+    layer: scientific
+    lifecycle: task_scoped
+    preferred_model: GPT-5.6 Sol High
+    prompt: agent/prompts/scientific/12_counterfactual_actionability_advisor.md
+
+  - id: SCI-FAIR
+    role: Fairness and Proxy Audit Advisor
+    layer: scientific
+    lifecycle: task_scoped
+    preferred_model: GPT-5.6 Sol High
+    prompt: agent/prompts/scientific/13_fairness_proxy_advisor.md
+
+  - id: SCI-XROBUST
+    role: Explanation Robustness / OCEA-PCES Advisor
+    layer: scientific
+    lifecycle: task_scoped
+    preferred_model: GPT-5.6 Sol High
+    prompt: agent/prompts/scientific/14_explanation_robustness_ocea_pces_advisor.md
+
+  - id: SCI-LLMFAITH
+    role: LLM Explanation Faithfulness Advisor
+    layer: scientific
+    lifecycle: inactive_by_default
+    preferred_model: GPT-5.6 Sol High
+    prompt: agent/prompts/scientific/15_llm_explanation_faithfulness_advisor.md
+
+  - id: SCI-REPRO
+    role: Reproducibility and Scientific Integrity Advisor
+    layer: scientific
+    lifecycle: task_scoped
+    preferred_model: GPT-5.6 Sol High
+    prompt: agent/prompts/scientific/16_reproducibility_scientific_integrity_advisor.md
+
+  - id: SCI-GOV
+    role: Ethics, Provenance and Governance Advisor
+    layer: scientific
+    lifecycle: task_scoped
+    preferred_model: GPT-5.6 Sol High
+    prompt: agent/prompts/scientific/17_ethics_provenance_governance_advisor.md

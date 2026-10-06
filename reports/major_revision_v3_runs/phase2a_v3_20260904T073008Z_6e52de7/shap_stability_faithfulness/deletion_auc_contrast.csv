@@ -1,0 +1,2 @@
+guided_mean_deletion_auc,random_repetition_mean,random_repetition_sample_sd,random_repetition_min,random_repetition_max,guided_minus_random_mean,guided_exceeds_random_repetition_fraction,inferential_p_value
+0.2719850778552195,0.05119426669126438,0.0038348531417201656,0.04458330639234684,0.05881345993708128,0.22079081116395516,1.0,

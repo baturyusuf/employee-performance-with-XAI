@@ -1,0 +1,138 @@
+{
+  "created_at_utc": "2026-09-10T07:34:07.218253+00:00",
+  "employee_level_outputs_publication_authorized": false,
+  "folds_reconstructed_from_phase1c_contracts": true,
+  "git_identity": {
+    "branch": "codex/eswa-submission-preparation",
+    "commit": "914e1e0dc6d1cade80f7fe2830b72c00acd7568a"
+  },
+  "historical_phase1c_model_fit_count": 5725,
+  "inner_folds": 5,
+  "macro_f1_oof_reused": true,
+  "models": [
+    "logistic_regression",
+    "random_forest",
+    "lightgbm",
+    "xgboost",
+    "proportional_odds_logistic",
+    "cumulative_threshold_xgboost"
+  ],
+  "network_calls": 0,
+  "new_inner_model_fit_count": 0,
+  "outer_folds_per_repetition": 5,
+  "outer_test_used_for_selection": false,
+  "output_hashes": {
+    "candidate_evidence.csv": "69eca584977dc817ab3bfa3ea190a26e53db4be73062bef2dbebca5da49345fa",
+    "oof_predictions.csv": "3146070c6322a664e39ba536bf5559086de2e01f41694db606c8fdab525a3406",
+    "per_class_metrics.csv": "e6e8379fdf502d958f7201da085c373e298e26622395111f4908a41f1aa33d48",
+    "repeated_selection_results.csv": "1f34b9f33b77c77ea4990c368da24e829eabf7b4686b7b63016d6e4b16c7b273",
+    "repetition_comparisons.csv": "fed1bf08dcc7f75455b2dfdf5c84c5183ea651749f43ab7a2f1406bae022273f",
+    "selected_candidate_changes.csv": "0f5e99aa1007bc46561c5e0288ab40a0cf62366c300eaa44c6a95acbd3e43d88",
+    "selection_schedule.csv": "8fbd61cad8968294c07102f2602609781d0af055ef7250c54a546777542880be"
+  },
+  "paid_api_calls": 0,
+  "phase1c_validation": {
+    "best_mean_balanced_accuracy_model": "cumulative_threshold_xgboost",
+    "best_mean_macro_f1_model": "xgboost",
+    "best_mean_ordinal_mae_model": "random_forest",
+    "best_mean_qwk_model": "random_forest",
+    "candidate_search_row_count": 1100,
+    "distinct_outer_assignment_count": 5,
+    "file_count": 12,
+    "fold_metric_row_count": 225,
+    "generation_commit": "78649c426e69fb5270f9d027b11ba6ba87d71a41",
+    "generation_implementation_blobs_verified": 6,
+    "model_count": 9,
+    "network_calls": 0,
+    "oof_prediction_row_count": 54000,
+    "paid_api_calls": 0,
+    "repeated_contract_sha256": "5681e521cfbaff5963494212fcc047116056fd7d66393346df0463aef7553af9",
+    "repetition_metric_row_count": 720,
+    "repetitions": 5,
+    "run_id": "phase1c_v3_20260903T215015Z_78649c4",
+    "scientific_input_sha256": "b5c5df19ecb1a3d61e01fbfae30f5774b8659d7b038f15ae93adee008130f7da",
+    "source_tree_receipt_internally_consistent": true,
+    "status": "passed"
+  },
+  "qwk_outer_model_fit_count": 150,
+  "repetitions": 5,
+  "run_id": "eswa_selection_v1_20260910T000000Z_914e1e0",
+  "runtime_policy": {
+    "allowed_git_subcommands": [
+      "--version",
+      "cat-file",
+      "diff",
+      "ls-files",
+      "ls-tree",
+      "rev-parse",
+      "show",
+      "status"
+    ],
+    "allowed_subprocess_executables": [
+      "git",
+      "git.exe"
+    ],
+    "api_credential_environment_cleared": [
+      "ANTHROPIC_API_KEY",
+      "AZURE_OPENAI_API_KEY",
+      "COHERE_API_KEY",
+      "GOOGLE_API_KEY",
+      "MISTRAL_API_KEY",
+      "OPENAI_API_KEY"
+    ],
+    "attempted_network_operations": 0,
+    "blocked_socket_operations": [
+      "socket.accept",
+      "socket.bind",
+      "socket.connect",
+      "socket.connect_ex",
+      "socket.listen",
+      "socket.send",
+      "socket.sendall",
+      "socket.sendmsg",
+      "socket.sendto",
+      "socket.create_connection",
+      "socket.create_server",
+      "socket.getaddrinfo",
+      "socket.gethostbyaddr",
+      "socket.gethostbyname",
+      "socket.gethostbyname_ex"
+    ],
+    "mode": "deny_all_network_and_paid_api_during_scientific_execution",
+    "network_allowed": false,
+    "paid_api_allowed": false,
+    "policy_version": 1,
+    "subprocess_policy": "shell_denied_and_only_git_executable_allowed",
+    "successful_network_operations": 0
+  },
+  "schema_version": 1,
+  "scientific_input_sha256": "cf9b1ff8930fd4b3ab1a6bcac128479ad1436fbc2fa0ca42c18d20643a5fc3ea",
+  "scientific_inputs": {
+    "contract_sha256": "10079c13cd1050da62a8cbc1b984f6b426782a0b57af7524c8a787ceeebc2cde",
+    "dataset_sha256": "b8deac0a615b97076622ae540f4cfd0d3c3f1e7acb83ba3ff6560470a9ccf60a",
+    "git_identity": {
+      "branch": "codex/eswa-submission-preparation",
+      "commit": "914e1e0dc6d1cade80f7fe2830b72c00acd7568a"
+    },
+    "implementation_hashes": {
+      "configs/eswa_repeated_selection_objective_v1.json": "10079c13cd1050da62a8cbc1b984f6b426782a0b57af7524c8a787ceeebc2cde",
+      "src/experiments/eswa_repeated_selection_objective_v1.py": "b56e22dd5862ccbd43aecdbea4d203008722f8f68afffa853f3cdb4169dc0839"
+    },
+    "source_hashes": {
+      "candidate_search_results.csv": "9c72c363ea22f8fb71cd947256f8003102810c240bd898e74cdfb7bd91a94768",
+      "fold_contracts.json": "714587a58464a04fcbf714de8c8ad3d9704e23186d1d115a317d54c37acd77e4",
+      "oof_predictions.csv": "47675d4666fb9d29a9db2ed0c9516ff939acd053589a72aace7612fb11934ced",
+      "selected_hyperparameters.csv": "65a83c724698748a47644c60b4c2fef0cb6337704bd40bcf1054f422eab4bd68",
+      "stage_metadata.json": "f3ac788c27ac32c879e6c34e8e0c5f9fc4d7d9e0713f315328bdf74592809dc7"
+    },
+    "source_tree_hash": "a99cf890cee97067e8a035e97ab850a7d6b1c6ae19f2334750429ff3ed53e830"
+  },
+  "seed_or_repetition_selected_from_results": false,
+  "selection_objectives": [
+    "macro_f1",
+    "qwk"
+  ],
+  "stage": "eswa_repeated_selection_objective_v1",
+  "status": "complete",
+  "total_lineage_model_fit_count": 5875
+}

@@ -1,0 +1,12 @@
+{
+  "disagreement_count": 2,
+  "disagreement_sample_set_sha256": "ae7ae3e02cf40be5023f74e53dde2a1300685b7f2270b3e86f1f9862936c9801",
+  "historical_sample_count": 311,
+  "historical_sample_set_sha256": "eafe9862b38d0f6e73bb63e16ee5bce68e9d76f0a4db9dfdf7ee1e9ffcd725fd",
+  "matched_sample_count": 309,
+  "matched_sample_set_sha256": "4a6b8deaa32a37132669bbe82131c0db8aa2f8e7d32c5db483578bf92a3f7718",
+  "primary_refit_comparison_has_identical_evaluation_population": true,
+  "restricted_and_refit_sample_sets_identical": true,
+  "row_identities_publication_authorized": false,
+  "sample_removal_comparison_is_fit_free": true
+}
